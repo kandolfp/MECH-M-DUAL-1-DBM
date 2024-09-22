@@ -1,0 +1,84 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Basics of Data Science",
+    "section": "",
+    "text": "Warning\n\n\n\nThe notes presented here are still under construction and can change without warning.\n\n\n\nPreface\nThese are the lecture notes for the Grundlagen der Datenbasierten Methoden class, part of the MCI | The Entrepreneurial School master for Mechatronik - Automation, Robotics & AI in the winter term 2024/25.\n\n\nAcknowledgements\nWe want to thank the open source community for providing excellent tutorial and guides for Data Science topics in and with Python on the web. Individual sources are cited at the appropriate spot throughout document at hand.\nWe want to thank Mirjam Ziselsberger for testing, checking, suggestions and general proofreading.\nThese notes are build with Quarto.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "In this class we are going to look at the basics behind modern day Data Science. We will always try to not only discuss the theory but also use Python to illustrate it and work on it programmatically.\nFor the class we will orient ourself on the first couple of chapters of Brunton and Kutz (2022), where we will highlight sections with lose similarity.\n\n\n\n\nBrunton, Steven L., and J. Nathan Kutz. 2022. Data-Driven Science and Engineering - Machine Learning, Dynamical Systems, and Control. 2nd ed. Cambridge: Cambridge University Press.",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "basics/linearalgebra.html",
+    "href": "basics/linearalgebra.html",
+    "title": "1  Linear Algebra",
+    "section": "",
+    "text": "1.1 Notation\nWe will refer to \\[\nv = \\left[\n    \\begin{array}{c} v_1 \\\\ v_2 \\\\ v_3 \\\\ \\vdots \\\\ v_n \\end{array}\n\\right]  \\in \\mathbb{R}^n\n\\] as a vector \\(v\\) with \\(n\\) elements, in the above case in the vector space \\(\\mathbb{R}^n\\), as a consequence we can perform scalar multiplication and addition. Multiplication by a scalar: \\[ 3 v = \\left[\n    \\begin{array}{c} 3 v_1 \\\\ 3 v_2 \\\\ 3 v_3 \\\\ \\vdots \\\\ 3v_n \\end{array}\n\\right]\n\\] We can multiply a vector by a scalar:\nv = np.array([1, 2, 3, 4])\n# show the shape\nprint(f'{v.shape=}')\n# access a single element\nprint(f'{v[0]=}')\n# use slicing to access multiple elements\nprint(f'{v[0:2]=}')\nprint(f'{v[2:]=}')\nprint(f'{v[:2]=}')\nprint(f'{v[0::2]=}')\n\nv.shape=(4,)\nv[0]=np.int64(1)\nv[0:2]=array([1, 2])\nv[2:]=array([3, 4])\nv[:2]=array([1, 2])\nv[0::2]=array([1, 3])\nFrom vectors we can come to \\[\nA = \\left[\n    \\begin{array}{cccc} a_{11} & a_{12} & \\dots & a_{1m} \\\\\n                        a_{21} & a_{22} & \\dots & A_{2m} \\\\  \n                        \\vdots & \\vdots & \\ddots & \\vdots\\\\\n                        a_{n1} & a_{n2} & \\dots & A_{nm} \\\\  \\end{array}\n\\right]\n=\n\\left(\n    \\begin{array}{cccc} a_{11} & a_{12} & \\dots & a_{1n} \\\\\n                        a_{21} & a_{22} & \\dots & A_{2n} \\\\  \n                        \\vdots & \\vdots & \\ddots & \\vdots\\\\\n                        a_{m1} & a_{m2} & \\dots & A_{mn} \\\\  \\end{array}\n\\right) \\in \\mathbb{R}^{m\\times n}\n\\] is called a \\(m \\times n\\) (\\(m\\) times \\(n\\)) matrix. If its values are real numbers we say it is an element of \\(\\mathbb{R}^{m\\times n}\\).\nA = np.array([[1, 2, 3, 4], \n              [5, 6, 7, 8],\n              [9, 10, 11, 12]])\n# show the shape\nprint(f'{A.shape=}')\n# access a single element\nprint(f'{A[0, 0]=}')\n# use slicing to access multiple elements\nprint(f'{A[0, :]=}')\nprint(f'{A[:, 2]=}')\n\nA.shape=(3, 4)\nA[0, 0]=np.int64(1)\nA[0, :]=array([1, 2, 3, 4])\nA[:, 2]=array([ 3,  7, 11])\nConsequently we can say that a vector is a \\(n \\times 1\\) matrix. If we want to refer to a row or a column of a matrix \\(A\\) we will use the following short hands:\nWe can multiply a matrix with a vector, as long as the dimensions fit. Note that usually there is no \\(\\cdot\\) used to indicate multiplication: \\[\nAv =\n\\left[\n    \\begin{array}{cccc} a_{11} & a_{12} & \\dots & a_{1n} \\\\\n                        a_{21} & a_{22} & \\dots & A_{2n} \\\\  \n                        \\vdots & \\vdots & \\ddots & \\vdots\\\\\n                        a_{m1} & a_{m2} & \\dots & A_{mn} \\\\  \\end{array}\n\\right]\n\\left[\n    \\begin{array}{c} v_1 \\\\ v_2 \\\\ \\vdots \\\\ v_n \\end{array}\n\\right]\n= A_{-1} v_1 + A_{-2} v_2 + \\dots + A_{-n} v_n\n\\] The result is a vector but this time in \\(\\mathbb{R}^m\\).\nIn Python the * operator is usually indicating multiplication. Unfortunately, in numpy it is interpreted as element wise multiplication, so we use @ for multiplications between vector spaces.\nw = A @ v\n# show the shape\nprint(f'{w.shape=}')\n# access a single element\nprint(f'{w=}')\n# By hand this is more tricky\nw_tilde = np.zeros(A.shape[0])\nfor i, bb in enumerate(v):\n    w_tilde += A[:, i] * bb\nprint(f'{w_tilde=}')\n\nw.shape=(3,)\nw=array([ 30,  70, 110])\nw_tilde=array([ 30.,  70., 110.])\nAs we can see from the above equation, we can view the matrix \\(A\\) as a linear mapping or linear function between two vector spaces, namely \\(\\mathbb{R}^{n}\\) to \\(\\mathbb{R}^{m}\\).",
+    "crumbs": [
+      "Basics",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "basics/linearalgebra.html#notation",
+    "href": "basics/linearalgebra.html#notation",
+    "title": "1  Linear Algebra",
+    "section": "",
+    "text": "Important\n\n\n\nWhile in math we start indices with 1, Python starts with 0.\n\n\n\n\n\n\n\n\\(A_{i-}\\) for row \\(i\\),\n\\(A_{-j}\\) for _column \\(j\\).",
+    "crumbs": [
+      "Basics",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "Summary",
+    "section": "",
+    "text": "Collection of interesting reads",
+    "crumbs": [
+      "Summary"
+    ]
+  },
+  {
+    "objectID": "summary.html#collection-of-interesting-reads",
+    "href": "summary.html#collection-of-interesting-reads",
+    "title": "Summary",
+    "section": "",
+    "text": "Semantic Versioning How to design the version of your project.",
+    "crumbs": [
+      "Summary"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Brunton, Steven L., and J. Nathan Kutz. 2022. Data-Driven Science\nand Engineering - Machine Learning, Dynamical Systems, and Control.\n2nd ed. Cambridge: Cambridge University Press.",
+    "crumbs": [
+      "References"
+    ]
+  },
+  {
+    "objectID": "basics/index.html",
+    "href": "basics/index.html",
+    "title": "Basics",
+    "section": "",
+    "text": "In this section we are going to discuss a lot of the mathematical basics in form of Linear Algebra as well as some topics of statistics of sets, and visualisation of sets in Python.",
+    "crumbs": [
+      "Basics"
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"cSpell.enabled": true,
+		"cSpell.language": "en-GB",
+		"cSpell.enableFiletypes": [
+			"quarto"
+		]
+	}
+}

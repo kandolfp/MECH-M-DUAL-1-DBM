@@ -1,0 +1,119 @@
+# Linear Algebra {#sec-intro-linearalgebra}
+
+The aim of this section is to discuss the basics of matrix, vector and number theory that we need for the later chapters and not introduce the whole of linear algebra.
+Nevertheless we will rely on some basic definitions and for that we refer to <INSERT A LINEAR ALGEBRA BOOK HERE>.
+
+In Python the module `numpy` is used to represent vectors and matrices, we can include it like this (and give it its short hand `np`):
+```{python}
+import numpy as np
+```
+
+## Notation
+
+We will refer to 
+$$
+v = \left[
+    \begin{array}{c} v_1 \\ v_2 \\ v_3 \\ \vdots \\ v_n \end{array}
+\right]  \in \mathbb{R}^n
+$$
+as a _vector_ $v$ with $n$ elements, in the above case in the _vector space_ $\mathbb{R}^n$, as a consequence we can perform _scalar_ multiplication and addition.
+Multiplication by a _scalar_:
+$$ 3 v = \left[
+    \begin{array}{c} 3 v_1 \\ 3 v_2 \\ 3 v_3 \\ \vdots \\ 3v_n \end{array}
+\right]
+$$
+We can multiply a vector by a _scalar_:
+
+::: {.callout-important}
+While in math we start indices with 1, Python starts with 0.
+:::
+
+```{python}
+#| classes: styled-output
+v = np.array([1, 2, 3, 4])
+# show the shape
+print(f'{v.shape=}')
+# access a single element
+print(f'{v[0]=}')
+# use slicing to access multiple elements
+print(f'{v[0:2]=}')
+print(f'{v[2:]=}')
+print(f'{v[:2]=}')
+print(f'{v[0::2]=}')
+```
+
+
+
+From vectors we can come to
+$$
+A = \left[
+    \begin{array}{cccc} a_{11} & a_{12} & \dots & a_{1m} \\
+                        a_{21} & a_{22} & \dots & A_{2m} \\  
+                        \vdots & \vdots & \ddots & \vdots\\
+                        a_{n1} & a_{n2} & \dots & A_{nm} \\  \end{array}
+\right] 
+=
+\left(
+    \begin{array}{cccc} a_{11} & a_{12} & \dots & a_{1n} \\
+                        a_{21} & a_{22} & \dots & A_{2n} \\  
+                        \vdots & \vdots & \ddots & \vdots\\
+                        a_{m1} & a_{m2} & \dots & A_{mn} \\  \end{array}
+\right) \in \mathbb{R}^{m\times n}
+$$ 
+is called a $m \times n$ ($m$ times $n$) matrix.
+If its values are real numbers we say it is an element of $\mathbb{R}^{m\times n}$.
+
+```{python}
+#| classes: styled-output
+A = np.array([[1, 2, 3, 4], 
+              [5, 6, 7, 8],
+              [9, 10, 11, 12]])
+# show the shape
+print(f'{A.shape=}')
+# access a single element
+print(f'{A[0, 0]=}')
+# use slicing to access multiple elements
+print(f'{A[0, :]=}')
+print(f'{A[:, 2]=}')
+```
+
+Consequently we can say that a vector is a $n \times 1$ matrix.
+If we want to refer to a row or a column of a matrix $A$ we will use the following short hands:
+
+- $A_{i-}$ for _row_ $i$,
+- $A_{-j}$ for _column $j$.
+
+We can multiply a matrix with a vector, as long as the dimensions fit.
+Note that usually there is no $\cdot$ used to indicate multiplication:
+$$
+Av = 
+\left[
+    \begin{array}{cccc} a_{11} & a_{12} & \dots & a_{1n} \\
+                        a_{21} & a_{22} & \dots & A_{2n} \\  
+                        \vdots & \vdots & \ddots & \vdots\\
+                        a_{m1} & a_{m2} & \dots & A_{mn} \\  \end{array}
+\right] 
+\left[
+    \begin{array}{c} v_1 \\ v_2 \\ \vdots \\ v_n \end{array}
+\right]
+= A_{-1} v_1 + A_{-2} v_2 + \dots + A_{-n} v_n
+$$
+The result is a vector but this time in $\mathbb{R}^m$.
+
+In Python the `*` operator is usually indicating multiplication.
+Unfortunately, in `numpy` it is interpreted as _element wise multiplication_, so we use `@` for multiplications between vector spaces.
+```{python}
+#| classes: styled-output
+w = A @ v
+# show the shape
+print(f'{w.shape=}')
+# access a single element
+print(f'{w=}')
+# By hand this is more tricky
+w_tilde = np.zeros(A.shape[0])
+for i, bb in enumerate(v):
+    w_tilde += A[:, i] * bb
+print(f'{w_tilde=}')
+```
+
+As we can see from the above equation, we can view the matrix $A$ as a _linear mapping_ or _linear function_ between two vector spaces, namely $\mathbb{R}^{n}$ to $\mathbb{R}^{m}$.

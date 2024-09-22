@@ -1,0 +1,6 @@
+# Introduction {.unnumbered}
+
+In this class we are going to look at the basics behind modern day Data Science.
+We will always try to not only discuss the theory but also use Python to illustrate it and work on it programmatically.
+
+For the class we will orient ourself on the first couple of chapters of @Brunton2022, where we will highlight sections with lose similarity.

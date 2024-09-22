@@ -1,0 +1,42 @@
+project:
+  type: book
+
+book:
+  title: "Basics of Data Science"
+  date: last-modified
+  reader-mode: true
+  page-footer:
+    left: Basics of Data Science WS 2024 (MECH-M-DUAL-1-GDM)
+    center: "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) Peter Kandolf"
+    right: This book was built with <a href="https://quarto.org/">Quarto</a>.
+  author:
+    - name: "Peter Kandolf"
+      orcid: 0000-0003-3601-0852
+      affiliation: "MCI | The Entrepreneurial School"
+  license: "CC BY-NC-SA"
+  site-url: https://kandolfp.github.io/MECH-M-DUAL-1-DBM/
+  repo-url: https://github.com/kandolfp/MECH-M-DUAL-1-DBM/
+  repo-branch: main
+  repo-actions: [edit, issue]
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - part: basics/index.qmd
+      chapters: 
+        - basics/linearalgebra.qmd
+        - basics/epilogue.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      light: [flatly, style.css]
+      dark: [darkly, dark-style.css]
+#  pdf:
+#    documentclass: scrreprt
+
+
+

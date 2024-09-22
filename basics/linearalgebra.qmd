@@ -16,16 +16,39 @@ v = \left[
     \begin{array}{c} v_1 \\ v_2 \\ v_3 \\ \vdots \\ v_n \end{array}
 \right]  \in \mathbb{R}^n
 $$
-as a _vector_ $v$ with $n$ elements, in the above case in the _vector space_ $\mathbb{R}^n$, as a consequence we can perform _scalar_ multiplication and addition.
-Multiplication by a _scalar_:
-$$ 3 v = \left[
-    \begin{array}{c} 3 v_1 \\ 3 v_2 \\ 3 v_3 \\ \vdots \\ 3v_n \end{array}
-\right]
-$$
-We can multiply a vector by a _scalar_:
+as a _vector_ $v$ with $n$ elements.
+The set $(\mathbb{R}^n, + ,\cdot)$ forms a so called _vector space_ with the _vector addition_ $+$ and the _scalar multiplication_ $\cdot$.
 
-::: {.callout-important}
-While in math we start indices with 1, Python starts with 0.
+::: {.callout appearance="simple"}
+## Definition - Vector space
+
+For a set $V$ over a field $F$ with the _vectors_ $u, v, w \in V$ and the _scalars_ $\alpha, \beta \in F$ the following assumptions need to hold true to form a vector space:
+
+For the vector addition:
+
+(@) associativity:
+$$ u + (v + w) = (u + v) +w$$
+(@) commutativity:
+$$u + v = v + u$$
+(@) there exists an identity element $0\in \mathbb{R}^n$, i.e. the zero vector
+$$v + 0 =  v$$
+
+For the scalar multiplication:
+
+(@) associativity:
+$$\alpha(\beta v) = (\alpha\beta)v$$
+(@) the multiplicative identity element $1\in\mathbb{R}$
+$$1 v = v$$
+(@) distributivity with respect to vector addition:
+$$\alpha(u + v) = \alpha u + \alpha v$$
+(@) distributivity of the scalar addition
+$$(\alpha + \beta)v = \alpha v + \beta v$$
+ in the ab _vector space_ $\mathbb{R}^n$.
+:::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+## {{< fa pen-to-square >}} Exercise - Vector space in Python
+Show that `np.array` forms a vector space with `+` and `*`.
 :::
 
 ```{python}
@@ -36,15 +59,21 @@ print(f'{v.shape=}')
 # access a single element
 print(f'{v[0]=}')
 # use slicing to access multiple elements
-print(f'{v[0:2]=}')
+print(f'{v[0:3]=}')
 print(f'{v[2:]=}')
 print(f'{v[:2]=}')
 print(f'{v[0::2]=}')
+
+alpha = 0.5
+w = alpha * v
+print(f'{w=}')
 ```
 
+::: {.callout-important}
+While in math we start indices with 1, Python starts with 0.
+:::
 
-
-From vectors we can come to
+From vectors we can move to matrices, where
 $$
 A = \left[
     \begin{array}{cccc} a_{11} & a_{12} & \dots & a_{1m} \\
@@ -78,6 +107,15 @@ print(f'{A[:, 2]=}')
 ```
 
 Consequently we can say that a vector is a $n \times 1$ matrix.
+It is sometimes also referred to as _column vector_ and its counterpart a $1 \times n$ matrix as a _row vector_.
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+## {{< fa pen-to-square >}} Exercise - Matrix as vector space?
+How do we need to define $+$ and $\cdot$ to say that $(\mathbb{R}^{m \times n}, + ,\cdot)$ is forming a vector space?
+
+Does `np.array`, `+`, `*` fulfil the properties of a vector space?
+:::
+
 If we want to refer to a row or a column of a matrix $A$ we will use the following short hands:
 
 - $A_{i-}$ for _row_ $i$,
@@ -116,4 +154,150 @@ for i, bb in enumerate(v):
 print(f'{w_tilde=}')
 ```
 
-As we can see from the above equation, we can view the matrix $A$ as a _linear mapping_ or _linear function_ between two vector spaces, namely $\mathbb{R}^{n}$ to $\mathbb{R}^{m}$.
+As we can see from the above equation, we can view the matrix $A$ as a _linear mapping_ or _linear function_ between two vector spaces, namely from $\mathbb{R}^{n}$ to $\mathbb{R}^{m}$.
+
+::: {.callout appearance="simple"}
+## Definition - linear map
+A **linear map** between vector spaces are mappings or functions that preserve the structure of the vector space.
+For two vector spaces $V$ and $W$ over a filed $F$ the mapping 
+$$T: V \to W$$
+is called linear if
+
+1. for $v, w \in V$
+$$T(v + w) = T(v) + T(w)$$
+1. for $v \in V$ and $\alpha \in F$
+$$T(\alpha v) = \alpha T(v).$$
+:::
+
+A linear mapping of special interest to us is the _transpose_ of a matrix defined by turning rows into columns and vice versa:
+$$
+(A^T)_{ij} = A_{ji}.
+$$
+Consequently, the transpose of a (row) vector is a column vector.
+
+```{python}
+#| classes: styled-output
+print(f'{A=}')
+print(f'{A.shape=}')
+B = A.transpose()
+print(f'{B=}')
+print(f'{B.shape=}')
+
+```
+
+With this operation we can define the _dot product_ or _scalar product_ of two vectors $v$ and $w$ as
+$$\langle v, w\rangle = v \cdot w = v^T w = \sum_i v_i w_i$$
+
+```{python}
+#| classes: styled-output
+v = np.array([1, 2, 3, 4])
+w = np.array([1, 1, 1, 1])
+# alternatively we can define w with
+w = np.ones(v.shape)
+alpha = np.vdot(v, w)
+print(f'{alpha=}')
+```
+
+:::{.callout-note}
+As $\mathbb{R}^n$ is an euclidean vector space the above function is also called the _inner product_.
+:::
+
+We also have the _outer product_ defined as:
+$$
+v \otimes w = \left[
+    \begin{array}{cccc} v_1 w_1 & v_1 w_2 & \dots & v_1 w_n \\
+                        v_2 w_1 & v_2 w_2 & \dots &v_2 w_n \\  
+                        \vdots & \vdots & \ddots & \vdots\\
+                        v_n w_1 & v_n w_2 & \dots & v_n w_n \\  \end{array}
+\right] = v w^T
+$$
+```{python}
+#| classes: styled-output
+C = np.outer(v, w)
+print(f'{C=}')
+```
+
+We can also multiply matrices $A$ and $B$ by applying the matrix vector multiplication to each column vector of $B$, or a bit more elaborated:
+
+For an ${m \times n}$ matrix $A$ and an ${n \times p}$ matrix $B$
+$$(AB)_{i,j} = \sum_{r=1}^n a_{i,r}b_{r,j}$$
+forms a ${m \times p}$ matrix.
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+## {{< fa pen-to-square >}} Exercise - Matrix multiplication?
+Show that the matrix multiplication is:
+
+- associative
+- (left and right) distributive
+- but not commutative
+:::
+
+```{python}
+#| classes: styled-output
+C = A @ A.transpose()
+print(f'{C=}')
+```
+
+This concludes our basic notation section and we continue with some more elaborate content that will come in handy later on in these notes.
+
+## Norms
+
+::: {.callout appearance="simple"}
+## Definition - norm
+A **norm** is a mapping from a vector space $V$ to the field $F$ into the real numbers.
+
+$$\| \cdot \|: V \to \mathbb{R}_0^+, v \mapsto \|v\|$$
+if it fulfils for $v, w\in V$ and $\alpha \in F$ the following 
+
+1. positivity:
+$$ \|v\| = 0 \Rightarrow v = 0 $$
+1. absolute homogeneity:
+$$ \| \alpha v \| = |\alpha| \| v \| $$
+1. subadditivity (often called the triangular inequality) 
+$$ \| v + w\| \leq  \| v \| + \| w \|$$.
+:::
+
+There are multiple norms that can be useful for vectors.
+The most common are:
+
+1. the one norm
+$$ \| v \|_1 = \sum_i |v_i|,$$
+1. the two norm (euclidean norm)
+$$ \| w \| = \| v \|_2 = \sqrt{\sum_i |x_i|^2} = \sqrt{\langle v, v \rangle},$$
+1. more general the $p$-norms (for $1\leq p \le \infty$)
+$$ \| v \|_p = \left(\sum_i |v_i|^p\right)^{\frac1p},$$
+1. the $\infty$ norm
+$$ \| v \|_\infty = \max_i |v_i|.$$
+
+An for metrics:
+
+1. the one norm (column sum norm)
+$$ \| A \|_1 = max_j \sum_i |A_{ij}|,$$
+1. the Frobeniusnorm
+$$ \| A \| = \| A \|_F = \sqrt{sum_i sum_j |A_{ij}|^2}$$
+1. The $p$ norms are defined
+$$ \| A \|_p = \left(sum_i sum_j |A_{ij}|^p\right)^{\frac1p}$$
+1. the $\infty$ norm (row sum norm)
+$$ \| A \|_1 = max_i \sum_j |A_{ij}|,$$
+
+```{python}
+#| classes: styled-output
+# The norms can be found in the linalg package of numpy
+from numpy import linalg as LA
+norm_v = LA.norm(v)
+print(f'{norm_v=}')
+norm_v2 = LA.norm(v, 2)
+print(f'{norm_v2=}')
+norm_A = LA.norm(A, 1)
+print(f'{norm_A=}')
+norm_Afr = LA.norm(A, 'fro')
+print(f'{norm_Afr=}')
+```
+
+:::{.callout-note}
+The function `norm` from the `numpy.linalg` package can be used to compute other norms or properties as well, see [docs](https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html).
+:::
+## Basis of vector spaces
+A 
+
+Basis

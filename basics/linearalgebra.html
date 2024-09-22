@@ -77,6 +77,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -238,6 +240,8 @@ window.Quarto = {
    
   <ul>
   <li><a href="#notation" id="toc-notation" class="nav-link active" data-scroll-target="#notation"><span class="header-section-number">1.1</span> Notation</a></li>
+  <li><a href="#norms" id="toc-norms" class="nav-link" data-scroll-target="#norms"><span class="header-section-number">1.2</span> Norms</a></li>
+  <li><a href="#basis-of-vector-spaces" id="toc-basis-of-vector-spaces" class="nav-link" data-scroll-target="#basis-of-vector-spaces"><span class="header-section-number">1.3</span> Basis of vector spaces</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/basics/linearalgebra.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -265,7 +269,7 @@ window.Quarto = {
 
 <p>The aim of this section is to discuss the basics of matrix, vector and number theory that we need for the later chapters and not introduce the whole of linear algebra. Nevertheless we will rely on some basic definitions and for that we refer to <insert a="" linear="" algebra="" book="" here="">.</insert></p>
 <p>In Python the module <code>numpy</code> is used to represent vectors and matrices, we can include it like this (and give it its short hand <code>np</code>):</p>
-<div id="57946cfe" class="cell" data-execution_count="1">
+<div id="59527773" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="notation" class="level2" data-number="1.1">
@@ -274,10 +278,74 @@ window.Quarto = {
 v = \left[
     \begin{array}{c} v_1 \\ v_2 \\ v_3 \\ \vdots \\ v_n \end{array}
 \right]  \in \mathbb{R}^n
-\]</span> as a <em>vector</em> <span class="math inline">\(v\)</span> with <span class="math inline">\(n\)</span> elements, in the above case in the <em>vector space</em> <span class="math inline">\(\mathbb{R}^n\)</span>, as a consequence we can perform <em>scalar</em> multiplication and addition. Multiplication by a <em>scalar</em>: <span class="math display">\[ 3 v = \left[
-    \begin{array}{c} 3 v_1 \\ 3 v_2 \\ 3 v_3 \\ \vdots \\ 3v_n \end{array}
-\right]
-\]</span> We can multiply a vector by a <em>scalar</em>:</p>
+\]</span> as a <em>vector</em> <span class="math inline">\(v\)</span> with <span class="math inline">\(n\)</span> elements. The set <span class="math inline">\((\mathbb{R}^n, + ,\cdot)\)</span> forms a so called <em>vector space</em> with the <em>vector addition</em> <span class="math inline">\(+\)</span> and the <em>scalar multiplication</em> <span class="math inline">\(\cdot\)</span>.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition - Vector space
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For a set <span class="math inline">\(V\)</span> over a field <span class="math inline">\(F\)</span> with the <em>vectors</em> <span class="math inline">\(u, v, w \in V\)</span> and the <em>scalars</em> <span class="math inline">\(\alpha, \beta \in F\)</span> the following assumptions need to hold true to form a vector space:</p>
+<p>For the vector addition:</p>
+<ol class="example" type="1">
+<li>associativity: <span class="math display">\[ u + (v + w) = (u + v) +w\]</span></li>
+<li>commutativity: <span class="math display">\[u + v = v + u\]</span></li>
+<li>there exists an identity element <span class="math inline">\(0\in \mathbb{R}^n\)</span>, i.e.&nbsp;the zero vector <span class="math display">\[v + 0 =  v\]</span></li>
+</ol>
+<p>For the scalar multiplication:</p>
+<ol start="4" class="example" type="1">
+<li>associativity: <span class="math display">\[\alpha(\beta v) = (\alpha\beta)v\]</span></li>
+<li>the multiplicative identity element <span class="math inline">\(1\in\mathbb{R}\)</span> <span class="math display">\[1 v = v\]</span></li>
+<li>distributivity with respect to vector addition: <span class="math display">\[\alpha(u + v) = \alpha u + \alpha v\]</span></li>
+<li>distributivity of the scalar addition <span class="math display">\[(\alpha + \beta)v = \alpha v + \beta v\]</span> in the ab <em>vector space</em> <span class="math inline">\(\mathbb{R}^n\)</span>.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<i class="fa-solid fa-pen-to-square" aria-label="pen-to-square"></i> Exercise - Vector space in Python
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Show that <code>np.array</code> forms a vector space with <code>+</code> and <code>*</code>.</p>
+</div>
+</div>
+</div>
+<div id="54131758" class="cell styled-output" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># show the shape</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>v<span class="sc">.</span>shape<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># access a single element</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>v[<span class="dv">0</span>]<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># use slicing to access multiple elements</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>v[<span class="dv">0</span>:<span class="dv">3</span>]<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>v[<span class="dv">2</span>:]<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>v[:<span class="dv">2</span>]<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>v[<span class="dv">0</span>::<span class="dv">2</span>]<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> alpha <span class="op">*</span> v</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>w<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>v.shape=(4,)
+v[0]=np.int64(1)
+v[0:3]=array([1, 2, 3])
+v[2:]=array([3, 4])
+v[:2]=array([1, 2])
+v[0::2]=array([1, 3])
+w=array([0.5, 1. , 1.5, 2. ])</code></pre>
+</div>
+</div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -291,27 +359,7 @@ Important
 <p>While in math we start indices with 1, Python starts with 0.</p>
 </div>
 </div>
-<div id="c3d3a43e" class="cell styled-output" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># show the shape</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>v<span class="sc">.</span>shape<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># access a single element</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>v[<span class="dv">0</span>]<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># use slicing to access multiple elements</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>v[<span class="dv">0</span>:<span class="dv">2</span>]<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>v[<span class="dv">2</span>:]<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>v[:<span class="dv">2</span>]<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>v[<span class="dv">0</span>::<span class="dv">2</span>]<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>v.shape=(4,)
-v[0]=np.int64(1)
-v[0:2]=array([1, 2])
-v[2:]=array([3, 4])
-v[:2]=array([1, 2])
-v[0::2]=array([1, 3])</code></pre>
-</div>
-</div>
-<p>From vectors we can come to <span class="math display">\[
+<p>From vectors we can move to matrices, where <span class="math display">\[
 A = \left[
     \begin{array}{cccc} a_{11} &amp; a_{12} &amp; \dots &amp; a_{1m} \\
                         a_{21} &amp; a_{22} &amp; \dots &amp; A_{2m} \\  
@@ -326,7 +374,7 @@ A = \left[
                         a_{m1} &amp; a_{m2} &amp; \dots &amp; A_{mn} \\  \end{array}
 \right) \in \mathbb{R}^{m\times n}
 \]</span> is called a <span class="math inline">\(m \times n\)</span> (<span class="math inline">\(m\)</span> times <span class="math inline">\(n\)</span>) matrix. If its values are real numbers we say it is an element of <span class="math inline">\(\mathbb{R}^{m\times n}\)</span>.</p>
-<div id="56e3489e" class="cell styled-output" data-execution_count="3">
+<div id="0c7ebead" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>],</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>]])</span>
@@ -344,7 +392,25 @@ A[0, :]=array([1, 2, 3, 4])
 A[:, 2]=array([ 3,  7, 11])</code></pre>
 </div>
 </div>
-<p>Consequently we can say that a vector is a <span class="math inline">\(n \times 1\)</span> matrix. If we want to refer to a row or a column of a matrix <span class="math inline">\(A\)</span> we will use the following short hands:</p>
+<p>Consequently we can say that a vector is a <span class="math inline">\(n \times 1\)</span> matrix. It is sometimes also referred to as <em>column vector</em> and its counterpart a <span class="math inline">\(1 \times n\)</span> matrix as a <em>row vector</em>.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<i class="fa-solid fa-pen-to-square" aria-label="pen-to-square"></i> Exercise - Matrix as vector space?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>How do we need to define <span class="math inline">\(+\)</span> and <span class="math inline">\(\cdot\)</span> to say that <span class="math inline">\((\mathbb{R}^{m \times n}, + ,\cdot)\)</span> is forming a vector space?</p>
+<p>Does <code>np.array</code>, <code>+</code>, <code>*</code> fulfil the properties of a vector space?</p>
+</div>
+</div>
+</div>
+<p>If we want to refer to a row or a column of a matrix <span class="math inline">\(A\)</span> we will use the following short hands:</p>
 <ul>
 <li><span class="math inline">\(A_{i-}\)</span> for <em>row</em> <span class="math inline">\(i\)</span>,</li>
 <li><span class="math inline">\(A_{-j}\)</span> for _column <span class="math inline">\(j\)</span>.</li>
@@ -363,7 +429,7 @@ Av =
 = A_{-1} v_1 + A_{-2} v_2 + \dots + A_{-n} v_n
 \]</span> The result is a vector but this time in <span class="math inline">\(\mathbb{R}^m\)</span>.</p>
 <p>In Python the <code>*</code> operator is usually indicating multiplication. Unfortunately, in <code>numpy</code> it is interpreted as <em>element wise multiplication</em>, so we use <code>@</code> for multiplications between vector spaces.</p>
-<div id="f785c89d" class="cell styled-output" data-execution_count="4">
+<div id="edfcea34" class="cell styled-output" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> A <span class="op">@</span> v</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># show the shape</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>w<span class="sc">.</span>shape<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
@@ -380,7 +446,193 @@ w=array([ 30,  70, 110])
 w_tilde=array([ 30.,  70., 110.])</code></pre>
 </div>
 </div>
-<p>As we can see from the above equation, we can view the matrix <span class="math inline">\(A\)</span> as a <em>linear mapping</em> or <em>linear function</em> between two vector spaces, namely <span class="math inline">\(\mathbb{R}^{n}\)</span> to <span class="math inline">\(\mathbb{R}^{m}\)</span>.</p>
+<p>As we can see from the above equation, we can view the matrix <span class="math inline">\(A\)</span> as a <em>linear mapping</em> or <em>linear function</em> between two vector spaces, namely from <span class="math inline">\(\mathbb{R}^{n}\)</span> to <span class="math inline">\(\mathbb{R}^{m}\)</span>.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition - linear map
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>linear map</strong> between vector spaces are mappings or functions that preserve the structure of the vector space. For two vector spaces <span class="math inline">\(V\)</span> and <span class="math inline">\(W\)</span> over a filed <span class="math inline">\(F\)</span> the mapping <span class="math display">\[T: V \to W\]</span> is called linear if</p>
+<ol type="1">
+<li>for <span class="math inline">\(v, w \in V\)</span> <span class="math display">\[T(v + w) = T(v) + T(w)\]</span></li>
+<li>for <span class="math inline">\(v \in V\)</span> and <span class="math inline">\(\alpha \in F\)</span> <span class="math display">\[T(\alpha v) = \alpha T(v).\]</span></li>
+</ol>
+</div>
+</div>
+<p>A linear mapping of special interest to us is the <em>transpose</em> of a matrix defined by turning rows into columns and vice versa: <span class="math display">\[
+(A^T)_{ij} = A_{ji}.
+\]</span> Consequently, the transpose of a (row) vector is a column vector.</p>
+<div id="b7012c76" class="cell styled-output" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>A<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>A<span class="sc">.</span>shape<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> A.transpose()</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>B<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>B<span class="sc">.</span>shape<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A=array([[ 1,  2,  3,  4],
+       [ 5,  6,  7,  8],
+       [ 9, 10, 11, 12]])
+A.shape=(3, 4)
+B=array([[ 1,  5,  9],
+       [ 2,  6, 10],
+       [ 3,  7, 11],
+       [ 4,  8, 12]])
+B.shape=(4, 3)</code></pre>
+</div>
+</div>
+<p>With this operation we can define the <em>dot product</em> or <em>scalar product</em> of two vectors <span class="math inline">\(v\)</span> and <span class="math inline">\(w\)</span> as <span class="math display">\[\langle v, w\rangle = v \cdot w = v^T w = \sum_i v_i w_i\]</span></p>
+<div id="7dd565b2" class="cell styled-output" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>])</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># alternatively we can define w with</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.ones(v.shape)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> np.vdot(v, w)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>alpha<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>alpha=np.float64(10.0)</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As <span class="math inline">\(\mathbb{R}^n\)</span> is an euclidean vector space the above function is also called the <em>inner product</em>.</p>
+</div>
+</div>
+<p>We also have the <em>outer product</em> defined as: <span class="math display">\[
+v \otimes w = \left[
+    \begin{array}{cccc} v_1 w_1 &amp; v_1 w_2 &amp; \dots &amp; v_1 w_n \\
+                        v_2 w_1 &amp; v_2 w_2 &amp; \dots &amp;v_2 w_n \\  
+                        \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+                        v_n w_1 &amp; v_n w_2 &amp; \dots &amp; v_n w_n \\  \end{array}
+\right] = v w^T
+\]</span></p>
+<div id="4075133e" class="cell styled-output" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.outer(v, w)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>C<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>C=array([[1., 1., 1., 1.],
+       [2., 2., 2., 2.],
+       [3., 3., 3., 3.],
+       [4., 4., 4., 4.]])</code></pre>
+</div>
+</div>
+<p>We can also multiply matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> by applying the matrix vector multiplication to each column vector of <span class="math inline">\(B\)</span>, or a bit more elaborated:</p>
+<p>For an <span class="math inline">\({m \times n}\)</span> matrix <span class="math inline">\(A\)</span> and an <span class="math inline">\({n \times p}\)</span> matrix <span class="math inline">\(B\)</span> <span class="math display">\[(AB)_{i,j} = \sum_{r=1}^n a_{i,r}b_{r,j}\]</span> forms a <span class="math inline">\({m \times p}\)</span> matrix.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<i class="fa-solid fa-pen-to-square" aria-label="pen-to-square"></i> Exercise - Matrix multiplication?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Show that the matrix multiplication is:</p>
+<ul>
+<li>associative</li>
+<li>(left and right) distributive</li>
+<li>but not commutative</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="a978db9f" class="cell styled-output" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">@</span> A.transpose()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>C<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>C=array([[ 30,  70, 110],
+       [ 70, 174, 278],
+       [110, 278, 446]])</code></pre>
+</div>
+</div>
+<p>This concludes our basic notation section and we continue with some more elaborate content that will come in handy later on in these notes.</p>
+</section>
+<section id="norms" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="norms"><span class="header-section-number">1.2</span> Norms</h2>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition - norm
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>norm</strong> is a mapping from a vector space <span class="math inline">\(V\)</span> to the field <span class="math inline">\(F\)</span> into the real numbers.</p>
+<p><span class="math display">\[\| \cdot \|: V \to \mathbb{R}_0^+, v \mapsto \|v\|\]</span> if it fulfils for <span class="math inline">\(v, w\in V\)</span> and <span class="math inline">\(\alpha \in F\)</span> the following</p>
+<ol type="1">
+<li>positivity: <span class="math display">\[ \|v\| = 0 \Rightarrow v = 0 \]</span></li>
+<li>absolute homogeneity: <span class="math display">\[ \| \alpha v \| = |\alpha| \| v \| \]</span></li>
+<li>subadditivity (often called the triangular inequality) <span class="math display">\[ \| v + w\| \leq  \| v \| + \| w \|\]</span>.</li>
+</ol>
+</div>
+</div>
+<p>There are multiple norms that can be useful for vectors. The most common are:</p>
+<ol type="1">
+<li>the one norm <span class="math display">\[ \| v \|_1 = \sum_i |v_i|,\]</span></li>
+<li>the two norm (euclidean norm) <span class="math display">\[ \| w \| = \| v \|_2 = \sqrt{\sum_i |x_i|^2} = \sqrt{\langle v, v \rangle},\]</span></li>
+<li>more general the <span class="math inline">\(p\)</span>-norms (for <span class="math inline">\(1\leq p \le \infty\)</span>) <span class="math display">\[ \| v \|_p = \left(\sum_i |v_i|^p\right)^{\frac1p},\]</span></li>
+<li>the <span class="math inline">\(\infty\)</span> norm <span class="math display">\[ \| v \|_\infty = \max_i |v_i|.\]</span></li>
+</ol>
+<p>An for metrics:</p>
+<ol type="1">
+<li>the one norm (column sum norm) <span class="math display">\[ \| A \|_1 = max_j \sum_i |A_{ij}|,\]</span></li>
+<li>the Frobeniusnorm <span class="math display">\[ \| A \| = \| A \|_F = \sqrt{sum_i sum_j |A_{ij}|^2}\]</span></li>
+<li>The <span class="math inline">\(p\)</span> norms are defined <span class="math display">\[ \| A \|_p = \left(sum_i sum_j |A_{ij}|^p\right)^{\frac1p}\]</span></li>
+<li>the <span class="math inline">\(\infty\)</span> norm (row sum norm) <span class="math display">\[ \| A \|_1 = max_i \sum_j |A_{ij}|,\]</span></li>
+</ol>
+<div id="b20a48e8" class="cell styled-output" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The norms can be found in the linalg package of numpy</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>norm_v <span class="op">=</span> LA.norm(v)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>norm_v<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>norm_v2 <span class="op">=</span> LA.norm(v, <span class="dv">2</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>norm_v2<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>norm_A <span class="op">=</span> LA.norm(A, <span class="dv">1</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>norm_A<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>norm_Afr <span class="op">=</span> LA.norm(A, <span class="st">'fro'</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>norm_Afr<span class="op">=</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>norm_v=np.float64(5.477225575051661)
+norm_v2=np.float64(5.477225575051661)
+norm_A=np.float64(24.0)
+norm_Afr=np.float64(25.495097567963924)</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The function <code>norm</code> from the <code>numpy.linalg</code> package can be used to compute other norms or properties as well, see <a href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html">docs</a>.</p>
+</div>
+</div>
+</section>
+<section id="basis-of-vector-spaces" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="basis-of-vector-spaces"><span class="header-section-number">1.3</span> Basis of vector spaces</h2>
+<p>A</p>
+<p>Basis</p>
 
 
 </section>

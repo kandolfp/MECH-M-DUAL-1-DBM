@@ -55,18 +55,18 @@ Show that `np.array` forms a vector space with `+` and `*`.
 #| classes: styled-output
 v = np.array([1, 2, 3, 4])
 # show the shape
-print(f'{v.shape=}')
+print(f"{v.shape=}")
 # access a single element
-print(f'{v[0]=}')
+print(f"{v[0]=}")
 # use slicing to access multiple elements
-print(f'{v[0:3]=}')
-print(f'{v[2:]=}')
-print(f'{v[:2]=}')
-print(f'{v[0::2]=}')
+print(f"{v[0:3]=}")
+print(f"{v[2:]=}")
+print(f"{v[:2]=}")
+print(f"{v[0::2]=}")
 
 alpha = 0.5
 w = alpha * v
-print(f'{w=}')
+print(f"{w=}")
 ```
 
 ::: {.callout-important}
@@ -98,12 +98,12 @@ A = np.array([[1, 2, 3, 4],
               [5, 6, 7, 8],
               [9, 10, 11, 12]])
 # show the shape
-print(f'{A.shape=}')
+print(f"{A.shape=}")
 # access a single element
-print(f'{A[0, 0]=}')
+print(f"{A[0, 0]=}")
 # use slicing to access multiple elements
-print(f'{A[0, :]=}')
-print(f'{A[:, 2]=}')
+print(f"{A[0, :]=}")
+print(f"{A[:, 2]=}")
 ```
 
 Consequently we can say that a vector is a $n \times 1$ matrix.
@@ -144,14 +144,14 @@ Unfortunately, in `numpy` it is interpreted as _element wise multiplication_, so
 #| classes: styled-output
 w = A @ v
 # show the shape
-print(f'{w.shape=}')
+print(f"{w.shape=}")
 # access a single element
-print(f'{w=}')
+print(f"{w=}")
 # By hand this is more tricky
 w_tilde = np.zeros(A.shape[0])
 for i, bb in enumerate(v):
     w_tilde += A[:, i] * bb
-print(f'{w_tilde=}')
+print(f"{w_tilde=}")
 ```
 
 As we can see from the above equation, we can view the matrix $A$ as a _linear mapping_ or _linear function_ between two vector spaces, namely from $\mathbb{R}^{n}$ to $\mathbb{R}^{m}$.
@@ -177,11 +177,11 @@ Consequently, the transpose of a (row) vector is a column vector.
 
 ```{python}
 #| classes: styled-output
-print(f'{A=}')
-print(f'{A.shape=}')
+print(f"{A=}")
+print(f"{A.shape=}")
 B = A.transpose()
-print(f'{B=}')
-print(f'{B.shape=}')
+print(f"{B=}")
+print(f"{B.shape=}")
 
 ```
 
@@ -195,7 +195,7 @@ w = np.array([1, 1, 1, 1])
 # alternatively we can define w with
 w = np.ones(v.shape)
 alpha = np.vdot(v, w)
-print(f'{alpha=}')
+print(f"{alpha=}")
 ```
 
 :::{.callout-note}
@@ -214,7 +214,7 @@ $$
 ```{python}
 #| classes: styled-output
 C = np.outer(v, w)
-print(f'{C=}')
+print(f"{C=}")
 ```
 
 We can also multiply matrices $A$ and $B$ by applying the matrix vector multiplication to each column vector of $B$, or a bit more elaborated:
@@ -235,7 +235,7 @@ Show that the matrix multiplication is:
 ```{python}
 #| classes: styled-output
 C = A @ A.transpose()
-print(f'{C=}')
+print(f"{C=}")
 ```
 
 This concludes our basic notation section and we continue with some more elaborate content that will come in handy later on in these notes.
@@ -285,13 +285,13 @@ $$ \| A \|_1 = max_i \sum_j |A_{ij}|,$$
 # The norms can be found in the linalg package of numpy
 from numpy import linalg as LA
 norm_v = LA.norm(v)
-print(f'{norm_v=}')
+print(f"{norm_v=}")
 norm_v2 = LA.norm(v, 2)
-print(f'{norm_v2=}')
+print(f"{norm_v2=}")
 norm_A = LA.norm(A, 1)
-print(f'{norm_A=}')
-norm_Afr = LA.norm(A, 'fro')
-print(f'{norm_Afr=}')
+print(f"{norm_A=}")
+norm_Afr = LA.norm(A, "fro")
+print(f"{norm_Afr=}")
 ```
 
 :::{.callout-note}

@@ -27,28 +27,22 @@ For a set $V$ over a [field](https://en.wikipedia.org/wiki/Field_(mathematics)) 
 For the vector addition:
 
 (@) associativity:
-$$ u + (v + w) = (u + v) +w$$
+$$ u + (v + w) = (u + v) +w,$$
 (@) commutativity:
-$$u + v = v + u$$
+$$u + v = v + u,$$
 (@) there exists an identity element $0\in \mathbb{R}^n$, i.e. the zero vector
-$$v + 0 =  v$$
+$$v + 0 =  v.$$
 
 For the scalar multiplication:
 
 (@) associativity:
-$$\alpha(\beta v) = (\alpha\beta)v$$
+$$\alpha(\beta v) = (\alpha\beta)v,$$
 (@) the multiplicative identity element $1\in\mathbb{R}$
 $$1 v = v$$
 (@) distributivity with respect to vector addition:
-$$\alpha(u + v) = \alpha u + \alpha v$$
+$$\alpha(u + v) = \alpha u + \alpha v,$$
 (@) distributivity of the scalar addition
-$$(\alpha + \beta)v = \alpha v + \beta v$$
- in the ab _vector space_ $\mathbb{R}^n$.
-:::
-
-::: {.callout-tip appearance="simple" collapse="true" icon=false}
-## {{< fa pen-to-square >}} Exercise - Vector space in Python
-Show that `np.array` forms a vector space with `+` and `*`.
+$$(\alpha + \beta)v = \alpha v + \beta v.$$
 :::
 
 ```{python}
@@ -71,6 +65,11 @@ print(f"{w=}")
 
 ::: {.callout-important}
 While in math we start indices with 1, Python starts with 0.
+:::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+## {{< fa pen-to-square >}} Exercise - Vector space in Python
+Create some vectors and scalars with `np.array` and check the above statements with `+` and `*`.
 :::
 
 From vectors we can move to matrices, where
@@ -250,11 +249,11 @@ $$\| \cdot \|: V \to \mathbb{R}_0^+, v \mapsto \|v\|$$
 if it fulfils for $v, w\in V$ and $\alpha \in F$ the following 
 
 1. positivity:
-$$ \|v\| = 0 \Rightarrow v = 0 $$
+$$ \|v\| = 0 \Rightarrow v = 0, $$
 1. absolute homogeneity:
-$$ \| \alpha v \| = |\alpha| \| v \| $$
-1. subadditivity (often called the triangular inequality) 
-$$ \| v + w\| \leq  \| v \| + \| w \|$$.
+$$ \| \alpha v \| = |\alpha| \| v \|, $$
+1. subadditivity (often called the _triangular inequality_) 
+$$ \| v + w\| \leq  \| v \| + \| w \|.$$
 :::
 
 There are multiple norms that can be useful for vectors.
@@ -297,7 +296,5 @@ print(f"{norm_Afr=}")
 :::{.callout-note}
 The function `norm` from the `numpy.linalg` package can be used to compute other norms or properties as well, see [docs](https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html).
 :::
-## Basis of vector spaces
-A 
 
-Basis
+## Basis of vector spaces

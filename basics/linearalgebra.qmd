@@ -22,7 +22,7 @@ The set $(\mathbb{R}^n, + ,\cdot)$ forms a so called _vector space_ with the _ve
 ::: {.callout appearance="simple"}
 ## Definition - Vector space
 
-For a set $V$ over a field $F$ with the _vectors_ $u, v, w \in V$ and the _scalars_ $\alpha, \beta \in F$ the following assumptions need to hold true to form a vector space:
+For a set $V$ over a [field](https://en.wikipedia.org/wiki/Field_(mathematics)) $F$ with the _vectors_ $u, v, w \in V$ and the _scalars_ $\alpha, \beta \in F$ the following assumptions need to hold true to form a vector space:
 
 For the vector addition:
 

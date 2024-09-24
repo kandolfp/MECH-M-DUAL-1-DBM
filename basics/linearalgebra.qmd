@@ -199,12 +199,12 @@ As $\mathbb{R}^n$ is an euclidean vector space the above function is also called
 
 We also have the _outer product_ defined as:
 $$
-v \otimes w = \left[
+v w^T = \left[
     \begin{array}{cccc} v_1 w_1 & v_1 w_2 & \dots & v_1 w_n \\
                         v_2 w_1 & v_2 w_2 & \dots &v_2 w_n \\  
                         \vdots & \vdots & \ddots & \vdots\\
                         v_n w_1 & v_n w_2 & \dots & v_n w_n \\  \end{array}
-\right] = v w^T
+\right]
 $$
 ```{python}
 #| classes: styled-output

@@ -75,23 +75,19 @@ Create some vectors and scalars with `np.array` and check the above statements w
 
 From vectors we can move to matrices, where
 $$
-A = \left[
-    \begin{array}{cccc} a_{11} & a_{12} & \dots & a_{1m} \\
-                        a_{21} & a_{22} & \dots & A_{2m} \\  
-                        \vdots & \vdots & \ddots & \vdots\\
-                        a_{n1} & a_{n2} & \dots & A_{nm} \\  \end{array}
-\right] 
-=
-\left(
+A \in \mathbb{R}^{m\times n} 
+\quad 
+\Leftrightarrow
+\quad A = (a_{ij}) = \left[
     \begin{array}{cccc} a_{11} & a_{12} & \dots & a_{1n} \\
-                        a_{21} & a_{22} & \dots & A_{2n} \\  
+                        a_{21} & a_{22} & \dots & a_{2n} \\  
                         \vdots & \vdots & \ddots & \vdots\\
-                        a_{m1} & a_{m2} & \dots & A_{mn} \\  \end{array}
-\right) \in \mathbb{R}^{m\times n}
+                        a_{m1} & a_{m2} & \dots & a_{mn} \\  \end{array}
+\right], a_{i,j} \in \mathbb{R}
 $$ 
 is called a $m \times n$ ($m$ times $n$) matrix.
 If its values are real numbers we say it is an element of $\mathbb{R}^{m\times n}$.
-
+We will use capital letters for matrices and small letters for vectors.
 ```{python}
 #| classes: styled-output
 A = np.array([[1, 2, 3, 4], 
@@ -182,7 +178,6 @@ print(f"{A.shape=}")
 B = A.transpose()
 print(f"{B=}")
 print(f"{B.shape=}")
-
 ```
 
 With this operation we can define the _dot product_ or _scalar product_ of two vectors $v$ and $w$ as

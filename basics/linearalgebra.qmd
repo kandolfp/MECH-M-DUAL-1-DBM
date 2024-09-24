@@ -296,3 +296,72 @@ The function `norm` from the `numpy.linalg` package can be used to compute other
 :::
 
 ## Basis of vector spaces
+
+As we will be using the notion of _basis vector_ or a _basis of a vector space_ we should introduce them properly.
+
+::: {.callout appearance="simple"}
+## Definition - basis
+A set of vectors $\mathcal{B} = \{b_1, \ldots, b_r\} \in \mathbb{R}^n$ is called:
+
+1. linear independent if
+$$ \sum_{j=1}^r \alpha_j b_j = 0 \Rightarrow \alpha_1 = \alpha_2 = \cdots = \alpha_r = 0,$$
+1. spans $\mathbb{R}^n$ if
+$$ v = \sum_{j=1}^r \alpha_j b_j, \quad \forall v \in \mathbb{R}^n, \alpha_1, \ldots, \alpha_r \in \mathbb{R}$$
+
+A set $\mathcal{B}$ is called a basis of a vector space if it is linear independent and spans the entire vector space.
+:::
+
+The standard basis of $\mathbb{R}^n$ are the vectors $e_i$ that are zero everywhere except for index $i$.
+
+The easiest to create one, lets say $e_3 \in \mathbb{R}^3$, in Python is by calling
+```{python}
+#| classes: styled-output
+# We need to keep the index shift in mind
+n = 3
+e_3 = np.zeros(n)
+e_3[3-1] = 1
+print(f"{e_3=}")
+```
+
+::: {.callout-caution appearance="simple" collapse="true" icon=false}
+## {{< fa circle-check >}} Example - Standard basis
+```{python}
+#| classes: styled-output
+#| error: true
+n = 3
+e_1 = np.zeros(n)
+e_1[0] = 1
+e_2 = np.zeros(n)
+e_2[1] = 1
+e_3 = np.zeros(n) 
+e_3[2] = 1
+
+x = np.random.rand(n)
+print(f"{x=}")
+y = x[0] * e_1 + x[1] * e_2 + x[2] * e_3
+print(f"{y=}")
+np.testing.assert_allclose(x, y)
+np.testing.assert_equal(e_1, e_2)
+```
+:::
+
+We call $$
+I_n = \left[
+    \begin{array}{cccc} 1 & 0 & 0 & 0 \\
+                        0 & 1 & \dots & 0 \\  
+                        \vdots & \vdots & \ddots & \vdots\\
+                        0 & 0 & \dots & 1 \\  \end{array}
+\right] 
+ \in \mathbb{R}^{n \times n}
+ $$
+the _identity matrix_.
+Note, the index $n$ is often omitted as it should be clear from the dimensions of the matrix.
+We can also think of it as the matrix that has all the standard basis vectors combined.
+
+```{python}
+#| classes: styled-output
+n = 4
+I_4 = np.eye(n)
+print(f"{I_4=}")
+```
+

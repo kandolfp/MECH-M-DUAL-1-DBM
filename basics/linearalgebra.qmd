@@ -13,9 +13,13 @@ import numpy as np
 
 We will refer to 
 $$
+v \in \mathbb{R}^{n} 
+\quad 
+\Leftrightarrow
+\quad
 v = \left[
     \begin{array}{c} v_1 \\ v_2 \\ v_3 \\ \vdots \\ v_n \end{array}
-\right]  \in \mathbb{R}^n
+\right] \quad v_i \in \mathbb{R},
 $$
 as a _vector_ $v$ with $n$ elements.
 The set $(\mathbb{R}^n, + ,\cdot)$ forms a so called _vector space_ with the _vector addition_ $+$ and the _scalar multiplication_ $\cdot$.

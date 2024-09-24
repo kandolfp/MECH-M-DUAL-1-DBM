@@ -313,6 +313,7 @@ $$ \sum_{j=1}^r \alpha_j b_j = 0 \Rightarrow \alpha_1 = \alpha_2 = \cdots = \alp
 $$ v = \sum_{j=1}^r \alpha_j b_j, \quad \forall v \in \mathbb{R}^n, \alpha_1, \ldots, \alpha_r \in \mathbb{R}$$
 
 A set $\mathcal{B}$ is called a basis of a vector space if it is linear independent and spans the entire vector space.
+The size of the basis, i.e. the number of vectors in the basis, is called the dimension of the vector space.
 :::
 
 The standard basis of $\mathbb{R}^n$ are the vectors $e_i$ that are zero everywhere except for index $i$.

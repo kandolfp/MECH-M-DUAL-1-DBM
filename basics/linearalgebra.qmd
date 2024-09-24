@@ -19,7 +19,7 @@ v \in \mathbb{R}^{n}
 \quad
 v = \left[
     \begin{array}{c} v_1 \\ v_2 \\ v_3 \\ \vdots \\ v_n \end{array}
-\right] \quad v_i \in \mathbb{R},
+\right], \quad v_i \in \mathbb{R},
 $$
 as a _vector_ $v$ with $n$ elements.
 The set $(\mathbb{R}^n, + ,\cdot)$ forms a so called _vector space_ with the _vector addition_ $+$ and the _scalar multiplication_ $\cdot$.
@@ -90,11 +90,15 @@ A \in \mathbb{R}^{m\times n}
                         a_{21} & a_{22} & \dots & a_{2n} \\  
                         \vdots & \vdots & \ddots & \vdots\\
                         a_{m1} & a_{m2} & \dots & a_{mn} \\  \end{array}
-\right], a_{i,j} \in \mathbb{R}
+\right],\quad a_{ij} \in \mathbb{R}
 $$ 
 is called a $m \times n$ ($m$ times $n$) matrix.
 If its values are real numbers we say it is an element of $\mathbb{R}^{m\times n}$.
+
+::: {.callout-important}
 We will use capital letters for matrices and small letters for vectors.
+:::
+
 ```{python}
 #| classes: styled-output
 A = np.array([[1, 2, 3, 4], 

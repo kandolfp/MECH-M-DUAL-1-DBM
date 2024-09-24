@@ -36,7 +36,10 @@ $$ u + (v + w) = (u + v) +w,$$
 (@) commutativity:
 $$u + v = v + u,$$
 (@) there exists an identity element $0\in \mathbb{R}^n$, i.e. the zero vector
-$$v + 0 =  v.$$
+$$v + 0 =  v,$$
+(@) there exists an inverse element
+$$v + w =  0\quad \Rightarrow w\equiv -v,$$
+usually it is denoted by $-v$.
 
 For the scalar multiplication:
 

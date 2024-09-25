@@ -24,6 +24,7 @@ book:
     - part: basics/index.qmd
       chapters: 
         - basics/linearalgebra.qmd
+        - basics/sets.qmd
         - basics/epilogue.qmd
     - summary.qmd
     - references.qmd

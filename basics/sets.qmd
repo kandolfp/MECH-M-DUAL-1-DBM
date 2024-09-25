@@ -1,0 +1,101 @@
+# Data sets {#sec-intro-sets}
+
+We continue our little introduction be looking at _data sets_ in the sense of a list of values that we want to describe closer.
+
+We use the `mieten3.asc` from [Open Data LMU](https://data.ub.uni-muenchen.de/2/). 
+The data set contains information about rents in Munich from the year 2003.
+The columns have the following meaning, see `DETAILS`:
+```txt
+Variablenbeschreibung:
+
+nm		    Nettomiete in EUR
+nmqm		Nettomiete pro m² in EUR
+wfl		    Wohnfläche in m²
+rooms		Anzahl der Zimmer in der Wohnung
+bj		    Baujahr der Wohnung
+bez		    Stadtbezirk
+wohngut		Gute Wohnlage? (J=1,N=0)
+wohnbest	Beste Wohnlage? (J=1,N=0)
+ww0		    Warmwasserversorgung vorhanden? (J=0,N=1)
+zh0		    Zentralheizung vorhanden? (J=0,N=1)
+badkach0	Gekacheltes Badezimmer? (J=0,N=1)
+badextra	Besondere Zusatzausstattung im Bad? (J=1,N=0)
+kueche		Gehobene Küche? (J=1,N=0)
+```
+
+
+For now we just show the code without a lot of explanation as we want to start doing and not hold ourself back with how.
+We use a [structured array](https://numpy.org/doc/stable/user/basics.rec.html#module-numpy.doc.structured_arrays) of `numpy` for it.
+
+```{python}
+#| classes: styled-output
+import numpy as np
+import requests
+import io
+response = requests.get("https://data.ub.uni-muenchen.de/2/1/miete03.asc")
+
+# Transform the content of the file into a numpy.ndarray
+data = np.genfromtxt(io.BytesIO(response.content), names=True)
+# Access the data types and names
+print(f"{data.dtype=}")
+# Access the second element (row)
+print(f"{data[1]=}")
+# Access a name
+print(f"{data['rooms']=}")
+```
+
+Now that we have some data we can look at it more closely, for this we interpret a row as a vector.
+
+## Basic properties of a data set
+
+First we are looking the total net rent, i.e. the row `nm`.
+
+For a vector $v \in \mathbb{R}^n$ we have:
+
+- the maximal value
+$$
+v^{max} = \max_i v_i
+$$
+- the minimal value
+$$
+v^{min} = \min_i v_i
+$$
+- the _mean_ of all values (often called the _arithmetic mean_)
+$$
+\overline{v} = \frac1n \sum_{i=1}^n v_i = \frac{v_1 + v_2 + \cdots + v_n}{n},
+$$
+- the median, i.e. the value such that half are bitter and half are smaller, for a sorted $v$ this is
+$$
+\widetilde{v} = \begin{cases} 
+                v_{(n+1)/2}& n\quad \text{odd}\\
+                \frac{v_{n/2} + v_{n/2+1}}{2}& n\quad \text{even}
+                \end{cases},
+$$
+```{python}
+#| classes: styled-output
+nm_max = np.max(data['nm'])
+print(f"{nm_max=}")
+
+nm_min = np.min(data['nm'])
+print(f"{nm_min=}")
+
+nm_mean = np.mean(data['nm'])
+# round to 2 digits
+nm_mean_r = np.around(nm_mean, 2)
+print(f"{nm_mean_r=}")
+
+nm_median = np.median(data['nm'])
+print(f"{nm_median=}")
+```
+
+```{python}
+#| echo: false
+#| output: asis
+max_index = np.argmax(data['nm'])
+rooms = int(data['rooms'][max_index])
+year = int(data['bj'][max_index])
+print((f"From this Python snippet we know that for tenants the rent variated between {nm_min} and {nm_max}, with an average of {nm_mean_r} and a median of {nm_median}. "
+"Of course there are tricky questions that require us to dig a bit deeper into these functions, e.g. know how many rooms does the most expensive flat have? "
+f"The surprising answer is {rooms} and it was build in {year} but how do we compute it?"))
+```
+

@@ -280,13 +280,13 @@ $$ \| v \|_\infty = \max_i |v_i|.$$
 An for metrics:
 
 1. the one norm (column sum norm)
-$$ \| A \|_1 = max_j \sum_i |A_{ij}|,$$
+$$ \| A \|_1 = max_j \sum_i |a_{ij}|,$$
 1. the Frobeniusnorm
-$$ \| A \| = \| A \|_F = \sqrt{sum_i sum_j |A_{ij}|^2}$$
+$$ \| A \| = \| A \|_F = \sqrt{sum_i sum_j |a_{ij}|^2}$$
 1. the $p$ norms are defined
-$$ \| A \|_p = \left(sum_i sum_j |A_{ij}|^p\right)^{\frac1p}$$
+$$ \| A \|_p = \left(\sum_i \sum_j |a_{ij}|^p\right)^{\frac1p}$$
 1. the $\infty$ norm (row sum norm)
-$$ \| A \|_1 = max_i \sum_j |A_{ij}|,$$
+$$ \| A \|_1 = max_i \sum_j |a_{ij}|,$$
 
 ```{python}
 #| classes: styled-output

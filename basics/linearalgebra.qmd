@@ -320,7 +320,7 @@ $$ \sum_{j=1}^r \alpha_j b_j = 0 \Rightarrow \alpha_1 = \alpha_2 = \cdots = \alp
 $$ v = \sum_{j=1}^r \alpha_j b_j, \quad \forall v \in \mathbb{R}^n, \alpha_1, \ldots, \alpha_r \in \mathbb{R}$$
 
 The set $\mathcal{B}$ is called a _basis_ of a vector space if it is linear independent and spans the entire vector space.
-The size of the basis, i.e. the number of vectors in the basis, is called the dimension of the vector space.
+The size of the basis, i.e. the number of vectors in the basis, is called the _dimension_ of the vector space.
 :::
 
 The standard basis of $\mathbb{R}^n$ are the vectors $e_i$ that are zero everywhere except for index $i$.
@@ -350,11 +350,17 @@ e_3[2] = 1
 
 x = np.random.rand(n)
 print(f"{x=}")
-y = x[0] * e_1 + x[1] * e_2 + x[2] * e_3
+# compute the coefficients
+a = np.dot(x, e_1)
+b = np.dot(x, e_2)
+c = np.dot(x, e_3)
+y = a * e_1 + b * e_2 + c * e_3
 print(f"{y=}")
 np.testing.assert_allclose(x, y)
-np.testing.assert_equal(e_1, e_2)
+print(f"{LA.norm(x-y)=}")
 ```
+
+See [`numpy.testing`](https://numpy.org/doc/stable/reference/routines.testing.html#) for help more ways of testing in `numpy`.
 :::
 
 We call $$
@@ -401,7 +407,8 @@ print(f"{A=}")
 X = LA.inv(A)
 print(f"{X=}")
 print(f"{A @ X=}")
-np.testing.assert_equal(A @ X, np.eye(A.shape[0]))
+np.testing.assert_almost_equal(A @ X, np.eye(A.shape[0]))
+# Note that the equality is hard to achieve for floats
 np.testing.assert_equal(A @ X, np.eye(A.shape[0]))
 ```
 

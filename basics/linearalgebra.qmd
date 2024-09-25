@@ -178,7 +178,7 @@ $$T(\alpha v) = \alpha T(v).$$
 
 A linear mapping of special interest to us is the _transpose_ of a matrix defined by turning rows into columns and vice versa:
 $$
-(A^T)_{ij} = A_{ji}.
+C = A^T, \quad \Rightarrow \quad c_{ij} = a_{ji}.
 $$
 Consequently, the transpose of a (row) vector is a column vector.
 
@@ -273,7 +273,7 @@ $$ \| v \|_1 = \sum_i |v_i|,$$
 1. the two norm (euclidean norm)
 $$ \| w \| = \| v \|_2 = \sqrt{\sum_i |x_i|^2} = \sqrt{\langle v, v \rangle},$$
 1. more general the $p$-norms (for $1\leq p \le \infty$)
-$$ \| v \|_p = \left(\sum_i |v_i|^p\right)^{\frac1p},$$
+$$ \| v \|_p = \left(\sum_i |v_i|^p\right)^{\frac{1}{p}},$$
 1. the $\infty$ norm
 $$ \| v \|_\infty = \max_i |v_i|.$$
 

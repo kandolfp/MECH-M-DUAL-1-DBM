@@ -152,9 +152,9 @@ Unfortunately, in `numpy` it is interpreted as _element wise multiplication_, so
 w = A @ v
 # show the shape
 print(f"{w.shape=}")
-# access a single element
+# show the result
 print(f"{w=}")
-# By hand this is more tricky
+# Doing the same by hand this is tricky
 w_tilde = np.zeros(A.shape[0])
 for i, bb in enumerate(v):
     w_tilde += A[:, i] * bb

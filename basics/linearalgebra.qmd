@@ -166,7 +166,7 @@ As we can see from the above equation, we can view the matrix $A$ as a _linear m
 ::: {.callout appearance="simple"}
 ## Definition - linear map
 A **linear map** between vector spaces are mappings or functions that preserve the structure of the vector space.
-For two vector spaces $V$ and $W$ over a filed $F$ the mapping 
+For two vector spaces $V$ and $W$ over a field $F$ the mapping 
 $$T: V \to W$$
 is called linear if
 
@@ -283,7 +283,7 @@ An for metrics:
 $$ \| A \|_1 = max_j \sum_i |A_{ij}|,$$
 1. the Frobeniusnorm
 $$ \| A \| = \| A \|_F = \sqrt{sum_i sum_j |A_{ij}|^2}$$
-1. The $p$ norms are defined
+1. the $p$ norms are defined
 $$ \| A \|_p = \left(sum_i sum_j |A_{ij}|^p\right)^{\frac1p}$$
 1. the $\infty$ norm (row sum norm)
 $$ \| A \|_1 = max_i \sum_j |A_{ij}|,$$
@@ -312,20 +312,20 @@ As we will be using the notion of _basis vector_ or a _basis of a vector space_ 
 
 ::: {.callout appearance="simple"}
 ## Definition - basis
-A set of vectors $\mathcal{B} = \{b_1, \ldots, b_r\} \in \mathbb{R}^n$ is called:
+A set of vectors $\mathcal{B} = \{b_1, \ldots, b_r\} \in \mathbb{R}^n$:
 
-1. linear independent if
+1. is called linear independent if
 $$ \sum_{j=1}^r \alpha_j b_j = 0 \Rightarrow \alpha_1 = \alpha_2 = \cdots = \alpha_r = 0,$$
 1. spans $\mathbb{R}^n$ if
 $$ v = \sum_{j=1}^r \alpha_j b_j, \quad \forall v \in \mathbb{R}^n, \alpha_1, \ldots, \alpha_r \in \mathbb{R}$$
 
-A set $\mathcal{B}$ is called a basis of a vector space if it is linear independent and spans the entire vector space.
+The set $\mathcal{B}$ is called a _basis_ of a vector space if it is linear independent and spans the entire vector space.
 The size of the basis, i.e. the number of vectors in the basis, is called the dimension of the vector space.
 :::
 
 The standard basis of $\mathbb{R}^n$ are the vectors $e_i$ that are zero everywhere except for index $i$.
 
-The easiest to create one, lets say $e_3 \in \mathbb{R}^3$, in Python is by calling
+The easiest way to create one, lets say $e_3 \in \mathbb{R}^3$, in Python is by calling
 ```{python}
 #| classes: styled-output
 # We need to keep the index shift in mind
@@ -381,14 +381,14 @@ print(f"{I_4=}")
 
 ::: {.callout appearance="simple"}
 ## Definition - inverse
-For a square matrices $A, X\in \mathbb{R}^{n\times n}$ that satisfy
+For matrices $A, X\in \mathbb{R}^{n\times n}$ that satisfy
 $$ A X = X A = I_n $$
 we call $X$ the inverse of $A$ and denote it by $A^{-1}$.
 :::
 
-The following holds tro for the inverse of matrices:
+The following holds true for the inverse of matrices:
 
-- the inverse of a product is product of the inverses:
+- the inverse of a product is the product of the inverses
 $$ (AB)^{-1} = B^{-1}A^{-1},$$
 - the inverse of the transpose is the transpose of the inverse
 $$ (A^{-1})^T = (A^{T})^{-1} \equiv A^{-T}.$$

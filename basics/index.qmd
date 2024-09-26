@@ -1,5 +1,21 @@
 # Basics {.unnumbered}
 
 In this section we are going to discuss a lot of the mathematical basics in the form of Linear Algebra as well as some topics of statistics of sets.
-We will always immediately show how to use the discussed content in Python and include also visualisations (with the code).
+We will always immediately show how to use the discussed content in [Python](https://www.python.org/).
+
+::: {.callout-note}
+These notes assume that you have some basic knowledge of programming in Python and we build on this knowledge.
+In this sense, we use Python as a tool and only describe the inner workings if it helps us to better understand the topics at hand. 
+
+If this is not the case have a look at [MECH-M-DUAL-1-SWD](https://kandolfp.github.io/MECH-M-DUAL-1-SWD), a class on software design in the same master program and from the same authors.
+
+Additionally, we can recommend the following books on Python:
+
+- @Matthes2023: Python Crash Course - A hands-on, project-based introduction to programming; [Online Material](https://ehmatthes.github.io/pcc_3e/).
+- [Python Cheat Sheet](https://github.com/ehmatthes/pcc_3e/releases/download/v1.0.0/beginners_python_cheat_sheet_pcc_all.pdf) provided by @Matthes2023.
+- @McKinney2022-qz: Python for data analysis 3e; [Online](https://wesmckinney.com/book/) and Print 
+- @Vasiliev2022: Python for Data Science - A Hands-On Introduction
+- @Inden2023: Python lernen – kurz & gut; German
+:::
+
 

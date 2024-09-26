@@ -100,12 +100,22 @@ print(f"{nm_quartiles=}")
 ```
 ```{python}
 #| echo: false
-#| output: asis
 max_index = np.argmax(data['nm'])
 rooms = int(data['rooms'][max_index])
 year = int(data['bj'][max_index])
-print((f"From this Python snippet we know that for tenants the rent variated between {nm_min} and {nm_max}, with an average of {nm_mean_r} and a median of {nm_median}. "
-"Of course there are tricky questions that require us to dig a bit deeper into these functions, e.g. know how many rooms does the most expensive flat have? "
-f"The surprising answer is {rooms} and it was build in {year} but how do we compute it?"))
+```
+From this Python snippet we know that for tenants the rent variated between `{python} float(nm_min)` and `{python} float(nm_max)`, with an average of `{python} float(nm_mean_r)` and a median of `{python} float(nm_median)`.
+Of course there are tricky questions that require us to dig a bit deeper into these functions, e.g. know how many rooms does the most expensive flat have?
+The surprising answer is `{python} rooms` and it was build in `{python} year` but how do we obtain these?
+
+We can use the `numpy.argwhere` function or some exit directly like `numpy.argmax`.
+```{python}
+#| classes: styled-output
+max_index = np.argmax(data['nm'])
+rooms = int(data['rooms'][max_index])
+year = int(data['bj'][max_index])
+print(f"{rooms=}, {year=}")
+```
+
 ```
 

@@ -221,3 +221,122 @@ nm_IQR = nm_quartiles[2] - nm_quartiles[0]
 print(f"{nm_IQR=}")
 ```
 
+## Histogram
+
+When exploring data it is also quite useful to draw histograms.
+For the _net rent_ this makes not much sense but for _rooms_ this is useful.
+
+```{python}
+#| label: fig-hist
+#| fig-cap: "Histogram for the number of rooms in our dataset"
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+index = np.array(range(0, len(data['rooms'])))
+
+plt.hist(data['rooms'])
+plt.xlabel('rooms')
+plt.ylabel('# of rooms')
+plt.show()
+```
+What we see in @fig-hist is simply the amount of occurrences of $1$ to $6$ in our dataset.
+Already we can see something rather interesting, there are flats with $5.5$ rooms in our dataset.
+
+Another helpful histogram is @fig-hist2 for the amount of buildings build per year.
+```{python}
+#| label: fig-hist2
+#| fig-cap: "Histogram for the buildings build per year."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+index = np.array(range(0, len(data['rooms'])))
+
+plt.hist(data['bj'])
+plt.xlabel('year of building')
+plt.ylabel('# of buildings')
+plt.show()
+```
+
+## Correlation 
+
+In statistics, the terms _correlation_ or _dependence_ describe any statistical relationship between _bivariate data_ (data that is paired) or _random variables_.
+
+For our dataset we can, for example check:
+
+1. the _living area in $m^2$_ - `wfl` vs. the _net rent_ - `nm`
+1. the _year of building_ - `bj` vs. if _central heating_ - `zh0` is available
+1. the _year of building_ - `bj` vs. the _city distric_ - `bez`
+```{python}
+#| label: fig-correlation
+#| fig-cap: "Scatterplot to investigate correlations in the data set."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+
+from plotly.subplots import make_subplots
+fig = make_subplots(rows=3, cols=1)
+
+fig.add_trace(go.Scatter(x=data["wfl"], y=data["nm"], mode="markers"), row=1, col=1)
+fig.update_xaxes(title_text="living area in m^2", row=1, col=1)
+fig.update_yaxes(title_text="net rent", row=1, col=1)
+
+fig.add_trace(go.Scatter(x=data["bj"], y=data["zh0"], mode="markers"), row=2, col=1)
+fig.update_xaxes(title_text="build in year", row=2, col=1)
+fig.update_yaxes(title_text="central heating", row=2, col=1)
+
+fig.add_trace(go.Scatter(x=data["bj"], y=data["bez"], mode="markers"), row=3, col=1)
+fig.update_xaxes(title_text="build in year", row=3, col=1)
+fig.update_yaxes(title_text="city district", row=3, col=1)
+
+fig.show()
+```
+
+In the first plot of @fig-correlation we see that the rent tends to go up with the area of the flat but there are for sure some rather cheap options in terms of space.
+
+The second plot of @fig-correlation tells us that around $1966$ central heating became a stable.
+Of course we can also guess that the older buildings with central heating where renovated but we have no data supporting this claim.
+
+The final, third plot of @fig-correlation does not yield an immediate correlation.
+
+More formal we can describe possible correlations via the _covariance_.
+The covariance is a measure of the joint variability of tow random variables.
+
+::: {.callout appearance="simple"}
+## Definition - covariance
+For two finite sets represented by a vectors $v, w\in\mathbb{R}^n$ the **covariance** is defined as
+$$
+\operatorname{cov}(v, w) = \frac1n \langle v -\overline{v}, w - \overline{w}\rangle
+$$
+:::
+
+The covariance is tricky to interpret, e.g. the unities of the two must not make sense.
+In our example, we have rent per square meter which makes some sense.
+
+From the covariance we can compute the correlation.
+
+::: {.callout appearance="simple"}
+## Definition - correlation
+For two finite sets represented by a vectors $v, w\in\mathbb{R}^n$ the **covariance** is defined as
+$$
+\rho_{v,w} = \operatorname{corr}(v, w) = \frac{\operatorname{cov}(v, w)}{\sigma_v \sigma_w}
+$$
+:::
+
+
+In `numpy` the function `numpy.cov` computes a matrix where the diagonal is the variance the values and the off-diagonals are the covariances of the $i$ and $j$ samples.
+Consequently, `numpy.corrcoef` is a matrix as well.
+```{python}
+#| classes: styled-output
+cov_nm_wfl = np.cov(data["nm"], data["wfl"])
+print(f"{cov_nm_wfl[0,1]=}")
+
+corr_nm_wfl = np.corrcoef(data["nm"], data["wfl"])
+print(f"{corr_nm_wfl[0,1]=}")
+```
+
+The above results, particularly $\rho_{\text{nm},\text{wfl}}=`{python} round(float(corr_nm_wfl[0,1]),3)`$ suggest that the higher the rent, the more space you get.
+
+:::{.callout-tip}
+Correlation and causation are not the same thing!
+:::
+
+:::{.callout-tip}
+We showed some basic test for correlation, there are more elaborate methods but they are subject to a later chapter.
+:::

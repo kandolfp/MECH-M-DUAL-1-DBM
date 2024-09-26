@@ -1,6 +1,6 @@
 # Data sets {#sec-intro-sets}
 
-We continue our little introduction be looking at _data sets_ in the sense of a list of values that we want to describe closer.
+We continue our little introduction by looking at _data sets_ in the sense of a list of values that we want to describe closer.
 
 We use the `mieten3.asc` from [Open Data LMU](https://data.ub.uni-muenchen.de/2/). 
 The data set contains information about rents in Munich from the year 2003.
@@ -121,7 +121,7 @@ print(f"{rooms=}, {year=}")
 
 :::{.callout-tip}
 There are various ways of visualizing data in Python.
-Two wildly used packages are `matplotlib` and [`plotly`](https://plotly.com/graphing-libraries/).
+Two widely used packages are [`matplotlib`](https://matplotlib.org) and [`plotly`](https://plotly.com/graphing-libraries/).
 :::
 
 It often helps to visualize the values to see differences and get an idea of their use.
@@ -154,7 +154,7 @@ plt.show()
 What is shown in @fig-quartiles is often combined into a single [boxplot](https://en.wikipedia.org/wiki/Box_plot) (see @fig-boxplot) that provides way more information at once.
 ```{python}
 #| label: fig-boxplot
-#| fig-cap: "Boxplot done in plotly with whiskers following 3/2 IQR"
+#| fig-cap: "Boxplot done in plotly with whiskers following 3/2 IQR."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 import plotly.graph_objects as go
@@ -206,7 +206,7 @@ IQR = \overline{v}_{0.75} - \overline{v}_{0.25}.
 $$
 :::
 
-With `numpy` the this they are computed as
+With `numpy` they are computed as follows
 
 ```{python}
 #| classes: styled-output
@@ -228,7 +228,7 @@ For the _net rent_ this makes not much sense but for _rooms_ this is useful.
 
 ```{python}
 #| label: fig-hist
-#| fig-cap: "Histogram for the number of rooms in our dataset"
+#| fig-cap: "Histogram of the number of rooms in our dataset."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 index = np.array(range(0, len(data['rooms'])))
@@ -338,5 +338,5 @@ Correlation and causation are not the same thing!
 :::
 
 :::{.callout-tip}
-We showed some basic test for correlation, there are more elaborate methods but they are subject to a later chapter.
+We showed some basic tests for correlation, there are more elaborate methods but they are subject to a later chapter.
 :::

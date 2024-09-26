@@ -62,14 +62,14 @@ v^{min} = \min_i v_i
 $$
 - the _mean_ of all values (often called the _arithmetic mean_)
 $$
-\overline{v} = \frac1n \sum_{i=1}^n v_i = \frac{v_1 + v_2 + \cdots + v_n}{n},
+\overline{v} = \frac1n \sum_{i=1}^n v_i = \frac{v_1 + v_2 + \cdots + v_n}{n}
 $$
-- the median, i.e. the value such that half are bigger and half are smaller, for a sorted $v$ this is
+- the median, i.e. the value where half is bigger and the other half is smaller, for a sorted $v$ this is
 $$
 \widetilde{v} = \begin{cases} 
                 v_{(n+1)/2}& n\quad \text{odd}\\
                 \frac{v_{n/2} + v_{n/2+1}}{2}& n\quad \text{even}
-                \end{cases},
+                \end{cases}
 $$
 - more general, we have quantiles. For a sorted $v$ and $p\in(0,1)$
 $$

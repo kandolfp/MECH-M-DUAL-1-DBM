@@ -24,7 +24,7 @@ kueche		Gehobene Küche? (J=1,N=0)
 ```
 
 
-For now we just show the code without a lot of explanation as we want to start doing and not hold ourself back with how.
+For now, we'll just show the code without much explanation because we want to jump right in and don't want to delve into how it works.
 We use a [structured array](https://numpy.org/doc/stable/user/basics.rec.html#module-numpy.doc.structured_arrays) of `numpy` for it.
 
 ```{python}
@@ -48,7 +48,7 @@ Now that we have some data we can look at it more closely, for this we interpret
 
 ## Basic properties of a data set
 
-First we are looking the total net rent, i.e. the row `nm`.
+First we are looking at the total net rent, i.e. the row `nm`.
 
 For a vector $v \in \mathbb{R}^n$ we have:
 
@@ -104,11 +104,11 @@ max_index = np.argmax(data['nm'])
 rooms = int(data['rooms'][max_index])
 year = int(data['bj'][max_index])
 ```
-From this Python snippet we know that for tenants the rent variated between `{python} float(nm_min)` and `{python} float(nm_max)`, with an average of `{python} float(nm_mean_r)` and a median of `{python} float(nm_median)`.
-Of course there are tricky questions that require us to dig a bit deeper into these functions, e.g. know how many rooms does the most expensive flat have?
-The surprising answer is `{python} rooms` and it was build in `{python} year` but how do we obtain these?
+From this Python snippet we know that for tenants the rent varied between `{python} float(nm_min)` and `{python} float(nm_max)`, with an average of `{python} float(nm_mean_r)` and a median of `{python} float(nm_median)`.
+Of course there are tricky questions that require us to dig a bit deeper into these functions, e.g. how many rooms does the most expensive flat have?
+The surprising answer is `{python} rooms` and it was built in `{python} year`, but how do we obtain these results?
 
-We can use the `numpy.argwhere` function or some exit directly like `numpy.argmax`.
+We can use `numpy.argwhere` or a function which returns directly like `numpy.argmax`.
 ```{python}
 #| classes: styled-output
 max_index = np.argmax(data['nm'])
@@ -164,9 +164,9 @@ fig.add_trace(go.Box(y=data["nm"], name="Standard"))
 fig.add_trace(go.Box(y=data["nm"], name="With points", boxpoints="all"))
 fig.show()
 ```
-The plot contains the box which is defined by the 1st quantile $Q_1$ and the 3rd $Q_3$, with the median as line in between these two.
+The plot contains the box which is defined by the 1st quantile $Q_1$ and the 3rd quantile $Q_3$, with the median as line in between these two.
 Furthermore, we can see the whiskers which help us identify so called outliers.
-By default they are defined as $\pm 1.5(Q_3 - Q_1)$, where ($Q_3 - Q_1$) is often called the _interquartile range_.
+By default they are defined as $\pm 1.5(Q_3 - Q_1)$, where ($Q_3 - Q_1$) is often called the _interquartile range_ (IQR).
 
 :::{.callout-note}
 @fig-boxplot is an interactive plot in the html version.
@@ -174,7 +174,7 @@ By default they are defined as $\pm 1.5(Q_3 - Q_1)$, where ($Q_3 - Q_1$) is ofte
 
 ## Spread
 
-The _spread_ or (_dispersion_, _variability_, _scatter_) are measures used in statistics to classify how data is, well, spread out.
+The _spread_ (or _dispersion_, _variability_, _scatter_) are measures used in statistics to classify how data is distributed.
 Common examples are _variance_, _standard deviation_, and the _interquartile range_ that we have already seen above.
 
 ::: {.callout appearance="simple"}
@@ -241,10 +241,10 @@ plt.show()
 What we see in @fig-hist is simply the amount of occurrences of $1$ to $6$ in our dataset.
 Already we can see something rather interesting, there are flats with $5.5$ rooms in our dataset.
 
-Another helpful histogram is @fig-hist2 for the amount of buildings build per year.
+Another helpful histogram is @fig-hist2 showing the amount of buildings built per year.
 ```{python}
 #| label: fig-hist2
-#| fig-cap: "Histogram for the buildings build per year."
+#| fig-cap: "Histogram of buildings built per year."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 index = np.array(range(0, len(data['rooms'])))
@@ -259,11 +259,11 @@ plt.show()
 
 In statistics, the terms _correlation_ or _dependence_ describe any statistical relationship between _bivariate data_ (data that is paired) or _random variables_.
 
-For our dataset we can, for example check:
+For our dataset we can, for example, check:
 
 1. the _living area in $m^2$_ - `wfl` vs. the _net rent_ - `nm`
-1. the _year of building_ - `bj` vs. if _central heating_ - `zh0` is available
-1. the _year of building_ - `bj` vs. the _city distric_ - `bez`
+1. the _year of construction_ - `bj` vs. if _central heating_ - `zh0` is available
+1. the _year of construction_ - `bj` vs. the _city district_ - `bez`
 ```{python}
 #| label: fig-correlation
 #| fig-cap: "Scatterplot to investigate correlations in the data set."
@@ -278,49 +278,49 @@ fig.update_xaxes(title_text="living area in m^2", row=1, col=1)
 fig.update_yaxes(title_text="net rent", row=1, col=1)
 
 fig.add_trace(go.Scatter(x=data["bj"], y=data["zh0"], mode="markers"), row=2, col=1)
-fig.update_xaxes(title_text="build in year", row=2, col=1)
+fig.update_xaxes(title_text="year of construction", row=2, col=1)
 fig.update_yaxes(title_text="central heating", row=2, col=1)
 
 fig.add_trace(go.Scatter(x=data["bj"], y=data["bez"], mode="markers"), row=3, col=1)
-fig.update_xaxes(title_text="build in year", row=3, col=1)
+fig.update_xaxes(title_text="year of construction", row=3, col=1)
 fig.update_yaxes(title_text="city district", row=3, col=1)
 
 fig.show()
 ```
 
-In the first plot of @fig-correlation we see that the rent tends to go up with the area of the flat but there are for sure some rather cheap options in terms of space.
+In the first plot of @fig-correlation we see that the rent tends to go up with the size of the flat but there are for sure some rather cheap options in terms of space.
 
-The second plot of @fig-correlation tells us that around $1966$ central heating became a stable.
-Of course we can also guess that the older buildings with central heating where renovated but we have no data supporting this claim.
+The second plot of @fig-correlation tells us that central heating became a constant around $1966$.
+Of course we can also guess that the older buildings with central heating were renovated, but we have no data to support this claim.
 
-The final, third plot of @fig-correlation does not yield an immediate correlation.
+The third plot of @fig-correlation does not yield an immediate correlation.
 
-More formal we can describe possible correlations via the _covariance_.
-The covariance is a measure of the joint variability of tow random variables.
+More formally, we can describe possible correlations using the _covariance_.
+The covariance is a measure of the joint variability of two random variables.
 
 ::: {.callout appearance="simple"}
 ## Definition - covariance
-For two finite sets represented by a vectors $v, w\in\mathbb{R}^n$ the **covariance** is defined as
+For two finite sets represented by vectors $v, w\in\mathbb{R}^n$ the **covariance** is defined as
 $$
 \operatorname{cov}(v, w) = \frac1n \langle v -\overline{v}, w - \overline{w}\rangle
 $$
 :::
 
 The covariance is tricky to interpret, e.g. the unities of the two must not make sense.
-In our example, we have rent per square meter which makes some sense.
+In the example below, we have rent per square meter, which makes some sense.
 
 From the covariance we can compute the correlation.
 
 ::: {.callout appearance="simple"}
 ## Definition - correlation
-For two finite sets represented by a vectors $v, w\in\mathbb{R}^n$ the **covariance** is defined as
+For two finite sets represented by vectors $v, w\in\mathbb{R}^n$ the **correlation** is defined as
 $$
 \rho_{v,w} = \operatorname{corr}(v, w) = \frac{\operatorname{cov}(v, w)}{\sigma_v \sigma_w}
 $$
 :::
 
 
-In `numpy` the function `numpy.cov` computes a matrix where the diagonal is the variance the values and the off-diagonals are the covariances of the $i$ and $j$ samples.
+In `numpy` the function `numpy.cov` computes a matrix where the diagonal is the variance of the values and the off-diagonals are the covariances of the $i$ and $j$ samples.
 Consequently, `numpy.corrcoef` is a matrix as well.
 ```{python}
 #| classes: styled-output

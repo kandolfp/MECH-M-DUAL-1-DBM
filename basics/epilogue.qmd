@@ -1,2 +1,4 @@
 # Epilogue {#sec-intro-epilog}
 
+This sums up our basic introduction.
+We introduced the basic mathematical constructs to use in further sections and learned how to work with them in Python.

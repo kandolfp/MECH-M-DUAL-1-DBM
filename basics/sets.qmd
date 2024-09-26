@@ -71,6 +71,14 @@ $$
                 \frac{v_{n/2} + v_{n/2+1}}{2}& n\quad \text{even}
                 \end{cases},
 $$
+- more general, we have quantiles. For a sorted $v$ and $p\in(0,1)$
+$$
+\overline{v}_p = \begin{cases} 
+                 \frac12\left(v_{np} + v_{np+1}\right) & pn \in \mathbb{N}\\
+                v_{\lfloor np+1\rfloor} & pn \not\in \mathbb{N}
+                \end{cases}.
+$$
+Some quantiles have special names, like the median for $p=0.5$, the lower and upper quartile for $p=0.25$ and $p=0.75$ (or first, second (median) and third quartile), respectively.
 ```{python}
 #| classes: styled-output
 nm_max = np.max(data['nm'])
@@ -86,8 +94,10 @@ print(f"{nm_mean_r=}")
 
 nm_median = np.median(data['nm'])
 print(f"{nm_median=}")
-```
 
+nm_quartiles = np.quantile(data['nm'], [1/4, 1/2, 3/4])
+print(f"{nm_quartiles=}")
+```
 ```{python}
 #| echo: false
 #| output: asis

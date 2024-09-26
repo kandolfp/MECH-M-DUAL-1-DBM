@@ -64,7 +64,7 @@ $$
 $$
 \overline{v} = \frac1n \sum_{i=1}^n v_i = \frac{v_1 + v_2 + \cdots + v_n}{n},
 $$
-- the median, i.e. the value such that half are bitter and half are smaller, for a sorted $v$ this is
+- the median, i.e. the value such that half are bigger and half are smaller, for a sorted $v$ this is
 $$
 \widetilde{v} = \begin{cases} 
                 v_{(n+1)/2}& n\quad \text{odd}\\

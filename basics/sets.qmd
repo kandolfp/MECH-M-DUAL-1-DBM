@@ -117,5 +117,58 @@ year = int(data['bj'][max_index])
 print(f"{rooms=}, {year=}")
 ```
 
+### Visualization
+
+:::{.callout-tip}
+There are various ways of visualizing data in Python.
+Two wildly used packages are `matplotlib` and [`plotly`](https://plotly.com/graphing-libraries/).
+:::
+
+It often helps to visualize the values to see differences and get an idea of their use.
+```{python}
+#| label: fig-quartiles
+#| fig-cap: "Visualization of the different measurements."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+nm_sort = np.sort(data["nm"])
+x = np.linspace(0, 1, len(nm_sort), endpoint=True,)
+
+plt.plot(x, nm_sort, label="net rent")
+plt.axis((0, 1, np.round(nm_min/100)*100, np.round(nm_max/100)*100))
+plt.xlabel('Scaled index')
+plt.ylabel('Net rent - nm')
+
+plt.plot([0, 0.25, 0.25], [nm_quartiles[0], nm_quartiles[0], nm_min], 
+         label='1st quartile')
+plt.plot([0, 0.5, 0.5], [nm_quartiles[1], nm_quartiles[1], nm_min],
+         label='2st quartile')
+plt.plot([0, 0.75, 0.75], [nm_quartiles[2], nm_quartiles[2], nm_min],
+         label='3st quartile')
+plt.plot([0, 1], [nm_mean, nm_mean],
+         label='mean')
+plt.legend()
+plt.show()
 ```
+
+What is shown in @fig-quartiles is often combined into a single [boxplot](https://en.wikipedia.org/wiki/Box_plot) (see @fig-boxplot) that provides way more information at once.
+```{python}
+#| label: fig-boxplot
+#| fig-cap: "Boxplot done in plotly with whiskers following 3/2 IQR"
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import plotly.graph_objects as go
+
+fig = go.Figure()
+fig.add_trace(go.Box(y=data["nm"], name="Standard"))
+fig.add_trace(go.Box(y=data["nm"], name="With points", boxpoints="all"))
+fig.show()
+```
+The plot contains the box which is defined by the 1st quantile $Q_1$ and the 3rd $Q_3$, with the median as line in between these two.
+Furthermore, we can see the whiskers which help us identify so called outliers.
+By default they are defined as $\pm 1.5(Q_3 - Q_1)$, where ($Q_3 - Q_1$) is often called the _interquartile range_.
+
+:::{.callout-note}
+@fig-boxplot is an interactive plot in the html version.
+:::
 

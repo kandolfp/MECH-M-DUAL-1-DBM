@@ -1,0 +1,36 @@
+# Eigendecomposition {#sec-matrixdc-eigen}
+
+We start of with the so called _eigendecomposition_.
+The main idea is to compute a decomposition (or factorization) of a square matrix into a canonical form.
+We will represent a matrix by its _eigenvalues_ and _eigenvectors_.
+In order to do so we need to recall some more definitions from our favourite linear algebra book, like @GoluLoan.
+
+::: {.callout appearance="simple"}
+## Definition - Determinat
+If $A = (a) \in \mathbb{R}^{1\times1}$ (a single number), then its _determinant_ is given by $\det(A) = a$. Now, the determinant of $A \in \mathbb{R}^{n\times n}$ is defined in terms of order-$(n-1)$ determinants:
+$$
+\det(A) = \sum_{j=1}^n (-1)^{j+1} a_{1j}\det(A_1j),
+$$
+where $A_1j$ is an $(n-1) \times (n-1)$ matrix obtained by deleting the first row and the $j$th column of $A$.
+
+[Compare @GoluLoan, pp. 66-67].
+:::
+
+Some important properties of the determinant are:
+
+1. for two matrices $A$ and $B$ in $\mathbb{R}^{n\times n}$
+$$
+\det(AB) = \det(A)\det(B),
+$$
+1. for the transpose of a matrix $A$
+$$
+\det(A^T) = \det(A),
+$$
+1. for a scalar $\alpha\in\mathbb{R}$ and a matrix $A$
+$$
+\det(\alpha A) = \alpha^n\det(A),
+$$
+1. we call a matrix $A$ _nonsingular_ if and only if
+$$
+\det(A) \not= 0.
+$$

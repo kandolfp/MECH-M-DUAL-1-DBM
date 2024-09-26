@@ -26,6 +26,9 @@ book:
         - basics/linearalgebra.qmd
         - basics/sets.qmd
         - basics/epilogue.qmd
+    - part: matrixdc/index.qmd
+      chapters:
+        - matrixdc/eigen.qmd
     - summary.qmd
     - references.qmd
 

@@ -1,0 +1,7 @@
+# Matrix decompositions {.unnumbered}
+
+There are a lot of different matrix decompositions and they can be used to fulfil several tasks.
+We are going to look into the _eigendecomposition_ as well as the _singular value decomposition_.
+Both of these can, for example, be used for picture compression and recognition.
+
+For notation we are following again @GoluLoan, that has plenty more to offer that we cover in these notes.

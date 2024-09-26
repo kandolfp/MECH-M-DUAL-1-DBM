@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -158,6 +178,23 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../matrixdc/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Matrix decompositions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../matrixdc/eigen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Eigendecomposition</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../summary.html" class="sidebar-item-text sidebar-link">
@@ -200,9 +237,45 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In this section we are going to discuss a lot of the mathematical basics in the form of Linear Algebra as well as some topics of statistics of sets. We will always immediately show how to use the discussed content in Python and include also visualisations (with the code).</p>
+<p>In this section we are going to discuss a lot of the mathematical basics in the form of Linear Algebra as well as some topics of statistics of sets. We will always immediately show how to use the discussed content in <a href="https://www.python.org/">Python</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These notes assume that you have some basic knowledge of programming in Python and we build on this knowledge. In this sense, we use Python as a tool and only describe the inner workings if it helps us to better understand the topics at hand.</p>
+<p>If this is not the case have a look at <a href="https://kandolfp.github.io/MECH-M-DUAL-1-SWD">MECH-M-DUAL-1-SWD</a>, a class on software design in the same master program and from the same authors.</p>
+<p>Additionally, we can recommend the following books on Python:</p>
+<ul>
+<li><span class="citation" data-cites="Matthes2023">Matthes (<a href="../references.html#ref-Matthes2023" role="doc-biblioref">2023</a>)</span>: Python Crash Course - A hands-on, project-based introduction to programming; <a href="https://ehmatthes.github.io/pcc_3e/">Online Material</a>.</li>
+<li><a href="https://github.com/ehmatthes/pcc_3e/releases/download/v1.0.0/beginners_python_cheat_sheet_pcc_all.pdf">Python Cheat Sheet</a> provided by <span class="citation" data-cites="Matthes2023">Matthes (<a href="../references.html#ref-Matthes2023" role="doc-biblioref">2023</a>)</span>.</li>
+<li><span class="citation" data-cites="McKinney2022-qz">McKinney (<a href="../references.html#ref-McKinney2022-qz" role="doc-biblioref">2022</a>)</span>: Python for data analysis 3e; <a href="https://wesmckinney.com/book/">Online</a> and Print</li>
+<li><span class="citation" data-cites="Vasiliev2022">Vasiliev (<a href="../references.html#ref-Vasiliev2022" role="doc-biblioref">2022</a>)</span>: Python for Data Science - A Hands-On Introduction</li>
+<li><span class="citation" data-cites="Inden2023">Inden (<a href="../references.html#ref-Inden2023" role="doc-biblioref">2023</a>)</span>: Python lernen – kurz &amp; gut; German</li>
+</ul>
+</div>
+</div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Inden2023" class="csl-entry" role="listitem">
+Inden, Michael. 2023. <em>Python Lernen – Kurz &amp; Gut -</em>. Sebastopol: O’Reilly.
+</div>
+<div id="ref-Matthes2023" class="csl-entry" role="listitem">
+Matthes, Eric. 2023. <em>Python Crash Course - a Hands-on, Project-Based Introduction to Programming</em>. 3rd ed. No Starch Press. <a href="https://ehmatthes.github.io/pcc_3e/">https://ehmatthes.github.io/pcc_3e/</a>.
+</div>
+<div id="ref-McKinney2022-qz" class="csl-entry" role="listitem">
+McKinney, Wes. 2022. <em>Python for Data Analysis 3e</em>. 3rd ed. Sebastopol, CA: O’Reilly Media. <a href="https://wesmckinney.com/book/">https://wesmckinney.com/book/</a>.
+</div>
+<div id="ref-Vasiliev2022" class="csl-entry" role="listitem">
+Vasiliev, Yuli. 2022. <em>Python for Data Science - a Hands-on Introduction</em>. München: No Starch Press.
+</div>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

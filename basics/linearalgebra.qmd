@@ -257,9 +257,9 @@ A **norm** is a mapping from a vector space $V$ to the field $F$ into the real n
 $$\| \cdot \|: V \to \mathbb{R}_0^+, v \mapsto \|v\|$$
 if it fulfils for $v, w\in V$ and $\alpha \in F$ the following 
 
-1. positivity:
+1. positivity
 $$ \|v\| = 0 \Rightarrow v = 0, $$
-1. absolute homogeneity:
+1. absolute homogeneity
 $$ \| \alpha v \| = |\alpha| \| v \|, $$
 1. subadditivity (often called the _triangular inequality_) 
 $$ \| v + w\| \leq  \| v \| + \| w \|.$$

@@ -321,7 +321,7 @@ Definition - determinant
 <div class="callout-body-container callout-body">
 <p>If <span class="math inline">\(A = (a) \in \mathbb{R}^{1\times1}\)</span> (a single number), then its <em>determinant</em> is given by <span class="math inline">\(\det(A) = a\)</span>. Now, the determinant of <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> is defined in terms of order-<span class="math inline">\((n-1)\)</span> determinants: <span class="math display">\[
 \det(A) = \sum_{j=1}^n (-1)^{j+1} a_{1j}\det(A_1j),
-\]</span> where <span class="math inline">\(A_1j\)</span> is an <span class="math inline">\((n-1) \times (n-1)\)</span> matrix obtained by deleting the first row and the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(A\)</span>.</p>
+\]</span> where <span class="math inline">\(A_1j\)</span> is a <span class="math inline">\((n-1) \times (n-1)\)</span> matrix obtained by deleting the first row and the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(A\)</span>.</p>
 <p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
 </div>
 </div>
@@ -344,7 +344,7 @@ Definition - determinant
 \]</span></li>
 </ol>
 <p>So let us check in <code>numpy</code>:</p>
-<div id="557bfc38" class="cell styled-output" data-execution_count="1">
+<div id="2d3c311d" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -389,14 +389,14 @@ p(\lambda) = \det(A - \lambda I).
 \]</span> Consequently, every <span class="math inline">\(n\times n\)</span> matrix has exactly <span class="math inline">\(n\)</span> eigenvalues. Note that for a real matrix the eigenvalues might still be in <span class="math inline">\(\mathbb{C}\)</span>.</p>
 <p>The set of all eigenvalues of <span class="math inline">\(A\)</span> is denoted by <span class="math display">\[
 \lambda(A) = \left\{\lambda : \det(A-\lambda I)=0\right\}.
-\]</span> If all of the eigenvalues are real (in <span class="math inline">\(\mathbb{R}\)</span>) we can sort them form largest to smallest <span class="math display">\[
-\lambda_n(A) \leq \cdots \leq \lambda_2(A) \leq \lambda_1(A)
-\]</span> we we denote the largest by <span class="math inline">\(\lambda_{max}(A) = \lambda_1(A)\)</span> and the smallest by <span class="math inline">\(\lambda_{min}(A) = \lambda_n(A)\)</span>, respectively.</p>
+\]</span> If all of the eigenvalues are real (in <span class="math inline">\(\mathbb{R}\)</span>) we can sort them from largest to smallest <span class="math display">\[
+\lambda_n(A) \leq \cdots \leq \lambda_2(A) \leq \lambda_1(A),
+\]</span> and we denote the largest by <span class="math inline">\(\lambda_{max}(A) = \lambda_1(A)\)</span> and the smallest by <span class="math inline">\(\lambda_{min}(A) = \lambda_n(A)\)</span>, respectively.</p>
 <p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
 </div>
 </div>
 <p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
-<div id="62271ae2" class="cell styled-output" data-execution_count="2">
+<div id="8ea08411" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> LA.eigvals(A)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lam_sort <span class="op">=</span> np.sort(lam)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -430,7 +430,7 @@ Definition - eigendecomposition
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If <span class="math inline">\(A \in \mathbb{C}^{n\times n}\)</span> has <span class="math inline">\(n\)</span> (linear) independent eigenvectors <span class="math inline">\(v_1, \ldots, v_n\)</span> and <span class="math inline">\(Av_i=\lambda_i v_i\)</span>, for <span class="math inline">\(i=1:n\)</span>, than <span class="math inline">\(A\)</span> is _diagonalizable.</p>
+<p>If <span class="math inline">\(A \in \mathbb{C}^{n\times n}\)</span> has <span class="math inline">\(n\)</span> (linear) independent eigenvectors <span class="math inline">\(v_1, \ldots, v_n\)</span> and <span class="math inline">\(Av_i=\lambda_i v_i\)</span>, for <span class="math inline">\(i=1:n\)</span>, than <span class="math inline">\(A\)</span> is <em>diagonalizable</em>.</p>
 <p>If we combine the eigenvectors to a matrix <span class="math display">\[
 V = \left[v_1 | \cdots | v_n\right],
 \]</span> then <span class="math display">\[
@@ -445,7 +445,7 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
 </div>
 </div>
 <p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
-<div id="98378583" class="cell styled-output" data-execution_count="3">
+<div id="4515e0af" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lam, V <span class="op">=</span> LA.eig(A)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_eigen <span class="op">=</span> np.diag(lam)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -515,7 +515,7 @@ A = V \Lambda V^{-1}
 <p>In this example we use the eigendecomposition to efficiently solve a system of differential equations <span class="math display">\[
 \dot{x} = A x.
 \]</span> By changing to the basis <span class="math inline">\(V\)</span> and using the notation <span class="math inline">\(\hat{x}=z\)</span> <span class="math display">\[
-z = V^{-1}x \iff x = Vz
+z = V^{-1}x \iff x = Vz,
 \]</span> and if follows <span class="math display">\[
 \begin{array}{lll}
 \dot{x} = A x &amp; \iff V \dot{z} &amp;= A V z \\
@@ -523,7 +523,7 @@ z = V^{-1}x \iff x = Vz
               &amp; \iff \dot{z} &amp;= \Lambda z
 \end{array}.
 \]</span> So for an initial value <span class="math inline">\(z_0\)</span> the solution in <span class="math inline">\(t\)</span> is <span class="math display">\[
-z(t) = \operatorname{diag}\left(e^{t\lambda_1}, \ldots, e^{t\lambda_n}\right) z_0
+z(t) = \operatorname{diag}\left(e^{t\lambda_1}, \ldots, e^{t\lambda_n}\right) z_0.
 \]</span></p>
 <p>We often say that it is now a <em>decoupled</em> differential equation.</p>
 </div>

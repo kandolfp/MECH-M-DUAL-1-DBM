@@ -334,7 +334,7 @@ $$
 I_n = \left[
     \begin{array}{cccc} 1 & 0 & \dots & 0\\
                         0 & 1 & \ddots & \vdots \\  
-                        \vdots & 1 & \ddots & 0\\
+                        \vdots & \ddots & 1 & 0\\
                         0 & \dots & 0 & 1 \\  \end{array}
 \right] 
  \in \mathbb{R}^{n \times n},

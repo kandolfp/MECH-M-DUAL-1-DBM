@@ -36,8 +36,35 @@ $$
 $$
 1. for an invertible matrix $A^{-1}$
 $$
-\det\left(A^{-1}\right) = \frac{1}{\det(A)}.
+\det\left(A^{-1}\right) = \frac{1}{\det(A)},
 $$
+
+So let us check in `numpy`:
+```{python}
+#| classes: styled-output
+#| error: true
+import numpy as np
+from numpy import linalg as LA
+
+A = np.array([[1, 2, 3], 
+              [2, 5, 1],
+              [2, 7, 9]])
+det_A = LA.det(A)
+print(f"{det_A=}")
+
+A_T = np.transpose(A)
+det_A_T = LA.det(A_T)
+print(f"{det_A_T=}")
+
+X = LA.inv(A)
+det_X = LA.det(X)
+print(f"{det_X=}")
+
+print(f"{det_X*det_A=}")
+
+det_Am = LA.det(-A)
+print(f"{det_Am=}")
+```
 
 ::: {.callout appearance="simple"}
 ## Definition - eigenvalues
@@ -61,6 +88,15 @@ we we denote the largest by $\lambda_{max}(A) = \lambda_1(A)$ and the smallest b
 :::
 
 From the above properties of the determinant we can conclude that, if $X \in \mathbb{C}^{n\times n}$ is nonsingular and $B = X^{-1} A X$, then $A$ and $B$ are called _similar_ and two similar matrices have exactly the same eigenvalues.
+
+```{python}
+#| classes: styled-output
+#| error: true
+lam = LA.eigvals(A)
+lam_sort = np.sort(lam)
+
+print(f"{lam_sort=}")
+```
 
 ::: {.callout appearance="simple"}
 ## Definition - eigenvector
@@ -94,6 +130,23 @@ This is called the _eigendecomposition_ of the matrix $A$.
 :::
 
 Not all matrices $A \in \mathbb{R}^{n\times n}$ are diagonalizable.
+
+```{python}
+#| classes: styled-output
+#| error: true
+lam, V = LA.eig(A)
+A_eigen = np.diag(lam)
+print(f"{A_eigen=}")
+print(f"{V=}")
+
+v_1 = (A @ V[:, 0]) / lam[0]
+print(f"{v_1=}")
+
+A_eigen2 = LA.inv(V) @ A @ V
+print(f"{A_eigen2=}")
+
+np.testing.assert_almost_equal(A_eigen, A_eigen2)
+```
 
 ::: {.callout-caution appearance="simple" collapse="true" icon=false}
 ## {{< fa circle-check >}} Example - matrix decomposition - system of linear equations

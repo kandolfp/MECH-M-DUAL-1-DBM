@@ -306,7 +306,7 @@ print(f"{norm_Afr=}")
 The function `norm` from the `numpy.linalg` package can be used to compute other norms or properties as well, see [docs](https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html).
 :::
 
-## Basis of vector spaces
+## Basis of vector spaces {#sec-intro-linearalgebra-basis}
 
 As we will be using the notion of _basis vector_ or a _basis of a vector space_ we should introduce them properly.
 

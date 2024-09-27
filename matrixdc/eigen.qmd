@@ -39,3 +39,113 @@ $$
 \det\left(A^{-1}\right) = \frac{1}{\det(A)}.
 $$
 
+::: {.callout appearance="simple"}
+## Definition - eigenvalues
+For a matrix $A \in \mathbb{C}^{n\times n}$ the _eigenvalues_ are the roots of the _characteristic polynomial_ 
+$$
+p(\lambda) = \det(A - \lambda I).
+$$
+Consequently, every $n\times n$ matrix has exactly $n$ eigenvalues. Note that for a real matrix the eigenvalues might still be in $\mathbb{C}$.
+
+The set of all eigenvalues of $A$ is denoted by
+$$
+\lambda(A) = \left\{\lambda : \det(A-\lambda I)=0\right\}.
+$$
+If all of the eigenvalues are real (in $\mathbb{R}$) we can sort them form largest to smallest
+$$
+\lambda_n(A) \leq \cdots \leq \lambda_2(A) \leq \lambda_1(A)
+$$
+we we denote the largest by $\lambda_{max}(A) = \lambda_1(A)$ and the smallest by $\lambda_{min}(A) = \lambda_n(A)$, respectively.
+
+[Compare @GoluLoan, pp. 66-67]
+:::
+
+From the above properties of the determinant we can conclude that, if $X \in \mathbb{C}^{n\times n}$ is nonsingular and $B = X^{-1} A X$, then $A$ and $B$ are called _similar_ and two similar matrices have exactly the same eigenvalues.
+
+::: {.callout appearance="simple"}
+## Definition - eigenvector
+If $\lambda \in \lambda(A)$, then there exists a nonzero vector $v$ so that 
+$$
+Av = \lambda v \iff (A - \lambda I)v = 0.
+$$
+Such a vector is called _eigenvector_ of $A$ associated with $\lambda$.
+:::
+
+::: {.callout appearance="simple"}
+## Definition - eigendecomposition
+If $A \in \mathbb{C}^{n\times n}$ has $n$ (linear) independent eigenvectors $v_1, \ldots, v_n$ and $Av_i=\lambda_i v_i$, for $i=1:n$, than $A$ is _diagonalizable. 
+
+If we combine the eigenvectors to a matrix
+$$
+V = \left[v_1 | \cdots | v_n\right],
+$$
+then
+$$
+V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left[
+    \begin{array}{cccc} \lambda_1 & 0 & \dots & 0\\
+                        0 & \lambda_2 & \ddots & \vdots \\  
+                        \vdots & \ddots & \ddots & 0\\
+                        0 & \dots & 0 & \lambda_n \\  \end{array}
+\right].
+$$
+This is called the _eigendecomposition_ of the matrix $A$.
+
+[Compare @GoluLoan, pp. 66-67]
+:::
+
+Not all matrices $A \in \mathbb{R}^{n\times n}$ are diagonalizable.
+
+::: {.callout-caution appearance="simple" collapse="true" icon=false}
+## {{< fa circle-check >}} Example - matrix decomposition - system of linear equations
+
+For a system of linear equations $Ax=b$ we get
+$$
+\begin{array}{lll}
+A x & = b  & \iff \\
+V \Lambda V^{-1} x & = b  & \iff \\
+\Lambda V^{-1} x & = V^{-1} b  & \iff \\
+V^{-1} x & = \Lambda^{-1}V^{-1} b  & \iff \\
+x & = V\Lambda^{-1}V^{-1} b  & \iff
+\end{array}
+$$
+As $\Lambda^{-1} = \operatorname{diag}\left(\lambda_1^{-1}, \ldots, \lambda_n^{-1}\right)$ this is easy to compute once we have the singular value decomposition.
+:::
+
+We can use what we have learned about the basis of a vector space and the transformation between two bases, see @sec-intro-linearalgebra-basis to get a different interpretation of the eigendecomposition.
+
+We recall, if $x$ is represented in the standard basis with matrix $I$ we can change to the basis represented by $V$ and therefore $\hat{x} = V^{-1}x$.
+
+Consequently, the equation
+$$
+A = V \Lambda V^{-1} 
+$$
+means that in the basis created by $V$ the matrix $A$ is represented by a diagonal matrix.
+
+::: {.callout-caution appearance="simple" collapse="true" icon=false}
+## {{< fa circle-check >}} Example - matrix decomposition - differential equation
+
+In this example we use the eigendecomposition to efficiently solve a system of differential equations
+$$
+\dot{x} = A x.
+$$
+By changing to the basis $V$ and using the notation $\hat{x}=z$
+$$
+z = V^{-1}x \iff x = Vz
+$$
+and if follows
+$$
+\begin{array}{lll}
+\dot{x} = A x & \iff V \dot{z} &= A V z \\
+              & \iff \dot{z} &= V^{-1} A V z \\
+              & \iff \dot{z} &= \Lambda z
+\end{array}.
+$$
+So for an initial value $z_0$ the solution in $t$ is
+$$
+z(t) = \operatorname{diag}\left(e^{t\lambda_1}, \ldots, e^{t\lambda_n}\right) z_0
+$$
+
+We often say that it is now a _decoupled_ differential equation.
+:::
+
+## Low-rank approximation of a square matrix

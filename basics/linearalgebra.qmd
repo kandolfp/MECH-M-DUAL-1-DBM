@@ -416,5 +416,68 @@ np.testing.assert_almost_equal(A @ X, np.eye(A.shape[0]))
 np.testing.assert_equal(A @ X, np.eye(A.shape[0]))
 ```
 
+::: {.callout appearance="simple"}
+## Definition - change of basis
+If we associate the matrices $B$ and $C$ with the matrix consisting of the basis vectors of two bases $\mathcal{B}$ and $\mathcal{C}$ of a vector space we can define the transformation matrix $T_{\mathcal{C}}^{\mathcal{B}}$ from $\mathcal{B}$ to $\mathcal{C}$ as
+$$
+T_{\mathcal{C}}^{\mathcal{B}} = C^{-1}B.
+$$
+
+So if we have a vector $b$ represented in $\mathcal{B}$ we can compute compute its representation in $\hat{b}$ in $\mathcal{C}$ as
+$$
+\hat{b} = T_{\mathcal{C}}^{\mathcal{B}} b = C^{-1}B b
+$$
+
+A special form is if we have the standard basis $I$ and move to a basis $C$ we get
+$$
+\hat{b} = T_{C}^{I} b = C^{-1} b.
+$$
+:::
+
+::: {.callout-caution appearance="simple" collapse="true" icon=false}
+## {{< fa circle-check >}} Example - basis change
+
+For 
+$$
+B = \left[
+    \begin{array}{ccc} 1 & 3 & 2 \\
+                       0 & 1 & 1 \\  
+                       2 & 0 & 1 \\  \end{array}
+\right]\quad \text{and}\quad
+C = \left[
+    \begin{array}{ccc} 1 & 0 & 1 \\
+                       0 & 1 & 1 \\  
+                       1 & 1 & 0 \\  \end{array}
+\right]
+$$
+we get
+$$
+T_{C}^{B} = \left[
+    \begin{array}{ccc} \frac32 & 1 & 1 \\
+                       \frac12 & -1 & 0 \\  
+                       -\frac12 & 2 & 1 \\  \end{array}
+\right]
+$$
+and for a $v = 2 b_1 - b_2 + 3 b_3$ we can compute its representation in $C$ as
+$$
+\hat{v} = T_{C}^{B} v 
+= \left[
+    \begin{array}{ccc} \frac32 & 1 & 1 \\
+                       \frac12 & -1 & 0 \\  
+                       -\frac12 & 2 & 1 \\  \end{array}
+\right]
+\left[
+    \begin{array}{c} 2 \\ -1 \\ 3 \end{array}
+\right]
+=
+\left[
+    \begin{array}{c} 5 \\ 2 \\ 0 \end{array}
+\right]
+$$
+and therefore, $v = 5c_1 + 2c_2 + 0 c_3$.
+
+(Compare [Wikipedia](https://de.wikipedia.org/wiki/Basiswechsel_(Vektorraum)))
+:::
+
 For now, this concludes our introduction to linear algebra.
 We will come back to more in later sections.

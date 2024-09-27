@@ -63,6 +63,8 @@ div.csl-indent {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -241,8 +243,14 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#low-rank-approximation-of-a-square-matrix" id="toc-low-rank-approximation-of-a-square-matrix" class="nav-link active" data-scroll-target="#low-rank-approximation-of-a-square-matrix"><span class="header-section-number">4.1</span> Low-rank approximation of a square matrix</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/matrixdc/eigen.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -273,7 +281,7 @@ window.Quarto = {
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Definition - Determinat
+Definition - determinant
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -288,16 +296,141 @@ Definition - Determinat
 <li>for two matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> in <span class="math inline">\(\mathbb{R}^{n\times n}\)</span> <span class="math display">\[
 \det(AB) = \det(A)\det(B),
 \]</span></li>
-<li>for the transpose of a matrix <span class="math inline">\(A\)</span> <span class="math display">\[
+<li>for the transpose <span class="math inline">\(A^T\)</span> of a matrix <span class="math inline">\(A\)</span> <span class="math display">\[
 \det(A^T) = \det(A),
 \]</span></li>
 <li>for a scalar <span class="math inline">\(\alpha\in\mathbb{R}\)</span> and a matrix <span class="math inline">\(A\)</span> <span class="math display">\[
 \det(\alpha A) = \alpha^n\det(A),
 \]</span></li>
-<li>we call a matrix <span class="math inline">\(A\)</span> <em>nonsingular</em> if and only if <span class="math display">\[
-\det(A) \not= 0.
+<li>we call a matrix <span class="math inline">\(A\)</span> <em>nonsingular</em> (i.e.&nbsp;invertible) if and only if <span class="math display">\[
+\det(A) \not= 0,
+\]</span></li>
+<li>for an invertible matrix <span class="math inline">\(A^{-1}\)</span> <span class="math display">\[
+\det\left(A^{-1}\right) = \frac{1}{\det(A)}.
 \]</span></li>
 </ol>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition - eigenvalues
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For a matrix <span class="math inline">\(A \in \mathbb{C}^{n\times n}\)</span> the <em>eigenvalues</em> are the roots of the <em>characteristic polynomial</em> <span class="math display">\[
+p(\lambda) = \det(A - \lambda I).
+\]</span> Consequently, every <span class="math inline">\(n\times n\)</span> matrix has exactly <span class="math inline">\(n\)</span> eigenvalues. Note that for a real matrix the eigenvalues might still be in <span class="math inline">\(\mathbb{C}\)</span>.</p>
+<p>The set of all eigenvalues of <span class="math inline">\(A\)</span> is denoted by <span class="math display">\[
+\lambda(A) = \left\{\lambda : \det(A-\lambda I)=0\right\}.
+\]</span> If all of the eigenvalues are real (in <span class="math inline">\(\mathbb{R}\)</span>) we can sort them form largest to smallest <span class="math display">\[
+\lambda_n(A) \leq \cdots \leq \lambda_2(A) \leq \lambda_1(A)
+\]</span> we we denote the largest by <span class="math inline">\(\lambda_{max}(A) = \lambda_1(A)\)</span> and the smallest by <span class="math inline">\(\lambda_{min}(A) = \lambda_n(A)\)</span>, respectively.</p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
+</div>
+</div>
+<p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition - eigenvector
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(\lambda \in \lambda(A)\)</span>, then there exists a nonzero vector <span class="math inline">\(v\)</span> so that <span class="math display">\[
+Av = \lambda v \iff (A - \lambda I)v = 0.
+\]</span> Such a vector is called <em>eigenvector</em> of <span class="math inline">\(A\)</span> associated with <span class="math inline">\(\lambda\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition - eigendecomposition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(A \in \mathbb{C}^{n\times n}\)</span> has <span class="math inline">\(n\)</span> (linear) independent eigenvectors <span class="math inline">\(v_1, \ldots, v_n\)</span> and <span class="math inline">\(Av_i=\lambda_i v_i\)</span>, for <span class="math inline">\(i=1:n\)</span>, than <span class="math inline">\(A\)</span> is _diagonalizable.</p>
+<p>If we combine the eigenvectors to a matrix <span class="math display">\[
+V = \left[v_1 | \cdots | v_n\right],
+\]</span> then <span class="math display">\[
+V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left[
+    \begin{array}{cccc} \lambda_1 &amp; 0 &amp; \dots &amp; 0\\
+                        0 &amp; \lambda_2 &amp; \ddots &amp; \vdots \\  
+                        \vdots &amp; \ddots &amp; \ddots &amp; 0\\
+                        0 &amp; \dots &amp; 0 &amp; \lambda_n \\  \end{array}
+\right].
+\]</span> This is called the <em>eigendecomposition</em> of the matrix <span class="math inline">\(A\)</span>.</p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
+</div>
+</div>
+<p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
+<div class="callout callout-style-simple callout-caution no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<i class="fa-solid fa-circle-check" aria-label="circle-check"></i> Example - matrix decomposition - system of linear equations
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For a system of linear equations <span class="math inline">\(Ax=b\)</span> we get <span class="math display">\[
+\begin{array}{lll}
+A x &amp; = b  &amp; \iff \\
+V \Lambda V^{-1} x &amp; = b  &amp; \iff \\
+\Lambda V^{-1} x &amp; = V^{-1} b  &amp; \iff \\
+V^{-1} x &amp; = \Lambda^{-1}V^{-1} b  &amp; \iff \\
+x &amp; = V\Lambda^{-1}V^{-1} b  &amp; \iff
+\end{array}
+\]</span> As <span class="math inline">\(\Lambda^{-1} = \operatorname{diag}\left(\lambda_1^{-1}, \ldots, \lambda_n^{-1}\right)\)</span> this is easy to compute once we have the singular value decomposition.</p>
+</div>
+</div>
+</div>
+<p>We can use what we have learned about the basis of a vector space and the transformation between two bases, see <a href="../basics/linearalgebra.html#sec-intro-linearalgebra-basis" class="quarto-xref"><span>Section 1.3</span></a> to get a different interpretation of the eigendecomposition.</p>
+<p>We recall, if <span class="math inline">\(x\)</span> is represented in the standard basis with matrix <span class="math inline">\(I\)</span> we can change to the basis represented by <span class="math inline">\(V\)</span> and therefore <span class="math inline">\(\hat{x} = V^{-1}x\)</span>.</p>
+<p>Consequently, the equation <span class="math display">\[
+A = V \Lambda V^{-1}
+\]</span> means that in the basis created by <span class="math inline">\(V\)</span> the matrix <span class="math inline">\(A\)</span> is represented by a diagonal matrix.</p>
+<div class="callout callout-style-simple callout-caution no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<i class="fa-solid fa-circle-check" aria-label="circle-check"></i> Example - matrix decomposition - differential equation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In this example we use the eigendecomposition to efficiently solve a system of differential equations <span class="math display">\[
+\dot{x} = A x.
+\]</span> By changing to the basis <span class="math inline">\(V\)</span> and using the notation <span class="math inline">\(\hat{x}=z\)</span> <span class="math display">\[
+z = V^{-1}x \iff x = Vz
+\]</span> and if follows <span class="math display">\[
+\begin{array}{lll}
+\dot{x} = A x &amp; \iff V \dot{z} &amp;= A V z \\
+              &amp; \iff \dot{z} &amp;= V^{-1} A V z \\
+              &amp; \iff \dot{z} &amp;= \Lambda z
+\end{array}.
+\]</span> So for an initial value <span class="math inline">\(z_0\)</span> the solution in <span class="math inline">\(t\)</span> is <span class="math display">\[
+z(t) = \operatorname{diag}\left(e^{t\lambda_1}, \ldots, e^{t\lambda_n}\right) z_0
+\]</span></p>
+<p>We often say that it is now a <em>decoupled</em> differential equation.</p>
+</div>
+</div>
+</div>
+<section id="low-rank-approximation-of-a-square-matrix" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="low-rank-approximation-of-a-square-matrix"><span class="header-section-number">4.1</span> Low-rank approximation of a square matrix</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -305,6 +438,7 @@ Definition - Determinat
 Golub, Gene H., and Charles F. Van Loan. 2013. <em>Matrix Computations</em>. 4th ed. Johns Hopkins Studies in the Mathematical Sciences.
 </div>
 </div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -891,7 +1025,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> Peter Kandolf</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/matrixdc/eigen.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/matrixdc/eigen.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

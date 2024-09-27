@@ -312,7 +312,7 @@ As we will be using the notion of _basis vector_ or a _basis of a vector space_ 
 
 ::: {.callout appearance="simple"}
 ## Definition - basis
-A set of vectors $\mathcal{B} = \{b_1, \ldots, b_r\} \in \mathbb{R}^n$:
+A set of vectors $\mathcal{B} = \{b_1, \ldots, b_r\}, b_i \in \mathbb{R}^n$:
 
 1. is called linear independent if
 $$ \sum_{j=1}^r \alpha_j b_j = 0 \Rightarrow \alpha_1 = \alpha_2 = \cdots = \alpha_r = 0,$$
@@ -321,11 +321,28 @@ $$ v = \sum_{j=1}^r \alpha_j b_j, \quad \forall v \in \mathbb{R}^n, \alpha_1, \l
 
 The set $\mathcal{B}$ is called a _basis_ of a vector space if it is linear independent and spans the entire vector space.
 The size of the basis, i.e. the number of vectors in the basis, is called the _dimension_ of the vector space.
+
+For a shorter notation we often associate the matrix 
+$$
+B = \left[b_1 | \cdots | b_n\right]
+$$
+with the basis.
 :::
 
-The standard basis of $\mathbb{R}^n$ are the vectors $e_i$ that are zero everywhere except for index $i$.
+The standard basis of $\mathbb{R}^n$ are the vectors $e_i$ that are zero everywhere except for index $i$ and its associated matrix is 
+$$
+I_n = \left[
+    \begin{array}{cccc} 1 & 0 & \dots & 0\\
+                        0 & 1 & \ddots & \vdots \\  
+                        \vdots & 1 & \ddots & 0\\
+                        0 & \dots & 0 & 1 \\  \end{array}
+\right] 
+ \in \mathbb{R}^{n \times n}
+ $$
+and called the _identity matrix_.
+Note, the index $n$ is often omitted as it should be clear from the dimensions of the matrix.
 
-The easiest way to create one, lets say $e_3 \in \mathbb{R}^3$, in Python is by calling
+The easiest way to create one of standard basis vectors, lets say $e_3 \in \mathbb{R}^3$, in Python is by calling
 ```{python}
 #| classes: styled-output
 # We need to keep the index shift in mind
@@ -333,6 +350,13 @@ n = 3
 e_3 = np.zeros(n)
 e_3[3-1] = 1
 print(f"{e_3=}")
+```
+and the identity matrix by
+```{python}
+#| classes: styled-output
+n = 4
+I_4 = np.eye(n)
+print(f"{I_4=}")
 ```
 
 ::: {.callout-caution appearance="simple" collapse="true" icon=false}
@@ -351,9 +375,9 @@ e_3[2] = 1
 x = np.random.rand(n)
 print(f"{x=}")
 # compute the coefficients
-a = np.dot(x, e_1)
-b = np.dot(x, e_2)
-c = np.dot(x, e_3)
+a = np.dot(x, e_1) / np.dot(e_1, e_1)
+b = np.dot(x, e_2) / np.dot(e_2, e_2)
+c = np.dot(x, e_3) / np.dot(e_3, e_3)
 y = a * e_1 + b * e_2 + c * e_3
 print(f"{y=}")
 np.testing.assert_allclose(x, y)
@@ -362,26 +386,6 @@ print(f"{LA.norm(x-y)=}")
 
 See [`numpy.testing`](https://numpy.org/doc/stable/reference/routines.testing.html#) for help more ways of testing in `numpy`.
 :::
-
-We call $$
-I_n = \left[
-    \begin{array}{cccc} 1 & 0 & 0 & 0 \\
-                        0 & 1 & \dots & 0 \\  
-                        \vdots & \vdots & \ddots & \vdots\\
-                        0 & 0 & \dots & 1 \\  \end{array}
-\right] 
- \in \mathbb{R}^{n \times n}
- $$
-the _identity matrix_.
-Note, the index $n$ is often omitted as it should be clear from the dimensions of the matrix.
-We can also think of it as the matrix that has all the standard basis vectors combined.
-
-```{python}
-#| classes: styled-output
-n = 4
-I_4 = np.eye(n)
-print(f"{I_4=}")
-```
 
 ## The inverse of a matrix
 

@@ -54,22 +54,22 @@ For a vector $v \in \mathbb{R}^n$ we have:
 
 - the maximal value
 $$
-v^{max} = \max_i v_i
+v^{max} = \max_i v_i,
 $$
 - the minimal value
 $$
-v^{min} = \min_i v_i
+v^{min} = \min_i v_i,
 $$
 - the _mean_ of all values (often called the _arithmetic mean_)
 $$
-\overline{v} = \frac1n \sum_{i=1}^n v_i = \frac{v_1 + v_2 + \cdots + v_n}{n}
+\overline{v} = \frac1n \sum_{i=1}^n v_i = \frac{v_1 + v_2 + \cdots + v_n}{n},
 $$
 - the median, i.e. the value where half is bigger and the other half is smaller, for a sorted $v$ this is
 $$
 \widetilde{v} = \begin{cases} 
                 v_{(n+1)/2}& n\quad \text{odd}\\
                 \frac{v_{n/2} + v_{n/2+1}}{2}& n\quad \text{even}
-                \end{cases}
+                \end{cases},
 $$
 - more general, we have quantiles. For a sorted $v$ and $p\in(0,1)$
 $$
@@ -181,7 +181,7 @@ Common examples are _variance_, _standard deviation_, and the _interquartile ran
 ## Definition - variance
 For a finite set represented by a vector $v\in\mathbb{R}^n$ the **variance** is defined as
 $$
-\operatorname{Var}(v) = \frac1n \sum_{i=1}^n (v_i - \mu)^2, \quad \mu = \overline{v} \quad\text{(the mean)}.
+\operatorname{Var}(v) = \frac1n \sum_{i=1}^n (v_i - \mu)^2, \quad \mu = \overline{v} \quad\text{(the mean)}
 $$
 or directly
 $$
@@ -302,7 +302,7 @@ The covariance is a measure of the joint variability of two random variables.
 ## Definition - covariance
 For two finite sets represented by vectors $v, w\in\mathbb{R}^n$ the **covariance** is defined as
 $$
-\operatorname{cov}(v, w) = \frac1n \langle v -\overline{v}, w - \overline{w}\rangle
+\operatorname{cov}(v, w) = \frac1n \langle v -\overline{v}, w - \overline{w}\rangle.
 $$
 :::
 
@@ -315,7 +315,7 @@ From the covariance we can compute the correlation.
 ## Definition - correlation
 For two finite sets represented by vectors $v, w\in\mathbb{R}^n$ the **correlation** is defined as
 $$
-\rho_{v,w} = \operatorname{corr}(v, w) = \frac{\operatorname{cov}(v, w)}{\sigma_v \sigma_w}
+\rho_{v,w} = \operatorname{corr}(v, w) = \frac{\operatorname{cov}(v, w)}{\sigma_v \sigma_w}.
 $$
 :::
 

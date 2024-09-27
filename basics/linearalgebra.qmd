@@ -27,30 +27,30 @@ The set $(\mathbb{R}^n, + ,\cdot)$ forms a so called _vector space_ with the _ve
 ::: {.callout appearance="simple"}
 ## Definition - Vector space
 
-For a set $V$ over a [field](https://en.wikipedia.org/wiki/Field_(mathematics)) $F$ with the _vectors_ $u, v, w \in V$ and the _scalars_ $\alpha, \beta \in F$ the following assumptions need to hold true to form a vector space:
+For a set $V$ over a [field](https://en.wikipedia.org/wiki/Field_(mathematics)) $F$ with the _vectors_ $u, v, w \in V$ and the _scalars_ $\alpha, \beta \in F$ the following properties need to hold true to form a vector space.
 
-For the vector addition:
+For the vector addition we need to have
 
-(@) associativity:
+(@) associativity
 $$ u + (v + w) = (u + v) +w,$$
-(@) commutativity:
+(@) commutativity
 $$u + v = v + u,$$
-(@) there exists an identity element $0\in \mathbb{R}^n$, i.e. the zero vector
+(@) there needs to exists an identity element $0\in \mathbb{R}^n$, i.e. the zero vector such that
 $$v + 0 =  v,$$
-(@) there exists an inverse element
+(@) there needs to exist an inverse element
 $$v + w =  0\quad \Rightarrow w\equiv -v,$$
-usually it is denoted by $-v$.
+and this element is usually denoted by $-v$.
 
-For the scalar multiplication:
+For the scalar multiplication we need to have
 
-(@) associativity:
+(@) associativity
 $$\alpha(\beta v) = (\alpha\beta)v,$$
-(@) the multiplicative identity element $1\in\mathbb{R}$
-$$1 v = v,$$
-(@) distributivity with respect to vector addition:
+(@) distributivity with respect to the vector addition
 $$\alpha(u + v) = \alpha u + \alpha v,$$
 (@) distributivity of the scalar addition
-$$(\alpha + \beta)v = \alpha v + \beta v.$$
+$$(\alpha + \beta)v = \alpha v + \beta v,$$
+(@) and there needs to exist a multiplicative identity element $1\in\mathbb{R}$
+$$1 v = v.$$
 :::
 
 ```{python}

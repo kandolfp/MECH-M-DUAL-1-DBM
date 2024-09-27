@@ -384,7 +384,7 @@ np.testing.assert_allclose(x, y)
 print(f"{LA.norm(x-y)=}")
 ```
 
-See [`numpy.testing`](https://numpy.org/doc/stable/reference/routines.testing.html#) for help more ways of testing in `numpy`.
+See [`numpy.testing`](https://numpy.org/doc/stable/reference/routines.testing.html#) for more ways of testing in `numpy`.
 :::
 
 ## The inverse of a matrix

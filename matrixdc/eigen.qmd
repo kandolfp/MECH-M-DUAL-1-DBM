@@ -22,7 +22,7 @@ Some important properties of the determinant are:
 $$
 \det(AB) = \det(A)\det(B),
 $$
-1. for the transpose of a matrix $A$
+1. for the transpose $A^T$ of a matrix $A$
 $$
 \det(A^T) = \det(A),
 $$
@@ -30,7 +30,12 @@ $$
 $$
 \det(\alpha A) = \alpha^n\det(A),
 $$
-1. we call a matrix $A$ _nonsingular_ if and only if
+1. we call a matrix $A$ _nonsingular_ (i.e. invertible) if and only if
 $$
-\det(A) \not= 0.
+\det(A) \not= 0,
 $$
+1. for an invertible matrix $A^{-1}$
+$$
+\det\left(A^{-1}\right) = \frac{1}{\det(A)}.
+$$
+

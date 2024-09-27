@@ -24,7 +24,7 @@ kueche		Gehobene Küche? (J=1,N=0)
 ```
 
 
-For now, we'll just show the code without much explanation because we want to jump right in and don't want to delve into how it works.
+For now, we'll just show the code without much explanation because we want to jump right in and do not want to delve into how it works.
 We use a [structured array](https://numpy.org/doc/stable/user/basics.rec.html#module-numpy.doc.structured_arrays) of `numpy` for it.
 
 ```{python}
@@ -52,11 +52,11 @@ First we are looking at the total net rent, i.e. the row `nm`.
 
 For a vector $v \in \mathbb{R}^n$ we have:
 
-- the maximal value
+- the maximal value, i.e. the maximum
 $$
 v^{max} = \max_i v_i,
 $$
-- the minimal value
+- the minimal value, i.e. the minimum
 $$
 v^{min} = \min_i v_i,
 $$
@@ -64,7 +64,7 @@ $$
 $$
 \overline{v} = \frac1n \sum_{i=1}^n v_i = \frac{v_1 + v_2 + \cdots + v_n}{n},
 $$
-- the median, i.e. the value where half is bigger and the other half is smaller, for a sorted $v$ this is
+- the median, i.e. the value where half of all the other values are bigger and the other half is smaller, for a sorted $v$ this is
 $$
 \widetilde{v} = \begin{cases} 
                 v_{(n+1)/2}& n\quad \text{odd}\\
@@ -108,7 +108,7 @@ From this Python snippet we know that for tenants the rent varied between `{pyth
 Of course there are tricky questions that require us to dig a bit deeper into these functions, e.g. how many rooms does the most expensive flat have?
 The surprising answer is `{python} rooms` and it was built in `{python} year`, but how do we obtain these results?
 
-We can use `numpy.argwhere` or a function which returns directly like `numpy.argmax`.
+We can use `numpy.argwhere` or a function which returns the index directly like `numpy.argmax`.
 ```{python}
 #| classes: styled-output
 max_index = np.argmax(data['nm'])

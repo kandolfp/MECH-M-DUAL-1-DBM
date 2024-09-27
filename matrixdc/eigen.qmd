@@ -6,7 +6,7 @@ We will represent a matrix by its _eigenvalues_ and _eigenvectors_.
 In order to do so we need to recall some more definitions from our favourite linear algebra book, such as @GoluLoan.
 
 ::: {.callout appearance="simple"}
-## Definition - Determinat
+## Definition - determinant
 If $A = (a) \in \mathbb{R}^{1\times1}$ (a single number), then its _determinant_ is given by $\det(A) = a$. Now, the determinant of $A \in \mathbb{R}^{n\times n}$ is defined in terms of order-$(n-1)$ determinants:
 $$
 \det(A) = \sum_{j=1}^n (-1)^{j+1} a_{1j}\det(A_1j),

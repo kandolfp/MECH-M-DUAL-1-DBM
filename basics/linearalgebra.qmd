@@ -225,7 +225,7 @@ print(f"{C=}")
 
 We can also multiply matrices $A$ and $B$ by applying the matrix vector multiplication to each column vector of $B$, or a bit more elaborated:
 
-For an ${m \times p}$ matrix $A$ and an ${p \times n}$ matrix $B$ the matrix-matrix multiplication ($\mathbb{R}^{m\times p} \times \mathbb{R}^{p\times n} \to \mathbb{R}^{m\times n}$)
+For a ${m \times p}$ matrix $A$ and a ${p \times n}$ matrix $B$ the matrix-matrix multiplication ($\mathbb{R}^{m\times p} \times \mathbb{R}^{p\times n} \to \mathbb{R}^{m\times n}$)
 $$C=AB \quad \Rightarrow\quad c_{ij} = \sum_{k=1}^p a_{ik}b_{kj}$$
 forms a ${m \times n}$ matrix.
 
@@ -277,7 +277,7 @@ $$ \| v \|_p = \left(\sum_i |v_i|^p\right)^{\frac{1}{p}},$$
 1. the $\infty$ norm
 $$ \| v \|_\infty = \max_i |v_i|.$$
 
-An for metrics:
+And for metrics:
 
 1. the one norm (column sum norm)
 $$ \| A \|_1 = max_j \sum_i |a_{ij}|,$$

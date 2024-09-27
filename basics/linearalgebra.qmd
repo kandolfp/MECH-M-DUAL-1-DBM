@@ -46,7 +46,7 @@ For the scalar multiplication:
 (@) associativity:
 $$\alpha(\beta v) = (\alpha\beta)v,$$
 (@) the multiplicative identity element $1\in\mathbb{R}$
-$$1 v = v$$
+$$1 v = v,$$
 (@) distributivity with respect to vector addition:
 $$\alpha(u + v) = \alpha u + \alpha v,$$
 (@) distributivity of the scalar addition
@@ -90,7 +90,7 @@ A \in \mathbb{R}^{m\times n}
                         a_{21} & a_{22} & \dots & a_{2n} \\  
                         \vdots & \vdots & \ddots & \vdots\\
                         a_{m1} & a_{m2} & \dots & a_{mn} \\  \end{array}
-\right],\quad a_{ij} \in \mathbb{R}
+\right],\quad a_{ij} \in \mathbb{R},
 $$ 
 is called a $m \times n$ ($m$ times $n$) matrix.
 If its values are real numbers we say it is an element of $\mathbb{R}^{m\times n}$.
@@ -141,7 +141,7 @@ Av =
 \left[
     \begin{array}{c} v_1 \\ v_2 \\ \vdots \\ v_n \end{array}
 \right]
-= A_{-1} v_1 + A_{-2} v_2 + \dots + A_{-n} v_n
+= A_{-1} v_1 + A_{-2} v_2 + \dots + A_{-n} v_n.
 $$
 The result is a vector but this time in $\mathbb{R}^m$.
 
@@ -171,7 +171,7 @@ $$T: V \to W$$
 is called linear if
 
 1. for $v, w \in V$
-$$T(v + w) = T(v) + T(w)$$
+$$T(v + w) = T(v) + T(w),$$
 1. for $v \in V$ and $\alpha \in F$
 $$T(\alpha v) = \alpha T(v).$$
 :::
@@ -192,7 +192,7 @@ print(f"{B.shape=}")
 ```
 
 With this operation we can define the _dot product_ or _scalar product_ of two vectors $v$ and $w$ as
-$$\langle v, w\rangle = v \cdot w = v^T w = \sum_i v_i w_i$$
+$$\langle v, w\rangle = v \cdot w = v^T w = \sum_i v_i w_i.$$
 
 ```{python}
 #| classes: styled-output
@@ -252,7 +252,7 @@ From the above Python snippet we can easily see that matrix-matrix multiplicatio
 
 ::: {.callout appearance="simple"}
 ## Definition - norm
-A **norm** is a mapping from a vector space $V$ to the field $F$ into the real numbers.
+A **norm** is a mapping from a vector space $V$ to the field $F$ into the real numbers
 
 $$\| \cdot \|: V \to \mathbb{R}_0^+, v \mapsto \|v\|$$
 if it fulfils for $v, w\in V$ and $\alpha \in F$ the following 
@@ -282,11 +282,11 @@ An for metrics:
 1. the one norm (column sum norm)
 $$ \| A \|_1 = max_j \sum_i |a_{ij}|,$$
 1. the Frobeniusnorm
-$$ \| A \| = \| A \|_F = \sqrt{sum_i sum_j |a_{ij}|^2}$$
+$$ \| A \| = \| A \|_F = \sqrt{sum_i sum_j |a_{ij}|^2},$$
 1. the $p$ norms are defined
-$$ \| A \|_p = \left(\sum_i \sum_j |a_{ij}|^p\right)^{\frac1p}$$
+$$ \| A \|_p = \left(\sum_i \sum_j |a_{ij}|^p\right)^{\frac1p},$$
 1. the $\infty$ norm (row sum norm)
-$$ \| A \|_1 = max_i \sum_j |a_{ij}|,$$
+$$ \| A \|_1 = max_i \sum_j |a_{ij}|.$$
 
 ```{python}
 #| classes: styled-output
@@ -317,7 +317,7 @@ A set of vectors $\mathcal{B} = \{b_1, \ldots, b_r\}, b_i \in \mathbb{R}^n$:
 1. is called linear independent if
 $$ \sum_{j=1}^r \alpha_j b_j = 0 \Rightarrow \alpha_1 = \alpha_2 = \cdots = \alpha_r = 0,$$
 1. spans $\mathbb{R}^n$ if
-$$ v = \sum_{j=1}^r \alpha_j b_j, \quad \forall v \in \mathbb{R}^n, \alpha_1, \ldots, \alpha_r \in \mathbb{R}$$
+$$ v = \sum_{j=1}^r \alpha_j b_j, \quad \forall v \in \mathbb{R}^n, \alpha_1, \ldots, \alpha_r \in \mathbb{R}.$$
 
 The set $\mathcal{B}$ is called a _basis_ of a vector space if it is linear independent and spans the entire vector space.
 The size of the basis, i.e. the number of vectors in the basis, is called the _dimension_ of the vector space.
@@ -337,7 +337,7 @@ I_n = \left[
                         \vdots & 1 & \ddots & 0\\
                         0 & \dots & 0 & 1 \\  \end{array}
 \right] 
- \in \mathbb{R}^{n \times n}
+ \in \mathbb{R}^{n \times n},
  $$
 and called the _identity matrix_.
 Note, the index $n$ is often omitted as it should be clear from the dimensions of the matrix.
@@ -425,7 +425,7 @@ $$
 
 So if we have a vector $b$ represented in $\mathcal{B}$ we can compute compute its representation in $\hat{b}$ in $\mathcal{C}$ as
 $$
-\hat{b} = T_{\mathcal{C}}^{\mathcal{B}} b = C^{-1}B b
+\hat{b} = T_{\mathcal{C}}^{\mathcal{B}} b = C^{-1}B b.
 $$
 
 A special form is if we have the standard basis $I$ and move to a basis $C$ we get
@@ -456,7 +456,7 @@ T_{C}^{B} = \left[
     \begin{array}{ccc} \frac32 & 1 & 1 \\
                        \frac12 & -1 & 0 \\  
                        -\frac12 & 2 & 1 \\  \end{array}
-\right]
+\right],
 $$
 and for a $v = 2 b_1 - b_2 + 3 b_3$ we can compute its representation in $C$ as
 $$
@@ -472,7 +472,7 @@ $$
 =
 \left[
     \begin{array}{c} 5 \\ 2 \\ 0 \end{array}
-\right]
+\right],
 $$
 and therefore, $v = 5c_1 + 2c_2 + 0 c_3$.
 

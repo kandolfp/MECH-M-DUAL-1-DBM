@@ -11,7 +11,7 @@ If $A = (a) \in \mathbb{R}^{1\times1}$ (a single number), then its _determinant_
 $$
 \det(A) = \sum_{j=1}^n (-1)^{j+1} a_{1j}\det(A_1j),
 $$
-where $A_1j$ is an $(n-1) \times (n-1)$ matrix obtained by deleting the first row and the $j$th column of $A$.
+where $A_1j$ is a $(n-1) \times (n-1)$ matrix obtained by deleting the first row and the $j$th column of $A$.
 
 [Compare @GoluLoan, pp. 66-67]
 :::
@@ -78,11 +78,11 @@ The set of all eigenvalues of $A$ is denoted by
 $$
 \lambda(A) = \left\{\lambda : \det(A-\lambda I)=0\right\}.
 $$
-If all of the eigenvalues are real (in $\mathbb{R}$) we can sort them form largest to smallest
+If all of the eigenvalues are real (in $\mathbb{R}$) we can sort them from largest to smallest
 $$
-\lambda_n(A) \leq \cdots \leq \lambda_2(A) \leq \lambda_1(A)
+\lambda_n(A) \leq \cdots \leq \lambda_2(A) \leq \lambda_1(A),
 $$
-we we denote the largest by $\lambda_{max}(A) = \lambda_1(A)$ and the smallest by $\lambda_{min}(A) = \lambda_n(A)$, respectively.
+and we denote the largest by $\lambda_{max}(A) = \lambda_1(A)$ and the smallest by $\lambda_{min}(A) = \lambda_n(A)$, respectively.
 
 [Compare @GoluLoan, pp. 66-67]
 :::
@@ -109,7 +109,7 @@ Such a vector is called _eigenvector_ of $A$ associated with $\lambda$.
 
 ::: {.callout appearance="simple"}
 ## Definition - eigendecomposition
-If $A \in \mathbb{C}^{n\times n}$ has $n$ (linear) independent eigenvectors $v_1, \ldots, v_n$ and $Av_i=\lambda_i v_i$, for $i=1:n$, than $A$ is _diagonalizable. 
+If $A \in \mathbb{C}^{n\times n}$ has $n$ (linear) independent eigenvectors $v_1, \ldots, v_n$ and $Av_i=\lambda_i v_i$, for $i=1:n$, than $A$ is _diagonalizable_. 
 
 If we combine the eigenvectors to a matrix
 $$
@@ -183,7 +183,7 @@ $$
 $$
 By changing to the basis $V$ and using the notation $\hat{x}=z$
 $$
-z = V^{-1}x \iff x = Vz
+z = V^{-1}x \iff x = Vz,
 $$
 and if follows
 $$
@@ -195,7 +195,7 @@ $$
 $$
 So for an initial value $z_0$ the solution in $t$ is
 $$
-z(t) = \operatorname{diag}\left(e^{t\lambda_1}, \ldots, e^{t\lambda_n}\right) z_0
+z(t) = \operatorname{diag}\left(e^{t\lambda_1}, \ldots, e^{t\lambda_n}\right) z_0.
 $$
 
 We often say that it is now a _decoupled_ differential equation.

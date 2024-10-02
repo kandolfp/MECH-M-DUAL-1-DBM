@@ -97,8 +97,9 @@ div.csl-indent {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -282,7 +283,13 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#low-rank-approximation-of-a-square-matrix" id="toc-low-rank-approximation-of-a-square-matrix" class="nav-link active" data-scroll-target="#low-rank-approximation-of-a-square-matrix"><span class="header-section-number">4.1</span> Low-rank approximation of a square matrix</a></li>
+  <li><a href="#examples-for-the-application" id="toc-examples-for-the-application" class="nav-link active" data-scroll-target="#examples-for-the-application"><span class="header-section-number">4.1</span> Examples for the application</a>
+  <ul class="collapse">
+  <li><a href="#solving-system-of-linear-equations" id="toc-solving-system-of-linear-equations" class="nav-link" data-scroll-target="#solving-system-of-linear-equations"><span class="header-section-number">4.1.1</span> Solving system of linear equations</a></li>
+  <li><a href="#linear-ordinary-differential-equations" id="toc-linear-ordinary-differential-equations" class="nav-link" data-scroll-target="#linear-ordinary-differential-equations"><span class="header-section-number">4.1.2</span> Linear Ordinary Differential Equations</a></li>
+  <li><a href="#higher-order-linear-differential-equations" id="toc-higher-order-linear-differential-equations" class="nav-link" data-scroll-target="#higher-order-linear-differential-equations"><span class="header-section-number">4.1.3</span> Higher Order Linear Differential Equations</a></li>
+  <li><a href="#low-rank-approximation-of-a-square-matrix" id="toc-low-rank-approximation-of-a-square-matrix" class="nav-link" data-scroll-target="#low-rank-approximation-of-a-square-matrix"><span class="header-section-number">4.1.4</span> Low-rank approximation of a square matrix</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/matrixdc/eigen.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -309,20 +316,19 @@ window.Quarto = {
 
 
 <p>We start off with the so called <em>eigendecomposition</em>. The main idea is to compute a decomposition (or factorization) of a square matrix into a canonical form. We will represent a matrix by its <em>eigenvalues</em> and <em>eigenvectors</em>. In order to do so we need to recall some more definitions from our favourite linear algebra book, such as <span class="citation" data-cites="GoluLoan">Golub and Van Loan (<a href="../references.html#ref-GoluLoan" role="doc-biblioref">2013</a>)</span>.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Definition - determinant
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If <span class="math inline">\(A = (a) \in \mathbb{R}^{1\times1}\)</span> (a single number), then its <em>determinant</em> is given by <span class="math inline">\(\det(A) = a\)</span>. Now, the determinant of <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> is defined in terms of order-<span class="math inline">\((n-1)\)</span> determinants: <span class="math display">\[
+<div class="callout-body-container">
+<div id="def-deterimant" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.1 (Determinant)</strong></span> If <span class="math inline">\(A = (a) \in \mathbb{R}^{1\times1}\)</span> (a single number), then its <em>determinant</em> is given by <span class="math inline">\(\det(A) = a\)</span>. Now, the determinant of <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> is defined in terms of order-<span class="math inline">\((n-1)\)</span> determinants: <span class="math display">\[
 \det(A) = \sum_{j=1}^n (-1)^{j+1} a_{1j}\det(A_1j),
 \]</span> where <span class="math inline">\(A_1j\)</span> is a <span class="math inline">\((n-1) \times (n-1)\)</span> matrix obtained by deleting the first row and the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(A\)</span>.</p>
 <p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
+</div>
+</div>
 </div>
 </div>
 <p>Some important properties of the determinant are:</p>
@@ -344,7 +350,7 @@ Definition - determinant
 \]</span></li>
 </ol>
 <p>So let us check in <code>numpy</code>:</p>
-<div id="2d3c311d" class="cell styled-output" data-execution_count="1">
+<div id="48e7d4c0" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -374,17 +380,14 @@ det_X*det_A=np.float64(1.0)
 det_Am=np.float64(-17.999999999999996)</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Definition - eigenvalues
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>For a matrix <span class="math inline">\(A \in \mathbb{C}^{n\times n}\)</span> the <em>eigenvalues</em> are the roots of the <em>characteristic polynomial</em> <span class="math display">\[
+<div class="callout-body-container">
+<div id="def-eigenvalues" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.2 (Eigenvalues)</strong></span> For a matrix <span class="math inline">\(A \in \mathbb{C}^{n\times n}\)</span> the <em>eigenvalues</em> are the roots of the <em>characteristic polynomial</em> <span class="math display">\[
 p(\lambda) = \det(A - \lambda I).
 \]</span> Consequently, every <span class="math inline">\(n\times n\)</span> matrix has exactly <span class="math inline">\(n\)</span> eigenvalues. Note that for a real matrix the eigenvalues might still be in <span class="math inline">\(\mathbb{C}\)</span>.</p>
 <p>The set of all eigenvalues of <span class="math inline">\(A\)</span> is denoted by <span class="math display">\[
@@ -395,8 +398,10 @@ p(\lambda) = \det(A - \lambda I).
 <p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
 </div>
 </div>
+</div>
+</div>
 <p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
-<div id="8ea08411" class="cell styled-output" data-execution_count="2">
+<div id="a15c5f50" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> LA.eigvals(A)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lam_sort <span class="op">=</span> np.sort(lam)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -405,32 +410,28 @@ p(\lambda) = \det(A - \lambda I).
 <pre><code>lam_sort=array([ 0.52277442,  3.        , 11.47722558])</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Definition - eigenvector
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If <span class="math inline">\(\lambda \in \lambda(A)\)</span>, then there exists a nonzero vector <span class="math inline">\(v\)</span> so that <span class="math display">\[
+<div class="callout-body-container">
+<div id="def-eigenvector" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.3 (Eigenvector)</strong></span> If <span class="math inline">\(\lambda \in \lambda(A)\)</span>, then there exists a nonzero vector <span class="math inline">\(v\)</span> so that <span class="math display">\[
 Av = \lambda v \iff (A - \lambda I)v = 0.
 \]</span> Such a vector is called <em>eigenvector</em> of <span class="math inline">\(A\)</span> associated with <span class="math inline">\(\lambda\)</span>.</p>
 </div>
 </div>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Definition - eigendecomposition
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If <span class="math inline">\(A \in \mathbb{C}^{n\times n}\)</span> has <span class="math inline">\(n\)</span> (linear) independent eigenvectors <span class="math inline">\(v_1, \ldots, v_n\)</span> and <span class="math inline">\(Av_i=\lambda_i v_i\)</span>, for <span class="math inline">\(i=1:n\)</span>, than <span class="math inline">\(A\)</span> is <em>diagonalizable</em>.</p>
+<div class="callout-body-container">
+<div id="def-edc" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.4 (Eigendecomposition)</strong></span> If <span class="math inline">\(A \in \mathbb{C}^{n\times n}\)</span> has <span class="math inline">\(n\)</span> (linear) independent eigenvectors <span class="math inline">\(v_1, \ldots, v_n\)</span> and <span class="math inline">\(Av_i=\lambda_i v_i\)</span>, for <span class="math inline">\(i=1:n\)</span>, than <span class="math inline">\(A\)</span> is <em>diagonalizable</em>.</p>
 <p>If we combine the eigenvectors to a matrix <span class="math display">\[
 V = \left[v_1 | \cdots | v_n\right],
 \]</span> then <span class="math display">\[
@@ -444,8 +445,10 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
 <p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
 </div>
 </div>
+</div>
+</div>
 <p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
-<div id="4515e0af" class="cell styled-output" data-execution_count="3">
+<div id="8d0af8b9" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lam, V <span class="op">=</span> LA.eig(A)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_eigen <span class="op">=</span> np.diag(lam)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -471,18 +474,16 @@ A_eigen2=array([[ 1.14772256e+01, -2.66453526e-15, -2.66453526e-15],
        [-3.99680289e-15,  1.38777878e-16,  3.00000000e+00]])</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<i class="fa-solid fa-circle-check" aria-label="circle-check"></i> Example - matrix decomposition - system of linear equations
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<p>We can use what we have learned about the basis of a vector space and the transformation between two bases, see <a href="../basics/linearalgebra.html#sec-intro-linearalgebra-basis" class="quarto-xref"><span>Section 1.3</span></a> to get a different interpretation of the eigendecomposition.</p>
+<p>We recall, if <span class="math inline">\(x\)</span> is represented in the standard basis with matrix <span class="math inline">\(I\)</span> we can change to the basis represented by <span class="math inline">\(V\)</span> and therefore <span class="math inline">\(\hat{x} = V^{-1}x\)</span>.</p>
+<p>Consequently, the equation <span class="math display">\[
+A = V \Lambda V^{-1}
+\]</span> means that in the basis created by <span class="math inline">\(V\)</span> the matrix <span class="math inline">\(A\)</span> is represented by a diagonal matrix.</p>
+<section id="examples-for-the-application" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="examples-for-the-application"><span class="header-section-number">4.1</span> Examples for the application</h2>
+<p>To get a better idea what the eigendecomposition can do we look into some examples.</p>
+<section id="solving-system-of-linear-equations" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="solving-system-of-linear-equations"><span class="header-section-number">4.1.1</span> Solving system of linear equations</h3>
 <p>For a system of linear equations <span class="math inline">\(Ax=b\)</span> we get <span class="math display">\[
 \begin{array}{lll}
 A x &amp; = b  &amp; \iff \\
@@ -491,30 +492,26 @@ V \Lambda V^{-1} x &amp; = b  &amp; \iff \\
 V^{-1} x &amp; = \Lambda^{-1}V^{-1} b  &amp; \iff \\
 x &amp; = V\Lambda^{-1}V^{-1} b  &amp; \iff
 \end{array}
-\]</span> As <span class="math inline">\(\Lambda^{-1} = \operatorname{diag}\left(\lambda_1^{-1}, \ldots, \lambda_n^{-1}\right)\)</span> this is easy to compute once we have the singular value decomposition.</p>
-</div>
-</div>
-</div>
-<p>We can use what we have learned about the basis of a vector space and the transformation between two bases, see <a href="../basics/linearalgebra.html#sec-intro-linearalgebra-basis" class="quarto-xref"><span>Section 1.3</span></a> to get a different interpretation of the eigendecomposition.</p>
-<p>We recall, if <span class="math inline">\(x\)</span> is represented in the standard basis with matrix <span class="math inline">\(I\)</span> we can change to the basis represented by <span class="math inline">\(V\)</span> and therefore <span class="math inline">\(\hat{x} = V^{-1}x\)</span>.</p>
-<p>Consequently, the equation <span class="math display">\[
-A = V \Lambda V^{-1}
-\]</span> means that in the basis created by <span class="math inline">\(V\)</span> the matrix <span class="math inline">\(A\)</span> is represented by a diagonal matrix.</p>
-<div class="callout callout-style-simple callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+\]</span> As <span class="math inline">\(\Lambda^{-1} = \operatorname{diag}\left(\lambda_1^{-1}, \ldots, \lambda_n^{-1}\right)\)</span> this is easy to compute once we have the eigenvalue decomposition.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<i class="fa-solid fa-circle-check" aria-label="circle-check"></i> Example - matrix decomposition - differential equation
+Note
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>The computation of the eigendecomposition is not cheep, therefore this is not always worth the effort and there are other ways of solving linear systems.</p>
+</div>
+</div>
+</section>
+<section id="linear-ordinary-differential-equations" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="linear-ordinary-differential-equations"><span class="header-section-number">4.1.2</span> Linear Ordinary Differential Equations</h3>
 <p>In this example we use the eigendecomposition to efficiently solve a system of differential equations <span class="math display">\[
-\dot{x} = A x.
-\]</span> By changing to the basis <span class="math inline">\(V\)</span> and using the notation <span class="math inline">\(\hat{x}=z\)</span> <span class="math display">\[
+\dot{x} = A x,\quad x(0) = x_0
+\]</span> By changing to the basis <span class="math inline">\(V\)</span> and using the notation <span class="math inline">\(\hat{x}=z\)</span> we have the equivalent formulations <span class="math display">\[
 z = V^{-1}x \iff x = Vz,
 \]</span> and if follows <span class="math display">\[
 \begin{array}{lll}
@@ -526,11 +523,149 @@ z = V^{-1}x \iff x = Vz,
 z(t) = \operatorname{diag}\left(e^{t\lambda_1}, \ldots, e^{t\lambda_n}\right) z_0.
 \]</span></p>
 <p>We often say that it is now a <em>decoupled</em> differential equation.</p>
+</section>
+<section id="higher-order-linear-differential-equations" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="higher-order-linear-differential-equations"><span class="header-section-number">4.1.3</span> Higher Order Linear Differential Equations</h3>
+<p>If we have a higher order linear ODE such as <span id="eq-hoode"><span class="math display">\[
+x^{(n)} + a_{n-1} x^{(n-1)} + \cdots + a_2 \ddot{x} + a_1 \dot{x} + a_0 x = 0.
+\tag{4.1}\]</span></span> we can use stack the derivatives into a vector <span class="math display">\[
+\begin{array}{ccc}
+x_1 &amp; = &amp; x\\
+x_2 &amp; = &amp; \dot{x}\\
+x_3 &amp; = &amp; \ddot{x}\\
+\vdots &amp; = &amp; \vdots \\
+x_{n-1} &amp; = &amp; x^{(n-2)} \\
+x_{n} &amp; = &amp; x^{(n-1)} \\
+\end{array}
+\quad
+\Leftrightarrow
+\quad
+\left[
+    \begin{array}{c} x_1 \\ x_2 \\ x_3 \\ \vdots \\ x_{n-1} \\ x_n \end{array}
+\right]
+=
+\left[
+    \begin{array}{c} x \\ \dot{x} \\ \ddot{x} \\ \vdots \\ x^{(n-2)} \\ x^{(n-1)} \end{array}
+\right]
+\]</span> and taking the derivative of this vector yields the following system <span class="math display">\[
+\underbrace{
+\frac{d}{d t}
+\left[
+    \begin{array}{c} x_1 \\ x_2 \\ x_3 \\ \vdots \\ x_{n-1} \\ x_n \end{array}
+\right]
+}_{\dot{x}}
+=
+\underbrace{\left[
+    \begin{array}{cccccc} 0 &amp; 1 &amp; 0 &amp; \dots &amp; 0 &amp; 0\\
+                          0 &amp; 0 &amp; 1 &amp; \dots &amp; 0 &amp; 0\\  
+                          0 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; 0\\
+                          \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots\\
+                          0 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; 1\\
+                          -a_0 &amp; -a_1 &amp; -a_2 &amp; \dots &amp; -a_{n-2} &amp; -a_{n-1}\\
+    \end{array}
+\right]
+}_{A}
+\underbrace{
+\left[
+    \begin{array}{c} x_1 \\ x_2 \\ x_3 \\ \vdots \\ x_{n-1} \\ x_n \end{array}
+\right]
+}_x
+\]</span></p>
+<p>We transformed it into a system of coupled 1st order ODEs <span class="math inline">\(\dot{x}=Ax\)</span> and we can solve this as seen above. More importantly, the characteristic polynomial of <a href="#eq-hoode" class="quarto-xref">Equation&nbsp;<span>4.1</span></a> is equal to the characteristic polynomial of <a href="#def-eigenvalues" class="quarto-xref">Definition&nbsp;<span>4.2</span></a> and the eigenvalues are the roots of this polynomial.</p>
+</section>
+<section id="low-rank-approximation-of-a-square-matrix" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="low-rank-approximation-of-a-square-matrix"><span class="header-section-number">4.1.4</span> Low-rank approximation of a square matrix</h3>
+<p>We can use the eigenvalue decomposition to <em>approximate</em> a square matrix.</p>
+<p>Let us sort the eigenvalues in <span class="math inline">\(\Lambda\)</span> and let us call <span class="math inline">\(W^T=V^{-1}\)</span> than we can write <span class="math display">\[
+A = V\Lambda W^T = \sum_{i=1}^n\lambda_i v_i u_i^T
+\]</span> where <span class="math inline">\(v_i\)</span> and <span class="math inline">\(u_i\)</span> correspond to the rows of the matrices. Now we can define the <em>rank</em> <span class="math inline">\(r\)</span> approximation of <span class="math inline">\(A\)</span> as <span class="math display">\[
+A\approx A_r = V\Lambda W^T = \sum_{i=1}^r\lambda_i v_i u_i^T
+\]</span></p>
+<p>To make this a bit easier to understand the following illustration is helpful: <a href="../_assets/matrixdc/lowrank.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Low Rank Approximation"><img src="../_assets/matrixdc/lowrank.svg" class="img-fluid" alt="Low Rank Approximation"></a></p>
+<p>The this approximation can be used to reduce the storage demand of an image.</p>
+<div id="cell-fig-mci_headquater" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> LA</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>im <span class="op">=</span> np.asarray(iio.imread(<span class="st">"https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"</span>))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rgb2gray(rgb):</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.dot(rgb[...,:<span class="dv">3</span>], [<span class="fl">0.2989</span>, <span class="fl">0.5870</span>, <span class="fl">0.1140</span>])</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>im_gray <span class="op">=</span> rgb2gray(im)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>im_cut <span class="op">=</span> im_gray[<span class="dv">1500</span>:<span class="dv">3001</span>,<span class="dv">1500</span>:<span class="dv">3001</span>] <span class="op">/</span> <span class="dv">255</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.imshow(im_cut, cmap=plt.get_cmap('gray'))</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>lam_, V_ <span class="op">=</span> LA.eig(im_cut)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>order <span class="op">=</span> np.argsort(np.<span class="bu">abs</span>(lam_))</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> lam_[order[::<span class="op">-</span><span class="dv">1</span>]]</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> V_[:, order[::<span class="op">-</span><span class="dv">1</span>]]</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].imshow(im_cut, cmap<span class="op">=</span>plt.get_cmap(<span class="st">"gray"</span>))</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_axis_off()</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_title(<span class="st">"Cut image"</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].plot((np.<span class="bu">abs</span>(lam)))</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_yscale(<span class="st">"log"</span>)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_title(<span class="st">"absolute value of the eigenvalues"</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_aspect(<span class="st">"auto"</span>, <span class="st">"box"</span>)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-mci_headquater" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mci_headquater-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="eigen_files/figure-html/fig-mci_headquater-output-1.png" width="557" height="431" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mci_headquater-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Image of MCI I.
+</figcaption>
+</figure>
 </div>
 </div>
 </div>
-<section id="low-rank-approximation-of-a-square-matrix" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="low-rank-approximation-of-a-square-matrix"><span class="header-section-number">4.1</span> Low-rank approximation of a square matrix</h2>
+<div id="cell-fig-mci_headquater_compress" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> LA</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>rec <span class="op">=</span> [<span class="dv">1</span><span class="op">/</span><span class="dv">1000</span>, <span class="dv">10</span><span class="op">/</span><span class="dv">100</span>, <span class="dv">25</span><span class="op">/</span><span class="dv">100</span>, <span class="dv">50</span><span class="op">/</span><span class="dv">100</span>, <span class="dv">1</span>]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>Vinv <span class="op">=</span> LA.inv(V)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>axs <span class="op">=</span> axs.reshape(<span class="dv">6</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, p <span class="kw">in</span> <span class="bu">enumerate</span>(rec):</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="bu">int</span>(np.ceil(<span class="bu">len</span>(lam) <span class="op">*</span> p))</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    A_r <span class="op">=</span> np.real(V[:, <span class="dv">1</span>:r] <span class="op">@</span> np.diag(lam[<span class="dv">1</span>:r], <span class="dv">0</span>) <span class="op">@</span> Vinv[<span class="dv">1</span>:r, :])</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    axs[i].imshow(A_r, cmap<span class="op">=</span>plt.get_cmap(<span class="st">"gray"</span>))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    axs[i].set_axis_off()</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    axs[i].set_title(<span class="ss">f"</span><span class="sc">{</span>r<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">5</span>].imshow(im_cut, cmap<span class="op">=</span>plt.get_cmap(<span class="st">"gray"</span>))</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">5</span>].set_axis_off()</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">5</span>].set_title(<span class="ss">f"Original image"</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-mci_headquater_compress" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mci_headquater_compress-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="eigen_files/figure-html/fig-mci_headquater_compress-output-1.png" width="540" height="394" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mci_headquater_compress-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: Image of MCI I.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -538,6 +673,7 @@ z(t) = \operatorname{diag}\left(e^{t\lambda_1}, \ldots, e^{t\lambda_n}\right) z_
 Golub, Gene H., and Charles F. Van Loan. 2013. <em>Matrix Computations</em>. 4th ed. Johns Hopkins Studies in the Mathematical Sciences.
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1131,6 +1267,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

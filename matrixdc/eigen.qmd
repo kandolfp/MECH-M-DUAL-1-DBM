@@ -161,7 +161,7 @@ V^{-1} x & = \Lambda^{-1}V^{-1} b  & \iff \\
 x & = V\Lambda^{-1}V^{-1} b  & \iff
 \end{array}
 $$
-As $\Lambda^{-1} = \operatorname{diag}\left(\lambda_1^{-1}, \ldots, \lambda_n^{-1}\right)$ this is easy to compute once we have the singular value decomposition.
+As $\Lambda^{-1} = \operatorname{diag}\left(\lambda_1^{-1}, \ldots, \lambda_n^{-1}\right)$ this is easy to compute once we have the eigenvalue decomposition.
 :::
 
 We can use what we have learned about the basis of a vector space and the transformation between two bases, see @sec-intro-linearalgebra-basis to get a different interpretation of the eigendecomposition.
@@ -202,3 +202,5 @@ We often say that it is now a _decoupled_ differential equation.
 :::
 
 ## Low-rank approximation of a square matrix
+
+We can use the eigen 

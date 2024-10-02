@@ -285,6 +285,7 @@ A\approx A_r = V\Lambda W^T = \sum_{i=1}^r\lambda_i v_i u_i^T
 $$
 
 To make this a bit easier to understand the following illustration is helpful:
+
 ![Low Rank Approximation](../_assets/matrixdc/lowrank.svg){.lightbox}
 
 The this approximation can be used to reduce the storage demand of an image.

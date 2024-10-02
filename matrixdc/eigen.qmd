@@ -341,9 +341,10 @@ fig, axs = plt.subplots(2, 3)
 axs = axs.reshape(6)
 for i, p in enumerate(rec):
     r = int(np.ceil(len(lam) * p))
-    A_r = np.real(V[:, 1:r] @ np.diag(lam[1:r], 0) @ Vinv[1:r, :])
+    A_r = np.real(V[:, 0:r] @ np.diag(lam[0:r], 0) @ Vinv[0:r, :])
     axs[i].imshow(A_r, cmap=plt.get_cmap("gray"))
     axs[i].set_axis_off()
+    r = r - 1
     axs[i].set_title(f"{r=}")
 
 axs[5].imshow(im_cut, cmap=plt.get_cmap("gray"))

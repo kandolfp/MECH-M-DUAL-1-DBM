@@ -157,8 +157,21 @@ print(f"{A_eigen2=}")
 np.testing.assert_almost_equal(A_eigen, A_eigen2)
 ```
 
-::: {.callout-caution appearance="simple" collapse="true" icon=false}
-## {{< fa circle-check >}} Example - matrix decomposition - system of linear equations
+We can use what we have learned about the basis of a vector space and the transformation between two bases, see @sec-intro-linearalgebra-basis to get a different interpretation of the eigendecomposition.
+
+We recall, if $x$ is represented in the standard basis with matrix $I$ we can change to the basis represented by $V$ and therefore $\hat{x} = V^{-1}x$.
+
+Consequently, the equation
+$$
+A = V \Lambda V^{-1} 
+$$
+means that in the basis created by $V$ the matrix $A$ is represented by a diagonal matrix.
+
+## Examples for the application
+
+To get a better idea what the eigendecomposition can do we look into some examples.
+
+### Solving system of linear equations
 
 For a system of linear equations $Ax=b$ we get
 $$
@@ -171,26 +184,18 @@ x & = V\Lambda^{-1}V^{-1} b  & \iff
 \end{array}
 $$
 As $\Lambda^{-1} = \operatorname{diag}\left(\lambda_1^{-1}, \ldots, \lambda_n^{-1}\right)$ this is easy to compute once we have the eigenvalue decomposition.
+
+::: {.callout-note}
+The computation of the eigendecomposition is not cheep, therefore this is not always worth the effort and there are other ways of solving linear systems.
 :::
 
-We can use what we have learned about the basis of a vector space and the transformation between two bases, see @sec-intro-linearalgebra-basis to get a different interpretation of the eigendecomposition.
-
-We recall, if $x$ is represented in the standard basis with matrix $I$ we can change to the basis represented by $V$ and therefore $\hat{x} = V^{-1}x$.
-
-Consequently, the equation
-$$
-A = V \Lambda V^{-1} 
-$$
-means that in the basis created by $V$ the matrix $A$ is represented by a diagonal matrix.
-
-::: {.callout-caution appearance="simple" collapse="true" icon=false}
-## {{< fa circle-check >}} Example - matrix decomposition - differential equation
+### Linear Ordinary Differential Equations
 
 In this example we use the eigendecomposition to efficiently solve a system of differential equations
 $$
-\dot{x} = A x.
+\dot{x} = A x,\quad x(0) = x_0
 $$
-By changing to the basis $V$ and using the notation $\hat{x}=z$
+By changing to the basis $V$ and using the notation $\hat{x}=z$ we have the equivalent formulations
 $$
 z = V^{-1}x \iff x = Vz,
 $$
@@ -208,8 +213,141 @@ z(t) = \operatorname{diag}\left(e^{t\lambda_1}, \ldots, e^{t\lambda_n}\right) z_
 $$
 
 We often say that it is now a _decoupled_ differential equation.
-:::
 
-## Low-rank approximation of a square matrix
+### Higher Order Linear Differential Equations
 
-We can use the eigen 
+If we have a higher order linear ODE such as
+$$
+x^{(n)} + a_{n-1} x^{(n-1)} + \cdots + a_2 \ddot{x} + a_1 \dot{x} + a_0 x = 0.
+$$ {#eq-hoode}
+we can use stack the derivatives into a vector
+$$
+\begin{array}{ccc}
+x_1 & = & x\\
+x_2 & = & \dot{x}\\
+x_3 & = & \ddot{x}\\
+\vdots & = & \vdots \\
+x_{n-1} & = & x^{(n-2)} \\
+x_{n} & = & x^{(n-1)} \\
+\end{array}
+\quad
+\Leftrightarrow
+\quad
+\left[
+    \begin{array}{c} x_1 \\ x_2 \\ x_3 \\ \vdots \\ x_{n-1} \\ x_n \end{array}
+\right]
+=
+\left[
+    \begin{array}{c} x \\ \dot{x} \\ \ddot{x} \\ \vdots \\ x^{(n-2)} \\ x^{(n-1)} \end{array}
+\right]
+$$
+and taking the derivative of this vector yields the following system
+$$
+\underbrace{
+\frac{d}{d t}
+\left[
+    \begin{array}{c} x_1 \\ x_2 \\ x_3 \\ \vdots \\ x_{n-1} \\ x_n \end{array}
+\right]
+}_{\dot{x}}
+=
+\underbrace{\left[
+    \begin{array}{cccccc} 0 & 1 & 0 & \dots & 0 & 0\\
+                          0 & 0 & 1 & \dots & 0 & 0\\  
+                          0 & 0 & 0 & \dots & 0 & 0\\
+                          \vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+                          0 & 0 & 0 & \dots & 0 & 1\\
+                          -a_0 & -a_1 & -a_2 & \dots & -a_{n-2} & -a_{n-1}\\
+    \end{array}
+\right]
+}_{A}
+\underbrace{
+\left[
+    \begin{array}{c} x_1 \\ x_2 \\ x_3 \\ \vdots \\ x_{n-1} \\ x_n \end{array}
+\right]
+}_x
+$$
+
+We transformed it into a system of coupled 1st order ODEs $\dot{x}=Ax$ and we can solve this as seen above.
+More importantly, the characteristic polynomial of @eq-hoode is equal to the characteristic polynomial of @def-eigenvalues and the eigenvalues are the roots of this polynomial.
+
+### Low-rank approximation of a square matrix
+
+We can use the eigenvalue decomposition to _approximate_ a square matrix.
+
+Let us sort the eigenvalues in $\Lambda$ and let us call $W^T=V^{-1}$ than we can write
+$$
+A = V\Lambda W^T = \sum_{i=1}^n\lambda_i v_i u_i^T
+$$
+where $v_i$ and $u_i$ correspond to the rows of the matrices.
+Now we can define the  _rank_ $r$ approximation of $A$ as
+$$
+A\approx A_r = V\Lambda W^T = \sum_{i=1}^r\lambda_i v_i u_i^T
+$$
+
+To make this a bit easier to understand the following illustration is helpful:
+![Low Rank Approximation](../_assets/matrixdc/lowrank.svg){.lightbox}
+
+The this approximation can be used to reduce the storage demand of an image.
+
+```{python}
+#| label: fig-mci_headquater
+#| fig-cap: "Image of MCI I."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import imageio.v3 as iio
+import numpy as np
+import numpy.linalg as LA
+
+im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
+
+def rgb2gray(rgb):
+    return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
+
+im_gray = rgb2gray(im)
+im_cut = im_gray[1500:3001,1500:3001] / 255
+#plt.imshow(im_cut, cmap=plt.get_cmap('gray'))
+
+lam_, V_ = LA.eig(im_cut)
+order = np.argsort(np.abs(lam_))
+lam = lam_[order[::-1]]
+V = V_[:, order[::-1]]
+
+fig, axs = plt.subplots(1, 2)
+axs[0].imshow(im_cut, cmap=plt.get_cmap("gray"))
+axs[0].set_axis_off()
+axs[0].set_title("Cut image")
+
+axs[1].plot((np.abs(lam)))
+axs[1].set_yscale("log")
+axs[1].set_title("absolute value of the eigenvalues")
+axs[1].set_aspect("auto", "box")
+plt.show()
+```
+
+```{python}
+#| label: fig-mci_headquater_compress
+#| fig-cap: "Image of MCI I."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import numpy as np
+import numpy.linalg as LA
+
+rec = [1/1000, 10/100, 25/100, 50/100, 1]
+Vinv = LA.inv(V)
+
+fig, axs = plt.subplots(2, 3)
+axs = axs.reshape(6)
+for i, p in enumerate(rec):
+    r = int(np.ceil(len(lam) * p))
+    A_r = np.real(V[:, 1:r] @ np.diag(lam[1:r], 0) @ Vinv[1:r, :])
+    axs[i].imshow(A_r, cmap=plt.get_cmap("gray"))
+    axs[i].set_axis_off()
+    axs[i].set_title(f"{r=}")
+
+axs[5].imshow(im_cut, cmap=plt.get_cmap("gray"))
+axs[5].set_axis_off()
+axs[5].set_title(f"Original image")
+plt.show()
+```

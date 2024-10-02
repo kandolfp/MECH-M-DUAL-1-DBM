@@ -350,7 +350,7 @@ window.Quarto = {
 \]</span></li>
 </ol>
 <p>So let us check in <code>numpy</code>:</p>
-<div id="c6a891bb" class="cell styled-output" data-execution_count="1">
+<div id="01196686" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -401,7 +401,7 @@ p(\lambda) = \det(A - \lambda I).
 </div>
 </div>
 <p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
-<div id="661aa52a" class="cell styled-output" data-execution_count="2">
+<div id="1c0bebbb" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> LA.eigvals(A)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lam_sort <span class="op">=</span> np.sort(lam)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -448,7 +448,7 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
 </div>
 </div>
 <p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
-<div id="1f57f297" class="cell styled-output" data-execution_count="3">
+<div id="3d6d4728" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lam, V <span class="op">=</span> LA.eig(A)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_eigen <span class="op">=</span> np.diag(lam)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -581,7 +581,13 @@ A = V\Lambda W^T = \sum_{i=1}^n\lambda_i v_i u_i^T
 \]</span> where <span class="math inline">\(v_i\)</span> and <span class="math inline">\(u_i\)</span> correspond to the rows of the matrices. Now we can define the <em>rank</em> <span class="math inline">\(r\)</span> approximation of <span class="math inline">\(A\)</span> as <span class="math display">\[
 A\approx A_r = V\Lambda W^T = \sum_{i=1}^r\lambda_i v_i u_i^T
 \]</span></p>
-<p>To make this a bit easier to understand the following illustration is helpful: <a href="../_assets/matrixdc/lowrank.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Low Rank Approximation"><img src="../_assets/matrixdc/lowrank.svg" class="img-fluid" alt="Low Rank Approximation"></a></p>
+<p>To make this a bit easier to understand the following illustration is helpful:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../_assets/matrixdc/lowrank.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Low Rank Approximation"><img src="../_assets/matrixdc/lowrank.svg" class="img-fluid figure-img" alt="Low Rank Approximation"></a></p>
+<figcaption>Low Rank Approximation</figcaption>
+</figure>
+</div>
 <p>The this approximation can be used to reduce the storage demand of an image.</p>
 <div id="cell-fig-mci_headquater" class="cell" data-execution_count="4">
 <details class="code-fold">
@@ -1268,7 +1274,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":false});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

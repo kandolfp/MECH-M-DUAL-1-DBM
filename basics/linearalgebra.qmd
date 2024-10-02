@@ -25,7 +25,8 @@ as a _vector_ $v$ with $n$ elements.
 The set $(\mathbb{R}^n, + ,\cdot)$ forms a so called _vector space_ with the _vector addition_ $+$ and the _scalar multiplication_ $\cdot$.
 
 ::: {.callout appearance="simple"}
-## Definition - Vector space
+:::: {#def-vectorspace} 
+## Vector space
 
 For a set $V$ over a [field](https://en.wikipedia.org/wiki/Field_(mathematics)) $F$ with the _vectors_ $u, v, w \in V$ and the _scalars_ $\alpha, \beta \in F$ the following properties need to hold true to form a vector space.
 
@@ -51,7 +52,9 @@ $$\alpha(u + v) = \alpha u + \alpha v,$$
 $$(\alpha + \beta)v = \alpha v + \beta v,$$
 (@) and there needs to exist a multiplicative identity element $1\in\mathbb{R}$
 $$1 v = v.$$
+::::
 :::
+
 
 ```{python}
 #| classes: styled-output
@@ -164,7 +167,8 @@ print(f"{w_tilde=}")
 As we can see from the above equation, we can view the matrix $A$ as a _linear mapping_ or _linear function_ between two vector spaces, namely from $\mathbb{R}^{n}$ to $\mathbb{R}^{m}$.
 
 ::: {.callout appearance="simple"}
-## Definition - linear map
+:::: {#def-linearmap} 
+## Linear map
 A **linear map** between vector spaces are mappings or functions that preserve the structure of the vector space.
 For two vector spaces $V$ and $W$ over a field $F$ the mapping 
 $$T: V \to W$$
@@ -174,6 +178,7 @@ is called linear if
 $$T(v + w) = T(v) + T(w),$$
 1. for $v \in V$ and $\alpha \in F$
 $$T(\alpha v) = \alpha T(v).$$
+::::
 :::
 
 A linear mapping of special interest to us is the _transpose_ of a matrix defined by turning rows into columns and vice versa:
@@ -251,7 +256,8 @@ From the above Python snippet we can easily see that matrix-matrix multiplicatio
 ## Norms
 
 ::: {.callout appearance="simple"}
-## Definition - norm
+:::: {#def-norm} 
+## Norm
 A **norm** is a mapping from a vector space $V$ to the field $F$ into the real numbers
 
 $$\| \cdot \|: V \to \mathbb{R}_0^+, v \mapsto \|v\|$$
@@ -263,6 +269,7 @@ $$ \|v\| = 0 \Rightarrow v = 0, $$
 $$ \| \alpha v \| = |\alpha| \| v \|, $$
 1. subadditivity (often called the _triangular inequality_) 
 $$ \| v + w\| \leq  \| v \| + \| w \|.$$
+::::
 :::
 
 There are multiple norms that can be useful for vectors.
@@ -311,7 +318,8 @@ The function `norm` from the `numpy.linalg` package can be used to compute other
 As we will be using the notion of _basis vector_ or a _basis of a vector space_ we should introduce them properly.
 
 ::: {.callout appearance="simple"}
-## Definition - basis
+:::: {#def-basis} 
+## Basis
 A set of vectors $\mathcal{B} = \{b_1, \ldots, b_r\}, b_i \in \mathbb{R}^n$:
 
 1. is called linear independent if
@@ -327,6 +335,7 @@ $$
 B = \left[b_1 | \cdots | b_n\right]
 $$
 with the basis.
+::::
 :::
 
 The standard basis of $\mathbb{R}^n$ are the vectors $e_i$ that are zero everywhere except for index $i$ and its associated matrix is 
@@ -390,10 +399,12 @@ See [`numpy.testing`](https://numpy.org/doc/stable/reference/routines.testing.ht
 ## The inverse of a matrix
 
 ::: {.callout appearance="simple"}
-## Definition - inverse
+:::: {#def-minverse} 
+## Matrix inverse
 For matrices $A, X\in \mathbb{R}^{n\times n}$ that satisfy
 $$ A X = X A = I_n $$
 we call $X$ the inverse of $A$ and denote it by $A^{-1}$.
+::::
 :::
 
 The following holds true for the inverse of matrices:
@@ -417,7 +428,8 @@ np.testing.assert_equal(A @ X, np.eye(A.shape[0]))
 ```
 
 ::: {.callout appearance="simple"}
-## Definition - change of basis
+:::: {#def-changebasis} 
+## Change of basis
 If we associate the matrices $B$ and $C$ with the matrix consisting of the basis vectors of two bases $\mathcal{B}$ and $\mathcal{C}$ of a vector space we can define the transformation matrix $T_{\mathcal{C}}^{\mathcal{B}}$ from $\mathcal{B}$ to $\mathcal{C}$ as
 $$
 T_{\mathcal{C}}^{\mathcal{B}} = C^{-1}B.
@@ -432,6 +444,7 @@ A special form is if we have the standard basis $I$ and move to a basis $C$ we g
 $$
 \hat{b} = T_{C}^{I} b = C^{-1} b.
 $$
+::::
 :::
 
 ::: {.callout-caution appearance="simple" collapse="true" icon=false}

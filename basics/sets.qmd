@@ -178,7 +178,8 @@ The _spread_ (or _dispersion_, _variability_, _scatter_) are measures used in st
 Common examples are _variance_, _standard deviation_, and the _interquartile range_ that we have already seen above.
 
 ::: {.callout appearance="simple"}
-## Definition - variance
+:::: {#def-variance} 
+## Variance
 For a finite set represented by a vector $v\in\mathbb{R}^n$ the **variance** is defined as
 $$
 \operatorname{Var}(v) = \frac1n \sum_{i=1}^n (v_i - \mu)^2, \quad \mu = \overline{v} \quad\text{(the mean)}
@@ -187,23 +188,28 @@ or directly
 $$
 \operatorname{Var}(v) = \frac{1}{n^2} \sum_{i=1}^n\sum_{j>i} (v_i - v_j)^2.
 $$
+::::
 :::
 
 ::: {.callout appearance="simple"}
-## Definition - standard deviation
+:::: {#def-stddeviation} 
+## Standard deviation
 For a finite set represented by a vector $v\in\mathbb{R}^n$ the **standard deviation** is defined as
 $$
 \sigma = \sqrt{\frac1n \sum_{i=1}^n (v_i - \mu)^2}, \quad \mu = \overline{v} \quad\text{(the mean)}.
 $$
 If we interpret $v$ as a sample this is often also called _uncorrected sample standard deviation_.
+::::
 :::
 
 ::: {.callout appearance="simple"}
-## Definition - interquartile range (IQR)
+:::: {#def-iqr} 
+## Interquartile range (IQR)
 For a finite set represented by a vector $v\in\mathbb{R}^n$ the **interquartile range** is defined as the difference of the first and third quartile, i.e.
 $$
 IQR = \overline{v}_{0.75} - \overline{v}_{0.25}.
 $$
+::::
 :::
 
 With `numpy` they are computed as follows
@@ -299,11 +305,13 @@ More formally, we can describe possible correlations using the _covariance_.
 The covariance is a measure of the joint variability of two random variables.
 
 ::: {.callout appearance="simple"}
-## Definition - covariance
+:::: {#def-cov} 
+## Covariance
 For two finite sets represented by vectors $v, w\in\mathbb{R}^n$ the **covariance** is defined as
 $$
 \operatorname{cov}(v, w) = \frac1n \langle v -\overline{v}, w - \overline{w}\rangle.
 $$
+::::
 :::
 
 The covariance is tricky to interpret, e.g. the unities of the two must not make sense.
@@ -312,13 +320,14 @@ In the example below, we have rent per square meter, which makes some sense.
 From the covariance we can compute the correlation.
 
 ::: {.callout appearance="simple"}
-## Definition - correlation
+:::: {#def-corr} 
+## Correlation
 For two finite sets represented by vectors $v, w\in\mathbb{R}^n$ the **correlation** is defined as
 $$
 \rho_{v,w} = \operatorname{corr}(v, w) = \frac{\operatorname{cov}(v, w)}{\sigma_v \sigma_w}.
 $$
+::::
 :::
-
 
 In `numpy` the function `numpy.cov` computes a matrix where the diagonal is the variance of the values and the off-diagonals are the covariances of the $i$ and $j$ samples.
 Consequently, `numpy.corrcoef` is a matrix as well.

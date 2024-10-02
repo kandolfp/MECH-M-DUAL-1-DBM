@@ -6,7 +6,9 @@ We will represent a matrix by its _eigenvalues_ and _eigenvectors_.
 In order to do so we need to recall some more definitions from our favourite linear algebra book, such as @GoluLoan.
 
 ::: {.callout appearance="simple"}
-## Definition - determinant
+:::: {#def-deterimant} 
+## Determinant
+
 If $A = (a) \in \mathbb{R}^{1\times1}$ (a single number), then its _determinant_ is given by $\det(A) = a$. Now, the determinant of $A \in \mathbb{R}^{n\times n}$ is defined in terms of order-$(n-1)$ determinants:
 $$
 \det(A) = \sum_{j=1}^n (-1)^{j+1} a_{1j}\det(A_1j),
@@ -14,6 +16,7 @@ $$
 where $A_1j$ is a $(n-1) \times (n-1)$ matrix obtained by deleting the first row and the $j$th column of $A$.
 
 [Compare @GoluLoan, pp. 66-67]
+::::
 :::
 
 Some important properties of the determinant are:
@@ -67,7 +70,8 @@ print(f"{det_Am=}")
 ```
 
 ::: {.callout appearance="simple"}
-## Definition - eigenvalues
+:::: {#def-eigenvalues} 
+## Eigenvalues
 For a matrix $A \in \mathbb{C}^{n\times n}$ the _eigenvalues_ are the roots of the _characteristic polynomial_ 
 $$
 p(\lambda) = \det(A - \lambda I).
@@ -85,6 +89,7 @@ $$
 and we denote the largest by $\lambda_{max}(A) = \lambda_1(A)$ and the smallest by $\lambda_{min}(A) = \lambda_n(A)$, respectively.
 
 [Compare @GoluLoan, pp. 66-67]
+::::
 :::
 
 From the above properties of the determinant we can conclude that, if $X \in \mathbb{C}^{n\times n}$ is nonsingular and $B = X^{-1} A X$, then $A$ and $B$ are called _similar_ and two similar matrices have exactly the same eigenvalues.
@@ -99,16 +104,19 @@ print(f"{lam_sort=}")
 ```
 
 ::: {.callout appearance="simple"}
-## Definition - eigenvector
+:::: {#def-eigenvector} 
+## Eigenvector
 If $\lambda \in \lambda(A)$, then there exists a nonzero vector $v$ so that 
 $$
 Av = \lambda v \iff (A - \lambda I)v = 0.
 $$
 Such a vector is called _eigenvector_ of $A$ associated with $\lambda$.
+::::
 :::
 
 ::: {.callout appearance="simple"}
-## Definition - eigendecomposition
+:::: {#def-edc} 
+## Eigendecomposition
 If $A \in \mathbb{C}^{n\times n}$ has $n$ (linear) independent eigenvectors $v_1, \ldots, v_n$ and $Av_i=\lambda_i v_i$, for $i=1:n$, than $A$ is _diagonalizable_. 
 
 If we combine the eigenvectors to a matrix
@@ -127,6 +135,7 @@ $$
 This is called the _eigendecomposition_ of the matrix $A$.
 
 [Compare @GoluLoan, pp. 66-67]
+::::
 :::
 
 Not all matrices $A \in \mathbb{R}^{n\times n}$ are diagonalizable.

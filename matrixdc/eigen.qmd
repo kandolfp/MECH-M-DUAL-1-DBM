@@ -314,32 +314,24 @@ order = np.argsort(np.abs(lam_))
 lam = lam_[order[::-1]]
 V = V_[:, order[::-1]]
 
-fig, axs = plt.subplots(1, 2)
-axs[0].imshow(im_cut, cmap=plt.get_cmap("gray"))
-axs[0].set_axis_off()
-axs[0].set_title("Cut image")
-
-axs[1].plot((np.abs(lam)))
-axs[1].set_yscale("log")
-axs[1].set_title("absolute value of the eigenvalues")
-axs[1].set_aspect("auto", "box")
-plt.show()
-```
-
-```{python}
-#| label: fig-mci_headquater_compress
-#| fig-cap: "Image of MCI I."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
-import matplotlib.pyplot as plt
-import numpy as np
-import numpy.linalg as LA
-
 rec = [1/1000, 10/100, 25/100, 50/100, 1]
 Vinv = LA.inv(V)
 
-fig, axs = plt.subplots(2, 3)
-axs = axs.reshape(6)
+fig = plt.figure()
+ax_eig = fig.add_subplot(3,1,1)
+ax_eig.plot((np.abs(lam)))
+ax_eig.set_yscale("log")
+ax_eig.set_title("absolute value of the eigenvalues")
+ax_eig.set_aspect("auto", "box")
+
+axs = [] 
+axs.append(fig.add_subplot(3, 3, 9))
+axs.append(fig.add_subplot(3, 3, 8))
+axs.append(fig.add_subplot(3, 3, 7))
+axs.append(fig.add_subplot(3, 3, 6))
+axs.append(fig.add_subplot(3, 3, 5))
+axs.append(fig.add_subplot(3, 3, 4))
+
 for i, p in enumerate(rec):
     r = int(np.ceil(len(lam) * p))
     A_r = np.real(V[:, 0:r] @ np.diag(lam[0:r], 0) @ Vinv[0:r, :])
@@ -351,5 +343,7 @@ for i, p in enumerate(rec):
 axs[5].imshow(im_cut, cmap=plt.get_cmap("gray"))
 axs[5].set_axis_off()
 axs[5].set_title(f"Original image")
+plt.subplots_adjust(top = 0.99, bottom=0.01, hspace=0.35, wspace=0.001)
 plt.show()
 ```
+

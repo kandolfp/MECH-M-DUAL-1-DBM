@@ -402,7 +402,7 @@ b = np.dot(x, e_2) / np.dot(e_2, e_2)
 c = np.dot(x, e_3) / np.dot(e_3, e_3)
 y = a * e_1 + b * e_2 + c * e_3
 print(f"{y=}")
-np.testing.assert_allclose(x, y)
+print(f"{np.allclose(x, y)=}")
 print(f"{LA.norm(x-y)=}")
 ```
 
@@ -435,7 +435,7 @@ print(f"{A=}")
 X = LA.inv(A)
 print(f"{X=}")
 print(f"{A @ X=}")
-np.testing.assert_almost_equal(A @ X, np.eye(A.shape[0]))
+print(f"{np.allclose(A @ X, np.eye(A.shape[0]))=}")
 # Note that the equality is hard to achieve for floats
 np.testing.assert_equal(A @ X, np.eye(A.shape[0]))
 ```

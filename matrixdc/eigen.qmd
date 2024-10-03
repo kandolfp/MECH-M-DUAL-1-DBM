@@ -292,13 +292,14 @@ The this approximation can be used to reduce the storage demand of an image.
 
 ```{python}
 #| label: fig-mci_headquater
-#| fig-cap: "Image of MCI I."
+#| fig-cap: "Image of MCI I and the reconstruction with reduced rank matrices."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import imageio.v3 as iio
 import numpy as np
 import numpy.linalg as LA
+%config InlineBackend.figure_formats = ['svg']
 
 im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
 
@@ -307,7 +308,6 @@ def rgb2gray(rgb):
 
 im_gray = rgb2gray(im)
 im_cut = im_gray[1500:3001,1500:3001] / 255
-#plt.imshow(im_cut, cmap=plt.get_cmap('gray'))
 
 lam_, V_ = LA.eig(im_cut)
 order = np.argsort(np.abs(lam_))
@@ -321,6 +321,8 @@ fig = plt.figure()
 ax_eig = fig.add_subplot(3,1,1)
 ax_eig.plot((np.abs(lam)))
 ax_eig.set_yscale("log")
+ax_eig.set_ylabel(r"$|\lambda_i|$")
+#ax_eig.set_xlabel("$i$")
 ax_eig.set_title("absolute value of the eigenvalues")
 ax_eig.set_aspect("auto", "box")
 
@@ -338,7 +340,7 @@ for i, p in enumerate(rec):
     axs[i].imshow(A_r, cmap=plt.get_cmap("gray"))
     axs[i].set_axis_off()
     r = r - 1
-    axs[i].set_title(f"{r=}")
+    axs[i].set_title(f"${r=}$")
 
 axs[5].imshow(im_cut, cmap=plt.get_cmap("gray"))
 axs[5].set_axis_off()

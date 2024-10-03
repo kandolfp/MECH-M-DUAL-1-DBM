@@ -391,3 +391,12 @@ plt.subplots_adjust(top = 0.99, bottom=0.01, hspace=0.35, wspace=0.001)
 plt.show()
 ```
 
+## Summary
+The eigenvalue decomposition is an important tool but it has its limitations
+
+1. the matrices involved need to be square
+1. eigenvalues might be complex, even if the problem at hand is real
+1. we only get a diagonal matrix $\Lambda$ if all eigenvectors are linear independent
+1. the computation of $V^{-1}$ is nontrivial unless $A$ is symmetric and $V$ becomes unitary ($V{-1} = V^T$).
+
+Therefore, we will look into a generalized decomposition called the _singular value decomposition_ in the next section.

@@ -270,6 +270,48 @@ $$
 We transformed it into a system of coupled 1st order ODEs $\dot{x}=Ax$ and we can solve this as seen above.
 More importantly, the characteristic polynomial of @eq-hoode is equal to the characteristic polynomial of @def-eigenvalues and the eigenvalues are the roots of this polynomial.
 
+### Generalized eigenvalue problem
+
+Let us motivate this by the example of _modal analysis_.
+If we consider the free vibrations of a weakly damped system we get the equation
+$$
+M\ddot{u} + K u = 0, \quad u(0) = u_0
+$$
+with the mass matrix $M$ and the stiffness matrix $K$ and $u(t)$ being the displacement.
+As we know, the solution of this linear differential equation has the form $u(t)=e^{i\omega t}u_0$ and thus we get
+$$
+(-\omega^2 M + K) u_0 = 0.
+$$ {#eq-ma}
+
+::: {.callout appearance="simple"}
+:::: {#def-edc} 
+## Generalized eigenvalue problem
+If $A, B \in \mathbb{C}^{n\times n}$, then the set of all matrices of the form $A-\lambda B$ with $\lambda\in\mathbb{C}$ is a _pencil_. The _generalized eigenvalues_ of $A-\lambda B$ are elements of the set $\lambda(A,B)$ defined by
+$$
+\lambda(A,B) = \{z\in\mathbb{C}: \det(A-zB)=0\}.
+$$
+If $\lambda \in \lambda(A,B)$ and $0\neq v\in\mathbb{C}^n$ satisfies
+$$
+A v = \lambda B v,
+$$ {#eq-gevp}
+then $v$ is an _eigenvector_ of $A-\lambda B$.
+The problem of finding a nontrivial solution to @eq-gevp is called the _generalized eigenvalue problem_.
+
+[Compare @GoluLoan, chap. 7.7]
+::::
+:::
+
+In our example @eq-ma the eigenvalues are $\lambda = \omega^2$ and correspond to the square of the natural frequencies and the eigenvectors $v=u$ correspond to the modes of vibration.
+
+If $M$ is invertible we can write 
+$$
+M^{-1}(K -\omega^2 M ) u_0 = (M^{-1}K -\omega^2 I ) u_0 = 0
+$$
+
+::: {.callout-warning}
+In most cases inverting the matrix is not recommended but to directly solve the generalized eigenvalue problem, [see @GoluLoan, chap. 7.7] for details. 
+:::
+
 ### Low-rank approximation of a square matrix
 
 We can use the eigenvalue decomposition to _approximate_ a square matrix.

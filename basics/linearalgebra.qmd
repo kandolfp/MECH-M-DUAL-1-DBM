@@ -505,5 +505,35 @@ and therefore, $v = 5c_1 + 2c_2 + 0 c_3$.
 (Compare [Wikipedia](https://de.wikipedia.org/wiki/Basiswechsel_(Vektorraum)))
 :::
 
+There are special basis vectors, respectively matrices that allow for easy computation of the inverse.
+
+::: {.callout appearance="simple"}
+:::: {#def-orthonormal} 
+## Orthonormal vector
+
+We call a set of vectors $\mathcal{V}=\{u_1, u_2, \ldots, u_m\}$ orthonormal if and only if
+$$
+\forall i,j: \langle u_i, u_j \rangle = \delta_{ij}
+$$
+where $\delta_{ij}$ is called the Kronecker delta which is $1$ if and only if $i=j$ and $0$ otherwise.
+This is true for a inner product, see @def-dotproduct.
+::::
+:::
+
+Extending this to a matrix (and to that end a basis) as follows.
+
+::: {.callout appearance="simple"}
+:::: {#def-orthonormalmatrix} 
+## Orthogonal matrix
+
+We call a matrix $Q\in\mathbb{R}^{n\times n}$, here the real and square is important, orthogonal if its columns and rows are orthonormal vectors.
+This is the same as
+$$
+Q^T Q = Q Q^T = I
+$$
+and this implies that $Q^{-1} = Q^T$.
+::::
+:::
+
 For now, this concludes our introduction to linear algebra.
 We will come back to more in later sections.

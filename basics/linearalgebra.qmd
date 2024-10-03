@@ -448,7 +448,7 @@ $$
 T_{\mathcal{C}}^{\mathcal{B}} = C^{-1}B.
 $$
 
-So if we have a vector $b$ represented in $\mathcal{B}$ we can compute compute its representation in $\hat{b}$ in $\mathcal{C}$ as
+So if we have a vector $b$ represented in $\mathcal{B}$ we can compute its representation in $\hat{b}$ in $\mathcal{C}$ as
 $$
 \hat{b} = T_{\mathcal{C}}^{\mathcal{B}} b = C^{-1}B b.
 $$

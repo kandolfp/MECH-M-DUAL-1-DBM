@@ -29,6 +29,7 @@ book:
     - part: matrixdc/index.qmd
       chapters:
         - matrixdc/eigen.qmd
+        - matrixdc/svd.qmd
     - summary.qmd
     - references.qmd
 

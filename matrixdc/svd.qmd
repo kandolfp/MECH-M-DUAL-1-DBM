@@ -1,0 +1,226 @@
+# Singular Value Decomposition {#sec-matrixdc-svd}
+
+We start off with the so called _eigendecomposition_.
+The main idea is to compute a decomposition (or factorization) of a square matrix into a canonical form.
+We will represent a matrix by its _eigenvalues_ and _eigenvectors_.
+In order to do so we need to recall some more definitions from our favourite linear algebra book, such as @GoluLoan.
+
+::: {.callout appearance="simple"}
+:::: {#thm-svd} 
+## Singular Value Decomposition
+
+If $A \in \mathbb{R}^{m\times n}$ (a real $m \times n$ matrix), there exists orthogonal matrices
+$$
+U = \left[u_1 | \cdots | u_m \right] \in \mathbb{R}^{m\times m}
+\quad
+\text{and}
+\quad
+V = \left[v_1 | \cdots | v_n \right] \in \mathbb{R}^{n\times n}
+$$
+such that 
+$$
+U^T A V = \Sigma = \operatorname{diag}(\sigma_1, \ldots, \sigma_p) \in \mathbb{R}^{m\times n}, \quad p=\min{m, m},
+$$ {#eq-svd}
+where $\sigma_1 \geq \sigma_2 \geq \ldots \sigma_p \geq 0$.
+
+
+[Compare @GoluLoan, pp. 76-80]
+::::
+:::
+
+::: {.callout-note}
+We call $\sigma_i$ a _singular value_ of $A$, the $u_i$ are called the _left singular values_ of $A$ and $v_i$ the _right singular values_ of $A$.
+Furthermore, $\sigma_{max} (A)$ is the largest singular value of $A$ and $\sigma_{min} (A)$ is the smallest singular value of $A$.
+:::
+
+Instead of providing a concise proof (if you are interested see [@GoluLoan, p. 76]) we show a possible motivation of the definition.
+
+If we compute the eigendecompositions of $AA^T$ and $A^TA$.
+The two matrices have the same positive eigenvalues - the squares of the eignevalues of $A$ and we get
+
+$$
+\begin{array}{lll} (A A^T)U &= & U(\Lambda\Lambda^T),\\
+                   (A^T A)V &= & V(\Lambda^T\Lambda).
+                   \end{array}
+$$
+For $A \in \mathbb{R}^{m\times n}$ with $m>n$ the get
+$$
+\Lambda = \left[
+    \begin{array}{c} \tilde{\Lambda}\\0\end{array}
+\right]
+$$
+with the diagonal matrix $\tilde\Lambda\in\mathbb{R}^{n\times n}$ and
+$$
+\begin{array}{llclc} \Lambda\Lambda^T & = & \left[
+    \begin{array}{cc}\tilde{\Lambda}^2 & 0 \\0 & 0 \end{array}
+\right]  & = & \left[
+    \begin{array}{cc}\tilde{\Sigma} & 0 \\0 & 0 \end{array}
+\right],  \\
+        \Lambda^T\Lambda & = & \tilde{\Lambda}^2 &= &\tilde{\Sigma}.
+                   \end{array}
+$$
+If we expand the matrices with zeros to match the correct dimensions this corresponds to the our singular value decomposition
+$$
+A = U \Sigma V^T.
+$$
+
+::: {.callout-important}
+The singular value decomposition always exists, is real and all singular vectors are positive.
+:::
+
+Again, to visualize the composition helps to better understand what is happening
+
+![Singular Value Decomposition](../_assets/matrixdc/SVD.svg){.lightbox}
+
+In the case that of $m\geq n$ we can save storage by reducing the matrices $U$ and $\Sigma$, to their counterpart $U_1$ and $\Sigma_1$ by removing the zeros.
+
+::: {.callout appearance="simple"}
+:::: {#def-thinsvd} 
+## Thin SVD
+
+If $A \in \mathbb{R}^{m\times n}$ for $m\geq n$, then
+$$
+A = \tilde{U} \tilde{\Sigma} V^T
+$$
+where
+$$
+U_1 = U(:, 1:n) = \left[u_1 | \cdots | u_n \right] \in \mathbb{R}^{m\times n}
+$$
+and
+$$
+\tilde{\Sigma} = \Sigma(1:n, 1:n) = \operatorname{diag}(\sigma_1, \ldots, \sigma_n) \in \mathbb{R}^{n\times n}.
+$$
+
+[Compare @GoluLoan, p. 80]
+::::
+:::
+
+![Thin SVD](../_assets/matrixdc/ThinSVD.svg){.lightbox}
+
+In Python we can compute the (Thin)SVD as follows
+
+```{python}
+#| classes: styled-output
+#| error: true
+import numpy as np
+import numpy.linalg as LA
+
+A = np.array([[3, 2, 2], 
+              [2, 3, -2]
+              ])
+
+U, s, Vh = LA.svd(A, full_matrices=True)
+print(f"{U.shape=}, {s.shape=}, {Vh.shape=}")
+print(f"{U=}")
+print(f"{U @ U.transpose()=}\n")
+
+print(f"{np.diag(s)=}\n")
+
+print(f"{Vh=}")
+print(f"{Vh.transpose() @ Vh=}\n")
+
+A1 = U[:, :len(s)] @ np.diag(s) @ Vh[:len(s),:]
+print(f"{np.allclose(A, A1)=}")
+print(f"{A-A1=}\n")
+
+S = np.zeros(A.shape)
+S[:len(s), :len(s)] = np.diag(s)
+A2 = U @ S @ Vh
+np.allclose(A, A2)
+print(f"{A-A2=}\n")
+
+print("\nThin SVD:")
+U, s, Vh = LA.svd(A, full_matrices=False)
+print(f"{U.shape=}, {s.shape=}, {Vh.shape=}")
+print(f"{np.allclose(A, U @ np.diag(s) @ Vh)=}")
+
+print("\nTransposed matrix:")
+B = A.transpose()
+U, s, Vh = LA.svd(B, full_matrices=False)
+print(f"{U.shape=}, {s.shape=}, {Vh.shape=}")
+print(f"{np.allclose(B, U @ np.diag(s) @ Vh)=}")
+```
+
+## Low rank approximation
+
+Again, we can cut of the reconstruction at a certain point and create an approximation.
+More formally this is defined in the next definition.
+
+::: {.callout appearance="simple"}
+:::: {#def-svdlowrank} 
+## Low-Rank Approximation
+
+If $A \in \mathbb{R}^{m\times n}$ and has the SVD $A = U\Sigma V^T$ than
+$$
+A_k = U(:, 1:k) \Sigma(1:k, 1:k) V^T(1:k, :)
+$$
+is the _optimal_ low-rank approximation of $A$ with rank $k$.
+This is often called the _truncated SVD_.
+
+[See @GoluLoan, Corollary 2.4.7 p. 79]
+::::
+:::
+
+![Truncated SVD](../_assets/matrixdc/TruncatedSVD.svg){.lightbox}
+
+We can use this for image compression.
+
+```{python}
+#| label: fig-mci_headquater_svd
+#| fig-cap: "Image of MCI I and the reconstruction with reduced rank matrices."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import imageio.v3 as iio
+import numpy as np
+import numpy.linalg as LA
+%config InlineBackend.figure_formats = ['svg']
+
+im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
+
+def rgb2gray(rgb):
+    return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
+
+im_gray = rgb2gray(im)
+im_scale = im_gray[1500:3001,1500:3001] / 255
+
+U, s, Vh = LA.svd(im_scale, full_matrices=False)
+
+rec = [1/1000, 10/100, 25/100, 50/100, 1]
+
+fig = plt.figure()
+ax_eig = fig.add_subplot(3,1,1)
+ax_eig.plot(s)
+ax_eig.set_yscale("log")
+ax_eig.set_ylabel(r"$|\sigma_i|$")
+#ax_eig.set_xlabel("$i$")
+ax_eig.set_title("singular value")
+ax_eig.set_aspect("auto", "box")
+
+axs = [] 
+axs.append(fig.add_subplot(3, 3, 9))
+axs.append(fig.add_subplot(3, 3, 8))
+axs.append(fig.add_subplot(3, 3, 7))
+axs.append(fig.add_subplot(3, 3, 6))
+axs.append(fig.add_subplot(3, 3, 5))
+axs.append(fig.add_subplot(3, 3, 4))
+
+for i, p in enumerate(rec):
+    r = int(np.ceil(len(s) * p))
+    A_r = U[:, :r] @ np.diag(s[:r]) @ Vh[:r, :]
+    axs[i].imshow(A_r, cmap=plt.get_cmap("gray"))
+    axs[i].set_axis_off()
+    r = r - 1
+    axs[i].set_title(f"${r=}$")
+
+axs[5].imshow(im_scale, cmap=plt.get_cmap("gray"))
+axs[5].set_axis_off()
+axs[5].set_title(f"Original image")
+plt.subplots_adjust(top = 0.99, bottom=0.01, hspace=0.35, wspace=0.001)
+plt.show()
+```
+
+::: {.callout-note}
+If we compare this to @fig-mci_headquater we can see that we get a much better result for smaller $r$.
+In the next section we will try to get a better idea on why.
+:::

@@ -334,7 +334,7 @@ The this approximation can be used to reduce the storage demand of an image.
 
 ```{python}
 #| label: fig-mci_headquater
-#| fig-cap: "Image of MCI I and the reconstruction with reduced rank matrices."
+#| fig-cap: "Image of MCI I and the reconstruction with approximated matrix."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt

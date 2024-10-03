@@ -258,6 +258,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Eigendecomposition</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../matrixdc/svd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -313,7 +319,7 @@ window.Quarto = {
 
 <p>The aim of this section is to discuss the basics of matrix, vector and number theory that we need for the later chapters and not introduce the whole of linear algebra. Nevertheless, we will rely on some basic definitions that can be found in any linear algebra book. For notation we refer to <span class="citation" data-cites="GoluLoan">Golub and Van Loan (<a href="../references.html#ref-GoluLoan" role="doc-biblioref">2013</a>)</span>.</p>
 <p>In Python the module <code>numpy</code> is used to represent vectors and matrices, we can include it like this (and give it its short hand <code>np</code>):</p>
-<div id="4f8333a7" class="cell" data-execution_count="1">
+<div id="75425523" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="notation" class="level2" data-number="1.1">
@@ -353,7 +359,7 @@ v = \left[
 </div>
 </div>
 </div>
-<div id="079a71d1" class="cell styled-output" data-execution_count="2">
+<div id="e46e8f26" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># show the shape</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>v<span class="sc">.</span>shape<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -431,7 +437,7 @@ Important
 <p>We will use capital letters for matrices and small letters for vectors.</p>
 </div>
 </div>
-<div id="5fa0d459" class="cell styled-output" data-execution_count="3">
+<div id="c416c675" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>],</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>]])</span>
@@ -486,7 +492,7 @@ Av =
 = A_{-1} v_1 + A_{-2} v_2 + \dots + A_{-n} v_n.
 \]</span> The result is a vector but this time in <span class="math inline">\(\mathbb{R}^m\)</span>.</p>
 <p>In Python the <code>*</code> operator is usually indicating multiplication. Unfortunately, in <code>numpy</code> it is interpreted as <em>element wise multiplication</em>, so we use <code>@</code> for multiplications between vector spaces.</p>
-<div id="748709a5" class="cell styled-output" data-execution_count="4">
+<div id="29117876" class="cell styled-output" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> A <span class="op">@</span> v</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># show the shape</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>w<span class="sc">.</span>shape<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -523,7 +529,7 @@ w_tilde=array([ 30.,  70., 110.])</code></pre>
 <p>A linear mapping of special interest to us is the <em>transpose</em> of a matrix defined by turning rows into columns and vice versa: <span class="math display">\[
 C = A^T, \quad \Rightarrow \quad c_{ij} = a_{ji}.
 \]</span> Consequently, the transpose of a (row) vector is a column vector.</p>
-<div id="f1605258" class="cell styled-output" data-execution_count="5">
+<div id="ddd28753" class="cell styled-output" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A<span class="sc">.</span>shape<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> A.transpose()</span>
@@ -541,8 +547,20 @@ B=array([[ 1,  5,  9],
 B.shape=(4, 3)</code></pre>
 </div>
 </div>
-<p>With this operation we can define the <em>dot product</em> or <em>scalar product</em> of two vectors <span class="math inline">\(v\)</span> and <span class="math inline">\(w\)</span> as <span class="math display">\[\langle v, w\rangle = v \cdot w = v^T w = \sum_i v_i w_i.\]</span></p>
-<div id="74b05d97" class="cell styled-output" data-execution_count="6">
+<p>With this operation we can define two more mappings.</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-dotproduct" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.3 (Dot product)</strong></span> The <em>dot product</em> or <em>scalar product</em> of two vectors <span class="math inline">\(v\)</span> and <span class="math inline">\(w\)</span> as is defined by <span class="math display">\[\langle v, w\rangle = v \cdot w = v^T w = \sum_i v_i w_i.\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div id="0841522a" class="cell styled-output" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>])</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># alternatively we can define w with</span></span>
@@ -566,7 +584,14 @@ Note
 <p>As <span class="math inline">\(\mathbb{R}^n\)</span> is an euclidean vector space the above function is also called the <em>inner product</em>.</p>
 </div>
 </div>
-<p>We also have the <em>outer product</em> defined as: <span class="math display">\[
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-outerproduct" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.4 (Outer product)</strong></span> We also have the <em>outer product</em> defined as: <span class="math display">\[
 v w^T = \left[
     \begin{array}{cccc} v_1 w_1 &amp; v_1 w_2 &amp; \dots &amp; v_1 w_n \\
                         v_2 w_1 &amp; v_2 w_2 &amp; \dots &amp;v_2 w_n \\  
@@ -574,7 +599,11 @@ v w^T = \left[
                         v_n w_1 &amp; v_n w_2 &amp; \dots &amp; v_n w_n \\  \end{array}
 \right]
 \]</span></p>
-<div id="8813ae87" class="cell styled-output" data-execution_count="7">
+</div>
+</div>
+</div>
+</div>
+<div id="4b5174fb" class="cell styled-output" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.outer(v, w)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>C<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -607,7 +636,7 @@ v w^T = \left[
 </div>
 </div>
 </div>
-<div id="1598ed95" class="cell styled-output" data-execution_count="8">
+<div id="99cb666c" class="cell styled-output" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">@</span> A.transpose()</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>C<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> A.transpose() <span class="op">@</span> A</span>
@@ -633,7 +662,7 @@ D=array([[107, 122, 137, 152],
 </div>
 <div class="callout-body-container">
 <div id="def-norm" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1.3 (Norm)</strong></span> A <strong>norm</strong> is a mapping from a vector space <span class="math inline">\(V\)</span> to the field <span class="math inline">\(F\)</span> into the real numbers</p>
+<p><span class="theorem-title"><strong>Definition 1.5 (Norm)</strong></span> A <strong>norm</strong> is a mapping from a vector space <span class="math inline">\(V\)</span> to the field <span class="math inline">\(F\)</span> into the real numbers</p>
 <p><span class="math display">\[\| \cdot \|: V \to \mathbb{R}_0^+, v \mapsto \|v\|\]</span> if it fulfils for <span class="math inline">\(v, w\in V\)</span> and <span class="math inline">\(\alpha \in F\)</span> the following</p>
 <ol type="1">
 <li>positivity <span class="math display">\[ \|v\| = 0 \Rightarrow v = 0, \]</span></li>
@@ -658,7 +687,7 @@ D=array([[107, 122, 137, 152],
 <li>the <span class="math inline">\(p\)</span> norms are defined <span class="math display">\[ \| A \|_p = \left(\sum_i \sum_j |a_{ij}|^p\right)^{\frac1p},\]</span></li>
 <li>the <span class="math inline">\(\infty\)</span> norm (row sum norm) <span class="math display">\[ \| A \|_1 = max_i \sum_j |a_{ij}|.\]</span></li>
 </ol>
-<div id="0d4aefdd" class="cell styled-output" data-execution_count="9">
+<div id="a6b3b026" class="cell styled-output" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The norms can be found in the linalg package of numpy</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>norm_v <span class="op">=</span> LA.norm(v)</span>
@@ -700,7 +729,7 @@ Note
 </div>
 <div class="callout-body-container">
 <div id="def-basis" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1.4 (Basis)</strong></span> A set of vectors <span class="math inline">\(\mathcal{B} = \{b_1, \ldots, b_r\}, b_i \in \mathbb{R}^n\)</span>:</p>
+<p><span class="theorem-title"><strong>Definition 1.6 (Basis)</strong></span> A set of vectors <span class="math inline">\(\mathcal{B} = \{b_1, \ldots, b_r\}, b_i \in \mathbb{R}^n\)</span>:</p>
 <ol type="1">
 <li>is called linear independent if <span class="math display">\[ \sum_{j=1}^r \alpha_j b_j = 0 \Rightarrow \alpha_1 = \alpha_2 = \cdots = \alpha_r = 0,\]</span></li>
 <li>spans <span class="math inline">\(\mathbb{R}^n\)</span> if <span class="math display">\[ v = \sum_{j=1}^r \alpha_j b_j, \quad \forall v \in \mathbb{R}^n, \alpha_1, \ldots, \alpha_r \in \mathbb{R}.\]</span></li>
@@ -723,7 +752,7 @@ I_n = \left[
 \in \mathbb{R}^{n \times n},
 \]</span> and called the <em>identity matrix</em>. Note, the index <span class="math inline">\(n\)</span> is often omitted as it should be clear from the dimensions of the matrix.</p>
 <p>The easiest way to create one of standard basis vectors, lets say <span class="math inline">\(e_3 \in \mathbb{R}^3\)</span>, in Python is by calling</p>
-<div id="510cc940" class="cell styled-output" data-execution_count="10">
+<div id="fe3e504d" class="cell styled-output" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We need to keep the index shift in mind</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>e_3 <span class="op">=</span> np.zeros(n)</span>
@@ -734,7 +763,7 @@ I_n = \left[
 </div>
 </div>
 <p>and the identity matrix by</p>
-<div id="a3c4ec23" class="cell styled-output" data-execution_count="11">
+<div id="cd97e572" class="cell styled-output" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">4</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>I_4 <span class="op">=</span> np.eye(n)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>I_4<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -757,7 +786,7 @@ I_n = \left[
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="c2fa5f6c" class="cell styled-output" data-execution_count="12">
+<div id="9b047262" class="cell styled-output" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>e_1 <span class="op">=</span> np.zeros(n)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>e_1[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span></span>
@@ -774,11 +803,12 @@ I_n = \left[
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.dot(x, e_3) <span class="op">/</span> np.dot(e_3, e_3)</span>
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> a <span class="op">*</span> e_1 <span class="op">+</span> b <span class="op">*</span> e_2 <span class="op">+</span> c <span class="op">*</span> e_3</span>
 <span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>y<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>np.testing.assert_allclose(x, y)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>np<span class="sc">.</span>allclose(x, y)<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>LA<span class="sc">.</span>norm(x<span class="op">-</span>y)<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>x=array([0.55461771, 0.91833185, 0.4208965 ])
-y=array([0.55461771, 0.91833185, 0.4208965 ])
+<pre><code>x=array([0.35661468, 0.77588861, 0.82607189])
+y=array([0.35661468, 0.77588861, 0.82607189])
+np.allclose(x, y)=True
 LA.norm(x-y)=np.float64(0.0)</code></pre>
 </div>
 </div>
@@ -796,7 +826,7 @@ LA.norm(x-y)=np.float64(0.0)</code></pre>
 </div>
 <div class="callout-body-container">
 <div id="def-minverse" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1.5 (Matrix inverse)</strong></span> For matrices <span class="math inline">\(A, X\in \mathbb{R}^{n\times n}\)</span> that satisfy <span class="math display">\[ A X = X A = I_n \]</span> we call <span class="math inline">\(X\)</span> the inverse of <span class="math inline">\(A\)</span> and denote it by <span class="math inline">\(A^{-1}\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition 1.7 (Matrix inverse)</strong></span> For matrices <span class="math inline">\(A, X\in \mathbb{R}^{n\times n}\)</span> that satisfy <span class="math display">\[ A X = X A = I_n \]</span> we call <span class="math inline">\(X\)</span> the inverse of <span class="math inline">\(A\)</span> and denote it by <span class="math inline">\(A^{-1}\)</span>.</p>
 </div>
 </div>
 </div>
@@ -806,32 +836,33 @@ LA.norm(x-y)=np.float64(0.0)</code></pre>
 <li>the inverse of a product is the product of the inverses <span class="math display">\[ (AB)^{-1} = B^{-1}A^{-1},\]</span></li>
 <li>the inverse of the transpose is the transpose of the inverse <span class="math display">\[ (A^{-1})^T = (A^{T})^{-1} \equiv A^{-T}.\]</span></li>
 </ul>
-<div id="3f4f5b3a" class="cell styled-output" data-execution_count="13">
+<div id="8d34138a" class="cell styled-output" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.random.rand(<span class="dv">3</span>, <span class="dv">3</span>)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> LA.inv(A)</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>X<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A <span class="op">@</span> X<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>np.testing.assert_almost_equal(A <span class="op">@</span> X, np.eye(A.shape[<span class="dv">0</span>]))</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>np<span class="sc">.</span>allclose(A <span class="op">@</span> X, np.eye(A.shape[<span class="dv">0</span>]))<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that the equality is hard to achieve for floats</span></span>
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>np.testing.assert_equal(A <span class="op">@</span> X, np.eye(A.shape[<span class="dv">0</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>A=array([[0.92908116, 0.03142941, 0.94602742],
-       [0.06086107, 0.02138356, 0.59156414],
-       [0.2518877 , 0.80862942, 0.11281221]])
-X=array([[ 1.20108759, -1.92156309,  0.00413092],
-       [-0.35870792,  0.33685139,  1.24169474],
-       [-0.11060343,  1.87595093, -0.04530915]])
-A @ X=array([[ 1.00000000e+00, -6.97812831e-18,  1.26381770e-18],
-       [ 2.16622849e-17,  1.00000000e+00,  5.33675675e-19],
-       [ 6.09675269e-17, -3.08772673e-17,  1.00000000e+00]])</code></pre>
+<pre><code>A=array([[0.38717471, 0.02332814, 0.14737745],
+       [0.30776398, 0.65371143, 0.98641643],
+       [0.12019197, 0.62710625, 0.66419884]])
+X=array([[ 3.26181149, -1.36078909,  1.29718272],
+       [ 1.51876155, -4.23568142,  5.9535102 ],
+       [-2.02419567,  4.24538267, -4.35019495]])
+A @ X=array([[ 1.00000000e+00, -4.76410012e-17,  1.43771657e-16],
+       [ 3.11219045e-16,  1.00000000e+00,  7.46456899e-16],
+       [-9.33744465e-18, -1.35119607e-16,  1.00000000e+00]])
+np.allclose(A @ X, np.eye(A.shape[0]))=True</code></pre>
 </div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
 <pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">AssertionError</span>                            Traceback (most recent call last)
 Cell <span class="ansi-green-fg">In[13], line 8</span>
-<span class="ansi-green-fg ansi-bold">      6</span> np<span style="color:rgb(98,98,98)">.</span>testing<span style="color:rgb(98,98,98)">.</span>assert_almost_equal(A <span style="color:rgb(98,98,98)">@</span> X, np<span style="color:rgb(98,98,98)">.</span>eye(A<span style="color:rgb(98,98,98)">.</span>shape[<span style="color:rgb(98,98,98)">0</span>]))
+<span class="ansi-green-fg ansi-bold">      6</span> <span style="color:rgb(0,135,0)">print</span>(<span style="color:rgb(175,0,0)">f</span><span style="color:rgb(175,0,0)">"</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>np<span style="color:rgb(98,98,98)">.</span>allclose(A<span style="color:rgb(188,188,188)"> </span><span style="color:rgb(98,98,98)">@</span><span style="color:rgb(188,188,188)"> </span>X,<span style="color:rgb(188,188,188)"> </span>np<span style="color:rgb(98,98,98)">.</span>eye(A<span style="color:rgb(98,98,98)">.</span>shape[<span style="color:rgb(98,98,98)">0</span>]))<span style="font-weight:bold;color:rgb(175,95,135)">=}</span><span style="color:rgb(175,0,0)">"</span>)
 <span class="ansi-green-fg ansi-bold">      7</span> <span style="font-style:italic;color:rgb(95,135,135)"># Note that the equality is hard to achieve for floats</span>
 <span class="ansi-green-fg">----&gt; 8</span> <span class="ansi-yellow-bg">np</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">testing</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">assert_equal</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">A</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">@</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">X</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">np</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">eye</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">A</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">shape</span><span class="ansi-yellow-bg">[</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">0</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">)</span>
 
@@ -863,12 +894,12 @@ File <span class="ansi-green-fg">~/work/MECH-M-DUAL-1-DBM/MECH-M-DUAL-1-DBM/.ven
 <span class="ansi-red-fg">AssertionError</span>: 
 Arrays are not equal
 
-Mismatched elements: 7 / 9 (77.8%)
-Max absolute difference among violations: 1.11022302e-16
-Max relative difference among violations: 1.11022302e-16
- ACTUAL: array([[ 1.000000e+00, -6.978128e-18,  1.263818e-18],
-       [ 2.166228e-17,  1.000000e+00,  5.336757e-19],
-       [ 6.096753e-17, -3.087727e-17,  1.000000e+00]])
+Mismatched elements: 8 / 9 (88.9%)
+Max absolute difference among violations: 7.46456899e-16
+Max relative difference among violations: 4.4408921e-16
+ ACTUAL: array([[ 1.000000e+00, -4.764100e-17,  1.437717e-16],
+       [ 3.112190e-16,  1.000000e+00,  7.464569e-16],
+       [-9.337445e-18, -1.351196e-16,  1.000000e+00]])
  DESIRED: array([[1., 0., 0.],
        [0., 1., 0.],
        [0., 0., 1.]])</pre>
@@ -882,10 +913,10 @@ Max relative difference among violations: 1.11022302e-16
 </div>
 <div class="callout-body-container">
 <div id="def-changebasis" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1.6 (Change of basis)</strong></span> If we associate the matrices <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> with the matrix consisting of the basis vectors of two bases <span class="math inline">\(\mathcal{B}\)</span> and <span class="math inline">\(\mathcal{C}\)</span> of a vector space we can define the transformation matrix <span class="math inline">\(T_{\mathcal{C}}^{\mathcal{B}}\)</span> from <span class="math inline">\(\mathcal{B}\)</span> to <span class="math inline">\(\mathcal{C}\)</span> as <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 1.8 (Change of basis)</strong></span> If we associate the matrices <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> with the matrix consisting of the basis vectors of two bases <span class="math inline">\(\mathcal{B}\)</span> and <span class="math inline">\(\mathcal{C}\)</span> of a vector space we can define the transformation matrix <span class="math inline">\(T_{\mathcal{C}}^{\mathcal{B}}\)</span> from <span class="math inline">\(\mathcal{B}\)</span> to <span class="math inline">\(\mathcal{C}\)</span> as <span class="math display">\[
 T_{\mathcal{C}}^{\mathcal{B}} = C^{-1}B.
 \]</span></p>
-<p>So if we have a vector <span class="math inline">\(b\)</span> represented in <span class="math inline">\(\mathcal{B}\)</span> we can compute compute its representation in <span class="math inline">\(\hat{b}\)</span> in <span class="math inline">\(\mathcal{C}\)</span> as <span class="math display">\[
+<p>So if we have a vector <span class="math inline">\(b\)</span> represented in <span class="math inline">\(\mathcal{B}\)</span> we can compute its representation in <span class="math inline">\(\hat{b}\)</span> in <span class="math inline">\(\mathcal{C}\)</span> as <span class="math display">\[
 \hat{b} = T_{\mathcal{C}}^{\mathcal{B}} b = C^{-1}B b.
 \]</span></p>
 <p>A special form is if we have the standard basis <span class="math inline">\(I\)</span> and move to a basis <span class="math inline">\(C\)</span> we get <span class="math display">\[
@@ -940,6 +971,36 @@ T_{C}^{B} = \left[
 \right],
 \]</span> and therefore, <span class="math inline">\(v = 5c_1 + 2c_2 + 0 c_3\)</span>.</p>
 <p>(Compare <a href="https://de.wikipedia.org/wiki/Basiswechsel_(Vektorraum)">Wikipedia</a>)</p>
+</div>
+</div>
+</div>
+<p>There are special basis vectors, respectively matrices that allow for easy computation of the inverse.</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-orthonormal" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.9 (Orthonormal vector)</strong></span> We call a set of vectors <span class="math inline">\(\mathcal{V}=\{u_1, u_2, \ldots, u_m\}\)</span> orthonormal if and only if <span class="math display">\[
+\forall i,j: \langle u_i, u_j \rangle = \delta_{ij}
+\]</span> where <span class="math inline">\(\delta_{ij}\)</span> is called the Kronecker delta which is <span class="math inline">\(1\)</span> if and only if <span class="math inline">\(i=j\)</span> and <span class="math inline">\(0\)</span> otherwise. This is true for a inner product, see <a href="#def-dotproduct" class="quarto-xref">Definition&nbsp;<span>1.3</span></a>.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Extending this to a matrix (and to that end a basis) as follows.</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-orthonormalmatrix" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.10 (Orthogonal matrix)</strong></span> We call a matrix <span class="math inline">\(Q\in\mathbb{R}^{n\times n}\)</span>, here the real and square is important, orthogonal if its columns and rows are orthonormal vectors. This is the same as <span class="math display">\[
+Q^T Q = Q Q^T = I
+\]</span> and this implies that <span class="math inline">\(Q^{-1} = Q^T\)</span>.</p>
+</div>
 </div>
 </div>
 </div>

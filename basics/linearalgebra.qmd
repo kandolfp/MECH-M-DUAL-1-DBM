@@ -196,8 +196,15 @@ print(f"{B=}")
 print(f"{B.shape=}")
 ```
 
-With this operation we can define the _dot product_ or _scalar product_ of two vectors $v$ and $w$ as
+With this operation we can define two more mappings.
+
+::: {.callout appearance="simple"}
+:::: {#def-dotproduct} 
+## Dot product
+The _dot product_ or _scalar product_ of two vectors $v$ and $w$ as is defined by
 $$\langle v, w\rangle = v \cdot w = v^T w = \sum_i v_i w_i.$$
+::::
+:::
 
 ```{python}
 #| classes: styled-output
@@ -213,6 +220,9 @@ print(f"{alpha=}")
 As $\mathbb{R}^n$ is an euclidean vector space the above function is also called the _inner product_.
 :::
 
+::: {.callout appearance="simple"}
+:::: {#def-outerproduct} 
+## Outer product
 We also have the _outer product_ defined as:
 $$
 v w^T = \left[
@@ -222,6 +232,9 @@ v w^T = \left[
                         v_n w_1 & v_n w_2 & \dots & v_n w_n \\  \end{array}
 \right]
 $$
+::::
+:::
+
 ```{python}
 #| classes: styled-output
 C = np.outer(v, w)

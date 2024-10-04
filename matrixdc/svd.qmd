@@ -222,5 +222,54 @@ plt.show()
 
 ::: {.callout-note}
 If we compare this to @fig-mci_headquater we can see that we get a much better result for smaller $r$.
-In the next section we will try to get a better idea on why.
+Let us have a look why.
+:::
+
+As the matrices $U$ and $V$ are orthogonal, they also define a basis of the corresponding (sub) vector spaces.
+As mentioned before, the SVD automatically selects these and they are optimal.
+
+Consequently, the matrices $U$ and $V$ can be understood as reflecting patterns in the image.
+We can think of the columns of $U$ and $V$ as the vertical respectively horizontal patterns of $A$.
+
+We can illustrate this by looking at the _modes_ of our decomposition
+$$
+M_k = U(:, k) V^T(k, :).
+$$
+
+```{python}
+#| label: fig-mci_headquater_svd_modes
+#| fig-cap: "Modes of the SVD decomposition of the MCI I image."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import numpy as np
+import numpy.linalg as LA
+%config InlineBackend.figure_formats = ['svg']
+
+rec = [0, 1, 2, 3, 4, 5]
+
+fig = plt.figure()
+axs = [] 
+axs.append(fig.add_subplot(3, 3, 1))
+axs.append(fig.add_subplot(3, 3, 2))
+axs.append(fig.add_subplot(3, 3, 3))
+axs.append(fig.add_subplot(3, 3, 4))
+axs.append(fig.add_subplot(3, 3, 5))
+axs.append(fig.add_subplot(3, 3, 6))
+
+for i, r in enumerate(rec):
+    M_r = np.outer(U[:, r], Vh[r, :])
+    axs[i].imshow(M_r, cmap=plt.get_cmap("gray"))
+    axs[i].set_axis_off()
+    r = r + 1
+    axs[i].set_title(f"${r=}$")
+
+plt.subplots_adjust(top = 0.99, bottom=0.01, hspace=0.35, wspace=0.001)
+plt.show()
+```
+::: {.callout-note}
+The big advantage here is, that the selection is optimal.
+A disadvantage is that the need to store the basis separately and this increases the necessary storage.
+We will see in later sections about _wavelets_ and _Fourier_ decomposition how a common basis can be used to reduce the storage by still keeping good reconstructive properties.
+:::
 :::

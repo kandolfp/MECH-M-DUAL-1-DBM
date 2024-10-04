@@ -297,6 +297,7 @@ The following code is a slight adaptation (for nicer presentation in these notes
 import matplotlib.pyplot as plt
 import numpy as np
 %config InlineBackend.figure_formats = ['svg']
+np.random.seed(6020)
 
 xC = np.array([2, 1])      # Center of data (mean)
 sig = np.array([2, 0.5])   # Principal axes

@@ -422,7 +422,7 @@ U_1 = U(:, 1:n) = \left[u_1 | \cdots | u_n \right] \in \mathbb{R}^{m\times n}
 </figure>
 </div>
 <p>In Python we can compute the (Thin)SVD as follows</p>
-<div id="9563673e" class="cell styled-output" data-execution_count="1">
+<div id="36cf71be" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -683,57 +683,58 @@ Important
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">'svg'</span>]</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>xC <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="dv">1</span>])      <span class="co"># Center of data (mean)</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>sig <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="fl">0.5</span>])   <span class="co"># Principal axes</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> np.pi<span class="op">/</span><span class="dv">3</span>            <span class="co"># Rotate cloud by pi/3</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> np.array([[np.cos(theta), <span class="op">-</span>np.sin(theta)],     <span class="co"># Rotation matrix</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>              [np.sin(theta), np.cos(theta)]])</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>nPoints <span class="op">=</span> <span class="dv">10000</span>            <span class="co"># Create 10,000 points</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> R <span class="op">@</span> np.diag(sig) <span class="op">@</span> np.random.randn(<span class="dv">2</span>, nPoints) <span class="op">+</span> np.diag(xC) <span class="op">@</span> np.ones((<span class="dv">2</span>, nPoints))</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">121</span>)</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>ax1.plot(X[<span class="dv">0</span>, :], X[<span class="dv">1</span>, :], <span class="st">'.'</span>, color<span class="op">=</span><span class="st">'k'</span>)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>ax1.grid()</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>ax1.set_aspect(<span class="st">"equal"</span>)</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>plt.xlim((<span class="op">-</span><span class="dv">6</span>, <span class="dv">8</span>))</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>plt.ylim((<span class="op">-</span><span class="dv">6</span>, <span class="dv">8</span>))</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">## f_ch01_ex03_1b</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>Xavg <span class="op">=</span> np.mean(A, axis<span class="op">=</span><span class="dv">1</span>)                  <span class="co"># Compute mean</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> X <span class="op">-</span> np.tile(Xavg, (nPoints, <span class="dv">1</span>)).T       <span class="co"># Mean-subtracted data</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Find principal components (SVD)</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>U, S, VT <span class="op">=</span> np.linalg.svd(B <span class="op">/</span> np.sqrt(nPoints), full_matrices<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">122</span>)</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>ax2.plot(X[<span class="dv">0</span>, :], X[<span class="dv">1</span>, :], <span class="st">'.'</span>, color<span class="op">=</span><span class="st">'k'</span>)   <span class="co"># Plot data to overlay PCA</span></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>ax2.grid()</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>ax2.set_aspect(<span class="st">"equal"</span>)</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>plt.xlim((<span class="op">-</span><span class="dv">6</span>, <span class="dv">8</span>))</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>plt.ylim((<span class="op">-</span><span class="dv">6</span>, <span class="dv">8</span>))</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> np.arange(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 1-std confidence interval</span></span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>Xstd <span class="op">=</span> U <span class="op">@</span> np.diag(S) <span class="op">@</span> np.array([np.cos(theta), np.sin(theta)])</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>ax2.plot(Xavg[<span class="dv">0</span>] <span class="op">+</span> Xstd[<span class="dv">0</span>, :], Xavg[<span class="dv">1</span>] <span class="op">+</span> Xstd[<span class="dv">1</span>, :], <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'r'</span>, linewidth<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>ax2.plot(Xavg[<span class="dv">0</span>] <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> Xstd[<span class="dv">0</span>, :], Xavg[<span class="dv">1</span>] <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> Xstd[<span class="dv">1</span>,:], <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'r'</span>, linewidth<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>ax2.plot(Xavg[<span class="dv">0</span>] <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> Xstd[<span class="dv">0</span>, :], Xavg[<span class="dv">1</span>] <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> Xstd[<span class="dv">1</span>,:], <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'r'</span>, linewidth<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot principal components U[:,0]S[0] and U[:,1]S[1]</span></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>ax2.plot(np.array([Xavg[<span class="dv">0</span>], Xavg[<span class="dv">0</span>] <span class="op">+</span> U[<span class="dv">0</span>,<span class="dv">0</span>] <span class="op">*</span> S[<span class="dv">0</span>]]),</span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>         np.array([Xavg[<span class="dv">1</span>], Xavg[<span class="dv">1</span>] <span class="op">+</span> U[<span class="dv">1</span>,<span class="dv">0</span>] <span class="op">*</span> S[<span class="dv">0</span>]]), <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'cyan'</span>, linewidth<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>ax2.plot(np.array([Xavg[<span class="dv">0</span>], Xavg[<span class="dv">0</span>] <span class="op">+</span> U[<span class="dv">0</span>,<span class="dv">1</span>] <span class="op">*</span> S[<span class="dv">1</span>]]),</span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>         np.array([Xavg[<span class="dv">1</span>], Xavg[<span class="dv">1</span>] <span class="op">+</span> U[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">*</span> S[<span class="dv">1</span>]]), <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'cyan'</span>, linewidth<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">6020</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>xC <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="dv">1</span>])      <span class="co"># Center of data (mean)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>sig <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="fl">0.5</span>])   <span class="co"># Principal axes</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> np.pi<span class="op">/</span><span class="dv">3</span>            <span class="co"># Rotate cloud by pi/3</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> np.array([[np.cos(theta), <span class="op">-</span>np.sin(theta)],     <span class="co"># Rotation matrix</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>              [np.sin(theta), np.cos(theta)]])</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>nPoints <span class="op">=</span> <span class="dv">10000</span>            <span class="co"># Create 10,000 points</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> R <span class="op">@</span> np.diag(sig) <span class="op">@</span> np.random.randn(<span class="dv">2</span>, nPoints) <span class="op">+</span> np.diag(xC) <span class="op">@</span> np.ones((<span class="dv">2</span>, nPoints))</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">121</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>ax1.plot(X[<span class="dv">0</span>, :], X[<span class="dv">1</span>, :], <span class="st">'.'</span>, color<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>ax1.grid()</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>ax1.set_aspect(<span class="st">"equal"</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>plt.xlim((<span class="op">-</span><span class="dv">6</span>, <span class="dv">8</span>))</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>plt.ylim((<span class="op">-</span><span class="dv">6</span>, <span class="dv">8</span>))</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">## f_ch01_ex03_1b</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>Xavg <span class="op">=</span> np.mean(A, axis<span class="op">=</span><span class="dv">1</span>)                  <span class="co"># Compute mean</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> X <span class="op">-</span> np.tile(Xavg, (nPoints, <span class="dv">1</span>)).T       <span class="co"># Mean-subtracted data</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Find principal components (SVD)</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>U, S, VT <span class="op">=</span> np.linalg.svd(B <span class="op">/</span> np.sqrt(nPoints), full_matrices<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">122</span>)</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>ax2.plot(X[<span class="dv">0</span>, :], X[<span class="dv">1</span>, :], <span class="st">'.'</span>, color<span class="op">=</span><span class="st">'k'</span>)   <span class="co"># Plot data to overlay PCA</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>ax2.grid()</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>ax2.set_aspect(<span class="st">"equal"</span>)</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>plt.xlim((<span class="op">-</span><span class="dv">6</span>, <span class="dv">8</span>))</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>plt.ylim((<span class="op">-</span><span class="dv">6</span>, <span class="dv">8</span>))</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> np.arange(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 1-std confidence interval</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>Xstd <span class="op">=</span> U <span class="op">@</span> np.diag(S) <span class="op">@</span> np.array([np.cos(theta), np.sin(theta)])</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>ax2.plot(Xavg[<span class="dv">0</span>] <span class="op">+</span> Xstd[<span class="dv">0</span>, :], Xavg[<span class="dv">1</span>] <span class="op">+</span> Xstd[<span class="dv">1</span>, :], <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'r'</span>, linewidth<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>ax2.plot(Xavg[<span class="dv">0</span>] <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> Xstd[<span class="dv">0</span>, :], Xavg[<span class="dv">1</span>] <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> Xstd[<span class="dv">1</span>,:], <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'r'</span>, linewidth<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>ax2.plot(Xavg[<span class="dv">0</span>] <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> Xstd[<span class="dv">0</span>, :], Xavg[<span class="dv">1</span>] <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> Xstd[<span class="dv">1</span>,:], <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'r'</span>, linewidth<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot principal components U[:,0]S[0] and U[:,1]S[1]</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>ax2.plot(np.array([Xavg[<span class="dv">0</span>], Xavg[<span class="dv">0</span>] <span class="op">+</span> U[<span class="dv">0</span>,<span class="dv">0</span>] <span class="op">*</span> S[<span class="dv">0</span>]]),</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>         np.array([Xavg[<span class="dv">1</span>], Xavg[<span class="dv">1</span>] <span class="op">+</span> U[<span class="dv">1</span>,<span class="dv">0</span>] <span class="op">*</span> S[<span class="dv">0</span>]]), <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'cyan'</span>, linewidth<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>ax2.plot(np.array([Xavg[<span class="dv">0</span>], Xavg[<span class="dv">0</span>] <span class="op">+</span> U[<span class="dv">0</span>,<span class="dv">1</span>] <span class="op">*</span> S[<span class="dv">1</span>]]),</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>         np.array([Xavg[<span class="dv">1</span>], Xavg[<span class="dv">1</span>] <span class="op">+</span> U[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">*</span> S[<span class="dv">1</span>]]), <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'cyan'</span>, linewidth<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-pca_gauss" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1394,7 +1395,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

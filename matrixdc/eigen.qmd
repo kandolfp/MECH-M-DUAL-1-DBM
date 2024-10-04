@@ -49,9 +49,9 @@ So let us check in `numpy`:
 import numpy as np
 from numpy import linalg as LA
 
-A = np.array([[1, 2, 3], 
-              [2, 5, 1],
-              [2, 7, 9]])
+A = np.array([[2, 0, 0],
+              [0, 3, 4],
+              [0, 4, 9]])
 det_A = LA.det(A)
 print(f"{det_A=}")
 
@@ -154,7 +154,7 @@ print(f"{v_1=}")
 A_eigen2 = LA.inv(V) @ A @ V
 print(f"{A_eigen2=}")
 
-np.testing.assert_almost_equal(A_eigen, A_eigen2)
+print(f"{np.allclose(A_eigen, A_eigen2)=}")
 ```
 
 We can use what we have learned about the basis of a vector space and the transformation between two bases, see @sec-intro-linearalgebra-basis to get a different interpretation of the eigendecomposition.

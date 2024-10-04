@@ -358,13 +358,13 @@ window.Quarto = {
 \]</span></li>
 </ol>
 <p>So let us check in <code>numpy</code>:</p>
-<div id="9a7fd1a9" class="cell styled-output" data-execution_count="1">
+<div id="3c6fa2a2" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">1</span>],</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">2</span>, <span class="dv">7</span>, <span class="dv">9</span>]])</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">4</span>],</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">9</span>]])</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>det_A <span class="op">=</span> LA.det(A)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>det_A<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
@@ -381,11 +381,11 @@ window.Quarto = {
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>det_Am <span class="op">=</span> LA.det(<span class="op">-</span>A)</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>det_Am<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>det_A=np.float64(17.999999999999996)
-det_A_T=np.float64(17.999999999999996)
-det_X=np.float64(0.055555555555555566)
+<pre><code>det_A=np.float64(21.999999999999996)
+det_A_T=np.float64(21.999999999999996)
+det_X=np.float64(0.04545454545454546)
 det_X*det_A=np.float64(1.0)
-det_Am=np.float64(-17.999999999999996)</code></pre>
+det_Am=np.float64(-21.999999999999996)</code></pre>
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon">
@@ -409,13 +409,13 @@ p(\lambda) = \det(A - \lambda I).
 </div>
 </div>
 <p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
-<div id="4205f77a" class="cell styled-output" data-execution_count="2">
+<div id="5fcfedaf" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> LA.eigvals(A)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lam_sort <span class="op">=</span> np.sort(lam)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>lam_sort<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>lam_sort=array([ 0.52277442,  3.        , 11.47722558])</code></pre>
+<pre><code>lam_sort=array([ 1.,  2., 11.])</code></pre>
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon">
@@ -456,7 +456,7 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
 </div>
 </div>
 <p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
-<div id="6cfd1491" class="cell styled-output" data-execution_count="3">
+<div id="3b550017" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lam, V <span class="op">=</span> LA.eig(A)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_eigen <span class="op">=</span> np.diag(lam)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -468,18 +468,19 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>A_eigen2 <span class="op">=</span> LA.inv(V) <span class="op">@</span> A <span class="op">@</span> V</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen2<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>np.testing.assert_almost_equal(A_eigen, A_eigen2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>np<span class="sc">.</span>allclose(A_eigen, A_eigen2)<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>A_eigen=array([[11.47722558,  0.        ,  0.        ],
-       [ 0.        ,  0.52277442,  0.        ],
-       [ 0.        ,  0.        ,  3.        ]])
-V=array([[ 0.30903897,  0.89088303,  0.33333333],
-       [ 0.23759713, -0.43039583, -0.66666667],
-       [ 0.92089224,  0.14521317,  0.66666667]])
-v_1=array([0.30903897, 0.23759713, 0.92089224])
-A_eigen2=array([[ 1.14772256e+01, -2.66453526e-15, -2.66453526e-15],
-       [-5.82867088e-16,  5.22774425e-01,  1.33226763e-15],
-       [-3.99680289e-15,  1.38777878e-16,  3.00000000e+00]])</code></pre>
+<pre><code>A_eigen=array([[11.,  0.,  0.],
+       [ 0.,  1.,  0.],
+       [ 0.,  0.,  2.]])
+V=array([[ 0.        ,  0.        ,  1.        ],
+       [ 0.4472136 ,  0.89442719,  0.        ],
+       [ 0.89442719, -0.4472136 ,  0.        ]])
+v_1=array([0.        , 0.4472136 , 0.89442719])
+A_eigen2=array([[1.10000000e+01, 0.00000000e+00, 0.00000000e+00],
+       [5.55111512e-17, 1.00000000e+00, 0.00000000e+00],
+       [0.00000000e+00, 0.00000000e+00, 2.00000000e+00]])
+np.allclose(A_eigen, A_eigen2)=True</code></pre>
 </div>
 </div>
 <p>We can use what we have learned about the basis of a vector space and the transformation between two bases, see <a href="../basics/linearalgebra.html#sec-intro-linearalgebra-basis" class="quarto-xref"><span>Section 1.3</span></a> to get a different interpretation of the eigendecomposition.</p>
@@ -1320,7 +1321,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","loop":false,"closeEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

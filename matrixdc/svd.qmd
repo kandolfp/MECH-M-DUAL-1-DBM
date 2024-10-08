@@ -555,4 +555,4 @@ $$
 ::::
 :::
 
-If we only use the truncated version, i.e. where we only use non zero singular values, we can use it to find good solutions to @eq-eq-leastsquare.
+If we only use the truncated version, i.e. where we only use non zero singular values, we can use it to find good solutions to @eq-leastsquare.

@@ -186,7 +186,7 @@ $$
 As $\Lambda^{-1} = \operatorname{diag}\left(\lambda_1^{-1}, \ldots, \lambda_n^{-1}\right)$ this is easy to compute once we have the eigenvalue decomposition.
 
 ::: {.callout-note}
-The computation of the eigendecomposition is not cheep, therefore this is not always worth the effort and there are other ways of solving linear systems.
+The computation of the eigendecomposition is not cheap, therefore this is not always worth the effort and there are other ways of solving linear systems.
 :::
 
 ### Linear Ordinary Differential Equations
@@ -220,7 +220,7 @@ If we have a higher order linear ODE such as
 $$
 x^{(n)} + a_{n-1} x^{(n-1)} + \cdots + a_2 \ddot{x} + a_1 \dot{x} + a_0 x = 0.
 $$ {#eq-hoode}
-we can use stack the derivatives into a vector
+we can stack the derivatives into a vector
 $$
 \begin{array}{ccc}
 x_1 & = & x\\
@@ -239,7 +239,7 @@ x_{n} & = & x^{(n-1)} \\
 =
 \left[
     \begin{array}{c} x \\ \dot{x} \\ \ddot{x} \\ \vdots \\ x^{(n-2)} \\ x^{(n-1)} \end{array}
-\right]
+\right],
 $$
 and taking the derivative of this vector yields the following system
 $$
@@ -264,7 +264,7 @@ $$
 \left[
     \begin{array}{c} x_1 \\ x_2 \\ x_3 \\ \vdots \\ x_{n-1} \\ x_n \end{array}
 \right]
-}_x
+}_x.
 $$
 
 We transformed it into a system of coupled 1st order ODEs $\dot{x}=Ax$ and we can solve this as seen above.
@@ -275,7 +275,7 @@ More importantly, the characteristic polynomial of @eq-hoode is equal to the cha
 Let us motivate this by the example of _modal analysis_.
 If we consider the free vibrations of a weakly damped system we get the equation
 $$
-M\ddot{u} + K u = 0, \quad u(0) = u_0
+M\ddot{u} + K u = 0, \quad u(0) = u_0,
 $$
 with the mass matrix $M$ and the stiffness matrix $K$ and $u(t)$ being the displacement.
 As we know, the solution of this linear differential equation has the form $u(t)=e^{i\omega t}u_0$ and thus we get
@@ -305,32 +305,32 @@ In our example @eq-ma the eigenvalues are $\lambda = \omega^2$ and correspond to
 
 If $M$ is invertible we can write 
 $$
-M^{-1}(K -\omega^2 M ) u_0 = (M^{-1}K -\omega^2 I ) u_0 = 0
+M^{-1}(K -\omega^2 M ) u_0 = (M^{-1}K -\omega^2 I ) u_0 = 0.
 $$
 
 ::: {.callout-warning}
-In most cases inverting the matrix is not recommended but to directly solve the generalized eigenvalue problem, [see @GoluLoan, chap. 7.7] for details. 
+In most cases inverting the matrix is not recommended but to directly solve the generalized eigenvalue problem [see @GoluLoan, chap. 7.7 for details]. 
 :::
 
 ### Low-rank approximation of a square matrix
 
 We can use the eigenvalue decomposition to _approximate_ a square matrix.
 
-Let us sort the eigenvalues in $\Lambda$ and let us call $W^T=V^{-1}$ than we can write
+Let us sort the eigenvalues in $\Lambda$ and let us call $W^T=V^{-1}$ then we can write
 $$
 A = V\Lambda W^T = \sum_{i=1}^n\lambda_i v_i u_i^T
 $$
 where $v_i$ and $u_i$ correspond to the rows of the matrices.
 Now we can define the  _rank_ $r$ approximation of $A$ as
 $$
-A\approx A_r = V\Lambda W^T = \sum_{i=1}^r\lambda_i v_i u_i^T
+A\approx A_r = V\Lambda W^T = \sum_{i=1}^r\lambda_i v_i u_i^T.
 $$
 
 To make this a bit easier to understand the following illustration is helpful:
 
 ![Low Rank Approximation](../_assets/matrixdc/lowrank.svg){.lightbox}
 
-The this approximation can be used to reduce the storage demand of an image.
+This approximation can be used to reduce the storage demand of an image.
 
 ```{python}
 #| label: fig-mci_headquater
@@ -392,11 +392,11 @@ plt.show()
 ```
 
 ## Summary
-The eigenvalue decomposition is an important tool but it has its limitations
+The eigenvalue decomposition is an important tool but it has its limitations:
 
-1. the matrices involved need to be square
-1. eigenvalues might be complex, even if the problem at hand is real
-1. we only get a diagonal matrix $\Lambda$ if all eigenvectors are linear independent
+1. the matrices involved need to be square,
+1. eigenvalues might be complex, even if the problem at hand is real,
+1. we only get a diagonal matrix $\Lambda$ if all eigenvectors are linear independent,
 1. the computation of $V^{-1}$ is nontrivial unless $A$ is symmetric and $V$ becomes unitary ($V{-1} = V^T$).
 
 Therefore, we will look into a generalized decomposition called the _singular value decomposition_ in the next section.

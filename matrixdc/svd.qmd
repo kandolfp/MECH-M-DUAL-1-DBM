@@ -416,3 +416,98 @@ R_{\frac\pi3} = \left[
 $$""")
 ```
 
+## Example Eigenfaces
+
+We combine SVD/PCA in a illustrative example called _eigenfaces_ as introduced in [@Brunton2022, Sec 1.6, pp. 28-34].
+
+The idea is tho apply the PCA techniques to a large set of faces to extract the dominate correlations between the images and create a _face basis_ that can be used to represent an image in these coordinates.
+For example you can reconstruct a face in this space by projecting onto the eigen vectors or it can be used for face recognition as similar faces usually cluster under this projection.
+
+The images are taken from the Yale Face Dataset B, in our case we use a [GitHub](https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos/tree/main) that provides [Julia](https://julialang.org/) Pluto notebooks for Chapter 1 to 4 of @Brunton2022.
+
+Our training set, so to speak, consists of the first 36 people in the dataset.
+We compute the _avarge face_ and subtract it from our dataset to get our matrix $B$.
+From here a SVD provides us with our basis $U$.
+To test our basis we use individual 37 and a portion of the image of the MCI Headquater (to see how well it performs on objects).
+For this we use the projection
+$$
+\tilde{x} = U_r U_r^T x.
+$$
+If we split this up, we first project onto our found patterns (encode) and than reconstruct from them (decode).
+
+::: {.callout-note}
+We can understand this as _encoding_ and _decoding_ our test image, which is the general buildup of an _autoencoder_ (a topic for another lecture).
+
+The corrolation coefficients $x_r = U_r^T x$ might reveal patterns for different $x$.
+In the case of faces, we can use this for face recognition, i.e. if the coefficients of $x_r$ are in the same cluster as other images, they are probably from the same person.
+:::
+
+::: {.callout-important}
+The following code is an adaptation  of the [@Brunton2022, Code 1.7 and 1.9].
+:::
+
+```{python}
+#| label: fig-eigfaces
+#| fig-cap: "Approximate reconstruction of a test face and an object using the eigenfaces basis for different order r."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import scipy
+import requests
+import io
+import matplotlib.pyplot as plt
+%config InlineBackend.figure_formats = ['svg']
+
+response = requests.get("https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos/raw/refs/heads/main/DATA/allFaces.mat")
+
+data = scipy.io.loadmat(io.BytesIO(response.content))
+faces = data["faces"]
+m = int(data["m"][0,0])
+n = int(data["n"][0,0])
+nfaces = np.ndarray.flatten(data['nfaces'])
+
+trainingFaces = faces[:, : np.sum(nfaces[:36])]
+avgFace = np.mean(trainingFaces, axis=1)
+
+B = trainingFaces - np.tile(avgFace, (trainingFaces.shape[1], 1)).T
+U, _, _ = np.linalg.svd(B, 'econ')
+
+testFace = faces[:, np.sum(nfaces[:36])]
+testFaceMS = testFace - avgFace
+rec = [25, 100, 400]
+
+fig = plt.figure()
+axs = [] 
+axs.append(fig.add_subplot(2, 4, 1))
+axs.append(fig.add_subplot(2, 4, 2))
+axs.append(fig.add_subplot(2, 4, 3))
+axs.append(fig.add_subplot(2, 4, 4))
+axs.append(fig.add_subplot(2, 4, 5))
+axs.append(fig.add_subplot(2, 4, 6))
+axs.append(fig.add_subplot(2, 4, 7))
+axs.append(fig.add_subplot(2, 4, 8))
+
+for i, p in enumerate(rec):
+    r = p
+    A_r = avgFace + U[:, :r] @ U[:, :r].T @ testFaceMS
+    axs[i].imshow(np.reshape(A_r, (m, n)).T, cmap=plt.get_cmap("gray"))
+    axs[i].set_axis_off()
+    axs[i].set_title(f"${r=}$")
+
+axs[3].imshow(np.reshape(testFace, (m, n)).T, cmap=plt.get_cmap("gray"))
+axs[3].set_axis_off()
+axs[3].set_title(f"Original image")
+
+testFaceMS = np.reshape(im_gray[1500:1500+n, 1500:1500+m].T, n*m) - avgFace
+rec = [100, 400, 1600]
+for i, p in enumerate(rec):
+    r = p
+    A_r = avgFace + U[:, :r] @ U[:, :r].T @ testFaceMS
+    axs[4 + i].imshow(np.reshape(A_r, (m, n)).T, cmap=plt.get_cmap("gray"))
+    axs[4 + i].set_axis_off()
+    axs[4 + i].set_title(f"${r=}$")
+axs[7].imshow(im_gray[1500:1500+n, 1500:1500+m], cmap=plt.get_cmap("gray"))
+axs[7].set_axis_off()
+axs[7].set_title(f"Original image")
+plt.show()
+```

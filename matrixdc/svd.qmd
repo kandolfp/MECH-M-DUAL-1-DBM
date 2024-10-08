@@ -275,15 +275,25 @@ We will see in later sections about _wavelets_ and _Fourier_ decomposition how a
 
 ## Principal Component Analysis
 
-On of the most important applications of SVD is the so called _principal component analysis_ (PCA). It is a common technique in data _exploration_, _analysis_, _visualization_, and _preprocessing_. 
+On of the most important applications of SVD is in the stable computation of the so called _principal component analysis_ (PCA). It is a common technique in data exploration, analysis, visualization, and preprocessing. 
 
-The main idea is to transform the data such that the main directions (principal components) capture the largest variation, i.e. we perform a change of basis, see @def-changebasis.
+The main idea of PCM is to transform the data in such a way that the main directions (principal components) capture the largest variation. In short we perform a change of the basis, see @def-changebasis.
 
-Let us investigate this in terms of a data set. 
-Our matrix $A$ is constructed by stacking a series of measurements (or experiments) as column vectors next to each other.
+Let us investigate this in terms of a (artificial) data set. 
+
+::: {.callout-important} 
+This example is adapted from [@Brunton2022, Example: Noisy Gaussian Data, pp. 25-27].
+:::
+
+We generate a noisy cloud (see @fig-pca_gauss) that consists of $10000$ points in 2D, generated from a normal distribution with zero mean and unit variance.
+The data is than:
+
+1. scaled by $2$ in the first direction and by $\frac12$ in second,
+1. rotated by $\frac\pi3$
+1. translation in the direction $\left[2\ 1\right]^T$.
+
+The resulting matrix $X$ is a long and skinny matrix with each measurement (or experiment) stacked next to each other.
 This means, each column represents a new set, e.g. a time step, and each row corresponds to the same sensor.
-
-For the computation we follow the outline given in [@Brunton2022, Chap. 1.5] and use the artificially constructed example _Noisy Gaussian Data_ as our explanatory example.
 
 ::: {.callout-important}
 The following code is a slight adaptation (for nicer presentation in these notes) of the [@Brunton2022, Code 1.4] also see [notebook on github](https://github.com/dynamicslab/databook_python/blob/master/CH01/CH01_SEC05_1_PCAGaussian.ipynb).
@@ -297,12 +307,12 @@ The following code is a slight adaptation (for nicer presentation in these notes
 import matplotlib.pyplot as plt
 import numpy as np
 %config InlineBackend.figure_formats = ['svg']
-np.random.seed(6020)
+np.random.seed(6020)       # Make sure to stay reproducible
 
 xC = np.array([2, 1])      # Center of data (mean)
 sig = np.array([2, 0.5])   # Principal axes
 
-theta = np.pi/3            # Rotate cloud by pi/3
+theta = np.pi / 3            # Rotate cloud by pi/3
 
 R = np.array([[np.cos(theta), -np.sin(theta)],     # Rotation matrix
               [np.sin(theta), np.cos(theta)]])
@@ -353,6 +363,7 @@ plt.show()
 
 ### Computation
 
+For the computation we follow the outline given in [@Brunton2022, Chap. 1.5].
 First we need to center our matrix $X$ according to the mean per feature, in our case per row. 
 $$
 \overline{x}_j = \frac1n \sum_{i=1}^n X_{ij}
@@ -372,7 +383,7 @@ $$ {#eq-pca_cov}
 The normalization factor of $n-1$ in @eq-pca_cov an not $n$ is called _Bassel's correction_ and compensates for the bias in the estimation of the population variance.
 :::
 
-As $C$ is symmetric and positiv semi-definite and therefore has non-negative real eigenvalues and $V^{-1} = V^T$ in the eigendecomposition $C = V \Lambda V^T$.
+As $C$ is symmetric and positiv semi-definite, therefore it has non-negative real eigenvalues and the matrix $V$ of the eigendecompostion satisfies $V^{-1} = V^T$ (i.e. it is orthogonal @def-orthonormalmatrix).
 The principal components are the eigenvectors and the eigenvalue are the variance along these components.
 
 If we instead compute the SVD of $B = U\Sigma V^T$ we get
@@ -385,5 +396,23 @@ $$
 $$
 
 ::: {.callout-tip}
-If hte sensor ranges of our matrix are very different in magnitued the correlation matrix is called by the row wise standard deviation of $B$ similar as for the mean. 
+If the sensor ranges of our matrix are very different in magnitued the correlation matrix is scalled by the _row wise standard deviation_ of $B$ similar as for the mean.
 :::
+
+```{python}
+#| echo: false
+#| output: asis
+
+print(r"In our example we get ")
+print(r"$\sigma_1=" + str(float(round(S[0],3))) + r"\approx 2$")
+print(r"and $\sigma_2=" + str(float(round(S[1],3))) + r"\approx \frac12$.")
+print(r"These results recover our given parameters very well.")
+print(r"Additionally we can see that our rotation matrix is closely matched by $U$ (up to signs) from our SVD:")
+print(r"""$$
+R_{\frac\pi3} = \left[
+\begin{array}{cc} """ + str(float(round(R[0, 0], 3))) + "&" + str(float(round(R[1, 0], 3))) + r"\\" + str(float(round(R[0, 1], 3))) + "&" + str(float(round(R[1, 1], 3))) + r"""\end{array}
+\right] \quad U = \left[
+\begin{array}{cc}""" + str(float(round(U[0, 0], 3))) + "&" + str(float(round(U[1, 0], 3))) + r"\\" + str(float(round(U[0, 1], 3))) + "&" + str(float(round(U[1, 1], 3))) + r"""\end{array} \right]
+$$""")
+```
+

@@ -309,7 +309,7 @@ M^{-1}(K -\omega^2 M ) u_0 = (M^{-1}K -\omega^2 I ) u_0 = 0.
 $$
 
 ::: {.callout-warning}
-In most cases inverting the matrix is not recommended but to directly solve the generalized eigenvalue problem [see @GoluLoan, chap. 7.7 for details]. 
+In most cases inverting the matrix is not recommended, to directly solve the generalized eigenvalue problem, see [@GoluLoan, chap. 7.7] for details. 
 :::
 
 ### Low-rank approximation of a square matrix

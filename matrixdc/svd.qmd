@@ -511,3 +511,48 @@ axs[7].set_axis_off()
 axs[7].set_title(f"Original image")
 plt.show()
 ```
+
+## Further applications of the SVD
+
+There are many more applications of the SVD but we want to highlight some regarding systems of linear equations,
+$$
+A x = b
+$$ {#eq-leq}
+where the matrix $A$, as well as the vector $b$ is known an $x$ is unknown.
+
+Depending on the structure of $A$ and the specific $b$ we have no, one, or infinitely many solutions.
+For now the interesting case is where $A$ is rectangular and therefore we have either an 
+
+- under-determined system $m\ll n$, so more unknowns than equations,
+- over-determined system $m\gg n$, so more equations than unknowns.
+
+For the second case (more equations than unknowns) we often switch to solving the optimization problem that minimizes
+$$
+\|Ax-b\|_2^2.
+$$ {#eq-leastsquare}
+This is called the _least square_ solution.
+The least square solution will also minimize $\|Ax-b\|_2$. 
+For an under-determined system we might seek the solution which minimizes $\|x\|_2$ called the _minimum norm_ solution.
+
+If we us the SVD decomposition for $A = U \Sigma V^T$ we can define the following
+
+::: {.callout appearance="simple"}
+:::: {#def-pinv} 
+## Pseudo-inverse
+
+We define the matrix $A^\dagger \in \mathbb{R}^{m\times n}$ by $A^\dagger = V\Sigma^\dagger U^T$ where
+$$
+\Sigma^\dagger = \operatorname{diag}\left(\frac1\sigma_1. \frac1\sigma_2, \ldots, \frac1\sigma_r, 0, \ldots, 0\right) \in \mathbb{R}^{m\times n}, \quad r=\operatorname{rank}(A).
+$$
+
+The matrix $A^\dagger$ is often called the _Moore-Penrose left pseudo-inverse_ as it fulfils the [_Moore-Penrose conditions_](https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse) conditions.
+It is also the matrix to provides the minimal Frobenius norm solution to 
+$$
+\min_{X \in \mathbb{R}^{m\times n}}\| A x - I_n\|_F.
+$$
+
+[Compare @GoluLoan, p 290]
+::::
+:::
+
+If we only use the truncated version, i.e. where we only use non zero singular values, we can use it to find good solutions to @eq-eq-leastsquare.

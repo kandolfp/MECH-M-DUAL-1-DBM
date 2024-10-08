@@ -358,7 +358,7 @@ window.Quarto = {
 \]</span></li>
 </ol>
 <p>So let us check in <code>numpy</code>:</p>
-<div id="f68aa4a3" class="cell styled-output" data-execution_count="1">
+<div id="2e58b412" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -409,7 +409,7 @@ p(\lambda) = \det(A - \lambda I).
 </div>
 </div>
 <p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
-<div id="b29d71de" class="cell styled-output" data-execution_count="2">
+<div id="4c30b1b7" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> LA.eigvals(A)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lam_sort <span class="op">=</span> np.sort(lam)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -456,7 +456,7 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
 </div>
 </div>
 <p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
-<div id="39cd527e" class="cell styled-output" data-execution_count="3">
+<div id="33b442f2" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lam, V <span class="op">=</span> LA.eig(A)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_eigen <span class="op">=</span> np.diag(lam)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -512,7 +512,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The computation of the eigendecomposition is not cheep, therefore this is not always worth the effort and there are other ways of solving linear systems.</p>
+<p>The computation of the eigendecomposition is not cheap, therefore this is not always worth the effort and there are other ways of solving linear systems.</p>
 </div>
 </div>
 </section>
@@ -537,7 +537,7 @@ z(t) = \operatorname{diag}\left(e^{t\lambda_1}, \ldots, e^{t\lambda_n}\right) z_
 <h3 data-number="4.1.3" class="anchored" data-anchor-id="higher-order-linear-differential-equations"><span class="header-section-number">4.1.3</span> Higher Order Linear Differential Equations</h3>
 <p>If we have a higher order linear ODE such as <span id="eq-hoode"><span class="math display">\[
 x^{(n)} + a_{n-1} x^{(n-1)} + \cdots + a_2 \ddot{x} + a_1 \dot{x} + a_0 x = 0.
-\tag{4.1}\]</span></span> we can use stack the derivatives into a vector <span class="math display">\[
+\tag{4.1}\]</span></span> we can stack the derivatives into a vector <span class="math display">\[
 \begin{array}{ccc}
 x_1 &amp; = &amp; x\\
 x_2 &amp; = &amp; \dot{x}\\
@@ -555,7 +555,7 @@ x_{n} &amp; = &amp; x^{(n-1)} \\
 =
 \left[
     \begin{array}{c} x \\ \dot{x} \\ \ddot{x} \\ \vdots \\ x^{(n-2)} \\ x^{(n-1)} \end{array}
-\right]
+\right],
 \]</span> and taking the derivative of this vector yields the following system <span class="math display">\[
 \underbrace{
 \frac{d}{d t}
@@ -578,14 +578,14 @@ x_{n} &amp; = &amp; x^{(n-1)} \\
 \left[
     \begin{array}{c} x_1 \\ x_2 \\ x_3 \\ \vdots \\ x_{n-1} \\ x_n \end{array}
 \right]
-}_x
+}_x.
 \]</span></p>
 <p>We transformed it into a system of coupled 1st order ODEs <span class="math inline">\(\dot{x}=Ax\)</span> and we can solve this as seen above. More importantly, the characteristic polynomial of <a href="#eq-hoode" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-hoode</span></a> is equal to the characteristic polynomial of <a href="#def-eigenvalues" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-eigenvalues</span></a> and the eigenvalues are the roots of this polynomial.</p>
 </section>
 <section id="generalized-eigenvalue-problem" class="level3" data-number="4.1.4">
 <h3 data-number="4.1.4" class="anchored" data-anchor-id="generalized-eigenvalue-problem"><span class="header-section-number">4.1.4</span> Generalized eigenvalue problem</h3>
 <p>Let us motivate this by the example of <em>modal analysis</em>. If we consider the free vibrations of a weakly damped system we get the equation <span class="math display">\[
-M\ddot{u} + K u = 0, \quad u(0) = u_0
+M\ddot{u} + K u = 0, \quad u(0) = u_0,
 \]</span> with the mass matrix <span class="math inline">\(M\)</span> and the stiffness matrix <span class="math inline">\(K\)</span> and <span class="math inline">\(u(t)\)</span> being the displacement. As we know, the solution of this linear differential equation has the form <span class="math inline">\(u(t)=e^{i\omega t}u_0\)</span> and thus we get <span id="eq-ma"><span class="math display">\[
 (-\omega^2 M + K) u_0 = 0.
 \tag{4.2}\]</span></span></p>
@@ -608,7 +608,7 @@ A v = \lambda B v,
 </div>
 <p>In our example <a href="#eq-ma" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-ma</span></a> the eigenvalues are <span class="math inline">\(\lambda = \omega^2\)</span> and correspond to the square of the natural frequencies and the eigenvectors <span class="math inline">\(v=u\)</span> correspond to the modes of vibration.</p>
 <p>If <span class="math inline">\(M\)</span> is invertible we can write <span class="math display">\[
-M^{-1}(K -\omega^2 M ) u_0 = (M^{-1}K -\omega^2 I ) u_0 = 0
+M^{-1}(K -\omega^2 M ) u_0 = (M^{-1}K -\omega^2 I ) u_0 = 0.
 \]</span></p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -620,17 +620,17 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In most cases inverting the matrix is not recommended but to directly solve the generalized eigenvalue problem, <span class="citation" data-cites="GoluLoan">(see <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, chap. 7.7</a>)</span> for details.</p>
+<p>In most cases inverting the matrix is not recommended but to directly solve the generalized eigenvalue problem <span class="citation" data-cites="GoluLoan">(see <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, chap. 7.7</a> for details)</span>.</p>
 </div>
 </div>
 </section>
 <section id="low-rank-approximation-of-a-square-matrix" class="level3" data-number="4.1.5">
 <h3 data-number="4.1.5" class="anchored" data-anchor-id="low-rank-approximation-of-a-square-matrix"><span class="header-section-number">4.1.5</span> Low-rank approximation of a square matrix</h3>
 <p>We can use the eigenvalue decomposition to <em>approximate</em> a square matrix.</p>
-<p>Let us sort the eigenvalues in <span class="math inline">\(\Lambda\)</span> and let us call <span class="math inline">\(W^T=V^{-1}\)</span> than we can write <span class="math display">\[
+<p>Let us sort the eigenvalues in <span class="math inline">\(\Lambda\)</span> and let us call <span class="math inline">\(W^T=V^{-1}\)</span> then we can write <span class="math display">\[
 A = V\Lambda W^T = \sum_{i=1}^n\lambda_i v_i u_i^T
 \]</span> where <span class="math inline">\(v_i\)</span> and <span class="math inline">\(u_i\)</span> correspond to the rows of the matrices. Now we can define the <em>rank</em> <span class="math inline">\(r\)</span> approximation of <span class="math inline">\(A\)</span> as <span class="math display">\[
-A\approx A_r = V\Lambda W^T = \sum_{i=1}^r\lambda_i v_i u_i^T
+A\approx A_r = V\Lambda W^T = \sum_{i=1}^r\lambda_i v_i u_i^T.
 \]</span></p>
 <p>To make this a bit easier to understand the following illustration is helpful:</p>
 <div class="quarto-figure quarto-figure-center">
@@ -639,7 +639,7 @@ A\approx A_r = V\Lambda W^T = \sum_{i=1}^r\lambda_i v_i u_i^T
 <figcaption>Low Rank Approximation</figcaption>
 </figure>
 </div>
-<p>The this approximation can be used to reduce the storage demand of an image.</p>
+<p>This approximation can be used to reduce the storage demand of an image.</p>
 <div id="cell-fig-mci_headquater" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
@@ -713,11 +713,11 @@ Figure&nbsp;4.1: Image of MCI I and the reconstruction with approximated matrix.
 </section>
 <section id="summary" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="summary"><span class="header-section-number">4.2</span> Summary</h2>
-<p>The eigenvalue decomposition is an important tool but it has its limitations</p>
+<p>The eigenvalue decomposition is an important tool but it has its limitations:</p>
 <ol type="1">
-<li>the matrices involved need to be square</li>
-<li>eigenvalues might be complex, even if the problem at hand is real</li>
-<li>we only get a diagonal matrix <span class="math inline">\(\Lambda\)</span> if all eigenvectors are linear independent</li>
+<li>the matrices involved need to be square,</li>
+<li>eigenvalues might be complex, even if the problem at hand is real,</li>
+<li>we only get a diagonal matrix <span class="math inline">\(\Lambda\)</span> if all eigenvectors are linear independent,</li>
 <li>the computation of <span class="math inline">\(V^{-1}\)</span> is nontrivial unless <span class="math inline">\(A\)</span> is symmetric and <span class="math inline">\(V\)</span> becomes unitary (<span class="math inline">\(V{-1} = V^T\)</span>).</li>
 </ol>
 <p>Therefore, we will look into a generalized decomposition called the <em>singular value decomposition</em> in the next section.</p>
@@ -1321,7 +1321,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

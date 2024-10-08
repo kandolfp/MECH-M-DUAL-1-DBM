@@ -36,7 +36,7 @@ Furthermore, $\sigma_{max} (A)$ is the largest singular value of $A$ and $\sigma
 Instead of providing a concise proof (if you are interested see [@GoluLoan, p. 76]) we show a possible motivation of the definition.
 
 If we compute the eigendecompositions of $AA^T$ and $A^TA$.
-The two matrices have the same positive eigenvalues - the squares of the eignevalues of $A$ and we get
+The two matrices have the same positive eigenvalues - the squares of the eigenvalues of $A$ and we get
 
 $$
 \begin{array}{lll} (A A^T)U &= & U(\Lambda\Lambda^T),\\
@@ -348,9 +348,9 @@ theta = 2 * np.pi * np.arange(0, 1, 0.01)
 # 1-std confidence interval
 Xstd = U @ np.diag(S) @ np.array([np.cos(theta), np.sin(theta)])
 
-ax2.plot(Xavg[0] + Xstd[0, :], Xavg[1] + Xstd[1, :], '-', color='r', linewidth=3)
-ax2.plot(Xavg[0] + 2 * Xstd[0, :], Xavg[1] + 2 * Xstd[1,:], '-', color='r', linewidth=3)
-ax2.plot(Xavg[0] + 3 * Xstd[0, :], Xavg[1] + 3 * Xstd[1,:], '-', color='r', linewidth=3)
+ax2.plot(Xavg[0] + Xstd[0, :], Xavg[1] + Xstd[1, :], "-", color="r", linewidth=3)
+ax2.plot(Xavg[0] + 2 * Xstd[0, :], Xavg[1] + 2 * Xstd[1, :], "-", color="r", linewidth=3)
+ax2.plot(Xavg[0] + 3 * Xstd[0, :], Xavg[1] + 3 * Xstd[1, :], '-', color='r', linewidth=3)
 
 # Plot principal components U[:,0]S[0] and U[:,1]S[1]
 ax2.plot(np.array([Xavg[0], Xavg[0] + U[0,0] * S[0]]),
@@ -383,7 +383,7 @@ $$ {#eq-pca_cov}
 The normalization factor of $n-1$ in @eq-pca_cov an not $n$ is called _Bassel's correction_ and compensates for the bias in the estimation of the population variance.
 :::
 
-As $C$ is symmetric and positiv semi-definite, therefore it has non-negative real eigenvalues and the matrix $V$ of the eigendecompostion satisfies $V^{-1} = V^T$ (i.e. it is orthogonal @def-orthonormalmatrix).
+As $C$ is symmetric and positive semi-definite, therefore it has non-negative real eigenvalues and the matrix $V$ of the eigendecomposition satisfies $V^{-1} = V^T$ (i.e. it is orthogonal @def-orthonormalmatrix).
 The principal components are the eigenvectors and the eigenvalue are the variance along these components.
 
 If we instead compute the SVD of $B = U\Sigma V^T$ we get
@@ -396,7 +396,7 @@ $$
 $$
 
 ::: {.callout-tip}
-If the sensor ranges of our matrix are very different in magnitued the correlation matrix is scalled by the _row wise standard deviation_ of $B$ similar as for the mean.
+If the sensor ranges of our matrix are very different in magnitude the correlation matrix is scaled by the _row wise standard deviation_ of $B$ similar as for the mean.
 :::
 
 ```{python}
@@ -416,19 +416,19 @@ R_{\frac\pi3} = \left[
 $$""")
 ```
 
-## Example Eigenfaces
+### Example Eigenfaces
 
 We combine SVD/PCA in a illustrative example called _eigenfaces_ as introduced in [@Brunton2022, Sec 1.6, pp. 28-34].
 
-The idea is tho apply the PCA techniques to a large set of faces to extract the dominate correlations between the images and create a _face basis_ that can be used to represent an image in these coordinates.
+The idea is to apply the PCA techniques to a large set of faces to extract the dominate correlations between the images and create a _face basis_ that can be used to represent an image in these coordinates.
 For example you can reconstruct a face in this space by projecting onto the eigen vectors or it can be used for face recognition as similar faces usually cluster under this projection.
 
 The images are taken from the Yale Face Dataset B, in our case we use a [GitHub](https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos/tree/main) that provides [Julia](https://julialang.org/) Pluto notebooks for Chapter 1 to 4 of @Brunton2022.
 
 Our training set, so to speak, consists of the first 36 people in the dataset.
-We compute the _avarge face_ and subtract it from our dataset to get our matrix $B$.
+We compute the _average face_ and subtract it from our dataset to get our matrix $B$.
 From here a SVD provides us with our basis $U$.
-To test our basis we use individual 37 and a portion of the image of the MCI Headquater (to see how well it performs on objects).
+To test our basis we use individual 37 and a portion of the image of the MCI Headquarter (to see how well it performs on objects).
 For this we use the projection
 $$
 \tilde{x} = U_r U_r^T x.
@@ -436,9 +436,9 @@ $$
 If we split this up, we first project onto our found patterns (encode) and than reconstruct from them (decode).
 
 ::: {.callout-note}
-We can understand this as _encoding_ and _decoding_ our test image, which is the general buildup of an _autoencoder_ (a topic for another lecture).
+We can understand this as _encoding_ and _decoding_ our test image, which is the general setup of an _autoencoder_ (a topic for another lecture).
 
-The corrolation coefficients $x_r = U_r^T x$ might reveal patterns for different $x$.
+The correlation coefficients $x_r = U_r^T x$ might reveal patterns for different $x$.
 In the case of faces, we can use this for face recognition, i.e. if the coefficients of $x_r$ are in the same cluster as other images, they are probably from the same person.
 :::
 

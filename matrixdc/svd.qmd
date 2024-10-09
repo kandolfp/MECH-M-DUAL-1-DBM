@@ -179,21 +179,20 @@ import numpy.linalg as LA
 im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
 
 def rgb2gray(rgb):
-    return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
+    return np.dot(rgb[..., :3], [0.2989, 0.5870, 0.1140])
 
 im_gray = rgb2gray(im)
-im_scale = im_gray[1500:3001,1500:3001] / 255
+im_scale = im_gray[1500:3001, 1500:3001] / 255
 
 U, s, Vh = LA.svd(im_scale, full_matrices=False)
 
 rec = [1/1000, 10/100, 25/100, 50/100, 1]
 
 fig = plt.figure()
-ax_eig = fig.add_subplot(3,1,1)
+ax_eig = fig.add_subplot(3, 1, 1)
 ax_eig.plot(s)
 ax_eig.set_yscale("log")
 ax_eig.set_ylabel(r"$|\sigma_i|$")
-#ax_eig.set_xlabel("$i$")
 ax_eig.set_title("singular value")
 ax_eig.set_aspect("auto", "box")
 

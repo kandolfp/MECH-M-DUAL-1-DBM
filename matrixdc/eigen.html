@@ -323,7 +323,7 @@ window.Quarto = {
 </header>
 
 
-<p>We start off with the so called <em>eigendecomposition</em>. The main idea is to compute a decomposition (or factorization) of a square matrix into a canonical form. We will represent a matrix by its <em>eigenvalues</em> and <em>eigenvectors</em>. In order to do so we need to recall some more definitions from our favourite linear algebra book, such as <span class="citation" data-cites="GoluLoan">Golub and Van Loan (<a href="#ref-GoluLoan" role="doc-biblioref">2013</a>)</span>.</p>
+<p>We start off with the so called <em>eigendecomposition</em>. The main idea is to compute a decomposition (or factorization) of a square matrix into a canonical form. We will represent a matrix by its <em>eigenvalues</em> and <em>eigenvectors</em>. In order to do so we need to recall some more definitions from our favourite linear algebra book, such as <span class="citation" data-cites="GoluLoan">Golub and Van Loan (<a href="../references.html#ref-GoluLoan" role="doc-biblioref">2013</a>)</span>.</p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -334,7 +334,7 @@ window.Quarto = {
 <p><span class="theorem-title"><strong>Definition 4.1 (Determinant)</strong></span> If <span class="math inline">\(A = (a) \in \mathbb{R}^{1\times1}\)</span> (a single number), then its <em>determinant</em> is given by <span class="math inline">\(\det(A) = a\)</span>. Now, the determinant of <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> is defined in terms of order-<span class="math inline">\((n-1)\)</span> determinants: <span class="math display">\[
 \det(A) = \sum_{j=1}^n (-1)^{j+1} a_{1j}\det(A_1j),
 \]</span> where <span class="math inline">\(A_1j\)</span> is a <span class="math inline">\((n-1) \times (n-1)\)</span> matrix obtained by deleting the first row and the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(A\)</span>.</p>
-<p><span class="citation" data-cites="GoluLoan">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
 </div>
 </div>
 </div>
@@ -358,7 +358,7 @@ window.Quarto = {
 \]</span></li>
 </ol>
 <p>So let us check in <code>numpy</code>:</p>
-<div id="c2d18840" class="cell styled-output" data-execution_count="1">
+<div id="1e27bdc8" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -403,13 +403,13 @@ p(\lambda) = \det(A - \lambda I).
 \]</span> If all of the eigenvalues are real (in <span class="math inline">\(\mathbb{R}\)</span>) we can sort them from largest to smallest <span class="math display">\[
 \lambda_n(A) \leq \cdots \leq \lambda_2(A) \leq \lambda_1(A),
 \]</span> and we denote the largest by <span class="math inline">\(\lambda_{max}(A) = \lambda_1(A)\)</span> and the smallest by <span class="math inline">\(\lambda_{min}(A) = \lambda_n(A)\)</span>, respectively.</p>
-<p><span class="citation" data-cites="GoluLoan">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
 </div>
 </div>
 </div>
 </div>
 <p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
-<div id="f10b8f31" class="cell styled-output" data-execution_count="2">
+<div id="ae4c83b7" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> LA.eigvals(A)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lam_sort <span class="op">=</span> np.sort(lam)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -450,13 +450,13 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
                         0 &amp; \dots &amp; 0 &amp; \lambda_n \\  \end{array}
 \right].
 \]</span> This is called the <em>eigendecomposition</em> of the matrix <span class="math inline">\(A\)</span>.</p>
-<p><span class="citation" data-cites="GoluLoan">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
 </div>
 </div>
 </div>
 </div>
 <p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
-<div id="fd270f22" class="cell styled-output" data-execution_count="3">
+<div id="b742c719" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lam, V <span class="op">=</span> LA.eig(A)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_eigen <span class="op">=</span> np.diag(lam)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -483,7 +483,7 @@ A_eigen2=array([[1.10000000e+01, 0.00000000e+00, 0.00000000e+00],
 np.allclose(A_eigen, A_eigen2)=True</code></pre>
 </div>
 </div>
-<p>We can use what we have learned about the basis of a vector space and the transformation between two bases, see <a href="#sec-intro-linearalgebra-basis" class="quarto-xref"><span class="quarto-unresolved-ref">sec-intro-linearalgebra-basis</span></a> to get a different interpretation of the eigendecomposition.</p>
+<p>We can use what we have learned about the basis of a vector space and the transformation between two bases, see <a href="../basics/linearalgebra.html#sec-intro-linearalgebra-basis" class="quarto-xref"><span>Section 1.3</span></a> to get a different interpretation of the eigendecomposition.</p>
 <p>We recall, if <span class="math inline">\(x\)</span> is represented in the standard basis with matrix <span class="math inline">\(I\)</span> we can change to the basis represented by <span class="math inline">\(V\)</span> and therefore <span class="math inline">\(\hat{x} = V^{-1}x\)</span>.</p>
 <p>Consequently, the equation <span class="math display">\[
 A = V \Lambda V^{-1}
@@ -580,7 +580,7 @@ x_{n} &amp; = &amp; x^{(n-1)} \\
 \right]
 }_x.
 \]</span></p>
-<p>We transformed it into a system of coupled 1st order ODEs <span class="math inline">\(\dot{x}=Ax\)</span> and we can solve this as seen above. More importantly, the characteristic polynomial of <a href="#eq-hoode" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-hoode</span></a> is equal to the characteristic polynomial of <a href="#def-eigenvalues" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-eigenvalues</span></a> and the eigenvalues are the roots of this polynomial.</p>
+<p>We transformed it into a system of coupled 1st order ODEs <span class="math inline">\(\dot{x}=Ax\)</span> and we can solve this as seen above. More importantly, the characteristic polynomial of <a href="#eq-hoode" class="quarto-xref">Equation&nbsp;<span>4.1</span></a> is equal to the characteristic polynomial of <a href="#def-eigenvalues" class="quarto-xref">Definition&nbsp;<span>4.2</span></a> and the eigenvalues are the roots of this polynomial.</p>
 </section>
 <section id="generalized-eigenvalue-problem" class="level3" data-number="4.1.4">
 <h3 data-number="4.1.4" class="anchored" data-anchor-id="generalized-eigenvalue-problem"><span class="header-section-number">4.1.4</span> Generalized eigenvalue problem</h3>
@@ -600,13 +600,13 @@ M\ddot{u} + K u = 0, \quad u(0) = u_0,
 \lambda(A,B) = \{z\in\mathbb{C}: \det(A-zB)=0\}.
 \]</span> If <span class="math inline">\(\lambda \in \lambda(A,B)\)</span> and <span class="math inline">\(0\neq v\in\mathbb{C}^n\)</span> satisfies <span id="eq-gevp"><span class="math display">\[
 A v = \lambda B v,
-\tag{4.3}\]</span></span> then <span class="math inline">\(v\)</span> is an <em>eigenvector</em> of <span class="math inline">\(A-\lambda B\)</span>. The problem of finding a nontrivial solution to <a href="#eq-gevp" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-gevp</span></a> is called the <em>generalized eigenvalue problem</em>.</p>
-<p><span class="citation" data-cites="GoluLoan">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, chap. 7.7</a>)</span></p>
+\tag{4.3}\]</span></span> then <span class="math inline">\(v\)</span> is an <em>eigenvector</em> of <span class="math inline">\(A-\lambda B\)</span>. The problem of finding a nontrivial solution to <a href="#eq-gevp" class="quarto-xref">Equation&nbsp;<span>4.3</span></a> is called the <em>generalized eigenvalue problem</em>.</p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, chap. 7.7</a>)</span></p>
 </div>
 </div>
 </div>
 </div>
-<p>In our example <a href="#eq-ma" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-ma</span></a> the eigenvalues are <span class="math inline">\(\lambda = \omega^2\)</span> and correspond to the square of the natural frequencies and the eigenvectors <span class="math inline">\(v=u\)</span> correspond to the modes of vibration.</p>
+<p>In our example <a href="#eq-ma" class="quarto-xref">Equation&nbsp;<span>4.2</span></a> the eigenvalues are <span class="math inline">\(\lambda = \omega^2\)</span> and correspond to the square of the natural frequencies and the eigenvectors <span class="math inline">\(v=u\)</span> correspond to the modes of vibration.</p>
 <p>If <span class="math inline">\(M\)</span> is invertible we can write <span class="math display">\[
 M^{-1}(K -\omega^2 M ) u_0 = (M^{-1}K -\omega^2 I ) u_0 = 0.
 \]</span></p>
@@ -620,7 +620,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In most cases inverting the matrix is not recommended, to directly solve the generalized eigenvalue problem, see <span class="citation" data-cites="GoluLoan">(<a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, chap. 7.7</a>)</span> for details.</p>
+<p>In most cases inverting the matrix is not recommended, to directly solve the generalized eigenvalue problem, see <span class="citation" data-cites="GoluLoan">(<a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, chap. 7.7</a>)</span> for details.</p>
 </div>
 </div>
 </section>
@@ -715,15 +715,15 @@ Figure&nbsp;4.1: Image of MCI I and the reconstruction with approximated matrix.
 <h2 data-number="4.2" class="anchored" data-anchor-id="summary"><span class="header-section-number">4.2</span> Summary</h2>
 <p>The eigenvalue decomposition is an important tool but it has its limitations:</p>
 <ol type="1">
-<li>the matrices involved need to be square,</li>
-<li>eigenvalues might be complex, even if the problem at hand is real,</li>
-<li>we only get a diagonal matrix <span class="math inline">\(\Lambda\)</span> if all eigenvectors are linear independent,</li>
-<li>the computation of <span class="math inline">\(V^{-1}\)</span> is nontrivial unless <span class="math inline">\(A\)</span> is symmetric and <span class="math inline">\(V\)</span> becomes unitary (<span class="math inline">\(V{-1} = V^T\)</span>).</li>
+<li>the matrices involved need to be square</li>
+<li>eigenvalues might be complex, even if the problem at hand is real</li>
+<li>we only get a diagonal matrix <span class="math inline">\(\Lambda\)</span> if all eigenvectors are linear independent</li>
+<li>the computation of <span class="math inline">\(V^{-1}\)</span> is non-trivial unless <span class="math inline">\(A\)</span> is symmetric and <span class="math inline">\(V\)</span> becomes unitary (<span class="math inline">\(V^{-1} = V^T\)</span>).</li>
 </ol>
 <p>Therefore, we will look into a generalized decomposition called the <em>singular value decomposition</em> in the next section.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-GoluLoan" class="csl-entry" role="listitem">
 Golub, Gene H., and Charles F. Van Loan. 2013. <em>Matrix Computations</em>. 4th ed. Johns Hopkins Studies in the Mathematical Sciences.
 </div>
@@ -1321,7 +1321,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":false,"selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

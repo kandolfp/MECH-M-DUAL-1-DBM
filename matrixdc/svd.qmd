@@ -561,7 +561,39 @@ $$
 ::::
 :::
 
-If we only use the truncated version, i.e. where we only use non zero singular values, we can use it to find good solutions to @eq-leastsquare.
+If we only use the truncated version, i.e. where we only use non-zero singular values, we can use it to find good solutions to @eq-leastsquare.
+
+::: {.callout appearance="simple"}
+:::: {#def-condition} 
+## Condition number
+
+The condition number of a matrix provides a measure how sensitive the solution of @eq-leq is to perturbations in $A$ and $b$.
+For a square matrix $A$ the condition number is defined as
+$$
+\kappa(A) = \|A\| \left\|A^{-1}\right\|,
+$$
+for an appropriate underlying norm.
+For the 2-norm $\kappa_2$ is
+$$
+\kappa_2(A) = \|A\|_2 \left\|A^{-1}\right\|_2 = \frac{\sigma_{max}}{\sigma_{min}}.
+$$
+
+To get a better idea on what this means think of it in this way.
+For the perturbed linear system
+$$
+A(x + \epsilon_x) = b + \epsilon_b,
+$$
+we can outline the worst case, where $\epsilon_x$ aligns with the singular vector of the largest singular vector and $x$ with the smallest singular value, i.e.
+$$
+A(x + \epsilon_x) = \sigma_{min}x + \sigma_{max}\epsilon_x.
+$$
+Consequently, the output signal-to-noise $\|b\|/\|\epsilon_b$ is equivalent with the input signal-to-noise $\|x\|/\|\epsilon_x$ and the factor between those two is $\kappa_2(A)$.
+
+In this sense $\kappa_2$ can be extended for more general matrices.
+
+[Compare @GoluLoan, p. 87; and @Brunton2022, pp. 18-19]
+::::
+:::
 
 ### Linear regression with SVD
 

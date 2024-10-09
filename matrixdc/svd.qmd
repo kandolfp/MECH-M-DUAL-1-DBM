@@ -556,3 +556,36 @@ $$
 :::
 
 If we only use the truncated version, i.e. where we only use non zero singular values, we can use it to find good solutions to @eq-leastsquare.
+
+### Linear regression with SVD
+
+Before we go into more details about regression in the next section we give a brief outlook in terms of how to solve such a problem with SVD.
+
+::: {.callout-important} 
+This example is adapted from [@Brunton2022, Example: One-Dimensional Linear Regression, Example: Cement Heat Generation Data, pp. 19-22].
+:::
+
+First we just take a linear correlation that we augment with some Gau\ss ian Noise.
+So our matrix $A$ is simple a vector with our $x$-coordinates and $b$ is the augmented image under our linear correlation.
+$$
+\left[
+    \begin{array}{c} a_1 \\ a_2 \\ \vdots \\ a_n \end{array}
+\right]x = 
+\left[
+    \begin{array}{c} b_1 \\ b_2 \\ \vdots \\ b_n \end{array}
+\right]
+\quad
+\Leftrightarrow
+\quad
+U\Sigma V^T x = b
+\quad
+\Leftrightarrow
+\quad
+x = A^\dagger b
+$$
+
+For this example $\Sigma = \|a\|_2$, $V=1$, and $U=\frac{a}{\|a\|}$.
+This is basically just the projection of $b$ along our basis $a$ and this is
+$$
+x = \frac{a^T b}{a^T a}.
+$$

@@ -1,5 +1,14 @@
 {
     "cSpell.words": [
-        "Unfortionaltly"
+        "eigendecomposition",
+        "eigendecompositions",
+        "callout",
+        "mathbb",
+        "operatorname"
+    ],
+    "cSpell.maxNumberOfProblems": 1000,
+    "cSpell.minWordLength": 3,
+    "cSpell.ignoreRegExpList": [
+        "/\\\\[a-z]+/gi\t"
     ]
 }

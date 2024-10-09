@@ -9,6 +9,9 @@
 		"cSpell.language": "en-GB",
 		"cSpell.enableFiletypes": [
 			"quarto"
+		],
+		"cSpell.words": [
+			"eigendecomposition"
 		]
 	}
 }

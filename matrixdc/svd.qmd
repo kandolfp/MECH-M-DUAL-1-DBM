@@ -446,11 +446,11 @@ The following code is an adaptation  of the [@Brunton2022, Code 1.7 and 1.9].
 :::
 
 ```{python}
-#| label: fig-eigfaces
-#| fig-cap: "Approximate reconstruction of a test face and an object using the eigenfaces basis for different order r."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
+#| eval: false
 import numpy as np
+import numpy.linalg as LA
 import scipy
 import requests
 import io
@@ -469,7 +469,7 @@ trainingFaces = faces[:, : np.sum(nfaces[:36])]
 avgFace = np.mean(trainingFaces, axis=1)
 
 B = trainingFaces - np.tile(avgFace, (trainingFaces.shape[1], 1)).T
-U, _, _ = np.linalg.svd(B, 'econ')
+U, _, _ = LA.svd(B, 'econ')
 
 testFace = faces[:, np.sum(nfaces[:36])]
 testFaceMS = testFace - avgFace
@@ -497,7 +497,8 @@ axs[3].imshow(np.reshape(testFace, (m, n)).T, cmap=plt.get_cmap("gray"))
 axs[3].set_axis_off()
 axs[3].set_title(f"Original image")
 
-testFaceMS = np.reshape(im_gray[1500:1500+n, 1500:1500+m].T, n*m) - avgFace
+shift = 1500
+testFaceMS = np.reshape(im_gray[shift:shift+n, shift:shift+m].T, n*m) - avgFace
 rec = [100, 400, 1600]
 for i, p in enumerate(rec):
     r = p
@@ -505,11 +506,17 @@ for i, p in enumerate(rec):
     axs[4 + i].imshow(np.reshape(A_r, (m, n)).T, cmap=plt.get_cmap("gray"))
     axs[4 + i].set_axis_off()
     axs[4 + i].set_title(f"${r=}$")
-axs[7].imshow(im_gray[1500:1500+n, 1500:1500+m], cmap=plt.get_cmap("gray"))
+axs[7].imshow(im_gray[shift:shift+n, shift:shift+m], cmap=plt.get_cmap("gray"))
 axs[7].set_axis_off()
 axs[7].set_title(f"Original image")
 plt.show()
 ```
+![Approximate reconstruction of a test face and an object using the eigenfaces basis for different order r.](../_assets/matrixdc/eigenfaces.svg){#fig-eigfaces}
+
+::: {.callout-note}
+Due to resource limitations the above computation can not be done for each build.
+We try to make sure that the code matches the image but if something is different if you try it yourself we apologise for that.
+:::
 
 ## Further applications of the SVD
 

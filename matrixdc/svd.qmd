@@ -557,7 +557,7 @@ $$
 \min_{X \in \mathbb{R}^{m\times n}}\| A x - I_n\|_F.
 $$
 
-[Compare @GoluLoan, p 290]
+[Compare @GoluLoan, pp. 290]
 ::::
 :::
 
@@ -571,7 +571,9 @@ Before we go into more details about regression in the next section we give a br
 This example is adapted from [@Brunton2022, Example: One-Dimensional Linear Regression, Example: Cement Heat Generation Data, pp. 19-22].
 :::
 
-First we just take a linear correlation that we augment with some Gau\ss ian Noise.
+#### Linear Regression [see @Brunton2022, pp. 19-21]
+
+First we just take a linear correlation that we augment with some Gaußian Noise.
 So our matrix $A$ is simple a vector with our $x$-coordinates and $b$ is the augmented image under our linear correlation.
 $$
 \left[
@@ -590,7 +592,7 @@ U\Sigma V^T x = b
 x = A^\dagger b
 $$
 
-#### Linear Regression [see @Brunton2022, pp. 19-21]
+
 
 For this example $\Sigma = \|a\|_2$, $V=1$, and $U=\tfrac{a}{\|a\|_2^2}$.
 This is basically just the projection of $b$ along our basis $a$ and this is

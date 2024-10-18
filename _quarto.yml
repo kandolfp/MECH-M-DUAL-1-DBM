@@ -30,6 +30,9 @@ book:
       chapters:
         - matrixdc/eigen.qmd
         - matrixdc/svd.qmd
+    - part: regression/index.qmd
+      chapters:
+        - regression/linear.qmd
     - summary.qmd
     - references.qmd
 

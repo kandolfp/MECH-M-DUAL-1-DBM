@@ -1,0 +1,18 @@
+# Regression analysis {.unnumbered}
+
+In general, _regression analysis_ can be understood as a set of tools that is used to estimate or establish a relationship between a dependent variable $Y$ (also called outcome or response variable, label) and the independent variable $X$ (also called regressor, predictors, covariates, explanatory variable or feature).
+If we add a regression function $f$ and some unknown parameters $\beta$ to the mix the problem can be written mathematically as
+$$
+Y = f(X, \beta)
+$$ {#qe-curvefitting}
+where $\beta$ is found by optimizing for _a good fit_ of $f$ to the data.
+
+We split up the discussion along the well known topics:
+
+- [linear regression](linear.qmd)
+- non-linear regression
+- multilinear regression
+- gradient decent
+- over and under fitting
+
+Parts of this section are based on [@Brunton2022, Section 4].

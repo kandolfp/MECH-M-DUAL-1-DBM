@@ -655,7 +655,7 @@ plt.plot(A, k*A, color="k", label="Target")
 plt.plot(A, b, 'x', color="r", label="Noisy data")
 plt.plot(A, A*x, '--', color="b", label="Regression line")
 plt.legend()
-plt.xlabel("$A$")
+plt.xlabel("$a$")
 plt.ylabel("$b$")
 plt.show()
 ```

@@ -145,3 +145,77 @@ plt.subplots_adjust(top = 0.99, bottom=0.01, hspace=0.35, wspace=0.001)
 plt.show()
 ```
 If we use @eq-fit2 it is called the _least square fit_.
+
+## Ordinary Least Square
+
+It is worth looking into the least square solution 
+$$
+E_2 (f) = \sqrt{\frac1n \sum_{k=1}^n|\underbrace{f(X_{k-},b) - y_k}_{\mathbf{e}_k} |^2},
+$$
+more closely.
+We can interpret it as the optimization problem
+$$
+b = \underset{v}{\operatorname{argmin}} \| y - Xv\|_2
+$$
+and with some linear algebra we get
+$$
+\begin{array}{ccl}
+b &= &\underset{v}{\operatorname{argmin}} \| y - Xv\|_2,\\
+  &= &\underset{v}{\operatorname{argmin}} \langle y -Xv, y -Xv\rangle,\\
+  &= &\underset{v}{\operatorname{argmin}} (y -Xv)^T (y -Xv),\\
+  &= &\underset{v}{\operatorname{argmin}} y^Ty - y^T X v - v^T X^T y + v^T X^T X v.\\
+\end{array}
+$$
+In order to find a solution we compute the derivative with respect to $v$ set it to $0$ and simplify, i.e.
+$$
+\frac{\mathrm{d}}{\mathrm{d}\,v} y^Ty- y^T X v - v^T X^T y + v^T X^T X v = - 2X^Ty + 2 X^TXv 
+$$
+and
+$$
+v = (A^TA)^{-1}A^Ty \equiv A^\dagger y.
+$$
+We recall, that $A^\dagger$ is called the Moore-Penrose pseudo-inverse, see @def-pinv.
+
+### Alternative computation
+
+The pseudo-inverse provides us with the optimal solution but for large systems the computation can be inefficient, or more precisely, there are more efficient ways to get the same results.
+
+Following [@Brunton2022, pp. 137-138] we can find an alternative for the above example in @fig-linear_reg.
+
+We want to fit the data points $(x_i, y_i)$ with the function $f(x) = b_2 x + b_1$ resulting in the error
+$$
+E_2(f) = \sqrt{\frac1n \sum_{k=1}^n(b_2 x_k + b_1 - y_k )^2}.
+$$
+A solution that minimizes the above equation also minimizes
+$$
+E_2 = \sum_{k=1}^n(b_2 x_k + b_1 - y_k )^2
+$$
+and we find the solution by partial differentiation
+$$
+\begin{array}{cc}
+\frac{\mathrm{d} E_2}{\mathrm{d}\,b_1} = 0 & \sum_{k=1}^n 2 (b_2 x_k + b_1 - y_k ) = 0\\
+\frac{\mathrm{d} E_2}{\mathrm{d}\,b_2} = 0 & \sum_{k=1}^n 2 (b_2 x_k + b_1 - y_k ) x_k = 0\\
+\end{array}
+$$
+and this results in the system
+$$
+\left[
+\begin{array}{cc}
+n & \sum_k x_k \\
+\sum_k x_k & \sum_k x_k^2
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+b_1\\b_2
+\end{array}
+\right]
+= 
+\left[
+\begin{array}{c}
+\sum_k y_k\\\sum_k x_k y_k
+\end{array}
+\right].
+$$
+This ansatz can be extended to polynomials of degree $k$, where the result is always a $(k+1) \times (k+1)$ matrix.
+

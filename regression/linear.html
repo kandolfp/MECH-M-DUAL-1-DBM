@@ -298,8 +298,17 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#ordinary-least-square" id="toc-ordinary-least-square" class="nav-link active" data-scroll-target="#ordinary-least-square"><span class="header-section-number">6.1</span> Ordinary Least Square</a>
+  <ul class="collapse">
+  <li><a href="#alternative-computation" id="toc-alternative-computation" class="nav-link" data-scroll-target="#alternative-computation"><span class="header-section-number">6.1.1</span> Alternative computation</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/regression/linear.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -325,7 +334,7 @@ window.Quarto = {
 
 <p>The general idea of linear regression is to approximate a <em>point cloud</em> by a mathematical function, this is often called <em>curve fitting</em> and it is closely related to optimization techniques, <span class="citation" data-cites="Brunton2022">(compare <a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, sec. 4.1</a>)</span>.</p>
 <p>Let us assume that we want to establish a relationship between our <span class="math inline">\(n\)</span> observations with <span class="math inline">\(m\)</span> independent variables. In order to get the notation down correctly we should describe the variables more closely.</p>
-<p>We have <span class="math inline">\(n\)</span> observations (the <span class="math inline">\(k\)</span> representation would be <span class="math inline">\(y_k\)</span>) resulting in a vector: <span class="math display">\[
+<p>We have <span class="math inline">\(n\)</span> observations (the <span class="math inline">\(k\)</span>-th representation is denoted by <span class="math inline">\(y_k\)</span>) resulting in a vector: <span class="math display">\[
 y = \left[
     \begin{array}{c} y_1 \\ y_2 \\ y_3 \\ \vdots \\ y_n \end{array}
     \right].
@@ -333,25 +342,64 @@ y = \left[
 <p>We have <span class="math inline">\(m\)</span> independent variables and consequently for each of this <span class="math inline">\(n\)</span> observations this results in a matrix <span class="math display">\[X = \left[
     \begin{array}{c} X_{1-} \\ X_{2-} \\ X_{3-} \\ \vdots \\ X_{n-} \end{array}
     \right] = \left[X_{-1}, \dots, X_{-m}\right],\]</span> where the second representation more closely fits to our idea of the <span class="math inline">\(m\)</span> independent variables.</p>
-<p>Let us model the relation in a linear fashion with the parameters <span class="math inline">\(\beta\)</span> as <span class="math display">\[
-y_k \overset{!}{=} X_{k1} \beta_1 + X_{k2} \beta_2 + \cdots + X_{km} \beta_m, \quad 1\leq k \leq n,
+<p>Let us model the relation in a linear fashion with the parameters <span class="math inline">\(b\)</span> as <span class="math display">\[
+y_k \overset{!}{=} X_{k1} b_1 + X_{k2} b_2 + \cdots + X_{km} b_m, \quad 1\leq k \leq n,
 \]</span> or in short <span class="math display">\[
-y = X\beta = f(X, \beta).
+y = Xb = f(X, b).
 \]</span></p>
-<p>Let us assume for a moment we already have a realisation of <span class="math inline">\(f\)</span>, i.e.&nbsp;we know the parameters <span class="math inline">\(\beta\)</span>, we get the error of the approximation as <span id="eq-fiterror"><span class="math display">\[
-\epsilon = y - f(X, \beta)\quad \Leftrightarrow \quad \epsilon_k = y_k - f(X_{k-}, \beta).
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In literature the parameters are most of the time called <span class="math inline">\(\beta\)</span> but for the sake of keeping notation consistent we opt for <span class="math inline">\(b\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Usually the convention is to define <span class="math inline">\(X_{-1}=1\)</span> as constant 1 at each position. The corresponding <span class="math inline">\(b_1\)</span> is called the <em>intercept</em>. We even find this convention if theory tells us <span class="math inline">\(b_1\)</span> is <span class="math inline">\(0\)</span> as some procedures assume this term to exist.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We talk of a linear model, as long as it is linear in the parameters <span class="math inline">\(b\)</span>. It might happen that regressors have a non linear relation.</p>
+</div>
+</div>
+<p>Let us assume for a moment we already have a realisation of <span class="math inline">\(f\)</span>, i.e.&nbsp;we know the parameters <span class="math inline">\(b\)</span>, we get the error of the approximation as <span id="eq-fiterror"><span class="math display">\[
+\mathbf{e} = y - f(X, b)\quad \Leftrightarrow \quad \mathbf{e}_k = y_k - f(X_{k-}, b).
 \tag{6.1}\]</span></span></p>
-<p>There are various possibilities to select the metric for minimizing <span class="math inline">\(\epsilon\)</span> and therefore characterizing the quality of the <em>fit</em>. This is done by selecting the underlying norm. Most commonly we use the <span class="math inline">\(1\)</span>-norm, the <span class="math inline">\(2\)</span>-norm and the <span class="math inline">\(\infty\)</span>-norm, i.e. <span id="eq-fit1"><span class="math display">\[
-E_1 (f) = \frac1n \sum_{k=1}^n|f(X_{k-}, \beta) - y_k |,
+<p>There are various possibilities to select the metric for minimizing <span class="math inline">\(\mathbf{e}\)</span> and therefore characterizing the quality of the <em>fit</em>. This is done by selecting the underlying norm. Most commonly we use the <span class="math inline">\(1\)</span>-norm, the <span class="math inline">\(2\)</span>-norm and the <span class="math inline">\(\infty\)</span>-norm, i.e. <span id="eq-fit1"><span class="math display">\[
+E_1 (f) = \frac1n \sum_{k=1}^n|f(X_{k-}, b) - y_k |,
 \tag{6.2}\]</span></span> for the <span class="math inline">\(1\)</span>-norm or mean absolute error, <span id="eq-fit2"><span class="math display">\[
-E_2 (f) = \sqrt{\frac1n \sum_{k=1}^n|f(X_{k-}, \beta) - y_k |^2},
+E_2 (f) = \sqrt{\frac1n \sum_{k=1}^n|f(X_{k-},b) - y_k |^2},
 \tag{6.3}\]</span></span> for the <span class="math inline">\(2\)</span>-norm or least-square error, <span id="eq-fit3"><span class="math display">\[
-E_\infty (f) = \max_{k}|f(X_{k-}, \beta) - y_k |
+E_\infty (f) = \max_{k}|f(X_{k-}, b) - y_k |
 \tag{6.4}\]</span></span> for the <span class="math inline">\(\infty\)</span>-norm or maximum error. Of course <span class="math inline">\(p\)</span>-norms work as well <span class="math display">\[
-E_p (f) = \left(\frac1n \sum_{k=1}^n|f(X_{k-}, \beta) - y_k |^p\right)^{1/p}.
-\]</span> If we go back and we want to solve <a href="#eq-fiterror" class="quarto-xref">Equation&nbsp;<span>6.1</span></a> for <span class="math inline">\(\beta\)</span> we have different</p>
+E_p (f) = \left(\frac1n \sum_{k=1}^n|f(X_{k-}, b) - y_k |^p\right)^{1/p}.
+\]</span> If we go back and we want to solve <a href="#eq-fiterror" class="quarto-xref">Equation&nbsp;<span>6.1</span></a> for <span class="math inline">\(b\)</span> we have different</p>
 <p>Depending on the selected norm we get different realisations. To illustrate this we use the example from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 136–67</a>)</span>.</p>
-<div id="cell-fig-cement_svd" class="cell" data-execution_count="1">
+<div id="cell-fig-linear_reg" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -422,12 +470,12 @@ E_p (f) = \left(\frac1n \sum_{k=1}^n|f(X_{k-}, \beta) - y_k |^p\right)^{1/p}.
 <span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-cement_svd" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-linear_reg" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-cement_svd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="linear_files/figure-html/fig-cement_svd-output-1.svg" class="img-fluid figure-img">
+<div aria-describedby="fig-linear_reg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="linear_files/figure-html/fig-linear_reg-output-1.svg" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cement_svd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-linear_reg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;6.1: Line fit with different norms. Top without outliers, bottom with one outlier.
 </figcaption>
 </figure>
@@ -435,6 +483,56 @@ Figure&nbsp;6.1: Line fit with different norms. Top without outliers, bottom wit
 </div>
 </div>
 <p>If we use <a href="#eq-fit2" class="quarto-xref">Equation&nbsp;<span>6.3</span></a> it is called the <em>least square fit</em>.</p>
+<section id="ordinary-least-square" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="ordinary-least-square"><span class="header-section-number">6.1</span> Ordinary Least Square</h2>
+<p>It is worth looking into the least square solution <span class="math display">\[
+E_2 (f) = \sqrt{\frac1n \sum_{k=1}^n|\underbrace{f(X_{k-},b) - y_k}_{\mathbf{e}_k} |^2},
+\]</span> more closely. We can interpret it as the optimization problem <span class="math display">\[
+b = \underset{v}{\operatorname{argmin}} \| y - Xv\|_2
+\]</span> and with some linear algebra we get <span class="math display">\[
+\begin{array}{ccl}
+b &amp;= &amp;\underset{v}{\operatorname{argmin}} \| y - Xv\|_2,\\
+  &amp;= &amp;\underset{v}{\operatorname{argmin}} \langle y -Xv, y -Xv\rangle,\\
+  &amp;= &amp;\underset{v}{\operatorname{argmin}} (y -Xv)^T (y -Xv),\\
+  &amp;= &amp;\underset{v}{\operatorname{argmin}} y^Ty - y^T X v - v^T X^T y + v^T X^T X v.\\
+\end{array}
+\]</span> In order to find a solution we compute the derivative with respect to <span class="math inline">\(v\)</span> set it to <span class="math inline">\(0\)</span> and simplify, i.e. <span class="math display">\[
+\frac{\mathrm{d}}{\mathrm{d}\,v} y^Ty- y^T X v - v^T X^T y + v^T X^T X v = - 2X^Ty + 2 X^TXv
+\]</span> and <span class="math display">\[
+v = (A^TA)^{-1}A^Ty \equiv A^\dagger y.
+\]</span> We recall, that <span class="math inline">\(A^\dagger\)</span> is called the Moore-Penrose pseudo-inverse, see <a href="../matrixdc/svd.html#def-pinv" class="quarto-xref">Definition&nbsp;<span>5.3</span></a>.</p>
+<section id="alternative-computation" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="alternative-computation"><span class="header-section-number">6.1.1</span> Alternative computation</h3>
+<p>The pseudo-inverse provides us with the optimal solution but for large systems the computation can be inefficient, or more precisely, there are more efficient ways to get the same results.</p>
+<p>Following <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 137–38</a>)</span> we can find an alternative for the above example in <a href="#fig-linear_reg" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>.</p>
+<p>We want to fit the data points <span class="math inline">\((x_i, y_i)\)</span> with the function <span class="math inline">\(f(x) = b_2 x + b_1\)</span> resulting in the error <span class="math display">\[
+E_2(f) = \sqrt{\frac1n \sum_{k=1}^n(b_2 x_k + b_1 - y_k )^2}.
+\]</span> A solution that minimizes the above equation also minimizes <span class="math display">\[
+E_2 = \sum_{k=1}^n(b_2 x_k + b_1 - y_k )^2
+\]</span> and we find the solution by partial differentiation <span class="math display">\[
+\begin{array}{cc}
+\frac{\mathrm{d} E_2}{\mathrm{d}\,b_1} = 0 &amp; \sum_{k=1}^n 2 (b_2 x_k + b_1 - y_k ) = 0\\
+\frac{\mathrm{d} E_2}{\mathrm{d}\,b_2} = 0 &amp; \sum_{k=1}^n 2 (b_2 x_k + b_1 - y_k ) x_k = 0\\
+\end{array}
+\]</span> and this results in the system <span class="math display">\[
+\left[
+\begin{array}{cc}
+n &amp; \sum_k x_k \\
+\sum_k x_k &amp; \sum_k x_k^2
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+b_1\\b_2
+\end{array}
+\right]
+=
+\left[
+\begin{array}{c}
+\sum_k y_k\\\sum_k x_k y_k
+\end{array}
+\right].
+\]</span> This ansatz can be extended to polynomials of degree <span class="math inline">\(k\)</span>, where the result is always a <span class="math inline">\((k+1) \times (k+1)\)</span> matrix.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -442,6 +540,8 @@ Figure&nbsp;6.1: Line fit with different norms. Top without outliers, bottom wit
 Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engineering - Machine Learning, Dynamical Systems, and Control</em>. 2nd ed. Cambridge: Cambridge University Press.
 </div>
 </div>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1028,7 +1128,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> Peter Kandolf</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/regression/linear.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/regression/linear.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

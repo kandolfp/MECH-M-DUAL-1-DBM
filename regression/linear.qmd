@@ -28,6 +28,20 @@ $$
 y = Xb = f(X, b).
 $$
 
+::: {.callout-note}
+In literature the parameters are most of the time called $\beta$ but for the sake of keeping notation consistent we opt for $b$.
+:::
+
+::: {.callout-tip}
+Usually the convention is to define $X_{-1}=1$ as constant 1 at each position.
+The corresponding $b_1$ is called the _intercept_.
+We even find this convention if theory tells us $b_1$ is $0$ as some procedures assume this term to exist.
+:::
+
+::: {.callout-note}
+We talk of a linear model, as long as it is linear in the parameters $b$.
+It might happen that regressors have a non linear relation.
+:::
 
 Let us assume for a moment we already have a realisation of $f$, i.e. we know the  parameters $b$, we get the error of the approximation as
 $$

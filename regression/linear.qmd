@@ -5,7 +5,7 @@ The general idea of linear regression is to approximate a _point cloud_ by a mat
 
 Let us assume that we want to establish a relationship between our $n$ observations with $m$ independent variables. In order to get the notation down correctly we should describe the variables more closely.
 
-We have $n$ observations (the $k$ representation would be $y_k$) resulting in a vector:
+We have $n$ observations (the $k$-th representation is denoted by $y_k$) resulting in a vector:
 $$
 y = \left[
     \begin{array}{c} y_1 \\ y_2 \\ y_3 \\ \vdots \\ y_n \end{array}
@@ -18,47 +18,48 @@ $$X = \left[
     \right] = \left[X_{-1}, \dots, X_{-m}\right],$$
 where the second representation more closely fits to our idea of the $m$ independent variables. 
 
-Let us model the relation in a linear fashion with the parameters $\beta$
+Let us model the relation in a linear fashion with the parameters $b$
 as 
 $$
-y_k \overset{!}{=} X_{k1} \beta_1 + X_{k2} \beta_2 + \cdots + X_{km} \beta_m, \quad 1\leq k \leq n,
+y_k \overset{!}{=} X_{k1} b_1 + X_{k2} b_2 + \cdots + X_{km} b_m, \quad 1\leq k \leq n,
 $$
 or in short
 $$
-y = X\beta = f(X, \beta).
+y = Xb = f(X, b).
 $$
 
-Let us assume for a moment we already have a realisation of $f$, i.e. we know the  parameters $\beta$, we get the error of the approximation as
+
+Let us assume for a moment we already have a realisation of $f$, i.e. we know the  parameters $b$, we get the error of the approximation as
 $$
-\epsilon = y - f(X, \beta)\quad \Leftrightarrow \quad \epsilon_k = y_k - f(X_{k-}, \beta).
+\mathbf{e} = y - f(X, b)\quad \Leftrightarrow \quad \mathbf{e}_k = y_k - f(X_{k-}, b).
 $$ {#eq-fiterror}
 
-There are various possibilities to select the metric for minimizing $\epsilon$ and therefore characterizing the quality of the _fit_.
+There are various possibilities to select the metric for minimizing $\mathbf{e}$ and therefore characterizing the quality of the _fit_.
 This is done by selecting the underlying norm.
 Most commonly we use the $1$-norm, the $2$-norm and the $\infty$-norm, i.e.
 $$
-E_1 (f) = \frac1n \sum_{k=1}^n|f(X_{k-}, \beta) - y_k |,
+E_1 (f) = \frac1n \sum_{k=1}^n|f(X_{k-}, b) - y_k |,
 $$ {#eq-fit1}
 for the $1$-norm or mean absolute error,
 $$
-E_2 (f) = \sqrt{\frac1n \sum_{k=1}^n|f(X_{k-}, \beta) - y_k |^2},
+E_2 (f) = \sqrt{\frac1n \sum_{k=1}^n|f(X_{k-},b) - y_k |^2},
 $$ {#eq-fit2}
 for the $2$-norm or least-square error,
 $$
-E_\infty (f) = \max_{k}|f(X_{k-}, \beta) - y_k |
+E_\infty (f) = \max_{k}|f(X_{k-}, b) - y_k |
 $$ {#eq-fit3}
 for the $\infty$-norm or maximum error.
 Of course $p$-norms work as well
 $$
-E_p (f) = \left(\frac1n \sum_{k=1}^n|f(X_{k-}, \beta) - y_k |^p\right)^{1/p}.
+E_p (f) = \left(\frac1n \sum_{k=1}^n|f(X_{k-}, b) - y_k |^p\right)^{1/p}.
 $$
-If we go back and we want to solve @eq-fiterror for $\beta$ we have different
+If we go back and we want to solve @eq-fiterror for $b$ we have different
 
 Depending on the selected norm we get different realisations.
 To illustrate this we use the example from [@Brunton2022, pp. 136-167].
 
 ```{python}
-#| label: fig-cement_svd
+#| label: fig-linear_reg
 #| fig-cap: "Line fit with different norms. Top without outliers, bottom with one outlier."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"

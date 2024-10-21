@@ -548,13 +548,13 @@ If we us the SVD decomposition for $A = U \Sigma V^T$ we can define the followin
 
 We define the matrix $A^\dagger \in \mathbb{R}^{m\times n}$ by $A^\dagger = V\Sigma^\dagger U^T$ where
 $$
-\Sigma^\dagger = \operatorname{diag}\left(\frac1\sigma_1. \frac1\sigma_2, \ldots, \frac1\sigma_r, 0, \ldots, 0\right) \in \mathbb{R}^{m\times n}, \quad r=\operatorname{rank}(A).
+\Sigma^\dagger = \operatorname{diag}\left(\frac{1}{\sigma_1}. \frac{1}{\sigma_2}, \ldots, \frac{1}{\sigma_r}, 0, \ldots, 0\right) \in \mathbb{R}^{m\times n}, \quad r=\operatorname{rank}(A).
 $$
 
 The matrix $A^\dagger$ is often called the _Moore-Penrose left pseudo-inverse_ as it fulfils the [_Moore-Penrose conditions_](https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse) conditions.
 It is also the matrix to provides the minimal Frobenius norm solution to 
 $$
-\min_{X \in \mathbb{R}^{m\times n}}\| A x - I_n\|_F.
+\min_{X \in \mathbb{R}^{m\times n}}\| A X - I_n\|_F.
 $$
 
 [Compare @GoluLoan, pp. 290]

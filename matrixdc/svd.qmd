@@ -563,6 +563,10 @@ $$
 
 If we only use the truncated version, i.e. where we only use non-zero singular values, we can use it to find good solutions to @eq-leastsquare.
 
+::: {callout-note}
+In `numpy` it can be computed by `numpy.linalg.pinv`. 
+:::
+
 ::: {.callout appearance="simple"}
 :::: {#def-condition} 
 ## Condition number

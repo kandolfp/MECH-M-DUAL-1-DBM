@@ -316,14 +316,14 @@ In most cases inverting the matrix is not recommended, to directly solve the gen
 
 We can use the eigenvalue decomposition to _approximate_ a square matrix.
 
-Let us sort the eigenvalues in $\Lambda$ and let us call $W^T=V^{-1}$ then we can write
+Let us sort the eigenvalues in $\Lambda$ and let us call $U^T=V^{-1}$ then we can write
 $$
-A = V\Lambda W^T = \sum_{i=1}^n\lambda_i v_i u_i^T
+A = V\Lambda U^T = \sum_{i=1}^n\lambda_i v_i u_i^T
 $$
 where $v_i$ and $u_i$ correspond to the rows of the matrices.
 Now we can define the  _rank_ $r$ approximation of $A$ as
 $$
-A\approx A_r = V\Lambda W^T = \sum_{i=1}^r\lambda_i v_i u_i^T.
+A\approx A_r = V\Lambda U^T = \sum_{i=1}^r\lambda_i v_i u_i^T.
 $$
 
 To make this a bit easier to understand the following illustration is helpful:

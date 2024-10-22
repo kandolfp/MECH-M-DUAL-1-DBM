@@ -19,7 +19,7 @@ V = \left[v_1 | \cdots | v_n \right] \in \mathbb{R}^{n\times n}
 $$
 such that 
 $$
-U^T A V = \Sigma = \operatorname{diag}(\sigma_1, \ldots, \sigma_p) \in \mathbb{R}^{m\times n}, \quad p=\min{m, m},
+U^T A V = \Sigma = \operatorname{diag}(\sigma_1, \ldots, \sigma_p) \in \mathbb{R}^{m\times n}, \quad p=\min\{m, n\},
 $$ {#eq-svd}
 where $\sigma_1 \geq \sigma_2 \geq \ldots \sigma_p \geq 0$.
 

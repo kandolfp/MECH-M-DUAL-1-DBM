@@ -152,7 +152,7 @@ More formally this is defined in the next definition.
 
 If $A \in \mathbb{R}^{m\times n}$ and has the SVD $A = U\Sigma V^T$ than
 $$
-A_k = U(:, 1:k) \Sigma(1:k, 1:k) V^T(1:k, :)
+A_k = U(:, 1:k)\, \Sigma(1:k, 1:k)\, V^T(1:k, :)
 $$
 is the _optimal_ low-rank approximation of $A$ with rank $k$.
 This is often called the _truncated SVD_.

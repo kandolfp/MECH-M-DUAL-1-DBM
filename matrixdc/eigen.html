@@ -375,7 +375,7 @@ window.Quarto = {
 \]</span></li>
 </ol>
 <p>So let us check in <code>numpy</code>:</p>
-<div id="76279230" class="cell styled-output" data-execution_count="1">
+<div id="a0417840" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -426,7 +426,7 @@ p(\lambda) = \det(A - \lambda I).
 </div>
 </div>
 <p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
-<div id="a75eb3c8" class="cell styled-output" data-execution_count="2">
+<div id="41a4264f" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> LA.eigvals(A)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lam_sort <span class="op">=</span> np.sort(lam)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -473,7 +473,7 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
 </div>
 </div>
 <p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
-<div id="ed62b886" class="cell styled-output" data-execution_count="3">
+<div id="98ae5e42" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lam, V <span class="op">=</span> LA.eig(A)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_eigen <span class="op">=</span> np.diag(lam)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -644,10 +644,10 @@ Warning
 <section id="low-rank-approximation-of-a-square-matrix" class="level3" data-number="4.1.5">
 <h3 data-number="4.1.5" class="anchored" data-anchor-id="low-rank-approximation-of-a-square-matrix"><span class="header-section-number">4.1.5</span> Low-rank approximation of a square matrix</h3>
 <p>We can use the eigenvalue decomposition to <em>approximate</em> a square matrix.</p>
-<p>Let us sort the eigenvalues in <span class="math inline">\(\Lambda\)</span> and let us call <span class="math inline">\(W^T=V^{-1}\)</span> then we can write <span class="math display">\[
-A = V\Lambda W^T = \sum_{i=1}^n\lambda_i v_i u_i^T
+<p>Let us sort the eigenvalues in <span class="math inline">\(\Lambda\)</span> and let us call <span class="math inline">\(U^T=V^{-1}\)</span> then we can write <span class="math display">\[
+A = V\Lambda U^T = \sum_{i=1}^n\lambda_i v_i u_i^T
 \]</span> where <span class="math inline">\(v_i\)</span> and <span class="math inline">\(u_i\)</span> correspond to the rows of the matrices. Now we can define the <em>rank</em> <span class="math inline">\(r\)</span> approximation of <span class="math inline">\(A\)</span> as <span class="math display">\[
-A\approx A_r = V\Lambda W^T = \sum_{i=1}^r\lambda_i v_i u_i^T.
+A\approx A_r = V\Lambda U^T = \sum_{i=1}^r\lambda_i v_i u_i^T.
 \]</span></p>
 <p>To make this a bit easier to understand the following illustration is helpful:</p>
 <div class="quarto-figure quarto-figure-center">
@@ -1338,7 +1338,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","loop":false,"selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false,"closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

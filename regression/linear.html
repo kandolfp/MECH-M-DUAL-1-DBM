@@ -97,6 +97,9 @@ div.csl-indent {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -307,6 +310,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#alternative-computation" id="toc-alternative-computation" class="nav-link" data-scroll-target="#alternative-computation"><span class="header-section-number">6.1.1</span> Alternative computation</a></li>
   </ul></li>
+  <li><a href="#data-linearization" id="toc-data-linearization" class="nav-link" data-scroll-target="#data-linearization"><span class="header-section-number">6.2</span> Data Linearization</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/regression/linear.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -399,7 +403,6 @@ E_\infty (f) = \max_{k}|f(X_{k-}, b) - y_k |
 E_p (f) = \left(\frac1n \sum_{k=1}^n|f(X_{k-}, b) - y_k |^p\right)^{1/p}.
 \]</span> If we go back and we want to solve <a href="#eq-fiterror" class="quarto-xref">Equation&nbsp;<span>6.1</span></a> for <span class="math inline">\(b\)</span> we have different</p>
 <p>Depending on the selected norm we get different realisations. To illustrate this we use the example from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 136–67</a>)</span>.</p>
-<div id="cell-fig-linear_reg" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -446,43 +449,67 @@ E_p (f) = \left(\frac1n \sum_{k=1}^n|f(X_{k-}, b) - y_k |^p\right)^{1/p}.
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y, <span class="st">"o"</span>, color<span class="op">=</span><span class="st">"r"</span>, label<span class="op">=</span><span class="st">"observations"</span>)</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>ax.plot(xf, y1, label<span class="op">=</span><span class="vs">r"$E_\infty$"</span>)</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>ax.plot(xf, y2, <span class="st">"--"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="vs">r"$E_1$"</span>)</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>ax.plot(xf, y3, <span class="st">":"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="vs">r"$E_2$"</span>)</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="dv">4</span>)</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">11</span>)</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Observations with no outliers."</span>)</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>ax.plot(x, z, <span class="st">"o"</span>, color<span class="op">=</span><span class="st">"r"</span>, label<span class="op">=</span><span class="st">"observations"</span>)</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>ax.plot(xf, y12, label<span class="op">=</span><span class="vs">r"$E_\infty$"</span>)</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>ax.plot(xf, y22, <span class="st">"--"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="vs">r"$E_1$"</span>)</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>ax.plot(xf, y32, <span class="st">":"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="vs">r"$E_2$"</span>)</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="dv">4</span>)</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">11</span>)</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Observations with outliers."</span>)</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="co"># ax.legend()</span></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(top <span class="op">=</span> <span class="fl">0.99</span>, bottom<span class="op">=</span><span class="fl">0.01</span>, hspace<span class="op">=</span><span class="fl">0.35</span>, wspace<span class="op">=</span><span class="fl">0.001</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">"o"</span>, color<span class="op">=</span><span class="st">"r"</span>, label<span class="op">=</span><span class="st">"observations"</span>)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>plt.plot(xf, y1, label<span class="op">=</span><span class="vs">r"$E_\infty$"</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>plt.plot(xf, y2, <span class="st">"--"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="vs">r"$E_1$"</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>plt.plot(xf, y3, <span class="st">":"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="vs">r"$E_2$"</span>)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">4</span>)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="dv">11</span>)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">1</span>)</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>plt.grid(visible<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>plt.plot(x, z, <span class="st">"o"</span>, color<span class="op">=</span><span class="st">"r"</span>, label<span class="op">=</span><span class="st">"observations"</span>)</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>plt.plot(xf, y12, label<span class="op">=</span><span class="vs">r"$E_\infty$"</span>)</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>plt.plot(xf, y22, <span class="st">"--"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="vs">r"$E_1$"</span>)</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>plt.plot(xf, y32, <span class="st">":"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="vs">r"$E_2$"</span>)</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">4</span>)</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="dv">11</span>)</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">1</span>)</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>plt.grid(visible<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display">
-<div id="fig-linear_reg" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-linear_reg" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-linear_reg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="linear_files/figure-html/fig-linear_reg-output-1.svg" class="img-fluid figure-img">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-linear_reg" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-linear_reg-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-linear_reg-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="linear_files/figure-html/fig-linear_reg-output-1.svg" class="lightbox" data-gallery="fig-linear_reg" title="Figure&nbsp;6.1&nbsp;(a): Observations with no outliers."><img src="linear_files/figure-html/fig-linear_reg-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-linear_reg"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-linear_reg-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Observations with no outliers.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-linear_reg" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-linear_reg-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-linear_reg-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="linear_files/figure-html/fig-linear_reg-output-2.svg" class="lightbox" data-gallery="fig-linear_reg" title="Figure&nbsp;6.1&nbsp;(b): Observations with outliers."><img src="linear_files/figure-html/fig-linear_reg-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-linear_reg"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-linear_reg-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Observations with outliers.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-linear_reg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;6.1: Line fit with different norms. Top without outliers, bottom with one outlier.
 </figcaption>
 </figure>
 </div>
-</div>
-</div>
-<p>If we use <a href="#eq-fit2" class="quarto-xref">Equation&nbsp;<span>6.3</span></a> it is called the <em>least square fit</em>.</p>
+<p>If we use <a href="#eq-fit2" class="quarto-xref">Equation&nbsp;<span>6.3</span></a> the regression fit is called the <em>least square fit</em>.</p>
 <section id="ordinary-least-square" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="ordinary-least-square"><span class="header-section-number">6.1</span> Ordinary Least Square</h2>
 <p>It is worth looking into the least square solution <span class="math display">\[
@@ -510,11 +537,10 @@ E_2(f) = \sqrt{\frac1n \sum_{k=1}^n(b_2 x_k + b_1 - y_k )^2}.
 \]</span> A solution that minimizes the above equation also minimizes <span class="math display">\[
 E_2 = \sum_{k=1}^n(b_2 x_k + b_1 - y_k )^2
 \]</span> and we find the solution by partial differentiation <span class="math display">\[
-\begin{array}{cc}
-\frac{\mathrm{d} E_2}{\mathrm{d}\,b_1} = 0 &amp; \sum_{k=1}^n 2 (b_2 x_k + b_1 - y_k ) = 0\\
-\frac{\mathrm{d} E_2}{\mathrm{d}\,b_2} = 0 &amp; \sum_{k=1}^n 2 (b_2 x_k + b_1 - y_k ) x_k = 0\\
-\end{array}
-\]</span> and this results in the system <span class="math display">\[
+\frac{\mathrm{d} E_2}{\mathrm{d}\,b_1} = 0 \Leftrightarrow \sum_{k=1}^n 2 (b_2 x_k + b_1 - y_k ) = 0,
+\]</span> <span class="math display">\[
+\frac{\mathrm{d} E_2}{\mathrm{d}\,b_2} = 0 \Leftrightarrow \sum_{k=1}^n 2 (b_2 x_k + b_1 - y_k ) x_k = 0,
+\]</span> and this results in the system <span id="eq-alternativeregression"><span class="math display">\[
 \left[
 \begin{array}{cc}
 n &amp; \sum_k x_k \\
@@ -532,7 +558,66 @@ b_1\\b_2
 \sum_k y_k\\\sum_k x_k y_k
 \end{array}
 \right].
-\]</span> This ansatz can be extended to polynomials of degree <span class="math inline">\(k\)</span>, where the result is always a <span class="math inline">\((k+1) \times (k+1)\)</span> matrix.</p>
+\tag{6.5}\]</span></span> This ansatz can be extended to polynomials of degree <span class="math inline">\(k\)</span>, where the result is always a <span class="math inline">\((k+1) \times (k+1)\)</span> matrix.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-lregfallenobject" class="theorem example">
+<p><span class="theorem-title"><strong>Example 6.1 (Example - parameter estimation of a falling object)</strong></span> Just because we deal with linear regression this does not means that the model needs to be linear too. As long as we are linear in the parameters <span class="math inline">\(b\)</span> we can apply our findings, even for non linear <em>independent variables</em>.</p>
+<p>To illustrate this, let us consider an object falling without aerodynamic drag, described by the differential equation <span class="math display">\[
+m \ddot{y}(t) = -m g,
+\]</span> for the gravitational constant <span class="math inline">\(g\)</span>. Integration with respect to <span class="math inline">\(t\)</span> results in <span class="math display">\[
+y(t) = y(0) + v(0) t - \frac{g}{2} t^2.
+\]</span> So we get <span class="math display">\[
+X{k-} = \left[1 t_k -\frac{g}{2} t^2\right]
+\quad \text{and} \quad
+b = \left[
+\begin{array}{c}
+\sum_k y_0\\ v_0 \\ g
+\end{array}
+\right]
+\]</span> or in the long form, for <span class="math inline">\(t_{k+1}-t_k = 0.1\)</span> <span class="math display">\[
+X = \left[
+\begin{array}{ccc}
+1 &amp; 0 &amp; 0 \\
+1 &amp; 0.1 &amp; -0.005 \\
+1 &amp; 0.2 &amp; -0.020 \\
+1 &amp; 0.3 &amp; -0.045 \\
+1 &amp; 0.4 &amp; -0.080 \\
+\vdots &amp; \vdots &amp; \vdots
+\end{array}
+\right]
+\]</span> and we can, for example, estimate our unknowns <span class="math inline">\(y_0\)</span>, <span class="math inline">\(v_0\)</span>, and <span class="math inline">\(g\)</span> by <span class="math display">\[
+b = X^\dagger b.
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="data-linearization" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="data-linearization"><span class="header-section-number">6.2</span> Data Linearization</h2>
+<p>Quite often it is possible to linearize the our model at hand. For example if we want to fit for <span id="eq-lregnonlinear"><span class="math display">\[
+f(x, b) = b_2 \exp(b_1 x),
+\tag{6.6}\]</span></span></p>
+<p>and use the same derivation as for @#eq-alternativeregression we end up with the corresponding system as <span class="math display">\[
+b_2 \sum_k x_k \exp(2 b_1 x_k) - \sum_k x_k y_k \exp(b_1 x_k) =0,
+\]</span> <span class="math display">\[
+b_2 \sum_k \exp(2 b_1 x_k) - \sum_k y_k \exp(b_1 x_k) =0.\\
+\]</span></p>
+<p>This non-linear system can not be solved in a straight forward fashion but we can avoid it by linearization with the simple transformation <span class="math display">\[
+\begin{array}{r}
+\hat{y} = \ln(x), \\
+\hat{x} = x, \\
+b_3 = \ln b_2,
+\end{array}
+\]</span> and taking the natural logarithm of both sides of @#eq-lregnonlinear and simplifying <span class="math display">\[
+\ln y = \ln(b_2 \exp(b_1 x)) = \ln(b_2) + b_1 x.
+\]</span> Now all that is left to apply <span class="math inline">\(\ln\)</span> to the data <span class="math inline">\(y\)</span> and solve the linear problem. In order to apply it to the original function the parameters transform needs to be reversed.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -540,7 +625,6 @@ b_1\\b_2
 Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engineering - Machine Learning, Dynamical Systems, and Control</em>. 2nd ed. Cambridge: Cambridge University Press.
 </div>
 </div>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1134,6 +1218,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

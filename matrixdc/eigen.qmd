@@ -1,3 +1,6 @@
+---
+lightbox: true
+---
 # Eigendecomposition {#sec-matrixdc-eigen}
 
 We start off with the so called _eigendecomposition_.
@@ -109,7 +112,7 @@ print(f"{lam_sort=}")
 If $\lambda \in \lambda(A)$, then there exists a nonzero vector $v$ so that 
 $$
 Av = \lambda v \iff (A - \lambda I)v = 0.
-$$
+$$ {#eq-eigenvector}
 Such a vector is called _eigenvector_ of $A$ associated with $\lambda$.
 ::::
 :::
@@ -310,6 +313,156 @@ $$
 
 ::: {.callout-warning}
 In most cases inverting the matrix is not recommended, to directly solve the generalized eigenvalue problem, see [@GoluLoan, chap. 7.7] for details. 
+:::
+
+Let us walk through this with an example from [@Downey2024VibrationMechanicsPractical, Sec. 8.3].
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-twostorybuilding}
+
+## Two Story Building
+
+![Two story frame where the floors have different dynamic properties.](../_assets/matrixdc/TwoStoryBuilding.svg){#fig-twostorybuilding}
+
+In @fig-twostorybuilding we can see a two story building consisting of a two column frame with a floor.
+The first floor columns are fixed at the base and have a height $h$, the second floor is fixed to the first and has the same height.
+However, the two frames can be displaced with the elasticity $E$ and the momentum of inertia $I$.
+The mass is centred at the floor level.
+
+This allows us to model such a building as a system with two degrees of freedom $x_1$ and $x_2$ as the displacement indicated in blue. The dashed blue line would be such a displacement for the frame. 
+
+The resulting equations of motion become
+$$
+\begin{array}{r}
+m_1 \ddot{x_1} + k_1 x_1 + k_2 (x_2 - x_1) = 0,\\
+m_2 \ddot{x_1} + k_2 (x_2 - x_1) = 0,
+\end{array}
+$$
+resulting in the matrices
+$$
+M = \left[
+\begin{array}{cc}
+m_1 & 0 \\
+0 & m_2
+\end{array}
+\right], \quad
+K = \left[\begin{array}{cc}
+k_1 + k_2 & -k_2 \\
+-k_2 & k_2
+\end{array}
+\right].
+$$
+
+For the derivation of the stiffness coefficients we refer to [@Downey2024VibrationMechanicsPractical, pp. 188] and recall the result here as follows
+$$
+k_1 = \frac{48 EI}{h^3}, \quad k_2 = \frac{24 EI}{h^3}.
+$$
+This results in the stiffness matrix
+$$
+K = \underbrace{\frac{24 EI}{h^3}}_{=k}
+\left[\begin{array}{cc}
+3 & -1 \\
+-1 & 1
+\end{array}
+\right].
+$$
+
+Now we can manually compute 
+$$
+\det(-\omega^2 M + K) = 0 \Leftrightarrow 2m^2\omega^4 - 5 m k \omega^2 + 2 k^2 = 0,
+$$
+and solving this equation for $\omega^2$ results in 
+$$
+\omega_1^2 = \frac{k}{2m}, \quad \omega_2^2 = \frac{2k}{m}.
+$$
+
+To compute the eigenvectors $v_1$ and $v_2$ we use @eq-eigenvector, i.e. for $v_1$ this reads as
+$$
+-\frac{k}{2m} \left[
+\begin{array}{cc}
+2m & 0 \\
+0 & m
+\end{array}
+\right] 
++ 
+k \left[\begin{array}{cc}
+3 & -1 \\
+-1 & 1
+\end{array}
+\right]
+\left[\begin{array}{c}
+v_{11}\\
+v_{21}
+\end{array}
+\right]
+= 
+\left[\begin{array}{cc}
+2 k & -k \\
+-k & \frac{k}{2}
+\end{array}
+\right]
+\left[\begin{array}{c}
+v_{11}\\
+v_{21}
+\end{array}
+\right]
+\overset{!}{=} 
+\left[\begin{array}{c}
+0\\
+0
+\end{array}
+\right],
+$$
+and results in the relation $2v_{11} = v_{21}$.
+We can select a solution as
+$$
+v_1 = \left[\begin{array}{c}
+\frac12\\
+1
+\end{array}
+\right].
+$$
+For $v_2$ we proceed similarly and derive a solution as: 
+$$
+v_2 = \left[\begin{array}{c}
+-1\\
+1
+\end{array}
+\right].
+$$
+
+The eigenvectors illustrate how the displacement functions and are not just some theoretical value.
+The following figure visualizes the two modes.
+
+::: {#fig-twosotrybuildingmodes layout-ncol=2}
+
+![First mode](../_assets/matrixdc/TwoStoryBuildingMode1.svg){#fig-tsm1}
+
+![Second mode](../_assets/matrixdc/TwoStoryBuildingMode2.svg){#fig-tsm2}
+
+Model of a two story building with the shape of the modes according to the modal analysis.
+:::
+
+Two wrap up the example our overall temporal response consists of the time invariant part defined by our eigenvectors $v_1$, and $v_2$, as well as the time dependent part with our eigenfrequencies $\omega_1$ and $\omega_2$ as well as the constants $A_1$, $A_2$, $\phi_1$, $\phi_2$ depending on the initial condition [see @Downey2024VibrationMechanicsPractical, Chapter 5].
+$$
+\left[\begin{array}{c}
+x_1(t)\\
+x_2(t)
+\end{array}
+\right]
+=
+\left[
+v_1, v_2
+\right]
+\left[\begin{array}{c}
+A_1 \sin(\omega_1 t \phi_1)\\
+A_2 \sin(\omega_2 t \phi_2){t}
+\end{array}
+\right]
+$$ 
+
+[Compare @Downey2024VibrationMechanicsPractical, Chapter 8.3, pp. 189-191]
+::::
 :::
 
 ### Low-rank approximation of a square matrix

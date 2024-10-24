@@ -326,7 +326,8 @@ Let us walk through this with an example from [@Downey2024VibrationMechanicsPrac
 
 In @fig-twostorybuilding we can see a two story building consisting of a two column frame with a floor.
 The first floor columns are fixed at the base and have a height $h$, the second floor is fixed to the first and has the same height.
-However, the two frames can be displaced with the elasticity $E$ and the momentum of inertia $I$.
+The columns of each frame are modelled as beams with flexural rigidity $EI$ and $2 EI$, respectively
+Where $E$ is called _Young's modulus_ and $I$ the _second moment of area_.
 The mass is centred at the floor level.
 
 This allows us to model such a building as a system with two degrees of freedom $x_1$ and $x_2$ as the displacement indicated in blue. The dashed blue line would be such a displacement for the frame. 

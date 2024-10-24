@@ -223,7 +223,7 @@ b_1\\b_2
 \sum_k y_k\\\sum_k x_k y_k
 \end{array}
 \right].
-$$
+$$ {#eq-alternativeregression}
 This ansatz can be extended to polynomials of degree $k$, where the result is always a $(k+1) \times (k+1)$ matrix.
 
 ::: {.callout-tip appearance="simple" collapse="true" icon=false}
@@ -270,6 +270,38 @@ and we can, for example, estimate our unknowns $y_0$, $v_0$, and $g$ by
 $$
 b = X^\dagger b.
 $$
+
 ::::
 :::
+
+## Data Linearization
+
+Quite often it is possible to linearize the our model at hand.
+For example if we want to fit for 
+$$
+f(x, b) = b_2 \exp(b_1 x),
+$$ {#eq-lregnonlinear}
+
+and use the same derivation as for @#eq-alternativeregression we end up with the corresponding system as
+$$
+b_2 \sum_k x_k \exp(2 b_1 x_k) - \sum_k x_k y_k \exp(b_1 x_k) =0,
+$$
+$$
+b_2 \sum_k \exp(2 b_1 x_k) - \sum_k y_k \exp(b_1 x_k) =0.\\
+$$
+
+This non-linear system can not be solved in a straight forward fashion but we can avoid it by linearization with the simple transformation
+$$
+\begin{array}{r}
+\hat{y} = \ln(x), \\
+\hat{x} = x, \\
+b_3 = \ln b_2,
+\end{array}
+$$
+and taking the natural logarithm of both sides of @#eq-lregnonlinear and simplifying
+$$
+\ln y = \ln(b_2 \exp(b_1 x)) = \ln(b_2) + b_1 x.
+$$
+Now all that is left to apply $\ln$ to the data $y$ and solve the linear problem.
+In order to apply it to the original function the parameters transform needs to be reversed.
 

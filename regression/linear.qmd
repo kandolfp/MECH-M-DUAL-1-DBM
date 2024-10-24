@@ -1,3 +1,6 @@
+---
+lightbox: true
+---
 # Linear Regression {#sec-regression-linear}
 
 The general idea of linear regression is to approximate a _point cloud_ by a mathematical function, this is often called _curve fitting_ and it is closely related to optimization techniques, [compare @Brunton2022, Section 4.1].
@@ -75,6 +78,10 @@ To illustrate this we use the example from [@Brunton2022, pp. 136-167].
 ```{python}
 #| label: fig-linear_reg
 #| fig-cap: "Line fit with different norms. Top without outliers, bottom with one outlier."
+#| fig-subcap:
+#|   - "Observations with no outliers."
+#|   - "Observations with outliers." 
+#| layout-ncol: 1
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
@@ -121,30 +128,30 @@ y32 = np.polyval(p32, xf)
 
 
 fig = plt.figure()
-ax = fig.add_subplot(2, 1, 1)
 
-ax.plot(x, y, "o", color="r", label="observations")
-ax.plot(xf, y1, label=r"$E_\infty$")
-ax.plot(xf, y2, "--", linewidth=2, label=r"$E_1$")
-ax.plot(xf, y3, ":", linewidth=2, label=r"$E_2$")
-ax.set_ylim(0, 4)
-ax.set_xlim(0, 11)
-ax.set_title("Observations with no outliers.")
-ax.legend()
+plt.plot(x, y, "o", color="r", label="observations")
+plt.plot(xf, y1, label=r"$E_\infty$")
+plt.plot(xf, y2, "--", linewidth=2, label=r"$E_1$")
+plt.plot(xf, y3, ":", linewidth=2, label=r"$E_2$")
+plt.ylim(0, 4)
+plt.xlim(0, 11)
+plt.legend(loc="upper left")
+plt.gca().set_aspect(1)
+plt.grid(visible=True)
+plt.show()
 
-ax = fig.add_subplot(2, 1, 2)
-ax.plot(x, z, "o", color="r", label="observations")
-ax.plot(xf, y12, label=r"$E_\infty$")
-ax.plot(xf, y22, "--", linewidth=2, label=r"$E_1$")
-ax.plot(xf, y32, ":", linewidth=2, label=r"$E_2$")
-ax.set_ylim(0, 4)
-ax.set_xlim(0, 11)
-ax.set_title("Observations with outliers.")
-# ax.legend()
-plt.subplots_adjust(top = 0.99, bottom=0.01, hspace=0.35, wspace=0.001)
+plt.plot(x, z, "o", color="r", label="observations")
+plt.plot(xf, y12, label=r"$E_\infty$")
+plt.plot(xf, y22, "--", linewidth=2, label=r"$E_1$")
+plt.plot(xf, y32, ":", linewidth=2, label=r"$E_2$")
+plt.ylim(0, 4)
+plt.xlim(0, 11)
+plt.legend(loc="upper left")
+plt.gca().set_aspect(1)
+plt.grid(visible=True)
 plt.show()
 ```
-If we use @eq-fit2 it is called the _least square fit_.
+If we use @eq-fit2 the regression fit is called the _least square fit_.
 
 ## Ordinary Least Square
 

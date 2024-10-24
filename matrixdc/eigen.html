@@ -375,7 +375,7 @@ window.Quarto = {
 \]</span></li>
 </ol>
 <p>So let us check in <code>numpy</code>:</p>
-<div id="89480831" class="cell styled-output" data-execution_count="1">
+<div id="2853c73e" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -426,7 +426,7 @@ p(\lambda) = \det(A - \lambda I).
 </div>
 </div>
 <p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
-<div id="b5c851d5" class="cell styled-output" data-execution_count="2">
+<div id="979c8651" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> LA.eigvals(A)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lam_sort <span class="op">=</span> np.sort(lam)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -473,7 +473,7 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
 </div>
 </div>
 <p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
-<div id="9a3a21a1" class="cell styled-output" data-execution_count="3">
+<div id="5a5310be" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lam, V <span class="op">=</span> LA.eig(A)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_eigen <span class="op">=</span> np.diag(lam)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -601,7 +601,7 @@ x_{n} &amp; = &amp; x^{(n-1)} \\
 </section>
 <section id="generalized-eigenvalue-problem" class="level3" data-number="4.1.4">
 <h3 data-number="4.1.4" class="anchored" data-anchor-id="generalized-eigenvalue-problem"><span class="header-section-number">4.1.4</span> Generalized eigenvalue problem</h3>
-<p>Let us motivate this by the example of <em>modal analysis</em>. If we consider the free vibrations of a weakly undamped system we get the equation <span class="math display">\[
+<p>Let us motivate this by the example of <em>modal analysis</em>. If we consider the free vibrations of a undamped system we get the equation <span class="math display">\[
 M\ddot{u} + K u = 0, \quad u(0) = u_0,
 \]</span> with the mass matrix <span class="math inline">\(M\)</span> and the stiffness matrix <span class="math inline">\(K\)</span> and <span class="math inline">\(u(t)\)</span> being the displacement. As we know, the solution of this linear differential equation has the form <span class="math inline">\(u(t)=e^{i\omega t}u_0\)</span> and thus we get <span id="eq-ma"><span class="math display">\[
 (-\omega^2 M + K) u_0 = 0.
@@ -1500,7 +1500,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

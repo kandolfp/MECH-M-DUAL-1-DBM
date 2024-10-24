@@ -226,3 +226,50 @@ b_1\\b_2
 $$
 This ansatz can be extended to polynomials of degree $k$, where the result is always a $(k+1) \times (k+1)$ matrix.
 
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-lregfallenobject}
+
+## Example - parameter estimation of a falling object
+
+Just because we deal with linear regression this does not means that the model needs to be linear too.
+As long as we are linear in the  parameters $b$ we can apply our findings, even for non linear _independent variables_.
+
+To illustrate this, let us consider an object falling without aerodynamic drag, described by the differential equation
+$$
+m \ddot{y}(t) = -m g,
+$$
+for the gravitational constant $g$.
+Integration with respect to $t$ results in 
+$$
+y(t) = y(0) + v(0) t - \frac{g}{2} t^2.
+$$
+So we get
+$$
+X{k-} = \left[1 t_k -\frac{g}{2} t^2\right]
+\quad \text{and} \quad
+b = \left[
+\begin{array}{c}
+\sum_k y_0\\ v_0 \\ g
+\end{array}
+\right]
+$$
+or in the long form, for $t_{k+1}-t_k = 0.1$
+$$
+X = \left[
+\begin{array}{ccc}
+1 & 0 & 0 \\
+1 & 0.1 & -0.005 \\
+1 & 0.2 & -0.020 \\
+1 & 0.3 & -0.045 \\
+1 & 0.4 & -0.080 \\
+\vdots & \vdots & \vdots 
+\end{array}
+\right]
+$$
+and we can, for example, estimate our unknowns $y_0$, $v_0$, and $g$ by
+$$
+b = X^\dagger b.
+$$
+::::
+:::
+

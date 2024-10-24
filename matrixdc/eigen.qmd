@@ -276,7 +276,7 @@ More importantly, the characteristic polynomial of @eq-hoode is equal to the cha
 ### Generalized eigenvalue problem
 
 Let us motivate this by the example of _modal analysis_.
-If we consider the free vibrations of a weakly undamped system we get the equation
+If we consider the free vibrations of a undamped system we get the equation
 $$
 M\ddot{u} + K u = 0, \quad u(0) = u_0,
 $$

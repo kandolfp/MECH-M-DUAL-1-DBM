@@ -199,10 +199,10 @@ E_2 = \sum_{k=1}^n(b_2 x_k + b_1 - y_k )^2
 $$
 and we find the solution by partial differentiation
 $$
-\begin{array}{cc}
-\frac{\mathrm{d} E_2}{\mathrm{d}\,b_1} = 0 & \sum_{k=1}^n 2 (b_2 x_k + b_1 - y_k ) = 0\\
-\frac{\mathrm{d} E_2}{\mathrm{d}\,b_2} = 0 & \sum_{k=1}^n 2 (b_2 x_k + b_1 - y_k ) x_k = 0\\
-\end{array}
+\frac{\mathrm{d} E_2}{\mathrm{d}\,b_1} = 0 \Leftrightarrow \sum_{k=1}^n 2 (b_2 x_k + b_1 - y_k ) = 0,
+$$
+$$
+\frac{\mathrm{d} E_2}{\mathrm{d}\,b_2} = 0 \Leftrightarrow \sum_{k=1}^n 2 (b_2 x_k + b_1 - y_k ) x_k = 0,
 $$
 and this results in the system
 $$

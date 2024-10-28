@@ -43,7 +43,7 @@ $$
                    (A^T A)V &= & V(\Lambda^T\Lambda).
                    \end{array}
 $$
-For $A \in \mathbb{R}^{m\times n}$ with $m>n$ the get
+For $A \in \mathbb{R}^{m\times n}$ with $m>n$ we get
 $$
 \Lambda = \left[
     \begin{array}{c} \tilde{\Lambda}\\0\end{array}
@@ -59,7 +59,7 @@ $$
         \Lambda^T\Lambda & = & \tilde{\Lambda}^2 &= &\tilde{\Sigma}.
                    \end{array}
 $$
-If we expand the matrices with zeros to match the correct dimensions this corresponds to the our singular value decomposition
+If we expand the matrices with zeros to match the correct dimensions this corresponds to our singular value decomposition
 $$
 A = U \Sigma V^T.
 $$

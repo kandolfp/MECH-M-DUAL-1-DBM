@@ -13,4 +13,4 @@ Individual sources are cited at the appropriate spot throughout document at hand
 
 We want to thank Mirjam Ziselsberger for testing, checking, suggestions and general proofreading.
 
-These notes are build with [Quarto](https://quarto.org/).
+These notes are built with [Quarto](https://quarto.org/).

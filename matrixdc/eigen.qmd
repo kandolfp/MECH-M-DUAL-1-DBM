@@ -456,8 +456,8 @@ x_2(t)
 v_1, v_2
 \right]
 \left[\begin{array}{c}
-A_1 \sin(\omega_1 t \phi_1)\\
-A_2 \sin(\omega_2 t \phi_2){t}
+A_1 \sin(\omega_1 t + \phi_1)\\
+A_2 \sin(\omega_2 t + \phi_2)
 \end{array}
 \right]
 $$ 

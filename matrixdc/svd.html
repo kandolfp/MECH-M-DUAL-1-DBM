@@ -382,7 +382,7 @@ Note
 \begin{array}{lll} (A A^T)U &amp;= &amp; U(\Lambda\Lambda^T),\\
                    (A^T A)V &amp;= &amp; V(\Lambda^T\Lambda).
                    \end{array}
-\]</span> For <span class="math inline">\(A \in \mathbb{R}^{m\times n}\)</span> with <span class="math inline">\(m&gt;n\)</span> the get <span class="math display">\[
+\]</span> For <span class="math inline">\(A \in \mathbb{R}^{m\times n}\)</span> with <span class="math inline">\(m&gt;n\)</span> we get <span class="math display">\[
 \Lambda = \left[
     \begin{array}{c} \tilde{\Lambda}\\0\end{array}
 \right]
@@ -394,7 +394,7 @@ Note
 \right],  \\
         \Lambda^T\Lambda &amp; = &amp; \tilde{\Lambda}^2 &amp;= &amp;\tilde{\Sigma}.
                    \end{array}
-\]</span> If we expand the matrices with zeros to match the correct dimensions this corresponds to the our singular value decomposition <span class="math display">\[
+\]</span> If we expand the matrices with zeros to match the correct dimensions this corresponds to our singular value decomposition <span class="math display">\[
 A = U \Sigma V^T.
 \]</span></p>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -444,7 +444,7 @@ U_1 = U(:, 1:n) = \left[u_1 | \cdots | u_n \right] \in \mathbb{R}^{m\times n}
 </figure>
 </div>
 <p>In Python we can compute the (Thin)SVD as follows</p>
-<div id="94be57db" class="cell styled-output" data-execution_count="1">
+<div id="f8fe1686" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -746,7 +746,7 @@ Important
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">## f_ch01_ex03_1b</span></span>
 <span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>Xavg <span class="op">=</span> np.mean(A, axis<span class="op">=</span><span class="dv">1</span>)                  <span class="co"># Compute mean</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>Xavg <span class="op">=</span> np.mean(X, axis<span class="op">=</span><span class="dv">1</span>)                  <span class="co"># Compute mean</span></span>
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> X <span class="op">-</span> np.tile(Xavg, (nPoints, <span class="dv">1</span>)).T       <span class="co"># Mean-subtracted data</span></span>
 <span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Find principal components (SVD)</span></span>
@@ -832,11 +832,11 @@ Tip
 <p>If the sensor ranges of our matrix are very different in magnitude the correlation matrix is scaled by the <em>row wise standard deviation</em> of <span class="math inline">\(B\)</span> similar as for the mean.</p>
 </div>
 </div>
-<p>In our example we get our scaled <span class="math inline">\(\sigma_1=1.996\approx 2\)</span> and <span class="math inline">\(\sigma_2=0.573\approx \frac12\)</span>. These results recover our given parameters very well. Additionally we can see that our rotation matrix is closely matched by <span class="math inline">\(U\)</span> (up to signs) from our SVD: <span class="math display">\[
+<p>In our example we get our scaled <span class="math inline">\(\sigma_1=1.988\approx 2\)</span> and <span class="math inline">\(\sigma_2=0.496\approx \frac12\)</span>. These results recover our given parameters very well. Additionally we can see that our rotation matrix is closely matched by <span class="math inline">\(U\)</span> (up to signs) from our SVD: <span class="math display">\[
 R_{\frac\pi3} = \left[
 \begin{array}{cc} 0.5&amp;0.866\\-0.866&amp;0.5\end{array}
 \right], \quad U = \left[
-\begin{array}{cc}-0.513&amp;-0.858\\-0.858&amp;0.513\end{array} \right]
+\begin{array}{cc}-0.501&amp;-0.865\\-0.865&amp;0.501\end{array} \right]
 \]</span></p>
 </section>
 <section id="example-eigenfaces" class="level3" data-number="5.2.2">
@@ -874,7 +874,7 @@ Important
 <p>The following code is an adaptation of the <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 1.7 and 1.9)</span>.</p>
 </div>
 </div>
-<div id="123a7279" class="cell" data-execution_count="6">
+<div id="68a70455" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1752,7 +1752,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":false});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

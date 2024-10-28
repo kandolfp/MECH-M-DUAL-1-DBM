@@ -329,7 +329,7 @@ plt.ylim((-6, 8))
 
 ## f_ch01_ex03_1b
 
-Xavg = np.mean(A, axis=1)                  # Compute mean
+Xavg = np.mean(X, axis=1)                  # Compute mean
 B = X - np.tile(Xavg, (nPoints, 1)).T       # Mean-subtracted data
 
 # Find principal components (SVD)

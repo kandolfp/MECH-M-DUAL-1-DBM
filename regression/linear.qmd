@@ -294,7 +294,7 @@ $$
 
 ## Data Linearization
 
-Quite often it is possible to linearize the our model at hand.
+Quite often it is possible to linearize our model at hand.
 For example if we want to fit for 
 $$
 f(x, b) = b_2 \exp(b_1 x),

@@ -125,13 +125,20 @@ y12 = np.polyval(p12, xf)
 y22 = np.polyval(p22, xf)
 y32 = np.polyval(p32, xf)
 
+X = np.array([x, np.ones(x.shape)]).T
+p4 = np.linalg.pinv(X) @ y
+p42 = np.linalg.pinv(X) @ z
+
+y4 = np.polyval(p4, xf)
+y42 = np.polyval(p42, xf)
 
 fig = plt.figure()
 
 plt.plot(x, y, "o", color="r", label="observations")
 plt.plot(xf, y1, label=r"$E_\infty$")
 plt.plot(xf, y2, "--", linewidth=2, label=r"$E_1$")
-plt.plot(xf, y3, ":", linewidth=2, label=r"$E_2$")
+plt.plot(xf, y3, "-.", linewidth=2, label=r"$E_2$")
+plt.plot(xf, y4, ":", linewidth=2, label=r"$X^\dagger$")
 plt.ylim(0, 4)
 plt.xlim(0, 11)
 plt.legend(loc="upper left")
@@ -142,7 +149,8 @@ plt.show()
 plt.plot(x, z, "o", color="r", label="observations")
 plt.plot(xf, y12, label=r"$E_\infty$")
 plt.plot(xf, y22, "--", linewidth=2, label=r"$E_1$")
-plt.plot(xf, y32, ":", linewidth=2, label=r"$E_2$")
+plt.plot(xf, y32, "-.", linewidth=2, label=r"$E_2$")
+plt.plot(xf, y42, ":", linewidth=2, label=r"$X^\dagger$")
 plt.ylim(0, 4)
 plt.xlim(0, 11)
 plt.legend(loc="upper left")
@@ -185,6 +193,8 @@ $$
 v = (A^TA)^{-1}A^Ty \equiv A^\dagger y.
 $$
 We recall, that $A^\dagger$ is called the Moore-Penrose pseudo-inverse, see @def-pinv.
+
+See @fig-linear_reg for the result when using the pseudo-inverse.
 
 ### Alternative computation
 

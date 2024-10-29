@@ -70,9 +70,8 @@ Of course $p$-norms work as well
 $$
 E_p (f) = \left(\frac1n \sum_{k=1}^n|f(X_{k-}, b) - y_k |^p\right)^{1/p}.
 $$
-If we go back and we want to solve @eq-fiterror for $b$ we have different
+If we go back and we want to solve @eq-fiterror for $b$ we have different realisations, depending on the selected norm.
 
-Depending on the selected norm we get different realisations.
 To illustrate this we use the example from [@Brunton2022, pp. 136-167].
 
 ```{python}

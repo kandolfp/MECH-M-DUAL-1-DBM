@@ -300,7 +300,7 @@ $$
 f(x, b) = b_2 \exp(b_1 x),
 $$ {#eq-lregnonlinear}
 
-and use the same derivation as for @#eq-alternativeregression we end up with the corresponding system as
+and use the same derivation as for @eq-alternativeregression we end up with the corresponding system as
 $$
 b_2 \sum_k x_k \exp(2 b_1 x_k) - \sum_k x_k y_k \exp(b_1 x_k) =0,
 $$
@@ -310,13 +310,13 @@ $$
 
 This non-linear system can not be solved in a straight forward fashion but we can avoid it by linearization with the simple transformation
 $$
-\begin{array}{r}
-\hat{y} = \ln(x), \\
-\hat{x} = x, \\
-b_3 = \ln b_2,
+\begin{array}{ccl}
+\hat{y} &=& \ln(y), \\
+\hat{x} &=& x, \\
+b_3 &=& \ln b_2,
 \end{array}
 $$
-and taking the natural logarithm of both sides of @#eq-lregnonlinear and simplifying
+and taking the natural logarithm of both sides of @eq-lregnonlinear and simplifying
 $$
 \ln y = \ln(b_2 \exp(b_1 x)) = \ln(b_2) + b_1 x.
 $$

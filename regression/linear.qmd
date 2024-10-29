@@ -91,13 +91,13 @@ import scipy.optimize
 # Function definitions
 def fit1(x0, t):
     x, y = t
-    return np.max(np.abs(x0[0] * x + x0[1] - y))
+    return 1/len(y)*np.max(np.abs(x0[0] * x + x0[1] - y))
 def fit2(x0, t):
     x, y = t
-    return np.sum(np.abs(x0[0] * x + x0[1] - y))
+    return 1/len(y)*np.sum(np.abs(x0[0] * x + x0[1] - y))
 def fit3(x0, t):
     x, y = t
-    return np.sum(np.power(np.abs(x0[0] * x + x0[1] - y), 2))
+    return 1/len(y)*np.sum(np.power(np.abs(x0[0] * x + x0[1] - y), 2))
 
 # The data
 x = np.arange(1, 11)
@@ -151,6 +151,10 @@ plt.grid(visible=True)
 plt.show()
 ```
 If we use @eq-fit2 the regression fit is called the _least square fit_.
+
+::: {.callout-tip}
+For the optimization algorithm to work fast it is often useful to rewrite the above error functions, e.g. the square-root in $E_2$ and the absolute value are not required. 
+:::
 
 ## Ordinary Least Square
 

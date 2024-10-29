@@ -4,7 +4,7 @@ In general, _regression analysis_ can be understood as a set of tools that is us
 If we add a regression function $f$ and some unknown parameters $b$ to the mix the problem can be written mathematically as
 $$
 Y = f(X, b)
-$$ {#qe-curvefitting}
+$$ {#eq-curvefitting}
 where $b$ is found by optimizing for _a good fit_ of $f$ to the data.
 
 We split up the discussion along the well known topics:

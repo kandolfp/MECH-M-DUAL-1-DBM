@@ -258,11 +258,16 @@ y(t) = y(0) + v(0) t - \frac{g}{2} t^2.
 $$
 So we get
 $$
-X{k-} = \left[1 t_k -\frac{g}{2} t^2\right]
+X{k-} = 
+\left[
+    \begin{array}{ccc}
+    1 & t_k & -\frac{1}{2} t_k^2 \\
+    \end{array}
+\right],
 \quad \text{and} \quad
-b = \left[
+y = \left[
 \begin{array}{c}
-\sum_k y_0\\ v_0 \\ g
+y^{(0)}\\ v^{(0)} \\ g
 \end{array}
 \right]
 $$
@@ -279,9 +284,9 @@ X = \left[
 \end{array}
 \right]
 $$
-and we can, for example, estimate our unknowns $y_0$, $v_0$, and $g$ by
+and we can, for example, estimate our unknowns $y^{(0)}$, $v^{(0)}$, and $g$ by
 $$
-b = X^\dagger b.
+b = X^\dagger y.
 $$
 
 ::::

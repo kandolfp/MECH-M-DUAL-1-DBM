@@ -262,6 +262,7 @@ The matrix @eq-vander is called the Vandermonde matrix.
 :::
 
 This can be solved in the same ways as the before with $X^\dagger$ or the direct system, but it should not as @eq-vander is badly conditioned.
+There are other methods like _divided differences_, Lagrange interpolation for this task.
 
 ::: {.callout-tip appearance="simple" collapse="true" icon=false}
 :::: {#exm-lregfallenobject}

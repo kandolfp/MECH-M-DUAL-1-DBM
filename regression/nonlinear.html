@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Non-linear Regression – Basics of Data Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../regression/optimizers.html" rel="next">
+<link href="../regression/linear.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script type="text/javascript">
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+if (typeof require !== 'undefined') {
+require.undef("plotly");
+requirejs.config({
+    paths: {
+        'plotly': ['https://cdn.plot.ly/plotly-2.35.2.min']
+    }
+});
+require(['plotly'], function(Plotly) {
+    window._Plotly = Plotly;
+});
+}
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../regression/index.html">Regression analysis</a></li><li class="breadcrumb-item"><a href="../regression/nonlinear.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Non-linear Regression</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Basics of Data Science</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../basics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../basics/linearalgebra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../basics/sets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data sets</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../basics/epilogue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Epilogue</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../matrixdc/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Matrix decompositions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../matrixdc/eigen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Eigendecomposition</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../matrixdc/svd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../regression/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regression analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../regression/linear.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../regression/nonlinear.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Non-linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../regression/optimizers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Optimizers</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-regression-nonlinear-gd" id="toc-sec-regression-nonlinear-gd" class="nav-link active" data-scroll-target="#sec-regression-nonlinear-gd"><span class="header-section-number">7.1</span> Gradient Descent</a></li>
+  <li><a href="#stochastic-gradient-descent" id="toc-stochastic-gradient-descent" class="nav-link" data-scroll-target="#stochastic-gradient-descent"><span class="header-section-number">7.2</span> Stochastic Gradient Descent</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/regression/nonlinear.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../regression/index.html">Regression analysis</a></li><li class="breadcrumb-item"><a href="../regression/nonlinear.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Non-linear Regression</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-regression-nonlinear" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Non-linear Regression</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This section is mainly based on <span class="citation" data-cites="Brunton2022">Brunton and Kutz (<a href="../references.html#ref-Brunton2022" role="doc-biblioref">2022</a>)</span>, Section 4.2.</p>
+</div>
+</div>
+<p>We extend our theory of <em>curve fitting</em> to a non-linear function <span class="math inline">\(f(X, c)\)</span> with coefficients <span class="math inline">\(b\in\mathbb{R}^m\)</span> and our <span class="math inline">\(n\)</span> <span class="math inline">\(X_{k-}\)</span>. We assume that <span class="math inline">\(m &lt; n\)</span>.</p>
+<p>If we define our root-mean-square error depending on <span class="math inline">\(b\)</span> as <span class="math display">\[
+E_2(c) = \sum_{k=1}^n(f(X_{k-}, c) - y_k )^2
+\]</span> and we can minimize with respect to each <span class="math inline">\(b_j\)</span> resulting in a <span class="math inline">\(m \times m\)</span> system <span class="math display">\[
+\sum_k (f(X_{k-}, c) - y_k)\frac{\partial f}{\partial c_j} = 0\quad\text{for}\quad j=1, 2, \ldots, m.
+\]</span></p>
+<p>Depending on the properties of the function at hand it can be guaranteed to find an extrema or not. For example convex functions have guarantees of convergence while non-convex functions can have chelating features that make it hard to work with optimization algorithms.</p>
+<p>To solve such a system we employ iterative solvers that use an initial guess. Let us look at the most common, the gradient descent method.</p>
+<section id="sec-regression-nonlinear-gd" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="sec-regression-nonlinear-gd"><span class="header-section-number">7.1</span> Gradient Descent</h2>
+<p>For a higher dimensional system or function <span class="math inline">\(f\)</span> the gradient must be zero<br>
+<span class="math display">\[
+\nabla f(x) = 0
+\]</span> to know that we are in an extrema. Since we can have saddle points this is not the sole criteria but a necessary one. Gradient descent, as the name suggest uses the gradient as <em>direction</em> in an iterative algorithm to find a minimum.</p>
+<p>The idea is basically, if you are lost on a mountain in the fog and you can not see the path, the fastest and a reliable way that only uses local information is to follow the steepest slope down.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A function does not necessarily experience gravity in the same way as we do, so please do not try this in real live, i.e.&nbsp;cliffs tend to be hard to walk down.</p>
+</div>
+</div>
+<p>We express this algorithm in terms of the iterations <span class="math inline">\(x^k\)</span> for guesses of the minimum with the updates <span class="math display">\[
+x^{k+1} = x^k - \delta\, \nabla f(x^k)
+\]</span> where the parameter <span class="math inline">\(\delta\)</span> defines how far along the gradient descent curve we move. This formula is an update for a Newton method where we use the derivative as the update function. This leaves us with the problem to find an algorithm to determine <span class="math inline">\(\delta\)</span>.</p>
+<p>Again, we can view this as an optimization problem for a new function <span class="math display">\[
+F(\delta) = f(x^{k+1}(\delta))
+\]</span> and <span id="eq-gcupdatep"><span class="math display">\[
+\partial_\delta F = -\nabla f(x^{k+1})\nabla f(x^k) = 0.
+\tag{7.1}\]</span></span></p>
+<p>Now the interpretation of <a href="#eq-gcupdatep" class="quarto-xref">Equation&nbsp;<span>7.1</span></a> is that we want that the gradient of the current step is orthogonal to the gradient of the next step.</p>
+<p>In order to make it clearer we follow the example given in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, sec. 4.2</a>,pp.&nbsp;141-144)</span>.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-gd" class="theorem example">
+<p><span class="theorem-title"><strong>Example 7.1 (Gradient decent)</strong></span> For the function <span class="math display">\[
+f(x) = x_1^2 + 3 x_2^2
+\]</span> we can compute the gradient as <span class="math display">\[
+\nabla f (x)= \left[ \begin{array}{c} \partial_{x_1} f(x)\\ \partial_{x_2} f(x) \end{array} \right] = \left[ \begin{array}{c} 2 x_1 \\ 6 x_2 \end{array} \right]
+\]</span> Resulting in <span class="math display">\[
+x^{k+1} = x^{(k)} - \delta \, \nabla f(x^{(k)}) =
+\left[ \begin{array}{c} (1 - 2 \delta) x^{(k)}_1 \\ (1 - 6 \delta)x^{(k)}_2 \end{array} \right].
+\]</span> Consequently <span class="math display">\[
+F(\delta) = (1-2\delta)^2 x_1^2 + (1-6\delta)^2 x_2^2,
+\]</span> <span class="math display">\[
+\partial_\delta F = -2^2(1-2\delta)x_1^2 - 6^2(1-6\delta)x_2^2,
+\]</span> and <span class="math display">\[
+\partial_\delta F(\delta) = 0 \Leftrightarrow \delta = \frac{x_1^2 + 9 x_2^2}{2 x_1^2 + 54 x_2^2}.
+\]</span></p>
+<div id="cell-fig-gd-ex1" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x_ <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">20</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>y_ <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">20</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x_, y_)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x, y: np.<span class="bu">pow</span>(x, <span class="dv">2</span>) <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> np.<span class="bu">pow</span>(y, <span class="dv">2</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>grad_f <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">*</span> np.array([<span class="dv">2</span>, <span class="dv">6</span>]).reshape(x.shape)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>delta <span class="op">=</span> <span class="kw">lambda</span> x: (x[<span class="dv">0</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">9</span> <span class="op">*</span> x[<span class="dv">1</span>]<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span> x[<span class="dv">0</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">54</span> <span class="op">*</span> x[<span class="dv">1</span>]<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> f(X, Y)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> go.Figure()</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>fig.add_trace(go.Surface(z<span class="op">=</span>Z, x<span class="op">=</span>X, y<span class="op">=</span>Y, colorscale<span class="op">=</span><span class="st">'greys'</span>, name<span class="op">=</span><span class="st">"Function"</span>))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>fig.update_traces(contours_z<span class="op">=</span><span class="bu">dict</span>(show<span class="op">=</span><span class="va">True</span>, usecolormap<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                                  highlightcolor<span class="op">=</span><span class="st">"limegreen"</span>, project_z<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">2</span>]).reshape((<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> np.array(f(x[<span class="dv">0</span>, <span class="dv">0</span>], x[<span class="dv">0</span>, <span class="dv">1</span>]))</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>diff <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> diff <span class="op">&gt;</span> <span class="fl">1e-10</span>:</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    x_new <span class="op">=</span> x[<span class="op">-</span><span class="dv">1</span>, :] <span class="op">-</span> delta(x[<span class="op">-</span><span class="dv">1</span>, :]) <span class="op">*</span> grad_f(x[<span class="op">-</span><span class="dv">1</span>, :])</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> np.hstack((z, f(x_new[<span class="dv">0</span>], x_new[<span class="dv">1</span>])))</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    diff <span class="op">=</span> np.linalg.norm(z[<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> z[<span class="op">-</span><span class="dv">2</span>])</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.vstack((x, x_new))</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>fig.add_scatter3d(x<span class="op">=</span>x[:, <span class="dv">0</span>], y<span class="op">=</span>x[:, <span class="dv">1</span>], z<span class="op">=</span>z, line_color<span class="op">=</span><span class="st">'red'</span>, name<span class="op">=</span><span class="st">"Decent path"</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-gd-ex1" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gd-ex1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>                            <div id="86535f4f-e5b9-4e0d-9d3f-e4076f20e645" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("86535f4f-e5b9-4e0d-9d3f-e4076f20e645")) {                    Plotly.newPlot(                        "86535f4f-e5b9-4e0d-9d3f-e4076f20e645",                        [{"colorscale":[[0.0,"rgb(255,255,255)"],[0.125,"rgb(240,240,240)"],[0.25,"rgb(217,217,217)"],[0.375,"rgb(189,189,189)"],[0.5,"rgb(150,150,150)"],[0.625,"rgb(115,115,115)"],[0.75,"rgb(82,82,82)"],[0.875,"rgb(37,37,37)"],[1.0,"rgb(0,0,0)"]],"name":"Function","x":[[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0],[-3.0,-2.6842105263157894,-2.3684210526315788,-2.0526315789473686,-1.736842105263158,-1.4210526315789473,-1.105263157894737,-0.7894736842105265,-0.47368421052631593,-0.1578947368421053,0.1578947368421053,0.4736842105263155,0.7894736842105261,1.1052631578947363,1.421052631578947,1.7368421052631575,2.052631578947368,2.3684210526315788,2.6842105263157894,3.0]],"y":[[-3.0,-3.0,-3.0,-3.0,-3.0,-3.0,-3.0,-3.0,-3.0,-3.0,-3.0,-3.0,-3.0,-3.0,-3.0,-3.0,-3.0,-3.0,-3.0,-3.0],[-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894,-2.6842105263157894],[-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788,-2.3684210526315788],[-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686,-2.0526315789473686],[-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158,-1.736842105263158],[-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473,-1.4210526315789473],[-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737,-1.105263157894737],[-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265,-0.7894736842105265],[-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593,-0.47368421052631593],[-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053,-0.1578947368421053],[0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053,0.1578947368421053],[0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155,0.4736842105263155],[0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261,0.7894736842105261],[1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363,1.1052631578947363],[1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947,1.421052631578947],[1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575,1.7368421052631575],[2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368,2.052631578947368],[2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788,2.3684210526315788],[2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894,2.6842105263157894],[3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0,3.0]],"z":[[36.0,34.204986149584485,32.609418282548475,31.213296398891966,30.01662049861496,29.019390581717452,28.221606648199447,27.623268698060944,27.224376731301938,27.024930747922436,27.024930747922436,27.224376731301938,27.62326869806094,28.221606648199444,29.01939058171745,30.016620498614955,31.213296398891966,32.609418282548475,34.204986149584485,36.0],[30.614958448753463,28.819944598337948,27.224376731301938,25.82825484764543,24.63157894736842,23.634349030470915,22.83656509695291,22.238227146814406,21.8393351800554,21.6398891966759,21.6398891966759,21.8393351800554,22.238227146814403,22.836565096952906,23.63434903047091,24.631578947368418,25.82825484764543,27.224376731301938,28.819944598337948,30.614958448753463],[25.82825484764543,24.033240997229917,22.437673130193904,21.041551246537395,19.844875346260388,18.84764542936288,18.049861495844876,17.451523545706372,17.052631578947366,16.853185595567865,16.853185595567865,17.052631578947366,17.45152354570637,18.049861495844873,18.847645429362878,19.844875346260388,21.041551246537395,22.437673130193904,24.033240997229917,25.82825484764543],[21.639889196675902,19.844875346260388,18.249307479224377,16.85318559556787,15.656509695290861,14.659279778393355,13.861495844875348,13.263157894736844,12.864265927977842,12.66481994459834,12.66481994459834,12.864265927977842,13.263157894736844,13.861495844875346,14.659279778393353,15.65650969529086,16.85318559556787,18.249307479224377,19.844875346260388,21.639889196675902],[18.049861495844876,16.254847645429365,14.659279778393351,13.263157894736842,12.066481994459835,11.069252077562329,10.271468144044322,9.673130193905818,9.274238227146816,9.074792243767314,9.074792243767314,9.274238227146816,9.673130193905818,10.27146814404432,11.069252077562327,12.066481994459833,13.263157894736842,14.659279778393351,16.254847645429365,18.049861495844876],[15.058171745152354,13.263157894736842,11.66759002770083,10.271468144044322,9.074792243767313,8.077562326869806,7.279778393351801,6.6814404432132966,6.282548476454294,6.083102493074793,6.083102493074793,6.282548476454293,6.6814404432132966,7.279778393351799,8.077562326869804,9.074792243767313,10.27146814404432,11.66759002770083,13.263157894736842,15.058171745152354],[12.664819944598339,10.869806094182826,9.274238227146814,7.878116343490306,6.681440443213297,5.68421052631579,4.886426592797785,4.288088642659281,3.889196675900278,3.6897506925207764,3.6897506925207764,3.8891966759002776,4.288088642659281,4.8864265927977835,5.684210526315789,6.681440443213296,7.878116343490304,9.274238227146814,10.869806094182826,12.664819944598339],[10.869806094182827,9.074792243767313,7.4792243767313025,6.083102493074794,4.886426592797785,3.889196675900278,3.091412742382273,2.493074792243769,2.094182825484766,1.8947368421052642,1.8947368421052642,2.0941828254847654,2.493074792243768,3.0914127423822713,3.8891966759002767,4.8864265927977835,6.083102493074792,7.4792243767313025,9.074792243767313,10.869806094182827],[9.673130193905818,7.878116343490305,6.282548476454293,4.886426592797784,3.6897506925207764,2.692520775623269,1.894736842105264,1.29639889196676,0.8975069252077568,0.6980609418282553,0.6980609418282553,0.8975069252077564,1.296398891966759,1.8947368421052624,2.692520775623268,3.6897506925207746,4.886426592797783,6.282548476454293,7.878116343490305,9.673130193905818],[9.074792243767313,7.2797783933518,5.684210526315789,4.288088642659281,3.0914127423822717,2.0941828254847645,1.2963988919667593,0.6980609418282553,0.2991689750692523,0.09972299168975075,0.09972299168975075,0.29916897506925183,0.6980609418282546,1.2963988919667577,2.094182825484763,3.09141274238227,4.288088642659279,5.684210526315789,7.2797783933518,9.074792243767313],[9.074792243767313,7.2797783933518,5.684210526315789,4.288088642659281,3.0914127423822717,2.0941828254847645,1.2963988919667593,0.6980609418282553,0.2991689750692523,0.09972299168975075,0.09972299168975075,0.29916897506925183,0.6980609418282546,1.2963988919667577,2.094182825484763,3.09141274238227,4.288088642659279,5.684210526315789,7.2797783933518,9.074792243767313],[9.673130193905816,7.878116343490303,6.282548476454292,4.8864265927977835,3.689750692520775,2.692520775623268,1.8947368421052626,1.2963988919667586,0.8975069252077554,0.698060941828254,0.698060941828254,0.8975069252077551,1.2963988919667577,1.894736842105261,2.6925207756232665,3.6897506925207733,4.886426592797782,6.282548476454292,7.878116343490303,9.673130193905816],[10.869806094182824,9.074792243767313,7.479224376731301,6.083102493074792,4.8864265927977835,3.8891966759002763,3.0914127423822713,2.493074792243767,2.094182825484764,1.8947368421052624,1.8947368421052624,2.0941828254847636,2.493074792243766,3.0914127423822695,3.889196675900275,4.886426592797782,6.08310249307479,7.479224376731301,9.074792243767313,10.869806094182824],[12.664819944598335,10.86980609418282,9.27423822714681,7.878116343490301,6.681440443213293,5.684210526315786,4.886426592797781,4.288088642659276,3.8891966759002736,3.689750692520772,3.689750692520772,3.889196675900273,4.288088642659276,4.886426592797779,5.684210526315784,6.681440443213291,7.8781163434903,9.27423822714681,10.86980609418282,12.664819944598335],[15.05817174515235,13.263157894736837,11.667590027700825,10.271468144044317,9.074792243767309,8.077562326869803,7.279778393351797,6.681440443213292,6.28254847645429,6.083102493074788,6.083102493074788,6.282548476454289,6.681440443213292,7.279778393351795,8.077562326869801,9.074792243767307,10.271468144044317,11.667590027700825,13.263157894736837,15.05817174515235],[18.049861495844873,16.254847645429358,14.659279778393348,13.263157894736839,12.06648199445983,11.069252077562322,10.271468144044317,9.673130193905813,9.27423822714681,9.074792243767309,9.074792243767309,9.27423822714681,9.673130193905813,10.271468144044317,11.069252077562322,12.066481994459828,13.263157894736835,14.659279778393348,16.254847645429358,18.049861495844873],[21.639889196675895,19.84487534626038,18.24930747922437,16.85318559556786,15.656509695290854,14.659279778393348,13.861495844875341,13.263157894736837,12.864265927977835,12.664819944598333,12.664819944598333,12.864265927977835,13.263157894736837,13.86149584487534,14.659279778393346,15.656509695290852,16.85318559556786,18.24930747922437,19.84487534626038,21.639889196675895],[25.82825484764543,24.033240997229917,22.437673130193904,21.041551246537395,19.844875346260388,18.84764542936288,18.049861495844876,17.451523545706372,17.052631578947366,16.853185595567865,16.853185595567865,17.052631578947366,17.45152354570637,18.049861495844873,18.847645429362878,19.844875346260388,21.041551246537395,22.437673130193904,24.033240997229917,25.82825484764543],[30.614958448753463,28.819944598337948,27.224376731301938,25.82825484764543,24.63157894736842,23.634349030470915,22.83656509695291,22.238227146814406,21.8393351800554,21.6398891966759,21.6398891966759,21.8393351800554,22.238227146814403,22.836565096952906,23.63434903047091,24.631578947368418,25.82825484764543,27.224376731301938,28.819944598337948,30.614958448753463],[36.0,34.204986149584485,32.609418282548475,31.213296398891966,30.01662049861496,29.019390581717452,28.221606648199447,27.623268698060944,27.224376731301938,27.024930747922436,27.024930747922436,27.224376731301938,27.62326869806094,28.221606648199444,29.01939058171745,30.016620498614955,31.213296398891966,32.609418282548475,34.204986149584485,36.0]],"type":"surface","contours":{"z":{"project":{"z":true},"highlightcolor":"limegreen","show":true,"usecolormap":true}}},{"line":{"color":"red"},"name":"Decent path","x":[3.0,1.846153846153846,0.5274725274725278,0.3245984784446325,0.0927424224127521,0.057072259946309,0.016306359984659693,0.01003468306748289,0.0028670523049951083,0.00176433987999699,0.0005040971085705679,0.0003102136052741957,8.863245864977002e-05,5.454305147678157e-05,1.5583728993366116e-05,9.589987072840692e-06,2.7399963065259032e-06],"y":[2.0,-0.30769230769230793,0.35164835164835173,-0.054099746407438754,0.061828281608501456,-0.009512043324384822,0.010870906656439808,-0.0016724471779138127,0.0019113682033300734,-0.00029405664666616463,0.00033606473904704563,-5.170226754569918e-05,5.908830576651344e-05,-9.090508579463573e-06,1.0389152662244105e-05,-1.5983311788067775e-06,1.8266642043506072e-06],"z":[21.0,3.6923076923076925,0.6491969568892652,0.11414451989261812,0.02006936613496582,0.0035286797599939877,0.0006204272105483928,0.00010908610295356345,1.917997414568146e-05,3.3723031464934417e-06,5.929324213614836e-07,1.0425185430531569e-07,1.832999636137415e-08,3.2228565030987467e-09,5.666560884569211e-10,9.963183972868918e-11,1.7517686106143102e-11],"type":"scatter3d"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('86535f4f-e5b9-4e0d-9d3f-e4076f20e645');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gd-ex1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: Gradient decent applied for the function <span class="math inline">\(f(x) = x_1^2 + 3x_2^2\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you can not compute the gradient analytically there are numerical methods to help do the computation.</p>
+</div>
+</div>
+<p>In order to get a better idea on how this is working for <em>curve fitting</em> we apply the gradient decent method to our curve fitting from <a href="linear.html#sec-regr-linear-ols" class="quarto-xref"><span>Section 6.1</span></a>.</p>
+<p>In <a href="linear.html#eq-ols_gradient" class="quarto-xref">Equation&nbsp;<span>6.5</span></a> we computed the gradient and instead of computing <span class="math inline">\(X^\dagger\)</span> with high cost we get the low cost iterative solver:</p>
+<p><span class="math display">\[
+c^{(k+1)} = c^{(k)} - \delta (2 X^mathsf{T} X c^{(k)} - 2 X^mathsf{T} y)
+\]</span></p>
+<p>As <span class="math inline">\(\delta\)</span> is tricky to compute we go ahead and introduce we do not update it but prescribe it. This will not grant us the optimal convergence (if there is convergence) but if we choose it right we still get convergence.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In machine learning the parameter <span class="math inline">\(\delta\)</span> is often called the <em>learning rate</em>.</p>
+</div>
+</div>
+<p>So lets try it with our example from <a href="linear.html#fig-linear_reg" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>.</p>
+<div id="cell-fig-non-linear_reg_gd2" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">6020</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>grad <span class="op">=</span> <span class="kw">lambda</span> c, X, y: <span class="dv">2</span> <span class="op">*</span> X.T <span class="op">@</span> (X <span class="op">@</span> c <span class="op">-</span> y)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>update <span class="op">=</span> <span class="kw">lambda</span> c, delta, X, y: c <span class="op">-</span> delta <span class="op">*</span> grad(c, X, y)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gd(c, delta, X, y, n, stop<span class="op">=</span><span class="fl">1e-10</span>):</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    diff <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n):</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        cnew <span class="op">=</span> update(c, delta, X, y)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        diff <span class="op">=</span> np.linalg.norm(cnew <span class="op">-</span> c)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        c <span class="op">=</span> cnew</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> diff <span class="op">&lt;</span> stop: <span class="cf">break</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># The data</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">11</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="fl">1.8</span>, <span class="fl">2.0</span>, <span class="fl">2.3</span>, <span class="fl">2.2</span>]).reshape((<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array([x, np.ones(x.shape)]).T</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>delta <span class="op">=</span> <span class="fl">0.002</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.random.random((<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>c_10 <span class="op">=</span> gd(c, delta, X, y, <span class="dv">50</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>c_20 <span class="op">=</span> gd(c_10, delta, X, y, <span class="dv">50</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>c_30 <span class="op">=</span> gd(c_20, delta, X, y, <span class="dv">200</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>p4 <span class="op">=</span> np.linalg.pinv(X) <span class="op">@</span> y</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>xf <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">11</span>, <span class="fl">0.1</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>y1 <span class="op">=</span> np.polyval(c_10, xf)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>y2 <span class="op">=</span> np.polyval(c_20, xf)</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>y3 <span class="op">=</span> np.polyval(c_30, xf)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>y4 <span class="op">=</span> np.polyval(p4, xf)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">"o"</span>, color<span class="op">=</span><span class="st">"r"</span>, label<span class="op">=</span><span class="st">"observations"</span>)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>plt.plot(xf, y1, label<span class="op">=</span><span class="vs">r"$n=50$"</span>)</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>plt.plot(xf, y2, label<span class="op">=</span><span class="vs">r"$n=100$"</span>)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>plt.plot(xf, y3, label<span class="op">=</span><span class="vs">r"$n=300$"</span>)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>plt.plot(xf, y4, label<span class="op">=</span><span class="vs">r"$E_2$"</span>)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">4</span>)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="dv">11</span>)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">1</span>)</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>plt.grid(visible<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-non-linear_reg_gd2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-non-linear_reg_gd2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="nonlinear_files/figure-html/fig-non-linear_reg_gd2-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;7.2: Line fit with gradient decent for different number of iterations and learning rate 2e-3."><img src="nonlinear_files/figure-html/fig-non-linear_reg_gd2-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-non-linear_reg_gd2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.2: Line fit with gradient decent for different number of iterations and learning rate 2e-3.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The above algorithm uses the entire set <span class="math inline">\(X\)</span> for the computation. For a large enough set <span class="math inline">\(X\)</span> this is quite cost intense, even if it is still cheaper than computing <span class="math inline">\(X^\dagger\)</span>.</p>
+</section>
+<section id="stochastic-gradient-descent" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="stochastic-gradient-descent"><span class="header-section-number">7.2</span> Stochastic Gradient Descent</h2>
+<p>In order to reduce cost we can randomly select some points of our training set and only train with those. Obviously the computation of the gradient becomes much faster. We call this method <em>Stochastic Gradient Decent</em> (SGD).</p>
+<p>In <a href="#fig-non-linear_reg_gd3" class="quarto-xref">Figure&nbsp;<span>7.3</span></a> we see the convergence for randomly selecting 1, 3, and 6 indices of our possible 10.</p>
+<p>The downside of the SGD algorithm is that the algorithm does not settle down for a long time and will <em>jump</em>. In the other side it might get less stuck in local minima.</p>
+<p>One possibility to try to get the strength of both is to use SDG to get a good guess for your initial value and SD for the fine tuning.</p>
+<div id="cell-fig-non-linear_reg_gd3" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">6020</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>grad <span class="op">=</span> <span class="kw">lambda</span> c, X, y: <span class="dv">2</span> <span class="op">*</span> X.T <span class="op">@</span> (X <span class="op">@</span> c <span class="op">-</span> y)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>update <span class="op">=</span> <span class="kw">lambda</span> c, delta, X, y: c <span class="op">-</span> delta <span class="op">*</span> grad(c, X, y)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sgd(c, delta, X, y, n, indices<span class="op">=-</span><span class="dv">1</span>, stop<span class="op">=</span><span class="fl">1e-10</span>):</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> indices <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        indices <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    diff <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n):</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> np.random.choice(X.shape[<span class="dv">0</span>], size<span class="op">=</span>indices, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        i.sort()</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        cnew <span class="op">=</span> update(c, delta, X[i, :], y[i])</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        diff <span class="op">=</span> np.linalg.norm(cnew <span class="op">-</span> c)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        c <span class="op">=</span> cnew</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> diff <span class="op">&lt;</span> stop: <span class="cf">break</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># The data</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">11</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="fl">1.8</span>, <span class="fl">2.0</span>, <span class="fl">2.3</span>, <span class="fl">2.2</span>]).reshape((<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array([x, np.ones(x.shape)]).T</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>delta <span class="op">=</span> <span class="fl">0.002</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.random.random((<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>c_10 <span class="op">=</span> sgd(c, delta, X, y, <span class="dv">200</span>, <span class="dv">1</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>c_20 <span class="op">=</span> sgd(c, delta, X, y, <span class="dv">200</span>, <span class="dv">3</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>c_30 <span class="op">=</span> sgd(c, delta, X, y, <span class="dv">200</span>, <span class="dv">5</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>c_ft <span class="op">=</span> gd(c_20, delta, X, y, <span class="dv">150</span>, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>p4 <span class="op">=</span> np.linalg.pinv(X) <span class="op">@</span> y</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>xf <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">11</span>, <span class="fl">0.1</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>y1 <span class="op">=</span> np.polyval(c_10, xf)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>y2 <span class="op">=</span> np.polyval(c_20, xf)</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>y3 <span class="op">=</span> np.polyval(c_30, xf)</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>yft <span class="op">=</span> np.polyval(c_ft, xf)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>y4 <span class="op">=</span> np.polyval(p4, xf)</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">"o"</span>, color<span class="op">=</span><span class="st">"r"</span>, label<span class="op">=</span><span class="st">"observations"</span>)</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>plt.plot(xf, y1, label<span class="op">=</span><span class="vs">r"#I=$1$"</span>)</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>plt.plot(xf, y2, label<span class="op">=</span><span class="vs">r"#I=$3$"</span>)</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.plot(xf, y3, label=r"#I=$5$")</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>plt.plot(xf, yft, label<span class="op">=</span><span class="vs">r"#I=$3$ GD $n=100$"</span>)</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>plt.plot(xf, y4, label<span class="op">=</span><span class="vs">r"$E_2$"</span>)</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">4</span>)</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="dv">11</span>)</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">1</span>)</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>plt.grid(visible<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-non-linear_reg_gd3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-non-linear_reg_gd3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="nonlinear_files/figure-html/fig-non-linear_reg_gd3-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;7.3: Line fit with stochastic gradient decent with 1 or 3 samples and 200 iterations as well as the 3 sample version as initial guess for GD with 100 iterations."><img src="nonlinear_files/figure-html/fig-non-linear_reg_gd3-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-non-linear_reg_gd3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.3: Line fit with stochastic gradient decent with 1 or 3 samples and 200 iterations as well as the 3 sample version as initial guess for GD with 100 iterations.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Brunton2022" class="csl-entry" role="listitem">
+Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engineering - Machine Learning, Dynamical Systems, and Control</em>. 2nd ed. Cambridge: Cambridge University Press.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/kandolfp\.github\.io\/MECH-M-DUAL-1-DBM\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../regression/linear.html" class="pagination-link" aria-label="Linear Regression">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../regression/optimizers.html" class="pagination-link" aria-label="Optimizers">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Optimizers</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Basics of Data Science WS 2024 (MECH-M-DUAL-1-GDM)</p>
+</div>   
+    <div class="nav-footer-center">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> Peter Kandolf</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/regression/nonlinear.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","loop":false});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

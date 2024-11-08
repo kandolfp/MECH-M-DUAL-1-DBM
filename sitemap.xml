@@ -2,54 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kandolfp.github.io/MECH-M-DUAL-1-DBM/index.html</loc>
-    <lastmod>2024-11-04T19:19:49.113Z</lastmod>
+    <lastmod>2024-11-08T12:07:43.572Z</lastmod>
   </url>
   <url>
     <loc>https://kandolfp.github.io/MECH-M-DUAL-1-DBM/intro.html</loc>
-    <lastmod>2024-11-04T19:19:49.113Z</lastmod>
+    <lastmod>2024-11-08T12:07:43.572Z</lastmod>
   </url>
   <url>
     <loc>https://kandolfp.github.io/MECH-M-DUAL-1-DBM/basics/linearalgebra.html</loc>
-    <lastmod>2024-11-04T19:19:49.113Z</lastmod>
+    <lastmod>2024-11-08T12:07:43.568Z</lastmod>
   </url>
   <url>
     <loc>https://kandolfp.github.io/MECH-M-DUAL-1-DBM/basics/sets.html</loc>
-    <lastmod>2024-11-04T19:19:49.113Z</lastmod>
+    <lastmod>2024-11-08T12:07:43.572Z</lastmod>
   </url>
   <url>
     <loc>https://kandolfp.github.io/MECH-M-DUAL-1-DBM/basics/epilogue.html</loc>
-    <lastmod>2024-11-04T19:19:49.113Z</lastmod>
+    <lastmod>2024-11-08T12:07:43.568Z</lastmod>
   </url>
   <url>
     <loc>https://kandolfp.github.io/MECH-M-DUAL-1-DBM/matrixdc/eigen.html</loc>
-    <lastmod>2024-11-04T19:19:49.113Z</lastmod>
+    <lastmod>2024-11-08T12:07:43.572Z</lastmod>
   </url>
   <url>
     <loc>https://kandolfp.github.io/MECH-M-DUAL-1-DBM/matrixdc/svd.html</loc>
-    <lastmod>2024-11-04T19:19:49.113Z</lastmod>
+    <lastmod>2024-11-08T12:07:43.572Z</lastmod>
   </url>
   <url>
     <loc>https://kandolfp.github.io/MECH-M-DUAL-1-DBM/regression/linear.html</loc>
-    <lastmod>2024-11-04T19:19:49.117Z</lastmod>
+    <lastmod>2024-11-08T12:07:43.572Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kandolfp.github.io/MECH-M-DUAL-1-DBM/regression/nonlinear.html</loc>
+    <lastmod>2024-11-08T12:07:43.572Z</lastmod>
+  </url>
+  <url>
+    <loc>https://kandolfp.github.io/MECH-M-DUAL-1-DBM/regression/optimizers.html</loc>
+    <lastmod>2024-11-08T12:07:43.572Z</lastmod>
   </url>
   <url>
     <loc>https://kandolfp.github.io/MECH-M-DUAL-1-DBM/summary.html</loc>
-    <lastmod>2024-11-04T19:19:49.117Z</lastmod>
+    <lastmod>2024-11-08T12:07:43.572Z</lastmod>
   </url>
   <url>
     <loc>https://kandolfp.github.io/MECH-M-DUAL-1-DBM/references.html</loc>
-    <lastmod>2024-11-04T19:19:49.113Z</lastmod>
+    <lastmod>2024-11-08T12:07:43.572Z</lastmod>
   </url>
   <url>
     <loc>https://kandolfp.github.io/MECH-M-DUAL-1-DBM/basics/index.html</loc>
-    <lastmod>2024-11-04T19:19:49.113Z</lastmod>
+    <lastmod>2024-11-08T12:07:43.568Z</lastmod>
   </url>
   <url>
     <loc>https://kandolfp.github.io/MECH-M-DUAL-1-DBM/matrixdc/index.html</loc>
-    <lastmod>2024-11-04T19:19:49.113Z</lastmod>
+    <lastmod>2024-11-08T12:07:43.572Z</lastmod>
   </url>
   <url>
     <loc>https://kandolfp.github.io/MECH-M-DUAL-1-DBM/regression/index.html</loc>
-    <lastmod>2024-11-04T19:19:49.113Z</lastmod>
+    <lastmod>2024-11-08T12:07:43.572Z</lastmod>
   </url>
 </urlset>

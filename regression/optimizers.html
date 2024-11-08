@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Regression analysis – Basics of Data Science</title>
+<title>8&nbsp; Optimizers – Basics of Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -50,8 +84,8 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../regression/linear.html" rel="next">
-<link href="../matrixdc/svd.html" rel="prev">
+<link href="../summary.html" rel="next">
+<link href="../regression/nonlinear.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -63,6 +97,9 @@ div.csl-indent {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -132,7 +169,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../regression/index.html">Regression analysis</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../regression/index.html">Regression analysis</a></li><li class="breadcrumb-item"><a href="../regression/optimizers.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Optimizers</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -232,7 +269,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../regression/index.html" class="sidebar-item-text sidebar-link active">
+            <a href="../regression/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Regression analysis</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -253,7 +290,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../regression/optimizers.html" class="sidebar-item-text sidebar-link">
+  <a href="../regression/optimizers.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Optimizers</span></span></a>
   </div>
 </li>
@@ -276,15 +313,26 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#over-determined-systems" id="toc-over-determined-systems" class="nav-link active" data-scroll-target="#over-determined-systems"><span class="header-section-number">8.1</span> Over-Determined Systems</a>
+  <ul class="collapse">
+  <li><a href="#lasso" id="toc-lasso" class="nav-link" data-scroll-target="#lasso"><span class="header-section-number">8.1.1</span> LASSO</a></li>
+  <li><a href="#ridge" id="toc-ridge" class="nav-link" data-scroll-target="#ridge"><span class="header-section-number">8.1.2</span> RIDGE</a></li>
+  </ul></li>
+  <li><a href="#sec-regression-optimizers-msou" id="toc-sec-regression-optimizers-msou" class="nav-link" data-scroll-target="#sec-regression-optimizers-msou"><span class="header-section-number">8.2</span> Model Selection/Identification and over-/underfitting</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/regression/optimizers.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../regression/index.html">Regression analysis</a></li><li class="breadcrumb-item"><a href="../regression/optimizers.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Optimizers</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Regression analysis</h1>
+<h1 class="title"><span id="sec-regression-optimizers" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Optimizers</span></span></h1>
 </div>
 
 
@@ -301,22 +349,191 @@ window.Quarto = {
 </header>
 
 
-<p>In general, <em>regression analysis</em> can be understood as a set of tools that is used to estimate or establish a relationship between a dependent variable <span class="math inline">\(Y\)</span> (also called outcome or response variable, label) and the independent variable <span class="math inline">\(X\)</span> (also called regressor, predictors, covariates, explanatory variable or feature). If we add a regression function <span class="math inline">\(f\)</span> and some unknown parameters <span class="math inline">\(b\)</span> to the mix the problem can be written mathematically as <span id="eq-curvefitting"><span class="math display">\[
-Y = f(X, c)
-\tag{1}\]</span></span> where <span class="math inline">\(b\)</span> is found by optimizing for <em>a good fit</em> of <span class="math inline">\(f\)</span> to the data.</p>
-<p>We split up the discussion along the well known topics:</p>
-<ul>
-<li><a href="linear.html" class="quarto-xref"><span>6&nbsp; Linear Regression</span></a></li>
-<li><a href="nonlinear.html" class="quarto-xref"><span>7&nbsp; Non-linear Regression</span></a>
-<ul>
-<li><a href="nonlinear.html#sec-regression-nonlinear-gd" class="quarto-xref"><span>7.1 Gradient Descent</span></a></li>
-</ul></li>
-<li><a href="optimizers.html" class="quarto-xref"><span>8&nbsp; Optimizers</span></a>
-<ul>
-<li><a href="optimizers.html#sec-regression-optimizers-msou" class="quarto-xref"><span>8.2 Model Selection/Identification and over-/underfitting</span></a></li>
-</ul></li>
-</ul>
-<p>Parts of this section are based on <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, sec. 4</a>)</span>.</p>
+<p>As we have seen in the previous section the task of regression usually results in an optimization problem. It is worth investigating this further by looking closely on the <span id="eq-axb"><span class="math display">\[
+A x = b
+\tag{8.1}\]</span></span> problem for different dimensions of <span class="math inline">\(A\)</span>.</p>
+<p>We investigate the impact of restricting our solution not just by <a href="#eq-axb" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> but with the help of the <span class="math inline">\(l_1\)</span> and <span class="math inline">\(l_2\)</span> norm imposed on the solution <span class="math inline">\(x\)</span>. As we have seen in <a href="linear.html#fig-linear_reg" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> the choice of norm has an implication on the result and the same is true here.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This section is mainly based on <span class="citation" data-cites="Brunton2022">Brunton and Kutz (<a href="../references.html#ref-Brunton2022" role="doc-biblioref">2022</a>)</span>, Section 4.3.</p>
+</div>
+</div>
+<section id="over-determined-systems" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="over-determined-systems"><span class="header-section-number">8.1</span> Over-Determined Systems</h2>
+<p>We speak of an over-determined system if we have more rows than columns, i.e.&nbsp;<span class="math inline">\(A\)</span> is tall and skinny and in general there is no solution to <a href="#eq-axb" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> but rather we minimize the error according to a norm, see <span class="citation" data-cites="ec-regr-linear-ols">(<a href="../references.html#ref-ec-regr-linear-ols" role="doc-biblioref"><strong>ec-regr-linear-ols?</strong></a>)</span>. If we further impose a restriction on <span class="math inline">\(x\)</span> we can select a more specific solution.</p>
+<p>The generalized form is <span id="eq-reg-optimizers"><span class="math display">\[
+x = \underset{v}{\operatorname{argmin}} \|Av - b\|_2 + \lambda_1 \|v\|_1 + \lambda_2\|v\|_2
+\tag{8.2}\]</span></span> where the parameters <span class="math inline">\(\lambda_1\)</span> and <span class="math inline">\(\lambda_2\)</span> are called the <em>penalization coefficients</em>, with respect to the norm. Selecting these coefficients is the first step towards <em>model selection</em>.</p>
+<p>Let us have a look at this in action for solving a <em>random</em> system with different parameters <span class="math inline">\(\lambda_1\)</span> and setting <span class="math inline">\(\lambda_2\)</span>.</p>
+<section id="lasso" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="lasso"><span class="header-section-number">8.1.1</span> LASSO</h3>
+<p>The <em>least absolute shrinkage and selection operator</em> LASSO solves <a href="#eq-reg-optimizers" class="quarto-xref">Equation&nbsp;<span>8.2</span></a> with <span class="math inline">\(\lambda_1 &gt; 0\)</span> and <span class="math inline">\(\lambda_2=0\)</span>, i.e.&nbsp;only optimizing with the <span class="math inline">\(l_1\)</span> norm. The theory tells us that for increasing <span class="math inline">\(\lambda_1\)</span> we should get more and more zeros in our solution <span class="math inline">\(x\)</span>.</p>
+<div id="cell-fig-opt_lambda1" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">6020</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.random.rand(m, n)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.random.rand(m)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>x0<span class="op">=</span> np.linalg.pinv(A) <span class="op">@</span> b</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>optimize <span class="op">=</span> <span class="kw">lambda</span> x, A, b, lam, norm: np.linalg.norm(A <span class="op">@</span> x <span class="op">-</span> b, <span class="bu">ord</span><span class="op">=</span>norm[<span class="dv">0</span>]) <span class="op">+\</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    lam <span class="op">*</span> np.linalg.norm(x, <span class="bu">ord</span><span class="op">=</span>norm[<span class="dv">1</span>])</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>axs <span class="op">=</span> []</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">10</span>))</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">11</span>))</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">12</span>))</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, lam <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>]):</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> minimize(optimize, args<span class="op">=</span>(A, b, lam, [<span class="dv">2</span>, <span class="dv">1</span>]), x0<span class="op">=</span>x0)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].bar(<span class="bu">range</span>(n), res.x)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].text(<span class="dv">5</span>, <span class="fl">0.05</span>, <span class="vs">rf"$\lambda=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].set_xlim(<span class="dv">0</span>, <span class="dv">100</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].set_ylim(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].hist(res.x, <span class="dv">20</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].text(<span class="op">-</span><span class="fl">0.08</span>, <span class="dv">50</span>, <span class="vs">rf"$\lambda=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].set_xlim(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].set_ylim(<span class="dv">0</span>, <span class="dv">70</span>)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_xticks([])</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].set_xticks([])</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">3</span>].set_yticks([])</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">5</span>].set_yticks([])</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(top <span class="op">=</span> <span class="fl">0.99</span>, bottom<span class="op">=</span><span class="fl">0.1</span>, hspace<span class="op">=</span><span class="fl">0.35</span>, wspace<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-opt_lambda1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-opt_lambda1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="optimizers_files/figure-html/fig-opt_lambda1-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;8.1: LASSO regression coefficients of an over-determined system with 500 constraints and 100 unknowns. Top three show the values for the solution and the bottom three a histogram of this solution. The label with lambda maps the two."><img src="optimizers_files/figure-html/fig-opt_lambda1-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-opt_lambda1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.1: LASSO regression coefficients of an over-determined system with 500 constraints and 100 unknowns. Top three show the values for the solution and the bottom three a histogram of this solution. The label with lambda maps the two.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The last row of <a href="#fig-opt_lambda1" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> confirms this quite impressively, interesting enough the solution also becomes positive.</p>
+</section>
+<section id="ridge" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="ridge"><span class="header-section-number">8.1.2</span> RIDGE</h3>
+<p>The Ridge Regression solves <a href="#eq-reg-optimizers" class="quarto-xref">Equation&nbsp;<span>8.2</span></a> with <span class="math inline">\(\lambda_1 = 0\)</span> and <span class="math inline">\(\lambda_2 &gt; 0\)</span>, i.e.&nbsp;only optimizing with the <span class="math inline">\(l_2\)</span> norm. The theory tells us that for for increasing <span class="math inline">\(\lambda_1\)</span> we should get more and more zeros in our solution <span class="math inline">\(x\)</span>.</p>
+<div id="cell-fig-opt_lambda2" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">6020</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.random.rand(m, n)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.random.rand(m)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>x0<span class="op">=</span> np.linalg.pinv(A) <span class="op">@</span> b</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>optimize <span class="op">=</span> <span class="kw">lambda</span> x, A, b, lam, norm: np.linalg.norm(A <span class="op">@</span> x <span class="op">-</span> b, <span class="bu">ord</span><span class="op">=</span>norm[<span class="dv">0</span>]) <span class="op">+\</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    lam <span class="op">*</span> np.linalg.norm(x, <span class="bu">ord</span><span class="op">=</span>norm[<span class="dv">1</span>])</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>axs <span class="op">=</span> []</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">10</span>))</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">11</span>))</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">12</span>))</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, lam <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>]):</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> minimize(optimize, args<span class="op">=</span>(A, b, lam, [<span class="dv">2</span>, <span class="dv">2</span>]), x0<span class="op">=</span>x0)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].bar(<span class="bu">range</span>(n), res.x)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].text(<span class="dv">5</span>, <span class="fl">0.05</span>, <span class="vs">rf"$\lambda=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].set_xlim(<span class="dv">0</span>, <span class="dv">100</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].set_ylim(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].hist(res.x, <span class="dv">20</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].text(<span class="op">-</span><span class="fl">0.08</span>, <span class="dv">15</span>, <span class="vs">rf"$\lambda=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].set_xlim(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>)</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].set_ylim(<span class="dv">0</span>, <span class="dv">20</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_xticks([])</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].set_xticks([])</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">3</span>].set_yticks([])</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">5</span>].set_yticks([])</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(top <span class="op">=</span> <span class="fl">0.99</span>, bottom<span class="op">=</span><span class="fl">0.1</span>, hspace<span class="op">=</span><span class="fl">0.35</span>, wspace<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-opt_lambda2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-opt_lambda2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="optimizers_files/figure-html/fig-opt_lambda2-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;8.2: Ridge regression coefficients of an over-determined system with 500 constraints and 100 unknowns. Top three show the values for the solution and the bottom three a histogram of this solution. The label with lambda maps the two."><img src="optimizers_files/figure-html/fig-opt_lambda2-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-opt_lambda2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.2: Ridge regression coefficients of an over-determined system with 500 constraints and 100 unknowns. Top three show the values for the solution and the bottom three a histogram of this solution. The label with lambda maps the two.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-regression-optimizers-msou" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="sec-regression-optimizers-msou"><span class="header-section-number">8.2</span> Model Selection/Identification and over-/underfitting</h2>
+<p>Let us use the results we have obtain so far for a discussion on <em>model selection</em>.</p>
+<p>So far, we have mostly explicitly proposed a model that we think will fit our data and we have seen that even it this case we can still choose multiple parameters to fin tune our selection.</p>
+<p>Now consider the other possibility, we have data where the model is unknown. For example, in <a href="linear.html#exm-lregfallenobject" class="quarto-xref">Example&nbsp;<span>6.1</span></a> we stopped with degree 2 for our polynomial because we know about Newton’s principles, if we don’t know it, we might extend the model for a higher degree.</p>
+<p>One of the leading assumptions to use in such a case is:</p>
+<blockquote class="blockquote">
+<p>Among competing hypotheses, the one with the fewest assumptions should be selected, or when you have two competing theories that make exactly the same predictions, the simpler one is the more likely. - Occam’s razor</p>
+</blockquote>
+<p>This plays an intimate role in over- and underfitting of models. To illustrate this we recall <a href="linear.html#exm-regression-linear-poly" class="quarto-xref">Example&nbsp;<span>6.2</span></a> with <a href="linear.html#fig-linear_reg_poly" class="quarto-xref">Figure&nbsp;<span>6.2</span></a> as seen below once more.</p>
+<div id="cell-fig-linear_reg_poly2" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div id="fig-linear_reg_poly2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-linear_reg_poly2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="optimizers_files/figure-html/fig-linear_reg_poly2-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;8.3: Fitting for different degrees of polynomial m"><img src="optimizers_files/figure-html/fig-linear_reg_poly2-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-linear_reg_poly2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.3: Fitting for different degrees of polynomial <span class="math inline">\(m\)</span>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>For <span class="math inline">\(m=1\)</span>, a straight line, we have an underfitted model. We can not adequately capture the underlying model, at least not in the entire region.</p>
+<p>If we move to <span class="math inline">\(m=16\)</span> and the extreme <span class="math inline">\(m=300\)</span> we see an overfitted system. The <span class="math inline">\(m=16\)</span> curve follows clusters of points <em>too close</em>, e.g.&nbsp;in the region around <span class="math inline">\(x=-2\)</span>, this is more pronounced for <span class="math inline">\(m=300\)</span> where we quite often closely follow our observations but between them we clearly overshoot.</p>
+<p>In this way we can also say that an overfitted system follows the <em>training</em> set to closely and will not generalize good for another <em>testing</em>/<em>evaluation</em> set.</p>
+<p>As a consequence model selection should always be followed by a cross-validation. Meaning we need to check if our model is any good.</p>
+<p>A classic method is the <em>k-fold cross validation</em>:</p>
+<blockquote class="blockquote">
+<p>Take random portions of your data and build a model. Do this <span class="math inline">\(k\)</span> times and average the parameter scores (regression loadings) to produce a cross-validated model. Test the model predictions against withheld (extrapolation) data and evaluate whether the model is actually any good. - <span class="citation" data-cites="Brunton2022">(see <a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 159</a>)</span></p>
+</blockquote>
+<p>As we can see there are a log of further paths to investigate but for now this concludes our excursion into regression.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -324,6 +541,7 @@ Y = f(X, c)
 Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engineering - Machine Learning, Dynamical Systems, and Control</em>. 2nd ed. Cambridge: Cambridge University Press.
 </div>
 </div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -892,13 +1110,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../matrixdc/svd.html" class="pagination-link" aria-label="Singular Value Decomposition">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></span>
+      <a href="../regression/nonlinear.html" class="pagination-link" aria-label="Non-linear Regression">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Non-linear Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../regression/linear.html" class="pagination-link" aria-label="Linear Regression">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../summary.html" class="pagination-link" aria-label="Summary">
+        <span class="nav-page-text">Summary</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -910,12 +1128,44 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> Peter Kandolf</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/regression/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/regression/optimizers.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

@@ -282,6 +282,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../regression/nonlinear.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Non-linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../regression/optimizers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Optimizers</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -356,7 +368,7 @@ U = \left[u_1 | \cdots | u_m \right] \in \mathbb{R}^{m\times m}
 \quad
 V = \left[v_1 | \cdots | v_n \right] \in \mathbb{R}^{n\times n}
 \]</span> such that <span id="eq-svd"><span class="math display">\[
-U^T A V = \Sigma = \operatorname{diag}(\sigma_1, \ldots, \sigma_p) \in \mathbb{R}^{m\times n}, \quad p=\min\{m, n\},
+U^mathsf{T} A V = \Sigma = \operatorname{diag}(\sigma_1, \ldots, \sigma_p) \in \mathbb{R}^{m\times n}, \quad p=\min\{m, n\},
 \tag{5.1}\]</span></span> where <span class="math inline">\(\sigma_1 \geq \sigma_2 \geq \ldots \sigma_p \geq 0\)</span>.</p>
 <p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 76–80</a>)</span></p>
 </div>
@@ -377,25 +389,25 @@ Note
 </div>
 </div>
 <p>Instead of providing a concise proof (if you are interested see <span class="citation" data-cites="GoluLoan">(<a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 76</a>)</span>) we show a possible motivation of the definition.</p>
-<p>If we compute the eigendecompositions of <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^TA\)</span>. The two matrices have the same positive eigenvalues - the squares of the eigenvalues of <span class="math inline">\(A\)</span> and we get</p>
+<p>If we compute the eigendecompositions of <span class="math inline">\(AA^mathsf{T}\)</span> and <span class="math inline">\(A^mathsf{T}A\)</span>. The two matrices have the same positive eigenvalues - the squares of the eigenvalues of <span class="math inline">\(A\)</span> and we get</p>
 <p><span class="math display">\[
-\begin{array}{lll} (A A^T)U &amp;= &amp; U(\Lambda\Lambda^T),\\
-                   (A^T A)V &amp;= &amp; V(\Lambda^T\Lambda).
+\begin{array}{lll} (A A^mathsf{T})U &amp;= &amp; U(\Lambda\Lambda^mathsf{T}),\\
+                   (A^mathsf{T} A)V &amp;= &amp; V(\Lambda^mathsf{T}\Lambda).
                    \end{array}
 \]</span> For <span class="math inline">\(A \in \mathbb{R}^{m\times n}\)</span> with <span class="math inline">\(m&gt;n\)</span> we get <span class="math display">\[
 \Lambda = \left[
     \begin{array}{c} \tilde{\Lambda}\\0\end{array}
 \right]
 \]</span> with the diagonal matrix <span class="math inline">\(\tilde\Lambda\in\mathbb{R}^{n\times n}\)</span> and <span class="math display">\[
-\begin{array}{llclc} \Lambda\Lambda^T &amp; = &amp; \left[
+\begin{array}{llclc} \Lambda\Lambda^mathsf{T} &amp; = &amp; \left[
     \begin{array}{cc}\tilde{\Lambda}^2 &amp; 0 \\0 &amp; 0 \end{array}
 \right]  &amp; = &amp; \left[
     \begin{array}{cc}\tilde{\Sigma} &amp; 0 \\0 &amp; 0 \end{array}
 \right],  \\
-        \Lambda^T\Lambda &amp; = &amp; \tilde{\Lambda}^2 &amp;= &amp;\tilde{\Sigma}.
+        \Lambda^mathsf{T}\Lambda &amp; = &amp; \tilde{\Lambda}^2 &amp;= &amp;\tilde{\Sigma}.
                    \end{array}
 \]</span> If we expand the matrices with zeros to match the correct dimensions this corresponds to our singular value decomposition <span class="math display">\[
-A = U \Sigma V^T.
+A = U \Sigma V^mathsf{T}.
 \]</span></p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -426,7 +438,7 @@ Important
 <div class="callout-body-container">
 <div id="def-thinsvd" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 5.1 (Thin SVD)</strong></span> If <span class="math inline">\(A \in \mathbb{R}^{m\times n}\)</span> for <span class="math inline">\(m\geq n\)</span>, then <span class="math display">\[
-A = \tilde{U} \tilde{\Sigma} V^T
+A = \tilde{U} \tilde{\Sigma} V^mathsf{T}
 \]</span> where <span class="math display">\[
 U_1 = U(:, 1:n) = \left[u_1 | \cdots | u_n \right] \in \mathbb{R}^{m\times n}
 \]</span> and <span class="math display">\[
@@ -444,7 +456,7 @@ U_1 = U(:, 1:n) = \left[u_1 | \cdots | u_n \right] \in \mathbb{R}^{m\times n}
 </figure>
 </div>
 <p>In Python we can compute the (Thin)SVD as follows</p>
-<div id="04ecea60" class="cell styled-output" data-execution_count="1">
+<div id="41b0891d" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -526,8 +538,8 @@ np.allclose(B, U @ np.diag(s) @ Vh)=True</code></pre>
 </div>
 <div class="callout-body-container">
 <div id="def-svdlowrank" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 5.2 (Low-Rank Approximation)</strong></span> If <span class="math inline">\(A \in \mathbb{R}^{m\times n}\)</span> and has the SVD <span class="math inline">\(A = U\Sigma V^T\)</span> than <span class="math display">\[
-A_k = U(:, 1:k)\, \Sigma(1:k, 1:k)\, V^T(1:k, :)
+<p><span class="theorem-title"><strong>Definition 5.2 (Low-Rank Approximation)</strong></span> If <span class="math inline">\(A \in \mathbb{R}^{m\times n}\)</span> and has the SVD <span class="math inline">\(A = U\Sigma V^mathsf{T}\)</span> than <span class="math display">\[
+A_k = U(:, 1:k)\, \Sigma(1:k, 1:k)\, V^mathsf{T}(1:k, :)
 \]</span> is the <em>optimal</em> low-rank approximation of <span class="math inline">\(A\)</span> with rank <span class="math inline">\(k\)</span>. This is often called the <em>truncated SVD</em>.</p>
 <p><span class="citation" data-cites="GoluLoan">(See <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013</a>, Corollary 2.4.7 p.&nbsp;79)</span></p>
 </div>
@@ -621,7 +633,7 @@ Note
 <p>As the matrices <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are orthogonal, they also define a basis of the corresponding (sub) vector spaces. As mentioned before, the SVD automatically selects these and they are optimal.</p>
 <p>Consequently, the matrices <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> can be understood as reflecting patterns in the image. We can think of the columns of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> as the vertical respectively horizontal patterns of <span class="math inline">\(A\)</span>.</p>
 <p>We can illustrate this by looking at the <em>modes</em> of our decomposition <span class="math display">\[
-M_k = U(:, k) V^T(k, :).
+M_k = U(:, k) V^mathsf{T}(k, :).
 \]</span></p>
 <div id="cell-fig-mci_headquater_svd_modes" class="cell" data-execution_count="3">
 <details class="code-fold">
@@ -701,7 +713,7 @@ Important
 <ol type="1">
 <li>scaled by <span class="math inline">\(2\)</span> in the first direction and by <span class="math inline">\(\frac12\)</span> in second,</li>
 <li>rotated by <span class="math inline">\(\frac\pi3\)</span></li>
-<li>translation in the direction <span class="math inline">\(\left[2\ 1\right]^T\)</span>.</li>
+<li>translation in the direction <span class="math inline">\(\left[2\ 1\right]^mathsf{T}\)</span>.</li>
 </ol>
 <p>The resulting matrix <span class="math inline">\(X\)</span> is a long and skinny matrix with each measurement (or experiment) stacked next to each other. This means, each column represents a new set, e.g.&nbsp;a time step, and each row corresponds to the same sensor.</p>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -798,7 +810,7 @@ Figure&nbsp;5.3: Principal components of the mean-subtracted Gaussian data on th
 \overline{X} = \left[\begin{array}{c}1\\\vdots\\1\end{array}\right] \overline{x}
 \]</span> which can be used to compute the centred matrix <span class="math inline">\(B = X - \overline{X}\)</span>.</p>
 <p>The PCA is the eigendecomposition of the covariance matrix <span id="eq-pca_cov"><span class="math display">\[
-C = \frac{1}{n-1} B^T B
+C = \frac{1}{n-1} B^mathsf{T} B
 \tag{5.2}\]</span></span></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -813,9 +825,9 @@ Note
 <p>The normalization factor of <span class="math inline">\(n-1\)</span> in <a href="#eq-pca_cov" class="quarto-xref">Equation&nbsp;<span>5.2</span></a> an not <span class="math inline">\(n\)</span> is called <em>Bassel’s correction</em> and compensates for the bias in the estimation of the population variance.</p>
 </div>
 </div>
-<p>As <span class="math inline">\(C\)</span> is symmetric and positive semi-definite, therefore it has non-negative real eigenvalues and the matrix <span class="math inline">\(V\)</span> of the eigendecomposition satisfies <span class="math inline">\(V^{-1} = V^T\)</span> (i.e.&nbsp;it is orthogonal <a href="../basics/linearalgebra.html#def-orthonormalmatrix" class="quarto-xref">Definition&nbsp;<span>1.10</span></a>). The principal components are the eigenvectors and the eigenvalue are the variance along these components.</p>
-<p>If we instead compute the SVD of <span class="math inline">\(B = U\Sigma V^T\)</span> we get <span class="math display">\[
-C = \frac{1}{n-1} B^TB = \frac{1}{n-1} V \Sigma V^T = \frac{1}{n-1} V (\Lambda^T\Lambda) V^T
+<p>As <span class="math inline">\(C\)</span> is symmetric and positive semi-definite, therefore it has non-negative real eigenvalues and the matrix <span class="math inline">\(V\)</span> of the eigendecomposition satisfies <span class="math inline">\(V^{-1} = V^mathsf{T}\)</span> (i.e.&nbsp;it is orthogonal <a href="../basics/linearalgebra.html#def-orthonormalmatrix" class="quarto-xref">Definition&nbsp;<span>1.10</span></a>). The principal components are the eigenvectors and the eigenvalue are the variance along these components.</p>
+<p>If we instead compute the SVD of <span class="math inline">\(B = U\Sigma V^mathsf{T}\)</span> we get <span class="math display">\[
+C = \frac{1}{n-1} B^mathsf{T}B = \frac{1}{n-1} V \Sigma V^mathsf{T} = \frac{1}{n-1} V (\Lambda^mathsf{T}\Lambda) V^mathsf{T}
 \]</span> leading to a way of computing the principal components in a robust way as <span class="math display">\[
 \lambda_k = \frac{\sigma_k^2}{n-1}.
 \]</span></p>
@@ -845,7 +857,7 @@ R_{\frac\pi3} = \left[
 <p>The idea is to apply the PCA techniques to a large set of faces to extract the dominate correlations between the images and create a <em>face basis</em> that can be used to represent an image in these coordinates. For example you can reconstruct a face in this space by projecting onto the eigen vectors or it can be used for face recognition as similar faces usually cluster under this projection.</p>
 <p>The images are taken from the Yale Face Dataset B, in our case we use a <a href="https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos/tree/main">GitHub</a> that provides <a href="https://julialang.org/">Julia</a> Pluto notebooks for Chapter 1 to 4 of <span class="citation" data-cites="Brunton2022">Brunton and Kutz (<a href="../references.html#ref-Brunton2022" role="doc-biblioref">2022</a>)</span>.</p>
 <p>Our training set, so to speak, consists of the first 36 people in the dataset. We compute the <em>average face</em> and subtract it from our dataset to get our matrix <span class="math inline">\(B\)</span>. From here a SVD provides us with our basis <span class="math inline">\(U\)</span>. To test our basis we use individual 37 and a portion of the image of the MCI Headquarter (to see how well it performs on objects). For this we use the projection <span class="math display">\[
-\tilde{x} = U_r U_r^T x.
+\tilde{x} = U_r U_r^mathsf{T} x.
 \]</span> If we split this up, we first project onto our found patterns (encode) and than reconstruct from them (decode).</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -858,7 +870,7 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>We can understand this as <em>encoding</em> and <em>decoding</em> our test image, which is the general setup of an <em>autoencoder</em> (a topic for another lecture).</p>
-<p>The correlation coefficients <span class="math inline">\(x_r = U_r^T x\)</span> might reveal patterns for different <span class="math inline">\(x\)</span>. In the case of faces, we can use this for face recognition, i.e.&nbsp;if the coefficients of <span class="math inline">\(x_r\)</span> are in the same cluster as other images, they are probably from the same person.</p>
+<p>The correlation coefficients <span class="math inline">\(x_r = U_r^mathsf{T} x\)</span> might reveal patterns for different <span class="math inline">\(x\)</span>. In the case of faces, we can use this for face recognition, i.e.&nbsp;if the coefficients of <span class="math inline">\(x_r\)</span> are in the same cluster as other images, they are probably from the same person.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -874,7 +886,7 @@ Important
 <p>The following code is an adaptation of the <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 1.7 and 1.9)</span>.</p>
 </div>
 </div>
-<div id="f209102c" class="cell" data-execution_count="6">
+<div id="eb4eeb32" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -978,7 +990,7 @@ A x = b
 <p>For the second case (more equations than unknowns) we often switch to solving the optimization problem that minimizes <span id="eq-leastsquare"><span class="math display">\[
 \|Ax-b\|_2^2.
 \tag{5.4}\]</span></span> This is called the <em>least square</em> solution. The least square solution will also minimize <span class="math inline">\(\|Ax-b\|_2\)</span>. For an under-determined system we might seek the solution which minimizes <span class="math inline">\(\|x\|_2\)</span> called the <em>minimum norm</em> solution.</p>
-<p>If we us the SVD decomposition for <span class="math inline">\(A = U \Sigma V^T\)</span> we can define the following</p>
+<p>If we us the SVD decomposition for <span class="math inline">\(A = U \Sigma V^mathsf{T}\)</span> we can define the following</p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -986,7 +998,7 @@ A x = b
 </div>
 <div class="callout-body-container">
 <div id="def-pinv" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 5.3 (Pseudo-inverse)</strong></span> We define the matrix <span class="math inline">\(A^\dagger \in \mathbb{R}^{m\times n}\)</span> by <span class="math inline">\(A^\dagger = V\Sigma^\dagger U^T\)</span> where <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 5.3 (Pseudo-inverse)</strong></span> We define the matrix <span class="math inline">\(A^\dagger \in \mathbb{R}^{m\times n}\)</span> by <span class="math inline">\(A^\dagger = V\Sigma^\dagger U^mathsf{T}\)</span> where <span class="math display">\[
 \Sigma^\dagger = \operatorname{diag}\left(\frac{1}{\sigma_1}. \frac{1}{\sigma_2}, \ldots, \frac{1}{\sigma_r}, 0, \ldots, 0\right) \in \mathbb{R}^{m\times n}, \quad r=\operatorname{rank}(A).
 \]</span></p>
 <p>The matrix <span class="math inline">\(A^\dagger\)</span> is often called the <em>Moore-Penrose left pseudo-inverse</em> as it fulfils the <a href="https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse"><em>Moore-Penrose conditions</em></a> conditions. It is also the matrix to provides the minimal Frobenius norm solution to <span class="math display">\[
@@ -1052,14 +1064,14 @@ Important
 \quad
 \Leftrightarrow
 \quad
-U\Sigma V^T x = b
+U\Sigma V^mathsf{T} x = b
 \quad
 \Leftrightarrow
 \quad
 x = A^\dagger b
 \]</span></p>
 <p>For this example <span class="math inline">\(\Sigma = \|a\|_2\)</span>, <span class="math inline">\(V=1\)</span>, and <span class="math inline">\(U=\tfrac{a}{\|a\|_2^2}\)</span>. This is basically just the projection of <span class="math inline">\(b\)</span> along our basis <span class="math inline">\(a\)</span> and this is <span class="math display">\[
-x = \frac{a^T b}{a^T a}.
+x = \frac{a^mathsf{T} b}{a^mathsf{T} a}.
 \]</span></p>
 <div id="cell-fig-linear_regression_svd" class="cell" data-execution_count="7">
 <details class="code-fold">
@@ -1752,7 +1764,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

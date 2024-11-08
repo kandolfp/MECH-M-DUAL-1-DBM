@@ -164,7 +164,7 @@ If we use @eq-fit2 the regression fit is called the _least square fit_.
 For the optimization algorithm to work fast it is often useful to rewrite the above error functions, e.g. the square-root in $E_2$ and the absolute value are not required. 
 :::
 
-## Ordinary Least Square
+## Ordinary Least Square {#sec-regr-linear-ols}
 
 It is worth looking into the least square solution 
 $$
@@ -187,7 +187,7 @@ $$
 In order to find a solution we compute the derivative with respect to $v$ set it to $0$ and simplify, i.e.
 $$
 \frac{\mathrm{d}}{\mathrm{d}\,v} y^Ty- y^T X v - v^T X^T y + v^T X^T X v = - 2X^Ty + 2 X^TXv 
-$$
+$$ {#eq-ols_gradient}
 and
 $$
 v = (A^TA)^{-1}A^Ty \equiv A^\dagger y.

@@ -190,9 +190,9 @@ $$
 $$ {#eq-ols_gradient}
 and
 $$
-v = (A^TA)^{-1}A^Ty \equiv A^\dagger y.
+v = (X^TX)^{-1}X^Ty \equiv X^\dagger y.
 $$
-We recall, that $A^\dagger$ is called the Moore-Penrose pseudo-inverse, see @def-pinv.
+We recall, that $X^\dagger$ is called the Moore-Penrose pseudo-inverse, see @def-pinv.
 
 See @fig-linear_reg for the result when using the pseudo-inverse.
 

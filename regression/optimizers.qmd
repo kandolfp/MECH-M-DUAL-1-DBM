@@ -1,0 +1,19 @@
+---
+lightbox: true
+---
+# Optimizers {#sec-regression-optimizers}
+
+As we have seen in the previous section the task of regression usually results in an optimization problem.
+It is worth investigating this further by looking closely on the 
+$$
+A x = b
+$$ {#eq-axb}
+problem for different dimensions of $A$.
+
+We investigate the impact of restricting our solution not just by @eq-axb but with the help of the $l_1$ and $l_2$ norm imposed on the solution $x$.
+As we have seen in @fig-linear_reg the choice of norm has an implication on the result and the same is true here.
+
+::: {.callout-important}
+This section is mainly based on @Brunton2022, Section 4.3.
+:::
+

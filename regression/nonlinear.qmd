@@ -25,3 +25,188 @@ For example convex functions have guarantees of convergence while non-convex fun
 To solve such a system we employ iterative solvers that use an initial guess.
 Let us look at the most common, the gradient descent method.
 
+## Gradient Descent
+
+For a higher dimensional system or function $f$ the gradient must be zero  
+$$
+\nabla f(x) = 0
+$$
+to know that we are in an extrema.
+Since we can have saddle points this is not the sole criteria but a necessary one.
+Gradient descent, as the name suggest uses the gradient as _direction_ in an iterative algorithm to find a minimum.
+
+The idea is basically, if you are lost on a mountain in the fog and you can not see the path, the fastest and a reliable way that only uses local information is to follow the steepest slope down.
+
+::: {.callout-warning}
+A function does not necessarily experience gravity in the same way as we do, so please do not try this in real live, i.e. cliffs tend to be hard to walk down.
+:::
+
+We express this algorithm in terms of the iterations $x^k$ for guesses of the minimum with the updates
+$$
+x^{k+1} = x^k - \delta\, \nabla f(x^k) 
+$$
+where the parameter $\delta$ defines how far along the gradient descent curve we move.
+This formula is an update for a Newton method where we use the derivative as the update function.
+This leaves us with the problem to find an algorithm to determine $\delta$.
+
+Again, we can view this as an optimization problem for a new function 
+$$
+F(\delta) = f(x^{k+1}(\delta))
+$$
+and
+$$
+\partial_\delta F = -\nabla f(x^{k+1})\nabla f(x^k) = 0.
+$$ {#eq-gcupdatep}
+
+Now the interpretation of @eq-gcupdatep is that we want that the gradient of the current step is orthogonal to the gradient of the next step.
+
+In order to make it clearer we follow the example given in [@Brunton2022, Section 4.2,pp. 141-144].
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-gd}
+
+## Gradient decent
+
+For the function 
+$$
+f(x) = x_1^2 + 3 x_2^2
+$$
+we can compute the gradient as
+$$
+\nabla f (x)= \left[ \begin{array}{c} \partial_{x_1} f(x)\\ \partial_{x_2} f(x) \end{array} \right] = \left[ \begin{array}{c} 2 x_1 \\ 6 x_2 \end{array} \right]
+$$
+Resulting in 
+$$
+x^{k+1} = x^{(k)} - \delta \, \nabla f(x^{(k)}) = 
+\left[ \begin{array}{c} (1 - 2 \delta) x^{(k)}_1 \\ (1 - 6 \delta)x^{(k)}_2 \end{array} \right].
+$$
+Consequently
+$$
+F(\delta) = (1-2\delta)^2 x_1^2 + (1-6\delta)^2 x_2^2,
+$$
+$$
+\partial_\delta F = -2^2(1-2\delta)x_1^2 - 6^2(1-6\delta)x_2^2,
+$$
+and
+$$
+\partial_\delta F(\delta) = 0 \Leftrightarrow \delta = \frac{x_1^2 + 9 x_2^2}{2 x_1^2 + 54 x_2^2}.
+$$
+
+```{python}
+#| label: fig-gd-ex1
+#| fig-cap: "Gradient decent applied for the function $f(x) = x_1^2 + 3x_2^2$."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import plotly.graph_objects as go
+import numpy as np
+
+x_ = np.linspace(-3, 3, 20)
+y_ = np.linspace(-3, 3, 20)
+X, Y = np.meshgrid(x_, y_)
+
+f = lambda x, y: np.pow(x, 2) + 3 * np.pow(y, 2)
+grad_f = lambda x: x * np.array([2, 6]).reshape(x.shape)
+delta = lambda x: (x[0]**2 + 9 * x[1]**2)/(2 * x[0]**2 + 54 * x[1]**2)
+
+Z = f(X, Y)
+
+fig = go.Figure()
+fig.add_trace(go.Surface(z=Z, x=X, y=Y, colorscale='greys', name="Function"))
+fig.update_traces(contours_z=dict(show=True, usecolormap=True,
+                                  highlightcolor="limegreen", project_z=True))
+x = np.array([3, 2]).reshape((1, 2))
+z = np.array(f(x[0, 0], x[0, 1]))
+diff = 1
+
+while diff > 1e-10:
+    x_new = x[-1, :] - delta(x[-1, :]) * grad_f(x[-1, :])
+    z = np.hstack((z, f(x_new[0], x_new[1])))
+    diff = np.linalg.norm(z[-1] - z[-2])
+    x = np.vstack((x, x_new))
+
+fig.add_scatter3d(x=x[:, 0], y=x[:, 1], z=z, line_color='red', name="Decent path")
+
+fig.show()
+```
+::::
+:::
+
+::: {.callout-note}
+If you can not compute the gradient analytically there are numerical methods to help do the computation.
+:::
+
+In order to get a better idea on how this is working for _curve fitting_ we apply the gradient decent method to our curve fitting from @sec-regr-linear-ols.
+
+In @eq-ols_gradient we computed the gradient and instead of computing $X^\dagger$ with high cost we get the low cost iterative solver:
+
+$$
+b^{(k+1)} = b^{(k)} - \delta (2 X^T X b^{(k)} - 2 X^T y)
+$$
+
+As $\delta$ is tricky to compute we go ahead and introduce we do not update it but prescribe it.
+This will not grant us the optimal convergence (if there is convergence) but if we choose it right we still get convergence. 
+
+::: {.callout-note}
+In machine learning the parameter $\delta$ is often called the _learning rate_.
+:::
+
+So lets try it with our example from @fig-linear_reg.
+
+```{python}
+#| label: fig-non-linear_reg_gd2
+#| fig-cap: "Line fit with gradient decent for different number of iterations and learning rate 2e-3."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import numpy as np
+%config InlineBackend.figure_formats = ["svg"]
+np.random.seed(6020)
+
+grad = lambda b, X, y: 2 * X.T @ (X @ b - y)
+update = lambda b, delta, X, y: b - delta * grad(b, X, y)
+
+def gd(b, delta, X, y, n, stop=1e-10):
+    diff = 1
+    for _ in range(1, n):
+        bnew = update(b, delta, X, y)
+        diff = np.linalg.norm(bnew - b)
+        b = bnew
+        if diff < stop: break
+    return b
+
+# The data
+x = np.arange(1, 11)
+y = np.array([0.2, 0.5, 0.3, 0.5, 1.0, 1.5, 1.8, 2.0, 2.3, 2.2]).reshape((-1, 1))
+
+X = np.array([x, np.ones(x.shape)]).T
+delta = 0.002
+b = np.random.random((2, 1))
+
+b_10 = gd(b, delta, X, y, 50)
+b_20 = gd(b_10, delta, X, y, 50)
+b_30 = gd(b_20, delta, X, y, 200)
+p4 = np.linalg.pinv(X) @ y
+
+xf = np.arange(0, 11, 0.1)
+y1 = np.polyval(b_10, xf)
+y2 = np.polyval(b_20, xf)
+y3 = np.polyval(b_30, xf)
+y4 = np.polyval(p4, xf)
+
+fig = plt.figure()
+plt.plot(x, y, "o", color="r", label="observations")
+plt.plot(xf, y1, label=r"$n=50$")
+plt.plot(xf, y2, label=r"$n=100$")
+plt.plot(xf, y3, label=r"$n=300$")
+plt.plot(xf, y4, label=r"$E_2$")
+plt.ylim(0, 4)
+plt.xlim(0, 11)
+plt.legend(loc="upper left")
+plt.gca().set_aspect(1)
+plt.grid(visible=True)
+plt.show()
+```
+
+The above algorithm uses the entire set $X$ for the computation.
+For a large enough set $X$ this is quite cost intense, even if it is still cheaper than computing $X^\dagger$.
+

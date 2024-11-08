@@ -323,7 +323,7 @@ $$
 
 ## Polynomial regression
 
-In the following example we generate an artificial sample of $n=100$ points the samples 
+In the following example we generate an artificial sample of $n=100$ points resulting in the samples 
 $$
 y_k = \frac12 x_k^2 + x_k + 2 + \epsilon_k
 $$
@@ -332,7 +332,7 @@ We perform the interpolation with $X^\dagger$.
 
 ```{python}
 #| label: fig-linear_reg_poly
-#| fig-cap: "Line fit with stochastic gradient decent with 1 or 3 samples and 200 iterations as well as the 3 sample version as initial guess for GD with 100 iterations."
+#| fig-cap: "Fitting for different degrees of polynomial $m$"
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
@@ -370,6 +370,8 @@ plt.plot(xf, y4, label=r"$m=300$")
 
 plt.ylim(0, 10)
 plt.xlim(-3, 3)
+plt.xlabel(r"$x$")
+plt.ylabel(r"$y$")
 plt.legend(loc="upper left")
 #plt.gca().set_aspect(0.25)
 plt.grid(visible=True)

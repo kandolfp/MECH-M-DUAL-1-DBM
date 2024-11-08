@@ -180,17 +180,17 @@ $$
 \begin{array}{ccl}
 b &= &\underset{v}{\operatorname{argmin}} \| y - Xv\|_2,\\
   &= &\underset{v}{\operatorname{argmin}} \langle y -Xv, y -Xv\rangle,\\
-  &= &\underset{v}{\operatorname{argmin}} (y -Xv)^T (y -Xv),\\
-  &= &\underset{v}{\operatorname{argmin}} y^Ty - y^T X v - v^T X^T y + v^T X^T X v.\\
+  &= &\underset{v}{\operatorname{argmin}} (y -Xv)^mathsf{T} (y -Xv),\\
+  &= &\underset{v}{\operatorname{argmin}} y^mathsf{T}y - y^mathsf{T} X v - v^mathsf{T} X^mathsf{T} y + v^mathsf{T} X^mathsf{T} X v.\\
 \end{array}
 $$
 In order to find a solution we compute the derivative with respect to $v$ set it to $0$ and simplify, i.e.
 $$
-\frac{\mathrm{d}}{\mathrm{d}\,v} y^Ty- y^T X v - v^T X^T y + v^T X^T X v = - 2X^Ty + 2 X^TXv 
+\frac{\mathrm{d}}{\mathrm{d}\,v} y^mathsf{T}y- y^mathsf{T} X v - v^mathsf{T} X^mathsf{T} y + v^mathsf{T} X^mathsf{T} X v = - 2X^mathsf{T}y + 2 X^mathsf{T}Xv 
 $$ {#eq-ols_gradient}
 and
 $$
-v = (X^TX)^{-1}X^Ty \equiv X^\dagger y.
+v = (X^mathsf{T}X)^{-1}X^mathsf{T}y \equiv X^\dagger y.
 $$
 We recall, that $X^\dagger$ is called the Moore-Penrose pseudo-inverse, see @def-pinv.
 
@@ -241,7 +241,7 @@ This ansatz can be extended to polynomials of degree $k$, where the result is al
 
 ## Polynomial Regression
 
-Polynomial regression, despite its name, is linear regression with a special function $f$ where the relation is polynomial in $x= \left[a_1, \dots, x_m\right]^T$
+Polynomial regression, despite its name, is linear regression with a special function $f$ where the relation is polynomial in $x= \left[a_1, \dots, x_m\right]^mathsf{T}$
 $$
 y_k = x_k^0 + x_k^1 b_1 + x_k^2 b_2 + \cdots + x_k^m b_m, \quad 1\leq k \leq n,
 $$

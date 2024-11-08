@@ -497,4 +497,5 @@ fig2.show()
 ::::
 :::
 
-Next, we are going to look into actual nonlinear regression.
+
+Next, we are going to look into actual non-linear regression.

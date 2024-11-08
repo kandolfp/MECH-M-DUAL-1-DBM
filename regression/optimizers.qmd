@@ -141,3 +141,86 @@ plt.subplots_adjust(top = 0.99, bottom=0.1, hspace=0.35, wspace=0.2)
 plt.show()
 ```
 
+## Model Selection/Identification and over-/underfitting {#sec-regression-optimizers-msou}
+
+Let us use the results we have obtain so far for a discussion on _model selection_. 
+
+So far, we have mostly explicitly proposed a model that we think will fit our data and we have seen that even it this case we can still choose multiple parameters to fin tune our selection. 
+
+Now consider the other possibility, we have data where the model is unknown.
+For example, in @exm-lregfallenobject we stopped with degree 2 for our polynomial because we know about Newton's principles, if we don't know it, we might extend the model for a higher degree.
+
+One of the leading assumptions to use in such a case is:
+
+> Among competing hypotheses, the one with the fewest assumptions should be selected, or when you have two competing theories that make exactly the same predictions, the simpler one is the more likely.
+- Occam's razor
+
+This plays an intimate role in over- and underfitting of models.
+To illustrate this we recall @exm-regression-linear-poly with @fig-linear_reg_poly as seen below once more.
+
+```{python}
+#| label: fig-linear_reg_poly2
+#| fig-cap: "Fitting for different degrees of polynomial $m$"
+#| echo: false
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import numpy as np
+import warnings
+warnings.simplefilter('ignore', np.exceptions.RankWarning)
+%config InlineBackend.figure_formats = ["svg"]
+np.random.seed(6020)
+
+m = 100
+x = 6 * np.random.rand(m) - 3
+y = 1/2 * x ** 2 + x + 2 + np.random.randn(m)
+
+X1 = np.vander(x, 2)
+X2 = np.vander(x, 3)
+X3 = np.vander(x, 16)
+
+p1 = np.linalg.pinv(X1) @ y
+p2 = np.linalg.pinv(X2) @ y
+p3 = np.linalg.pinv(X3) @ y
+p4 = np.polyfit(x, y, 300)
+
+xf = np.arange(-3, 3, 0.1)
+y1 = np.polyval(p1, xf)
+y2 = np.polyval(p2, xf)
+y3 = np.polyval(p3, xf)
+y4 = np.polyval(p4, xf)
+
+fig = plt.figure()
+plt.plot(x, y, "o", color="r", label="observations", linewidth=3)
+plt.plot(xf, y1, label=r"$m=1$")
+plt.plot(xf, y2, label=r"$m=2$")
+plt.plot(xf, y3, label=r"$m=16$")
+plt.plot(xf, y4, label=r"$m=300$")
+
+plt.ylim(0, 10)
+plt.xlim(-3, 3)
+plt.xlabel(r"$x$")
+plt.ylabel(r"$y$")
+plt.legend(loc="upper left")
+#plt.gca().set_aspect(0.25)
+plt.grid(visible=True)
+plt.show()
+```
+
+For $m=1$, a straight line, we have an underfitted model.
+We can not adequately capture the underlying model, at least not in the entire region.
+
+If we move to $m=16$ and the extreme $m=300$ we see an overfitted system.
+The $m=16$ curve follows clusters of points _too close_, e.g. in the region around $x=-2$, this is more pronounced for $m=300$ where we quite often closely follow our observations but between them we clearly overshoot.
+
+In this way we can also say that an overfitted system follows the _training_ set to closely and will not generalize good for another _testing_/_evaluation_ set.
+
+As a consequence model selection should always be followed by a cross-validation.
+Meaning we need to check if our model is any good. 
+
+A classic method is the _k-fold cross validation_:
+
+> Take random portions of your data and build a model. Do this $k$ times and average the parameter scores (regression loadings) to produce a cross-validated model. 
+> Test the model predictions against withheld (extrapolation) data and evaluate whether the model is actually any good. 
+- [see @Brunton2022, pp. 159]
+
+As we can see there are a log of further paths to investigate but for now this concludes our excursion into regression.

@@ -386,6 +386,9 @@ The condition of the Vandermonde matrix increases rapidly:
 
 The result of the $m=300$ is unstable and we can not compute it via $X^\dagger$.
 :::::
+
+As can be seen in @fig-linear_reg_poly we do not necessarily get a good result if we use a higher degree polynomial.
+This is especially true if we extrapolate and not interpolate.
 ::::
 :::
 

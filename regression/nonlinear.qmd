@@ -7,16 +7,16 @@ lightbox: true
 This section is mainly based on @Brunton2022, Section 4.2.
 :::
 
-We extend our theory of _curve fitting_ to a non-linear function $f(X, b)$ with coefficients $b\in\mathbb{R}^m$ and our $n$ $X_{k-}$.
+We extend our theory of _curve fitting_ to a non-linear function $f(X, c)$ with coefficients $b\in\mathbb{R}^m$ and our $n$ $X_{k-}$.
 We assume that $m < n$.
 
 If we define our root-mean-square error depending on $b$ as 
 $$
-E_2(b) = \sum_{k=1}^n(f(X_{k-}, b) - y_k )^2
+E_2(c) = \sum_{k=1}^n(f(X_{k-}, c) - y_k )^2
 $$
 and we can minimize with respect to each $b_j$ resulting in a $m \times m$ system
 $$
-\sum_k (f(X_{k-}, b) - y_k)\frac{\partial f}{\partial b_j} = 0\quad\text{for}\quad j=1, 2, \ldots, m.
+\sum_k (f(X_{k-}, c) - y_k)\frac{\partial f}{\partial c_j} = 0\quad\text{for}\quad j=1, 2, \ldots, m.
 $$
 
 Depending on the properties of the function at hand it can be guaranteed to find an extrema or not.
@@ -140,7 +140,7 @@ In order to get a better idea on how this is working for _curve fitting_ we appl
 In @eq-ols_gradient we computed the gradient and instead of computing $X^\dagger$ with high cost we get the low cost iterative solver:
 
 $$
-b^{(k+1)} = b^{(k)} - \delta (2 X^mathsf{T} X b^{(k)} - 2 X^mathsf{T} y)
+c^{(k+1)} = c^{(k)} - \delta (2 X^mathsf{T} X c^{(k)} - 2 X^mathsf{T} y)
 $$
 
 As $\delta$ is tricky to compute we go ahead and introduce we do not update it but prescribe it.
@@ -162,17 +162,17 @@ import numpy as np
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
 
-grad = lambda b, X, y: 2 * X.T @ (X @ b - y)
-update = lambda b, delta, X, y: b - delta * grad(b, X, y)
+grad = lambda c, X, y: 2 * X.T @ (X @ c - y)
+update = lambda c, delta, X, y: c - delta * grad(c, X, y)
 
-def gd(b, delta, X, y, n, stop=1e-10):
+def gd(c, delta, X, y, n, stop=1e-10):
     diff = 1
     for _ in range(1, n):
-        bnew = update(b, delta, X, y)
-        diff = np.linalg.norm(bnew - b)
-        b = bnew
+        cnew = update(c, delta, X, y)
+        diff = np.linalg.norm(cnew - c)
+        c = cnew
         if diff < stop: break
-    return b
+    return c
 
 # The data
 x = np.arange(1, 11)
@@ -180,17 +180,17 @@ y = np.array([0.2, 0.5, 0.3, 0.5, 1.0, 1.5, 1.8, 2.0, 2.3, 2.2]).reshape((-1, 1)
 
 X = np.array([x, np.ones(x.shape)]).T
 delta = 0.002
-b = np.random.random((2, 1))
+c = np.random.random((2, 1))
 
-b_10 = gd(b, delta, X, y, 50)
-b_20 = gd(b_10, delta, X, y, 50)
-b_30 = gd(b_20, delta, X, y, 200)
+c_10 = gd(c, delta, X, y, 50)
+c_20 = gd(c_10, delta, X, y, 50)
+c_30 = gd(c_20, delta, X, y, 200)
 p4 = np.linalg.pinv(X) @ y
 
 xf = np.arange(0, 11, 0.1)
-y1 = np.polyval(b_10, xf)
-y2 = np.polyval(b_20, xf)
-y3 = np.polyval(b_30, xf)
+y1 = np.polyval(c_10, xf)
+y2 = np.polyval(c_20, xf)
+y3 = np.polyval(c_30, xf)
 y4 = np.polyval(p4, xf)
 
 fig = plt.figure()
@@ -232,21 +232,21 @@ import numpy as np
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
 
-grad = lambda b, X, y: 2 * X.T @ (X @ b - y)
-update = lambda b, delta, X, y: b - delta * grad(b, X, y)
+grad = lambda c, X, y: 2 * X.T @ (X @ c - y)
+update = lambda c, delta, X, y: c - delta * grad(c, X, y)
 
-def sgd(b, delta, X, y, n, indices=-1, stop=1e-10):
+def sgd(c, delta, X, y, n, indices=-1, stop=1e-10):
     if indices == -1:
         indices = X.shape[0]
     diff = 1
     for _ in range(1, n):
         i = np.random.choice(X.shape[0], size=indices, replace=False)
         i.sort()
-        bnew = update(b, delta, X[i, :], y[i])
-        diff = np.linalg.norm(bnew - b)
-        b = bnew
+        cnew = update(c, delta, X[i, :], y[i])
+        diff = np.linalg.norm(cnew - c)
+        c = cnew
         if diff < stop: break
-    return b
+    return c
 
 # The data
 x = np.arange(1, 11)
@@ -254,19 +254,19 @@ y = np.array([0.2, 0.5, 0.3, 0.5, 1.0, 1.5, 1.8, 2.0, 2.3, 2.2]).reshape((-1, 1)
 
 X = np.array([x, np.ones(x.shape)]).T
 delta = 0.002
-b = np.random.random((2, 1))
+c = np.random.random((2, 1))
 
-b_10 = sgd(b, delta, X, y, 200, 1)
-b_20 = sgd(b, delta, X, y, 200, 3)
-b_30 = sgd(b, delta, X, y, 200, 5)
-b_ft = gd(b_20, delta, X, y, 150, -1)
+c_10 = sgd(c, delta, X, y, 200, 1)
+c_20 = sgd(c, delta, X, y, 200, 3)
+c_30 = sgd(c, delta, X, y, 200, 5)
+c_ft = gd(c_20, delta, X, y, 150, -1)
 p4 = np.linalg.pinv(X) @ y
 
 xf = np.arange(0, 11, 0.1)
-y1 = np.polyval(b_10, xf)
-y2 = np.polyval(b_20, xf)
-y3 = np.polyval(b_30, xf)
-yft = np.polyval(b_ft, xf)
+y1 = np.polyval(c_10, xf)
+y2 = np.polyval(c_20, xf)
+y3 = np.polyval(c_30, xf)
+yft = np.polyval(c_ft, xf)
 y4 = np.polyval(p4, xf)
 
 
@@ -285,5 +285,3 @@ plt.gca().set_aspect(1)
 plt.grid(visible=True)
 plt.show()
 ```
-
-

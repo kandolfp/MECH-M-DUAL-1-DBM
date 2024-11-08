@@ -33,6 +33,7 @@ book:
     - part: regression/index.qmd
       chapters:
         - regression/linear.qmd
+        - regression/nonlinear.qmd
     - summary.qmd
     - references.qmd
 

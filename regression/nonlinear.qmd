@@ -1,0 +1,27 @@
+---
+lightbox: true
+---
+# Non-linear Regression {#sec-regression-nonlinear}
+
+::: {.callout-important}
+This section is mainly based on @Brunton2022, Section 4.2.
+:::
+
+We extend our theory of _curve fitting_ to a non-linear function $f(X, b)$ with coefficients $b\in\mathbb{R}^m$ and our $n$ $X_{k-}$.
+We assume that $m < n$.
+
+If we define our root-mean-square error depending on $b$ as 
+$$
+E_2(b) = \sum_{k=1}^n(f(X_{k-}, b) - y_k )^2
+$$
+and we can minimize with respect to each $b_j$ resulting in a $m \times m$ system
+$$
+\sum_k (f(X_{k-}, b) - y_k)\frac{\partial f}{\partial b_j} = 0\quad\text{for}\quad j=1, 2, \ldots, m.
+$$
+
+Depending on the properties of the function at hand it can be guaranteed to find an extrema or not.
+For example convex functions have guarantees of convergence while non-convex functions can have chelating features that make it hard to work with optimization algorithms.
+
+To solve such a system we employ iterative solvers that use an initial guess.
+Let us look at the most common, the gradient descent method.
+

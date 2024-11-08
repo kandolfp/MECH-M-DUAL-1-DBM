@@ -210,3 +210,80 @@ plt.show()
 The above algorithm uses the entire set $X$ for the computation.
 For a large enough set $X$ this is quite cost intense, even if it is still cheaper than computing $X^\dagger$.
 
+## Stochastic Gradient Descent
+
+In order to reduce cost we can randomly select some points of our training set and only train with those.
+Obviously the computation of the gradient becomes much faster.
+We call this method _Stochastic Gradient Decent_ (SGD).
+
+In @fig-non-linear_reg_gd3 we see the convergence for randomly selecting 1, 3, and 6 indices of our possible 10.
+
+The downside of the SGD algorithm is that the algorithm does not settle down for a long time and will _jump_.
+In the other side it might get less stuck in local minima.
+
+One possibility to try to get the strength of both is to use SDG to get a good guess for your initial value and SD for the fine tuning.
+```{python}
+#| label: fig-non-linear_reg_gd3
+#| fig-cap: "Line fit with stochastic gradient decent with 1 or 3 samples and 200 iterations as well as the 3 sample version as initial guess for GD with 100 iterations."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import numpy as np
+%config InlineBackend.figure_formats = ["svg"]
+np.random.seed(6020)
+
+grad = lambda b, X, y: 2 * X.T @ (X @ b - y)
+update = lambda b, delta, X, y: b - delta * grad(b, X, y)
+
+def sgd(b, delta, X, y, n, indices=-1, stop=1e-10):
+    if indices == -1:
+        indices = X.shape[0]
+    diff = 1
+    for _ in range(1, n):
+        i = np.random.choice(X.shape[0], size=indices, replace=False)
+        i.sort()
+        bnew = update(b, delta, X[i, :], y[i])
+        diff = np.linalg.norm(bnew - b)
+        b = bnew
+        if diff < stop: break
+    return b
+
+# The data
+x = np.arange(1, 11)
+y = np.array([0.2, 0.5, 0.3, 0.5, 1.0, 1.5, 1.8, 2.0, 2.3, 2.2]).reshape((-1, 1))
+
+X = np.array([x, np.ones(x.shape)]).T
+delta = 0.002
+b = np.random.random((2, 1))
+
+b_10 = sgd(b, delta, X, y, 200, 1)
+b_20 = sgd(b, delta, X, y, 200, 3)
+b_30 = sgd(b, delta, X, y, 200, 5)
+b_ft = gd(b_20, delta, X, y, 150, -1)
+p4 = np.linalg.pinv(X) @ y
+
+xf = np.arange(0, 11, 0.1)
+y1 = np.polyval(b_10, xf)
+y2 = np.polyval(b_20, xf)
+y3 = np.polyval(b_30, xf)
+yft = np.polyval(b_ft, xf)
+y4 = np.polyval(p4, xf)
+
+
+fig = plt.figure()
+plt.plot(x, y, "o", color="r", label="observations")
+plt.plot(xf, y1, label=r"#I=$1$")
+plt.plot(xf, y2, label=r"#I=$3$")
+#plt.plot(xf, y3, label=r"#I=$5$")
+plt.plot(xf, yft, label=r"#I=$3$ GD $n=100$")
+plt.plot(xf, y4, label=r"$E_2$")
+
+plt.ylim(0, 4)
+plt.xlim(0, 11)
+plt.legend(loc="upper left")
+plt.gca().set_aspect(1)
+plt.grid(visible=True)
+plt.show()
+```
+
+

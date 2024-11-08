@@ -25,7 +25,7 @@ For example convex functions have guarantees of convergence while non-convex fun
 To solve such a system we employ iterative solvers that use an initial guess.
 Let us look at the most common, the gradient descent method.
 
-## Gradient Descent
+## Gradient Descent {#sec-regression-nonlinear-gd}
 
 For a higher dimensional system or function $f$ the gradient must be zero  
 $$

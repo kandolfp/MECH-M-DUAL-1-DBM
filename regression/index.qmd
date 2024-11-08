@@ -9,10 +9,10 @@ where $b$ is found by optimizing for _a good fit_ of $f$ to the data.
 
 We split up the discussion along the well known topics:
 
-- [linear regression](linear.qmd)
-- non-linear regression
-- multilinear regression
-- gradient decent
-- over and under fitting
+- @sec-regression-linear
+- @sec-regression-nonlinear
+   - @sec-regression-nonlinear-gd
+- @sec-regression-optimizers
+   - @sec-regression-optimizers-msou
 
 Parts of this section are based on [@Brunton2022, Section 4].

@@ -239,10 +239,34 @@ b_1\\b_2
 $$ {#eq-alternativeregression}
 This ansatz can be extended to polynomials of degree $k$, where the result is always a $(k+1) \times (k+1)$ matrix.
 
+## Polynomial Regression
+
+Polynomial regression, despite its name, is linear regression with a special function $f$ where the relation is polynomial in $x= \left[a_1, \dots, x_m\right]^T$
+$$
+y_k = x_k^0 + x_k^1 b_1 + x_k^2 b_2 + \cdots + x_k^m b_m, \quad 1\leq k \leq n,
+$$
+With the matrix form 
+$$
+X = \left[
+\begin{array}{cccc}
+1 & x_1    &x_1^2  & \cdots &x_1^m  \\
+1 & x_2    &x_2^2  & \cdots &x_2^m  \\
+1 & \vdots &\vdots & \ddots &\vdots \\
+1 & x_n    &x_n^2  & \cdots &x_n^m
+\end{array}
+\right]
+$$ {#eq-vander}
+
+::: {.callout-note}
+The matrix @eq-vander is called the Vandermonde matrix.
+:::
+
+This can be solved in the same ways as the before with $X^\dagger$ or the direct system, but it should not as @eq-vander is badly conditioned.
+
 ::: {.callout-tip appearance="simple" collapse="true" icon=false}
 :::: {#exm-lregfallenobject}
 
-## Example - parameter estimation of a falling object
+## Parameter estimation of a falling object
 
 Just because we deal with linear regression this does not means that the model needs to be linear too.
 As long as we are linear in the  parameters $b$ we can apply our findings, even for non linear _independent variables_.
@@ -289,6 +313,78 @@ $$
 b = X^\dagger y.
 $$
 
+::::
+:::
+
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-regression-linear-poly}
+
+## Polynomial regression
+
+In the following example we generate an artificial sample of $n=100$ points the samples 
+$$
+y_k = \frac12 x_k^2 + x_k + 2 + \epsilon_k
+$$
+where $\epsilon_k$ is a random number that simulates the error. 
+We perform the interpolation with $X^\dagger$.
+
+```{python}
+#| label: fig-linear_reg_poly
+#| fig-cap: "Line fit with stochastic gradient decent with 1 or 3 samples and 200 iterations as well as the 3 sample version as initial guess for GD with 100 iterations."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import numpy as np
+import warnings
+warnings.simplefilter('ignore', np.exceptions.RankWarning)
+%config InlineBackend.figure_formats = ["svg"]
+np.random.seed(6020)
+
+m = 100
+x = 6 * np.random.rand(m) - 3
+y = 1/2 * x ** 2 + x + 2 + np.random.randn(m)
+
+X1 = np.vander(x, 2)
+X2 = np.vander(x, 3)
+X3 = np.vander(x, 16)
+
+p1 = np.linalg.pinv(X1) @ y
+p2 = np.linalg.pinv(X2) @ y
+p3 = np.linalg.pinv(X3) @ y
+p4 = np.polyfit(x, y, 300)
+
+xf = np.arange(-3, 3, 0.1)
+y1 = np.polyval(p1, xf)
+y2 = np.polyval(p2, xf)
+y3 = np.polyval(p3, xf)
+y4 = np.polyval(p4, xf)
+
+fig = plt.figure()
+plt.plot(x, y, "o", color="r", label="observations", linewidth=3)
+plt.plot(xf, y1, label=r"$m=1$")
+plt.plot(xf, y2, label=r"$m=2$")
+plt.plot(xf, y3, label=r"$m=16$")
+plt.plot(xf, y4, label=r"$m=300$")
+
+plt.ylim(0, 10)
+plt.xlim(-3, 3)
+plt.legend(loc="upper left")
+#plt.gca().set_aspect(0.25)
+plt.grid(visible=True)
+plt.show()
+```
+
+::::: {.callout-caution}
+
+The condition of the Vandermonde matrix increases rapidly:
+
+| degree | $m=2$ | $m=3$ | $m=5$ | $m=10$ | $m=15$ | $m=20$ | 
+| --- | --- |  --- | --- | --- | --- | --- | 
+| $\kappa_2$  | 6.07e0 | 1.63e1 | 1.89e2 | 154e5 | 1.24e8 | 1.41e11 |
+
+The result of the $m=300$ is unstable and we can not compute it via $X^\dagger$.
+:::::
 ::::
 :::
 

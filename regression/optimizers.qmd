@@ -19,7 +19,7 @@ This section is mainly based on @Brunton2022, Section 4.3.
 
 ## Over-Determined Systems
 
-We speak of an over-determined system if we have more rows than columns, i.e. $A$ is tall and skinny and in general there is no solution to @eq-axb but rather we minimize the error according to a norm, see @ec-regr-linear-ols.
+We speak of an over-determined system if we have more rows than columns, i.e. $A$ is tall and skinny and in general there is no solution to @eq-axb but rather we minimize the error according to a norm, see @ex-regr-linear-ols.
 If we further impose a restriction on $x$ we can select a more specific solution.
 
 The generalized form is

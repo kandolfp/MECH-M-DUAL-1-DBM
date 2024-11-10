@@ -353,7 +353,7 @@ window.Quarto = {
 </header>
 
 
-<p>We start off with the so called <em>eigendecomposition</em>. The main idea is to compute a decomposition (or factorization) of a square matrix into a canonical form. We will represent a matrix by its <em>eigenvalues</em> and <em>eigenvectors</em>. In order to do so we need to recall some more definitions from our favourite linear algebra book, such as <span class="citation" data-cites="GoluLoan">Golub and Van Loan (<a href="#ref-GoluLoan" role="doc-biblioref">2013</a>)</span>.</p>
+<p>We start off with the so called <em>eigendecomposition</em>. The main idea is to compute a decomposition (or factorization) of a square matrix into a canonical form. We will represent a matrix by its <em>eigenvalues</em> and <em>eigenvectors</em>. In order to do so we need to recall some more definitions from our favourite linear algebra book, such as <span class="citation" data-cites="GoluLoan">Golub and Van Loan (<a href="../references.html#ref-GoluLoan" role="doc-biblioref">2013</a>)</span>.</p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -370,7 +370,7 @@ V = \left[v_1 | \cdots | v_n \right] \in \mathbb{R}^{n\times n}
 \]</span> such that <span id="eq-svd"><span class="math display">\[
 U^mathsf{T} A V = \Sigma = \operatorname{diag}(\sigma_1, \ldots, \sigma_p) \in \mathbb{R}^{m\times n}, \quad p=\min\{m, n\},
 \tag{5.1}\]</span></span> where <span class="math inline">\(\sigma_1 \geq \sigma_2 \geq \ldots \sigma_p \geq 0\)</span>.</p>
-<p><span class="citation" data-cites="GoluLoan">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 76–80</a>)</span></p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 76–80</a>)</span></p>
 </div>
 </div>
 </div>
@@ -388,7 +388,7 @@ Note
 <p>We call <span class="math inline">\(\sigma_i\)</span> a <em>singular value</em> of <span class="math inline">\(A\)</span>, the <span class="math inline">\(u_i\)</span> are called the <em>left singular values</em> of <span class="math inline">\(A\)</span> and <span class="math inline">\(v_i\)</span> the <em>right singular values</em> of <span class="math inline">\(A\)</span>. Furthermore, <span class="math inline">\(\sigma_{max} (A)\)</span> is the largest singular value of <span class="math inline">\(A\)</span> and <span class="math inline">\(\sigma_{min} (A)\)</span> is the smallest singular value of <span class="math inline">\(A\)</span>.</p>
 </div>
 </div>
-<p>Instead of providing a concise proof (if you are interested see <span class="citation" data-cites="GoluLoan">(<a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 76</a>)</span>) we show a possible motivation of the definition.</p>
+<p>Instead of providing a concise proof (if you are interested see <span class="citation" data-cites="GoluLoan">(<a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 76</a>)</span>) we show a possible motivation of the definition.</p>
 <p>If we compute the eigendecompositions of <span class="math inline">\(AA^mathsf{T}\)</span> and <span class="math inline">\(A^mathsf{T}A\)</span>. The two matrices have the same positive eigenvalues - the squares of the eigenvalues of <span class="math inline">\(A\)</span> and we get</p>
 <p><span class="math display">\[
 \begin{array}{lll} (A A^mathsf{T})U &amp;= &amp; U(\Lambda\Lambda^mathsf{T}),\\
@@ -444,7 +444,7 @@ U_1 = U(:, 1:n) = \left[u_1 | \cdots | u_n \right] \in \mathbb{R}^{m\times n}
 \]</span> and <span class="math display">\[
 \tilde{\Sigma} = \Sigma(1:n, 1:n) = \operatorname{diag}(\sigma_1, \ldots, \sigma_n) \in \mathbb{R}^{n\times n}.
 \]</span></p>
-<p><span class="citation" data-cites="GoluLoan">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 80</a>)</span></p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 80</a>)</span></p>
 </div>
 </div>
 </div>
@@ -456,7 +456,7 @@ U_1 = U(:, 1:n) = \left[u_1 | \cdots | u_n \right] \in \mathbb{R}^{m\times n}
 </figure>
 </div>
 <p>In Python we can compute the (Thin)SVD as follows</p>
-<div id="f77a5f55" class="cell styled-output" data-execution_count="1">
+<div id="2ec56883" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -541,7 +541,7 @@ np.allclose(B, U @ np.diag(s) @ Vh)=True</code></pre>
 <p><span class="theorem-title"><strong>Definition 5.2 (Low-Rank Approximation)</strong></span> If <span class="math inline">\(A \in \mathbb{R}^{m\times n}\)</span> and has the SVD <span class="math inline">\(A = U\Sigma V^mathsf{T}\)</span> than <span class="math display">\[
 A_k = U(:, 1:k)\, \Sigma(1:k, 1:k)\, V^mathsf{T}(1:k, :)
 \]</span> is the <em>optimal</em> low-rank approximation of <span class="math inline">\(A\)</span> with rank <span class="math inline">\(k\)</span>. This is often called the <em>truncated SVD</em>.</p>
-<p><span class="citation" data-cites="GoluLoan">(See <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013</a>, Corollary 2.4.7 p.&nbsp;79)</span></p>
+<p><span class="citation" data-cites="GoluLoan">(See <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013</a>, Corollary 2.4.7 p.&nbsp;79)</span></p>
 </div>
 </div>
 </div>
@@ -627,7 +627,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If we compare this to <a href="#fig-mci_headquater" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-mci_headquater</span></a> we can see that we get a much better result for smaller <span class="math inline">\(r\)</span>. Let us have a look why.</p>
+<p>If we compare this to <a href="eigen.html#fig-mci_headquater" class="quarto-xref">Figure&nbsp;<span>4.3</span></a> we can see that we get a much better result for smaller <span class="math inline">\(r\)</span>. Let us have a look why.</p>
 </div>
 </div>
 <p>As the matrices <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are orthogonal, they also define a basis of the corresponding (sub) vector spaces. As mentioned before, the SVD automatically selects these and they are optimal.</p>
@@ -694,7 +694,7 @@ Note
 <section id="principal-component-analysis" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="principal-component-analysis"><span class="header-section-number">5.2</span> Principal Component Analysis</h2>
 <p>On of the most important applications of SVD is in the stable computation of the so called <em>principal component analysis</em> (PCA). It is a common technique in data exploration, analysis, visualization, and preprocessing.</p>
-<p>The main idea of PCM is to transform the data in such a way that the main directions (principal components) capture the largest variation. In short we perform a change of the basis, see <a href="#def-changebasis" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-changebasis</span></a>.</p>
+<p>The main idea of PCM is to transform the data in such a way that the main directions (principal components) capture the largest variation. In short we perform a change of the basis, see <a href="../basics/linearalgebra.html#def-changebasis" class="quarto-xref">Definition&nbsp;<span>1.8</span></a>.</p>
 <p>Let us investigate this in terms of a (artificial) data set.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -706,10 +706,10 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This example is adapted from <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Example: Noisy Gaussian Data, pp.&nbsp;25-27)</span>.</p>
+<p>This example is adapted from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Example: Noisy Gaussian Data, pp.&nbsp;25-27)</span>.</p>
 </div>
 </div>
-<p>We generate a noisy cloud (see <a href="#fig-pca_gauss" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-pca_gauss</span></a>) that consists of <span class="math inline">\(10000\)</span> points in 2D, generated from a normal distribution with zero mean and unit variance. The data is than:</p>
+<p>We generate a noisy cloud (see <a href="#fig-pca_gauss" class="quarto-xref">Figure&nbsp;<span>5.3</span></a>) that consists of <span class="math inline">\(10000\)</span> points in 2D, generated from a normal distribution with zero mean and unit variance. The data is than:</p>
 <ol type="1">
 <li>scaled by <span class="math inline">\(2\)</span> in the first direction and by <span class="math inline">\(\frac12\)</span> in second,</li>
 <li>rotated by <span class="math inline">\(\frac\pi3\)</span></li>
@@ -726,7 +726,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The following code is a slight adaptation (for nicer presentation in these notes) of the <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 1.4)</span> also see <a href="https://github.com/dynamicslab/databook_python/blob/master/CH01/CH01_SEC05_1_PCAGaussian.ipynb">notebook on github</a>.</p>
+<p>The following code is a slight adaptation (for nicer presentation in these notes) of the <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 1.4)</span> also see <a href="https://github.com/dynamicslab/databook_python/blob/master/CH01/CH01_SEC05_1_PCAGaussian.ipynb">notebook on github</a>.</p>
 </div>
 </div>
 <div id="cell-fig-pca_gauss" class="cell" data-execution_count="4">
@@ -804,7 +804,7 @@ Figure&nbsp;5.3: Principal components of the mean-subtracted Gaussian data on th
 </div>
 <section id="computation" class="level3" data-number="5.2.1">
 <h3 data-number="5.2.1" class="anchored" data-anchor-id="computation"><span class="header-section-number">5.2.1</span> Computation</h3>
-<p>For the computation we follow the outline given in <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, chap. 1.5</a>)</span>. First we need to center our matrix <span class="math inline">\(X\)</span> according to the mean per feature, in our case per row. <span class="math display">\[
+<p>For the computation we follow the outline given in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, chap. 1.5</a>)</span>. First we need to center our matrix <span class="math inline">\(X\)</span> according to the mean per feature, in our case per row. <span class="math display">\[
 \overline{x}_j = \frac1n \sum_{i=1}^n X_{ij}
 \]</span> and our <em>mean matrix</em> is the outer product with the one vector <span class="math display">\[
 \overline{X} = \left[\begin{array}{c}1\\\vdots\\1\end{array}\right] \overline{x}
@@ -822,10 +822,10 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The normalization factor of <span class="math inline">\(n-1\)</span> in <a href="#eq-pca_cov" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-pca_cov</span></a> an not <span class="math inline">\(n\)</span> is called <em>Bassel’s correction</em> and compensates for the bias in the estimation of the population variance.</p>
+<p>The normalization factor of <span class="math inline">\(n-1\)</span> in <a href="#eq-pca_cov" class="quarto-xref">Equation&nbsp;<span>5.2</span></a> an not <span class="math inline">\(n\)</span> is called <em>Bassel’s correction</em> and compensates for the bias in the estimation of the population variance.</p>
 </div>
 </div>
-<p>As <span class="math inline">\(C\)</span> is symmetric and positive semi-definite, therefore it has non-negative real eigenvalues and the matrix <span class="math inline">\(V\)</span> of the eigendecomposition satisfies <span class="math inline">\(V^{-1} = V^mathsf{T}\)</span> (i.e.&nbsp;it is orthogonal <a href="#def-orthonormalmatrix" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-orthonormalmatrix</span></a>). The principal components are the eigenvectors and the eigenvalue are the variance along these components.</p>
+<p>As <span class="math inline">\(C\)</span> is symmetric and positive semi-definite, therefore it has non-negative real eigenvalues and the matrix <span class="math inline">\(V\)</span> of the eigendecomposition satisfies <span class="math inline">\(V^{-1} = V^mathsf{T}\)</span> (i.e.&nbsp;it is orthogonal <a href="../basics/linearalgebra.html#def-orthonormalmatrix" class="quarto-xref">Definition&nbsp;<span>1.10</span></a>). The principal components are the eigenvectors and the eigenvalue are the variance along these components.</p>
 <p>If we instead compute the SVD of <span class="math inline">\(B = U\Sigma V^mathsf{T}\)</span> we get <span class="math display">\[
 C = \frac{1}{n-1} B^mathsf{T}B = \frac{1}{n-1} V \Sigma V^mathsf{T} = \frac{1}{n-1} V (\Lambda^mathsf{T}\Lambda) V^mathsf{T}
 \]</span> leading to a way of computing the principal components in a robust way as <span class="math display">\[
@@ -853,9 +853,9 @@ R_{\frac\pi3} = \left[
 </section>
 <section id="example-eigenfaces" class="level3" data-number="5.2.2">
 <h3 data-number="5.2.2" class="anchored" data-anchor-id="example-eigenfaces"><span class="header-section-number">5.2.2</span> Example Eigenfaces</h3>
-<p>We combine SVD/PCA in a illustrative example called <em>eigenfaces</em> as introduced in <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Sec 1.6, pp.&nbsp;28-34)</span>.</p>
+<p>We combine SVD/PCA in a illustrative example called <em>eigenfaces</em> as introduced in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Sec 1.6, pp.&nbsp;28-34)</span>.</p>
 <p>The idea is to apply the PCA techniques to a large set of faces to extract the dominate correlations between the images and create a <em>face basis</em> that can be used to represent an image in these coordinates. For example you can reconstruct a face in this space by projecting onto the eigen vectors or it can be used for face recognition as similar faces usually cluster under this projection.</p>
-<p>The images are taken from the Yale Face Dataset B, in our case we use a <a href="https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos/tree/main">GitHub</a> that provides <a href="https://julialang.org/">Julia</a> Pluto notebooks for Chapter 1 to 4 of <span class="citation" data-cites="Brunton2022">Brunton and Kutz (<a href="#ref-Brunton2022" role="doc-biblioref">2022</a>)</span>.</p>
+<p>The images are taken from the Yale Face Dataset B, in our case we use a <a href="https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos/tree/main">GitHub</a> that provides <a href="https://julialang.org/">Julia</a> Pluto notebooks for Chapter 1 to 4 of <span class="citation" data-cites="Brunton2022">Brunton and Kutz (<a href="../references.html#ref-Brunton2022" role="doc-biblioref">2022</a>)</span>.</p>
 <p>Our training set, so to speak, consists of the first 36 people in the dataset. We compute the <em>average face</em> and subtract it from our dataset to get our matrix <span class="math inline">\(B\)</span>. From here a SVD provides us with our basis <span class="math inline">\(U\)</span>. To test our basis we use individual 37 and a portion of the image of the MCI Headquarter (to see how well it performs on objects). For this we use the projection <span class="math display">\[
 \tilde{x} = U_r U_r^mathsf{T} x.
 \]</span> If we split this up, we first project onto our found patterns (encode) and than reconstruct from them (decode).</p>
@@ -883,10 +883,10 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The following code is an adaptation of the <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 1.7 and 1.9)</span>.</p>
+<p>The following code is an adaptation of the <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 1.7 and 1.9)</span>.</p>
 </div>
 </div>
-<div id="00b1d281" class="cell" data-execution_count="6">
+<div id="f558499d" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1004,12 +1004,12 @@ A x = b
 <p>The matrix <span class="math inline">\(A^\dagger\)</span> is often called the <em>Moore-Penrose left pseudo-inverse</em> as it fulfils the <a href="https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse"><em>Moore-Penrose conditions</em></a> conditions. It is also the matrix to provides the minimal Frobenius norm solution to <span class="math display">\[
 \min_{X \in \mathbb{R}^{m\times n}}\| A X - I_n\|_F.
 \]</span></p>
-<p><span class="citation" data-cites="GoluLoan">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 290</a>)</span></p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 290</a>)</span></p>
 </div>
 </div>
 </div>
 </div>
-<p>If we only use the truncated version, i.e.&nbsp;where we only use non-zero singular values, we can use it to find good solutions to <a href="#eq-leastsquare" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-leastsquare</span></a>.</p>
+<p>If we only use the truncated version, i.e.&nbsp;where we only use non-zero singular values, we can use it to find good solutions to <a href="#eq-leastsquare" class="quarto-xref">Equation&nbsp;<span>5.4</span></a>.</p>
 <div class="{callout-note}">
 <p>In <code>numpy</code> it can be computed by <code>numpy.linalg.pinv</code>.</p>
 </div>
@@ -1020,7 +1020,7 @@ A x = b
 </div>
 <div class="callout-body-container">
 <div id="def-condition" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 5.4 (Condition number)</strong></span> The condition number of a matrix provides a measure how sensitive the solution of <a href="#eq-leq" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-leq</span></a> is to perturbations in <span class="math inline">\(A\)</span> and <span class="math inline">\(b\)</span>. For a square matrix <span class="math inline">\(A\)</span> the condition number is defined as <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 5.4 (Condition number)</strong></span> The condition number of a matrix provides a measure how sensitive the solution of <a href="#eq-leq" class="quarto-xref">Equation&nbsp;<span>5.3</span></a> is to perturbations in <span class="math inline">\(A\)</span> and <span class="math inline">\(b\)</span>. For a square matrix <span class="math inline">\(A\)</span> the condition number is defined as <span class="math display">\[
 \kappa(A) = \|A\| \left\|A^{-1}\right\|,
 \]</span> for an appropriate underlying norm. For the 2-norm <span class="math inline">\(\kappa_2\)</span> is <span class="math display">\[
 \kappa_2(A) = \|A\|_2 \left\|A^{-1}\right\|_2 = \frac{\sigma_{max}}{\sigma_{min}}.
@@ -1031,7 +1031,7 @@ A(x + \epsilon_x) = b + \epsilon_b,
 A(x + \epsilon_x) = \sigma_{min}x + \sigma_{max}\epsilon_x.
 \]</span> Consequently, the output signal-to-noise <span class="math inline">\(\|b\|/\|\epsilon_b\)</span> is equivalent with the input signal-to-noise <span class="math inline">\(\|x\|/\|\epsilon_x\)</span> and the factor between those two is <span class="math inline">\(\kappa_2(A)\)</span>.</p>
 <p>In this sense <span class="math inline">\(\kappa_2\)</span> can be extended for more general matrices.</p>
-<p><span class="citation" data-cites="GoluLoan Brunton2022">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 87</a>; and <a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 18–19</a>)</span></p>
+<p><span class="citation" data-cites="GoluLoan Brunton2022">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 87</a>; and <a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 18–19</a>)</span></p>
 </div>
 </div>
 </div>
@@ -1049,11 +1049,11 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This example is adapted from <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Example: One-Dimensional Linear Regression, Example: Cement Heat Generation Data, pp.&nbsp;19-22)</span>.</p>
+<p>This example is adapted from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Example: One-Dimensional Linear Regression, Example: Cement Heat Generation Data, pp.&nbsp;19-22)</span>.</p>
 </div>
 </div>
 <section id="linear-regression-see-brunton2022-pp.-19-21" class="level4" data-number="5.3.1.1">
-<h4 data-number="5.3.1.1" class="anchored" data-anchor-id="linear-regression-see-brunton2022-pp.-19-21"><span class="header-section-number">5.3.1.1</span> Linear Regression <span class="citation" data-cites="Brunton2022">(see <a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 19–21</a>)</span></h4>
+<h4 data-number="5.3.1.1" class="anchored" data-anchor-id="linear-regression-see-brunton2022-pp.-19-21"><span class="header-section-number">5.3.1.1</span> Linear Regression <span class="citation" data-cites="Brunton2022">(see <a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 19–21</a>)</span></h4>
 <p>First we just take a linear correlation that we augment with some Gaußian Noise. So our matrix <span class="math inline">\(A\)</span> is simple a vector with our <span class="math inline">\(x\)</span>-coordinates and <span class="math inline">\(b\)</span> is the augmented image under our linear correlation. <span class="math display">\[
 \left[
     \begin{array}{c} a_1 \\ a_2 \\ \vdots \\ a_n \end{array}
@@ -1114,7 +1114,7 @@ Figure&nbsp;5.5: Linear regression with SVD.
 <p>Our reconstructed unknown <span class="math inline">\(x=\)</span> 2.855 and is a reasonable good match for <span class="math inline">\(k=\)</span> 3.0</p>
 </section>
 <section id="multi-linear-regression-see-brunton2022-pp.-21-23" class="level4" data-number="5.3.1.2">
-<h4 data-number="5.3.1.2" class="anchored" data-anchor-id="multi-linear-regression-see-brunton2022-pp.-21-23"><span class="header-section-number">5.3.1.2</span> Multi-Linear Regression <span class="citation" data-cites="Brunton2022">(see <a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 21–23</a>)</span></h4>
+<h4 data-number="5.3.1.2" class="anchored" data-anchor-id="multi-linear-regression-see-brunton2022-pp.-21-23"><span class="header-section-number">5.3.1.2</span> Multi-Linear Regression <span class="citation" data-cites="Brunton2022">(see <a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 21–23</a>)</span></h4>
 <p>The second example is based on the <em>Portland Cement Data</em> build in with MATLAB. In Python we again use the dataset provided on <a href="https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos/tree/main">GitHub</a>. The data set contains the heat generation during the hardening of 12 cement mixtures comprised of 4 basic ingredients, i.e.&nbsp;<span class="math inline">\(A\in \mathbb{R}^{13\times 4}\)</span>. The aim is to determine the weights <span class="math inline">\(x\)</span> that relate the proportion of the ingredients to the heat generation in the mixture.</p>
 <div id="cell-fig-cement_svd" class="cell" data-execution_count="8">
 <details class="code-fold">
@@ -1161,7 +1161,7 @@ Figure&nbsp;5.6: Estimate for hardening in cement mixtures.
 <p>This concludes our investigation of matrix decompositions, we will investigate further decompositions of signals later, but for now we dive deeper into regression.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-Brunton2022" class="csl-entry" role="listitem">
 Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engineering - Machine Learning, Dynamical Systems, and Control</em>. 2nd ed. Cambridge: Cambridge University Press.
 </div>
@@ -1764,7 +1764,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

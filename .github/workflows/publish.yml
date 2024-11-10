@@ -22,8 +22,7 @@ jobs:
         
       - name: Install dependencies, render
         run: |
-          locale-gen de_AT.UTF-8
-          update-locale 
+          sudo apt-get install -qq language-pack-de 
           pdm install 
           pdm run quarto render .
         env:

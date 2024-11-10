@@ -15,6 +15,8 @@ dependencies = [
     "scipy>=1.14.1",
     "imageio>=2.35.1",
     "owid-catalog>=0.3.11",
+    "odfpy>=1.4.1",
+    "DateTime>=5.5",
 ]
 requires-python = "==3.12.*"
 readme = "README.md"

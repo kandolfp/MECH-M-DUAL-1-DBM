@@ -285,3 +285,77 @@ plt.gca().set_aspect(1)
 plt.grid(visible=True)
 plt.show()
 ```
+
+## Categorical Variables
+
+Even with our excursion to non-linear regression we still had somewhat regular data to work with.
+This is not always the case.
+Sometimes there are trends in the data, like per month, or day.
+The inclusion of categorical variables can help to control for trends in the data.
+
+We can integrate such variables to the regressor by adding columns to the matrix $X$ for each of the categories.
+Note, they can be interpreted as to correspond to the offset (the constant $1$) so this column can be omitted and each category gets a separate offset.
+
+We can see this in action in the following example. 
+We investigate the unemployment data in Austria.
+There is a strong seasonality @fig-non-categorical_variables-2 in the data.
+This is largely due to the fact that the Austrian job market has a large touristic sector with its season and the construction industry employs less people during summer.
+
+For the regression @fig-non-categorical_variables-2 we can see that this captures the seasonal change quite well.
+
+The data is taken from [Arbeitsmarktdaten online](https://iambweb.ams.or.at/ambweb/).
+
+```{python}
+#| label: fig-non-categorical_variables
+#| fig-cap: "Unemployment data from Austria for the years 2010 to 2017."
+#| fig-subcap: 
+#|   - "Regression with categorical variables per month."
+#|   - "Seasonality of the unemployment average over the years." 
+#| layout-ncol: 1
+#| code-fold: true
+#| echo: false
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import locale
+import DateTime
+%config InlineBackend.figure_formats = ["svg"]
+np.random.seed(6020)
+
+df = pd.read_excel("../_assets/regression/AUT_UE10-19.ods", engine="odf")
+
+locale.setlocale(locale.LC_ALL, 'de_AT.utf8')
+select = "Gesamt Bestand"
+df["date"] = pd.to_datetime(df["Monat"], format="%B %Y")
+df["month"] = pd.to_datetime(df["Monat"], format="%B %Y").dt.month
+y = df[select].to_numpy().reshape((-1, 1))
+x = (pd.to_datetime(df["Monat"], format="%B %Y").astype(int) / 10**9 - 1262304000.0) / 2678400.0 * 1 / 12
+X = pd.concat([x, x**2, x**3, pd.get_dummies(df["month"], dtype='int')], axis=1).to_numpy()
+cat = 122
+c = np.linalg.pinv(X[:cat, :]) @ y[:cat]
+
+fig = plt.figure()
+plt.plot(x[:cat], y[:cat], "o", color="r", label="observations")
+plt.plot(x[:cat], X[:cat, :] @ c)
+plt.xticks(range(0, 10), range(2010, 2020))
+plt.ylabel("Unemployment")
+plt.grid()
+plt.show()
+
+mean_month = df[[select, "month"]].groupby("month").mean()
+mean_month = mean_month - mean_month.mean()
+fig = plt.figure()
+plt.bar(x=pd.to_datetime(df["Monat"][:12], format="%B %Y").dt.month_name(),
+        height=mean_month[select].to_numpy())
+plt.xticks(rotation=45)
+plt.ylabel("Relative unemployment")
+plt.show()
+```
+
+::: {.callout-note}
+There is also quite a difference between man and woman that could be categorized separately.
+:::
+
+We wrap up this section about regression by talking more abstract about the regression of linear systems and some general thoughts about the selection of the model and consequences.
+

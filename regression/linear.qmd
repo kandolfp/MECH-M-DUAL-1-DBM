@@ -32,7 +32,9 @@ y = X c = f(X, c).
 $$
 
 ::: {.callout-note}
-In literature the parameters are most of the time called $\beta$ but for the sake of keeping notation consistent we opt for $c$ (and not $b$ to not confuse it with $ Ax =b$).
+
+In literature the parameters are most of the time called $\beta$ but for the sake of keeping notation consistent we opt for $c$ (and not $b$ to not confuse it with $Ax =b$).
+
 :::
 
 ::: {.callout-tip}

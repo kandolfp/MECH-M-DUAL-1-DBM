@@ -19,7 +19,7 @@ This section is mainly based on @Brunton2022, Section 4.3.
 
 ## Over-Determined Systems
 
-We speak of an over-determined system if we have more rows than columns, i.e. $A$ is tall and skinny and in general there is no solution to @eq-axb but rather we minimize the error according to a norm, see @ex-regr-linear-ols.
+We speak of an over-determined system if we have more rows than columns, i.e. $A$ is tall and skinny and in general there is no solution to @eq-axb but rather we minimize the error according to a norm, see @sec-regr-linear-ols.
 If we further impose a restriction on $x$ we can select a more specific solution.
 
 The generalized form is
@@ -68,11 +68,11 @@ axs.append(fig.add_subplot(4, 3, 12))
 for i, lam in enumerate([0, 0.1, 0.5]):
     res = minimize(optimize, args=(A, b, lam, [2, 1]), x0=x0)
     axs[i * 2].bar(range(n), res.x)
-    axs[i * 2].text(5, 0.05, rf"$\lambda={lam}$")
+    axs[i * 2].text(5, 0.05, rf"$\lambda_1={lam}$")
     axs[i * 2].set_xlim(0, 100)
     axs[i * 2].set_ylim(-0.1, 0.1)
     axs[i * 2 + 1].hist(res.x, 20)
-    axs[i * 2 + 1].text(-0.08, 50, rf"$\lambda={lam}$")
+    axs[i * 2 + 1].text(-0.08, 50, rf"$\lambda_1={lam}$")
     axs[i * 2 + 1].set_xlim(-0.1, 0.1)
     axs[i * 2 + 1].set_ylim(0, 70)
 axs[0].set_xticks([])
@@ -124,11 +124,11 @@ axs.append(fig.add_subplot(4, 3, 12))
 for i, lam in enumerate([0, 0.1, 0.5]):
     res = minimize(optimize, args=(A, b, lam, [2, 2]), x0=x0)
     axs[i * 2].bar(range(n), res.x)
-    axs[i * 2].text(5, 0.05, rf"$\lambda={lam}$")
+    axs[i * 2].text(5, 0.05, rf"$\lambda_2={lam}$")
     axs[i * 2].set_xlim(0, 100)
     axs[i * 2].set_ylim(-0.1, 0.1)
     axs[i * 2 + 1].hist(res.x, 20)
-    axs[i * 2 + 1].text(-0.08, 15, rf"$\lambda={lam}$")
+    axs[i * 2 + 1].text(-0.08, 15, rf"$\lambda_2={lam}$")
     axs[i * 2 + 1].set_xlim(-0.1, 0.1)
     axs[i * 2 + 1].set_ylim(0, 20)
 axs[0].set_xticks([])
@@ -278,4 +278,4 @@ A classic method is the _k-fold cross validation_:
 > Test the model predictions against withheld (extrapolation) data and evaluate whether the model is actually any good. 
 - [see @Brunton2022, pp. 159]
 
-As we can see there are a log of further paths to investigate but for now this concludes our excursion into regression.
+As we can see, there are a lot of further paths to investigate but for now this concludes our excursion into regression.

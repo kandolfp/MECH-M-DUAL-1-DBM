@@ -161,7 +161,7 @@ m = 500
 n = 100
 A = # Random matrix with m rows and 100 columns 
 b = np.random.rand(m)
-x0 = # Optimal 2 norm solution without panaltization as initial start
+x0 = # Optimal 2 norm solution without penalization as initial start
 
 optimize = # function to optimize
 

@@ -65,7 +65,7 @@ In order to make it clearer we follow the example given in [@Brunton2022, Sectio
 ::: {.callout-tip appearance="simple" collapse="true" icon=false}
 :::: {#exm-gd}
 
-## Gradient decent
+## Gradient descent
 
 For the function 
 $$
@@ -94,7 +94,7 @@ $$
 
 ```{python}
 #| label: fig-gd-ex1
-#| fig-cap: "Gradient decent applied for the function $f(x) = x_1^2 + 3x_2^2$."
+#| fig-cap: "Gradient descent applied for the function $f(x) = x_1^2 + 3x_2^2$."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 import plotly.graph_objects as go
@@ -124,7 +124,7 @@ while diff > 1e-10:
     diff = np.linalg.norm(z[-1] - z[-2])
     x = np.vstack((x, x_new))
 
-fig.add_scatter3d(x=x[:, 0], y=x[:, 1], z=z, line_color='red', name="Decent path")
+fig.add_scatter3d(x=x[:, 0], y=x[:, 1], z=z, line_color='red', name="Descent path")
 
 fig.show()
 ```
@@ -135,7 +135,7 @@ fig.show()
 If you can not compute the gradient analytically there are numerical methods to help do the computation.
 :::
 
-In order to get a better idea on how this is working for _curve fitting_ we apply the gradient decent method to our curve fitting from @sec-regr-linear-ols.
+In order to get a better idea on how this is working for _curve fitting_ we apply the gradient descent method to our curve fitting from @sec-regr-linear-ols.
 
 In @eq-ols_gradient we computed the gradient and instead of computing $X^\dagger$ with high cost we get the low cost iterative solver:
 
@@ -154,7 +154,7 @@ So lets try it with our example from @fig-linear_reg.
 
 ```{python}
 #| label: fig-non-linear_reg_gd2
-#| fig-cap: "Line fit with gradient decent for different number of iterations and learning rate 2e-3."
+#| fig-cap: "Line fit with gradient descent for different number of iterations and learning rate 2e-3."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
@@ -214,7 +214,7 @@ For a large enough set $X$ this is quite cost intense, even if it is still cheap
 
 In order to reduce cost we can randomly select some points of our training set and only train with those.
 Obviously the computation of the gradient becomes much faster.
-We call this method _Stochastic Gradient Decent_ (SGD).
+We call this method _Stochastic Gradient descent_ (SGD).
 
 In @fig-non-linear_reg_gd3 we see the convergence for randomly selecting 1, 3, and 6 indices of our possible 10.
 
@@ -224,7 +224,7 @@ In the other side it might get less stuck in local minima.
 One possibility to try to get the strength of both is to use SDG to get a good guess for your initial value and SD for the fine tuning.
 ```{python}
 #| label: fig-non-linear_reg_gd3
-#| fig-cap: "Line fit with stochastic gradient decent with 1 or 3 samples and 200 iterations as well as the 3 sample version as initial guess for GD with 100 iterations."
+#| fig-cap: "Line fit with stochastic gradient descent with 1 or 3 samples and 200 iterations as well as the 3 sample version as initial guess for GD with 100 iterations."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt

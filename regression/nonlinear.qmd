@@ -10,7 +10,7 @@ This section is mainly based on @Brunton2022, Section 4.2.
 We extend our theory of _curve fitting_ to a non-linear function $f(X, c)$ with coefficients $b\in\mathbb{R}^m$ and our $n$ $X_{k-}$.
 We assume that $m < n$.
 
-If we define our root-mean-square error depending on $b$ as 
+If we define our root-mean-square error depending on $c$ as 
 $$
 E_2(c) = \sum_{k=1}^n(f(X_{k-}, c) - y_k )^2
 $$

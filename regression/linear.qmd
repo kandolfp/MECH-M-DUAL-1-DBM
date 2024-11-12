@@ -21,7 +21,7 @@ $$X = \left[
     \right] = \left[X_{-1}, \dots, X_{-m}\right],$$
 where the second representation more closely fits to our idea of the $m$ independent variables. 
 
-Let us model the relation in a linear fashion with the parameters $b$
+Let us model the relation in a linear fashion with the parameters $c$
 as 
 $$
 y_k \overset{!}{=} X_{k1} c_1 + X_{k2} c_2 + \cdots + X_{km} c_m, \quad 1\leq k \leq n,

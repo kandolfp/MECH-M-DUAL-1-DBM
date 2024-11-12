@@ -43,7 +43,7 @@ A function does not necessarily experience gravity in the same way as we do, so 
 
 We express this algorithm in terms of the iterations $x^k$ for guesses of the minimum with the updates
 $$
-x^{k+1} = x^k - \delta\, \nabla f(x^k) 
+x^{(k+1)} = x^{(k)} - \delta\, \nabla f(x^{(k)}) 
 $$
 where the parameter $\delta$ defines how far along the gradient descent curve we move.
 This formula is an update for a Newton method where we use the derivative as the update function.
@@ -51,11 +51,11 @@ This leaves us with the problem to find an algorithm to determine $\delta$.
 
 Again, we can view this as an optimization problem for a new function 
 $$
-F(\delta) = f(x^{k+1}(\delta))
+F(\delta) = f(x^{(k+1)}(\delta))
 $$
 and
 $$
-\partial_\delta F = -\nabla f(x^{k+1})\nabla f(x^k) = 0.
+\partial_\delta F = -\nabla f(x^{(k+1)})\nabla f(x^{(k)}) = 0.
 $$ {#eq-gcupdatep}
 
 Now the interpretation of @eq-gcupdatep is that we want that the gradient of the current step is orthogonal to the gradient of the next step.

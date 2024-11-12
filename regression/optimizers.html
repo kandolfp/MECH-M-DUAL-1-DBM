@@ -368,7 +368,7 @@ Important
 </div>
 <section id="over-determined-systems" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="over-determined-systems"><span class="header-section-number">8.1</span> Over-Determined Systems</h2>
-<p>We speak of an over-determined system if we have more rows than columns, i.e.&nbsp;<span class="math inline">\(A\)</span> is tall and skinny and in general there is no solution to <a href="#eq-axb" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> but rather we minimize the error according to a norm, see <span class="citation" data-cites="ec-regr-linear-ols">(<a href="../references.html#ref-ec-regr-linear-ols" role="doc-biblioref"><strong>ec-regr-linear-ols?</strong></a>)</span>. If we further impose a restriction on <span class="math inline">\(x\)</span> we can select a more specific solution.</p>
+<p>We speak of an over-determined system if we have more rows than columns, i.e.&nbsp;<span class="math inline">\(A\)</span> is tall and skinny and in general there is no solution to <a href="#eq-axb" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> but rather we minimize the error according to a norm, see <span class="citation" data-cites="ex-regr-linear-ols">(<a href="../references.html#ref-ex-regr-linear-ols" role="doc-biblioref"><strong>ex-regr-linear-ols?</strong></a>)</span>. If we further impose a restriction on <span class="math inline">\(x\)</span> we can select a more specific solution.</p>
 <p>The generalized form is <span id="eq-reg-optimizers"><span class="math display">\[
 x = \underset{v}{\operatorname{argmin}} \|Av - b\|_2 + \lambda_1 \|v\|_1 + \lambda_2\|v\|_2
 \tag{8.2}\]</span></span> where the parameters <span class="math inline">\(\lambda_1\)</span> and <span class="math inline">\(\lambda_2\)</span> are called the <em>penalization coefficients</em>, with respect to the norm. Selecting these coefficients is the first step towards <em>model selection</em>.</p>
@@ -1134,7 +1134,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","openEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

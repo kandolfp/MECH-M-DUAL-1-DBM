@@ -373,8 +373,8 @@ window.Quarto = {
 <li>for two matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> in <span class="math inline">\(\mathbb{R}^{n\times n}\)</span> <span class="math display">\[
 \det(AB) = \det(A)\det(B),
 \]</span></li>
-<li>for the transpose <span class="math inline">\(A^mathsf{T}\)</span> of a matrix <span class="math inline">\(A\)</span> <span class="math display">\[
-\det(A^mathsf{T}) = \det(A),
+<li>for the transpose <span class="math inline">\(A^{\mathsf{T}}\)</span> of a matrix <span class="math inline">\(A\)</span> <span class="math display">\[
+\det(A^{\mathsf{T}}) = \det(A),
 \]</span></li>
 <li>for a scalar <span class="math inline">\(\alpha\in\mathbb{R}\)</span> and a matrix <span class="math inline">\(A\)</span> <span class="math display">\[
 \det(\alpha A) = \alpha^n\det(A),
@@ -387,7 +387,7 @@ window.Quarto = {
 \]</span></li>
 </ol>
 <p>So let us check in <code>numpy</code>:</p>
-<div id="32968435" class="cell styled-output" data-execution_count="1">
+<div id="ee2585f3" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -438,7 +438,7 @@ p(\lambda) = \det(A - \lambda I).
 </div>
 </div>
 <p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
-<div id="1941f4fd" class="cell styled-output" data-execution_count="2">
+<div id="16485f82" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> LA.eigvals(A)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lam_sort <span class="op">=</span> np.sort(lam)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -485,7 +485,7 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
 </div>
 </div>
 <p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
-<div id="c7c6cc21" class="cell styled-output" data-execution_count="3">
+<div id="061d3768" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lam, V <span class="op">=</span> LA.eig(A)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_eigen <span class="op">=</span> np.diag(lam)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -815,10 +815,10 @@ A_2 \sin(\omega_2 t + \phi_2)
 <section id="low-rank-approximation-of-a-square-matrix" class="level3" data-number="4.1.5">
 <h3 data-number="4.1.5" class="anchored" data-anchor-id="low-rank-approximation-of-a-square-matrix"><span class="header-section-number">4.1.5</span> Low-rank approximation of a square matrix</h3>
 <p>We can use the eigenvalue decomposition to <em>approximate</em> a square matrix.</p>
-<p>Let us sort the eigenvalues in <span class="math inline">\(\Lambda\)</span> and let us call <span class="math inline">\(U^mathsf{T}=V^{-1}\)</span> then we can write <span class="math display">\[
-A = V\Lambda U^mathsf{T} = \sum_{i=1}^n\lambda_i v_i u_i^mathsf{T}
+<p>Let us sort the eigenvalues in <span class="math inline">\(\Lambda\)</span> and let us call <span class="math inline">\(U^{\mathsf{T}}=V^{-1}\)</span> then we can write <span class="math display">\[
+A = V\Lambda U^{\mathsf{T}} = \sum_{i=1}^n\lambda_i v_i u_i^{\mathsf{T}}
 \]</span> where <span class="math inline">\(v_i\)</span> and <span class="math inline">\(u_i\)</span> correspond to the rows of the matrices. Now we can define the <em>rank</em> <span class="math inline">\(r\)</span> approximation of <span class="math inline">\(A\)</span> as <span class="math display">\[
-A\approx A_r = V\Lambda U^mathsf{T} = \sum_{i=1}^r\lambda_i v_i u_i^mathsf{T}.
+A\approx A_r = V\Lambda U^{\mathsf{T}} = \sum_{i=1}^r\lambda_i v_i u_i^{\mathsf{T}}.
 \]</span></p>
 <p>To make this a bit easier to understand the following illustration is helpful:</p>
 <div class="quarto-figure quarto-figure-center">
@@ -906,7 +906,7 @@ Figure&nbsp;4.3: Image of MCI I and the reconstruction with approximated matrix.
 <li>the matrices involved need to be square</li>
 <li>eigenvalues might be complex, even if the problem at hand is real</li>
 <li>we only get a diagonal matrix <span class="math inline">\(\Lambda\)</span> if all eigenvectors are linear independent</li>
-<li>the computation of <span class="math inline">\(V^{-1}\)</span> is non-trivial unless <span class="math inline">\(A\)</span> is symmetric and <span class="math inline">\(V\)</span> becomes unitary (<span class="math inline">\(V^{-1} = V^mathsf{T}\)</span>).</li>
+<li>the computation of <span class="math inline">\(V^{-1}\)</span> is non-trivial unless <span class="math inline">\(A\)</span> is symmetric and <span class="math inline">\(V\)</span> becomes unitary (<span class="math inline">\(V^{-1} = V^{\mathsf{T}}\)</span>).</li>
 </ol>
 <p>Therefore, we will look into a generalized decomposition called the <em>singular value decomposition</em> in the next section.</p>
 
@@ -1512,7 +1512,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","loop":false,"closeEffect":"zoom","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

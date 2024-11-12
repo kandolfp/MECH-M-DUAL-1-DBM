@@ -155,7 +155,6 @@ Fill out the missing parts:
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import minimize
-%config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
 
 m = 500

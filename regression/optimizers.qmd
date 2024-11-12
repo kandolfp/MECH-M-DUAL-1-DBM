@@ -51,7 +51,7 @@ m = 500
 n = 100
 A = np.random.rand(m, n)
 b = np.random.rand(m)
-x0= np.linalg.pinv(A) @ b
+x0 = np.linalg.pinv(A) @ b
 
 optimize = lambda x, A, b, lam, norm: np.linalg.norm(A @ x - b, ord=norm[0]) +\
     lam * np.linalg.norm(x, ord=norm[1])
@@ -107,7 +107,7 @@ m = 500
 n = 100
 A = np.random.rand(m, n)
 b = np.random.rand(m)
-x0= np.linalg.pinv(A) @ b
+x0 = np.linalg.pinv(A) @ b
 
 optimize = lambda x, A, b, lam, norm: np.linalg.norm(A @ x - b, ord=norm[0]) +\
     lam * np.linalg.norm(x, ord=norm[1])

@@ -28,9 +28,9 @@ Some important properties of the determinant are:
 $$
 \det(AB) = \det(A)\det(B),
 $$
-1. for the transpose $A^mathsf{T}$ of a matrix $A$
+1. for the transpose $A^{\mathsf{T}}$ of a matrix $A$
 $$
-\det(A^mathsf{T}) = \det(A),
+\det(A^{\mathsf{T}}) = \det(A),
 $$
 1. for a scalar $\alpha\in\mathbb{R}$ and a matrix $A$
 $$
@@ -470,14 +470,14 @@ $$
 
 We can use the eigenvalue decomposition to _approximate_ a square matrix.
 
-Let us sort the eigenvalues in $\Lambda$ and let us call $U^mathsf{T}=V^{-1}$ then we can write
+Let us sort the eigenvalues in $\Lambda$ and let us call $U^{\mathsf{T}}=V^{-1}$ then we can write
 $$
-A = V\Lambda U^mathsf{T} = \sum_{i=1}^n\lambda_i v_i u_i^mathsf{T}
+A = V\Lambda U^{\mathsf{T}} = \sum_{i=1}^n\lambda_i v_i u_i^{\mathsf{T}}
 $$
 where $v_i$ and $u_i$ correspond to the rows of the matrices.
 Now we can define the  _rank_ $r$ approximation of $A$ as
 $$
-A\approx A_r = V\Lambda U^mathsf{T} = \sum_{i=1}^r\lambda_i v_i u_i^mathsf{T}.
+A\approx A_r = V\Lambda U^{\mathsf{T}} = \sum_{i=1}^r\lambda_i v_i u_i^{\mathsf{T}}.
 $$
 
 To make this a bit easier to understand the following illustration is helpful:
@@ -551,6 +551,6 @@ The eigenvalue decomposition is an important tool but it has its limitations:
 1. the matrices involved need to be square
 1. eigenvalues might be complex, even if the problem at hand is real
 1. we only get a diagonal matrix $\Lambda$ if all eigenvectors are linear independent
-1. the computation of $V^{-1}$ is non-trivial unless $A$ is symmetric and $V$ becomes unitary ($V^{-1} = V^mathsf{T}$).
+1. the computation of $V^{-1}$ is non-trivial unless $A$ is symmetric and $V$ becomes unitary ($V^{-1} = V^{\mathsf{T}}$).
 
 Therefore, we will look into a generalized decomposition called the _singular value decomposition_ in the next section.

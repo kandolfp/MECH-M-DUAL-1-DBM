@@ -140,7 +140,7 @@ In order to get a better idea on how this is working for _curve fitting_ we appl
 In @eq-ols_gradient we computed the gradient and instead of computing $X^\dagger$ with high cost we get the low cost iterative solver:
 
 $$
-c^{(k+1)} = c^{(k)} - \delta (2 X^mathsf{T} X c^{(k)} - 2 X^mathsf{T} y)
+c^{(k+1)} = c^{(k)} - \delta (2 X^{\mathsf{T}} X c^{(k)} - 2 X^{\mathsf{T}} y)
 $$
 
 As $\delta$ is tricky to compute we go ahead and introduce we do not update it but prescribe it.

@@ -183,7 +183,7 @@ $$T(\alpha v) = \alpha T(v).$$
 
 A linear mapping of special interest to us is the _transpose_ of a matrix defined by turning rows into columns and vice versa:
 $$
-C = A^\mathsf{T}, \quad \Rightarrow \quad c_{ij} = a_{ji}.
+C = A^{\mathsf{T}}, \quad \Rightarrow \quad c_{ij} = a_{ji}.
 $$
 Consequently, the transpose of a (row) vector is a column vector.
 
@@ -202,7 +202,7 @@ With this operation we can define two more mappings.
 :::: {#def-dotproduct} 
 ## Dot product
 The _dot product_ or _scalar product_ of two vectors $v$ and $w$ as is defined by
-$$\langle v, w\rangle = v \cdot w = v^mathsf{T} w = \sum_i v_i w_i.$$
+$$\langle v, w\rangle = v \cdot w = v^{\mathsf{T}} w = \sum_i v_i w_i.$$
 ::::
 :::
 
@@ -225,7 +225,7 @@ As $\mathbb{R}^n$ is an euclidean vector space the above function is also called
 ## Outer product
 We also have the _outer product_ defined as:
 $$
-v w^mathsf{T} = \left[
+v w^{\mathsf{T}} = \left[
     \begin{array}{cccc} v_1 w_1 & v_1 w_2 & \dots & v_1 w_n \\
                         v_2 w_1 & v_2 w_2 & \dots &v_2 w_n \\  
                         \vdots & \vdots & \ddots & \vdots\\
@@ -425,7 +425,7 @@ The following holds true for the inverse of matrices:
 - the inverse of a product is the product of the inverses
 $$ (AB)^{-1} = B^{-1}A^{-1},$$
 - the inverse of the transpose is the transpose of the inverse
-$$ (A^{-1})^mathsf{T} = (A^{mathsf{T}})^{-1} \equiv A^{-mathsf{T}}.$$
+$$ (A^{-1})^{\mathsf{T}} = (A^{mathsf{T}})^{-1} \equiv A^{-mathsf{T}}.$$
 
 ```{python}
 #| classes: styled-output
@@ -529,9 +529,9 @@ Extending this to a matrix (and to that end a basis) as follows.
 We call a matrix $Q\in\mathbb{R}^{n\times n}$, here the real and square is important, orthogonal if its columns and rows are orthonormal vectors.
 This is the same as
 $$
-Q^mathsf{T} Q = Q Q^mathsf{T} = I
+Q^{\mathsf{T}} Q = Q Q^{\mathsf{T}} = I
 $$
-and this implies that $Q^{-1} = Q^mathsf{T}$.
+and this implies that $Q^{-1} = Q^{\mathsf{T}}$.
 ::::
 :::
 

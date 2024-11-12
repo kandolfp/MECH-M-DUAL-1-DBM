@@ -141,6 +141,61 @@ plt.subplots_adjust(top = 0.99, bottom=0.1, hspace=0.35, wspace=0.2)
 plt.show()
 ```
 
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exr-lasso_reg}
+
+## Implement the above optimization yourself.
+
+Fill out the missing parts:
+
+```{python}
+#| code-fold: true
+#| code-summary: "Code fragment for implementation."
+#| eval: false
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.optimize import minimize
+%config InlineBackend.figure_formats = ["svg"]
+np.random.seed(6020)
+
+m = 500
+n = 100
+A = # Random matrix with m rows and 100 columns 
+b = np.random.rand(m)
+x0 = # Optimal 2 norm solution without panaltization as initial start
+
+optimize = # function to optimize
+
+fig = plt.figure()
+axs = []
+axs.append(fig.add_subplot(4, 1, 1))
+axs.append(fig.add_subplot(4, 3, 10))
+axs.append(fig.add_subplot(4, 1, 2))
+axs.append(fig.add_subplot(4, 3, 11))
+axs.append(fig.add_subplot(4, 1, 3))
+axs.append(fig.add_subplot(4, 3, 12))
+
+for i, lam in enumerate([0, 0.1, 0.5]):
+    res = minimize(optimize, args=, x0=x0)    # use your correct arguments here
+    axs[i * 2].bar(range(n), res.x)
+    axs[i * 2].text(5, 0.05, rf"$\lambda={lam}$")
+    axs[i * 2].set_xlim(0, 100)
+    axs[i * 2].set_ylim(-0.1, 0.1)
+    axs[i * 2 + 1].hist(res.x, 20)
+    axs[i * 2 + 1].text(-0.08, 15, rf"$\lambda={lam}$")
+    axs[i * 2 + 1].set_xlim(-0.1, 0.1)
+    axs[i * 2 + 1].set_ylim(0, 20)
+axs[0].set_xticks([])
+axs[2].set_xticks([])
+axs[3].set_yticks([])
+axs[5].set_yticks([])
+
+plt.subplots_adjust(top = 0.99, bottom=0.1, hspace=0.35, wspace=0.2)
+plt.show()
+```
+::::
+:::
+
 ## Model Selection/Identification and over-/underfitting {#sec-regression-optimizers-msou}
 
 Let us use the results we have obtain so far for a discussion on _model selection_. 

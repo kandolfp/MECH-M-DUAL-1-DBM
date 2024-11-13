@@ -201,7 +201,7 @@ With this operation we can define two more mappings.
 ::: {.callout appearance="simple"}
 :::: {#def-dotproduct} 
 ## Dot product
-The _dot product_ or _scalar product_ of two vectors $v$ and $w$ as is defined by
+The _dot product_, _inner product_, or _scalar product_ of two vectors $v$ and $w$ as is defined by
 $$\langle v, w\rangle = v \cdot w = v^{\mathsf{T}} w = \sum_i v_i w_i.$$
 ::::
 :::

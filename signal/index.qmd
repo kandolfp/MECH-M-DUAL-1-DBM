@@ -1,8 +1,22 @@
-# Singnal transformations {.unnumbered}
+# Signal Processing {.unnumbered}
 
-In this section we are going to discuss basics of signal transformation in terms of the 
+In previous parts we have already discussed how changing a coordinate system or basis (@def-changebasis) can simplify expression or computation, see @sec-matrixdc-eigen and @sec-matrixdc-svd, among others.
 
-- Fourier Transform
-- Wavelet Transform
+One of the most fundamental coordinate transformations was introduced by J.-B. Joseph Fourier in the early 1800s.
+While investigating _heat_ he discovered that sine and cosine functions with increasing frequency form an orthogonal basis (@def-basis & @def-orthonormal).
+In fact, the sine and cosine functions for an eigenbasis for the heat equation
+$$
+\frac{\partial u}{\partial t} = \Delta u
+$$
+and solving it becomes trivial once you determine the corresponding eigenvalues that are connected to the geometry, amplitudes, and boundary conditions.
 
-Parts of this section are based on [@Brunton2022, Section 4].
+In the 200+ years since, this discovery has not only founded new corners of mathematics but also allows via the _fast fourier transform_ or FFT the real-time image and audio compression that make our global communication networks work.
+
+In the same area the related wavelets where developed to for advanced signal processing and compression.
+
+In this section we are going to discuss basics of signal processing in terms of these and other signal transformations, see
+
+- @sec-signal-fourier
+- @sec-signal-wavelet
+
+Parts of this section are based on [@Brunton2022, Section 2].

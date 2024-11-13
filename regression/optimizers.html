@@ -391,7 +391,7 @@ Important
 </div>
 <section id="over-determined-systems" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="over-determined-systems"><span class="header-section-number">8.1</span> Over-Determined Systems</h2>
-<p>We speak of an over-determined system if we have more rows than columns, i.e.&nbsp;<span class="math inline">\(A\)</span> is tall and skinny and in general there is no solution to <a href="#eq-axb" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> but rather we minimize the error according to a norm, see <span class="citation" data-cites="ex-regr-linear-ols">(<a href="../references.html#ref-ex-regr-linear-ols" role="doc-biblioref"><strong>ex-regr-linear-ols?</strong></a>)</span>. If we further impose a restriction on <span class="math inline">\(x\)</span> we can select a more specific solution.</p>
+<p>We speak of an over-determined system if we have more rows than columns, i.e.&nbsp;<span class="math inline">\(A\)</span> is tall and skinny and in general there is no solution to <a href="#eq-axb" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> but rather we minimize the error according to a norm, see <a href="linear.html#sec-regr-linear-ols" class="quarto-xref"><span>Section 6.1</span></a>. If we further impose a restriction on <span class="math inline">\(x\)</span> we can select a more specific solution.</p>
 <p>The generalized form is <span id="eq-reg-optimizers"><span class="math display">\[
 x = \underset{v}{\operatorname{argmin}} \|Av - b\|_2 + \lambda_1 \|v\|_1 + \lambda_2\|v\|_2
 \tag{8.2}\]</span></span> where the parameters <span class="math inline">\(\lambda_1\)</span> and <span class="math inline">\(\lambda_2\)</span> are called the <em>penalization coefficients</em>, with respect to the norm. Selecting these coefficients is the first step towards <em>model selection</em>.</p>
@@ -412,7 +412,7 @@ x = \underset{v}{\operatorname{argmin}} \|Av - b\|_2 + \lambda_1 \|v\|_1 + \lamb
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.random.rand(m, n)</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.random.rand(m)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>x0<span class="op">=</span> np.linalg.pinv(A) <span class="op">@</span> b</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> np.linalg.pinv(A) <span class="op">@</span> b</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>optimize <span class="op">=</span> <span class="kw">lambda</span> x, A, b, lam, norm: np.linalg.norm(A <span class="op">@</span> x <span class="op">-</span> b, <span class="bu">ord</span><span class="op">=</span>norm[<span class="dv">0</span>]) <span class="op">+\</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    lam <span class="op">*</span> np.linalg.norm(x, <span class="bu">ord</span><span class="op">=</span>norm[<span class="dv">1</span>])</span>
@@ -429,11 +429,11 @@ x = \underset{v}{\operatorname{argmin}} \|Av - b\|_2 + \lambda_1 \|v\|_1 + \lamb
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, lam <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>]):</span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> minimize(optimize, args<span class="op">=</span>(A, b, lam, [<span class="dv">2</span>, <span class="dv">1</span>]), x0<span class="op">=</span>x0)</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].bar(<span class="bu">range</span>(n), res.x)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].text(<span class="dv">5</span>, <span class="fl">0.05</span>, <span class="vs">rf"$\lambda=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].text(<span class="dv">5</span>, <span class="fl">0.05</span>, <span class="vs">rf"$\lambda_1=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].set_xlim(<span class="dv">0</span>, <span class="dv">100</span>)</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].set_ylim(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>)</span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].hist(res.x, <span class="dv">20</span>)</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].text(<span class="op">-</span><span class="fl">0.08</span>, <span class="dv">50</span>, <span class="vs">rf"$\lambda=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].text(<span class="op">-</span><span class="fl">0.08</span>, <span class="dv">50</span>, <span class="vs">rf"$\lambda_1=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].set_xlim(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>)</span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].set_ylim(<span class="dv">0</span>, <span class="dv">70</span>)</span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_xticks([])</span>
@@ -476,7 +476,7 @@ Figure&nbsp;8.1: LASSO regression coefficients of an over-determined system with
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.random.rand(m, n)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.random.rand(m)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>x0<span class="op">=</span> np.linalg.pinv(A) <span class="op">@</span> b</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> np.linalg.pinv(A) <span class="op">@</span> b</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>optimize <span class="op">=</span> <span class="kw">lambda</span> x, A, b, lam, norm: np.linalg.norm(A <span class="op">@</span> x <span class="op">-</span> b, <span class="bu">ord</span><span class="op">=</span>norm[<span class="dv">0</span>]) <span class="op">+\</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    lam <span class="op">*</span> np.linalg.norm(x, <span class="bu">ord</span><span class="op">=</span>norm[<span class="dv">1</span>])</span>
@@ -493,11 +493,11 @@ Figure&nbsp;8.1: LASSO regression coefficients of an over-determined system with
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, lam <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>]):</span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> minimize(optimize, args<span class="op">=</span>(A, b, lam, [<span class="dv">2</span>, <span class="dv">2</span>]), x0<span class="op">=</span>x0)</span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].bar(<span class="bu">range</span>(n), res.x)</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].text(<span class="dv">5</span>, <span class="fl">0.05</span>, <span class="vs">rf"$\lambda=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].text(<span class="dv">5</span>, <span class="fl">0.05</span>, <span class="vs">rf"$\lambda_2=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].set_xlim(<span class="dv">0</span>, <span class="dv">100</span>)</span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].set_ylim(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>)</span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].hist(res.x, <span class="dv">20</span>)</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].text(<span class="op">-</span><span class="fl">0.08</span>, <span class="dv">15</span>, <span class="vs">rf"$\lambda=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].text(<span class="op">-</span><span class="fl">0.08</span>, <span class="dv">15</span>, <span class="vs">rf"$\lambda_2=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].set_xlim(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>)</span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].set_ylim(<span class="dv">0</span>, <span class="dv">20</span>)</span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_xticks([])</span>
@@ -530,49 +530,48 @@ Figure&nbsp;8.2: Ridge regression coefficients of an over-determined system with
 <div class="callout-body-container">
 <div id="exr-lasso_reg" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.1 (Implement the above optimization yourself.)</strong></span> Fill out the missing parts:</p>
-<div id="a895e0ab" class="cell" data-execution_count="3">
+<div id="f9ea3a58" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">6020</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="dv">500</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> <span class="co"># Random matrix with m rows and 100 columns </span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.random.rand(m)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="co"># Optimal 2 norm solution without panaltization as initial start</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>optimize <span class="op">=</span> <span class="co"># function to optimize</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>axs <span class="op">=</span> []</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">10</span>))</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">11</span>))</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">3</span>))</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">12</span>))</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, lam <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>]):</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> minimize(optimize, args<span class="op">=</span>, x0<span class="op">=</span>x0)    <span class="co"># use your correct arguments here</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].bar(<span class="bu">range</span>(n), res.x)</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].text(<span class="dv">5</span>, <span class="fl">0.05</span>, <span class="vs">rf"$\lambda=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].set_xlim(<span class="dv">0</span>, <span class="dv">100</span>)</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].set_ylim(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>)</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].hist(res.x, <span class="dv">20</span>)</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].text(<span class="op">-</span><span class="fl">0.08</span>, <span class="dv">15</span>, <span class="vs">rf"$\lambda=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].set_xlim(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>)</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].set_ylim(<span class="dv">0</span>, <span class="dv">20</span>)</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_xticks([])</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].set_xticks([])</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">3</span>].set_yticks([])</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">5</span>].set_yticks([])</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(top <span class="op">=</span> <span class="fl">0.99</span>, bottom<span class="op">=</span><span class="fl">0.1</span>, hspace<span class="op">=</span><span class="fl">0.35</span>, wspace<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">6020</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> <span class="co"># Random matrix with m rows and 100 columns </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.random.rand(m)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="co"># Optimal 2 norm solution without penalization as initial start</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>optimize <span class="op">=</span> <span class="co"># function to optimize</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>axs <span class="op">=</span> []</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">10</span>))</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">11</span>))</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">12</span>))</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, lam <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>]):</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> minimize(optimize, args<span class="op">=</span>, x0<span class="op">=</span>x0)    <span class="co"># use your correct arguments here</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].bar(<span class="bu">range</span>(n), res.x)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].text(<span class="dv">5</span>, <span class="fl">0.05</span>, <span class="vs">rf"$\lambda=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].set_xlim(<span class="dv">0</span>, <span class="dv">100</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span>].set_ylim(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].hist(res.x, <span class="dv">20</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].text(<span class="op">-</span><span class="fl">0.08</span>, <span class="dv">15</span>, <span class="vs">rf"$\lambda=</span><span class="sc">{</span>lam<span class="sc">}</span><span class="vs">$"</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].set_xlim(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    axs[i <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>].set_ylim(<span class="dv">0</span>, <span class="dv">20</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_xticks([])</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].set_xticks([])</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">3</span>].set_yticks([])</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">5</span>].set_yticks([])</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(top <span class="op">=</span> <span class="fl">0.99</span>, bottom<span class="op">=</span><span class="fl">0.1</span>, hspace<span class="op">=</span><span class="fl">0.35</span>, wspace<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -613,7 +612,7 @@ Figure&nbsp;8.3: Fitting for different degrees of polynomial <span class="math i
 <blockquote class="blockquote">
 <p>Take random portions of your data and build a model. Do this <span class="math inline">\(k\)</span> times and average the parameter scores (regression loadings) to produce a cross-validated model. Test the model predictions against withheld (extrapolation) data and evaluate whether the model is actually any good. - <span class="citation" data-cites="Brunton2022">(see <a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 159</a>)</span></p>
 </blockquote>
-<p>As we can see there are a log of further paths to investigate but for now this concludes our excursion into regression.</p>
+<p>As we can see, there are a lot of further paths to investigate but for now this concludes our excursion into regression.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -1214,7 +1213,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

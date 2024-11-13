@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Basics – Basics of Data Science</title>
+<title>9&nbsp; Fourier transform – Basics of Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -50,8 +30,8 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../basics/linearalgebra.html" rel="next">
-<link href="../intro.html" rel="prev">
+<link href="../signal/wavelet.html" rel="next">
+<link href="../signal/index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -103,7 +83,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../basics/index.html">Basics</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../signal/index.html">Singnal transformations</a></li><li class="breadcrumb-item"><a href="../signal/fourier.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fourier transform</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -151,7 +131,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../basics/index.html" class="sidebar-item-text sidebar-link active">
+            <a href="../basics/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -241,7 +221,7 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../signal/fourier.html" class="sidebar-item-text sidebar-link">
+  <a href="../signal/fourier.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fourier transform</span></span></a>
   </div>
 </li>
@@ -276,9 +256,9 @@ div.csl-indent {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../signal/index.html">Singnal transformations</a></li><li class="breadcrumb-item"><a href="../signal/fourier.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fourier transform</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Basics</h1>
+<h1 class="title"><span id="sec-signal-fourier" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fourier transform</span></span></h1>
 </div>
 
 
@@ -295,45 +275,8 @@ div.csl-indent {
 </header>
 
 
-<p>In this section we are going to discuss a lot of the mathematical basics in the form of Linear Algebra as well as some topics of statistics of sets. We will always immediately show how to use the discussed content in <a href="https://www.python.org/">Python</a>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>These notes assume that you have some basic knowledge of programming in Python and we build on this knowledge. In this sense, we use Python as a tool and only describe the inner workings if it helps us to better understand the topics at hand.</p>
-<p>If this is not the case have a look at <a href="https://kandolfp.github.io/MECH-M-DUAL-1-SWD">MECH-M-DUAL-1-SWD</a>, a class on software design in the same master program and from the same authors.</p>
-<p>Additionally, we can recommend the following books on Python:</p>
-<ul>
-<li><span class="citation" data-cites="Matthes2023">Matthes (<a href="../references.html#ref-Matthes2023" role="doc-biblioref">2023</a>)</span>: Python Crash Course - A hands-on, project-based introduction to programming; <a href="https://ehmatthes.github.io/pcc_3e/">Online Material</a>.</li>
-<li><a href="https://github.com/ehmatthes/pcc_3e/releases/download/v1.0.0/beginners_python_cheat_sheet_pcc_all.pdf">Python Cheat Sheet</a> provided by <span class="citation" data-cites="Matthes2023">Matthes (<a href="../references.html#ref-Matthes2023" role="doc-biblioref">2023</a>)</span>.</li>
-<li><span class="citation" data-cites="McKinney2022-qz">McKinney (<a href="../references.html#ref-McKinney2022-qz" role="doc-biblioref">2022</a>)</span>: Python for data analysis 3e; <a href="https://wesmckinney.com/book/">Online</a> and Print</li>
-<li><span class="citation" data-cites="Vasiliev2022">Vasiliev (<a href="../references.html#ref-Vasiliev2022" role="doc-biblioref">2022</a>)</span>: Python for Data Science - A Hands-On Introduction</li>
-<li><span class="citation" data-cites="Inden2023">Inden (<a href="../references.html#ref-Inden2023" role="doc-biblioref">2023</a>)</span>: Python lernen – kurz &amp; gut; German</li>
-</ul>
-</div>
-</div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-Inden2023" class="csl-entry" role="listitem">
-Inden, Michael. 2023. <em>Python Lernen – Kurz &amp; Gut -</em>. Sebastopol: O’Reilly.
-</div>
-<div id="ref-Matthes2023" class="csl-entry" role="listitem">
-Matthes, Eric. 2023. <em>Python Crash Course - a Hands-on, Project-Based Introduction to Programming</em>. 3rd ed. No Starch Press. <a href="https://ehmatthes.github.io/pcc_3e/">https://ehmatthes.github.io/pcc_3e/</a>.
-</div>
-<div id="ref-McKinney2022-qz" class="csl-entry" role="listitem">
-McKinney, Wes. 2022. <em>Python for Data Analysis 3e</em>. 3rd ed. Sebastopol, CA: O’Reilly Media. <a href="https://wesmckinney.com/book/">https://wesmckinney.com/book/</a>.
-</div>
-<div id="ref-Vasiliev2022" class="csl-entry" role="listitem">
-Vasiliev, Yuli. 2022. <em>Python for Data Science - a Hands-on Introduction</em>. München: No Starch Press.
-</div>
-</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -902,13 +845,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../intro.html" class="pagination-link" aria-label="Introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
+      <a href="../signal/index.html" class="pagination-link" aria-label="Singnal transformations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Singnal transformations</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../basics/linearalgebra.html" class="pagination-link" aria-label="Linear Algebra">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../signal/wavelet.html" class="pagination-link" aria-label="Wavelet transform">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -920,7 +863,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> Peter Kandolf</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/basics/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/signal/fourier.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

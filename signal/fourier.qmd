@@ -2,3 +2,61 @@
 lightbox: true
 ---
 # Fourier transform {#sec-signal-fourier}
+
+The fourier transform helps us convert a signal from the time domain to the frequency domain.
+In this section our main concern is going to be one dimensional signals, but the concepts can be applied to multiple dimensions.
+
+Before we can start defining the _Fourier Series_ we need to extend our notion of vector space to functions.
+This is done with _Hilbert_ spaces. 
+
+::: {.callout appearance="simple"}
+:::: {#def-hilbert-innerproduct} 
+## Hilbert inner product
+The _Hilbert inner product_ of two functions $f(x)$ and $g(x)$ is defined for $x \in [a, b]$ as:
+$$
+\langle f(x), g(x)\rangle = \int_a^b f(x) \overline{g}(x)\, \mathrm{d}x,
+$$
+where $\overline{g}(x)$ denotes the complex conjugate. 
+::::
+:::
+
+At first this looks strange but it is closely related to our already known @def-dotproduct.
+
+As a first step, if we move from real to complex vector spaces the transpose is replaced by the conjugate transposed or hermit transpose, in notation the $^\mathbf{T}$ becomes $^\mathbf{H}$.
+
+Now consider a discrete version of $f$ and $g$ at regular intervals $\Delta x = \frac{b-a}{n-1}$ where 
+$$
+f_i = f(x_i) = f(a + (i - 1) \Delta x),\quad i = 1, \ldots n,
+$$
+same for $g_i$ and accordingly $x_1 = a + 0 \Delta x = a$ and $x_n = a + (n - 1)\Delta x = b$.
+
+The inner product is than
+$$
+\langle f, g \rangle = \langle\left[\begin{array}{c}f_1 \\ f_2 \\ \vdots \\ f_n \end{array}\right], \left[\begin{array}{c}g_1 \\ g_2 \\ \vdots \\ g_n \end{array}\right] \rangle = \sum_{i=1}^n f_i \overline{g}_i = \sum_{i=1}^n f(x_i)\overline{g}(x_i).
+$$
+
+As this sum will increase by increasing $n$ we should normalize it by the factor $\Delta x$.
+
+$$
+\frac{b-a}{n-1} \langle g, f \rangle = \sum_{i=1}^n f(x_i)\overline{g}(x_i) \Delta x.
+$$
+If we now increase $n\to \infty$ we get $\Delta x \to 0$ and the sum transforms into the integral. 
+
+::: {.callout appearance="simple"}
+:::: {#def-hilbert-innerproduct} 
+## Hilbert two norm
+The _Hilbert two norm_ of the function $f(x)$ is defined for $x \in [a, b]$ as:
+$$
+\|f\|_2 = \sqrt{\langle f(x), g(x)\rangle} = \left(\int_a^b f(x) \overline{f}(x)\,\mathrm{d}x\right)^{\frac12},
+$$
+where $\overline{f}(x)$ denotes the complex conjugate. 
+
+The set of all functions with bounded norm defines the Hilbert space $L^2(a, b)$, i.e. the set of all square integrable functions.
+This space is also called the space of _Lebesgue_ integrable functions.
+::::
+:::
+
+Similar as we saw projection in vector spaces related to the inner product this is true here as well. 
+
+The Fourier series is nothing else as the projection of a function with an integer period on the domain $[a, b]$ onto the orthogonal basis defined by the sine and cosine functions.
+

@@ -1,0 +1,8 @@
+# Singnal transformations {.unnumbered}
+
+In this section we are going to discuss basics of signal transformation in terms of the 
+
+- Fourier Transform
+- Wavelet Transform
+
+Parts of this section are based on [@Brunton2022, Section 4].

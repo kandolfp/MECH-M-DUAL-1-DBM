@@ -1,0 +1,4 @@
+---
+lightbox: true
+---
+# Fourier transform {#sec-signal-fourier}

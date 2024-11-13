@@ -1,0 +1,4 @@
+---
+lightbox: true
+---
+# Wavelet transform {#sec-wavelet-fourier}

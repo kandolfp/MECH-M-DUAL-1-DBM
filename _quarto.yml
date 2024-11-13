@@ -35,6 +35,10 @@ book:
         - regression/linear.qmd
         - regression/nonlinear.qmd
         - regression/optimizers.qmd
+    - part: signal/index.qmd
+      chapters:
+        - signal/fourier.qmd
+        - signal/wavelet.qmd
     - summary.qmd
     - references.qmd
 

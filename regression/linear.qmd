@@ -430,7 +430,7 @@ In order to apply it to the original function the parameters transform needs to 
 ::: {.callout-tip appearance="simple" collapse="true" icon=false}
 :::: {#exm-population}
 
-## Example - population of the world
+## World population
 
 We take a look at the population growth were the data is kindly provided by @owid-population-growth. Have a look at there excellent work on [ourworldindata.org](https://ourworldindata.org/).
 

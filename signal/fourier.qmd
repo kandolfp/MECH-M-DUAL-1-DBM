@@ -455,3 +455,45 @@ The Discrete Fourier Transform (DFT) is a way of approximating the Fourier trans
 
 ::: {.callout appearance="simple"}
 :::: {#def-fourier-dft} 
+
+## Discrete-Fourier Transform
+For equally spaced values $x_k = k\Delta x$, for $k\in\mathbb{Z}$ and $\Delta x>0$ and the discrete values of the function evaluations $f_k=f(x_k)$.
+If the function is periodic with $L=N\Delta x$ than the discrete Fourier transform is given as
+$$
+\hat{f}_k = \sum_{j=1}^{N-1}f_j\, \mathrm{e}^{-\mathrm{i} j k\tfrac{2 \pi}{N}},
+$$
+and its inverse (iDFT) as
+$$
+f_k = \frac{1}{N}\sum_{j=1}^{N-1}\hat{f}_j\, \mathrm{e}^{\mathrm{i} j k\tfrac{2 \pi}{N}}.
+$$
+::::
+:::
+
+As we can see, the DFT is a linear operator and therefore it can be written as a matrix vector product
+$$
+\left[
+    \begin{array}{c} \hat{f}_1 \\ \hat{f}_2 \\ \hat{f}_3 \\ \vdots \\ \hat{f}_N \end{array}
+\right]
+=
+\left[
+    \begin{array}{ccccc} 1 & 1 & 1 & \dots & 1 \\
+                         1 & \omega_N & \omega_N^2 & \dots & \omega_N^{N-1} \\  
+                         1 & \omega_N^2 & \omega_N^4 & \dots & \omega_N^{2(N-1)} \\
+                         \vdots & \vdots & \ddots & \vdots\\
+                         1 & \omega_N^{N-1} & \omega_N^{2(N-1)} & \dots & \omega_N^{(N-1)^2 } \\
+    \end{array}
+\right] 
+\left[
+    \begin{array}{c} f_1 \\ f_2 \\ f_3 \\ \vdots \\ f_N \end{array}
+\right]
+$$
+with $\omega_N = \exp({-\mathrm{i} \tfrac{2 \pi}{N}})$. 
+
+::: {.callout-note}
+The matrix of the DFT is a unitary Vandermonte matrix.
+:::
+
+As we can transfer the properties of the Fourier transform to the DFT we get the nice properties for sampled signals.
+
+The downside of the DFT is that it does not scale well for large $N$ as the matrix-vector multiplication is $\mathcal{O}(N^2)$ and becomes slow. 
+

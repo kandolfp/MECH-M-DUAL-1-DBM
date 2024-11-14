@@ -59,5 +59,26 @@ This space is also called the space of _Lebesgue_ integrable functions.
 
 Similar as we saw projection in vector spaces related to the inner product this is true here as well. 
 
+::: {.callout appearance="simple"}
+:::: {#def-fourier-periodic} 
+## Periodic function
+
+We call a function $f\,:\, \mathbb{R} \to \mathbb{R}$ periodic with a period of $L>0$, $L$-periodic for short, if 
+$$
+f(x + L) = f(x),\quad\forall x \in \mathbb{R}.
+$$
+
+The following holds true for $L$-periodic functions:
+
+1. If $L$ is a period than $nL$ for $n = 1, 2, 3, \ldots$ is a period as well.
+1. If $f$ and $g$ are $L$-periodic, than $\alpha f + \beta g$ are $L$-periodic, for $\alpha, \beta \in \mathbb{C}$.
+1. I $f$ is $L$-periodic it follows that $\forall a\in\mathbb{R}$
+$$
+\int_a^{a+T}f(x)\,\mathrm{d}x = \int_0^{T}f(x)\,\mathrm{d}x.
+$$
+1. If $f$ is $L$-periodic than $F(x)=f(\frac{x}{\omega})$ with $\omega = \frac{2\pi}{L}$ is $2\pi$-periodic.
+::::
+:::
+
 The Fourier series is nothing else as the projection of a function with an integer period on the domain $[a, b]$ onto the orthogonal basis defined by the sine and cosine functions.
 

@@ -1,13 +1,14 @@
 ---
 lightbox: true
 ---
-# Fourier transform {#sec-signal-fourier}
+# Fourier Transform {#sec-signal-fourier}
 
 The fourier transform helps us convert a signal from the time domain to the frequency domain.
 In this section our main concern is going to be one dimensional signals, but the concepts can be applied to multiple dimensions.
 
-Before we can start defining the _Fourier Series_ we need to extend our notion of vector space to functions.
+Before we can start defining the _Fourier Series_ we need to extend our notion of vector space to functions space.
 This is done with _Hilbert_ spaces. 
+The computational rules follow the same principal as in @def-vectorspace, what we want to investigate is the inner product.
 
 ::: {.callout appearance="simple"}
 :::: {#def-hilbert-innerproduct} 

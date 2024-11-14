@@ -82,3 +82,241 @@ $$
 
 The Fourier series is nothing else as the projection of a function with an integer period on the domain $[a, b]$ onto the orthogonal basis defined by the sine and cosine functions.
 
+## Fourier Series
+
+In Fourier analysis the first result is stated for a periodic and piecewise smooth function $f(x)$.
+
+::: {.callout appearance="simple"}
+:::: {#def-fourier-series} 
+## Fourier Series
+For a $L$-periodic function $f(x)$ we can write
+$$
+f(x) = \frac{a_0}{2} + \sum_{k=1}^\infty \left(a_k \cos\left(\omega kx\right)+ b_k \sin\left(\omega kx\right)\right),
+$$ {#eq-fs}
+for 
+$$
+\begin{align}
+a_k = \frac{2}{L}\int_0^L f(x) \cos\left(\omega kx\right)\, \mathrm{d}x,\\
+b_k = \frac{2}{L}\int_0^L f(x) \sin\left(\omega kx\right)\, \mathrm{d}x.
+\end{align}
+$$
+where we can view the last two equations as the projection onto the orthogonal basis $\{\cos(kx), \sin(kx)\}_{k=0}^\infty$, i.e.
+$$
+\begin{align}
+a_k = \frac{1}{\|\cos\left(\omega kx\right)\|_2^2} \langle f(x), \cos\left(\omega kx\right)\rangle, \\
+b_k = \frac{1}{\|\sin\left(\omega kx\right)\|_2^2} \langle f(x), \sin\left(\omega kx\right)\rangle.
+\end{align}
+$$
+
+If we perform a partial reconstruction by truncating the series at $M$ we get 
+$$
+\hat{f}_M(x) = \frac{a_0}{2} + \sum_{k=1}^M \left(a_k \cos\left(\omega kx\right)+ b_k \sin\left(\omega kx\right)\right).
+$$
+:::
+::::
+
+With the help of Euler's formula:
+$$
+\mathrm{e}^{\mathrm{i} kx} = \cos(kx) + \mathrm{i} \sin(kx)
+$$ {#eq-euler}
+we can rewrite @eq-fs as
+$$
+f(x) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\omega\mathrm{i} kx}
+$$
+with 
+$$
+c_k = \frac{1}{L} \int_0^L f(x) \mathrm{e}^{-\omega\mathrm{i} kx}\, \mathrm{d}x.
+$$
+and for $n=1, 2, 3, \ldots$
+$$
+c_0 = \tfrac12 a_0, \quad c_n = \tfrac12 (a_n - \mathrm{i} b_n), \quad c_{-n} = \tfrac12 (a_n + \mathrm{i} b_n).
+$$
+
+::: {.callout-note}
+If $f(x)$ is real valued than $c_k = \overline{c}_{-k}$.
+:::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-fourier-hat}
+
+## Fourier Series of Hat functions
+
+We test the Fourier Series with two different hat functions.
+The first represents a triangle with constant slope up and down, the second a rectangle with infinite slope in the corners.
+
+```{python}
+#| label: fig-fourier_hat
+#| fig-cap: "Fourier transform of a two hat functions."
+#| fig-subcap:
+#|   - "Sawtooth function and the reconstruction with 7 nodes"
+#|   - "Nodes of the reconstruction"
+#|   - "Step function and the reconstruction with various nodes"
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.cm import get_cmap
+%config InlineBackend.figure_formats = ["svg"]
+
+# Parameters
+L = 2 * np.pi
+M = 7
+M2 = 50
+N = 101
+# Hat functions
+fun = lambda x, L: 0 if abs(x) > L / 4 else (1 - np.sign(x) * x * 4 / L)
+fun2 = lambda x, L: 0 if abs(x) > L / 4 else 1
+
+# x and y for the functions
+x = np.linspace(-L/2, L/2, N)
+dx = x[1] - x[0]
+omega = np.pi * 2 / L
+
+f = np.fromiter(map(lambda x: fun(x, L), x), x.dtype)
+f2 = np.fromiter(map(lambda x: fun2(x, L), x), x.dtype)
+
+# Necessary functions
+scalarproduct = lambda f, g, dx: dx * np.vecdot(f, g)
+a_coeff = lambda n, f: 2 / L * scalarproduct(f, np.cos(omega * n * x), dx)
+b_coeff = lambda n, f: 2 / L * scalarproduct(f, np.sin(omega * n * x), dx)
+
+# f_hat_0
+f_hat = np.zeros((M+1, N))
+f_hat[0, :] = 1/2 * a_coeff(0, f)
+f2_hat = np.zeros((M2+1, N))
+f2_hat[0, :] = 1/2 * a_coeff(0, f2)
+
+# Computation of the approximation
+a = np.zeros(M)
+b = np.zeros(M)
+for i in range(M):
+    a[i] = a_coeff(i+1, f)
+    b[i] = b_coeff(i+1, f)
+    f_hat[i+1, :] = f_hat[i, :] + \
+        a[i] * np.cos(omega * (i+1) * x) + \
+        b[i] * np.sin(omega * (i+1) * x)
+
+for i in range(M2):
+    f2_hat[i+1, :] = f2_hat[i, :] + \
+        a_coeff(i+1, f2) * np.cos(omega * (i+1) * x) + \
+        b_coeff(i+1, f2) * np.sin(omega * (i+1) * x)
+
+# Figures
+plt.figure(0)
+plt.plot(x, f, label=r"$f$")
+plt.plot(x, f_hat[-1, :], label=r"$\hat{f_7}$")
+plt.xticks([])
+plt.legend()
+plt.gca().set_aspect(1.5)
+
+plt.figure(1)
+plt.plot(x, f_hat[0, :], label=rf"$a_{0}$")
+for i in range(M):
+    plt.plot(x, a[i] * np.cos(omega * (i+1) * x), label=rf"$a_{i+1}\cos({i+1}\omega x$")
+plt.legend(ncol=np.ceil((M+1)/2), bbox_to_anchor=(1, -0.1))
+plt.xticks([])
+plt.gca().set_aspect(1.5)
+
+plt.figure(2)
+plt.plot(x, f2, label=r"$f$")
+plt.plot(x, f2_hat[7, :], label=r"$\hat{f}_7$")
+plt.plot(x, f2_hat[20, :], label=r"$\hat{f}_{20}$")
+plt.plot(x, f2_hat[50, :], label=r"$\hat{f}_{50}$")
+plt.xlabel(r"$x$")
+plt.legend()
+plt.gca().set_aspect(1.5)
+
+plt.show()
+```
+::::
+:::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+## {{< fa pen-to-square >}} Exercise - Self implementation @exm-fourier-hat
+
+Implement the code yourself by filling out the missing sections:
+
+```{python}
+#| code-fold: false
+#| eval: false
+#| code-summary: "Code fragment for implementation."
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.cm import get_cmap
+
+# Parameters
+L = 2 * np.pi   # Interval
+M = 7           # Nodes for the first function
+M2 = 50         # Nodes for the second function
+N = 101         # Interpolation points
+# Hat functions
+fun = lambda x, L: # tooth
+fun2 = lambda x, L: # step
+
+# x and y for the functions
+x = # points for the evaluation ()
+dx = x[1] - x[0]
+omega = np.pi * 2 / L
+
+f = # fun evaluated at x
+f2 = # fun2 evaluated at x
+
+# Necessary functions
+scalarproduct = lambda f, g, dx: # see definition in the notes
+a_coeff = lambda n, f: # see definition in the notes
+b_coeff = lambda n, f: # see definition in the notes
+
+# f_hat_0
+f_hat = np.zeros((M+1, N))
+f_hat[0, :] = # a_0 for f
+f2_hat = np.zeros((M2+1, N))
+f2_hat[0, :] = # a_0 for f2
+
+# Computation of the approximation
+a = np.zeros(M)
+b = np.zeros(M)
+for i in range(M):
+    a[i] = a_coeff(i+1, f)
+    b[i] = b_coeff(i+1, f)
+    f_hat[i+1, :] = f_hat[i, :] + \
+        a[i] * np.cos(omega * (i+1) * x) + \
+        b[i] * np.sin(omega * (i+1) * x)
+
+for i in range(M2):
+    f2_hat[i+1, :] = f2_hat[i, :] + \
+        a_coeff(i+1, f2) * np.cos(omega * (i+1) * x) + \
+        b_coeff(i+1, f2) * np.sin(omega * (i+1) * x)
+
+# Figures
+plt.figure(0)
+plt.plot(x, f, label=r"$f$")
+plt.plot(x, f_hat[-1, :], label=r"$\hat{f_7}$")
+plt.xticks([])
+plt.legend()
+plt.gca().set_aspect(1.5)
+
+plt.figure(1)
+plt.plot(x, f_hat[0, :], label=rf"$a_{0}$")
+for i in range(M):
+    plt.plot(x, a[i] * np.cos(omega * (i+1) * x), label=rf"$a_{i+1}\cos({i+1}\omega x$")
+plt.legend(ncol=np.ceil((M+1)/2), bbox_to_anchor=(1, -0.1))
+plt.xticks([])
+plt.gca().set_aspect(1.5)
+
+plt.figure(2)
+plt.plot(x, f2, label=r"$f$")
+plt.plot(x, f2_hat[7, :], label=r"$\hat{f}_7$")
+plt.plot(x, f2_hat[20, :], label=r"$\hat{f}_{20}$")
+plt.plot(x, f2_hat[50, :], label=r"$\hat{f}_{50}$")
+plt.xlabel(r"$x$")
+plt.legend()
+plt.gca().set_aspect(1.5)
+
+plt.show()
+```
+:::
+
+::: {.callout-note}
+The phenomenon that the truncated Fourier series oscillates in @fig-fourier_hat-3 due to the discontinuity of the function is called the Gibbs phenomenon.
+:::

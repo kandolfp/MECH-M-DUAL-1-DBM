@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Singnal transformations – Basics of Data Science</title>
+<title>Signal Processing – Basics of Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -91,6 +91,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -103,7 +132,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../signal/index.html">Singnal transformations</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../signal/index.html">Signal Processing</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -233,7 +262,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../signal/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Singnal transformations</span></a>
+ <span class="menu-text">Signal Processing</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -242,7 +271,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../signal/fourier.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fourier transform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fourier Transform</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -278,7 +307,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Singnal transformations</h1>
+<h1 class="title">Signal Processing</h1>
 </div>
 
 
@@ -295,12 +324,18 @@ div.csl-indent {
 </header>
 
 
-<p>In this section we are going to discuss basics of signal transformation in terms of the</p>
+<p>In previous parts we have already discussed how changing a coordinate system or basis (<a href="../basics/linearalgebra.html#def-changebasis" class="quarto-xref">Definition&nbsp;<span>1.8</span></a>) can simplify expression or computation, see <a href="../matrixdc/eigen.html" class="quarto-xref"><span>4&nbsp; Eigendecomposition</span></a> and <a href="../matrixdc/svd.html" class="quarto-xref"><span>5&nbsp; Singular Value Decomposition</span></a>, among others.</p>
+<p>One of the most fundamental coordinate transformations was introduced by J.-B. Joseph Fourier in the early 1800s. While investigating <em>heat</em> he discovered that sine and cosine functions with increasing frequency form an orthogonal basis (<a href="../basics/linearalgebra.html#def-basis" class="quarto-xref">Definition&nbsp;<span>1.6</span></a> &amp; <a href="../basics/linearalgebra.html#def-orthonormal" class="quarto-xref">Definition&nbsp;<span>1.9</span></a>). In fact, the sine and cosine functions for an eigenbasis for the heat equation <span class="math display">\[
+\frac{\partial u}{\partial t} = \Delta u
+\]</span> and solving it becomes trivial once you determine the corresponding eigenvalues that are connected to the geometry, amplitudes, and boundary conditions.</p>
+<p>In the 200+ years since, this discovery has not only founded new corners of mathematics but also allows via the <em>fast fourier transform</em> or FFT the real-time image and audio compression that make our global communication networks work.</p>
+<p>In the same area the related wavelets where developed to for advanced signal processing and compression.</p>
+<p>In this section we are going to discuss basics of signal processing in terms of these and other signal transformations, see</p>
 <ul>
-<li>Fourier Transform</li>
-<li>Wavelet Transform</li>
+<li><a href="fourier.html" class="quarto-xref"><span>9&nbsp; Fourier Transform</span></a></li>
+<li><a href="wavelet.html" class="quarto-xref"><span>10&nbsp; Wavelet transform</span></a></li>
 </ul>
-<p>Parts of this section are based on <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, sec. 4</a>)</span>.</p>
+<p>Parts of this section are based on <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, sec. 2</a>)</span>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -881,8 +916,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../signal/fourier.html" class="pagination-link" aria-label="Fourier transform">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fourier transform</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../signal/fourier.html" class="pagination-link" aria-label="Fourier Transform">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fourier Transform</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

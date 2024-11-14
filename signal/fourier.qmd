@@ -320,3 +320,138 @@ plt.show()
 ::: {.callout-note}
 The phenomenon that the truncated Fourier series oscillates in @fig-fourier_hat-3 due to the discontinuity of the function is called the Gibbs phenomenon.
 :::
+
+## Fourier Transform
+
+The Fourier Series is defined for $L$-periodic functions.
+The Fourier transform extends this to functions with the domain extended to $\pm\infty$.
+
+Let us start of with the series representation we already know:
+$$
+f(x) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\mathrm{i} \omega k x}
+$$
+with the coefficients
+$$
+c_k = \frac{1}{2L} \int_{-L}^{L} f(x) \mathrm{e}^{-\mathrm{i} \omega_k x}\, \mathrm{d}x,
+$$
+with $\omega_k=\frac{k\pi}{L} = k\Delta \omega$.
+
+If we now perform the transition for $L \to \infty$ resulting in $\Delta\omega \to 0$ and basically moving from discrete frequencies to a continuous set of frequencies.
+This results in
+$$
+f(x) = \lim_{\Delta \omega \to 0} \sum_{k=-\infty}^\infty \frac{\Delta \omega}{2\pi}
+\int_{-\tfrac{\pi}{\Delta \omega}}^{\tfrac{\pi}{\Delta \omega}} f(\xi) \mathrm{e}^{-\mathrm{i} k \Delta \omega \xi}\, \mathrm{d}\xi\,\, \mathrm{e}^{\Delta\omega\mathrm{i} kx}
+$$
+which is a Riemann integral and the kernel becomes the Fourier Transform of our function. 
+
+::: {.callout appearance="simple"}
+:::: {#def-fourier-transform} 
+## Fourier Transform
+A function $f\,:\, \mathbb{R} \to \mathbb{R}$ is called fourier transposable if
+$$
+\hat{f}(\omega) = \mathcal{F}\{f(x)\} = \int_{-\infty}^{\infty} f(x)\mathrm{e}^{-\mathrm{i} \omega x}\, \mathrm{d}x
+$$
+exists for all $\omega\in\mathbb{R}$.
+In this case we call $\hat{f}(\omega) \equiv \mathcal{F}\{f(x)\}$ the **Fourier transform** of $f(x)$.
+
+The **inverse Fourier transform** is defined as
+$$
+\mathcal{F}^{-1}\{\hat{f}(\omega)\} = \frac{1}{2 \pi}\int_{-\infty}^{\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i} \omega x}\, \mathrm{d}\omega
+$$
+::::
+:::
+
+::: {.callout-note}
+
+The pair $(f, \hat{f})$ is often called the _Fourier transform pair_. 
+
+The two integrals converge, as long as both functions are Lebesgue integrable, i.e. 
+$$\int_{-\infty}^\infty|f(x)|\, \mathrm{d}x \le \infty,$$
+or $f, \hat{f} \in L^1[(-\infty, \infty)]$.
+:::
+
+As could be expected, the Fourier transform has properties that lead to computational advantages.
+
+For tow functions $f, g \in L^1[(-\infty, \infty)]$ and $\alpha, \beta\in\mathbb{C}$ the following properties hold:
+
+(@) **Linearity**
+$$
+\mathcal{F}\{\alpha f(x) + \beta g(x)\} = 
+\alpha \mathcal{F}\{f(x)\} + \beta \mathcal{F}\{g(x)\} = 
+\alpha \hat{f}(\omega)+ \beta \hat{g}(\omega),
+$$
+and 
+$$
+\mathcal{F}^{-1}\{\alpha \hat{f}(\omega) + \beta \hat{g}(\omega)\} = 
+\alpha \mathcal{F}^{-1}\{\hat{f}(\omega)\} + \beta \mathcal{F}^{-1}\{\hat{g}(\omega)\} = 
+\alpha f(x) + \beta g(x).
+$$
+
+(@) **Conjugation** 
+$$
+\mathcal{F}\{\overline{f(x)}\} = \overline{\hat{f}(-\omega)}.
+$$
+
+(@) **Scaling**, for $\alpha \neq 0$
+$$
+\mathcal{F}\{f(\alpha x)\} = \frac{1}{|\alpha|}\hat{f}\left(\frac{\omega}{\alpha}\right).
+$$
+
+(@) **Drift in time**, for $a\in\mathbb{R}$
+$$
+\mathcal{F}\{f(x - a)\} = \mathrm{e}^{-\mathrm{i}\omega a}\hat{f}(\omega).
+$$
+
+(@) **Drift in frequency**, for $a\in\mathbb{R}$
+
+$$
+\mathrm{e}^{\mathrm{i} a x} \mathcal{F}\{f(x - a)\} = \hat{f}(\omega - a).
+$$
+
+(@) If $f$ is **even** or **odd**, than $\hat{f}$ is even or odd, respectively.
+
+(@) **Derivative in time**
+$$
+\mathcal{F}\{\partial_x f(x)\} = \mathrm{i} \omega \hat{f}(\omega)
+$$
+We are going to prove this by going through the lines
+$$
+\begin{align}
+\mathcal{F}\left\{\frac{d}{d\,x}f(x)\right\} &= \int_{-\infty}^\infty f'(x)\mathrm{e}^{-\mathrm{i}\omega a}\, \mathrm{d}x \\
+&= \left[f(x)\mathrm{e}^{-\mathrm{i}\omega a}\right]_{-\infty}^\infty - \int_{-\infty}^\infty -\mathrm{i} \omega f(x)\mathrm{e}^{-\mathrm{i}\omega a}\, \mathrm{d}x \\
+&= \mathrm{i} \omega \int_{-\infty}^\infty f(x)\mathrm{e}^{-\mathrm{i}\omega a}\, \mathrm{d}x \\
+&= \mathrm{i} \omega \mathcal{F}\{f(x)\}
+\end{align}
+$$
+For higher derivatives we get
+$$
+\mathcal{F}\{\partial_x^n f(x)\} = \mathrm{i}^n \omega^n \hat{f}(\omega)
+$$
+
+(@) **Derivative in frequency**
+$$
+\mathcal{F}\{x^n f(x)\} = \mathrm{i}^n \partial_\omega^n\hat{f}(\omega)
+$$
+
+(@) The **convolution** of two functions is defined as 
+$$
+(f \ast g)(x) = \int_{-\infty}^{\infty}f(x - \xi) g(\xi)\, \mathrm{d}\xi,
+$$
+and for the Fourier transform
+$$
+\mathcal{F}\{(f \ast g)(x)\} = \hat{f} \cdot \hat{g}.
+$$
+
+(@) **Parseval's Theorem**
+$$
+\|f\|_2^2 = \int_{-\infty}^{\infty}|f(x)|^2\, \mathrm{d}x = \frac{1}{2 \pi}\int_{-\infty}^{\infty}|\hat{f}(\omega)|^2\, \mathrm{d}\omega
+$$
+stating that the Fourier Transform preserves the 2-norm up to a scaling factor.
+
+## Discrete Fourier Transform (DFT)
+
+The Discrete Fourier Transform (DFT) is a way of approximating the Fourier transform on discrete vectors of data and it essentially a discretized version of the Fourier transform by sampling the function and numerical integration. 
+
+
+::: {.callout appearance="simple"}
+:::: {#def-fourier-dft} 

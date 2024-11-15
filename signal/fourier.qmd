@@ -458,11 +458,11 @@ The Discrete Fourier Transform (DFT) is a way of approximating the Fourier trans
 For equally spaced values $x_k = k\Delta x$, for $k\in\mathbb{Z}$ and $\Delta x>0$ and the discrete values of the function evaluations $f_k=f(x_k)$.
 If the function is periodic with $L=N\Delta x$ than the discrete Fourier transform is given as
 $$
-\hat{f}_k = \sum_{j=1}^{N-1}f_j\, \mathrm{e}^{-\mathrm{i} j k\tfrac{2 \pi}{N}},
-$$
+\hat{f}_k = \sum_{j=0}^{N-1}f_j\, \mathrm{e}^{-\mathrm{i} j k\tfrac{2 \pi}{N}},
+$${#eq-dft}
 and its inverse (iDFT) as
 $$
-f_k = \frac{1}{N}\sum_{j=1}^{N-1}\hat{f}_j\, \mathrm{e}^{\mathrm{i} j k\tfrac{2 \pi}{N}}.
+f_k = \frac{1}{N}\sum_{j=0}^{N-1}\hat{f}_j\, \mathrm{e}^{\mathrm{i} j k\tfrac{2 \pi}{N}}.
 $$
 ::::
 :::
@@ -484,7 +484,7 @@ $$
 \left[
     \begin{array}{c} f_1 \\ f_2 \\ f_3 \\ \vdots \\ f_N \end{array}
 \right]
-$$
+$$ {#eq-dft}
 with $\omega_N = \exp({-\mathrm{i} \tfrac{2 \pi}{N}})$. 
 
 ::: {.callout-note}
@@ -494,4 +494,18 @@ The matrix of the DFT is a unitary Vandermonte matrix.
 As we can transfer the properties of the Fourier transform to the DFT we get the nice properties for sampled signals.
 
 The downside of the DFT is that it does not scale well for large $N$ as the matrix-vector multiplication is $\mathcal{O}(N^2)$ and becomes slow. 
+
+```{python}
+#| code-fold: true
+#| code-summary: "Show code for the computation of the DFT matrix."
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+N = 256
+w = np.exp(-1j * 2 * np.pi / N )
+
+J, K = np.meshgrid(np.arange(N), np.arange(N))
+DFT = np.power(w, J*K)
+```
 

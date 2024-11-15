@@ -162,13 +162,13 @@ import matplotlib.pyplot as plt
 L = 2 * np.pi
 M = 7
 M2 = 50
-N = 101
+N = 100
 # Hat functions
 fun = lambda x, L: 0 if abs(x) > L / 4 else (1 - np.sign(x) * x * 4 / L)
 fun2 = lambda x, L: 0 if abs(x) > L / 4 else 1
 
 # x and y for the functions
-x = np.linspace(-L/2, L/2, N)
+x = np.linspace(-L/2, L/2, N, endpoint=False) # <1>
 dx = x[1] - x[0]
 w = np.pi * 2 / L
 
@@ -212,7 +212,7 @@ plt.gca().set_aspect(1.5)
 plt.figure(1)
 plt.plot(x, f_hat[0, :], label=rf"$a_{0}$")
 for i in range(M):
-    plt.plot(x, a[i] * np.cos(w * (i+1) * x), label=rf"$a_{i+1}\cos({i+1}\omega x$")
+    plt.plot(x, a[i] * np.cos(w * (i+1) * x), label=rf"$a_{i+1}\cos({i+1}\omega x)$")
 plt.legend(ncol=np.ceil((M+1)/2), bbox_to_anchor=(1, -0.1))
 plt.xticks([])
 plt.gca().set_aspect(1.5)
@@ -228,6 +228,7 @@ plt.gca().set_aspect(1.5)
 
 plt.show()
 ```
+1. Not including the endpoint is important, as this is part of the periodicity of the function.
 ::::
 :::
 
@@ -297,7 +298,7 @@ plt.gca().set_aspect(1.5)
 plt.figure(1)
 plt.plot(x, f_hat[0, :], label=rf"$a_{0}$")
 for i in range(M):
-    plt.plot(x, a[i] * np.cos(w * (i+1) * x), label=rf"$a_{i+1}\cos({i+1}\omega x$")
+    plt.plot(x, a[i] * np.cos(w * (i+1) * x), label=rf"$a_{i+1}\cos({i+1}\omega x)$")
 plt.legend(ncol=np.ceil((M+1)/2), bbox_to_anchor=(1, -0.1))
 plt.xticks([])
 plt.gca().set_aspect(1.5)

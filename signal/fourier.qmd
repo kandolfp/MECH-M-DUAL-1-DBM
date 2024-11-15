@@ -509,3 +509,93 @@ J, K = np.meshgrid(np.arange(N), np.arange(N))
 DFT = np.power(w, J*K)
 ```
 
+## Fast Fourier Transform
+
+In 1965, James W. Cooley (IBM) and John W. Tukey (Princeton) developed the so called _fast Fourier transform_ (FFT) that scales with $\mathcal{O}(N \log(N))$.
+ which becomes almost linear for large enough $N$. 
+
+::: {.callout-note}
+
+To give an idea of what this change means and why this algorithm was a game changer.
+Audio is most of the time sampled with 44.1kHz, i.e. 44 100 samples per second.
+For a 10s audio clip the vector $f$ will have the length $N = 4.41 \times 10^5$.
+The DFT computation (without generating the matrix) results ins approximately $2\times 10^11$ multiplications.
+The FFT on the other hand requires $6\times 10^6$ leading to a speed-up of about $30 000$.
+
+How this influenced our world we know from the use in our daily communication networks.
+
+[Compare @Brunton2022, pp. 65-66]
+:::
+
+::: {.callout-note}
+We should note that Cooley and Tukey where not the first to propose a FFT but the provided the formulation used today.
+Gauss already formulated the FFT 150 years earlier in 1805 for orbital approximations.
+Apparently, he did the necessary computations in his head and needed a fast algorithm so he developed the FFT.
+Gauss being Gauss did not see this as something important and it did not get published until 1866 in his compiled notes. 
+:::
+
+The main idea of the FFT is to exploit symmetries in the Fourier transform and to relate the $N$-dimensional DFT to a lower dimensional DFT by reordering the coefficients. 
+
+::: {.callout appearance="simple"}
+:::: {#def-fourier-dft} 
+
+## Discrete-Fourier Transform
+
+If we assume that $N = 2^n$, i.e. a power of $2$, in particular $N=2M$, and $F_N$ denotes the matrix of @eq-dft for dimension $N$ and we have $\hat{f} = F_N f$ and $f = \tfrac1N \overline{F_N} \hat{f}$.
+By splitting $f$ in the even and odd indices as 
+$$e = [f_0, f_2, \ldots, f_{N-2}]^{\mathrm{T}}\in \mathbb{C}^{M}$$
+and 
+$$o = [f_1, f_3, \ldots, f_{N-1}]^{\mathrm{T}}\in \mathbb{C}^{M}$$
+and for @eq-dft we get
+$$
+\begin{align}
+\hat{f}_k &= \sum_{j=0}^{N-1}f_j\, \omega^{j k} = \sum_{j=0}^{M}f_{2j}\, \omega^{(2j) k} + \sum_{j=0}^{M}f_{2j+1}\, \omega^{(2j+1) k} \\
+&= \sum_{j=0}^{M}e_j\, (\omega^2)^{j k} + \omega^k\sum_{j=0}^{M}o_{j}\, (\omega^2)^{j k}.
+\end{align}
+$$
+If we further split $\hat{f}$ in an upper and lower part 
+$$u = [\hat{f}_0, \hat{f}_2, \ldots, \hat{f}_{M-1}]^{\mathrm{T}}\in \mathbb{C}^{M}$$
+and 
+$$l = [\hat{f}_{M}, \hat{f}_{M+1}, \ldots, \hat{f}_{N-1}]^{\mathrm{T}}\in \mathbb{C}^{M}$$
+and with the property $\omega^{k+M} = \omega^k \omega^M = - \omega^k$ we get
+
+$$
+\begin{align}
+u_k &= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} + \omega^k\sum_{j=0}^{M}o_{j}\, (\omega^2)^{j k},\\
+l_k &= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} - \omega^k\sum_{j=0}^{M}o_{j}\, (\omega^2)^{j k}.
+\end{align}
+$$
+This results in the more visual matrix representation
+$$
+\hat{f}= F_N f = 
+\left[
+    \begin{array}{cc}
+    I_M & D_M \\
+    I_M & -D_m
+    \end{array}
+\right]
+\left[
+    \begin{array}{cc}
+    F_M & 0 \\
+    0 & F_M
+    \end{array}
+\right]
+\left[
+    \begin{array}{cc}
+    f_{even}\\
+    f_{odd}
+    \end{array}
+\right]
+$$
+Now repeat this $n$ times.
+::::
+:::
+
+::: {.callout-note}
+If $N$ is not a power of $2$ padding is used to make the size fit by extending the vector with zeros.
+:::
+
+::: {.callout-note}
+The original FFT paper uses bit flipping and similar techniques to boost performance even more.
+It can even be implemented to allow for in place computation to save storage.
+:::

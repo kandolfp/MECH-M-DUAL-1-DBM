@@ -447,7 +447,7 @@ $$
 $$
 stating that the Fourier Transform preserves the 2-norm up to a scaling factor.
 
-## Discrete Fourier Transform (DFT)
+## Discrete Fourier Transform
 
 The Discrete Fourier Transform (DFT) is a way of approximating the Fourier transform on discrete vectors of data and it essentially a discretized version of the Fourier transform by sampling the function and numerical integration. 
 
@@ -478,7 +478,7 @@ $$
     \begin{array}{ccccc} 1 & 1 & 1 & \dots & 1 \\
                          1 & \omega_N & \omega_N^2 & \dots & \omega_N^{N-1} \\  
                          1 & \omega_N^2 & \omega_N^4 & \dots & \omega_N^{2(N-1)} \\
-                         \vdots & \vdots & \ddots & \vdots\\
+                         \vdots & \vdots & \vdots & \ddots & \vdots\\
                          1 & \omega_N^{N-1} & \omega_N^{2(N-1)} & \dots & \omega_N^{(N-1)^2 } \\
     \end{array}
 \right] 
@@ -513,7 +513,7 @@ DFT = np.power(w, J*K)
 ## Fast Fourier Transform
 
 In 1965, James W. Cooley (IBM) and John W. Tukey (Princeton) developed the so called _fast Fourier transform_ (FFT) that scales with $\mathcal{O}(N \log(N))$.
- which becomes almost linear for large enough $N$. 
+ which becomes almost linear for large enough $N$, see @Cooley1965.
 
 ::: {.callout-note}
 
@@ -532,7 +532,7 @@ How this influenced our world we know from the use in our daily communication ne
 We should note that Cooley and Tukey where not the first to propose a FFT but the provided the formulation used today.
 Gauss already formulated the FFT 150 years earlier in 1805 for orbital approximations.
 Apparently, he did the necessary computations in his head and needed a fast algorithm so he developed the FFT.
-Gauss being Gauss did not see this as something important and it did not get published until 1866 in his compiled notes. 
+Gauss being Gauss did not see this as something important and it did not get published until 1866 in his compiled notes, @Gauss.
 :::
 
 The main idea of the FFT is to exploit symmetries in the Fourier transform and to relate the $N$-dimensional DFT to a lower dimensional DFT by reordering the coefficients. 
@@ -572,7 +572,7 @@ $$
 \left[
     \begin{array}{cc}
     I_M & D_M \\
-    I_M & -D_m
+    I_M & -D_M
     \end{array}
 \right]
 \left[
@@ -585,6 +585,18 @@ $$
     \begin{array}{cc}
     f_{even}\\
     f_{odd}
+    \end{array}
+\right],
+$$
+for $I_M$ being the identity matrix in dimension $M$ and 
+$$
+D_M = 
+\left[
+    \begin{array}{ccccc} 1 & 0 & 0 & \dots & 0 \\
+                         0 & \omega & 0 & \dots & 0 \\  
+                         0 & 0 & \omega^2 & \dots & 0 \\
+                         \vdots & \vdots & \ddots & \ddots &\vdots\\
+                         0 & 0 & 0 & \dots & \omega^{(M-1)} \\
     \end{array}
 \right]
 $$

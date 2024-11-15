@@ -54,7 +54,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -326,6 +346,7 @@ window.Quarto = {
   <li><a href="#fourier-series" id="toc-fourier-series" class="nav-link active" data-scroll-target="#fourier-series"><span class="header-section-number">9.1</span> Fourier Series</a></li>
   <li><a href="#fourier-transform" id="toc-fourier-transform" class="nav-link" data-scroll-target="#fourier-transform"><span class="header-section-number">9.2</span> Fourier Transform</a></li>
   <li><a href="#discrete-fourier-transform-dft" id="toc-discrete-fourier-transform-dft" class="nav-link" data-scroll-target="#discrete-fourier-transform-dft"><span class="header-section-number">9.3</span> Discrete Fourier Transform (DFT)</a></li>
+  <li><a href="#fast-fourier-transform" id="toc-fast-fourier-transform" class="nav-link" data-scroll-target="#fast-fourier-transform"><span class="header-section-number">9.4</span> Fast Fourier Transform</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/signal/fourier.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -483,78 +504,77 @@ Note
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.cm <span class="im">import</span> get_cmap</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">7</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>M2 <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">101</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Hat functions</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> x, L: <span class="dv">0</span> <span class="cf">if</span> <span class="bu">abs</span>(x) <span class="op">&gt;</span> L <span class="op">/</span> <span class="dv">4</span> <span class="cf">else</span> (<span class="dv">1</span> <span class="op">-</span> np.sign(x) <span class="op">*</span> x <span class="op">*</span> <span class="dv">4</span> <span class="op">/</span> L)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>fun2 <span class="op">=</span> <span class="kw">lambda</span> x, L: <span class="dv">0</span> <span class="cf">if</span> <span class="bu">abs</span>(x) <span class="op">&gt;</span> L <span class="op">/</span> <span class="dv">4</span> <span class="cf">else</span> <span class="dv">1</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># x and y for the functions</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span>L<span class="op">/</span><span class="dv">2</span>, L<span class="op">/</span><span class="dv">2</span>, N)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>dx <span class="op">=</span> x[<span class="dv">1</span>] <span class="op">-</span> x[<span class="dv">0</span>]</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>omega <span class="op">=</span> np.pi <span class="op">*</span> <span class="dv">2</span> <span class="op">/</span> L</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> np.fromiter(<span class="bu">map</span>(<span class="kw">lambda</span> x: fun(x, L), x), x.dtype)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>f2 <span class="op">=</span> np.fromiter(<span class="bu">map</span>(<span class="kw">lambda</span> x: fun2(x, L), x), x.dtype)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Necessary functions</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>scalarproduct <span class="op">=</span> <span class="kw">lambda</span> f, g, dx: dx <span class="op">*</span> np.vecdot(f, g)</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>a_coeff <span class="op">=</span> <span class="kw">lambda</span> n, f: <span class="dv">2</span> <span class="op">/</span> L <span class="op">*</span> scalarproduct(f, np.cos(omega <span class="op">*</span> n <span class="op">*</span> x), dx)</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>b_coeff <span class="op">=</span> <span class="kw">lambda</span> n, f: <span class="dv">2</span> <span class="op">/</span> L <span class="op">*</span> scalarproduct(f, np.sin(omega <span class="op">*</span> n <span class="op">*</span> x), dx)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co"># f_hat_0</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>f_hat <span class="op">=</span> np.zeros((M<span class="op">+</span><span class="dv">1</span>, N))</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>f_hat[<span class="dv">0</span>, :] <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span> <span class="op">*</span> a_coeff(<span class="dv">0</span>, f)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>f2_hat <span class="op">=</span> np.zeros((M2<span class="op">+</span><span class="dv">1</span>, N))</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>f2_hat[<span class="dv">0</span>, :] <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span> <span class="op">*</span> a_coeff(<span class="dv">0</span>, f2)</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Computation of the approximation</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.zeros(M)</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.zeros(M)</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    a[i] <span class="op">=</span> a_coeff(i<span class="op">+</span><span class="dv">1</span>, f)</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    b[i] <span class="op">=</span> b_coeff(i<span class="op">+</span><span class="dv">1</span>, f)</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    f_hat[i<span class="op">+</span><span class="dv">1</span>, :] <span class="op">=</span> f_hat[i, :] <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        a[i] <span class="op">*</span> np.cos(omega <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x) <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>        b[i] <span class="op">*</span> np.sin(omega <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x)</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M2):</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    f2_hat[i<span class="op">+</span><span class="dv">1</span>, :] <span class="op">=</span> f2_hat[i, :] <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>        a_coeff(i<span class="op">+</span><span class="dv">1</span>, f2) <span class="op">*</span> np.cos(omega <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x) <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        b_coeff(i<span class="op">+</span><span class="dv">1</span>, f2) <span class="op">*</span> np.sin(omega <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x)</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Figures</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">0</span>)</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f_hat[<span class="op">-</span><span class="dv">1</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f_7}</span><span class="vs">$"</span>)</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">1</span>)</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f_hat[<span class="dv">0</span>, :], label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span><span class="dv">0</span><span class="sc">}</span><span class="vs">$"</span>)</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    plt.plot(x, a[i] <span class="op">*</span> np.cos(omega <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x), label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\cos(</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\omega x$"</span>)</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>plt.legend(ncol<span class="op">=</span>np.ceil((M<span class="op">+</span><span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span>), bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="op">-</span><span class="fl">0.1</span>))</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">2</span>)</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2_hat[<span class="dv">7</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_7$"</span>)</span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2_hat[<span class="dv">20</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{20}</span><span class="vs">$"</span>)</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2_hat[<span class="dv">50</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{50}</span><span class="vs">$"</span>)</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>M2 <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">101</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Hat functions</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> x, L: <span class="dv">0</span> <span class="cf">if</span> <span class="bu">abs</span>(x) <span class="op">&gt;</span> L <span class="op">/</span> <span class="dv">4</span> <span class="cf">else</span> (<span class="dv">1</span> <span class="op">-</span> np.sign(x) <span class="op">*</span> x <span class="op">*</span> <span class="dv">4</span> <span class="op">/</span> L)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>fun2 <span class="op">=</span> <span class="kw">lambda</span> x, L: <span class="dv">0</span> <span class="cf">if</span> <span class="bu">abs</span>(x) <span class="op">&gt;</span> L <span class="op">/</span> <span class="dv">4</span> <span class="cf">else</span> <span class="dv">1</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># x and y for the functions</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span>L<span class="op">/</span><span class="dv">2</span>, L<span class="op">/</span><span class="dv">2</span>, N)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>dx <span class="op">=</span> x[<span class="dv">1</span>] <span class="op">-</span> x[<span class="dv">0</span>]</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.pi <span class="op">*</span> <span class="dv">2</span> <span class="op">/</span> L</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> np.fromiter(<span class="bu">map</span>(<span class="kw">lambda</span> x: fun(x, L), x), x.dtype)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>f2 <span class="op">=</span> np.fromiter(<span class="bu">map</span>(<span class="kw">lambda</span> x: fun2(x, L), x), x.dtype)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Necessary functions</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>scalarproduct <span class="op">=</span> <span class="kw">lambda</span> f, g, dx: dx <span class="op">*</span> np.vecdot(f, g)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>a_coeff <span class="op">=</span> <span class="kw">lambda</span> n, f: <span class="dv">2</span> <span class="op">/</span> L <span class="op">*</span> scalarproduct(f, np.cos(w <span class="op">*</span> n <span class="op">*</span> x), dx)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>b_coeff <span class="op">=</span> <span class="kw">lambda</span> n, f: <span class="dv">2</span> <span class="op">/</span> L <span class="op">*</span> scalarproduct(f, np.sin(w <span class="op">*</span> n <span class="op">*</span> x), dx)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># f_hat_0</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>f_hat <span class="op">=</span> np.zeros((M<span class="op">+</span><span class="dv">1</span>, N))</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>f_hat[<span class="dv">0</span>, :] <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span> <span class="op">*</span> a_coeff(<span class="dv">0</span>, f)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>f2_hat <span class="op">=</span> np.zeros((M2<span class="op">+</span><span class="dv">1</span>, N))</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>f2_hat[<span class="dv">0</span>, :] <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span> <span class="op">*</span> a_coeff(<span class="dv">0</span>, f2)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Computation of the approximation</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.zeros(M)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.zeros(M)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    a[i] <span class="op">=</span> a_coeff(i<span class="op">+</span><span class="dv">1</span>, f)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    b[i] <span class="op">=</span> b_coeff(i<span class="op">+</span><span class="dv">1</span>, f)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    f_hat[i<span class="op">+</span><span class="dv">1</span>, :] <span class="op">=</span> f_hat[i, :] <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        a[i] <span class="op">*</span> np.cos(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x) <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        b[i] <span class="op">*</span> np.sin(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M2):</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    f2_hat[i<span class="op">+</span><span class="dv">1</span>, :] <span class="op">=</span> f2_hat[i, :] <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>        a_coeff(i<span class="op">+</span><span class="dv">1</span>, f2) <span class="op">*</span> np.cos(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x) <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>        b_coeff(i<span class="op">+</span><span class="dv">1</span>, f2) <span class="op">*</span> np.sin(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Figures</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">0</span>)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f_hat[<span class="op">-</span><span class="dv">1</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f_7}</span><span class="vs">$"</span>)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">1</span>)</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f_hat[<span class="dv">0</span>, :], label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span><span class="dv">0</span><span class="sc">}</span><span class="vs">$"</span>)</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    plt.plot(x, a[i] <span class="op">*</span> np.cos(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x), label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\cos(</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\omega x$"</span>)</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>plt.legend(ncol<span class="op">=</span>np.ceil((M<span class="op">+</span><span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span>), bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="op">-</span><span class="fl">0.1</span>))</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">2</span>)</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2_hat[<span class="dv">7</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_7$"</span>)</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2_hat[<span class="dv">20</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{20}</span><span class="vs">$"</span>)</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2_hat[<span class="dv">50</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{50}</span><span class="vs">$"</span>)</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="fig-fourier_hat" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -624,80 +644,79 @@ Figure&nbsp;9.1: Fourier transform of a two hat functions.
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Implement the code yourself by filling out the missing sections:</p>
-<div id="1ab5b7c8" class="cell" data-execution_count="2">
+<div id="73ff45c6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.cm <span class="im">import</span> get_cmap</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi   <span class="co"># Interval</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">7</span>           <span class="co"># Nodes for the first function</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>M2 <span class="op">=</span> <span class="dv">50</span>         <span class="co"># Nodes for the second function</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">101</span>         <span class="co"># Interpolation points</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Hat functions</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> x, L: <span class="co"># tooth</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>fun2 <span class="op">=</span> <span class="kw">lambda</span> x, L: <span class="co"># step</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># x and y for the functions</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="co"># points for the evaluation ()</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>dx <span class="op">=</span> x[<span class="dv">1</span>] <span class="op">-</span> x[<span class="dv">0</span>]</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>omega <span class="op">=</span> np.pi <span class="op">*</span> <span class="dv">2</span> <span class="op">/</span> L</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="co"># fun evaluated at x</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>f2 <span class="op">=</span> <span class="co"># fun2 evaluated at x</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Necessary functions</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>scalarproduct <span class="op">=</span> <span class="kw">lambda</span> f, g, dx: <span class="co"># see definition in the notes</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>a_coeff <span class="op">=</span> <span class="kw">lambda</span> n, f: <span class="co"># see definition in the notes</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>b_coeff <span class="op">=</span> <span class="kw">lambda</span> n, f: <span class="co"># see definition in the notes</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># f_hat_0</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>f_hat <span class="op">=</span> np.zeros((M<span class="op">+</span><span class="dv">1</span>, N))</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>f_hat[<span class="dv">0</span>, :] <span class="op">=</span> <span class="co"># a_0 for f</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>f2_hat <span class="op">=</span> np.zeros((M2<span class="op">+</span><span class="dv">1</span>, N))</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>f2_hat[<span class="dv">0</span>, :] <span class="op">=</span> <span class="co"># a_0 for f2</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Computation of the approximation</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.zeros(M)</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.zeros(M)</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    a[i] <span class="op">=</span> a_coeff(i<span class="op">+</span><span class="dv">1</span>, f)</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    b[i] <span class="op">=</span> b_coeff(i<span class="op">+</span><span class="dv">1</span>, f)</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    f_hat[i<span class="op">+</span><span class="dv">1</span>, :] <span class="op">=</span> f_hat[i, :] <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        a[i] <span class="op">*</span> np.cos(omega <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x) <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        b[i] <span class="op">*</span> np.sin(omega <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x)</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M2):</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    f2_hat[i<span class="op">+</span><span class="dv">1</span>, :] <span class="op">=</span> f2_hat[i, :] <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        a_coeff(i<span class="op">+</span><span class="dv">1</span>, f2) <span class="op">*</span> np.cos(omega <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x) <span class="op">+</span> <span class="op">\</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>        b_coeff(i<span class="op">+</span><span class="dv">1</span>, f2) <span class="op">*</span> np.sin(omega <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x)</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Figures</span></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">0</span>)</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f_hat[<span class="op">-</span><span class="dv">1</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f_7}</span><span class="vs">$"</span>)</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">1</span>)</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f_hat[<span class="dv">0</span>, :], label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span><span class="dv">0</span><span class="sc">}</span><span class="vs">$"</span>)</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    plt.plot(x, a[i] <span class="op">*</span> np.cos(omega <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x), label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\cos(</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\omega x$"</span>)</span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>plt.legend(ncol<span class="op">=</span>np.ceil((M<span class="op">+</span><span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span>), bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="op">-</span><span class="fl">0.1</span>))</span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">2</span>)</span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2_hat[<span class="dv">7</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_7$"</span>)</span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2_hat[<span class="dv">20</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{20}</span><span class="vs">$"</span>)</span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2_hat[<span class="dv">50</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{50}</span><span class="vs">$"</span>)</span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi   <span class="co"># Interval</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">7</span>           <span class="co"># Nodes for the first function</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>M2 <span class="op">=</span> <span class="dv">50</span>         <span class="co"># Nodes for the second function</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">101</span>         <span class="co"># Interpolation points</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Hat functions</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> x, L: <span class="co"># tooth</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>fun2 <span class="op">=</span> <span class="kw">lambda</span> x, L: <span class="co"># step</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># x and y for the functions</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="co"># points for the evaluation ()</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>dx <span class="op">=</span> x[<span class="dv">1</span>] <span class="op">-</span> x[<span class="dv">0</span>]</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.pi <span class="op">*</span> <span class="dv">2</span> <span class="op">/</span> L</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="co"># fun evaluated at x</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>f2 <span class="op">=</span> <span class="co"># fun2 evaluated at x</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Necessary functions</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>scalarproduct <span class="op">=</span> <span class="kw">lambda</span> f, g, dx: <span class="co"># see definition in the notes</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>a_coeff <span class="op">=</span> <span class="kw">lambda</span> n, f: <span class="co"># see definition in the notes</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>b_coeff <span class="op">=</span> <span class="kw">lambda</span> n, f: <span class="co"># see definition in the notes</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># f_hat_0</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>f_hat <span class="op">=</span> np.zeros((M<span class="op">+</span><span class="dv">1</span>, N))</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>f_hat[<span class="dv">0</span>, :] <span class="op">=</span> <span class="co"># a_0 for f</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>f2_hat <span class="op">=</span> np.zeros((M2<span class="op">+</span><span class="dv">1</span>, N))</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>f2_hat[<span class="dv">0</span>, :] <span class="op">=</span> <span class="co"># a_0 for f2</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Computation of the approximation</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.zeros(M)</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.zeros(M)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    a[i] <span class="op">=</span> a_coeff(i<span class="op">+</span><span class="dv">1</span>, f)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    b[i] <span class="op">=</span> b_coeff(i<span class="op">+</span><span class="dv">1</span>, f)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    f_hat[i<span class="op">+</span><span class="dv">1</span>, :] <span class="op">=</span> f_hat[i, :] <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        a[i] <span class="op">*</span> np.cos(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x) <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        b[i] <span class="op">*</span> np.sin(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M2):</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    f2_hat[i<span class="op">+</span><span class="dv">1</span>, :] <span class="op">=</span> f2_hat[i, :] <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        a_coeff(i<span class="op">+</span><span class="dv">1</span>, f2) <span class="op">*</span> np.cos(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x) <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        b_coeff(i<span class="op">+</span><span class="dv">1</span>, f2) <span class="op">*</span> np.sin(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Figures</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">0</span>)</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f_hat[<span class="op">-</span><span class="dv">1</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f_7}</span><span class="vs">$"</span>)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">1</span>)</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f_hat[<span class="dv">0</span>, :], label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span><span class="dv">0</span><span class="sc">}</span><span class="vs">$"</span>)</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    plt.plot(x, a[i] <span class="op">*</span> np.cos(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> x), label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\cos(</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\omega x$"</span>)</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>plt.legend(ncol<span class="op">=</span>np.ceil((M<span class="op">+</span><span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span>), bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="op">-</span><span class="fl">0.1</span>))</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">2</span>)</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2_hat[<span class="dv">7</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_7$"</span>)</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2_hat[<span class="dv">20</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{20}</span><span class="vs">$"</span>)</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f2_hat[<span class="dv">50</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{50}</span><span class="vs">$"</span>)</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -822,16 +841,16 @@ Note
 </div>
 <div class="callout-body-container">
 <div id="def-fourier-dft" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 9.6 (Discrete-Fourier Transform)</strong></span> For equally spaced values <span class="math inline">\(x_k = k\Delta x\)</span>, for <span class="math inline">\(k\in\mathbb{Z}\)</span> and <span class="math inline">\(\Delta x&gt;0\)</span> and the discrete values of the function evaluations <span class="math inline">\(f_k=f(x_k)\)</span>. If the function is periodic with <span class="math inline">\(L=N\Delta x\)</span> than the discrete Fourier transform is given as <span class="math display">\[
-\hat{f}_k = \sum_{j=1}^{N-1}f_j\, \mathrm{e}^{-\mathrm{i} j k\tfrac{2 \pi}{N}},
-\]</span> and its inverse (iDFT) as <span class="math display">\[
-f_k = \frac{1}{N}\sum_{j=1}^{N-1}\hat{f}_j\, \mathrm{e}^{\mathrm{i} j k\tfrac{2 \pi}{N}}.
+<p><span class="theorem-title"><strong>Definition 9.6 (Discrete-Fourier Transform)</strong></span> For equally spaced values <span class="math inline">\(x_k = k\Delta x\)</span>, for <span class="math inline">\(k\in\mathbb{Z}\)</span> and <span class="math inline">\(\Delta x&gt;0\)</span> and the discrete values of the function evaluations <span class="math inline">\(f_k=f(x_k)\)</span>. If the function is periodic with <span class="math inline">\(L=N\Delta x\)</span> than the discrete Fourier transform is given as <span id="eq-dft"><span class="math display">\[
+\hat{f}_k = \sum_{j=0}^{N-1}f_j\, \mathrm{e}^{-\mathrm{i} j k\tfrac{2 \pi}{N}},
+\tag{9.3}\]</span></span> and its inverse (iDFT) as <span class="math display">\[
+f_k = \frac{1}{N}\sum_{j=0}^{N-1}\hat{f}_j\, \mathrm{e}^{\mathrm{i} j k\tfrac{2 \pi}{N}}.
 \]</span></p>
 </div>
 </div>
 </div>
 </div>
-<p>As we can see, the DFT is a linear operator and therefore it can be written as a matrix vector product <span class="math display">\[
+<p>As we can see, the DFT is a linear operator and therefore it can be written as a matrix vector product <span id="eq-dft"><span class="math display">\[
 \left[
     \begin{array}{c} \hat{f}_1 \\ \hat{f}_2 \\ \hat{f}_3 \\ \vdots \\ \hat{f}_N \end{array}
 \right]
@@ -847,7 +866,7 @@ f_k = \frac{1}{N}\sum_{j=1}^{N-1}\hat{f}_j\, \mathrm{e}^{\mathrm{i} j k\tfrac{2 
 \left[
     \begin{array}{c} f_1 \\ f_2 \\ f_3 \\ \vdots \\ f_N \end{array}
 \right]
-\]</span> with <span class="math inline">\(\omega_N = \exp({-\mathrm{i} \tfrac{2 \pi}{N}})\)</span>.</p>
+\tag{9.4}\]</span></span> with <span class="math inline">\(\omega_N = \exp({-\mathrm{i} \tfrac{2 \pi}{N}})\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -863,8 +882,129 @@ Note
 </div>
 <p>As we can transfer the properties of the Fourier transform to the DFT we get the nice properties for sampled signals.</p>
 <p>The downside of the DFT is that it does not scale well for large <span class="math inline">\(N\)</span> as the matrix-vector multiplication is <span class="math inline">\(\mathcal{O}(N^2)\)</span> and becomes slow.</p>
+<div id="95c34520" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Show code for the computation of the DFT matrix.</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">256</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.exp(<span class="op">-</span><span class="ot">1j</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> N )</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>J, K <span class="op">=</span> np.meshgrid(np.arange(N), np.arange(N))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>DFT <span class="op">=</span> np.power(w, J<span class="op">*</span>K)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="fast-fourier-transform" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="fast-fourier-transform"><span class="header-section-number">9.4</span> Fast Fourier Transform</h2>
+<p>In 1965, James W. Cooley (IBM) and John W. Tukey (Princeton) developed the so called <em>fast Fourier transform</em> (FFT) that scales with <span class="math inline">\(\mathcal{O}(N \log(N))\)</span>. which becomes almost linear for large enough <span class="math inline">\(N\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To give an idea of what this change means and why this algorithm was a game changer. Audio is most of the time sampled with 44.1kHz, i.e.&nbsp;44 100 samples per second. For a 10s audio clip the vector <span class="math inline">\(f\)</span> will have the length <span class="math inline">\(N = 4.41 \times 10^5\)</span>. The DFT computation (without generating the matrix) results ins approximately <span class="math inline">\(2\times 10^11\)</span> multiplications. The FFT on the other hand requires <span class="math inline">\(6\times 10^6\)</span> leading to a speed-up of about <span class="math inline">\(30 000\)</span>.</p>
+<p>How this influenced our world we know from the use in our daily communication networks.</p>
+<p><span class="citation" data-cites="Brunton2022">(Compare <a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 65–66</a>)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We should note that Cooley and Tukey where not the first to propose a FFT but the provided the formulation used today. Gauss already formulated the FFT 150 years earlier in 1805 for orbital approximations. Apparently, he did the necessary computations in his head and needed a fast algorithm so he developed the FFT. Gauss being Gauss did not see this as something important and it did not get published until 1866 in his compiled notes.</p>
+</div>
+</div>
+<p>The main idea of the FFT is to exploit symmetries in the Fourier transform and to relate the <span class="math inline">\(N\)</span>-dimensional DFT to a lower dimensional DFT by reordering the coefficients.</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-fourier-dft" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 9.7 (Discrete-Fourier Transform)</strong></span> If we assume that <span class="math inline">\(N = 2^n\)</span>, i.e.&nbsp;a power of <span class="math inline">\(2\)</span>, in particular <span class="math inline">\(N=2M\)</span>, and <span class="math inline">\(F_N\)</span> denotes the matrix of <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span>9.4</span></a> for dimension <span class="math inline">\(N\)</span> and we have <span class="math inline">\(\hat{f} = F_N f\)</span> and <span class="math inline">\(f = \tfrac1N \overline{F_N} \hat{f}\)</span>. By splitting <span class="math inline">\(f\)</span> in the even and odd indices as <span class="math display">\[e = [f_0, f_2, \ldots, f_{N-2}]^{\mathrm{T}}\in \mathbb{C}^{M}\]</span> and <span class="math display">\[o = [f_1, f_3, \ldots, f_{N-1}]^{\mathrm{T}}\in \mathbb{C}^{M}\]</span> and for <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span>9.4</span></a> we get <span class="math display">\[
+\begin{align}
+\hat{f}_k &amp;= \sum_{j=0}^{N-1}f_j\, \omega^{j k} = \sum_{j=0}^{M}f_{2j}\, \omega^{(2j) k} + \sum_{j=0}^{M}f_{2j+1}\, \omega^{(2j+1) k} \\
+&amp;= \sum_{j=0}^{M}e_j\, (\omega^2)^{j k} + \omega^k\sum_{j=0}^{M}o_{j}\, (\omega^2)^{j k}.
+\end{align}
+\]</span> If we further split <span class="math inline">\(\hat{f}\)</span> in an upper and lower part <span class="math display">\[u = [\hat{f}_0, \hat{f}_2, \ldots, \hat{f}_{M-1}]^{\mathrm{T}}\in \mathbb{C}^{M}\]</span> and <span class="math display">\[l = [\hat{f}_{M}, \hat{f}_{M+1}, \ldots, \hat{f}_{N-1}]^{\mathrm{T}}\in \mathbb{C}^{M}\]</span> and with the property <span class="math inline">\(\omega^{k+M} = \omega^k \omega^M = - \omega^k\)</span> we get</p>
+<p><span class="math display">\[
+\begin{align}
+u_k &amp;= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} + \omega^k\sum_{j=0}^{M}o_{j}\, (\omega^2)^{j k},\\
+l_k &amp;= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} - \omega^k\sum_{j=0}^{M}o_{j}\, (\omega^2)^{j k}.
+\end{align}
+\]</span> This results in the more visual matrix representation <span class="math display">\[
+\hat{f}= F_N f =
+\left[
+    \begin{array}{cc}
+    I_M &amp; D_M \\
+    I_M &amp; -D_m
+    \end{array}
+\right]
+\left[
+    \begin{array}{cc}
+    F_M &amp; 0 \\
+    0 &amp; F_M
+    \end{array}
+\right]
+\left[
+    \begin{array}{cc}
+    f_{even}\\
+    f_{odd}
+    \end{array}
+\right]
+\]</span> Now repeat this <span class="math inline">\(n\)</span> times.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(N\)</span> is not a power of <span class="math inline">\(2\)</span> padding is used to make the size fit by extending the vector with zeros.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The original FFT paper uses bit flipping and similar techniques to boost performance even more. It can even be implemented to allow for in place computation to save storage.</p>
+</div>
+</div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Brunton2022" class="csl-entry" role="listitem">
+Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engineering - Machine Learning, Dynamical Systems, and Control</em>. 2nd ed. Cambridge: Cambridge University Press.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -1458,7 +1598,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","selector":".lightbox","loop":false});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false,"closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

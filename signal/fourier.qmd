@@ -609,6 +609,244 @@ If $N$ is not a power of $2$ padding is used to make the size fit by extending t
 :::
 
 ::: {.callout-note}
-The original FFT paper uses bit flipping and similar techniques to boost performance even more.
+The original FFT paper [@Cooley1965] uses bit flipping and similar techniques to boost performance even more.
 It can even be implemented to allow for in place computation to save storage.
+
+IMAGE
+
+[Compare @Meyberg1992-ws, pp. 331]
+:::
+
+In order to give an idea how FFT works in an application we follow the example given in [@Brunton2022, p. 66-67].
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-fourier-fft-den}
+
+## FFT for de-noising
+
+For a signal consisting of two main frequencies $f_1 = 50$ and $f_2=120$ we construct a signal
+$$
+f(t) = \sin(2\pi f_1 t) + \sin(2\pi f_2 t)
+$$
+and add some Gaussian white noise `np.random.randn`.
+
+We compute the FFT from the two signals and their power spectral density (PSD), i.e. 
+$$
+PSD(\hat{f})=\frac1N \|\hat{f}\|^2.
+$$
+We use the PSD to take all frequencies with a $PSD < 100$ out of our reconstruction as a filter. 
+This removes noise from the signal.
+
+```{python}
+#| label: fig-fourier_fft_denoise
+#| fig-cap: "Signal noise filter with FFT."
+#| fig-subcap:
+#|   - "Original clean signal and noisy signal."
+#|   - "Scaled square norm of of the Fourier coefficients (PSD), only parts are shown."
+#|   - "Original signal and de-noised signal."
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+%config InlineBackend.figure_formats = ["svg"]
+
+np.random.seed(6020)
+# Parameters
+N = 1024
+a, b = 0, 1/4
+t = np.linspace(a, b, N, endpoint=False)
+dt = t[1] - t[0]
+f1 = 50
+f2 = 120
+fun = lambda t: np.sin(2 * np.pi * f1 * t) + np.sin(2 * np.pi * f2 * t)
+
+f_clean = fun(t)
+f_noise = fun(t) + 2.5 * np.random.randn(len(t))              # Add some noise
+
+fhat_noise = np.fft.fft(f_noise)
+fhat_clean = np.fft.fft(f_clean)
+
+PSD_noise = np.abs(fhat_noise)**2 / N
+PSD_clean = np.abs(fhat_clean)**2 / N
+
+freq = (1 / (dt * N)) * np.arange(N)
+L = np.arange(1, np.floor(N/4), dtype='int')
+
+# Apply filter in spectral space
+filter = PSD_noise > 100
+PSDclean = PSD_noise * filter
+fhat_filtered = filter * fhat_noise
+f_filtered = np.fft.ifft(fhat_filtered)
+
+# Figures
+plt.figure(0)
+plt.plot(t, f_noise, ":", label=r"Noisy")
+plt.plot(t, f_clean, label=r"Clean")
+plt.xlabel("Time [s]")
+plt.ylabel(r"$f$")
+plt.xlim(t[0], t[-1])
+plt.ylim(-5, 5)
+plt.legend(loc=1)
+plt.gca().set_aspect(5e-3)
+
+plt.figure(1)
+plt.plot(freq[L], PSD_noise[L], label=r"Noisy")
+plt.plot(freq[L], PSD_clean[L], label=r"Clean")
+plt.xlabel("Frequency [Hz]")
+plt.ylabel("PSD")
+plt.xlim(0, int(freq[L[-1] + 1]))
+plt.legend(loc=1)
+plt.gca().set_aspect(1)
+
+plt.figure(3)
+plt.plot(t, np.real(f_filtered), label=r"Noisy")
+plt.plot(t, f_clean, label=r"Clean")
+plt.xlabel("Time [s]")
+plt.ylabel(r"$f$")
+plt.xlim(t[0], t[-1])
+plt.ylim(-5, 5)
+plt.legend(loc=1)
+plt.gca().set_aspect(5e-3)
+plt.show()
+```
+
+As can be seen in the @fig-fourier_fft_denoise-3, the reconstruction is not exact.
+This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. 
+In particular: 
+```{python}
+#| echo: false
+import pandas as pd
+df = pd.DataFrame({"Frequency": np.round(freq[filter], 3), "PSD": np.round(PSD_noise[filter], 3)})
+df
+```
+
+Note: For @fig-fourier_fft_denoise-3 we discarded the imaginary part of the reconstruction.
+::::
+:::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+## {{< fa pen-to-square >}} Exercise - DFT vs. FFT
+
+Implement @exm-fourier-fft-den with DFT and FFT such that you can evaluate the runtime and create a plot showing the different runtime as well as check if the two produce the same result
+:::
+
+For the Fourier transform we stated that the multiplication with $\mathcal{F}\{\partial f\}=\mathrm{i}\omega\mathcal{F}\{f\}$, similarly we can derive a formula for the numerical derivative of a sampled function by multiplying each entry of the transformed vector by $\mathrm{i}\kappa$ for $\kappa=\tfrac{2\pi k}{N}$.
+$\kappa$ is called the discrete wavenumber associated with the component $k$.
+
+Let us explore this with the example stated in [@Brunton2022, p. 68-69].
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-fourier-fft-spectralderiv}
+
+## Spectral derivative
+
+We compute the so called spectral derivative for the function 
+$$
+\begin{align}
+f(x) &= \cos(x)\exp\left(-\frac{x^2}{25}\right) \\
+\partial_x f(x) &= -\sin(x)\exp\left(-\frac{x^2}{25}\right) - \frac{2}{25}x f(x)
+\end{align}
+$$
+
+In order to porovide something to compare our results to we also compute the forward Euler finite-differences for the derivative
+$$
+\partial_x f(x_k) \approx \frac{f(x_{k+1}) - f(x_k)}{x_{k+1} - x_k}.
+$$
+
+```{python}
+#| label: fig-fourier_fft_spectralderivative
+#| fig-cap: "Computing the derivative of a function"
+#| fig-subcap:
+#|   - "Computation of the derivative with different methods"
+#|   - "Accuracy of the methods for computing the derivative"
+#|   - "Gibbs phenomenon for the spectral derivative for discontinuous functions"
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+%config InlineBackend.figure_formats = ["svg"]
+
+# Parameters
+N = 128
+a, b = -15, 15
+L = b - a
+
+fun = lambda x: np.cos(x) * np.exp(-np.power(x, 2) / 25)
+dfun = lambda x: -(np.sin(x) * np.exp(-np.power(x, 2) / 25) + (2 / 25) * x * fun(x))
+
+def fD(N, fun, dfun, a, b):
+    x = np.linspace(a, b, N, endpoint=False)
+    dx = x[1] - x[0]
+    f = fun(x)
+    df_DD = np.diff(f) / dx
+    df_DD = np.append(df_DD, df_DD[-1])
+    return df_DD, np.linalg.norm(df_DD - dfun(x)) / np.linalg.norm(df_DD)
+
+def spD(N, fun, dfun, a, b):
+    x = np.linspace(a, b, N, endpoint=False)
+    f = fun(x)
+    fhat = np.fft.fft(f)
+    kappa = np.fft.fftfreq(N, (b - a) / (N * 2 * np.pi))
+    df_hat = kappa * fhat * (1j)
+    df_r = np.fft.ifft(df_hat).real
+    return df_r, np.linalg.norm(df_r - dfun(x)) / np.linalg.norm(df_r)
+
+
+# Finite differences
+df_fD, e = fD(N, fun, dfun, a, b)
+# Spectral derivative
+df_spD, e = spD(N, fun, dfun, a, b)
+
+# Figures
+x = np.linspace(a, b, N, endpoint=False)
+plt.figure(0)
+plt.plot(x, dfun(x), label="Exact")
+plt.plot(x, df_fD, "-.", label="Finite Differences")
+plt.plot(x, df_spD, "--", label="Spectral")
+plt.xlabel("x")
+plt.ylabel(r"$\partial_x f$")
+plt.legend(loc=1)
+plt.gca().set_aspect(5)
+
+plt.figure(1)
+n = 19
+M = range(3, n)
+e_spD = np.ones(len(M))
+e_fD = np.ones(len(M))
+for i, j in enumerate(M):
+    _, e_fD[i] = fD(2**j, fun, dfun, a, b)
+    _, e_spD[i] = spD(2**j, fun, dfun, a, b)
+
+plt.loglog(np.pow(2, M), e_fD, label="Finite differences")
+plt.loglog(np.pow(2, M), e_spD, label="Spectral derivative")
+plt.grid()
+plt.xlabel("N")
+plt.ylabel("Relative Error")
+plt.legend(loc=1)
+plt.gca().set_aspect(2.5e-1)
+
+fun_saw = lambda x, L: 0 if abs(x) > L / 4 else (1 - np.sign(x) * x * 4 / L)
+a, b = -np.pi, np.pi
+L = b - a
+fun2 = lambda x: np.fromiter(map(lambda x: fun_saw(x, L), x), x.dtype)
+N = 2**10
+
+x = np.linspace(a, b, N, endpoint=False)
+
+plt.figure(2)
+df_spD, _ = spD(N, fun2, fun2, a, b)
+df_fD, _ = fD(N, fun2, fun2, a, b)
+plt.plot(x, df_fD, "-.", label="Finite derivative")
+plt.plot(x, df_spD, "--", label="Spectral derivative")
+plt.plot(x, fun2(x), label=r"$f$")
+plt.xlabel("x")
+plt.xlim(-2, 2)
+plt.legend(loc=1)
+plt.gca().set_aspect(1)
+```
+As can be seen in @fig-fourier_fft_spectralderivative-2 we can reduce the error of both methods by increasing $N$.
+Nevertheless, the spectral method is more accurate and converges faster
+::::
 :::

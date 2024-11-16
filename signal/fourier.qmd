@@ -850,6 +850,6 @@ plt.legend(loc=1)
 plt.gca().set_aspect(1)
 ```
 As can be seen in @fig-fourier_fft_spectralderivative-2 we can reduce the error of both methods by increasing $N$.
-Nevertheless, the spectral method is more accurate and converges faster
+Nevertheless, the spectral method is more accurate and converges faster.
 ::::
 :::

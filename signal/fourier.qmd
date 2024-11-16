@@ -538,9 +538,9 @@ Gauss being Gauss did not see this as something important and it did not get pub
 The main idea of the FFT is to exploit symmetries in the Fourier transform and to relate the $N$-dimensional DFT to a lower dimensional DFT by reordering the coefficients. 
 
 ::: {.callout appearance="simple"}
-:::: {#def-fourier-dft} 
+:::: {#def-fourier-fft} 
 
-## Discrete-Fourier Transform
+## Fast-Fourier Transform
 
 If we assume that $N = 2^n$, i.e. a power of $2$, in particular $N=2M$, and $F_N$ denotes the matrix of @eq-dft for dimension $N$ and we have $\hat{f} = F_N f$ and $f = \tfrac1N \overline{F_N} \hat{f}$.
 By splitting $f$ in the even and odd indices as 
@@ -617,7 +617,10 @@ IMAGE
 [Compare @Meyberg1992-ws, pp. 331]
 :::
 
-In order to give an idea how FFT works in an application we follow the example given in [@Brunton2022, p. 66-67].
+### Examples for the FFT in action
+
+In order to give an idea how FFT works in an application we follow the examples given in [@Brunton2022, pp. 66-76].
+
 
 ::: {.callout-tip appearance="simple" collapse="true" icon=false}
 :::: {#exm-fourier-fft-den}

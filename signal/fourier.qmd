@@ -853,3 +853,290 @@ As can be seen in @fig-fourier_fft_spectralderivative-2 we can reduce the error 
 Nevertheless, the spectral method is more accurate and converges faster.
 ::::
 :::
+
+In @sec-eigen-lode we have already seen how the eigendecomposition can be used to compute the solution of ordinary differential equations by changing the basis and transforming the equation into a basis that can be handled easy.
+The same is true with the Fourier transformation.
+
+As mentioned before, Fourier introduced it to solve the heat equation and we will do the same.
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-fourier-fft-heat}
+
+## Heat Equation
+
+The heat equation in 1D is given by
+$$
+\dot{u} = \alpha^2 \partial_x^2 u,
+$$
+for $u(t, x)$ as the temprature distribution in space ($x$) and time ($t$).
+By applying the Fourier transform we get $\mathcal{F}\{u(t,x)\}=\hat{u}(t, x)$ and
+$$
+\dot{\hat{u}} = - \alpha^2\omega^2\hat{u}.
+$$
+This transformed the partial differential equation into an ordinary differential equation and we can solve it for each fixed frequency $\omega$ as
+$$
+\hat{u}(t, \omega) = \mathrm{e}^{-\alpha^2\omega^2 t} \hat{u}(0, \omega).
+$$
+where $\hat{u}(0, \omega)$ is nothing else than the Fourier transform of the initial temperature distribution at time $t=0$.
+To compute the inverse Fourier transform we can make use of the convolution property introduced above. 
+
+$$
+u(t, x) = \mathcal{F}^{-1}\{\hat{u}(t, \omega\} = \mathcal{F}^{-1}\{\mathrm{e}^{-\alpha^2\omega^2 t}\} \ast u(0, x) = \frac{1}{2 \alpha \sqrt{\pi t}} \mathrm{e}^{-\tfrac{x^2}{4\alpha^2t}} \ast u(0, x).
+$$
+
+For the numerical computation it is more convenient to stay in the frequency domain and use $\kappa$ as before.
+
+The majority of the following code is from [@Brunton2022, Code 2.5 and Code 2.6].
+
+```{python}
+#| label: fig-fourier_fft_heat
+#| fig-cap: "Simulation of the heat equation in 1D."
+#| fig-subcap:
+#|   - "Evolution of the heat equation in time."
+#|   - "x-t diagram of the transport equation. "
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+%config InlineBackend.figure_formats = ["svg"]
+
+alpha = 1
+a, b = -50, 50
+L = b - a
+N = 1000
+x = np.linspace(a, b, N, endpoint=False)
+dx = x[1] - x[0]
+
+# Define discrete wavenumbers
+#kappa = 2 * np.pi * np.fft.fftfreq(N, d=dx)
+kappa = np.fft.fftfreq(N, (b - a) / (N * 2 * np.pi))
+
+# Initial condition
+u0 = np.zeros_like(x)
+u0[np.abs(x) < 10] = 1
+u0hat = np.fft.fft(u0)
+
+# SciPy's odeint function doesn't play well with complex numbers, so we recast 
+# the state u0hat from an N-element complex vector to a 2N-element real vector
+u0hat_ri = np.concatenate((u0hat.real, u0hat.imag))
+
+# Simulate in Fourier frequency domain
+dt = 0.1
+T = np.arange(0,10,dt)
+
+#fun = lambda t, x: - alpha**2 * np.power(kappa, 2) * x
+#euler = lambda y, dt, t, fun: y + dt * fun(t, y)
+
+#uhat = np.zeros((len(T) + 1, len(u0hat)), dtype="complex")
+#uhat[0, :] = u0hat
+#for i, t in enumerate(T):
+#    uhat[i + 1] = euler(uhat[i], dt, t, fun)
+
+def rhsHeat(uhat_ri,t,kappa,a):
+    uhat = uhat_ri[:N] + (1j) * uhat_ri[N:]
+    d_uhat = -a**2 * (np.power(kappa, 2)) * uhat
+    d_uhat_ri = np.concatenate((d_uhat.real, d_uhat.imag)).astype('float64')
+    return d_uhat_ri
+
+uhat_ri = odeint(rhsHeat, u0hat_ri, T, args=(kappa, alpha))
+
+uhat = uhat_ri[:, :N] + (1j) * uhat_ri[:, N:]
+
+u = np.zeros_like(uhat)
+
+for k in range(len(T)):
+    u[k, :] = np.fft.ifft(uhat[k,:])
+
+u = u.real    
+
+# Waterfall plot
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+u_plot = u[0:-1:10, :]
+for j in range(u_plot.shape[0]):
+    ys = j * np.ones(u_plot.shape[1])
+    ax.plot(x, ys, u_plot[j, :])
+    
+# Image plot
+plt.figure()
+plt.imshow(np.flipud(u), aspect=8)
+plt.axis('off')
+plt.show()
+```
+::::
+:::
+
+Next, we look at the transport equation.
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-fourier-fft-advection}
+
+## Transport or advection
+
+The transport equation in 1D is given by
+$$
+\dot{u} = - c \partial_x u.
+$$
+It is called the transport equation, as the initial value simply propagates in time to the right hand side of the domain with speed $c$, i.e. $u(t, x) = u(0, x -c t)$.
+The solution is simply computed by exchanging the right hand side from the above code. 
+
+The majority of the following code is from [@Brunton2022, Code 2.5 and Code 2.6].
+
+```{python}
+#| label: fig-fourier_fft_advection
+#| fig-cap: "Computing the derivative of a function"
+#| fig-subcap:
+#|   - "Evolution of the transport equation in time."
+#|   - "x-t diagram of the transport equation."
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+%config InlineBackend.figure_formats = ["svg"]
+
+c = 2
+a, b = -20, 20
+L = b - a
+N = 1000
+x = np.linspace(a, b, N, endpoint=False)
+dx = x[1] - x[0]
+
+# Define discrete wavenumbers
+#kappa = 2 * np.pi * np.fft.fftfreq(N, d=dx)
+kappa = np.fft.fftfreq(N, (b - a) / (N * 2 * np.pi))
+
+# Initial condition
+u0 = 1/np.cosh(x)
+u0hat = np.fft.fft(u0)
+
+# SciPy's odeint function doesn't play well with complex numbers, so we recast 
+# the state u0hat from an N-element complex vector to a 2N-element real vector
+u0hat_ri = np.concatenate((u0hat.real, u0hat.imag))
+
+# Simulate in Fourier frequency domain
+dt = 0.025
+T = np.arange(0,100*dt,dt)
+
+def rhsWave(uhat_ri,t,kappa,c):
+    uhat = uhat_ri[:N] + (1j) * uhat_ri[N:]
+    d_uhat = -c * (1j ) *kappa * uhat
+    d_uhat_ri = np.concatenate((d_uhat.real,d_uhat.imag)).astype('float64')
+    return d_uhat_ri
+
+uhat_ri = odeint(rhsWave, u0hat_ri, T, args=(kappa, c))
+
+uhat = uhat_ri[:, :N] + (1j) * uhat_ri[:, N:]
+
+u = np.zeros_like(uhat)
+
+for k in range(len(T)):
+    u[k, :] = np.fft.ifft(uhat[k,:])
+
+u = u.real    
+
+# Waterfall plot
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+u_plot = u[0:-1:10, :]
+for j in range(u_plot.shape[0]):
+    ys = j * np.ones(u_plot.shape[1])
+    ax.plot(x, ys, u_plot[j, :])
+    
+# Image plot
+plt.figure()
+plt.imshow(np.flipud(u), aspect=8)
+plt.axis('off')
+plt.show()
+```
+::::
+:::
+
+To increase complexity from these simple equations we move to the nonlinear Burger's equation which is a combination of the two above and an example that produces shock waves in fluids. 
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-fourier-fft-burger}
+
+## Burger's equation
+
+Burger's equation in 1D is given by
+$$
+\dot{u} + u \partial_t u = \nu \partial_x^2 u.
+$$
+The equation consists of a nonlinear convection part $u \partial_t u$ as well as diffusion. 
+The convection part is designed in such a way that larger amplitudes travel faster and therefore causes a shock wave to form. 
+
+Regarding the solution of this equation, the interesting part is that we need to map back and forth between the Fourier space and time space to apply the nonlinearity.
+
+This example is also very useful to test the capabilities of your solver as by decreasing the diffusion factor further and further we can approach an infinitely steep shock and in theory it can break like an ocean wave. 
+
+The majority of the following code is from [@Brunton2022, Code 2.5 and Code 2.6].
+
+```{python}
+#| label: fig-fourier_fft_burger
+#| fig-cap: "Time integration of the Burger's equation"
+#| fig-subcap:
+#|   - "Evolution of Burger's equation in time."
+#|   - "x-t diagram of Burger's equation."
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+%config InlineBackend.figure_formats = ["svg"]
+
+nu = 0.001
+a, b = -10, 10
+L = b - a
+N = 1000
+x = np.linspace(a, b, N, endpoint=False)
+dx = x[1] - x[0]
+
+# Define discrete wavenumbers
+#kappa = 2 * np.pi * np.fft.fftfreq(N, d=dx)
+kappa = np.fft.fftfreq(N, (b - a) / (N * 2 * np.pi))
+
+# Initial condition
+u0 = 1/np.cosh(x)
+
+# Simulate in Fourier frequency domain
+dt = 0.025
+T = np.arange(0,100*dt,dt)
+
+def rhsBurgers(u, t, kappa, nu):
+    uhat = np.fft.fft(u)
+    d_uhat = (1j) * kappa * uhat
+    dd_uhat = -np.power(kappa, 2) * uhat
+    d_u = np.fft.ifft(d_uhat)
+    dd_u = np.fft.ifft(dd_uhat)
+    du_dt = -u * d_u + nu * dd_u
+    return du_dt.real
+
+u = odeint(rhsBurgers, u0, T, args=(kappa, nu))
+
+# Waterfall plot
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+u_plot = u[0:-1:10, :]
+for j in range(u_plot.shape[0]):
+    ys = j * np.ones(u_plot.shape[1])
+    ax.plot(x, ys, u_plot[j, :])
+    
+# Image plot
+plt.figure()
+plt.imshow(np.flipud(u), aspect=8)
+plt.axis('off')
+plt.show()
+```
+::::
+:::
+
+This concludes our example with the FFT.
+

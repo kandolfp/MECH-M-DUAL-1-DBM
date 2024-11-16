@@ -1140,3 +1140,163 @@ plt.show()
 
 This concludes our example with the FFT.
 
+## Gabor Transform
+
+The Fourier transform is computed as soon as all the values of a signal are sampled. 
+It provides spectral information over the entire signal and not when in time certain frequencies occur, i.e. no temporal information.
+The Fourier transform can only characterize periodic and stationary signals.
+The time component is _used_ during the integration and no longer present in the transformed signal.
+
+If both is needed in order to generate a spectrogram (plot frequency versus time),
+the Gabor transform brings remedy.
+Technically it is the Fourier transform of the signal masked by a sliding window
+$$
+\mathcal{G}\{f\}(t, \omega) = G_f(t, \omega) = \int_{-\infty}^\infty f(\tau) \mathrm{e}^{-\mathrm{i}\omega\tau}\overline{g}(\tau - t)\, \mathrm{d}\tau.
+$$
+for the so called _kernel_ $g(t)$ a Gaussian bell curve is often used
+$$
+g(t - \tau) =  \mathrm{e}^{-\tfrac{(t-\tau)^2}{a^2}}.
+$$
+
+```{python}
+#| label: fig-fourier_gabor
+#| fig-cap: "Signal with Gaussian kernel"
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+%config InlineBackend.figure_formats = ["svg"]
+
+np.random.seed(6020)
+# Parameters
+N = 1024
+a, b = 0, 1/4
+t = np.linspace(a, b, N, endpoint=False)
+dt = t[1] - t[0]
+f1 = 50
+f2 = 120
+fun = lambda t: np.sin(2 * np.pi * f1 * t) + np.sin(2 * np.pi * f2 * t)
+
+gauss = lambda x, a: np.exp(-np.pow(x, 2) / a**2)
+
+f_clean = fun(t) + np.random.randn(len(t))  
+gauss = gauss(t - 0.125, 0.025) * 4.8
+
+# Figures
+plt.figure(0)
+plt.plot(t, f_clean, label="Signal")
+plt.plot(t, gauss, label=r"$g(t-\tau)$")
+#plt.xlabel("Time [s]")
+#plt.ylabel(r"$f$")
+plt.xticks([0.1, 0.125, 0.15], [r"$\tau - a$", r"$\tau$", r"$\tau + a$"])
+plt.xlim(t[0], t[-1])
+plt.ylim(-5, 5)
+plt.yticks([])
+plt.legend(loc=1)
+plt.gca().set_aspect(5e-3)
+
+plt.show()
+```
+
+@fig-fourier_gabor illustrates the sliding time window with the spread as $a$ and the center $\tau$. 
+The inverse is given as
+$$
+f(t) = \mathcal{G}^{-1}\{G_f(t, \omega)\} = \frac{1}{2 \pi \|g\|^2} = \int_{-\infty}^\infty\int_{-\infty}^\infty G_f(\tau, \omega) \mathrm{e}^{\mathrm{i}\omega\tau}\overline{g}(t - \tau)\, \mathrm{d}\omega\, \mathrm{d}t.
+$$
+
+As with the Fourier transform the application of the Gabor transform is usually done in its discrete form. 
+
+::: {.callout appearance="simple"}
+:::: {#def-fourier-dgt} 
+
+## Discrete Gabor Transform
+
+For discrete time $\tau = k \Delta t$ and frequencies $\nu = j \Delta \omega$ the discretized kernel function has the form
+$$
+g_{j,k} = \mathrm{e}^{{\mathrm{i}2 \pi j\Delta\omega t}} g(t- k\Delta t)
+$$
+and the discrete Gabor transform
+$$
+\mathcal{G}\{f\}_{j,k} = \langle f, g_{j,k} \rangle = \int_{-\infty}^\infty f(\tau)\overline{g}_{j,k}(\tau)\, \mathrm{d}\tau.
+$$
+
+::::
+:::
+
+The following example is taken from [@Brunton2022, pp.77-78].
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-fourier-dgt-chirp}
+
+## Gabor transform for a quadratic chirp
+
+As example we use an oscillating cosine function where the frequency of the oscillation increases as a quadratic function in time:
+$$
+f(t) = \cos(2\pi t h(t)), \quad \text{with} h(t) = h_0 + (h_1 - h_0)\frac{t}{3 t_1^2},
+$$
+where the frequency shifts from $h_0$ to $h_1$ between $t=0$ and $t=t_1$.
+
+The majority of the following code is from [@Brunton2022, Code 2.9].
+
+```{python}
+#| label: fig-fourier_dgt_chirp
+#| fig-cap: "Quadratic chirp signal "
+#| fig-subcap:
+#|   - "Power spectral density of the signal."
+#|   - "Spectrogram."
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+%config InlineBackend.figure_formats = ["svg"]
+
+N = 2048
+a, b = 0, 2
+t = np.linspace(a, b, N, endpoint=False)
+dt = t[1] - t[0]
+h0 = 50
+h1 = 250
+t1 = 2
+x = np.cos(2 * np.pi * t * (h0 + (h1 - h0) * np.power(t,2) / (3 * t1**2)))
+
+plt.figure(0)
+N = len(x)
+freq = (1 / (dt * N)) * np.arange(N)
+PSD_noise = np.abs(np.fft.fft(x))**2 / N
+plt.plot(freq[:N//2], PSD_noise[:N//2])
+plt.xlabel("Frequency [Hz]")
+plt.gca().set_aspect(10)
+
+plt.figure(1)
+plt.specgram(x, NFFT=128, Fs=1/dt, noverlap=120, cmap='jet')
+plt.colorbar()
+plt.xlabel("Time [s]")
+plt.ylabel("Frequency [Hz]")
+plt.show()
+```
+
+We can see a clear peak at 50Hz but no information of time is given, where else in the spectrogram we see how the frequency progresses in time.
+
+::::
+:::
+
+::: {.callout-note}
+
+For the analysis of time-frequency we see Heisenberg's uncertainty principle at work.
+We can not attain high resolution simultaneously in both time and frequency domain.
+In the time domain we have perfect resolution but no information about the frequencies, in the Fourier domain the time information is not present.
+
+The spectrogram resolves both but with reduced resolution. 
+This effect manifests differently at different locations of the chirp
+signal.
+At the left where the frequency is almost constant, the band becomes
+narrower, whereas at the right it becomes wider due to the increased blur in
+horizontal direction.
+The product of the uncertainties of these quantities has a minimal value.
+In this context time and frequency domain respectively represent the extremes.
+:::
+
+There is also the Laplace transform that can be understood as a generalized Fourier transform, see [@Brunton2022, Section 2.5].
+We will not cover this transform here but move on the multi resolution analysis with Wavelets.

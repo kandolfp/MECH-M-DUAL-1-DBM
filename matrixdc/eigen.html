@@ -344,7 +344,7 @@ window.Quarto = {
   <li><a href="#examples-for-the-application" id="toc-examples-for-the-application" class="nav-link active" data-scroll-target="#examples-for-the-application"><span class="header-section-number">4.1</span> Examples for the application</a>
   <ul class="collapse">
   <li><a href="#solving-system-of-linear-equations" id="toc-solving-system-of-linear-equations" class="nav-link" data-scroll-target="#solving-system-of-linear-equations"><span class="header-section-number">4.1.1</span> Solving system of linear equations</a></li>
-  <li><a href="#linear-ordinary-differential-equations" id="toc-linear-ordinary-differential-equations" class="nav-link" data-scroll-target="#linear-ordinary-differential-equations"><span class="header-section-number">4.1.2</span> Linear Ordinary Differential Equations</a></li>
+  <li><a href="#sec-eigen-lode" id="toc-sec-eigen-lode" class="nav-link" data-scroll-target="#sec-eigen-lode"><span class="header-section-number">4.1.2</span> Linear Ordinary Differential Equations</a></li>
   <li><a href="#higher-order-linear-differential-equations" id="toc-higher-order-linear-differential-equations" class="nav-link" data-scroll-target="#higher-order-linear-differential-equations"><span class="header-section-number">4.1.3</span> Higher Order Linear Differential Equations</a></li>
   <li><a href="#generalized-eigenvalue-problem" id="toc-generalized-eigenvalue-problem" class="nav-link" data-scroll-target="#generalized-eigenvalue-problem"><span class="header-section-number">4.1.4</span> Generalized eigenvalue problem</a></li>
   <li><a href="#low-rank-approximation-of-a-square-matrix" id="toc-low-rank-approximation-of-a-square-matrix" class="nav-link" data-scroll-target="#low-rank-approximation-of-a-square-matrix"><span class="header-section-number">4.1.5</span> Low-rank approximation of a square matrix</a></li>
@@ -410,7 +410,7 @@ window.Quarto = {
 \]</span></li>
 </ol>
 <p>So let us check in <code>numpy</code>:</p>
-<div id="6c57e45f" class="cell styled-output" data-execution_count="1">
+<div id="17ae0ffc" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -461,7 +461,7 @@ p(\lambda) = \det(A - \lambda I).
 </div>
 </div>
 <p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
-<div id="9debfe3a" class="cell styled-output" data-execution_count="2">
+<div id="f226edb6" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> LA.eigvals(A)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lam_sort <span class="op">=</span> np.sort(lam)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -508,7 +508,7 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
 </div>
 </div>
 <p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
-<div id="02fb055a" class="cell styled-output" data-execution_count="3">
+<div id="eef017e6" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lam, V <span class="op">=</span> LA.eig(A)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_eigen <span class="op">=</span> np.diag(lam)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -568,8 +568,8 @@ Note
 </div>
 </div>
 </section>
-<section id="linear-ordinary-differential-equations" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="linear-ordinary-differential-equations"><span class="header-section-number">4.1.2</span> Linear Ordinary Differential Equations</h3>
+<section id="sec-eigen-lode" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="sec-eigen-lode"><span class="header-section-number">4.1.2</span> Linear Ordinary Differential Equations</h3>
 <p>In this example we use the eigendecomposition to efficiently solve a system of differential equations <span class="math display">\[
 \dot{x} = A x,\quad x(0) = x_0
 \]</span> By changing to the basis <span class="math inline">\(V\)</span> and using the notation <span class="math inline">\(\hat{x}=z\)</span> we have the equivalent formulations <span class="math display">\[
@@ -1535,7 +1535,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

@@ -192,7 +192,7 @@ As $\Lambda^{-1} = \operatorname{diag}\left(\lambda_1^{-1}, \ldots, \lambda_n^{-
 The computation of the eigendecomposition is not cheap, therefore this is not always worth the effort and there are other ways of solving linear systems.
 :::
 
-### Linear Ordinary Differential Equations
+### Linear Ordinary Differential Equations {#sec-eigen-lode}
 
 In this example we use the eigendecomposition to efficiently solve a system of differential equations
 $$

@@ -923,26 +923,16 @@ u0hat = np.fft.fft(u0)
 u0hat_ri = np.concatenate((u0hat.real, u0hat.imag))
 
 # Simulate in Fourier frequency domain
-dt = 0.1
+dt = 0.001
 T = np.arange(0,10,dt)
 
-#fun = lambda t, x: - alpha**2 * np.power(kappa, 2) * x
-#euler = lambda y, dt, t, fun: y + dt * fun(t, y)
+fun = lambda t, x: - alpha**2 * (np.power(kappa, 2)) * x
+euler = lambda y, dt, t, fun: y + dt * fun(t, y)
 
-#uhat = np.zeros((len(T) + 1, len(u0hat)), dtype="complex")
-#uhat[0, :] = u0hat
-#for i, t in enumerate(T):
-#    uhat[i + 1] = euler(uhat[i], dt, t, fun)
-
-def rhsHeat(uhat_ri,t,kappa,a):
-    uhat = uhat_ri[:N] + (1j) * uhat_ri[N:]
-    d_uhat = -a**2 * (np.power(kappa, 2)) * uhat
-    d_uhat_ri = np.concatenate((d_uhat.real, d_uhat.imag)).astype('float64')
-    return d_uhat_ri
-
-uhat_ri = odeint(rhsHeat, u0hat_ri, T, args=(kappa, alpha))
-
-uhat = uhat_ri[:, :N] + (1j) * uhat_ri[:, N:]
+uhat = np.zeros((len(T), len(u0hat)), dtype="complex")
+uhat[0, :] = u0hat
+for i, t in enumerate(T[1:]):
+    uhat[i + 1, :] = euler(uhat[i, :], dt, t, fun)
 
 u = np.zeros_like(uhat)
 
@@ -954,15 +944,17 @@ u = u.real
 # Waterfall plot
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
+ax.set_xlabel(r"$x$")
+ax.set_ylabel(r"$t$")
 
-u_plot = u[0:-1:10, :]
+u_plot = u[0:-1:1000, :]
 for j in range(u_plot.shape[0]):
     ys = j * np.ones(u_plot.shape[1])
     ax.plot(x, ys, u_plot[j, :])
     
 # Image plot
 plt.figure()
-plt.imshow(np.flipud(u), aspect=8)
+plt.imshow(np.flipud(u[0:-1:100]), aspect=8)
 plt.axis('off')
 plt.show()
 ```

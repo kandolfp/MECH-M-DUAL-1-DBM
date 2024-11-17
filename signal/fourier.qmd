@@ -1034,7 +1034,8 @@ u = u.real
 # Waterfall plot
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-
+ax.set_xlabel(r"$x$")
+ax.set_ylabel(r"$t$")
 u_plot = u[0:-1:10, :]
 for j in range(u_plot.shape[0]):
     ys = j * np.ones(u_plot.shape[1])
@@ -1115,6 +1116,8 @@ u = odeint(rhsBurgers, u0, T, args=(kappa, nu))
 # Waterfall plot
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
+ax.set_xlabel(r"$x$")
+ax.set_ylabel(r"$t$")
 
 u_plot = u[0:-1:10, :]
 for j in range(u_plot.shape[0]):

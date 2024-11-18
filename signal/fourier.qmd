@@ -550,8 +550,8 @@ $$o = [f_1, f_3, \ldots, f_{N-1}]^{\mathrm{T}}\in \mathbb{C}^{M}$$
 and for @eq-dft we get
 $$
 \begin{align}
-\hat{f}_k &= \sum_{j=0}^{N-1}f_j\, \omega^{j k} = \sum_{j=0}^{M}f_{2j}\, \omega^{(2j) k} + \sum_{j=0}^{M}f_{2j+1}\, \omega^{(2j+1) k} \\
-&= \sum_{j=0}^{M}e_j\, (\omega^2)^{j k} + \omega^k\sum_{j=0}^{M}o_{j}\, (\omega^2)^{j k}.
+\hat{f}_k &= \sum_{j=0}^{N-1}f_j\, \omega^{j k} = \sum_{j=0}^{M-1}f_{2j}\, \omega^{(2j) k} + \sum_{j=0}^{M-1}f_{2j+1}\, \omega^{(2j+1) k} \\
+&= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} + \omega^k\sum_{j=0}^{M-1}o_{j}\, (\omega^2)^{j k}.
 \end{align}
 $$
 If we further split $\hat{f}$ in an upper and lower part 
@@ -562,8 +562,8 @@ and with the property $\omega^{k+M} = \omega^k \omega^M = - \omega^k$ we get
 
 $$
 \begin{align}
-u_k &= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} + \omega^k\sum_{j=0}^{M}o_{j}\, (\omega^2)^{j k},\\
-l_k &= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} - \omega^k\sum_{j=0}^{M}o_{j}\, (\omega^2)^{j k}.
+u_k &= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} + \omega^k\sum_{j=0}^{M-1}o_{j}\, (\omega^2)^{j k},\\
+l_k &= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} - \omega^k\sum_{j=0}^{M-1}o_{j}\, (\omega^2)^{j k}.
 \end{align}
 $$
 This results in the more visual matrix representation

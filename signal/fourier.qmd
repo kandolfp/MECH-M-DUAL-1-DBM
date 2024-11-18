@@ -258,8 +258,8 @@ x = # points for the evaluation ()
 dx = x[1] - x[0]
 w = np.pi * 2 / L
 
-f = # fun evaluated at x
-f2 = # fun2 evaluated at x
+f = np.fromiter(map(lambda x: fun(x, L), x), x.dtype)
+f2 = np.fromiter(map(lambda x: fun2(x, L), x), x.dtype)
 
 # Necessary functions
 scalarproduct = lambda f, g, dx: # see definition in the notes

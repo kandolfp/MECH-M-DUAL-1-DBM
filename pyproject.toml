@@ -17,6 +17,7 @@ dependencies = [
     "owid-catalog>=0.3.11",
     "odfpy>=1.4.1",
     "DateTime>=5.5",
+    "pywavelets>=1.7.0",
 ]
 requires-python = "==3.12.*"
 readme = "README.md"

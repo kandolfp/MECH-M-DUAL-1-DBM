@@ -1,0 +1,233 @@
+---
+lightbox: true
+---
+# Two-Dimensional Transform {#sec-signal-2d}
+
+There is nothing preventing us from extending the transforms we discussed before to 2D. 
+One of the most common applications are image processing.
+
+## Fourier 
+If we apply FFT to a matrix $X\in\mathrm{R}^{m\times n}$ we can simply apply the 1D version to every row and than to every column of the resulting matrix.
+The other way round will produce the same final result.
+
+This is shown in the code below but note we should use the more efficient `np.fft.fft2`.
+
+```{python}
+#| label: fig-mci_signal2d_fft
+#| fig-cap: "Image of MCI I and the reconstruction with approximated matrix."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import imageio.v3 as iio
+import numpy as np
+%config InlineBackend.figure_formats = ['svg']
+
+im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
+
+def rgb2gray(rgb):
+    return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
+
+A = rgb2gray(im)
+
+Cshift = np.zeros_like(A, dtype='complex')
+C = np.zeros_like(A, dtype='complex')
+for j in range(A.shape[0]):
+    C[j, :] = np.fft.fft(A[j, :])
+    Cshift[j,:] = np.fft.fftshift(np.copy(C[j, :]))
+
+Rshift = np.zeros_like(A, dtype='complex')
+R = np.zeros_like(A, dtype='complex')
+D = np.zeros_like(C)
+for j in range(A.shape[1]):
+    R[:, j] = np.fft.fft(A[:, j])
+    Rshift[:, j] = np.fft.fftshift(np.copy(R[:, j]))
+    D[:, j] = np.fft.fft(C[:, j])
+
+fig, axs = plt.subplots(2, 2)
+img = axs[0, 0].imshow(A, cmap="gray")
+img = axs[1, 0].imshow(np.log(np.abs(Cshift)), cmap="gray")
+img = axs[0, 1].imshow(np.log(np.abs(Rshift)), cmap="gray")
+img = axs[1, 1].imshow(np.fft.fftshift(np.log(np.abs(D))), cmap="gray")
+
+for ax in axs.flatten():
+    ax.axis('off')
+```
+
+Of course we can use this to compress the image by removing small values from the transform. 
+
+```{python}
+#| label: fig-mci_signal2d_fft_compress
+#| fig-cap: "Image of MCI I and the reconstruction with various amounts of FFT coefficients left."
+#| fig-subcap:
+#|   - "Original image."
+#|   - "5% of FFT coefficients"
+#|   - "1% of FFT coefficients"
+#|   - "0.2% of FFT coefficients"
+#| layout-ncol: 2
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import imageio.v3 as iio
+import numpy as np
+%config InlineBackend.figure_formats = ['svg']
+
+im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
+
+def rgb2gray(rgb):
+    return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
+
+def myplot(A):
+    plt.figure()
+    plt.imshow(A, cmap="gray")
+    plt.axis("off")
+    plt.gca().set_aspect(1)
+
+A = rgb2gray(im)
+A_fft = np.fft.fft2(A)
+A_fft_sort = np.sort(np.abs(A_fft.reshape(-1)))
+myplot(A)
+
+for c in (0.05, 0.01, 0.002):
+    thresh = A_fft_sort[int(np.floor((1 - c) * len(A_fft_sort)))]
+    A_fft_th = A_fft * (np.abs(A_fft) > thresh)
+    A_th = np.fft.ifft2(A_fft_th).real
+    myplot(A_th)
+
+```
+
+We can also use the FFT for de-noising and filtering of signals.
+It is rather simple to just eliminate certain frequency bands in the frequency domain. 
+
+```{python}
+#| label: fig-mci_signal2d_fft_de-noise
+#| fig-cap: "Image of MCI I and the reconstruction with various amounts of FFT coefficients left."
+#| fig-subcap:
+#|   - "Noisy image."
+#|   - "Noisy FFT coefficients"
+#|   - "Filtered/De-noised image"
+#|   - "Filtered/De-noised FFT coefficients"
+#| layout-ncol: 2
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import imageio.v3 as iio
+import numpy as np
+%config InlineBackend.figure_formats = ['svg']
+np.random.seed(6020)
+
+im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
+
+def rgb2gray(rgb):
+    return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
+
+def myplot(A):
+    plt.figure()
+    plt.imshow(A, cmap="gray")
+    plt.axis("off")
+    plt.gca().set_aspect(1)
+
+A = rgb2gray(im)
+A_noise = A + 200*np.random.randn(*A.shape).astype('uint8')
+A_noise_fft = np.fft.fft2(A_noise)
+A_noise_fft_shift = np.fft.fftshift(A_noise_fft)
+F = np.log(np.abs(A_noise_fft_shift) + 1)
+
+myplot(A_noise)
+myplot(F)
+
+nx, ny = A.shape
+X, Y = np.meshgrid(np.arange(-ny/2 + 1, ny / 2 + 1), np.arange(-nx / 2 + 1, nx / 2 + 1))
+R2 = np.power(X, 2) + np.power(Y, 2)
+ind = R2 < 150**2
+A_noise_fft_shift_filter = A_noise_fft_shift * ind
+F_filter = np.log(np.abs(A_noise_fft_shift_filter) + 1)
+
+A_filter = np.fft.ifft2(np.fft.fftshift(A_noise_fft_shift_filter)).real
+myplot(A_filter)
+myplot(F_filter)
+```
+
+## Wavelet 
+
+Similar to the FFT also the Wavelet transform is used in much the same situations.
+
+Before we go on and apply the wavelet transform in the same situations we show how the multi level approach looks like for an image.
+For the image we use the _Daubechies 1_ wavelets.
+
+```{python}
+#| label: fig-mci_signal2d_wavelet
+#| fig-cap: "First three levels of the discrete wavelet transform."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import imageio.v3 as iio
+import numpy as np
+import pywt
+%config InlineBackend.figure_formats = ['svg']
+
+im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
+
+def rgb2gray(rgb):
+    return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
+
+n = 2
+A = rgb2gray(im)
+coeffs = pywt.wavedec2(A, wavelet="db1", level=n)
+
+coeffs[0] /= np.abs(coeffs[0]).max()
+arr, coeff_slices = pywt.coeffs_to_array(coeffs)
+
+plt.imshow(arr, cmap='gray', vmin=-0.25, vmax=0.75)
+plt.axis("off")
+#plt.gca().set_aspect(0.5)
+plt.show()
+```
+
+Of course we can use this to compress the image by removing small values from the transform. 
+
+```{python}
+#| label: fig-mci_signal2d_wavelet_compress
+#| fig-cap: "Image of MCI I and the reconstruction with various amounts of wavelets."
+#| fig-subcap:
+#|   - "Original image."
+#|   - "5% of wavelets"
+#|   - "1% of wavelets"
+#|   - "0.2% of wavelets"
+#| layout-ncol: 2
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import imageio.v3 as iio
+import numpy as np
+import pywt
+%config InlineBackend.figure_formats = ['svg']
+
+im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
+
+def rgb2gray(rgb):
+    return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
+
+def myplot(A):
+    plt.figure()
+    plt.imshow(A, cmap="gray")
+    plt.axis("off")
+    plt.gca().set_aspect(1)
+
+w = "db1"
+A = rgb2gray(im)
+coeffs = pywt.wavedec2(A, wavelet=w, level=4)
+
+coeff_arr, coeff_slices = pywt.coeffs_to_array(coeffs)
+Csort = np.sort(np.abs(coeff_arr.reshape(-1)))
+myplot(A)
+for c in (0.05, 0.01, 0.002):
+    thresh = Csort[int(np.floor((1 - c) * len(Csort)))]
+    Cfilt = coeff_arr * (np.abs(coeff_arr) > thresh)
+
+    coeffs_filt = pywt.array_to_coeffs(Cfilt, coeff_slices, output_format='wavedec2')
+    A_r = pywt.waverec2(coeffs_filt, wavelet=w)
+    myplot(A_r.astype('uint8'))
+
+```
+
+For ne-noising filters are applied or we and this is going to be the subject for a lecture more focused on image processing.

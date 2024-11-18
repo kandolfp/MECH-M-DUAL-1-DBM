@@ -39,6 +39,7 @@ book:
       chapters:
         - signal/fourier.qmd
         - signal/wavelet.qmd
+        - signal/twodim.qmd
     - summary.qmd
     - references.qmd
 

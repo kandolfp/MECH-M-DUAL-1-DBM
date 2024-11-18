@@ -729,6 +729,81 @@ Note: For @fig-fourier_fft_denoise-3 we discarded the imaginary part of the reco
 :::
 
 ::: {.callout-tip appearance="simple" collapse="true" icon=false}
+## {{< fa pen-to-square >}} Exercise - Self implementation @exm-fourier-fft-den
+
+Implement the code yourself by filling out the missing sections:
+
+```{python}
+#| code-fold: false
+#| eval: false
+#| code-summary: "Code fragment for implementation."
+import numpy as np
+import matplotlib.pyplot as plt
+%config InlineBackend.figure_formats = ["svg"]
+
+np.random.seed(6020)
+# Parameters
+N = 1024
+a, b = 0, 1/4
+t = # specify the sample steps for t
+dt = t[1] - t[0]
+f1 = 50
+f2 = 120
+fun = lambda t: # define the function as described in the example
+
+f_clean = fun(t)
+f_noise = fun(t) + 2.5 * np.random.randn(len(t))
+
+fhat_noise = # transform the noisy signal with fft
+fhat_clean = # transform the clean signal with fft
+
+PSD_noise = # Compute the PSD for the noisy signal 
+PSD_clean = # Compute the PSD for the clean signal 
+
+freq = (1 / (dt * N)) * np.arange(N)
+L = np.arange(1, np.floor(N/4), dtype='int')
+
+# Apply filter in spectral space
+filter = # create the filter for the PSD values grater 100 
+PSDclean = # set everything not part of the filter to zero
+fhat_filtered = # apply the filter to the transformed function
+f_filtered = # apply the inverse fft
+
+# Figures
+plt.figure(0)
+plt.plot(t, f_noise, ":", label=r"Noisy")
+plt.plot(t, f_clean, label=r"Clean")
+plt.xlabel("Time [s]")
+plt.ylabel(r"$f$")
+plt.xlim(t[0], t[-1])
+plt.ylim(-5, 5)
+plt.legend(loc=1)
+plt.gca().set_aspect(5e-3)
+
+plt.figure(1)
+plt.plot(freq[L], PSD_noise[L], label=r"Noisy")
+plt.plot(freq[L], PSD_clean[L], label=r"Clean")
+plt.xlabel("Frequency [Hz]")
+plt.ylabel("PSD")
+plt.xlim(0, int(freq[L[-1] + 1]))
+plt.legend(loc=1)
+plt.gca().set_aspect(1)
+
+plt.figure(3)
+plt.plot(t, np.real(f_filtered), label=r"Noisy")
+plt.plot(t, f_clean, label=r"Clean")
+plt.xlabel("Time [s]")
+plt.ylabel(r"$f$")
+plt.xlim(t[0], t[-1])
+plt.ylim(-5, 5)
+plt.legend(loc=1)
+plt.gca().set_aspect(5e-3)
+plt.show()
+
+```
+:::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
 ## {{< fa pen-to-square >}} Exercise - DFT vs. FFT
 
 Implement @exm-fourier-fft-den with DFT and FFT such that you can evaluate the runtime and create a plot showing the different runtime as well as check if the two produce the same result

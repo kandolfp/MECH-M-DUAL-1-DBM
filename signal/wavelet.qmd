@@ -185,3 +185,185 @@ If this family of wavelets is orthogonal (as e.g. the Haar wavelet) it is possib
 
 There also exists a _fast_ wavelet transform that reduces the computational complexity from $\mathcal{O}(N\log N)$ to $\mathcal{O}(N)$ by cleverly reusing parts of the inner product computation.
 :::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-wavelet-haar-1d}
+
+## Signal analysis with the Haar wavelet
+
+To start and get an idea how the analysis works we use an instructive example. 
+We have a piecewise constant function as $v = [3, 1, 0, 4, 0, 6, 9, 9]^{\mathrm{T}}$
+$$
+f(x) = \sum_{i=1}^{8} v_i \chi_{[i-1, i)},
+$$
+where $\chi_{[c, d)}$ is the indicator function that is 1 on the interval $[c, d)$ and zero everywhere else.
+
+Now let us proceed through the levels of the transform to see what is happening, we select $a=2$ and $b=1$: 
+
+$$
+\mathcal{W}\{f\}(1, :) =
+\left( 
+						\begin{array}{c c c c c c c c}
+							\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}&0&0&0&0&0&0\\
+							0&0&\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}&0&0&0&0\\
+							0&0&0&0&\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}&0&0\\
+							0&0&0&0&0&0&\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}\\
+							\frac{1}{\sqrt{2}}&\frac{-1}{\sqrt{2}}&0&0&0&0&0&0\\
+                            0&0&\frac{1}{\sqrt{2}}&\frac{-1}{\sqrt{2}}&0&0&0&0\\
+                            0&0&0&0&\frac{1}{\sqrt{2}}&\frac{-1}{\sqrt{2}}&0&0\\
+                            0&0&0&0&0&0&\frac{1}{\sqrt{2}}&\frac{-1}{\sqrt{2}}\\
+						\end{array}
+					\right) 
+                    \left[
+						\begin{array}{c}
+							3\\
+                            1\\
+                            0\\
+                            4\\
+                            0\\
+                            6\\
+                            9\\
+                            9
+						\end{array}
+					\right]=\left[
+							\begin{array}{c}
+								2\sqrt{2}\\
+                                2\sqrt{2}\\
+                                3\sqrt{2}\\
+                                9\sqrt{2}\\
+                                \sqrt{2}\\
+                                -2\sqrt{2}\\
+                                -3\sqrt{2}\\
+                                 0\\
+							\end{array}
+						\right]
+$$
+
+We than apply the next level just for the first half
+$$
+\mathcal{W}\{f\}(2, :) =
+\left( 
+						\begin{array}{c c c c c c c c}
+							\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}&0&0&0&0&0&0\\
+							0&0&\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}&0&0&0&0\\
+                            \frac{1}{\sqrt{2}}&\frac{-1}{\sqrt{2}}&0&0&0&0&0&0\\
+							0&0&\frac{1}{\sqrt{2}}&\frac{-1}{\sqrt{2}}&0&0&0&0\\
+							0&0&0&0&1&0&0&0\\
+							0&0&0&0&0&1&0&0\\
+							0&0&0&0&0&0&1&0\\
+							0&0&0&0&0&0&0&1\\
+						\end{array}
+					\right) 
+                    \left[
+							\begin{array}{c}
+								2\sqrt{2}\\
+                                2\sqrt{2}\\
+                                3\sqrt{2}\\
+                                9\sqrt{2}\\
+                                \sqrt{2}\\
+                                -2\sqrt{2}\\
+                                -3\sqrt{2}\\
+                                 0\\
+							\end{array}
+						\right]=\left[
+							\begin{array}{c}
+								4\\
+                                12\\
+                                0\\
+                                -6\\
+                                \sqrt{2}\\
+                                -2\sqrt{2}\\
+                                -3\sqrt{2}\\
+                                 0\\
+							\end{array}
+						\right]
+$$
+and our final step
+$$
+\mathcal{W}\{f\}(3, :) =
+\left( 
+						\begin{array}{c c c c c c c c}
+							\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}&0&0&0&0&0&0\\
+								\frac{1}{\sqrt{2}}&\frac{-1}{\sqrt{2}}&0&0&0&0&0&0\\
+								0&0&1&0&0&0&0&0\\
+								0&0&0&1&0&0&0&0\\
+								0&0&0&0&1&0&0&0\\
+								0&0&0&0&0&1&0&0\\
+								0&0&0&0&0&0&1&0\\
+								0&0&0&0&0&0&0&1\\
+						\end{array}
+					\right) 
+                    \left[
+							\begin{array}{c}
+								4\\
+                                12\\
+                                0\\
+                                -6\\
+                                \sqrt{2}\\
+                                -2\sqrt{2}\\
+                                -3\sqrt{2}\\
+                                 0\\
+							\end{array}
+						\right]=\left[
+							\begin{array}{c}
+								8\sqrt{2}\\
+                                -4\sqrt{2}\\
+                                0\\
+                                -6\\
+                                \sqrt{2}\\
+                                -2\sqrt{2}\\
+                                -3\sqrt{2}\\
+                                 0\\
+							\end{array}
+						\right]
+$$
+
+```{python}
+#| label: fig-wavelet-haar-1d
+#| fig-cap: "Mexican hat wavelets for the first two levels of multi resolution."
+#| fig-subcap:
+#|   - "Scaling 1 and translation 0."
+#|   - "Scaling 1/2 and translation 0."
+#|   - "Scaling 1/2 and translation 1/2."
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+import pywt
+%config InlineBackend.figure_formats = ["svg"]
+
+
+N = 1000
+a, b = 0, 8
+t = np.linspace(a, b, N, endpoint=False)
+v = np.array([3, 1, 0, 4, 0, 6, 9, 9])
+chi = lambda t, a, b: np.astype((t >= a) & (t < b), float)
+mother = lambda t: chi(t, 0, 1/2) - chi(1/2, 1)
+psi = lambda t, a, b: 1 / np.sqrt(a) * mother((t - b) / a, 2)
+
+def f(t, v, spread=1):
+    y = np.zeros(t.shape)
+    for i, x in enumerate(v):
+        y += x * chi(t, i * spread, (i + 1) * spread)
+    return y
+
+X = np.zeros((4, len(v)))
+for i in range(0, 4):
+    x = pywt.wavedec(v, wavelet="Haar", level=i)
+    X[i, :] = np.concatenate(x) 
+
+plt.figure(0)
+plt.plot(t, f(t, v), label="Signal")
+#plt.plot(t, f(t, X[0, :], 1))
+plt.plot(t, f(t, X[1, 0:5], 2), label="Level 1")
+plt.plot(t, f(t, X[2, 0:3], 4), label="Level 2")
+plt.plot(t, f(t, X[3, 0:1], 8), label="Level 3")
+plt.xlabel("t")
+plt.legend()
+plt.show()
+```
+
+::::
+:::
+

@@ -14,7 +14,13 @@ This is shown in the code below but note we should use the more efficient `np.ff
 
 ```{python}
 #| label: fig-mci_signal2d_fft
-#| fig-cap: "Image of MCI I and the reconstruction with approximated matrix."
+#| fig-cap: "Image of MCI I and the row/column wise FFT."
+#| fig-subcap:
+#|   - "Original image."
+#|   - "Image after applying FFT on each individual row"
+#|   - "Image after applying FFT on each individual column"
+#|   - "Row and column wise FFT (order does not matter)"
+#| layout-ncol: 2
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
@@ -26,6 +32,12 @@ im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?down
 
 def rgb2gray(rgb):
     return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
+
+def myplot(A):
+    plt.figure()
+    plt.imshow(A, cmap="gray")
+    plt.axis("off")
+    plt.gca().set_aspect(1)
 
 A = rgb2gray(im)
 
@@ -43,14 +55,10 @@ for j in range(A.shape[1]):
     Rshift[:, j] = np.fft.fftshift(np.copy(R[:, j]))
     D[:, j] = np.fft.fft(C[:, j])
 
-fig, axs = plt.subplots(2, 2)
-img = axs[0, 0].imshow(A, cmap="gray")
-img = axs[1, 0].imshow(np.log(np.abs(Cshift)), cmap="gray")
-img = axs[0, 1].imshow(np.log(np.abs(Rshift)), cmap="gray")
-img = axs[1, 1].imshow(np.fft.fftshift(np.log(np.abs(D))), cmap="gray")
-
-for ax in axs.flatten():
-    ax.axis('off')
+myplot(A)
+myplot(np.log(np.abs(Cshift)))
+myplot(np.log(np.abs(Rshift)))
+myplot(np.fft.fftshift(np.log(np.abs(D))))
 ```
 
 Of course we can use this to compress the image by removing small values from the transform. 
@@ -179,7 +187,7 @@ arr, coeff_slices = pywt.coeffs_to_array(coeffs)
 
 plt.imshow(arr, cmap='gray', vmin=-0.25, vmax=0.75)
 plt.axis("off")
-#plt.gca().set_aspect(0.5)
+plt.gca().set_aspect(1)
 plt.show()
 ```
 

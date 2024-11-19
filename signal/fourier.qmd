@@ -823,13 +823,13 @@ We compute the so called spectral derivative for the function
 $$
 \begin{align}
 f(t) &= \cos(t) \exp\left(-\frac{t^2}{25}\right) \\
-\partial_x f(t) &= -\sin(t) \exp\left(-\frac{t^2}{25}\right) - \frac{2}{25}t f(t)
+\partial_t f(t) &= -\sin(t) \exp\left(-\frac{t^2}{25}\right) - \frac{2}{25}t f(t)
 \end{align}
 $$
 
 In order to porovide something to compare our results to we also compute the forward Euler finite-differences for the derivative
 $$
-\partial_x f(t_k) \approx \frac{f(t_{k+1}) - f(t_k)}{t_{k+1} - t_k}.
+\partial_t f(t_k) \approx \frac{f(t_{k+1}) - f(t_k)}{t_{k+1} - t_k}.
 $$
 
 ```{python}
@@ -916,13 +916,14 @@ t = np.linspace(a, b, N, endpoint=False)
 plt.figure(2)
 df_spD, _ = spD(N, fun2, fun2, a, b)
 df_fD, _ = fD(N, fun2, fun2, a, b)
+plt.plot(t, fun2(t), label=r"$f$")
 plt.plot(t, df_fD, "-.", label="Finite derivative")
 plt.plot(t, df_spD, "--", label="Spectral derivative")
-plt.plot(t, fun2(t), label=r"$f$")
 plt.xlabel("t")
+plt.ylabel(r"$f, \partial_t f$")
 plt.xlim(-2, 2)
 plt.legend(loc=1)
-plt.gca().set_aspect(1)
+plt.gca().set_aspect(0.5)
 ```
 As can be seen in @fig-fourier_fft_spectralderivative-2 we can reduce the error of both methods by increasing $N$.
 Nevertheless, the spectral method is more accurate and converges faster.
@@ -933,6 +934,12 @@ In @sec-eigen-lode we have already seen how the eigendecomposition can be used t
 The same is true with the Fourier transformation.
 
 As mentioned before, Fourier introduced it to solve the heat equation and we will do the same.
+
+::: {.callout-caution}
+Above we have always transformed the _time_ component of a function into the frequency domain via FFT.
+In the next example we have the time evolution of a signal and therefore the function depends on time and space.
+We apply the FFT to the space component to compute the derivative in _frequency_ domain w.r.t. the transformed variable. 
+:::
 
 ::: {.callout-tip appearance="simple" collapse="true" icon=false}
 :::: {#exm-fourier-fft-heat}
@@ -1015,13 +1022,15 @@ for k in range(len(T)):
 
 u = u.real    
 
-# Waterfall plot
 fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+ax = fig.add_subplot(projection='3d')
+#ax.view_init(elev=45, azim=-20, roll=0)
 ax.set_xlabel(r"$x$")
 ax.set_ylabel(r"$t$")
+ax.set_zlabel(r"$u(t, x)$")
+ax.set_zticks([])
 
-u_plot = u[0:-1:1000, :]
+u_plot = u[0:-1:int(1 / dt), :]
 for j in range(u_plot.shape[0]):
     ys = j * np.ones(u_plot.shape[1])
     ax.plot(x, ys, u_plot[j, :])
@@ -1029,7 +1038,10 @@ for j in range(u_plot.shape[0]):
 # Image plot
 plt.figure()
 plt.imshow(np.flipud(u[0:-1:100]), aspect=8)
-plt.axis('off')
+plt.xlabel(r"$x$")
+plt.ylabel(r"$t \to$")
+plt.gca().axes.get_xaxis().set_ticks([])
+plt.gca().axes.get_yaxis().set_ticks([])
 plt.show()
 ```
 ::::
@@ -1087,8 +1099,10 @@ fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.set_xlabel(r"$x$")
 ax.set_ylabel(r"$t$")
+ax.set_zlabel(r"$u(t, x)$")
+ax.set_zticks([])
 
-u_plot = u[0:-1:1000, :]
+u_plot = u[0:-1:int(1 / dt), :]
 for j in range(u_plot.shape[0]):
     ys = j * np.ones(u_plot.shape[1])
     ax.plot(x, ys, u_plot[j, :])
@@ -1096,7 +1110,10 @@ for j in range(u_plot.shape[0]):
 # Image plot
 plt.figure()
 plt.imshow(np.flipud(u[0:-1:100]), aspect=8)
-plt.axis('off')
+plt.xlabel(r"$x$")
+plt.ylabel(r"$t \to$")
+plt.gca().axes.get_xaxis().set_ticks([])
+plt.gca().axes.get_yaxis().set_ticks([])
 plt.show()
 ```
 :::
@@ -1174,9 +1191,11 @@ u = u.real
 
 # Waterfall plot
 fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+ax = fig.add_subplot(projection='3d')
 ax.set_xlabel(r"$x$")
 ax.set_ylabel(r"$t$")
+ax.set_zlabel(r"$u(t, x)$")
+ax.set_zticks([])
 u_plot = u[0:-1:60, :]
 for j in range(u_plot.shape[0]):
     ys = j * np.ones(u_plot.shape[1])
@@ -1185,7 +1204,10 @@ for j in range(u_plot.shape[0]):
 # Image plot
 plt.figure()
 plt.imshow(np.flipud(u), aspect=1.5)
-plt.axis('off')
+plt.xlabel(r"$x$")
+plt.ylabel(r"$t \to$")
+plt.gca().axes.get_xaxis().set_ticks([])
+plt.gca().axes.get_yaxis().set_ticks([])
 plt.show()
 ```
 ::::
@@ -1259,6 +1281,8 @@ fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.set_xlabel(r"$x$")
 ax.set_ylabel(r"$t$")
+ax.set_zlabel(r"$u(t, x)$")
+ax.set_zticks([])
 
 u_plot = u[0:-1:10, :]
 for j in range(u_plot.shape[0]):
@@ -1268,7 +1292,10 @@ for j in range(u_plot.shape[0]):
 # Image plot
 plt.figure()
 plt.imshow(np.flipud(u), aspect=8)
-plt.axis('off')
+plt.xlabel(r"$x$")
+plt.ylabel(r"$t \to$")
+plt.gca().axes.get_xaxis().set_ticks([])
+plt.gca().axes.get_yaxis().set_ticks([])
 plt.show()
 ```
 ::::

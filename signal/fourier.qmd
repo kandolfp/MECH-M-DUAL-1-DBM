@@ -1368,7 +1368,7 @@ The following example is taken from [@Brunton2022, pp.77-78].
 
 As example we use an oscillating cosine function where the frequency of the oscillation increases as a quadratic function in time:
 $$
-f(t) = \cos(2\pi t h(t)), \quad \text{with} h(t) = h_0 + (h_1 - h_0)\frac{t}{3 t_1^2},
+f(t) = \cos(2\pi\, t\, h(t)), \quad \text{with}\quad h(t) = h_0 + (h_1 - h_0)\frac{t}{3 t_1^2},
 $$
 where the frequency shifts from $h_0$ to $h_1$ between $t=0$ and $t=t_1$.
 

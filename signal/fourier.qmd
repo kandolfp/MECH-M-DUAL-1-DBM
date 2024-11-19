@@ -859,7 +859,7 @@ def fD(N, fun, dfun, a, b):
     dt = t[1] - t[0]
     f = fun(t)
     df_DD = np.diff(f) / dt
-    df_DD = np.append(df_DD, df_DD[-1])
+    df_DD = np.append(df_DD, (f[-1] - f[0]) / dt)
     return df_DD, np.linalg.norm(df_DD - dfun(t)) / np.linalg.norm(df_DD)
 
 def spD(N, fun, dfun, a, b):

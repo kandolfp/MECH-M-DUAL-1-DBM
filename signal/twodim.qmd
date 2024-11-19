@@ -127,7 +127,7 @@ def myplot(A):
     plt.gca().set_aspect(1)
 
 A = rgb2gray(im)
-A_noise = A + 200*np.random.randn(*A.shape).astype('uint8')
+A_noise = A + (200 * np.random.randn(*A.shape)).astype('uint8')
 A_noise_fft = np.fft.fft2(A_noise)
 A_noise_fft_shift = np.fft.fftshift(A_noise_fft)
 F = np.log(np.abs(A_noise_fft_shift) + 1)

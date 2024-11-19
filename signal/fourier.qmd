@@ -941,12 +941,12 @@ As mentioned before, Fourier introduced it to solve the heat equation and we wil
 
 The heat equation in 1D is given by
 $$
-\dot{u} = \alpha^2 \partial_x^2 u,
+\dot{u}(t, x) = \alpha^2 \partial_x^2 u(\tau, x),
 $$
-for $u(t, x)$ as the temprature distribution in space ($x$) and time ($t$).
-By applying the Fourier transform we get $\mathcal{F}\{u(t,x)\}=\hat{u}(t, x)$ and
+for $u(t, x)$ as the temperature distribution in space ($x$) and time ($t$).
+By applying the Fourier transform we get $\mathcal{F}\{u(t,x)\}=\hat{u}(t, \omega)$ and
 $$
-\dot{\hat{u}} = - \alpha^2\omega^2\hat{u}.
+\dot{\hat{u}}(t, \omega) = - \alpha^2\omega^2\hat{u}(t, \omega).
 $$
 This transformed the partial differential equation into an ordinary differential equation and we can solve it for each fixed frequency $\omega$ as
 $$
@@ -956,7 +956,10 @@ where $\hat{u}(0, \omega)$ is nothing else than the Fourier transform of the ini
 To compute the inverse Fourier transform we can make use of the convolution property introduced above. 
 
 $$
-u(t, x) = \mathcal{F}^{-1}\{\hat{u}(t, \omega\} = \mathcal{F}^{-1}\{\mathrm{e}^{-\alpha^2\omega^2 t}\} \ast u(0, x) = \frac{1}{2 \alpha \sqrt{\pi t}} \mathrm{e}^{-\tfrac{x^2}{4\alpha^2t}} \ast u(0, x).
+\begin{align}
+u(t, x) &= \mathcal{F}^{-1}\{\hat{u}(t, \omega)\} = \mathcal{F}^{-1}\{\mathrm{e}^{-\alpha^2\omega^2 t}\} \ast u(0, x) \\
+&= \frac{1}{2 \alpha \sqrt{\pi t}} \mathrm{e}^{-\tfrac{x^2}{4\alpha^2t}} \ast u(0, x).
+\end{align}
 $$
 
 For the numerical computation it is more convenient to stay in the frequency domain and use $\kappa$ as before.
@@ -1197,7 +1200,7 @@ To increase complexity from these simple equations we move to the nonlinear Burg
 
 Burger's equation in 1D is given by
 $$
-\dot{u} + u \partial_t u = \nu \partial_x^2 u.
+\dot{u} + u \partial_x u = \nu \partial_x^2 u.
 $$
 The equation consists of a nonlinear convection part $u \partial_t u$ as well as diffusion. 
 The convection part is designed in such a way that larger amplitudes travel faster and therefore causes a shock wave to form. 

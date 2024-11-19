@@ -65,7 +65,7 @@ Similar as we saw projection in vector spaces related to the inner product this 
 
 We call a function $f\,:\, \mathbb{R} \to \mathbb{R}$ periodic with a period of $L>0$, $L$-periodic for short, if 
 $$
-f(x + L) = f(x),\quad\forall x \in \mathbb{R}.
+f(g + L) = f(t),\quad\forall t \in \mathbb{R}.
 $$
 
 The following holds true for $L$-periodic functions:
@@ -74,9 +74,9 @@ The following holds true for $L$-periodic functions:
 1. If $f$ and $g$ are $L$-periodic, than $\alpha f + \beta g$ are $L$-periodic, for $\alpha, \beta \in \mathbb{C}$.
 1. I $f$ is $L$-periodic it follows that $\forall a\in\mathbb{R}$
 $$
-\int_a^{a+T}f(x)\,\mathrm{d}x = \int_0^{T}f(x)\,\mathrm{d}x.
+\int_a^{a+T}f(t)\,\mathrm{d}t = \int_0^{T}f(t)\,\mathrm{d}t.
 $$
-1. If $f$ is $L$-periodic than $F(x)=f(\frac{x}{\omega})$ with $\omega = \frac{2\pi}{L}$ is $2\pi$-periodic.
+1. If $f$ is $L$-periodic than $F(t)=f(\frac{t}{\omega})$ with $\omega = \frac{2\pi}{L}$ is $2\pi$-periodic.
 ::::
 :::
 
@@ -84,48 +84,48 @@ The Fourier series is nothing else as the projection of a function with an integ
 
 ## Fourier Series
 
-In Fourier analysis the first result is stated for a periodic and piecewise smooth function $f(x)$.
+In Fourier analysis the first result is stated for a periodic and piecewise smooth function $f(t)$.
 
 ::: {.callout appearance="simple"}
 :::: {#def-fourier-series} 
 ## Fourier Series
-For a $L$-periodic function $f(x)$ we can write
+For a $L$-periodic function $f(t)$ we can write
 $$
-f(x) = \frac{a_0}{2} + \sum_{k=1}^\infty \left(a_k \cos\left(\omega kx\right)+ b_k \sin\left(\omega kx\right)\right),
+f(t) = \frac{a_0}{2} + \sum_{k=1}^\infty \left(a_k \cos\left(\omega k t \right)+ b_k \sin\left(\omega k t\right)\right),
 $$ {#eq-fs}
 for 
 $$
 \begin{align}
-a_k = \frac{2}{L}\int_0^L f(x) \cos\left(\omega kx\right)\, \mathrm{d}x,\\
-b_k = \frac{2}{L}\int_0^L f(x) \sin\left(\omega kx\right)\, \mathrm{d}x.
+a_k = \frac{2}{L}\int_0^L f(t) \cos\left(\omega k t \right)\, \mathrm{d}t,\\
+b_k = \frac{2}{L}\int_0^L f(t) \sin\left(\omega k t \right)\, \mathrm{d}t.
 \end{align}
 $$
-where we can view the last two equations as the projection onto the orthogonal basis $\{\cos(kx), \sin(kx)\}_{k=0}^\infty$, i.e.
+where we can view the last two equations as the projection onto the orthogonal basis $\{\cos(k t), \sin(k t)\}_{k=0}^\infty$, i.e.
 $$
 \begin{align}
-a_k = \frac{1}{\|\cos\left(\omega kx\right)\|_2^2} \langle f(x), \cos\left(\omega kx\right)\rangle, \\
-b_k = \frac{1}{\|\sin\left(\omega kx\right)\|_2^2} \langle f(x), \sin\left(\omega kx\right)\rangle.
+a_k = \frac{1}{\|\cos\left(\omega k t\right)\|_2^2} \langle f(t), \cos\left(\omega k t\right)\rangle, \\
+b_k = \frac{1}{\|\sin\left(\omega k t\right)\|_2^2} \langle f(t), \sin\left(\omega k t\right)\rangle.
 \end{align}
 $$
 
 If we perform a partial reconstruction by truncating the series at $M$ we get 
 $$
-\hat{f}_M(x) = \frac{a_0}{2} + \sum_{k=1}^M \left(a_k \cos\left(\omega kx\right)+ b_k \sin\left(\omega kx\right)\right).
+\hat{f}_M(t) = \frac{a_0}{2} + \sum_{k=1}^M \left(a_k \cos\left(\omega k t \right)+ b_k \sin\left(\omega k t \right)\right).
 $$
 :::
 ::::
 
 With the help of Euler's formula:
 $$
-\mathrm{e}^{\mathrm{i} kx} = \cos(kx) + \mathrm{i} \sin(kx)
+\mathrm{e}^{\mathrm{i} k t} = \cos(k t) + \mathrm{i} \sin(k t)
 $$ {#eq-euler}
 we can rewrite @eq-fs as
 $$
-f(x) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\omega\mathrm{i} kx}
+f(t) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\omega\mathrm{i} k t}
 $$
 with 
 $$
-c_k = \frac{1}{L} \int_0^L f(x) \mathrm{e}^{-\omega\mathrm{i} kx}\, \mathrm{d}x.
+c_k = \frac{1}{L} \int_0^L f(t) \mathrm{e}^{-\omega\mathrm{i} k t}\, \mathrm{d}t.
 $$
 and for $n=1, 2, 3, \ldots$
 $$
@@ -133,7 +133,7 @@ c_0 = \tfrac12 a_0, \quad c_n = \tfrac12 (a_n - \mathrm{i} b_n), \quad c_{-n} = 
 $$
 
 ::: {.callout-note}
-If $f(x)$ is real valued than $c_k = \overline{c}_{-k}$.
+If $f(t)$ is real valued than $c_k = \overline{c}_{-k}$.
 :::
 
 ::: {.callout-tip appearance="simple" collapse="true" icon=false}
@@ -164,64 +164,64 @@ M = 7
 M2 = 50
 N = 100
 # Hat functions
-fun = lambda x, L: 0 if abs(x) > L / 4 else (1 - np.sign(x) * x * 4 / L)
-fun2 = lambda x, L: 0 if abs(x) > L / 4 else 1
+fun = lambda t, L: 0 if abs(t) > L / 4 else (1 - np.sign(t) * t * 4 / L)
+fun2 = lambda t, L: 0 if abs(t) > L / 4 else 1
 
-# x and y for the functions
-x = np.linspace(-L/2, L/2, N, endpoint=False) # <1>
-dx = x[1] - x[0]
+# t
+t = np.linspace(-L/2, L/2, N, endpoint=False) # <1>
+dt = t[1] - t[0]
 w = np.pi * 2 / L
 
-f = np.fromiter(map(lambda x: fun(x, L), x), x.dtype)
-f2 = np.fromiter(map(lambda x: fun2(x, L), x), x.dtype)
+f = np.fromiter(map(lambda t: fun(t, L), t), t.dtype)
+f2 = np.fromiter(map(lambda t: fun2(t, L), t), t.dtype)
 
 # Necessary functions
-scalarproduct = lambda f, g, dx: dx * np.vecdot(f, g)
-a_coeff = lambda n, f: 2 / L * scalarproduct(f, np.cos(w * n * x), dx)
-b_coeff = lambda n, f: 2 / L * scalarproduct(f, np.sin(w * n * x), dx)
+scalarproduct = lambda f, g, dt: dt * np.vecdot(f, g)
+a_coeff = lambda n, f: 2 / L * scalarproduct(f, np.cos(w * n * t), dt)
+b_coeff = lambda n, f: 2 / L * scalarproduct(f, np.sin(w * n * t), dt)
 
 # f_hat_0
-f_hat = np.zeros((M+1, N))
+f_hat = np.zeros((M + 1, N))
 f_hat[0, :] = 1/2 * a_coeff(0, f)
-f2_hat = np.zeros((M2+1, N))
+f2_hat = np.zeros((M2 + 1, N))
 f2_hat[0, :] = 1/2 * a_coeff(0, f2)
 
 # Computation of the approximation
 a = np.zeros(M)
 b = np.zeros(M)
 for i in range(M):
-    a[i] = a_coeff(i+1, f)
-    b[i] = b_coeff(i+1, f)
-    f_hat[i+1, :] = f_hat[i, :] + \
-        a[i] * np.cos(w * (i+1) * x) + \
-        b[i] * np.sin(w * (i+1) * x)
+    a[i] = a_coeff(i + 1, f)
+    b[i] = b_coeff(i + 1, f)
+    f_hat[i + 1, :] = f_hat[i, :] + \
+        a[i] * np.cos(w * (i + 1) * t) + \
+        b[i] * np.sin(w * (i + 1) * t)
 
 for i in range(M2):
-    f2_hat[i+1, :] = f2_hat[i, :] + \
-        a_coeff(i+1, f2) * np.cos(w * (i+1) * x) + \
-        b_coeff(i+1, f2) * np.sin(w * (i+1) * x)
+    f2_hat[i + 1, :] = f2_hat[i, :] + \
+        a_coeff(i + 1, f2) * np.cos(w * (i + 1) * t) + \
+        b_coeff(i + 1, f2) * np.sin(w * (i + 1) * t)
 
 # Figures
 plt.figure(0)
-plt.plot(x, f, label=r"$f$")
-plt.plot(x, f_hat[-1, :], label=r"$\hat{f_7}$")
+plt.plot(t, f, label=r"$f$")
+plt.plot(t, f_hat[-1, :], label=r"$\hat{f_7}$")
 plt.xticks([])
 plt.legend()
 plt.gca().set_aspect(1.5)
 
 plt.figure(1)
-plt.plot(x, f_hat[0, :], label=rf"$a_{0}$")
+plt.plot(t, f_hat[0, :], label=rf"$a_{0}$")
 for i in range(M):
-    plt.plot(x, a[i] * np.cos(w * (i+1) * x), label=rf"$a_{i+1}\cos({i+1}\omega x)$")
-plt.legend(ncol=np.ceil((M+1)/2), bbox_to_anchor=(1, -0.1))
+    plt.plot(t, a[i] * np.cos(w * (i+1) * t), label=rf"$a_{i+1}\cos({i+1}\omega t)$")
+plt.legend(ncol=np.ceil((M + 1) / 2), bbox_to_anchor=(1, -0.1))
 plt.xticks([])
 plt.gca().set_aspect(1.5)
 
 plt.figure(2)
-plt.plot(x, f2, label=r"$f$")
-plt.plot(x, f2_hat[7, :], label=r"$\hat{f}_7$")
-plt.plot(x, f2_hat[20, :], label=r"$\hat{f}_{20}$")
-plt.plot(x, f2_hat[50, :], label=r"$\hat{f}_{50}$")
+plt.plot(t, f2, label=r"$f$")
+plt.plot(t, f2_hat[7, :], label=r"$\hat{f}_7$")
+plt.plot(t, f2_hat[20, :], label=r"$\hat{f}_{20}$")
+plt.plot(t, f2_hat[50, :], label=r"$\hat{f}_{50}$")
 plt.xlabel(r"$x$")
 plt.legend()
 plt.gca().set_aspect(1.5)
@@ -254,60 +254,60 @@ fun = lambda x, L: # tooth
 fun2 = lambda x, L: # step
 
 # x and y for the functions
-x = # points for the evaluation ()
-dx = x[1] - x[0]
+t = # points for the evaluation ()
+dt = t[1] - t[0]
 w = np.pi * 2 / L
 
-f = np.fromiter(map(lambda x: fun(x, L), x), x.dtype)
-f2 = np.fromiter(map(lambda x: fun2(x, L), x), x.dtype)
+f = np.fromiter(map(lambda t: fun(t, L), t), t.dtype)
+f2 = np.fromiter(map(lambda t: fun2(t, L), t), t.dtype)
 
 # Necessary functions
-scalarproduct = lambda f, g, dx: # see definition in the notes
+scalarproduct = lambda f, g, dt: # see definition in the notes
 a_coeff = lambda n, f: # see definition in the notes
 b_coeff = lambda n, f: # see definition in the notes
 
 # f_hat_0
-f_hat = np.zeros((M+1, N))
+f_hat = np.zeros((M + 1, N))
 f_hat[0, :] = # a_0 for f
-f2_hat = np.zeros((M2+1, N))
+f2_hat = np.zeros((M2 + 1, N))
 f2_hat[0, :] = # a_0 for f2
 
 # Computation of the approximation
 a = np.zeros(M)
 b = np.zeros(M)
 for i in range(M):
-    a[i] = a_coeff(i+1, f)
-    b[i] = b_coeff(i+1, f)
-    f_hat[i+1, :] = f_hat[i, :] + \
-        a[i] * np.cos(w * (i+1) * x) + \
-        b[i] * np.sin(w * (i+1) * x)
+    a[i] = a_coeff(i + 1, f)
+    b[i] = b_coeff(i + 1, f)
+    f_hat[i + 1, :] = f_hat[i, :] + \
+        a[i] * np.cos(w * (i + 1) * t) + \
+        b[i] * np.sin(w * (i + 1) * t)
 
 for i in range(M2):
-    f2_hat[i+1, :] = f2_hat[i, :] + \
-        a_coeff(i+1, f2) * np.cos(w * (i+1) * x) + \
-        b_coeff(i+1, f2) * np.sin(w * (i+1) * x)
+    f2_hat[i + 1, :] = f2_hat[i, :] + \
+        a_coeff(i + 1, f2) * np.cos(w * (i + 1) * t) + \
+        b_coeff(i + 1, f2) * np.sin(w * (i + 1) * t)
 
 # Figures
 plt.figure(0)
-plt.plot(x, f, label=r"$f$")
-plt.plot(x, f_hat[-1, :], label=r"$\hat{f_7}$")
+plt.plot(t, f, label=r"$f$")
+plt.plot(t, f_hat[-1, :], label=r"$\hat{f_7}$")
 plt.xticks([])
 plt.legend()
 plt.gca().set_aspect(1.5)
 
 plt.figure(1)
-plt.plot(x, f_hat[0, :], label=rf"$a_{0}$")
+plt.plot(t, f_hat[0, :], label=rf"$a_{0}$")
 for i in range(M):
-    plt.plot(x, a[i] * np.cos(w * (i+1) * x), label=rf"$a_{i+1}\cos({i+1}\omega x)$")
-plt.legend(ncol=np.ceil((M+1)/2), bbox_to_anchor=(1, -0.1))
+    plt.plot(t, a[i] * np.cos(w * (i+1) * t), label=rf"$a_{i+1}\cos({i+1}\omega t)$")
+plt.legend(ncol=np.ceil((M + 1)/2), bbox_to_anchor=(1, -0.1))
 plt.xticks([])
 plt.gca().set_aspect(1.5)
 
 plt.figure(2)
-plt.plot(x, f2, label=r"$f$")
-plt.plot(x, f2_hat[7, :], label=r"$\hat{f}_7$")
-plt.plot(x, f2_hat[20, :], label=r"$\hat{f}_{20}$")
-plt.plot(x, f2_hat[50, :], label=r"$\hat{f}_{50}$")
+plt.plot(t, f2, label=r"$f$")
+plt.plot(t, f2_hat[7, :], label=r"$\hat{f}_7$")
+plt.plot(t, f2_hat[20, :], label=r"$\hat{f}_{20}$")
+plt.plot(t, f2_hat[50, :], label=r"$\hat{f}_{50}$")
 plt.xlabel(r"$x$")
 plt.legend()
 plt.gca().set_aspect(1.5)
@@ -327,19 +327,19 @@ The Fourier transform extends this to functions with the domain extended to $\pm
 
 Let us start of with the series representation we already know:
 $$
-f(x) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\mathrm{i} \omega k x}
+f(t) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\mathrm{i} \omega k t}
 $$
 with the coefficients
 $$
-c_k = \frac{1}{2L} \int_{-L}^{L} f(x) \mathrm{e}^{-\mathrm{i} \omega_k x}\, \mathrm{d}x,
+c_k = \frac{1}{2L} \int_{-L}^{L} f(t) \mathrm{e}^{-\mathrm{i} \omega_k t}\, \mathrm{d}t,
 $$
 with $\omega_k=\frac{k\pi}{L} = k\Delta \omega$.
 
 If we now perform the transition for $L \to \infty$ resulting in $\Delta\omega \to 0$ and basically moving from discrete frequencies to a continuous set of frequencies.
 This results in
 $$
-f(x) = \lim_{\Delta \omega \to 0} \sum_{k=-\infty}^\infty \frac{\Delta \omega}{2\pi}
-\int_{-\tfrac{\pi}{\Delta \omega}}^{\tfrac{\pi}{\Delta \omega}} f(\xi) \mathrm{e}^{-\mathrm{i} k \Delta \omega \xi}\, \mathrm{d}\xi\,\, \mathrm{e}^{\Delta\omega\mathrm{i} kx}
+f(t) = \lim_{\Delta \omega \to 0} \sum_{k=-\infty}^\infty \frac{\Delta \omega}{2\pi}
+\int_{-\tfrac{\pi}{\Delta \omega}}^{\tfrac{\pi}{\Delta \omega}} f(\xi) \mathrm{e}^{-\mathrm{i} k \Delta \omega \xi}\, \mathrm{d}\xi\,\, \mathrm{e}^{\Delta\omega\mathrm{i} k t}
 $$
 which is a Riemann integral and the kernel becomes the Fourier Transform of our function. 
 
@@ -348,10 +348,10 @@ which is a Riemann integral and the kernel becomes the Fourier Transform of our 
 ## Fourier Transform
 A function $f\,:\, \mathbb{R} \to \mathbb{R}$ is called fourier transposable if
 $$
-\hat{f}(\omega) = \mathcal{F}\{f(x)\} = \int_{-\infty}^{\infty} f(x)\mathrm{e}^{-\mathrm{i} \omega x}\, \mathrm{d}x
+\hat{f}(\omega) = \mathcal{F}\{f(t)\} = \int_{-\infty}^{\infty} f(t)\mathrm{e}^{-\mathrm{i} \omega t}\, \mathrm{d}t
 $$
 exists for all $\omega\in\mathbb{R}$.
-In this case we call $\hat{f}(\omega) \equiv \mathcal{F}\{f(x)\}$ the **Fourier transform** of $f(x)$.
+In this case we call $\hat{f}(\omega) \equiv \mathcal{F}\{f(t)\}$ the **Fourier transform** of $f(t)$.
 
 The **inverse Fourier transform** is defined as
 $$
@@ -365,7 +365,7 @@ $$
 The pair $(f, \hat{f})$ is often called the _Fourier transform pair_. 
 
 The two integrals converge, as long as both functions are Lebesgue integrable, i.e. 
-$$\int_{-\infty}^\infty|f(x)|\, \mathrm{d}x \le \infty,$$
+$$\int_{-\infty}^\infty|f(t)|\, \mathrm{d}t \le \infty,$$
 or $f, \hat{f} \in L^1[(-\infty, \infty)]$.
 :::
 
@@ -375,75 +375,75 @@ For tow functions $f, g \in L^1[(-\infty, \infty)]$ and $\alpha, \beta\in\mathbb
 
 (@) **Linearity**
 $$
-\mathcal{F}\{\alpha f(x) + \beta g(x)\} = 
-\alpha \mathcal{F}\{f(x)\} + \beta \mathcal{F}\{g(x)\} = 
+\mathcal{F}\{\alpha f(t) + \beta g(t)\} = 
+\alpha \mathcal{F}\{f(t)\} + \beta \mathcal{F}\{g(t)\} = 
 \alpha \hat{f}(\omega)+ \beta \hat{g}(\omega),
 $$
 and 
 $$
 \mathcal{F}^{-1}\{\alpha \hat{f}(\omega) + \beta \hat{g}(\omega)\} = 
 \alpha \mathcal{F}^{-1}\{\hat{f}(\omega)\} + \beta \mathcal{F}^{-1}\{\hat{g}(\omega)\} = 
-\alpha f(x) + \beta g(x).
+\alpha f(t) + \beta g(t).
 $$
 
 (@) **Conjugation** 
 $$
-\mathcal{F}\{\overline{f(x)}\} = \overline{\hat{f}(-\omega)}.
+\mathcal{F}\{\overline{f(t)}\} = \overline{\hat{f}(-\omega)}.
 $$
 
 (@) **Scaling**, for $\alpha \neq 0$
 $$
-\mathcal{F}\{f(\alpha x)\} = \frac{1}{|\alpha|}\hat{f}\left(\frac{\omega}{\alpha}\right).
+\mathcal{F}\{f(\alpha t)\} = \frac{1}{|\alpha|}\hat{f}\left(\frac{\omega}{\alpha}\right).
 $$
 
 (@) **Drift in time**, for $a\in\mathbb{R}$
 $$
-\mathcal{F}\{f(x - a)\} = \mathrm{e}^{-\mathrm{i}\omega a}\hat{f}(\omega).
+\mathcal{F}\{f(t - a)\} = \mathrm{e}^{-\mathrm{i}\omega a}\hat{f}(\omega).
 $$
 
 (@) **Drift in frequency**, for $a\in\mathbb{R}$
 
 $$
-\mathrm{e}^{\mathrm{i} a x} \mathcal{F}\{f(x - a)\} = \hat{f}(\omega - a).
+\mathrm{e}^{\mathrm{i} a t} \mathcal{F}\{f(t)\} = \hat{f}(\omega - a).
 $$
 
 (@) If $f$ is **even** or **odd**, than $\hat{f}$ is even or odd, respectively.
 
 (@) **Derivative in time**
 $$
-\mathcal{F}\{\partial_x f(x)\} = \mathrm{i} \omega \hat{f}(\omega)
+\mathcal{F}\{\partial_t f(t)\} = \mathrm{i} \omega \hat{f}(\omega)
 $$
 We are going to prove this by going through the lines
 $$
 \begin{align}
-\mathcal{F}\left\{\frac{d}{d\,x}f(x)\right\} &= \int_{-\infty}^\infty f'(x)\mathrm{e}^{-\mathrm{i}\omega a}\, \mathrm{d}x \\
-&= \left[f(x)\mathrm{e}^{-\mathrm{i}\omega a}\right]_{-\infty}^\infty - \int_{-\infty}^\infty -\mathrm{i} \omega f(x)\mathrm{e}^{-\mathrm{i}\omega a}\, \mathrm{d}x \\
-&= \mathrm{i} \omega \int_{-\infty}^\infty f(x)\mathrm{e}^{-\mathrm{i}\omega a}\, \mathrm{d}x \\
-&= \mathrm{i} \omega \mathcal{F}\{f(x)\}
+\mathcal{F}\left\{\frac{d}{d\,t}f(t)\right\} &= \int_{-\infty}^\infty f'(t)\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t \\
+&= \left[f(t)\mathrm{e}^{-\mathrm{i}\omega t}\right]_{-\infty}^\infty - \int_{-\infty}^\infty -\mathrm{i} \omega f(t)\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t \\
+&= \mathrm{i} \omega \int_{-\infty}^\infty f(t)\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t \\
+&= \mathrm{i} \omega \mathcal{F}\{f(t)\}
 \end{align}
 $$
 For higher derivatives we get
 $$
-\mathcal{F}\{\partial_x^n f(x)\} = \mathrm{i}^n \omega^n \hat{f}(\omega)
+\mathcal{F}\{\partial_t^n f(t)\} = \mathrm{i}^n \omega^n \hat{f}(\omega)
 $$
 
 (@) **Derivative in frequency**
 $$
-\mathcal{F}\{x^n f(x)\} = \mathrm{i}^n \partial_\omega^n\hat{f}(\omega)
+\mathcal{F}\{t^n f(t)\} = \mathrm{i}^n \partial_\omega^n\hat{f}(\omega)
 $$
 
 (@) The **convolution** of two functions is defined as 
 $$
-(f \ast g)(x) = \int_{-\infty}^{\infty}f(x - \xi) g(\xi)\, \mathrm{d}\xi,
+(f \ast g)(t) = \int_{-\infty}^{\infty}f(t - \xi) g(\xi)\, \mathrm{d}\xi,
 $$
 and for the Fourier transform
 $$
-\mathcal{F}\{(f \ast g)(x)\} = \hat{f} \cdot \hat{g}.
+\mathcal{F}\{(f \ast g)(t)\} = \hat{f} \cdot \hat{g}.
 $$
 
 (@) **Parseval's Theorem**
 $$
-\|f\|_2^2 = \int_{-\infty}^{\infty}|f(x)|^2\, \mathrm{d}x = \frac{1}{2 \pi}\int_{-\infty}^{\infty}|\hat{f}(\omega)|^2\, \mathrm{d}\omega
+\|f\|_2^2 = \int_{-\infty}^{\infty}|f(t)|^2\, \mathrm{d}t = \frac{1}{2 \pi}\int_{-\infty}^{\infty}|\hat{f}(\omega)|^2\, \mathrm{d}\omega
 $$
 stating that the Fourier Transform preserves the 2-norm up to a scaling factor.
 
@@ -456,8 +456,8 @@ The Discrete Fourier Transform (DFT) is a way of approximating the Fourier trans
 :::: {#def-fourier-dft} 
 
 ## Discrete-Fourier Transform
-For equally spaced values $x_k = k\Delta x$, for $k\in\mathbb{Z}$ and $\Delta x>0$ and the discrete values of the function evaluations $f_k=f(x_k)$.
-If the function is periodic with $L=N\Delta x$ than the discrete Fourier transform is given as
+For equally spaced values $t_k = k\Delta t$, for $k\in\mathbb{Z}$ and $\Delta t>0$ and the discrete values of the function evaluations $f_k=f(t_k)$.
+If the function is periodic with $L=N\Delta t$ than the discrete Fourier transform is given as
 $$
 \hat{f}_k = \sum_{j=0}^{N-1}f_j\, \mathrm{e}^{-\mathrm{i} j k\tfrac{2 \pi}{N}},
 $${#eq-dft}
@@ -822,14 +822,14 @@ Let us explore this with the example stated in [@Brunton2022, p. 68-69].
 We compute the so called spectral derivative for the function 
 $$
 \begin{align}
-f(x) &= \cos(x)\exp\left(-\frac{x^2}{25}\right) \\
-\partial_x f(x) &= -\sin(x)\exp\left(-\frac{x^2}{25}\right) - \frac{2}{25}x f(x)
+f(t) &= \cos(t) \exp\left(-\frac{t^2}{25}\right) \\
+\partial_x f(t) &= -\sin(t) \exp\left(-\frac{t^2}{25}\right) - \frac{2}{25}t f(t)
 \end{align}
 $$
 
 In order to porovide something to compare our results to we also compute the forward Euler finite-differences for the derivative
 $$
-\partial_x f(x_k) \approx \frac{f(x_{k+1}) - f(x_k)}{x_{k+1} - x_k}.
+\partial_x f(t_k) \approx \frac{f(t_{k+1}) - f(t_k)}{t_{k+1} - t_k}.
 $$
 
 ```{python}
@@ -851,25 +851,25 @@ N = 128
 a, b = -15, 15
 L = b - a
 
-fun = lambda x: np.cos(x) * np.exp(-np.power(x, 2) / 25)
-dfun = lambda x: -(np.sin(x) * np.exp(-np.power(x, 2) / 25) + (2 / 25) * x * fun(x))
+fun = lambda t: np.cos(t) * np.exp(-np.power(t, 2) / 25)
+dfun = lambda t: -(np.sin(t) * np.exp(-np.power(t, 2) / 25) + (2 / 25) * t * fun(t))
 
 def fD(N, fun, dfun, a, b):
-    x = np.linspace(a, b, N, endpoint=False)
-    dx = x[1] - x[0]
-    f = fun(x)
-    df_DD = np.diff(f) / dx
+    t = np.linspace(a, b, N, endpoint=False)
+    dt = t[1] - t[0]
+    f = fun(t)
+    df_DD = np.diff(f) / dt
     df_DD = np.append(df_DD, df_DD[-1])
-    return df_DD, np.linalg.norm(df_DD - dfun(x)) / np.linalg.norm(df_DD)
+    return df_DD, np.linalg.norm(df_DD - dfun(t)) / np.linalg.norm(df_DD)
 
 def spD(N, fun, dfun, a, b):
-    x = np.linspace(a, b, N, endpoint=False)
-    f = fun(x)
+    t = np.linspace(a, b, N, endpoint=False)
+    f = fun(t)
     fhat = np.fft.fft(f)
     kappa = np.fft.fftfreq(N, (b - a) / (N * 2 * np.pi))
     df_hat = kappa * fhat * (1j)
     df_r = np.fft.ifft(df_hat).real
-    return df_r, np.linalg.norm(df_r - dfun(x)) / np.linalg.norm(df_r)
+    return df_r, np.linalg.norm(df_r - dfun(t)) / np.linalg.norm(df_r)
 
 
 # Finite differences
@@ -878,13 +878,13 @@ df_fD, e = fD(N, fun, dfun, a, b)
 df_spD, e = spD(N, fun, dfun, a, b)
 
 # Figures
-x = np.linspace(a, b, N, endpoint=False)
+t = np.linspace(a, b, N, endpoint=False)
 plt.figure(0)
-plt.plot(x, dfun(x), label="Exact")
-plt.plot(x, df_fD, "-.", label="Finite Differences")
-plt.plot(x, df_spD, "--", label="Spectral")
-plt.xlabel("x")
-plt.ylabel(r"$\partial_x f$")
+plt.plot(t, dfun(t), label="Exact")
+plt.plot(t, df_fD, "-.", label="Finite Differences")
+plt.plot(t, df_spD, "--", label="Spectral")
+plt.xlabel("t")
+plt.ylabel(r"$\partial_t f$")
 plt.legend(loc=1)
 plt.gca().set_aspect(5)
 
@@ -905,21 +905,21 @@ plt.ylabel("Relative Error")
 plt.legend(loc=1)
 plt.gca().set_aspect(2.5e-1)
 
-fun_saw = lambda x, L: 0 if abs(x) > L / 4 else (1 - np.sign(x) * x * 4 / L)
+fun_saw = lambda t, L: 0 if abs(t) > L / 4 else (1 - np.sign(t) * t * 4 / L)
 a, b = -np.pi, np.pi
 L = b - a
-fun2 = lambda x: np.fromiter(map(lambda x: fun_saw(x, L), x), x.dtype)
+fun2 = lambda t: np.fromiter(map(lambda t: fun_saw(t, L), t), t.dtype)
 N = 2**10
 
-x = np.linspace(a, b, N, endpoint=False)
+t = np.linspace(a, b, N, endpoint=False)
 
 plt.figure(2)
 df_spD, _ = spD(N, fun2, fun2, a, b)
 df_fD, _ = fD(N, fun2, fun2, a, b)
-plt.plot(x, df_fD, "-.", label="Finite derivative")
-plt.plot(x, df_spD, "--", label="Spectral derivative")
-plt.plot(x, fun2(x), label=r"$f$")
-plt.xlabel("x")
+plt.plot(t, df_fD, "-.", label="Finite derivative")
+plt.plot(t, df_spD, "--", label="Spectral derivative")
+plt.plot(t, fun2(t), label=r"$f$")
+plt.xlabel("t")
 plt.xlim(-2, 2)
 plt.legend(loc=1)
 plt.gca().set_aspect(1)
@@ -993,13 +993,9 @@ u0 = np.zeros_like(x)
 u0[np.abs(x) < 10] = 1
 u0hat = np.fft.fft(u0)
 
-# SciPy's odeint function doesn't play well with complex numbers, so we recast 
-# the state u0hat from an N-element complex vector to a 2N-element real vector
-u0hat_ri = np.concatenate((u0hat.real, u0hat.imag))
-
 # Simulate in Fourier frequency domain
 dt = 0.001
-T = np.arange(0,10,dt)
+T = np.arange(0, 10, dt)
 
 fun = lambda t, x: - alpha**2 * (np.power(kappa, 2)) * x
 euler = lambda y, dt, t, fun: y + dt * fun(t, y)
@@ -1012,7 +1008,7 @@ for i, t in enumerate(T[1:]):
 u = np.zeros_like(uhat)
 
 for k in range(len(T)):
-    u[k, :] = np.fft.ifft(uhat[k,:])
+    u[k, :] = np.fft.ifft(uhat[k, :])
 
 u = u.real    
 

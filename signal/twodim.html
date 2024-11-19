@@ -359,7 +359,6 @@ window.Quarto = {
 <h2 data-number="11.1" class="anchored" data-anchor-id="fourier"><span class="header-section-number">11.1</span> Fourier</h2>
 <p>If we apply FFT to a matrix <span class="math inline">\(X\in\mathrm{R}^{m\times n}\)</span> we can simply apply the 1D version to every row and than to every column of the resulting matrix. The other way round will produce the same final result.</p>
 <p>This is shown in the code below but note we should use the more efficient <code>np.fft.fft2</code>.</p>
-<div id="cell-fig-mci_signal2d_fft" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -372,43 +371,93 @@ window.Quarto = {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rgb2gray(rgb):</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.dot(rgb[...,:<span class="dv">3</span>], [<span class="fl">0.2989</span>, <span class="fl">0.5870</span>, <span class="fl">0.1140</span>])</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> rgb2gray(im)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>Cshift <span class="op">=</span> np.zeros_like(A, dtype<span class="op">=</span><span class="st">'complex'</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.zeros_like(A, dtype<span class="op">=</span><span class="st">'complex'</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(A.shape[<span class="dv">0</span>]):</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    C[j, :] <span class="op">=</span> np.fft.fft(A[j, :])</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    Cshift[j,:] <span class="op">=</span> np.fft.fftshift(np.copy(C[j, :]))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> myplot(A):</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    plt.imshow(A, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    plt.gca().set_aspect(<span class="dv">1</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> rgb2gray(im)</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>Rshift <span class="op">=</span> np.zeros_like(A, dtype<span class="op">=</span><span class="st">'complex'</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> np.zeros_like(A, dtype<span class="op">=</span><span class="st">'complex'</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> np.zeros_like(C)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(A.shape[<span class="dv">1</span>]):</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    R[:, j] <span class="op">=</span> np.fft.fft(A[:, j])</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    Rshift[:, j] <span class="op">=</span> np.fft.fftshift(np.copy(R[:, j]))</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    D[:, j] <span class="op">=</span> np.fft.fft(C[:, j])</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> axs[<span class="dv">0</span>, <span class="dv">0</span>].imshow(A, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> axs[<span class="dv">1</span>, <span class="dv">0</span>].imshow(np.log(np.<span class="bu">abs</span>(Cshift)), cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> axs[<span class="dv">0</span>, <span class="dv">1</span>].imshow(np.log(np.<span class="bu">abs</span>(Rshift)), cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> axs[<span class="dv">1</span>, <span class="dv">1</span>].imshow(np.fft.fftshift(np.log(np.<span class="bu">abs</span>(D))), cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>Cshift <span class="op">=</span> np.zeros_like(A, dtype<span class="op">=</span><span class="st">'complex'</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.zeros_like(A, dtype<span class="op">=</span><span class="st">'complex'</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(A.shape[<span class="dv">0</span>]):</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    C[j, :] <span class="op">=</span> np.fft.fft(A[j, :])</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    Cshift[j,:] <span class="op">=</span> np.fft.fftshift(np.copy(C[j, :]))</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>Rshift <span class="op">=</span> np.zeros_like(A, dtype<span class="op">=</span><span class="st">'complex'</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> np.zeros_like(A, dtype<span class="op">=</span><span class="st">'complex'</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> np.zeros_like(C)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(A.shape[<span class="dv">1</span>]):</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    R[:, j] <span class="op">=</span> np.fft.fft(A[:, j])</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    Rshift[:, j] <span class="op">=</span> np.fft.fftshift(np.copy(R[:, j]))</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    D[:, j] <span class="op">=</span> np.fft.fft(C[:, j])</span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axs.flatten():</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">'off'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>myplot(A)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>myplot(np.log(np.<span class="bu">abs</span>(Cshift)))</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>myplot(np.log(np.<span class="bu">abs</span>(Rshift)))</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>myplot(np.fft.fftshift(np.log(np.<span class="bu">abs</span>(D))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display">
-<div id="fig-mci_signal2d_fft" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-mci_signal2d_fft" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mci_signal2d_fft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_fft-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;11.1: Image of MCI I and the reconstruction with approximated matrix."><img src="twodim_files/figure-html/fig-mci_signal2d_fft-output-1.svg" class="img-fluid figure-img"></a>
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mci_signal2d_fft" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-mci_signal2d_fft-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mci_signal2d_fft-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft-output-1.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft" title="Figure&nbsp;11.1&nbsp;(a): Original image."><img src="twodim_files/figure-html/fig-mci_signal2d_fft-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mci_signal2d_fft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.1: Image of MCI I and the reconstruction with approximated matrix.
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Original image.
 </figcaption>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mci_signal2d_fft" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-mci_signal2d_fft-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mci_signal2d_fft-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft-output-2.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft" title="Figure&nbsp;11.1&nbsp;(b): Image after applying FFT on each individual row"><img src="twodim_files/figure-html/fig-mci_signal2d_fft-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Image after applying FFT on each individual row
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mci_signal2d_fft" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-mci_signal2d_fft-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mci_signal2d_fft-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft-output-3.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft" title="Figure&nbsp;11.1&nbsp;(c): Image after applying FFT on each individual column"><img src="twodim_files/figure-html/fig-mci_signal2d_fft-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Image after applying FFT on each individual column
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mci_signal2d_fft" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-mci_signal2d_fft-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mci_signal2d_fft-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft-output-4.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft" title="Figure&nbsp;11.1&nbsp;(d): Row and column wise FFT (order does not matter)"><img src="twodim_files/figure-html/fig-mci_signal2d_fft-output-4.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) Row and column wise FFT (order does not matter)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mci_signal2d_fft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.1: Image of MCI I and the row/column wise FFT.
+</figcaption>
+</figure>
 </div>
 <p>Of course we can use this to compress the image by removing small values from the transform.</p>
 <details class="code-fold">
@@ -522,7 +571,7 @@ Figure&nbsp;11.2: Image of MCI I and the reconstruction with various amounts of 
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    plt.gca().set_aspect(<span class="dv">1</span>)</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> rgb2gray(im)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>A_noise <span class="op">=</span> A <span class="op">+</span> <span class="dv">200</span><span class="op">*</span>np.random.randn(<span class="op">*</span>A.shape).astype(<span class="st">'uint8'</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>A_noise <span class="op">=</span> A <span class="op">+</span> (<span class="dv">200</span> <span class="op">*</span> np.random.randn(<span class="op">*</span>A.shape)).astype(<span class="st">'uint8'</span>)</span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>A_noise_fft <span class="op">=</span> np.fft.fft2(A_noise)</span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>A_noise_fft_shift <span class="op">=</span> np.fft.fftshift(A_noise_fft)</span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> np.log(np.<span class="bu">abs</span>(A_noise_fft_shift) <span class="op">+</span> <span class="dv">1</span>)</span>
@@ -630,14 +679,14 @@ Figure&nbsp;11.3: Image of MCI I and the reconstruction with various amounts of 
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>plt.imshow(arr, cmap<span class="op">=</span><span class="st">'gray'</span>, vmin<span class="op">=-</span><span class="fl">0.25</span>, vmax<span class="op">=</span><span class="fl">0.75</span>)</span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.gca().set_aspect(0.5)</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">1</span>)</span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-mci_signal2d_wavelet" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mci_signal2d_wavelet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_wavelet-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;11.4: First three levels of the discrete wavelet transform."><img src="twodim_files/figure-html/fig-mci_signal2d_wavelet-output-1.svg" class="img-fluid figure-img"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_wavelet-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;11.4: First three levels of the discrete wavelet transform."><img src="twodim_files/figure-html/fig-mci_signal2d_wavelet-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mci_signal2d_wavelet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;11.4: First three levels of the discrete wavelet transform.
@@ -1338,7 +1387,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

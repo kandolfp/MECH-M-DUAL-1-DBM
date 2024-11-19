@@ -665,7 +665,7 @@ Figure&nbsp;9.1: Fourier transform of a two hat functions.
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Implement the code yourself by filling out the missing sections:</p>
-<div id="5b03f4d1" class="cell" data-execution_count="2">
+<div id="2a8d4a79" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -903,7 +903,7 @@ Note
 </div>
 <p>As we can transfer the properties of the Fourier transform to the DFT we get the nice properties for sampled signals.</p>
 <p>The downside of the DFT is that it does not scale well for large <span class="math inline">\(N\)</span> as the matrix-vector multiplication is <span class="math inline">\(\mathcal{O}(N^2)\)</span> and becomes slow.</p>
-<div id="5b54c043" class="cell" data-execution_count="3">
+<div id="6f921047" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show code for the computation of the DFT matrix.</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1164,7 +1164,7 @@ Figure&nbsp;9.2: Signal noise filter with FFT.
 </figure>
 </div>
 <p>As can be seen in the <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span>9.2 (c)</span></a>, the reconstruction is not exact. This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. In particular:</p>
-<div id="5182ace0" class="cell" data-execution_count="5">
+<div id="8b8e630d" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -1222,7 +1222,7 @@ Figure&nbsp;9.2: Signal noise filter with FFT.
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Implement the code yourself by filling out the missing sections:</p>
-<div id="0d6d0a37" class="cell" data-execution_count="6">
+<div id="b713c045" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
@@ -1317,11 +1317,11 @@ Figure&nbsp;9.2: Signal noise filter with FFT.
 <p><span class="theorem-title"><strong>Example 9.3 (Spectral derivative)</strong></span> We compute the so called spectral derivative for the function <span class="math display">\[
 \begin{align}
 f(t) &amp;= \cos(t) \exp\left(-\frac{t^2}{25}\right) \\
-\partial_x f(t) &amp;= -\sin(t) \exp\left(-\frac{t^2}{25}\right) - \frac{2}{25}t f(t)
+\partial_t f(t) &amp;= -\sin(t) \exp\left(-\frac{t^2}{25}\right) - \frac{2}{25}t f(t)
 \end{align}
 \]</span></p>
 <p>In order to porovide something to compare our results to we also compute the forward Euler finite-differences for the derivative <span class="math display">\[
-\partial_x f(t_k) \approx \frac{f(t_{k+1}) - f(t_k)}{t_{k+1} - t_k}.
+\partial_t f(t_k) \approx \frac{f(t_{k+1}) - f(t_k)}{t_{k+1} - t_k}.
 \]</span></p>
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
@@ -1342,7 +1342,7 @@ f(t) &amp;= \cos(t) \exp\left(-\frac{t^2}{25}\right) \\
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    dt <span class="op">=</span> t[<span class="dv">1</span>] <span class="op">-</span> t[<span class="dv">0</span>]</span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> fun(t)</span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    df_DD <span class="op">=</span> np.diff(f) <span class="op">/</span> dt</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    df_DD <span class="op">=</span> np.append(df_DD, df_DD[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    df_DD <span class="op">=</span> np.append(df_DD, (f[<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> f[<span class="dv">0</span>]) <span class="op">/</span> dt)</span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_DD, np.linalg.norm(df_DD <span class="op">-</span> dfun(t)) <span class="op">/</span> np.linalg.norm(df_DD)</span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> spD(N, fun, dfun, a, b):</span>
@@ -1399,13 +1399,14 @@ f(t) &amp;= \cos(t) \exp\left(-\frac{t^2}{25}\right) \\
 <span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">2</span>)</span>
 <span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>df_spD, _ <span class="op">=</span> spD(N, fun2, fun2, a, b)</span>
 <span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>df_fD, _ <span class="op">=</span> fD(N, fun2, fun2, a, b)</span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_fD, <span class="st">"-."</span>, label<span class="op">=</span><span class="st">"Finite derivative"</span>)</span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_spD, <span class="st">"--"</span>, label<span class="op">=</span><span class="st">"Spectral derivative"</span>)</span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>plt.plot(t, fun2(t), label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>plt.plot(t, fun2(t), label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_fD, <span class="st">"-."</span>, label<span class="op">=</span><span class="st">"Finite derivative"</span>)</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_spD, <span class="st">"--"</span>, label<span class="op">=</span><span class="st">"Spectral derivative"</span>)</span>
 <span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"t"</span>)</span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$f, \partial_t f$"</span>)</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="fig-fourier_fft_spectralderivative" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1465,6 +1466,19 @@ Figure&nbsp;9.3: Computing the derivative of a function
 </div>
 <p>In <a href="../matrixdc/eigen.html#sec-eigen-lode" class="quarto-xref"><span>Section 4.1.2</span></a> we have already seen how the eigendecomposition can be used to compute the solution of ordinary differential equations by changing the basis and transforming the equation into a basis that can be handled easy. The same is true with the Fourier transformation.</p>
 <p>As mentioned before, Fourier introduced it to solve the heat equation and we will do the same.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Above we have always transformed the <em>time</em> component of a function into the frequency domain via FFT. In the next example we have the time evolution of a signal and therefore the function depends on time and space. We apply the FFT to the space component to compute the derivative in <em>frequency</em> domain w.r.t. the transformed variable.</p>
+</div>
+</div>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1473,14 +1487,17 @@ Figure&nbsp;9.3: Computing the derivative of a function
 <div class="callout-body-container">
 <div id="exm-fourier-fft-heat" class="theorem example">
 <p><span class="theorem-title"><strong>Example 9.4 (Heat Equation)</strong></span> The heat equation in 1D is given by <span class="math display">\[
-\dot{u} = \alpha^2 \partial_x^2 u,
-\]</span> for <span class="math inline">\(u(t, x)\)</span> as the temprature distribution in space (<span class="math inline">\(x\)</span>) and time (<span class="math inline">\(t\)</span>). By applying the Fourier transform we get <span class="math inline">\(\mathcal{F}\{u(t,x)\}=\hat{u}(t, x)\)</span> and <span class="math display">\[
-\dot{\hat{u}} = - \alpha^2\omega^2\hat{u}.
+\dot{u}(t, x) = \alpha^2 \partial_x^2 u(\tau, x),
+\]</span> for <span class="math inline">\(u(t, x)\)</span> as the temperature distribution in space (<span class="math inline">\(x\)</span>) and time (<span class="math inline">\(t\)</span>). By applying the Fourier transform we get <span class="math inline">\(\mathcal{F}\{u(t,x)\}=\hat{u}(t, \omega)\)</span> and <span class="math display">\[
+\dot{\hat{u}}(t, \omega) = - \alpha^2\omega^2\hat{u}(t, \omega).
 \]</span> This transformed the partial differential equation into an ordinary differential equation and we can solve it for each fixed frequency <span class="math inline">\(\omega\)</span> as <span class="math display">\[
 \hat{u}(t, \omega) = \mathrm{e}^{-\alpha^2\omega^2 t} \hat{u}(0, \omega).
 \]</span> where <span class="math inline">\(\hat{u}(0, \omega)\)</span> is nothing else than the Fourier transform of the initial temperature distribution at time <span class="math inline">\(t=0\)</span>. To compute the inverse Fourier transform we can make use of the convolution property introduced above.</p>
 <p><span class="math display">\[
-u(t, x) = \mathcal{F}^{-1}\{\hat{u}(t, \omega\} = \mathcal{F}^{-1}\{\mathrm{e}^{-\alpha^2\omega^2 t}\} \ast u(0, x) = \frac{1}{2 \alpha \sqrt{\pi t}} \mathrm{e}^{-\tfrac{x^2}{4\alpha^2t}} \ast u(0, x).
+\begin{align}
+u(t, x) &amp;= \mathcal{F}^{-1}\{\hat{u}(t, \omega)\} = \mathcal{F}^{-1}\{\mathrm{e}^{-\alpha^2\omega^2 t}\} \ast u(0, x) \\
+&amp;= \frac{1}{2 \alpha \sqrt{\pi t}} \mathrm{e}^{-\tfrac{x^2}{4\alpha^2t}} \ast u(0, x).
+\end{align}
 \]</span></p>
 <p>For the numerical computation it is more convenient to stay in the frequency domain and use <span class="math inline">\(\kappa\)</span> as before.</p>
 <p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.5 and Code 2.6)</span>.</p>
@@ -1526,22 +1543,27 @@ u(t, x) = \mathcal{F}^{-1}\{\hat{u}(t, \omega\} = \mathcal{F}^{-1}\{\mathrm{e}^{
 <span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> u.real    </span>
 <span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Waterfall plot</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="co">#ax.view_init(elev=45, azim=-20, roll=0)</span></span>
 <span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"$x$"</span>)</span>
 <span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"$t$"</span>)</span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>u_plot <span class="op">=</span> u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">1000</span>, :]</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(u_plot.shape[<span class="dv">0</span>]):</span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    ys <span class="op">=</span> j <span class="op">*</span> np.ones(u_plot.shape[<span class="dv">1</span>])</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, ys, u_plot[j, :])</span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Image plot</span></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.flipud(u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">100</span>]), aspect<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r"$u(t, x)$"</span>)</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>ax.set_zticks([])</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>u_plot <span class="op">=</span> u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="bu">int</span>(<span class="dv">1</span> <span class="op">/</span> dt), :]</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(u_plot.shape[<span class="dv">0</span>]):</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    ys <span class="op">=</span> j <span class="op">*</span> np.ones(u_plot.shape[<span class="dv">1</span>])</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, ys, u_plot[j, :])</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Image plot</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.flipud(u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">100</span>]), aspect<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$t \to$"</span>)</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_xaxis().set_ticks([])</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_yaxis().set_ticks([])</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="fig-fourier_fft_heat" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1585,7 +1607,7 @@ Figure&nbsp;9.4: Simulation of the heat equation in 1D.
 </div>
 </div>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1594,10 +1616,10 @@ Figure&nbsp;9.4: Simulation of the heat equation in 1D.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Implement the code yourself by filling out the missing sections:</p>
-<div id="d07838cf" class="cell" data-execution_count="9">
+<div id="814cac87" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
@@ -1641,17 +1663,22 @@ Figure&nbsp;9.4: Simulation of the heat equation in 1D.
 <span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
 <span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"$x$"</span>)</span>
 <span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"$t$"</span>)</span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>u_plot <span class="op">=</span> u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">1000</span>, :]</span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(u_plot.shape[<span class="dv">0</span>]):</span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    ys <span class="op">=</span> j <span class="op">*</span> np.ones(u_plot.shape[<span class="dv">1</span>])</span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, ys, u_plot[j, :])</span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Image plot</span></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.flipud(u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">100</span>]), aspect<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r"$u(t, x)$"</span>)</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>ax.set_zticks([])</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>u_plot <span class="op">=</span> u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="bu">int</span>(<span class="dv">1</span> <span class="op">/</span> dt), :]</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(u_plot.shape[<span class="dv">0</span>]):</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    ys <span class="op">=</span> j <span class="op">*</span> np.ones(u_plot.shape[<span class="dv">1</span>])</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, ys, u_plot[j, :])</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Image plot</span></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.flipud(u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">100</span>]), aspect<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$t \to$"</span>)</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_xaxis().set_ticks([])</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_yaxis().set_ticks([])</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1717,19 +1744,24 @@ Figure&nbsp;9.4: Simulation of the heat equation in 1D.
 <span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Waterfall plot</span></span>
 <span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
 <span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"$x$"</span>)</span>
 <span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"$t$"</span>)</span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>u_plot <span class="op">=</span> u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">60</span>, :]</span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(u_plot.shape[<span class="dv">0</span>]):</span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>    ys <span class="op">=</span> j <span class="op">*</span> np.ones(u_plot.shape[<span class="dv">1</span>])</span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, ys, u_plot[j, :])</span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Image plot</span></span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.flipud(u), aspect<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
-<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r"$u(t, x)$"</span>)</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>ax.set_zticks([])</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>u_plot <span class="op">=</span> u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">60</span>, :]</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(u_plot.shape[<span class="dv">0</span>]):</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>    ys <span class="op">=</span> j <span class="op">*</span> np.ones(u_plot.shape[<span class="dv">1</span>])</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, ys, u_plot[j, :])</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Image plot</span></span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.flipud(u), aspect<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$t \to$"</span>)</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_xaxis().set_ticks([])</span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_yaxis().set_ticks([])</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="fig-fourier_fft_advection" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1781,7 +1813,7 @@ Figure&nbsp;9.5: Computing the derivative of a function
 <div class="callout-body-container">
 <div id="exm-fourier-fft-burger" class="theorem example">
 <p><span class="theorem-title"><strong>Example 9.6 (Burger’s equation)</strong></span> Burger’s equation in 1D is given by <span class="math display">\[
-\dot{u} + u \partial_t u = \nu \partial_x^2 u.
+\dot{u} + u \partial_x u = \nu \partial_x^2 u.
 \]</span> The equation consists of a nonlinear convection part <span class="math inline">\(u \partial_t u\)</span> as well as diffusion. The convection part is designed in such a way that larger amplitudes travel faster and therefore causes a shock wave to form.</p>
 <p>Regarding the solution of this equation, the interesting part is that we need to map back and forth between the Fourier space and time space to apply the nonlinearity.</p>
 <p>This example is also very useful to test the capabilities of your solver as by decreasing the diffusion factor further and further we can approach an infinitely steep shock and in theory it can break like an ocean wave.</p>
@@ -1827,17 +1859,22 @@ Figure&nbsp;9.5: Computing the derivative of a function
 <span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
 <span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"$x$"</span>)</span>
 <span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"$t$"</span>)</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>u_plot <span class="op">=</span> u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">10</span>, :]</span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(u_plot.shape[<span class="dv">0</span>]):</span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    ys <span class="op">=</span> j <span class="op">*</span> np.ones(u_plot.shape[<span class="dv">1</span>])</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, ys, u_plot[j, :])</span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Image plot</span></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.flipud(u), aspect<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r"$u(t, x)$"</span>)</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>ax.set_zticks([])</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>u_plot <span class="op">=</span> u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">10</span>, :]</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(u_plot.shape[<span class="dv">0</span>]):</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    ys <span class="op">=</span> j <span class="op">*</span> np.ones(u_plot.shape[<span class="dv">1</span>])</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, ys, u_plot[j, :])</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Image plot</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.flipud(u), aspect<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$t \to$"</span>)</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_xaxis().set_ticks([])</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_yaxis().set_ticks([])</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="fig-fourier_fft_burger" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1970,7 +2007,7 @@ g_{j,k} = \mathrm{e}^{{\mathrm{i}2 \pi j\Delta\omega t}} g(t- k\Delta t)
 <div class="callout-body-container">
 <div id="exm-fourier-dgt-chirp" class="theorem example">
 <p><span class="theorem-title"><strong>Example 9.7 (Gabor transform for a quadratic chirp)</strong></span> As example we use an oscillating cosine function where the frequency of the oscillation increases as a quadratic function in time: <span class="math display">\[
-f(t) = \cos(2\pi t h(t)), \quad \text{with} h(t) = h_0 + (h_1 - h_0)\frac{t}{3 t_1^2},
+f(t) = \cos(2\pi\, t\, h(t)), \quad \text{with}\quad h(t) = h_0 + (h_1 - h_0)\frac{t}{3 t_1^2},
 \]</span> where the frequency shifts from <span class="math inline">\(h_0\)</span> to <span class="math inline">\(h_1\)</span> between <span class="math inline">\(t=0\)</span> and <span class="math inline">\(t=t_1\)</span>.</p>
 <p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.9)</span>.</p>
 <details class="code-fold">
@@ -2684,7 +2721,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","loop":false,"descPosition":"bottom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

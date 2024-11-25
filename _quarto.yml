@@ -40,6 +40,9 @@ book:
         - signal/fourier.qmd
         - signal/wavelet.qmd
         - signal/twodim.qmd
+    - part: sensing/index.qmd
+      chapters:
+        - sensing/sparsity.qmd
     - summary.qmd
     - references.qmd
 

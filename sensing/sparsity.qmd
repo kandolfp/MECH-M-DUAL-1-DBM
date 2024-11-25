@@ -1,0 +1,141 @@
+---
+lightbox: true
+---
+# Sparsity and Compression {#sec-sensing-sparsity}
+
+As we have seen before and maybe know from our own experience, most image and audio signals are highly compressible.
+Here compressible means we can find a basis that allows for a sparse reprehension of our signal. 
+Let us put this into a small definition. 
+
+::: {.callout appearance="simple"}
+:::: {#def-sensing-ksparse} 
+
+## $K$-sparse data
+
+A compressible signal $x\in \mathbb{R}^n$ may be written in a sparse vector $s\in \mathbb{R}^n$ with a basis transformation (see @def-changebasis for the formal definition) expressed by the matrix $C\in\mathbb{R}^{n\times n}$ and
+$$
+x = C s.
+$$
+The vector $s$ is called $K$-sparse if it contains exactly $K$ non-zero elements.
+
+::::: {.callout-important}
+It is important to note that this does not imply that $C$ is sparse.
+:::::
+
+If the basis is generic such as the Fourier or Wavelet basis, i.e. we do not need to store the matrix $C$ but can generate it on the spot, we only need to store the $K$ non-zero elements of $s$ to reconstruct the original signal.
+::::
+:::
+
+::: {.callout-note}
+As we have seen in @sec-signal-2d images (and audio) signals are highly compressible in the Fourier and Wavelet basis with view most entries small or zero.
+By setting the small value to zero we reduce the density further without a high loss of quality.
+
+We see this in JPEG compression for images and MP3 compression for audio signals.
+If we stream an audio signal on view an image on the web we only need to transfer $s$ and not $x$, saving bandwidth and storage as we go. 
+:::
+
+We have seen in @fig-mci_headquater_svd that we can use the SVD to reduce the size as well.
+The downside here is that we need to store $U$ and $V$ (@def-def-svdlowrank) even if we reduce the rank.
+This is rather inefficient. 
+On the other hand, we have used SVD in @sec-matrixcd-svd-eigenfaces with the Eigenfaces example how we can create a basis with SVD that can be used to classify an entire class of images - human faces.
+Storing the basis matrices in this case is comparable cheap and it allows us to use certain aspects of the downsampling for learning purposes.
+
+We also need to stress that SVD and Fourier are unitary transformations which make the move into and from the basis cheep.
+This is the basis for a lot of computation seen in the field of compressed sensing and compression in general.
+
+::: {.callout-note}
+The driving factors for compression are audio, image and video, but also raw data compression as seen with `zip`, `7z` and all the other available algorithms.
+
+It is wrong to assume that we do not see this in engineering applications.
+High dimensional differential equations usually have a solution on a low dimensional manifolds and therefore imply that sparsity can be seen here to. 
+:::
+
+Let us return to image compression and follow along with the examples given in [@Brunton2022, Chapter 3, pp98-101].
+
+We can use the code provided earlier.
+We move from @fig-mci_sparsity_fft_compress-1 to @fig-mci_sparsity_fft_compress-2 via $\mathcal{F}$. 
+From @fig-mci_sparsity_fft_compress-2 to @fig-mci_sparsity_fft_compress-4 we only keep the highest 5% of our values and move to @fig-mci_sparsity_fft_compress-3 via $\mathcal{F}^{-1}$.
+
+```{python}
+#| label: fig-mci_sparsity_fft_compress
+#| fig-cap: "Image of MCI I and the reconstruction with various amounts of FFT coefficients left."
+#| fig-subcap:
+#|   - "Original image."
+#|   - "Fourier coefficients"
+#|   - "Compressed image"
+#|   - "Truncated FFT coefficients (5%)"
+#| layout-ncol: 2
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import imageio.v3 as iio
+import numpy as np
+%config InlineBackend.figure_formats = ['svg']
+
+im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
+
+# https://raw.githubusercontent.com/dynamicslab/databook_python/refs/heads/master/DATA/jelly.jpg
+def rgb2gray(rgb):
+    return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
+
+def myplot(A):
+    plt.figure()
+    plt.imshow(A, cmap="gray")
+    plt.axis("off")
+    plt.gca().set_aspect(1)
+
+A = rgb2gray(im)
+A_fft = np.fft.fft2(A)
+A_fft_sort = np.sort(np.abs(A_fft.reshape(-1)))
+myplot(A)
+
+myplot(np.log(np.abs(np.fft.fftshift(A_fft)) + 1))
+c = 0.05
+thresh = A_fft_sort[int(np.floor((1 - c) * len(A_fft_sort)))]
+A_fft_th = A_fft * (np.abs(A_fft) > thresh)
+A_th = np.fft.ifft2(A_fft_th).real
+myplot(A_th)
+myplot(np.log(np.abs(np.fft.fftshift(A_fft_th)) + 1))
+```
+
+In order to get an idea why the Fourier transform is useful in this scenario we look at the image as a surface.
+
+::: {.callout-note}
+In order to make this feasible for interactive rendering we use only the upper left quarter of the image.
+:::
+
+```{python}
+#| label: fig-mci_sparsity_fft_compress2
+#| fig-cap: "Upper left quarter of the MCI I image as a 3D surface"
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import plotly.graph_objects as go
+import numpy as np
+%config InlineBackend.figure_formats = ['svg']
+
+B = np.transpose(A[:int(A.shape[0]/2):5, :int(A.shape[1]/2):5])
+y = np.arange(B.shape[0])
+x = np.arange(B.shape[1])
+
+X,Y = np.meshgrid(x,y)
+fig = go.Figure()
+fig.add_trace(go.Surface(z=B, x=X, y=Y))
+fig.show()
+```
+
+As can be seen in @fig-mci_sparsity_fft_compress2 we can express the clouds with view modes and even the raster of the building seams to fit this model nicely.
+
+It is not very surprising to have such structure in a so called _natural image_.
+The image or pixel space is big, very big.
+For an $n \time n$ black and white image there are $2^{n^2}$ possible images.
+So for a $20 \times 20$ image we already have $2^400$ possible images which a number with a number with 121 digits and it is assumed that there are (only) about $10^{82}$ atoms in the universe.
+
+::: {#fig-sparsity-pixelspace}
+[![](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*FIm11cfKof-67M3Swxrhqg.png)](https://medium.com/@erictuanle/constructing-probability-model-for-data-6e25bb2fd6cb)
+
+[Medium article](https://medium.com/@erictuanle/constructing-probability-model-for-data-6e25bb2fd6cb) discussing probability models for data.
+:::
+
+So finding structure in images, especially in images with high resolution is not surprising.
+The rest is basically random noise.
+Most of the _dimensions_ of pixel space are only necessary if we want to encode this random noise images but for a cloud with some mountains and a building only need some dimensions and are therefore highly compressible. 

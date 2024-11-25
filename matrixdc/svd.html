@@ -325,6 +325,23 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../sensing/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sparsity and compression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sensing/sparsity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../summary.html" class="sidebar-item-text sidebar-link">
@@ -351,7 +368,7 @@ window.Quarto = {
   <li><a href="#principal-component-analysis" id="toc-principal-component-analysis" class="nav-link" data-scroll-target="#principal-component-analysis"><span class="header-section-number">5.2</span> Principal Component Analysis</a>
   <ul class="collapse">
   <li><a href="#computation" id="toc-computation" class="nav-link" data-scroll-target="#computation"><span class="header-section-number">5.2.1</span> Computation</a></li>
-  <li><a href="#example-eigenfaces" id="toc-example-eigenfaces" class="nav-link" data-scroll-target="#example-eigenfaces"><span class="header-section-number">5.2.2</span> Example Eigenfaces</a></li>
+  <li><a href="#sec-matrixcd-svd-eigenfaces" id="toc-sec-matrixcd-svd-eigenfaces" class="nav-link" data-scroll-target="#sec-matrixcd-svd-eigenfaces"><span class="header-section-number">5.2.2</span> Example Eigenfaces</a></li>
   </ul></li>
   <li><a href="#further-applications-of-the-svd" id="toc-further-applications-of-the-svd" class="nav-link" data-scroll-target="#further-applications-of-the-svd"><span class="header-section-number">5.3</span> Further applications of the SVD</a>
   <ul class="collapse">
@@ -485,7 +502,7 @@ U_1 = U(:, 1:n) = \left[u_1 | \cdots | u_n \right] \in \mathbb{R}^{m\times n}
 </figure>
 </div>
 <p>In Python we can compute the (Thin)SVD as follows</p>
-<div id="669d12de" class="cell styled-output" data-execution_count="1">
+<div id="8a499925" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -880,8 +897,8 @@ R_{\frac\pi3} = \left[
 \begin{array}{cc}-0.501&amp;-0.865\\-0.865&amp;0.501\end{array} \right]
 \]</span></p>
 </section>
-<section id="example-eigenfaces" class="level3" data-number="5.2.2">
-<h3 data-number="5.2.2" class="anchored" data-anchor-id="example-eigenfaces"><span class="header-section-number">5.2.2</span> Example Eigenfaces</h3>
+<section id="sec-matrixcd-svd-eigenfaces" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="sec-matrixcd-svd-eigenfaces"><span class="header-section-number">5.2.2</span> Example Eigenfaces</h3>
 <p>We combine SVD/PCA in a illustrative example called <em>eigenfaces</em> as introduced in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Sec 1.6, pp.&nbsp;28-34)</span>.</p>
 <p>The idea is to apply the PCA techniques to a large set of faces to extract the dominate correlations between the images and create a <em>face basis</em> that can be used to represent an image in these coordinates. For example you can reconstruct a face in this space by projecting onto the eigen vectors or it can be used for face recognition as similar faces usually cluster under this projection.</p>
 <p>The images are taken from the Yale Face Dataset B, in our case we use a <a href="https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos/tree/main">GitHub</a> that provides <a href="https://julialang.org/">Julia</a> Pluto notebooks for Chapter 1 to 4 of <span class="citation" data-cites="Brunton2022">Brunton and Kutz (<a href="../references.html#ref-Brunton2022" role="doc-biblioref">2022</a>)</span>.</p>
@@ -915,7 +932,7 @@ Important
 <p>The following code is an adaptation of the <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 1.7 and 1.9)</span>.</p>
 </div>
 </div>
-<div id="dd9adc96" class="cell" data-execution_count="6">
+<div id="9c604b09" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1793,7 +1810,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":false,"closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

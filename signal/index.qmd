@@ -18,5 +18,6 @@ In this section we are going to discuss basics of signal processing in terms of 
 
 - @sec-signal-fourier
 - @sec-signal-wavelet
+- @sec-signal-2d
 
-Parts of this section are based on [@Brunton2022, Section 2].
+Parts of this section are based on [@Brunton2022, Chapter 2].

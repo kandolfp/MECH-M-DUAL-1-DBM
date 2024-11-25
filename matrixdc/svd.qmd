@@ -416,7 +416,7 @@ R_{\frac\pi3} = \left[
 $$""")
 ```
 
-### Example Eigenfaces
+### Example Eigenfaces {#sec-matrixcd-svd-eigenfaces}
 
 We combine SVD/PCA in a illustrative example called _eigenfaces_ as introduced in [@Brunton2022, Sec 1.6, pp. 28-34].
 

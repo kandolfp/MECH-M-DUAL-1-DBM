@@ -127,7 +127,7 @@ As can be seen in @fig-mci_sparsity_fft_compress2 we can express the clouds with
 
 It is not very surprising to have such structure in a so called _natural image_.
 The image or pixel space is big, very big.
-For an $n \time n$ black and white image there are $2^{n^2}$ possible images.
+For an $n \times n$ black and white image there are $2^{n^2}$ possible images.
 So for a $20 \times 20$ image we already have $2^400$ possible images which a number with a number with 121 digits and it is assumed that there are (only) about $10^{82}$ atoms in the universe.
 
 ::: {#fig-sparsity-pixelspace}

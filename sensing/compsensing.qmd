@@ -221,7 +221,7 @@ For this algorithm we sample $p=128$ points in time from the $N = 4096$ high res
 We therefore know exactly the timing of these samples.
 If we would sample uniformly in time we fail, see @fig-sensing_compsensing_signal2.
 This happens because we see an aliasing effect for the high-frequency domain resulting in erroneous frequency peaks.
-If we compare the samples in @sensing_compsensing_signal-1 and @sensing_compsensing_signal2-1 it is hard to see the difference.
+If we compare the samples in @fig-sensing_compsensing_signal-1 and @fig-sensing_compsensing_signal2-1 it is hard to see the difference.
 
 ```{python}
 #| label: fig-sensing_compsensing_signal2

@@ -43,6 +43,7 @@ book:
     - part: sensing/index.qmd
       chapters:
         - sensing/sparsity.qmd
+        - sensing/compsensing.qmd
     - summary.qmd
     - references.qmd
 

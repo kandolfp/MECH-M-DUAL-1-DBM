@@ -12,17 +12,17 @@ Let us put this into a small definition.
 
 ## $K$-sparse data
 
-A compressible signal $x\in \mathbb{R}^n$ may be written in a sparse vector $s\in \mathbb{R}^n$ with a basis transformation (see @def-changebasis for the formal definition) expressed by the matrix $C\in\mathbb{R}^{n\times n}$ and
+A compressible signal $x\in \mathbb{R}^n$ may be written in a sparse vector $s\in \mathbb{R}^n$ with a basis transformation (see @def-changebasis for the formal definition) expressed by the matrix $B\in\mathbb{R}^{n\times n}$ and
 $$
-x = C s.
+x = B s.
 $$
 The vector $s$ is called $K$-sparse if it contains exactly $K$ non-zero elements.
 
 ::::: {.callout-important}
-It is important to note that this does not imply that $C$ is sparse.
+It is important to note that this does not imply that $B$ is sparse.
 :::::
 
-If the basis is generic such as the Fourier or Wavelet basis, i.e. we do not need to store the matrix $C$ but can generate it on the spot, we only need to store the $K$ non-zero elements of $s$ to reconstruct the original signal.
+If the basis is generic such as the Fourier or Wavelet basis, i.e. we do not need to store the matrix $B$ but can generate it on the spot, we only need to store the $K$ non-zero elements of $s$ to reconstruct the original signal.
 ::::
 :::
 
@@ -35,7 +35,7 @@ If we stream an audio signal on view an image on the web we only need to transfe
 :::
 
 We have seen in @fig-mci_headquater_svd that we can use the SVD to reduce the size as well.
-The downside here is that we need to store $U$ and $V$ (@def-def-svdlowrank) even if we reduce the rank.
+The downside here is that we need to store $U$ and $V$ (@def-svdlowrank) even if we reduce the rank.
 This is rather inefficient. 
 On the other hand, we have used SVD in @sec-matrixcd-svd-eigenfaces with the Eigenfaces example how we can create a basis with SVD that can be used to classify an entire class of images - human faces.
 Storing the basis matrices in this case is comparable cheap and it allows us to use certain aspects of the downsampling for learning purposes.

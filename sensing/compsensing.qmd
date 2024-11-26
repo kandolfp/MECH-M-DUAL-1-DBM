@@ -1,0 +1,278 @@
+---
+lightbox: true
+---
+# Compressed Sensing {#sec-sensing-compressed-sensing}
+
+We use compression in everyday life extensively.
+Nevertheless, it almost always requires us to have the high resolution data/measurement and than compress it down. 
+Here we discuss the reverse, where we collect relatively few _compressed_ or _random_ measurements and then infer a sparse representation.
+
+Until recent developments the computation was non-polynomial (NP) hard problem but now there are algorithms to reconstruct the full signal with high probability using convex algorithms.
+
+::: {.callout appearance="simple"}
+:::: {#def-sensing-compressed-sensing} 
+
+## Compressed Sensing
+For a signal $x$ that is $K$-sparse in $\mathcal{B}$ with matrix $B$ we need $n$ measurements and can compress them to $K$.
+
+In compressed sensing we collect $p$ randomly chosen or _compressed_ measurements and solve for the $K$ elements of $s$ that are not zero, with $K < p \ll n$.
+
+We can represent $p$ linear measurements of $x$ as the matrix $C\in\mathbb{R}^{p\times n}$ and thus
+$$
+y = C x.
+$$
+
+Relating this back to $s$ and $\mathcal{B}$ we get
+$$
+y = C x = C B s = D s,
+$$
+as an under-determined system.
+To get the optimal solution, i.e. the smallest $K$, we optimize
+$$
+\check{s} = \operatorname{argmin}_s \| s \|_0, \quad \text{subject to} \quad y = C B s.
+$$
+Here $\|\cdot\|_0$ is $\ell_0$ pseudo norm that measures the number of non-zero elements.
+::::
+:::
+
+As we will see, the selection of the matrix $C$ is important to allow for the optimization to be such that we do not need brute-force to look for $\check{s}$.
+This brute-force search is combinatorial in $n$ and $K$, for a fixed (known) $K$ but significantly larger for unknown $K$.
+
+Under certain condition on $C$ we can relax the conditions to a convex $\ell_1$-minimization
+$$
+\check{s} = \operatorname{argmin}_s \| s \|_1, \quad \text{subject to} \quad y = C B s.
+$$ {#eq-sparse-l1}
+
+In order to have @eq-sparse-l1 converge with high properbility we need to following assumptions to be met (precise description will follow):
+
+1. The measurement matrix $C$ must be _incoherent_ with respect to the sparsifying basis $\mathcal{B}$, i.e. the rows of $C$ do not correlate with the columns of $B$.
+1. The number of measurements $p$ must be sufficiently large, on the order of 
+$$
+p \approx \mathcal{O}\left(K\log\left(\frac{n}{K}\right)\right) \approx k_1\, K \log\left(\frac{n}{K}\right),
+$$
+where $k_1$ depends on how incoherent $C$ and $B$ are.
+
+::: {.callout-note}
+In @fig-mci_sparsity_fft_compress we illustrated compressed sensing with a $4016 \times 6016$ image.
+With our 5% of Fourier coefficients this puts the sparsity $K = 0.05 \times 4016 \times 6016 \approx 1 208 013$ and with $k_1=3$ we would stay with $p$ 3.6 million measurements and about 15% of the original pixels.
+
+The trick part is how to select them, which is why compressed sensing is not used much in imaging, except for some cases like magnetic resonance imaging (MRI) for patience that can not stay still or sedation is risky.
+:::
+
+The idea of the two conditions is to make $CB$ act more or less like a unitary transformation on $K$-sparse vectors $s$, preserving relative distance between vectors and allowing for the $\ell_1$ convex optimization.
+We will see this in therms of the _restricted isometry property_ (RIP).
+
+We know of the Shannon-Nyquist sampling theorem:
+
+> If a function $f(t)$ contains no frequencies higher than $b$ hertz, then it can be completely determined from its ordinates at a sequence of points spaced less than $\frac{1}{2b} seconds apart.
+- see [Wikipedia](https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem)
+
+telling us that we need a sampling rate of at least double the highest frequency to recover the signal properly.
+However, this is only true for signals with broadband frequency content and this is hardly ever the case for uncompressed signals.
+As we expect an uncompressed signal can be expressed as a sparse signal in the correct basis we can relax the Shannon-Nyquist theorem.
+Nevertheless, we need precise timing for our measurements and the recovery is not guaranteed, it is possible with high probability.
+
+::: {.callout-note}
+There are alternative formulations based on so called _greedy algorithms_ that determine the sparsity through an iterative matching pursuit problem, e.g. the _compressed sensing matching pursuit_ algorithm or CoSaMP for short.
+
+A related convex formulation we have already seen and can be applied here is
+$$
+\check{s} = \operatorname{argmin}_s \| CBs - y\|_2 + \lambda_1 \|s\|_1
+$$
+compare @sec-regression-optimizers where $\lambda$ is a weight for the importance of sparsity, see @fig-opt_lambda1.
+:::
+
+@sec-regression-optimizers actually serve as our first example and shows neatly how the $\ell_1$ norm promotes sparsity whereas the $\ell_2$ solution stays dense.
+We can also use this example to give an insight to what _with high probability_ means. 
+We created a random matrix in this example with 5 times more rows than columns, unless we are very unlucky and we have a lot of linear dependency between the rows we will have infinitely many solution with _high probability_.
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-sensing-recovery-audio}
+
+## Recovering an Audio Signal from Sparse Measurements
+
+Let us consider a audio signal consisting of a two-tone audio signal
+$$
+f(t) = \cos(97 t\, 2\pi) + \cos(777 t\, 2\pi)
+$$
+which is sparse in the frequency domain (transformation via FFT).
+The highest frequency is $777 \mathrm{Hz}$ and therefore the Shannon-Nyquist theorem tells us we should sample with at least $1554 \mathrm{Hz}$.
+
+The sparsity of the sample allows us to reconstruct the signal by sampling randomly with an average sampling rate of $128 \mathrm{Hz}$, well below the Shannon-Nyquist threshold.
+
+The code relies on the CoSaMP implementation @NEEDELL2009301 provided on [gitHub](https://github.com/avirmaux/CoSaMP/tree/master) and included below so we can work with it.
+
+The code is adapted from [@Brunton2022, Code 3.3]
+
+```{python}
+#| code-fold: true
+#| code-summary: "CoSaMP algorithm form gitHub, now print."
+import numpy as np
+
+
+def cosamp(phi, u, s, epsilon=1e-10, max_iter=1000):
+    """
+    Return an `s`-sparse approximation of the target signal
+    Input:
+        - phi, sampling matrix
+        - u, noisy sample vector
+        - s, sparsity
+    """
+    a = np.zeros(phi.shape[1])
+    v = u
+    it = 0 # count
+    halt = False
+    while not halt:
+        it += 1
+        #print("Iteration {}\r".format(it), end="")
+        
+        y = np.dot(np.transpose(phi), v)
+        omega = np.argsort(y)[-(2*s):] # large components
+        omega = np.union1d(omega, a.nonzero()[0]) # use set instead?
+        phiT = phi[:, omega]
+        b = np.zeros(phi.shape[1])
+        # Solve Least Square
+        b[omega], _, _, _ = np.linalg.lstsq(phiT, u)
+        
+        # Get new estimate
+        b[np.argsort(b)[:-s]] = 0
+        a = b
+        
+        # Halt criterion
+        v_old = v
+        v = u - np.dot(phi, a)
+
+        halt = (np.linalg.norm(v - v_old) < epsilon) or \
+            np.linalg.norm(v) < epsilon or \
+            it > max_iter
+        
+    return a
+```
+
+```{python}
+#| label: fig-sensing_compsensing_signal
+#| fig-cap: "Compressed sensing reconstruction of a two frequency audio signal, entire time from [0, 1]."
+#| fig-subcap:
+#|   - "Time window of the signal, the x marks sampling points in the domain."
+#|   - "Time window of the reconstructed signal from the above measurements."
+#|   - "Power spectral density of the original and reconstructed signal."
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.fftpack import dct, idct
+%config InlineBackend.figure_formats = ['svg']
+np.random.seed(6020)
+
+N = 4096
+t = np.linspace(0, 1, N)
+fun = lambda t: np.cos(97 * t * 2 * np.pi) + np.cos(777 * t * 2 * np.pi)
+f = fun(t)
+f_hat = np.fft.fft(f)
+PSD = np.abs(f_hat)**2 / N
+
+## Randomly sample signal
+p = 128 # num. random samples, p = N/32
+perm = np.floor(np.random.rand(p) * N).astype(int)
+y = f[perm]
+
+## Solve compressed sensing problem
+Psi = dct(np.identity(N)) # Build Psi
+Theta = Psi[perm, :]       # Measure rows of Psi
+
+s = cosamp(Theta, y, s=10, epsilon=1.e-10, max_iter=10) # CS via matching pursuit
+frec = idct(s)
+frec_hat = np.fft.fft(frec, N) # computes the (fast) discrete fourier transform
+PSDrec = np.abs(frec_hat)**2 / N # Power spectrum (how much power in each freq)
+
+time_window = np.array([512, 768]) / N
+freq = np.arange(N)
+L = int(np.floor(N / 2))
+
+plt.figure()
+plt.plot(t, f, "k")
+plt.plot(perm/N, y, "rx", ms=12, mew=4)
+plt.xlabel("Time [s]")
+plt.xlim(time_window[0], time_window[1])
+plt.ylim(-2, 2)
+plt.gca().set_aspect(5e-3)
+
+plt.figure()
+plt.plot(t, frec, "r")
+plt.xlim(time_window[0], time_window[1])
+plt.xlabel("Time [s]")
+plt.ylim(-2, 2)
+plt.gca().set_aspect(5e-3)
+
+plt.figure()
+plt.plot(freq[:L], PSD[:L], "k", label="Original")
+plt.plot(freq[:L], PSDrec[:L], "r", label="Reconstructed")
+plt.xlim(0, N/4)
+plt.ylim(0, N/4)
+plt.legend()
+plt.gca().set_aspect(1/3)
+
+plt.show()
+```
+
+The CoSaMP algorithm works in the discrete cosine transform basis, which can be derived from the FFT.
+For this algorithm we sample $p=128$ points in time from the $N = 4096$ high resolution sampling.
+We therefore know exactly the timing of these samples.
+If we would sample uniformly in time we fail, see @fig-sensing_compsensing_signal2.
+This happens because we see an aliasing effect for the high-frequency domain resulting in erroneous frequency peaks.
+If we compare the samples in @sensing_compsensing_signal-1 and @sensing_compsensing_signal2-1 it is hard to see the difference.
+
+```{python}
+#| label: fig-sensing_compsensing_signal2
+#| fig-cap: "Compressed sensing reconstruction of a two frequency audio signal, entire time from [0, 1] - sampling uniform in time."
+#| fig-subcap:
+#|   - "Time window of the signal, the x marks sampling points in the domain."
+#|   - "Time window of the reconstructed signal from the above measurements."
+#|   - "Power spectral density of the original and reconstructed signal."
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+ttt = np.random.uniform(0, 1, p)
+y = fun(ttt)
+
+## Solve compressed sensing problem
+Psi = dct(np.identity(N)) # Build Psi
+Theta = Psi[perm, :]       # Measure rows of Psi
+
+s = cosamp(Theta, y, s=10, epsilon=1.e-10, max_iter=10) # CS via matching pursuit
+frec = idct(s)
+frec_hat = np.fft.fft(frec, N) # computes the (fast) discrete fourier transform
+PSDrec = np.abs(frec_hat)**2 / N # Power spectrum (how much power in each freq)
+
+plt.figure()
+plt.plot(t, f, "k")
+plt.plot(perm/N, y, "rx", ms=12, mew=4)
+plt.xlabel("Time [s]")
+plt.xlim(time_window[0], time_window[1])
+plt.ylim(-2, 2)
+plt.gca().set_aspect(5e-3)
+
+plt.figure()
+plt.plot(t, frec, "r")
+plt.xlim(time_window[0], time_window[1])
+plt.xlabel("Time [s]")
+plt.ylim(-2, 2)
+plt.gca().set_aspect(5e-3)
+
+plt.figure()
+plt.plot(freq[:L], PSD[:L], "k", label="Original")
+plt.plot(freq[:L], PSDrec[:L], "r", label="Reconstructed")
+plt.xlim(0, N/4)
+plt.ylim(0, N/4)
+plt.legend()
+plt.gca().set_aspect(1/3)
+```
+
+In the algorithm CoSaMP the desired level of sparsity can be selected.
+For the above plots we used $s=10$ to simulate an unknown factor.
+Convergence to the sparsest solution relies on $p$, which in return is related to the sparsity $K$.
+
+[Compare @Brunton2022, pp. 107]
+::::
+:::

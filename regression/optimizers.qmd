@@ -10,7 +10,7 @@ A x = b
 $$ {#eq-axb}
 problem for different dimensions of $A$.
 
-We investigate the impact of restricting our solution not just by @eq-axb but with the help of the $l_1$ and $l_2$ norm imposed on the solution $x$.
+We investigate the impact of restricting our solution not just by @eq-axb but with the help of the $\ell_1$ and $\ell_2$ norm imposed on the solution $x$.
 As we have seen in @fig-linear_reg the choice of norm has an implication on the result and the same is true here.
 
 ::: {.callout-important}
@@ -33,7 +33,7 @@ Let us have a look at this in action for solving a _random_ system with differen
 
 ### LASSO 
 
-The _least absolute shrinkage and selection operator_ LASSO solves @eq-reg-optimizers with $\lambda_1 > 0$ and $\lambda_2=0$, i.e. only optimizing with the $l_1$ norm.
+The _least absolute shrinkage and selection operator_ LASSO solves @eq-reg-optimizers with $\lambda_1 > 0$ and $\lambda_2=0$, i.e. only optimizing with the $\ell_1$ norm.
 The theory tells us that for increasing $\lambda_1$ we should get more and more zeros in our solution $x$.
 
 ```{python}
@@ -89,7 +89,7 @@ The last row of @fig-opt_lambda1 confirms this quite impressively, interesting e
 
 ### RIDGE 
 
-The Ridge Regression solves @eq-reg-optimizers with $\lambda_1 = 0$ and $\lambda_2 > 0$, i.e. only optimizing with the $l_2$ norm.
+The Ridge Regression solves @eq-reg-optimizers with $\lambda_1 = 0$ and $\lambda_2 > 0$, i.e. only optimizing with the $\ell_2$ norm.
 The theory tells us that for for increasing $\lambda_1$ we should get more and more zeros in our solution $x$.
 
 ```{python}

@@ -340,6 +340,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sensing/compsensing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -398,7 +404,7 @@ window.Quarto = {
 <p>As we have seen in the previous section the task of regression usually results in an optimization problem. It is worth investigating this further by looking closely on the <span id="eq-axb"><span class="math display">\[
 A x = b
 \tag{8.1}\]</span></span> problem for different dimensions of <span class="math inline">\(A\)</span>.</p>
-<p>We investigate the impact of restricting our solution not just by <a href="#eq-axb" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> but with the help of the <span class="math inline">\(l_1\)</span> and <span class="math inline">\(l_2\)</span> norm imposed on the solution <span class="math inline">\(x\)</span>. As we have seen in <a href="linear.html#fig-linear_reg" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> the choice of norm has an implication on the result and the same is true here.</p>
+<p>We investigate the impact of restricting our solution not just by <a href="#eq-axb" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> but with the help of the <span class="math inline">\(\ell_1\)</span> and <span class="math inline">\(\ell_2\)</span> norm imposed on the solution <span class="math inline">\(x\)</span>. As we have seen in <a href="linear.html#fig-linear_reg" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> the choice of norm has an implication on the result and the same is true here.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -421,7 +427,7 @@ x = \underset{v}{\operatorname{argmin}} \|Av - b\|_2 + \lambda_1 \|v\|_1 + \lamb
 <p>Let us have a look at this in action for solving a <em>random</em> system with different parameters <span class="math inline">\(\lambda_1\)</span> and setting <span class="math inline">\(\lambda_2\)</span>.</p>
 <section id="lasso" class="level3" data-number="8.1.1">
 <h3 data-number="8.1.1" class="anchored" data-anchor-id="lasso"><span class="header-section-number">8.1.1</span> LASSO</h3>
-<p>The <em>least absolute shrinkage and selection operator</em> LASSO solves <a href="#eq-reg-optimizers" class="quarto-xref">Equation&nbsp;<span>8.2</span></a> with <span class="math inline">\(\lambda_1 &gt; 0\)</span> and <span class="math inline">\(\lambda_2=0\)</span>, i.e.&nbsp;only optimizing with the <span class="math inline">\(l_1\)</span> norm. The theory tells us that for increasing <span class="math inline">\(\lambda_1\)</span> we should get more and more zeros in our solution <span class="math inline">\(x\)</span>.</p>
+<p>The <em>least absolute shrinkage and selection operator</em> LASSO solves <a href="#eq-reg-optimizers" class="quarto-xref">Equation&nbsp;<span>8.2</span></a> with <span class="math inline">\(\lambda_1 &gt; 0\)</span> and <span class="math inline">\(\lambda_2=0\)</span>, i.e.&nbsp;only optimizing with the <span class="math inline">\(\ell_1\)</span> norm. The theory tells us that for increasing <span class="math inline">\(\lambda_1\)</span> we should get more and more zeros in our solution <span class="math inline">\(x\)</span>.</p>
 <div id="cell-fig-opt_lambda1" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
@@ -485,7 +491,7 @@ Figure&nbsp;8.1: LASSO regression coefficients of an over-determined system with
 </section>
 <section id="ridge" class="level3" data-number="8.1.2">
 <h3 data-number="8.1.2" class="anchored" data-anchor-id="ridge"><span class="header-section-number">8.1.2</span> RIDGE</h3>
-<p>The Ridge Regression solves <a href="#eq-reg-optimizers" class="quarto-xref">Equation&nbsp;<span>8.2</span></a> with <span class="math inline">\(\lambda_1 = 0\)</span> and <span class="math inline">\(\lambda_2 &gt; 0\)</span>, i.e.&nbsp;only optimizing with the <span class="math inline">\(l_2\)</span> norm. The theory tells us that for for increasing <span class="math inline">\(\lambda_1\)</span> we should get more and more zeros in our solution <span class="math inline">\(x\)</span>.</p>
+<p>The Ridge Regression solves <a href="#eq-reg-optimizers" class="quarto-xref">Equation&nbsp;<span>8.2</span></a> with <span class="math inline">\(\lambda_1 = 0\)</span> and <span class="math inline">\(\lambda_2 &gt; 0\)</span>, i.e.&nbsp;only optimizing with the <span class="math inline">\(\ell_2\)</span> norm. The theory tells us that for for increasing <span class="math inline">\(\lambda_1\)</span> we should get more and more zeros in our solution <span class="math inline">\(x\)</span>.</p>
 <div id="cell-fig-opt_lambda2" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
@@ -553,7 +559,7 @@ Figure&nbsp;8.2: Ridge regression coefficients of an over-determined system with
 <div class="callout-body-container">
 <div id="exr-lasso_reg" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.1 (Implement the above optimization yourself.)</strong></span> Fill out the missing parts:</p>
-<div id="3afb6c63" class="cell" data-execution_count="3">
+<div id="4379f3ae" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1236,7 +1242,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

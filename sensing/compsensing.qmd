@@ -330,3 +330,89 @@ In general, increasing $p$ ill decrease $\delta_K$, same as having incoherence v
 Luckily, there exist generic sampling matrices $C$ that are sufficiently incoherent with resect to nearly all transform bases.
 In particular, Gaussian and Bernoulli random measurement matrices satisfy @def-sensing-rip for a generic $B$ (with high probability).
 
+## Sparse Regression
+
+Let us return to regression for a moment an in particular to the LASSO method introduced in @sec-regression-optimizers-lasso.
+We have seen that $\ell_1$, i.e. the $\|\cdot\|_1$, promotes sparsity and we can use this to create a more robust method that rejects outliers. 
+
+We split up our points into a training and test set (the classic 80:20 split). 
+For the test set an varying the parameter $\lambda_1$ through a range of values we create a _fit_ with the training set and test against the test set. 
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-sensing-lasso}
+
+## LASSO fit for a regression problem
+
+For our 
+$$
+A x = b
+$$
+problem, we consider a problem the dimensions as $200$ observations with $10$ candidate predictions. 
+This results in a matrix $A\in\mathcal{R}^{200 \times 10}$ and we select the vector $b\in\mathcal{R}^{200}$ as the linear combination of exactly two of theses $10$ candidates.
+As a result, the vector $x$ is $2$-sparse by construction, and the aim is to recover this.
+In order to give the algorithm something to work on we add noise to $b$ resulting in no zero element in $b$. 
+
+To perform a $10$ fold cross validation [^1] for the LASSO method we use the features of `sklearn` [^2]. 
+
+```{python}
+#| label: fig-sensing_lasso
+#| fig-cap: "Cross-validation mean square error of Lasso fit, the green circle marks the optimal choice, the blue line the mean error of the k-folds and the error bar the maximal and minimal error form the k-folds."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import linear_model
+from sklearn import model_selection
+import pandas as pd
+%config InlineBackend.figure_formats = ["svg"]
+np.random.seed(6020)
+
+m = 200
+n = 10
+
+A = np.random.randn(m, n)
+x = np.array([0, 0, 1, 0, 0, 0, -1, 0, 0, 0])
+b = A @ x + 2 * np.random.randn(m)
+
+cv = 10
+lassoCV = linear_model.LassoCV(cv=cv, random_state=6020, tol=1e-8)
+lassoCV.fit(A, b)
+
+lasso_best = linear_model.Lasso(alpha=lassoCV.alpha_, random_state=6020)
+lasso_best.fit(A, b)
+print(lasso_best.coef_)
+
+plt.figure()
+Lmean = lassoCV.mse_path_.mean(axis=-1)
+error = [np.min(lassoCV.mse_path_, axis=-1), 
+         np.max(lassoCV.mse_path_, axis=-1)] / np.sqrt(n)
+plt.errorbar(lassoCV.alphas_, Lmean, yerr=error, ecolor="lightgray")
+plt.plot(lassoCV.alpha_, Lmean[lassoCV.alphas_==lassoCV.alpha_], "go", mfc='none')
+plt.xscale("log")
+plt.ylabel("Means Square Error")
+plt.xlabel(r"$\lambda_1$")
+plt.gca().invert_xaxis()
+plt.show()
+```
+The resulting coefficients for the best fit with lasso are 
+
+```{python} 
+#| classes: styled-output
+#| echo: false
+lasso_best.coef_
+```
+and a appropriate fit for our toy example.
+
+[Compare @Brunton2022, pp. 115]
+::::
+:::
+
+[^1]: We split our data into $10$ sets, use 9 for the training and 1 for test and average over the results.
+[^2]: Install the package via `pdm add scikit-learn`.
+
+::: {.callout-note}
+It is also possible to build a dictionary and and look for a sparse representation in this dictionary.
+
+An example how this can be done with the Eigenfaces example can be found in [@Brunton2022, pp. 117]
+:::
+

@@ -4,3 +4,7 @@
   background-color: darkgray;
   border-radius: 4px;
 }
+
+p {
+  text-align: justify
+}

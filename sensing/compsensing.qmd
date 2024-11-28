@@ -276,3 +276,57 @@ Convergence to the sparsest solution relies on $p$, which in return is related t
 [Compare @Brunton2022, pp. 107]
 ::::
 :::
+
+## The theoretic basics of compressed sensing
+
+Now that we have seen compressed sensing in action we need to bring in the theoretical basics that form this theory.
+
+The key feature is to look into the geometry of sparse vectors and how these vectors are transformed via random measurements. 
+More precisely, for large enough $p$ (amount of measurements) our matrix $D = CB$ of @def-sensing-compressed-sensing preserves the distance and inner product structure of sparse vectors.
+In turn this means, we need to find a matrix $C$ such that $D$ is a near-isometry map on sparse vectors.
+
+::: {.callout-note}
+An isometry map is a map that is distance preserving, i.e. the distance between to points is not changed under this map. 
+
+$$
+\| a - b \| = \| f(a) - f(b) \|
+$$
+
+A unitary map is a map that preserves distance and angle between vectors, i.e.
+$$
+\langle a, b \rangle = \langle f(a), f(b) \rangle
+$$
+For a linear map $f(x) = Ux$ this results in $U^\mathrm{H}U = UU^\mathrm{H} = I$.
+:::
+
+If $D$ behaves as a near isometry, it is possible to solve 
+$$
+y = D s
+$$
+for the _sparsest_ vector $s$ using convex $\ell_1$ minimization.
+
+Furthermore, a general rule is, the more incoherent the measurements are the smaller we can choose $p$. 
+
+::: {.callout appearance="simple"}
+:::: {#def-sensing-rip} 
+
+## Restricted Isometry Property (RIP)
+
+For $p$ incoherent measurements the matrix $D=CB$ satisfies a **restricted isometry property** (RIP) for sparse vectors $s$
+
+$$
+(1-\delta_K)\|s\|_2^2 \leq \|C B s\|_2^2 \leq (1+\delta_K)\|s\|_2^2,
+$$
+with the restricted isometry constant $\delta_K$.
+For a small enough $\delta_K$ $CB$ acts as a near-isometry on $K$-sparse vectors. 
+
+In particular, for $\delta_K < 1$ and therefore $(1-\delta_K) > 0$ and $(1+\delta_K) > 0$ this means the norm induced by $CB$ is equivalent to the two norm on the $K$-sparse vectors. 
+::::
+:::
+
+It is difficult to compute the $\delta_K$ in the RIP and as $C$ may be selected at random there is more information included in the statistical properties of $\delta_K$ for a family of matrices $C$.
+In general, increasing $p$ ill decrease $\delta_K$, same as having incoherence vectors and both improve the properties of $CB$ by bringing it closer to an isometry.
+
+Luckily, there exist generic sampling matrices $C$ that are sufficiently incoherent with resect to nearly all transform bases.
+In particular, Gaussian and Bernoulli random measurement matrices satisfy @def-sensing-rip for a generic $B$ (with high probability).
+

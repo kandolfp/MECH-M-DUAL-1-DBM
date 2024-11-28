@@ -416,3 +416,142 @@ It is also possible to build a dictionary and and look for a sparse representati
 An example how this can be done with the Eigenfaces example can be found in [@Brunton2022, pp. 117]
 :::
 
+## Robust Principal Component Analysis (RPCA)
+
+We discussed the principal component analysis in @sec-matrixdc-pca as an application with the SVD.
+Similar as regression, also the PCA is sensitive to outliers and _corrupt data_. 
+In @10.1145/1970392.1970395 an algorithm to make it more robust was developed. 
+
+The main idea of the paper is to decompose a matrix $X$ into a structured low-rank matrix $L$ and a sparse matrix $S$ containing the outliers and corrupt data
+$$
+X = L + S.
+$$
+If we can recover the principal components of $L$ from $X$ we have a robust method as the influence of $S$ have little influence.
+
+It might not be immediately obvious but applications of this split are video surveillance where the background is represented by $L$ and the foreground objects in $L$, face recognition with the eigenfaces in $L$ and shadows, occlusions (like glasses or masks) are in $S$.
+
+We have an optimization problem of the form
+$$
+\min_{L, S} \operatorname{rank}(L) + \| S \|_0 \quad\text{subject to}\quad $L+S = X$,
+$$ {#eq-rpca-org}
+where unfortunately both parts are not convex but we can search for it with _high probability_ using 
+$$
+\min_{L, S} \|L\|_{\star} + \lambda \| S \|_1 \quad\text{subject to}\quad $L+S = X$,
+$$ {#eq-rpca-pcp}
+with $\|\cdot\|_{\star}$ is called the _nuclear norm_ consisting of the sum of all singular values and we use it as our proxy for the $\operatorname{rank}$.
+
+@eq-rpca-pcp is called _principal component pursuit_ (PCP) and in @10.1145/1970392.1970395 they show that @eq-rpca-pcp converges to @eq-rpca-org for 
+
+1. $\lambda = 1/\sqrt{\max(n,m)}$ for $X^{m \times n}$ and
+1. $L$ is not sparse
+1. $S$ is not low-rank, where we assume that the entries do not span a low-dimensional column space.
+
+We can solve the PCP with an augmented Lagrange multiplier algorithm such as
+$$
+\mathcal{L}(L, S, Y) = \|L\|_{\star} + \lambda \| S \|_1 + \langle Y, X - L - S \rangle + \frac{\mu}{2} \|X-L-S\|_F^2.
+$$
+This is an iterative method where we solve for $L_k$ and $S_k$, update $Y_{k+1} = Y_k + \mu (X-L_k - S_k)$ and check for convergence. 
+For this specific problem the alternations method (ADM) provides a simple procedure to solve for $L$ and $S$.
+
+The following implementation of RPCA can be found in [@Brunton2022, pp. 121] with a similar application to the eigenfaces dataset.
+
+```{python}
+#| code-fold: true
+#| code-summary: "Robust principal component analysis and helper functions"
+def shrink(X, tau):
+    Y = np.abs(X) - tau
+    return np.sign(X) * np.maximum(Y, np.zeros_like(Y))
+
+
+def SVT(X, tau):
+    U, S, VT = np.linalg.svd(X, full_matrices=False)
+    out = U @ np.diag(shrink(S, tau)) @ VT
+    return out
+
+
+def RPCA(X):
+    n1, n2 = X.shape
+    mu = n1 * n2 / (4 * np.sum(np.abs(X.reshape(-1))))
+    lambd = 1 / np.sqrt(np.maximum(n1, n2))
+    thresh = 10**(-7) * np.linalg.norm(X)
+    
+    S = np.zeros_like(X)
+    Y = np.zeros_like(X)
+    L = np.zeros_like(X)
+    count = 0
+    while (np.linalg.norm(X - L - S) > thresh) and (count < 1000):
+        L = SVT(X - S + (1 / mu) * Y, 1 / mu)
+        S = shrink(X - L + (1 / mu) * Y, lambd / mu)
+        Y = Y + mu*(X - L - S)
+        count += 1
+    return L, S
+```
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+
+import numpy as np
+import numpy.linalg as LA
+import scipy
+import requests
+import io
+import imageio.v3 as iio
+import matplotlib.pyplot as plt
+%config InlineBackend.figure_formats = ['svg']
+
+def rgb2gray(rgb):
+    return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
+
+response = requests.get("https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos/raw/refs/heads/main/DATA/allFaces.mat")
+
+data = scipy.io.loadmat(io.BytesIO(response.content))
+faces = data["faces"]
+m = int(data["m"][0,0])
+n = int(data["n"][0,0])
+nfaces = np.ndarray.flatten(data['nfaces'])
+
+XX = faces[:,:nfaces[0]]
+im = np.asarray(iio.imread("https://raw.githubusercontent.com/dynamicslab/databook_python/refs/heads/master/DATA/mustache.jpg"))
+A = (rgb2gray(im)/255).astype("uint8")
+X = np.append(XX, (XX[:, 2] * A.T.flatten()).reshape((-1, 1)), axis=1)
+L, S = RPCA(X)
+
+for index in [2, 3, -1]:
+    plt.figure()
+    plt.imshow(np.reshape(X[:, index], (m, n)).T, cmap="gray")
+    plt.gca().axis("off")
+    plt.figure()
+    plt.imshow(np.reshape(L[:, index], (m, n)).T, cmap="gray")
+    plt.gca().axis("off")
+    plt.figure()
+    plt.imshow(np.reshape(S[:, index], (m, n)).T, cmap="gray")
+    plt.gca().axis("off")
+```
+::: {#fig-sensing_rpca layout-ncol=3}
+
+![$X$ for image 3](../_assets/sensing/X_2.svg){#fig-sensing_rpca-1}
+
+![$L$ for image 3](../_assets/sensing/L_2.svg){#fig-sensing_rpca-2}
+
+![$S$ for image 3](../_assets/sensing/S_2.svg){#fig-sensing_rpca-3}
+
+![$X$ for image 4](../_assets/sensing/X_3.svg){#fig-sensing_rpca-4}
+
+![$L$ for image 4](../_assets/sensing/L_3.svg){#fig-sensing_rpca-5}
+
+![$S$ for image 4](../_assets/sensing/S_3.svg){#fig-sensing_rpca-6}
+
+![$X$ for image 3 with comic disguise](../_assets/sensing/X_-1.svg){#fig-sensing_rpca-7}
+
+![$L$ for image 3 with comic disguise](../_assets/sensing/L_-1.svg){#fig-sensing_rpca-8}
+
+![$S$ for image 3 with comic disguise](../_assets/sensing/S_-1.svg){#fig-sensing_rpca-9}
+
+RPCA decomposition for the Yale B dataset.
+:::
+
+@fig-sensing_rpca we can see that RPCA effectively filters out occluded regions and shadows form $X$ in $L$.
+The missing part is filled in with the most consistent low-rank feature from the eigenfaces. 
+

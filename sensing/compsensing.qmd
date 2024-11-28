@@ -275,7 +275,7 @@ Convergence to the sparsest solution relies on $p$, which in return is related t
 
 [Compare @Brunton2022, pp. 107]
 ::::
-:::
+::: 
 
 ## The theoretic basics of compressed sensing
 
@@ -555,3 +555,107 @@ RPCA decomposition for the Yale B dataset.
 @fig-sensing_rpca we can see that RPCA effectively filters out occluded regions and shadows form $X$ in $L$.
 The missing part is filled in with the most consistent low-rank feature from the eigenfaces. 
 
+## Sparse Sensor Placement
+
+So far we have looked how to construct a signal with random measurements in a generic basis.
+But how about placing sensors at the correct points to reconstruct the signal with high probability.
+This can dramatically reduce the amount of data to measure.
+
+We can set _tailored sensors_ for a particular library instead of _random sensors_ in a generic library. 
+
+This can be used to reconstruct faces, or classify signals, see [@Brunton2022, Chapter 3.8] and references within.
+
+To see this in action we use the Python package `PySensors` and the example _Sea Surface Temperature (SST) sensors_ from their documentation, [Online](https://python-sensors.readthedocs.io/en/latest/examples/sea_surface_temperature.html#gallery-examples-sea-surface-temperature-ipynb) accessed on the 28th of November 2024.
+
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-sensing-sparse-sensor-placement}
+
+## Sea Surface Temperature (SST) sensors
+
+For a given dataset of sea surface temperature as training data we would like to place (sparse) sensors optimal that allow us to reconstruct the temperature at any other location. 
+This is achieved with the `SSPOR` algorithm form @8361090.
+
+```{python}
+#| label: fig-sensing_sst
+#| fig-cap: "Finding optimal sensor placements to recover the sea surface temperature."
+#| fig-subcap:
+#|   - "Sea surface temperature."
+#|   - "Optimal learned sensor placements to recover sea surface temperature"
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+from ftplib import FTP
+import numpy as np
+import matplotlib.pyplot as plt
+import netCDF4
+import pysensors as ps
+
+%config InlineBackend.figure_formats = ["svg"]
+np.random.seed(6020)
+
+# Import and save data locally
+ftp = FTP('ftp.cdc.noaa.gov')
+ftp.login()
+ftp.cwd('/Datasets/noaa.oisst.v2/')
+
+filenames = ['sst.wkmean.1990-present.nc', 'lsmask.nc']
+
+for filename in filenames:
+    localfile = open(filename, 'wb')
+    ftp.retrbinary('RETR ' + filename, localfile.write, 1024)
+    localfile.close()
+
+ftp.quit()
+
+f = netCDF4.Dataset('sst.wkmean.1990-present.nc')
+
+lat,lon = f.variables['lat'], f.variables['lon']
+SST = f.variables['sst']
+sst = SST[:]
+
+f = netCDF4.Dataset('lsmask.nc')
+mask = f.variables['mask']
+
+masks = np.bool_(np.squeeze(mask))
+snapshot = float("nan")*np.ones((180,360))
+snapshot[masks] = sst[0,masks]
+
+plt.figure()
+plt.imshow(snapshot, cmap=plt.cm.coolwarm)
+plt.xticks([])
+plt.yticks([])
+X = sst[:,masks]
+X = np.reshape(X.compressed(), X.shape)
+
+# Compute optimal sensor placement
+model = ps.SSPOR(
+    basis=ps.basis.SVD(n_basis_modes=25),
+    n_sensors=25
+)
+model.fit(X)
+sensors = model.get_selected_sensors()
+
+# Plot sensor locations
+temp = np.transpose(0 * X[1,:])
+temp[sensors] = 1
+img = 0*snapshot
+img[masks] = temp
+plt.figure()
+plt.imshow(snapshot, cmap=plt.cm.coolwarm)
+indx = np.where(img==1)
+plt.scatter(indx[1], indx[0], 4, color='black')
+plt.xticks([])
+plt.yticks([])
+```
+
+```{python}
+#| echo: false
+%%bash
+# Code to remove above files
+rm lsmask.nc sst.wkmean.1990-present.nc
+```
+
+(Compare [Online](https://python-sensors.readthedocs.io/en/latest/examples/sea_surface_temperature.html#gallery-examples-sea-surface-temperature-ipynb) accessed on the 28th of November 2024)
+:::
+::::

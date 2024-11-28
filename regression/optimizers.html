@@ -372,7 +372,7 @@ window.Quarto = {
   <ul>
   <li><a href="#over-determined-systems" id="toc-over-determined-systems" class="nav-link active" data-scroll-target="#over-determined-systems"><span class="header-section-number">8.1</span> Over-Determined Systems</a>
   <ul class="collapse">
-  <li><a href="#lasso" id="toc-lasso" class="nav-link" data-scroll-target="#lasso"><span class="header-section-number">8.1.1</span> LASSO</a></li>
+  <li><a href="#sec-regression-optimizers-lasso" id="toc-sec-regression-optimizers-lasso" class="nav-link" data-scroll-target="#sec-regression-optimizers-lasso"><span class="header-section-number">8.1.1</span> LASSO</a></li>
   <li><a href="#ridge" id="toc-ridge" class="nav-link" data-scroll-target="#ridge"><span class="header-section-number">8.1.2</span> RIDGE</a></li>
   </ul></li>
   <li><a href="#sec-regression-optimizers-msou" id="toc-sec-regression-optimizers-msou" class="nav-link" data-scroll-target="#sec-regression-optimizers-msou"><span class="header-section-number">8.2</span> Model Selection/Identification and over-/underfitting</a></li>
@@ -425,8 +425,8 @@ Important
 x = \underset{v}{\operatorname{argmin}} \|Av - b\|_2 + \lambda_1 \|v\|_1 + \lambda_2\|v\|_2
 \tag{8.2}\]</span></span> where the parameters <span class="math inline">\(\lambda_1\)</span> and <span class="math inline">\(\lambda_2\)</span> are called the <em>penalization coefficients</em>, with respect to the norm. Selecting these coefficients is the first step towards <em>model selection</em>.</p>
 <p>Let us have a look at this in action for solving a <em>random</em> system with different parameters <span class="math inline">\(\lambda_1\)</span> and setting <span class="math inline">\(\lambda_2\)</span>.</p>
-<section id="lasso" class="level3" data-number="8.1.1">
-<h3 data-number="8.1.1" class="anchored" data-anchor-id="lasso"><span class="header-section-number">8.1.1</span> LASSO</h3>
+<section id="sec-regression-optimizers-lasso" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="sec-regression-optimizers-lasso"><span class="header-section-number">8.1.1</span> LASSO</h3>
 <p>The <em>least absolute shrinkage and selection operator</em> LASSO solves <a href="#eq-reg-optimizers" class="quarto-xref">Equation&nbsp;<span>8.2</span></a> with <span class="math inline">\(\lambda_1 &gt; 0\)</span> and <span class="math inline">\(\lambda_2=0\)</span>, i.e.&nbsp;only optimizing with the <span class="math inline">\(\ell_1\)</span> norm. The theory tells us that for increasing <span class="math inline">\(\lambda_1\)</span> we should get more and more zeros in our solution <span class="math inline">\(x\)</span>.</p>
 <div id="cell-fig-opt_lambda1" class="cell" data-execution_count="1">
 <details class="code-fold">
@@ -559,7 +559,7 @@ Figure&nbsp;8.2: Ridge regression coefficients of an over-determined system with
 <div class="callout-body-container">
 <div id="exr-lasso_reg" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.1 (Implement the above optimization yourself.)</strong></span> Fill out the missing parts:</p>
-<div id="54766f8e" class="cell" data-execution_count="3">
+<div id="5521d092" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1242,7 +1242,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":false,"selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

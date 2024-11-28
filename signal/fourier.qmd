@@ -489,7 +489,7 @@ $$ {#eq-dft}
 with $\omega_N = \exp({-\mathrm{i} \tfrac{2 \pi}{N}})$. 
 
 ::: {.callout-note}
-The matrix of the DFT is a unitary Vandermonte matrix.
+The matrix of the DFT is a unitary Vandermonde matrix.
 :::
 
 As we can transfer the properties of the Fourier transform to the DFT we get the nice properties for sampled signals.

@@ -162,7 +162,7 @@ def cosamp(phi, u, s, epsilon=1e-10, max_iter=1000):
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.fftpack import dct, idct
-%config InlineBackend.figure_formats = ['svg']
+%config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
 
 N = 4096

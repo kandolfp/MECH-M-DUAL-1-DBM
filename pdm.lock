@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:8d7e01a31cf8816c6028c3191134cd8f69f0a7b5bcce0d88370900a3c863fff8"
+content_hash = "sha256:d8f67edafe42d200edfd3b2b57e623d23c530c9c000079127d3ebee8688c52fe"
 
 [[metadata.targets]]
 requires_python = "==3.12.*"
@@ -243,6 +243,26 @@ files = [
     {file = "cffi-1.17.1-cp312-cp312-win32.whl", hash = "sha256:a08d7e755f8ed21095a310a693525137cfe756ce62d066e53f502a83dc550f65"},
     {file = "cffi-1.17.1-cp312-cp312-win_amd64.whl", hash = "sha256:51392eae71afec0d0c8fb1a53b204dbb3bcabcb3c9b807eedf3e1e6ccf2de903"},
     {file = "cffi-1.17.1.tar.gz", hash = "sha256:1c39c6016c32bc48dd54561950ebd6836e1670f2ae46128f67cf49e789c52824"},
+]
+
+[[package]]
+name = "cftime"
+version = "1.6.4.post1"
+requires_python = ">=3.8"
+summary = "Time-handling functionality from netcdf4-python"
+groups = ["default"]
+dependencies = [
+    "numpy>1.13.3; python_version < \"3.12.0.rc1\"",
+    "numpy>=1.26.0b1; python_version >= \"3.12.0.rc1\"",
+]
+files = [
+    {file = "cftime-1.6.4.post1-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:a590f73506f4704ba5e154ef55bfbaed5e1b4ac170f3caeb8c58e4f2c619ee4e"},
+    {file = "cftime-1.6.4.post1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:933cb10e1af4e362e77f513e3eb92b34a688729ddbf938bbdfa5ac20a7f44ba0"},
+    {file = "cftime-1.6.4.post1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:cf17a1b36f62e9e73c4c9363dd811e1bbf1170f5ac26d343fb26012ccf482908"},
+    {file = "cftime-1.6.4.post1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8e18021f421aa26527bad8688c1acf0c85fa72730beb6efce969c316743294f2"},
+    {file = "cftime-1.6.4.post1-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:5835b9d622f9304d1c23a35603a0f068739f428d902860f25e6e7e5a1b7cd8ea"},
+    {file = "cftime-1.6.4.post1-cp312-cp312-win_amd64.whl", hash = "sha256:7f50bf0d1b664924aaee636eb2933746b942417d1f8b82ab6c1f6e8ba0da6885"},
+    {file = "cftime-1.6.4.post1.tar.gz", hash = "sha256:50ac76cc9f10ab7bd46e44a71c51a6927051b499b4407df4f29ab13d741b942f"},
 ]
 
 [[package]]
@@ -691,6 +711,17 @@ groups = ["default"]
 files = [
     {file = "jmespath-1.0.1-py3-none-any.whl", hash = "sha256:02e2e4cc71b5bcab88332eebf907519190dd9e6e82107fa7f83b1003a6252980"},
     {file = "jmespath-1.0.1.tar.gz", hash = "sha256:90261b206d6defd58fdd5e85f478bf633a2901798906be2ad389150c5c60edbe"},
+]
+
+[[package]]
+name = "joblib"
+version = "1.4.2"
+requires_python = ">=3.8"
+summary = "Lightweight pipelining with Python functions"
+groups = ["default"]
+files = [
+    {file = "joblib-1.4.2-py3-none-any.whl", hash = "sha256:06d478d5674cbc267e7496a410ee875abd68e4340feff4490bcb7afb88060ae6"},
+    {file = "joblib-1.4.2.tar.gz", hash = "sha256:2382c5816b2636fbd20a09e0f4e9dad4736765fdfb7dca582943b9c1366b3f0e"},
 ]
 
 [[package]]
@@ -1212,6 +1243,26 @@ files = [
 ]
 
 [[package]]
+name = "netcdf4"
+version = "1.7.2"
+requires_python = ">=3.8"
+summary = "Provides an object-oriented python interface to the netCDF version 4 library"
+groups = ["default"]
+dependencies = [
+    "certifi",
+    "cftime",
+    "numpy",
+]
+files = [
+    {file = "netCDF4-1.7.2-cp312-cp312-macosx_12_0_x86_64.whl", hash = "sha256:e73e3baa0b74afc414e53ff5095748fdbec7fb346eda351e567c23f2f0d247f1"},
+    {file = "netCDF4-1.7.2-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:a51da09258b31776f474c1d47e484fc7214914cdc59edf4cee789ba632184591"},
+    {file = "netCDF4-1.7.2-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:cb95b11804fe051897d1f2044b05d82a1847bc2549631cdd2f655dde7de77a9c"},
+    {file = "netCDF4-1.7.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f9d8a848373723f41ef662590b4f5e1832227501c9fd4513e8ad8da58c269977"},
+    {file = "netCDF4-1.7.2-cp312-cp312-win_amd64.whl", hash = "sha256:568ea369e00b581302d77fc5fd0b8f78e520c7e08d0b5af5219ba51f3f1cd694"},
+    {file = "netcdf4-1.7.2.tar.gz", hash = "sha256:a4c6375540b19989896136943abb6d44850ff6f1fa7d3f063253b1ad3f8b7fce"},
+]
+
+[[package]]
 name = "notebook"
 version = "7.2.2"
 requires_python = ">=3.8"
@@ -1636,6 +1687,22 @@ files = [
 ]
 
 [[package]]
+name = "python-sensors"
+version = "0.3.5"
+requires_python = ">=3.6"
+summary = "Sparse sensor placement"
+groups = ["default"]
+dependencies = [
+    "numpy",
+    "scikit-learn>=0.23",
+    "scipy",
+]
+files = [
+    {file = "python-sensors-0.3.5.tar.gz", hash = "sha256:87340f18360b6918746d42fe90a2334d268ea2a31e1f7ea0022d83ebc3623480"},
+    {file = "python_sensors-0.3.5-py3-none-any.whl", hash = "sha256:b0c759655abc8f6fea2caf2e0be518fd2e666b9a359537518f2e26806851aa16"},
+]
+
+[[package]]
 name = "pytz"
 version = "2024.2"
 summary = "World timezone definitions, modern and historical"
@@ -1859,6 +1926,27 @@ files = [
 ]
 
 [[package]]
+name = "scikit-learn"
+version = "1.5.2"
+requires_python = ">=3.9"
+summary = "A set of python modules for machine learning and data mining"
+groups = ["default"]
+dependencies = [
+    "joblib>=1.2.0",
+    "numpy>=1.19.5",
+    "scipy>=1.6.0",
+    "threadpoolctl>=3.1.0",
+]
+files = [
+    {file = "scikit_learn-1.5.2-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:f932a02c3f4956dfb981391ab24bda1dbd90fe3d628e4b42caef3e041c67707a"},
+    {file = "scikit_learn-1.5.2-cp312-cp312-macosx_12_0_arm64.whl", hash = "sha256:3b923d119d65b7bd555c73be5423bf06c0105678ce7e1f558cb4b40b0a5502b1"},
+    {file = "scikit_learn-1.5.2-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f60021ec1574e56632be2a36b946f8143bf4e5e6af4a06d85281adc22938e0dd"},
+    {file = "scikit_learn-1.5.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:394397841449853c2290a32050382edaec3da89e35b3e03d6cc966aebc6a8ae6"},
+    {file = "scikit_learn-1.5.2-cp312-cp312-win_amd64.whl", hash = "sha256:57cc1786cfd6bd118220a92ede80270132aa353647684efa385a74244a41e3b1"},
+    {file = "scikit_learn-1.5.2.tar.gz", hash = "sha256:b4237ed7b3fdd0a4882792e68ef2545d5baa50aca3bb45aa7df468138ad8f94d"},
+]
+
+[[package]]
 name = "scipy"
 version = "1.14.1"
 requires_python = ">=3.10"
@@ -1985,6 +2073,17 @@ dependencies = [
 files = [
     {file = "terminado-0.18.1-py3-none-any.whl", hash = "sha256:a4468e1b37bb318f8a86514f65814e1afc977cf29b3992a4500d9dd305dcceb0"},
     {file = "terminado-0.18.1.tar.gz", hash = "sha256:de09f2c4b85de4765f7714688fff57d3e75bad1f909b589fde880460c753fd2e"},
+]
+
+[[package]]
+name = "threadpoolctl"
+version = "3.5.0"
+requires_python = ">=3.8"
+summary = "threadpoolctl"
+groups = ["default"]
+files = [
+    {file = "threadpoolctl-3.5.0-py3-none-any.whl", hash = "sha256:56c1e26c150397e58c4926da8eeee87533b1e32bef131bd4bf6a2f45f3185467"},
+    {file = "threadpoolctl-3.5.0.tar.gz", hash = "sha256:082433502dd922bf738de0d8bcc4fdcbf0979ff44c42bd40f5af8a282f6fa107"},
 ]
 
 [[package]]

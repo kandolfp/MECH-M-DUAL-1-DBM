@@ -18,6 +18,9 @@ dependencies = [
     "odfpy>=1.4.1",
     "DateTime>=5.5",
     "pywavelets>=1.7.0",
+    "scikit-learn>=1.5.2",
+    "netCDF4>=1.7.2",
+    "python-sensors>=0.3.5",
 ]
 requires-python = "==3.12.*"
 readme = "README.md"

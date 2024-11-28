@@ -272,7 +272,7 @@ A disadvantage is that the need to store the basis separately and this increases
 We will see in later sections about _wavelets_ and _Fourier_ decomposition how a common basis can be used to reduce the storage by still keeping good reconstructive properties.
 :::
 
-## Principal Component Analysis
+## Principal Component Analysis {#sec-matrixdc-pca}
 
 On of the most important applications of SVD is in the stable computation of the so called _principal component analysis_ (PCA). It is a common technique in data exploration, analysis, visualization, and preprocessing. 
 

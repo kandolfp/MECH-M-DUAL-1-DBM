@@ -31,7 +31,7 @@ Selecting these coefficients is the first step towards _model selection_.
 
 Let us have a look at this in action for solving a _random_ system with different parameters $\lambda_1$ and setting $\lambda_2$.
 
-### LASSO 
+### LASSO {#sec-regression-optimizers-lasso}
 
 The _least absolute shrinkage and selection operator_ LASSO solves @eq-reg-optimizers with $\lambda_1 > 0$ and $\lambda_2=0$, i.e. only optimizing with the $\ell_1$ norm.
 The theory tells us that for increasing $\lambda_1$ we should get more and more zeros in our solution $x$.

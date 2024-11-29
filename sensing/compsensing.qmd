@@ -374,18 +374,19 @@ A = np.random.randn(m, n)
 x = np.array([0, 0, 1, 0, 0, 0, -1, 0, 0, 0])
 b = A @ x + 2 * np.random.randn(m)
 
+# k-cross validation for the Lasso method
 cv = 10
 lassoCV = linear_model.LassoCV(cv=cv, random_state=6020, tol=1e-8)
 lassoCV.fit(A, b)
-
+# Recompute the lasso method for the optimal lambda selected
 lasso_best = linear_model.Lasso(alpha=lassoCV.alpha_, random_state=6020)
 lasso_best.fit(A, b)
-print(lasso_best.coef_)
 
+# Plotting
 plt.figure()
 Lmean = lassoCV.mse_path_.mean(axis=-1)
 error = [np.min(lassoCV.mse_path_, axis=-1), 
-         np.max(lassoCV.mse_path_, axis=-1)] / np.sqrt(n)
+         np.max(lassoCV.mse_path_, axis=-1)] / np.sqrt(cv)
 plt.errorbar(lassoCV.alphas_, Lmean, yerr=error, ecolor="lightgray")
 plt.plot(lassoCV.alpha_, Lmean[lassoCV.alphas_==lassoCV.alpha_], "go", mfc='none')
 plt.xscale("log")
@@ -655,7 +656,7 @@ img[masks] = temp
 plt.figure()
 plt.imshow(snapshot, cmap=plt.cm.coolwarm)
 indx = np.where(img==1)
-plt.scatter(indx[1], indx[0], 4, color='black')
+plt.scatter(indx[1], indx[0], 8, color='black')
 plt.xticks([])
 plt.yticks([])
 ```

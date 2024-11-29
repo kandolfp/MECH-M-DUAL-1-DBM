@@ -483,7 +483,7 @@ f(t) = \cos(97 t\, 2\pi) + \cos(777 t\, 2\pi)
 <p>The sparsity of the sample allows us to reconstruct the signal by sampling randomly with an average sampling rate of <span class="math inline">\(128 \mathrm{Hz}\)</span>, well below the Shannon-Nyquist threshold.</p>
 <p>The code relies on the CoSaMP implementation <span class="citation" data-cites="NEEDELL2009301">Needell and Tropp (<a href="../references.html#ref-NEEDELL2009301" role="doc-biblioref">2009</a>)</span> provided on <a href="https://github.com/avirmaux/CoSaMP/tree/master">gitHub</a> and included below so we can work with it.</p>
 <p>The code is adapted from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 3.3)</span></p>
-<div id="226a1604" class="cell" data-execution_count="1">
+<div id="95be6b1b" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>CoSaMP algorithm form gitHub, now print.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -811,35 +811,32 @@ A x = b
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>])</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> A <span class="op">@</span> x <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> np.random.randn(m)</span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>lassoCV <span class="op">=</span> linear_model.LassoCV(cv<span class="op">=</span>cv, random_state<span class="op">=</span><span class="dv">6020</span>, tol<span class="op">=</span><span class="fl">1e-8</span>)</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>lassoCV.fit(A, b)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>lasso_best <span class="op">=</span> linear_model.Lasso(alpha<span class="op">=</span>lassoCV.alpha_, random_state<span class="op">=</span><span class="dv">6020</span>)</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>lasso_best.fit(A, b)</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lasso_best.coef_)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># k-cross validation for the Lasso method</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>lassoCV <span class="op">=</span> linear_model.LassoCV(cv<span class="op">=</span>cv, random_state<span class="op">=</span><span class="dv">6020</span>, tol<span class="op">=</span><span class="fl">1e-8</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>lassoCV.fit(A, b)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Recompute the lasso method for the optimal lambda selected</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>lasso_best <span class="op">=</span> linear_model.Lasso(alpha<span class="op">=</span>lassoCV.alpha_, random_state<span class="op">=</span><span class="dv">6020</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>lasso_best.fit(A, b)</span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>Lmean <span class="op">=</span> lassoCV.mse_path_.mean(axis<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>error <span class="op">=</span> [np.<span class="bu">min</span>(lassoCV.mse_path_, axis<span class="op">=-</span><span class="dv">1</span>), </span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>         np.<span class="bu">max</span>(lassoCV.mse_path_, axis<span class="op">=-</span><span class="dv">1</span>)] <span class="op">/</span> np.sqrt(n)</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>plt.errorbar(lassoCV.alphas_, Lmean, yerr<span class="op">=</span>error, ecolor<span class="op">=</span><span class="st">"lightgray"</span>)</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>plt.plot(lassoCV.alpha_, Lmean[lassoCV.alphas_<span class="op">==</span>lassoCV.alpha_], <span class="st">"go"</span>, mfc<span class="op">=</span><span class="st">'none'</span>)</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">"log"</span>)</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Means Square Error"</span>)</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$\lambda_1$"</span>)</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>plt.gca().invert_xaxis()</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>Lmean <span class="op">=</span> lassoCV.mse_path_.mean(axis<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>error <span class="op">=</span> [np.<span class="bu">min</span>(lassoCV.mse_path_, axis<span class="op">=-</span><span class="dv">1</span>), </span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>         np.<span class="bu">max</span>(lassoCV.mse_path_, axis<span class="op">=-</span><span class="dv">1</span>)] <span class="op">/</span> np.sqrt(cv)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>plt.errorbar(lassoCV.alphas_, Lmean, yerr<span class="op">=</span>error, ecolor<span class="op">=</span><span class="st">"lightgray"</span>)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>plt.plot(lassoCV.alpha_, Lmean[lassoCV.alphas_<span class="op">==</span>lassoCV.alpha_], <span class="st">"go"</span>, mfc<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">"log"</span>)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Means Square Error"</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$\lambda_1$"</span>)</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>plt.gca().invert_xaxis()</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[ 0.          0.          1.0978465   0.         -0.         -0.
- -1.06495486  0.          0.          0.        ]</code></pre>
-</div>
 <div class="cell-output cell-output-display">
 <div id="fig-sensing_lasso" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sensing_lasso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="compsensing_files/figure-html/fig-sensing_lasso-output-2.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;13.3: Cross-validation mean square error of Lasso fit, the green circle marks the optimal choice, the blue line the mean error of the k-folds and the error bar the maximal and minimal error form the k-folds."><img src="compsensing_files/figure-html/fig-sensing_lasso-output-2.svg" class="img-fluid figure-img"></a>
+<a href="compsensing_files/figure-html/fig-sensing_lasso-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;13.3: Cross-validation mean square error of Lasso fit, the green circle marks the optimal choice, the blue line the mean error of the k-folds and the error bar the maximal and minimal error form the k-folds."><img src="compsensing_files/figure-html/fig-sensing_lasso-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sensing_lasso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;13.3: Cross-validation mean square error of Lasso fit, the green circle marks the optimal choice, the blue line the mean error of the k-folds and the error bar the maximal and minimal error form the k-folds.
@@ -849,7 +846,7 @@ Figure&nbsp;13.3: Cross-validation mean square error of Lasso fit, the green cir
 </div>
 </div>
 <p>The resulting coefficients for the best fit with lasso are</p>
-<div id="e49a0acc" class="cell styled-output" data-execution_count="5">
+<div id="87170d83" class="cell styled-output" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>array([ 0.        ,  0.        ,  1.0978465 ,  0.        , -0.        ,
        -0.        , -1.06495486,  0.        ,  0.        ,  0.        ])</code></pre>
@@ -878,97 +875,106 @@ Note
 </section>
 <section id="robust-principal-component-analysis-rpca" class="level2" data-number="13.3">
 <h2 data-number="13.3" class="anchored" data-anchor-id="robust-principal-component-analysis-rpca"><span class="header-section-number">13.3</span> Robust Principal Component Analysis (RPCA)</h2>
-<p>We discussed the principal component analysis in <a href="../matrixdc/svd.html#sec-matrixdc-pca" class="quarto-xref"><span>Section 5.2</span></a> as an application with the SVD. Similar as regression, also the PCA is sensitive to outliers and <em>corrupt data</em>. In <span class="citation" data-cites="10.1145/1970392.1970395">Candès et al. (<a href="../references.html#ref-10.1145/1970392.1970395" role="doc-biblioref">2011</a>)</span> an algorithm to make it more robust was developed.</p>
+<p>We discussed the principal component analysis in <a href="../matrixdc/svd.html#sec-matrixdc-pca" class="quarto-xref"><span>Section 5.2</span></a> as an application for the SVD. Similar as regression, also the PCA is sensitive to outliers and <em>corrupt data</em>. In <span class="citation" data-cites="10.1145/1970392.1970395">Candès et al. (<a href="../references.html#ref-10.1145/1970392.1970395" role="doc-biblioref">2011</a>)</span> an algorithm to make it more robust was developed.</p>
 <p>The main idea of the paper is to decompose a matrix <span class="math inline">\(X\)</span> into a structured low-rank matrix <span class="math inline">\(L\)</span> and a sparse matrix <span class="math inline">\(S\)</span> containing the outliers and corrupt data <span class="math display">\[
 X = L + S.
-\]</span> If we can recover the principal components of <span class="math inline">\(L\)</span> from <span class="math inline">\(X\)</span> we have a robust method as the influence of <span class="math inline">\(S\)</span> have little influence.</p>
+\]</span> If we can recover the principal components of <span class="math inline">\(L\)</span> from <span class="math inline">\(X\)</span> we have a robust method as the perturbation of <span class="math inline">\(S\)</span> has little influence.</p>
 <p>It might not be immediately obvious but applications of this split are video surveillance where the background is represented by <span class="math inline">\(L\)</span> and the foreground objects in <span class="math inline">\(L\)</span>, face recognition with the eigenfaces in <span class="math inline">\(L\)</span> and shadows, occlusions (like glasses or masks) are in <span class="math inline">\(S\)</span>.</p>
-<p>We have an optimization problem of the form <span id="eq-rpca-org"><span class="math display">\[
+<p>The task boils down to an optimization problem of the form <span id="eq-rpca-org"><span class="math display">\[
 \min_{L, S} \operatorname{rank}(L) + \| S \|_0 \quad\text{subject to}\quad $L+S = X$,
 \tag{13.2}\]</span></span> where unfortunately both parts are not convex but we can search for it with <em>high probability</em> using <span id="eq-rpca-pcp"><span class="math display">\[
-\min_{L, S} \|L\|_{\star} + \lambda \| S \|_1 \quad\text{subject to}\quad $L+S = X$,
-\tag{13.3}\]</span></span> with <span class="math inline">\(\|\cdot\|_{\star}\)</span> is called the <em>nuclear norm</em> consisting of the sum of all singular values and we use it as our proxy for the <span class="math inline">\(\operatorname{rank}\)</span>.</p>
-<p><a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> is called <em>principal component pursuit</em> (PCP) and in <span class="citation" data-cites="10.1145/1970392.1970395">Candès et al. (<a href="../references.html#ref-10.1145/1970392.1970395" role="doc-biblioref">2011</a>)</span> they show that <a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> converges to <a href="#eq-rpca-org" class="quarto-xref">Equation&nbsp;<span>13.2</span></a> for</p>
+\min_{L, S} \|L\|_{\star} + \lambda \| S \|_1 \quad\text{subject to}\quad $L+S = X$.
+\tag{13.3}\]</span></span> In <a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> <span class="math inline">\(\|\cdot\|_{\star}\)</span> is called the <em>nuclear norm</em> consisting of the sum of all singular values and we use it as our proxy for the <span class="math inline">\(\operatorname{rank}\)</span>.</p>
+<p><a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> is called <em>principal component pursuit</em> (PCP) and in <span class="citation" data-cites="10.1145/1970392.1970395">Candès et al. (<a href="../references.html#ref-10.1145/1970392.1970395" role="doc-biblioref">2011</a>)</span> the authors show that <a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> converges to <a href="#eq-rpca-org" class="quarto-xref">Equation&nbsp;<span>13.2</span></a> for</p>
 <ol type="1">
-<li><span class="math inline">\(\lambda = 1/\sqrt{\max(n,m)}\)</span> for <span class="math inline">\(X^{m \times n}\)</span> and</li>
-<li><span class="math inline">\(L\)</span> is not sparse</li>
+<li><span class="math inline">\(\lambda = 1/\sqrt{\max(n,m)}\)</span> for <span class="math inline">\(X^{m \times n}\)</span>,</li>
+<li><span class="math inline">\(L\)</span> is not sparse,</li>
 <li><span class="math inline">\(S\)</span> is not low-rank, where we assume that the entries do not span a low-dimensional column space.</li>
 </ol>
 <p>We can solve the PCP with an augmented Lagrange multiplier algorithm such as <span class="math display">\[
 \mathcal{L}(L, S, Y) = \|L\|_{\star} + \lambda \| S \|_1 + \langle Y, X - L - S \rangle + \frac{\mu}{2} \|X-L-S\|_F^2.
-\]</span> This is an iterative method where we solve for <span class="math inline">\(L_k\)</span> and <span class="math inline">\(S_k\)</span>, update <span class="math inline">\(Y_{k+1} = Y_k + \mu (X-L_k - S_k)\)</span> and check for convergence. For this specific problem the alternations method (ADM) provides a simple procedure to solve for <span class="math inline">\(L\)</span> and <span class="math inline">\(S\)</span>.</p>
-<p>The following implementation of RPCA can be found in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 121</a>)</span> with a similar application to the eigenfaces dataset.</p>
-<div id="69e7ef6e" class="cell" data-execution_count="6">
+\]</span></p>
+<p>This is an iterative method where we solve for <span class="math inline">\(L_k\)</span> and <span class="math inline">\(S_k\)</span>, update <span class="math inline">\(Y_{k+1} = Y_k + \mu (X-L_k - S_k)\)</span> and check for convergence. For this specific problem the alternations method (ADM) provides a simple procedure to solve for <span class="math inline">\(L\)</span> and <span class="math inline">\(S\)</span>.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-sensing-rpca" class="theorem example">
+<p><span class="theorem-title"><strong>Example 13.3 (Robust principal component analysis with Yale B dataset)</strong></span> The following implementation of RPCA can be found in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 121</a>)</span> with the same application to the eigenfaces dataset.</p>
+<div id="1360bee3" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Robust principal component analysis and helper functions</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> shrink(X, tau):</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    Y <span class="op">=</span> np.<span class="bu">abs</span>(X) <span class="op">-</span> tau</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sign(X) <span class="op">*</span> np.maximum(Y, np.zeros_like(Y))</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> SVT(X, tau):</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    U, S, VT <span class="op">=</span> np.linalg.svd(X, full_matrices<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> U <span class="op">@</span> np.diag(shrink(S, tau)) <span class="op">@</span> VT</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> RPCA(X):</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    n1, n2 <span class="op">=</span> X.shape</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    mu <span class="op">=</span> n1 <span class="op">*</span> n2 <span class="op">/</span> (<span class="dv">4</span> <span class="op">*</span> np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(X.reshape(<span class="op">-</span><span class="dv">1</span>))))</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    lambd <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> np.sqrt(np.maximum(n1, n2))</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    thresh <span class="op">=</span> <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span><span class="dv">7</span>) <span class="op">*</span> np.linalg.norm(X)</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    S <span class="op">=</span> np.zeros_like(X)</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    Y <span class="op">=</span> np.zeros_like(X)</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    L <span class="op">=</span> np.zeros_like(X)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (np.linalg.norm(X <span class="op">-</span> L <span class="op">-</span> S) <span class="op">&gt;</span> thresh) <span class="kw">and</span> (count <span class="op">&lt;</span> <span class="dv">1000</span>):</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>        L <span class="op">=</span> SVT(X <span class="op">-</span> S <span class="op">+</span> (<span class="dv">1</span> <span class="op">/</span> mu) <span class="op">*</span> Y, <span class="dv">1</span> <span class="op">/</span> mu)</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>        S <span class="op">=</span> shrink(X <span class="op">-</span> L <span class="op">+</span> (<span class="dv">1</span> <span class="op">/</span> mu) <span class="op">*</span> Y, lambd <span class="op">/</span> mu)</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>        Y <span class="op">=</span> Y <span class="op">+</span> mu<span class="op">*</span>(X <span class="op">-</span> L <span class="op">-</span> S)</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>        count <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L, S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> shrink(X, tau):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    Y <span class="op">=</span> np.<span class="bu">abs</span>(X) <span class="op">-</span> tau</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sign(X) <span class="op">*</span> np.maximum(Y, np.zeros_like(Y))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> SVT(X, tau):</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    U, S, VT <span class="op">=</span> np.linalg.svd(X, full_matrices<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> U <span class="op">@</span> np.diag(shrink(S, tau)) <span class="op">@</span> VT</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> RPCA(X):</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    n1, n2 <span class="op">=</span> X.shape</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    mu <span class="op">=</span> n1 <span class="op">*</span> n2 <span class="op">/</span> (<span class="dv">4</span> <span class="op">*</span> np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(X.reshape(<span class="op">-</span><span class="dv">1</span>))))</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    lambd <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> np.sqrt(np.maximum(n1, n2))</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    thresh <span class="op">=</span> <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span><span class="dv">7</span>) <span class="op">*</span> np.linalg.norm(X)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    S <span class="op">=</span> np.zeros_like(X)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    Y <span class="op">=</span> np.zeros_like(X)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    L <span class="op">=</span> np.zeros_like(X)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (np.linalg.norm(X <span class="op">-</span> L <span class="op">-</span> S) <span class="op">&gt;</span> thresh) <span class="kw">and</span> (count <span class="op">&lt;</span> <span class="dv">1000</span>):</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        L <span class="op">=</span> SVT(X <span class="op">-</span> S <span class="op">+</span> (<span class="dv">1</span> <span class="op">/</span> mu) <span class="op">*</span> Y, <span class="dv">1</span> <span class="op">/</span> mu)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        S <span class="op">=</span> shrink(X <span class="op">-</span> L <span class="op">+</span> (<span class="dv">1</span> <span class="op">/</span> mu) <span class="op">*</span> Y, lambd <span class="op">/</span> mu)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        Y <span class="op">=</span> Y <span class="op">+</span> mu<span class="op">*</span>(X <span class="op">-</span> L <span class="op">-</span> S)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L, S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="8839f81b" class="cell" data-execution_count="7">
+<div id="55970e0a" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> LA</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">'svg'</span>]</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rgb2gray(rgb):</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.dot(rgb[...,:<span class="dv">3</span>], [<span class="fl">0.2989</span>, <span class="fl">0.5870</span>, <span class="fl">0.1140</span>])</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(<span class="st">"https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos/raw/refs/heads/main/DATA/allFaces.mat"</span>)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> scipy.io.loadmat(io.BytesIO(response.content))</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>faces <span class="op">=</span> data[<span class="st">"faces"</span>]</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="bu">int</span>(data[<span class="st">"m"</span>][<span class="dv">0</span>,<span class="dv">0</span>])</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">int</span>(data[<span class="st">"n"</span>][<span class="dv">0</span>,<span class="dv">0</span>])</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>nfaces <span class="op">=</span> np.ndarray.flatten(data[<span class="st">'nfaces'</span>])</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> faces[:,:nfaces[<span class="dv">0</span>]]</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>im <span class="op">=</span> np.asarray(iio.imread(<span class="st">"https://raw.githubusercontent.com/dynamicslab/databook_python/refs/heads/master/DATA/mustache.jpg"</span>))</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> (rgb2gray(im)<span class="op">/</span><span class="dv">255</span>).astype(<span class="st">"uint8"</span>)</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.append(XX, (XX[:, <span class="dv">2</span>] <span class="op">*</span> A.T.flatten()).reshape((<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)), axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>L, S <span class="op">=</span> RPCA(X)</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index <span class="kw">in</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    plt.imshow(np.reshape(X[:, index], (m, n)).T, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    plt.gca().axis(<span class="st">"off"</span>)</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    plt.imshow(np.reshape(L[:, index], (m, n)).T, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    plt.gca().axis(<span class="st">"off"</span>)</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    plt.imshow(np.reshape(S[:, index], (m, n)).T, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    plt.gca().axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> LA</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">'svg'</span>]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rgb2gray(rgb):</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.dot(rgb[...,:<span class="dv">3</span>], [<span class="fl">0.2989</span>, <span class="fl">0.5870</span>, <span class="fl">0.1140</span>])</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(<span class="st">"https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos/raw/refs/heads/main/DATA/allFaces.mat"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> scipy.io.loadmat(io.BytesIO(response.content))</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>faces <span class="op">=</span> data[<span class="st">"faces"</span>]</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="bu">int</span>(data[<span class="st">"m"</span>][<span class="dv">0</span>,<span class="dv">0</span>])</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">int</span>(data[<span class="st">"n"</span>][<span class="dv">0</span>,<span class="dv">0</span>])</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>nfaces <span class="op">=</span> np.ndarray.flatten(data[<span class="st">'nfaces'</span>])</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> faces[:,:nfaces[<span class="dv">0</span>]]</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>im <span class="op">=</span> np.asarray(iio.imread(<span class="st">"https://raw.githubusercontent.com/dynamicslab/databook_python/refs/heads/master/DATA/mustache.jpg"</span>))</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.<span class="bu">round</span>(rgb2gray(im)<span class="op">/</span><span class="dv">255</span>).astype(<span class="st">"uint8"</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.append(XX, (XX[:, <span class="dv">2</span>] <span class="op">*</span> A.T.flatten()).reshape((<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>L, S <span class="op">=</span> RPCA(X)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index <span class="kw">in</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    plt.imshow(np.reshape(X[:, index], (m, n)).T, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    plt.gca().axis(<span class="st">"off"</span>)</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    plt.imshow(np.reshape(L[:, index], (m, n)).T, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    plt.gca().axis(<span class="st">"off"</span>)</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    plt.imshow(np.reshape(S[:, index], (m, n)).T, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    plt.gca().axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="fig-sensing_rpca" class="quarto-layout-panel">
@@ -1094,14 +1100,19 @@ Figure&nbsp;13.4: RPCA decomposition for the Yale B dataset.
 </figcaption>
 </figure>
 </div>
-<p><a href="#fig-sensing_rpca" class="quarto-xref">Figure&nbsp;<span>13.4</span></a> we can see that RPCA effectively filters out occluded regions and shadows form <span class="math inline">\(X\)</span> in <span class="math inline">\(L\)</span>. The missing part is filled in with the most consistent low-rank feature from the eigenfaces.</p>
+<p>In <a href="#fig-sensing_rpca" class="quarto-xref">Figure&nbsp;<span>13.4</span></a> we can see that RPCA effectively filters out occluded regions and shadows form <span class="math inline">\(X\)</span> in <span class="math inline">\(L\)</span>. The missing part is filled in with the most consistent low-rank feature from the provided dataset. In our case we include all faces from the first person plus the third image with a fake moustache.</p>
+<p>We need to stress, that we can not use this setup to reconstruct a different face obscured by a moustache.</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="sparse-sensor-placement" class="level2" data-number="13.4">
 <h2 data-number="13.4" class="anchored" data-anchor-id="sparse-sensor-placement"><span class="header-section-number">13.4</span> Sparse Sensor Placement</h2>
-<p>So far we have looked how to construct a signal with random measurements in a generic basis. But how about placing sensors at the correct points to reconstruct the signal with high probability. This can dramatically reduce the amount of data to measure.</p>
-<p>We can set <em>tailored sensors</em> for a particular library instead of <em>random sensors</em> in a generic library.</p>
-<p>This can be used to reconstruct faces, or classify signals, see <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, chap. 3.8</a>)</span> and references within.</p>
-<p>To see this in action we use the Python package <code>PySensors</code> and the example <em>Sea Surface Temperature (SST) sensors</em> from their documentation, <a href="https://python-sensors.readthedocs.io/en/latest/examples/sea_surface_temperature.html#gallery-examples-sea-surface-temperature-ipynb">Online</a> accessed on the 28th of November 2024.</p>
+<p>So far we have looked how to reconstruct a signal with random measurements in a generic basis. But how about placing sensors at the correct points to reconstruct the signal with high probability. This can dramatically reduce the amount of data to measure.</p>
+<p>We can set <em>tailored sensors</em> for a particular library (our basis) instead of <em>random sensors</em> in a generic library.</p>
+<p>Amongst other things, this can be used to reconstruct faces, or classify signals, see <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, chap. 3.8</a>)</span> and references within.</p>
+<p>To see this in action we use the Python package <code>PySensors</code> and the example <em>Sea Surface Temperature (SST) sensors</em> from their documentation, see the <a href="https://python-sensors.readthedocs.io/en/latest/examples/sea_surface_temperature.html#gallery-examples-sea-surface-temperature-ipynb">docs</a> accessed on the 28th of November 2024.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1109,71 +1120,71 @@ Figure&nbsp;13.4: RPCA decomposition for the Yale B dataset.
 </div>
 <div class="callout-body-container">
 <div id="exm-sensing-sparse-sensor-placement" class="theorem example">
-<p><span class="theorem-title"><strong>Example 13.3 (Sea Surface Temperature (SST) sensors)</strong></span> For a given dataset of sea surface temperature as training data we would like to place (sparse) sensors optimal that allow us to reconstruct the temperature at any other location. This is achieved with the <code>SSPOR</code> algorithm form <span class="citation" data-cites="8361090">Manohar et al. (<a href="../references.html#ref-8361090" role="doc-biblioref">2018</a>)</span>.</p>
+<p><span class="theorem-title"><strong>Example 13.4 (Sea Surface Temperature (SST) sensors)</strong></span> For a given dataset of sea surface temperature as training data we would like to place (sparse) sensors optimal that allow us to reconstruct the temperature at any other location. This is achieved with the <code>SSPOR</code> algorithm from <span class="citation" data-cites="8361090">Manohar et al. (<a href="../references.html#ref-8361090" role="doc-biblioref">2018</a>)</span>.</p>
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ftplib <span class="im">import</span> FTP</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> netCDF4</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pysensors <span class="im">as</span> ps</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">6020</span>)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Import and save data locally</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>ftp <span class="op">=</span> FTP(<span class="st">'ftp.cdc.noaa.gov'</span>)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>ftp.login()</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>ftp.cwd(<span class="st">'/Datasets/noaa.oisst.v2/'</span>)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>filenames <span class="op">=</span> [<span class="st">'sst.wkmean.1990-present.nc'</span>, <span class="st">'lsmask.nc'</span>]</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> filenames:</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    localfile <span class="op">=</span> <span class="bu">open</span>(filename, <span class="st">'wb'</span>)</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    ftp.retrbinary(<span class="st">'RETR '</span> <span class="op">+</span> filename, localfile.write, <span class="dv">1024</span>)</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    localfile.close()</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>ftp.quit()</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> netCDF4.Dataset(<span class="st">'sst.wkmean.1990-present.nc'</span>)</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>lat,lon <span class="op">=</span> f.variables[<span class="st">'lat'</span>], f.variables[<span class="st">'lon'</span>]</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>SST <span class="op">=</span> f.variables[<span class="st">'sst'</span>]</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>sst <span class="op">=</span> SST[:]</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> netCDF4.Dataset(<span class="st">'lsmask.nc'</span>)</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> f.variables[<span class="st">'mask'</span>]</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>masks <span class="op">=</span> np.bool_(np.squeeze(mask))</span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>snapshot <span class="op">=</span> <span class="bu">float</span>(<span class="st">"nan"</span>)<span class="op">*</span>np.ones((<span class="dv">180</span>,<span class="dv">360</span>))</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>snapshot[masks] <span class="op">=</span> sst[<span class="dv">0</span>,masks]</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>plt.imshow(snapshot, cmap<span class="op">=</span>plt.cm.coolwarm)</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>plt.yticks([])</span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sst[:,masks]</span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.reshape(X.compressed(), X.shape)</span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute optimal sensor placement</span></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ps.SSPOR(</span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    basis<span class="op">=</span>ps.basis.SVD(n_basis_modes<span class="op">=</span><span class="dv">25</span>),</span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    n_sensors<span class="op">=</span><span class="dv">25</span></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>model.fit(X)</span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>sensors <span class="op">=</span> model.get_selected_sensors()</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot sensor locations</span></span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> np.transpose(<span class="dv">0</span> <span class="op">*</span> X[<span class="dv">1</span>,:])</span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>temp[sensors] <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> <span class="dv">0</span><span class="op">*</span>snapshot</span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>img[masks] <span class="op">=</span> temp</span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>plt.imshow(snapshot, cmap<span class="op">=</span>plt.cm.coolwarm)</span>
-<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>indx <span class="op">=</span> np.where(img<span class="op">==</span><span class="dv">1</span>)</span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>plt.scatter(indx[<span class="dv">1</span>], indx[<span class="dv">0</span>], <span class="dv">4</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>plt.yticks([])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ftplib <span class="im">import</span> FTP</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> netCDF4</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pysensors <span class="im">as</span> ps</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">6020</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Import and save data locally</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>ftp <span class="op">=</span> FTP(<span class="st">'ftp.cdc.noaa.gov'</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>ftp.login()</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>ftp.cwd(<span class="st">'/Datasets/noaa.oisst.v2/'</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>filenames <span class="op">=</span> [<span class="st">'sst.wkmean.1990-present.nc'</span>, <span class="st">'lsmask.nc'</span>]</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> filenames:</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    localfile <span class="op">=</span> <span class="bu">open</span>(filename, <span class="st">'wb'</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    ftp.retrbinary(<span class="st">'RETR '</span> <span class="op">+</span> filename, localfile.write, <span class="dv">1024</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    localfile.close()</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>ftp.quit()</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> netCDF4.Dataset(<span class="st">'sst.wkmean.1990-present.nc'</span>)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>lat,lon <span class="op">=</span> f.variables[<span class="st">'lat'</span>], f.variables[<span class="st">'lon'</span>]</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>SST <span class="op">=</span> f.variables[<span class="st">'sst'</span>]</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>sst <span class="op">=</span> SST[:]</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> netCDF4.Dataset(<span class="st">'lsmask.nc'</span>)</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> f.variables[<span class="st">'mask'</span>]</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>masks <span class="op">=</span> np.bool_(np.squeeze(mask))</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>snapshot <span class="op">=</span> <span class="bu">float</span>(<span class="st">"nan"</span>)<span class="op">*</span>np.ones((<span class="dv">180</span>,<span class="dv">360</span>))</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>snapshot[masks] <span class="op">=</span> sst[<span class="dv">0</span>,masks]</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>plt.imshow(snapshot, cmap<span class="op">=</span>plt.cm.coolwarm)</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>plt.yticks([])</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sst[:,masks]</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.reshape(X.compressed(), X.shape)</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute optimal sensor placement</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ps.SSPOR(</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    basis<span class="op">=</span>ps.basis.SVD(n_basis_modes<span class="op">=</span><span class="dv">25</span>),</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    n_sensors<span class="op">=</span><span class="dv">25</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>model.fit(X)</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>sensors <span class="op">=</span> model.get_selected_sensors()</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot sensor locations</span></span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> np.transpose(<span class="dv">0</span> <span class="op">*</span> X[<span class="dv">1</span>,:])</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>temp[sensors] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> <span class="dv">0</span><span class="op">*</span>snapshot</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>img[masks] <span class="op">=</span> temp</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>plt.imshow(snapshot, cmap<span class="op">=</span>plt.cm.coolwarm)</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>indx <span class="op">=</span> np.where(img<span class="op">==</span><span class="dv">1</span>)</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>plt.scatter(indx[<span class="dv">1</span>], indx[<span class="dv">0</span>], <span class="dv">8</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>plt.yticks([])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="fig-sensing_sst" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1212,11 +1223,12 @@ Figure&nbsp;13.5: Finding optimal sensor placements to recover the sea surface t
 </figcaption>
 </figure>
 </div>
-<p>(Compare <a href="https://python-sensors.readthedocs.io/en/latest/examples/sea_surface_temperature.html#gallery-examples-sea-surface-temperature-ipynb">Online</a> accessed on the 28th of November 2024)</p>
+<p>(Compare <a href="https://python-sensors.readthedocs.io/en/latest/examples/sea_surface_temperature.html#gallery-examples-sea-surface-temperature-ipynb">docs of <code>PySensors</code></a> accessed on the 28th of November 2024)</p>
 </div>
 </div>
 </div>
 </div>
+<p>This concludes our excursion into compressed sensing.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -1833,7 +1845,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","loop":false,"descPosition":"bottom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

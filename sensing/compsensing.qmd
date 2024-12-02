@@ -64,7 +64,7 @@ We will see this in therms of the _restricted isometry property_ (RIP).
 
 We know of the Shannon-Nyquist sampling theorem:
 
-> If a function $f(t)$ contains no frequencies higher than $b$ hertz, then it can be completely determined from its ordinates at a sequence of points spaced less than $\frac{1}{2b} seconds apart.
+> If a function $f(t)$ contains no frequencies higher than $b$ hertz, then it can be completely determined from its ordinates at a sequence of points spaced less than $\frac{1}{2b}$ seconds apart.
 - see [Wikipedia](https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem)
 
 telling us that we need a sampling rate of at least double the highest frequency to recover the signal properly.

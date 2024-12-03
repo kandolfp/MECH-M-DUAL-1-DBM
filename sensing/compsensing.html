@@ -450,7 +450,7 @@ Note
 <p>The idea of the two conditions is to make <span class="math inline">\(CB\)</span> act more or less like a unitary transformation on <span class="math inline">\(K\)</span>-sparse vectors <span class="math inline">\(s\)</span>, preserving relative distance between vectors and allowing for the <span class="math inline">\(\ell_1\)</span> convex optimization. We will see this in therms of the <em>restricted isometry property</em> (RIP).</p>
 <p>We know of the Shannon-Nyquist sampling theorem:</p>
 <blockquote class="blockquote">
-<p>If a function <span class="math inline">\(f(t)\)</span> contains no frequencies higher than <span class="math inline">\(b\)</span> hertz, then it can be completely determined from its ordinates at a sequence of points spaced less than $ seconds apart. - see <a href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem">Wikipedia</a></p>
+<p>If a function <span class="math inline">\(f(t)\)</span> contains no frequencies higher than <span class="math inline">\(b\)</span> hertz, then it can be completely determined from its ordinates at a sequence of points spaced less than <span class="math inline">\(\frac{1}{2b}\)</span> seconds apart. - see <a href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem">Wikipedia</a></p>
 </blockquote>
 <p>telling us that we need a sampling rate of at least double the highest frequency to recover the signal properly. However, this is only true for signals with broadband frequency content and this is hardly ever the case for uncompressed signals. As we expect an uncompressed signal can be expressed as a sparse signal in the correct basis we can relax the Shannon-Nyquist theorem. Nevertheless, we need precise timing for our measurements and the recovery is not guaranteed, it is possible with high probability.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -483,7 +483,7 @@ f(t) = \cos(97 t\, 2\pi) + \cos(777 t\, 2\pi)
 <p>The sparsity of the sample allows us to reconstruct the signal by sampling randomly with an average sampling rate of <span class="math inline">\(128 \mathrm{Hz}\)</span>, well below the Shannon-Nyquist threshold.</p>
 <p>The code relies on the CoSaMP implementation <span class="citation" data-cites="NEEDELL2009301">Needell and Tropp (<a href="../references.html#ref-NEEDELL2009301" role="doc-biblioref">2009</a>)</span> provided on <a href="https://github.com/avirmaux/CoSaMP/tree/master">gitHub</a> and included below so we can work with it.</p>
 <p>The code is adapted from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 3.3)</span></p>
-<div id="95be6b1b" class="cell" data-execution_count="1">
+<div id="beb1c67a" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>CoSaMP algorithm form gitHub, now print.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -846,7 +846,7 @@ Figure&nbsp;13.3: Cross-validation mean square error of Lasso fit, the green cir
 </div>
 </div>
 <p>The resulting coefficients for the best fit with lasso are</p>
-<div id="87170d83" class="cell styled-output" data-execution_count="5">
+<div id="3913b3fb" class="cell styled-output" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>array([ 0.        ,  0.        ,  1.0978465 ,  0.        , -0.        ,
        -0.        , -1.06495486,  0.        ,  0.        ,  0.        ])</code></pre>
@@ -881,9 +881,9 @@ X = L + S.
 \]</span> If we can recover the principal components of <span class="math inline">\(L\)</span> from <span class="math inline">\(X\)</span> we have a robust method as the perturbation of <span class="math inline">\(S\)</span> has little influence.</p>
 <p>It might not be immediately obvious but applications of this split are video surveillance where the background is represented by <span class="math inline">\(L\)</span> and the foreground objects in <span class="math inline">\(L\)</span>, face recognition with the eigenfaces in <span class="math inline">\(L\)</span> and shadows, occlusions (like glasses or masks) are in <span class="math inline">\(S\)</span>.</p>
 <p>The task boils down to an optimization problem of the form <span id="eq-rpca-org"><span class="math display">\[
-\min_{L, S} \operatorname{rank}(L) + \| S \|_0 \quad\text{subject to}\quad $L+S = X$,
+\min_{L, S} \operatorname{rank}(L) + \| S \|_0 \quad\text{subject to}\quad L+S = X,
 \tag{13.2}\]</span></span> where unfortunately both parts are not convex but we can search for it with <em>high probability</em> using <span id="eq-rpca-pcp"><span class="math display">\[
-\min_{L, S} \|L\|_{\star} + \lambda \| S \|_1 \quad\text{subject to}\quad $L+S = X$.
+\min_{L, S} \|L\|_{\star} + \lambda \| S \|_1 \quad\text{subject to}\quad L+S = X.
 \tag{13.3}\]</span></span> In <a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> <span class="math inline">\(\|\cdot\|_{\star}\)</span> is called the <em>nuclear norm</em> consisting of the sum of all singular values and we use it as our proxy for the <span class="math inline">\(\operatorname{rank}\)</span>.</p>
 <p><a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> is called <em>principal component pursuit</em> (PCP) and in <span class="citation" data-cites="10.1145/1970392.1970395">Candès et al. (<a href="../references.html#ref-10.1145/1970392.1970395" role="doc-biblioref">2011</a>)</span> the authors show that <a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> converges to <a href="#eq-rpca-org" class="quarto-xref">Equation&nbsp;<span>13.2</span></a> for</p>
 <ol type="1">
@@ -903,7 +903,7 @@ X = L + S.
 <div class="callout-body-container">
 <div id="exm-sensing-rpca" class="theorem example">
 <p><span class="theorem-title"><strong>Example 13.3 (Robust principal component analysis with Yale B dataset)</strong></span> The following implementation of RPCA can be found in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 121</a>)</span> with the same application to the eigenfaces dataset.</p>
-<div id="1360bee3" class="cell" data-execution_count="6">
+<div id="1ee717d6" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Robust principal component analysis and helper functions</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> shrink(X, tau):</span>
@@ -935,7 +935,7 @@ X = L + S.
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L, S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="55970e0a" class="cell" data-execution_count="7">
+<div id="0cc3a591" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1845,7 +1845,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","loop":false,"descPosition":"bottom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

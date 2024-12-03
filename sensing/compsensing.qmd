@@ -433,11 +433,11 @@ It might not be immediately obvious but applications of this split are video sur
 
 The task boils down to an optimization problem of the form
 $$
-\min_{L, S} \operatorname{rank}(L) + \| S \|_0 \quad\text{subject to}\quad $L+S = X$,
+\min_{L, S} \operatorname{rank}(L) + \| S \|_0 \quad\text{subject to}\quad L+S = X,
 $$ {#eq-rpca-org}
 where unfortunately both parts are not convex but we can search for it with _high probability_ using 
 $$
-\min_{L, S} \|L\|_{\star} + \lambda \| S \|_1 \quad\text{subject to}\quad $L+S = X$.
+\min_{L, S} \|L\|_{\star} + \lambda \| S \|_1 \quad\text{subject to}\quad L+S = X.
 $$ {#eq-rpca-pcp}
 In @eq-rpca-pcp $\|\cdot\|_{\star}$ is called the _nuclear norm_ consisting of the sum of all singular values and we use it as our proxy for the $\operatorname{rank}$.
 

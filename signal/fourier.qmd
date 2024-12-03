@@ -1301,6 +1301,117 @@ plt.show()
 ::::
 :::
 
+The following example is taken from [@Meyberg1992-ws].
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-fourier-fft-gec}
+
+## Ground Emitter Circuit
+
+We can use FFT to compute some base properties of a ground emitter circuit @fig-fft-gec-1 and how the signal is propagated through this circuit @fig-fft-gec-2.
+
+```{python}
+#| code-fold: true
+#| echo: true
+#| code-summary: "Show the raw data for the example"
+import numpy as np
+import matplotlib.pyplot as plt
+%config InlineBackend.figure_formats = ["svg"]
+
+frequ = 2 * np.pi * 50
+f = lambda t: 0.8 * np.sin(t * frequ)
+diod = lambda t: (np.exp(1.2 + t) - 1)
+
+t = np.linspace(0, 2 * np.pi / frequ, 1024, endpoint=False)
+x = np.linspace(np.min(f(t)) * 1.3, np.max(f(t)) * 1.1, 1024)
+
+ic = lambda t: diod(f(t))
+
+k = np.arange(0, 16) * 1 / 16
+
+# The provided figures where used to create the illustation
+if False:
+    plt.figure()
+    plt.plot(f(t), t)
+    plt.plot([np.min(t),np.max(t)], [0,0], "gray")
+    plt.axis("off")
+    plt.savefig("sin.svg", transparent=True)
+    plt.figure()
+    plt.plot(x, diod(x))
+    z = np.array([0, np.min(f(t)), np.max(f(t))])
+    plt.plot(z, diod(z), "bx")
+    plt.axis("off")
+    plt.xlim([-2,5])
+    plt.gcf().patch.set_visible(False)
+    plt.savefig("diode.svg", transparent=True)
+
+    plt.figure()
+    plt.plot(t, ic(t))
+    plt.plot(2*np.pi*k/frequ, ic(2*np.pi*k/frequ), "ro")
+    plt.axis("off")
+    plt.savefig("ic.svg", transparent=True, bbox_inches ="tight")
+
+y = ic(k)
+yhat = (np.fft.fft(y))
+#Necessary correction factor for the FFT
+factor = 1 / 16
+yy = factor * yhat
+
+ic_mean = np.mean(ic(np.linspace(0, 1/50, 2**20)))
+c0 = yy[0].real
+effective_value = np.linalg.norm(yy[1:])
+harmonic_distortion = np.linalg.norm(yy[3:-2])/np.linalg.norm(yy[1:])
+```
+
+::::: {#fig-fft-gec}
+
+![Electric circuit](../_assets/signal/electric_circuit.svg){#fig-fft-gec-1}
+
+![Signal transition](../_assets/signal/signals.svg){#fig-fft-gec-2}
+
+The electric circuit and the signal transition for our example.
+:::::
+
+The transition of the transistor is approximately that of a diode and is illustrated in the $u_{BE}$ vs. $i_C$ diagram on the top left (orange signal). 
+The exiting function on the bottom is a normal sine wave with $50\mathrm{Hz}$.
+
+All together we get the equation
+$$
+i_c = \mathrm{e}^{1.2 + 0.8 \sin(2 \pi 50 t)} - 1
+$$
+for the current in $[\mathrm{mA}]$ running through the transistor. 
+
+We can see, that the signal is boosted depending on the characteristic curve of the diode, i.e. the positive part of the sine more than the negative part.
+If we compute take the fourier transform as illustrated with the red points on the curve on the right we get from the FFT coefficients $c_i$:
+
+1. the direct current component:
+```{python}
+#| echo: false
+#| output: asis
+print(r"$$")
+print(f"c_0 = {np.round(c0,3)}")
+print(r"$$")
+```
+1. the effective value from Parseval's Theorem:
+```{python}
+#| echo: false
+#| output: asis
+print(r"$$")
+print(r"\overline{i_c} = \sqrt{\sum_{i=0}^{15} |c_i|^2}"f"= {np.round(effective_value,3)}")
+print(r"$$")
+```
+1. the total harmonic distortion (how the signal is deformed):
+```{python}
+#| echo: false
+#| output: asis
+print(r"$$")
+print(r"THD = \frac{\sqrt{\sum_{i=2}^{14} |c_i|^2}}{\sqrt{\sum_{i=1}^{15} |c_i|^2}}="f"{np.round(harmonic_distortion,3)}")
+print(r"$$")
+```
+
+::::
+:::
+
 This concludes our example with the FFT.
 
 ## Gabor Transform

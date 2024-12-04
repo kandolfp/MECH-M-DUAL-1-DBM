@@ -44,6 +44,9 @@ book:
       chapters:
         - sensing/sparsity.qmd
         - sensing/compsensing.qmd
+    - part: statistics/index.qmd
+      chapters:
+        - statistics/bayesian.qmd
     - summary.qmd
     - references.qmd
 

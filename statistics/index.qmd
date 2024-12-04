@@ -1,0 +1,5 @@
+# Statistics {.unnumbered}
+
+Data science as we know it does not work without the solid foundations given via statistics and stochastic. 
+
+We have already seen some of these topics in our section about the basic properties of sets, @sec-intro-sets and we will build on this here to recall the most important results.

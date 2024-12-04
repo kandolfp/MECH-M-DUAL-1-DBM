@@ -1,0 +1,18 @@
+---
+lightbox: true
+---
+# Bayesian Statistics {#sec-statistic-bayesian}
+
+In the middle of the eighteenth century Joshua Bayes, a Presbyterian minister, set the ground work and as it so often happens was first not acknowledged by his peers.
+
+The basic rule is often illustrated via a Vann diagram for sets.
+Translated into a statistic problem this becomes:
+What is the probability, that a number is both, in set $A$ and set $B$ and we get 
+$$
+P(A, B) = P(B|A) P(A) = P(A|B)P(B)
+$$ 
+and this equation is called the **law of joint probabilities**.
+With $P(X)$ we describe the probability of event $X$ and with $P(X|Y)$ is the probability of event $X$ under the condition of the event $Y$ and in we find the most common representation
+$$
+P(A|B) = \frac{P(B|A) P(A)}{P(B)}.
+$$

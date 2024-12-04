@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -43,6 +97,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -325,8 +384,14 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#election-prediction-as-instructive-example" id="toc-election-prediction-as-instructive-example" class="nav-link active" data-scroll-target="#election-prediction-as-instructive-example"><span class="header-section-number">14.1</span> Election prediction as instructive example</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/statistics/bayesian.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -351,13 +416,304 @@ window.Quarto = {
 
 
 <p>In the middle of the eighteenth century Joshua Bayes, a Presbyterian minister, set the ground work and as it so often happens was first not acknowledged by his peers.</p>
-<p>The basic rule is often illustrated via a Vann diagram for sets. Translated into a statistic problem this becomes: What is the probability, that a number is both, in set <span class="math inline">\(A\)</span> and set <span class="math inline">\(B\)</span> and we get <span class="math display">\[
-P(A, B) = P(B|A) P(A) = P(A|B)P(B)
-\]</span> and this equation is called the <strong>law of joint probabilities</strong>. With <span class="math inline">\(P(X)\)</span> we describe the probability of event <span class="math inline">\(X\)</span> and with <span class="math inline">\(P(X|Y)\)</span> is the probability of event <span class="math inline">\(X\)</span> under the condition of the event <span class="math inline">\(Y\)</span> and in we find the most common representation <span class="math display">\[
+<p>The basic rule is often illustrated via a Venn diagram for sets.</p>
+<div id="fig-statistics-venn" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-statistics-venn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../_assets/statistics/vann.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;14.1: Venn diagram illustrating the principal of joint probabilities."><img src="../_assets/statistics/vann.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-venn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.1: Venn diagram illustrating the principal of joint probabilities.
+</figcaption>
+</figure>
+</div>
+<p>Translated into a statistic problem this becomes: What is the probability, that a number is both, in set <span class="math inline">\(A\)</span> and set <span class="math inline">\(B\)</span>.</p>
+<p>Before we can write this down proper we need to introduce some notation. With <span class="math inline">\(P(A)\)</span> we denote the probability of the event <span class="math inline">\(A\)</span> and <span class="math inline">\(P(A, B, \ldots)\)</span> the probability of all events listed combined. Furthermore we call <span class="math inline">\(P(\neg A)\)</span> the probability of <em>not</em> <span class="math inline">\(A\)</span>, i.e.&nbsp;<span class="math inline">\(P(\neg A) = 1 - P(A)\)</span>.</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-statistics-independent" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 14.1 (Independent events - unconditional probability)</strong></span> We call two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> independent if the fact that we know <span class="math inline">\(A\)</span> happened does not give us any insight the probability that <span class="math inline">\(B\)</span> happens or vice versa.</p>
+<p>In this case the probability of both events happening is <span class="math display">\[
+P(A, B) = P(A) P(B).
+\]</span></p>
+<p>An example is the classic coin toss. After throwing the first coin that lands on heads we have no information what the second toss will likely be.</p>
+<p>So if we say <span class="math inline">\(A\)</span> represents <em>first flip heads</em>, <span class="math inline">\(B\)</span> <em>second flip heads</em> we get <span class="math display">\[
+P(A, B) = P(A) P(B) = \frac12 \frac12 = \frac14,
+\]</span> or if <span class="math inline">\(B\)</span> represents <em>both flips tail</em> we get: <span class="math display">\[
+P(A, B) = P(A) P(B) = \frac12 0 = 0.
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>Now what happens when the two events are not independent.</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-statistics-dependent" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 14.2 (Dependent events - conditional probability)</strong></span> If two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are not independent and the probability of event <span class="math inline">\(B\)</span> is not zero, i.e.&nbsp;<span class="math inline">\(P(B)\neq 0\)</span> we define the conditional probability of <span class="math inline">\(A\)</span> under the condition <span class="math inline">\(B\)</span> as <span class="math inline">\(P(A | B)\)</span> and we get the relation <span class="math display">\[
+P(A | B) = \frac{P(A, B)}{P(B)}.
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>Therefore, if we return to our Venn diagram in <a href="#fig-statistics-venn" class="quarto-xref">Figure&nbsp;<span>14.1</span></a> we can see this relation played out. As <span class="math inline">\(P(A|B)\)</span> can be understood as the fraction of probability <span class="math inline">\(B\)</span> that intersects with <span class="math inline">\(A\)</span>.</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-statistics-ljp" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 14.3 (Law of joint probabilities)</strong></span> For two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> the following relation <span class="math display">\[
+P(A, B) = P(B|A) P(A) = P(A|B) P(B)
+\]</span> is called the <strong>law of joint probabilities</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-statistics-bayesianth" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 14.4 (Bayes’ theorem)</strong></span> For two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> as well as there dependent probabilities the following relation is called Bayes’ theorem <span class="math display">\[
 P(A|B) = \frac{P(B|A) P(A)}{P(B)}.
 \]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent we get <span class="math display">\[
+P(A|B) = P(A).
+\]</span></p>
+</div>
+</div>
+<p>Let us look at this with an example.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-statistics-cancerscreeing" class="theorem example">
+<p><span class="theorem-title"><strong>Example 14.1 (Cancer Screening)</strong></span> Let us assume we look at a medical procedure that tests for something like prostate or breast cancer.</p>
+<p>This test for <span class="math inline">\(cancer\)</span> is quite reliable with a true positive rate of <span class="math inline">\(80\%\)</span> and a true negative rate with <span class="math inline">\(90\%\)</span>. This translates into the probabilities <span class="math display">\[
+\begin{align}
+P(+ | cancer) = 0.8,\\
+P(+ | \neg cancer) = 0.1.
+\end{align}
+\]</span> furthermore we assume that only <span class="math inline">\(1\%\)</span> of all the people taking the exam actually have cancer, i.e. <span class="math display">\[
+P(cancer) = 0.01.
+\]</span></p>
+<p>From Beyes’ theorem we can compute the probability (or likelihood) to have cancer when receiving a positive test result as <span class="math display">\[
+P(cancer | +) = \frac{P(+ | cancer) P(cancer)}{P(+)}
+\]</span> The part we do not know in this equation is <span class="math inline">\(P(+)\)</span> but we can compute this with <a href="#def-statistics-ljp" class="quarto-xref">Definition&nbsp;<span>14.3</span></a> as <span class="math display">\[
+\begin{align}
+P(+) &amp;= P(+, cancer) + P(+, \neg cancer) \\
+     &amp;= P(+| cancer)P(cancer) + P(+| \neg cancer) P(\neg cancer)\\
+     &amp;= 0.8 \cdot 0.01 + 0.1 \cdot 0.99 = 0.107.
+\end{align}
+\]</span></p>
+<p>Overall, this allow us to compute <span class="math display">\[
+P(cancer | +) = \frac{P(+ | cancer) P(cancer)}{P(+)} = \frac{0.8 \cdot 0.01}{0.107} = 0.07477.
+\]</span></p>
+<p><span class="citation" data-cites="Lambert2018-ll">(Compare <a href="../references.html#ref-Lambert2018-ll" role="doc-biblioref">Lambert 2018, sec. 3.6.2</a>)</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<i class="fa-solid fa-pen-to-square" aria-label="pen-to-square"></i> Exercise - Bayes’ Theorem?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol class="example" type="1">
+<li><p>A person is known to lie half the time. This person throws a die and reports it is a 4 (four).<br>
+<br>
+What is the probability that it is actually a four?</p></li>
+<li><p>There are 3 urns containing 3 white and 2 black, 2 white and 4 black, as well as 4 white and 1 black ball respectively. Each urn can be chosen with equal probability.<br>
+<br>
+What is the likelihood that a white ball is drawn?</p></li>
+</ol>
+</div>
+</div>
+</div>
+<section id="election-prediction-as-instructive-example" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="election-prediction-as-instructive-example"><span class="header-section-number">14.1</span> Election prediction as instructive example</h2>
+<p>What Bayes was after was the basic question of data science: find the parameters of a model given the outcome data together with the model.</p>
+<p>The theorem can be used as an update for the probability we have with additional information and therefore fitting our parameters.</p>
+<p>Let us explain this with the help of the basics for election forecasts (this example follows the notes of <span class="citation" data-cites="mehrle">Mehrle (<a href="../references.html#ref-mehrle" role="doc-biblioref">2024</a>)</span>).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>So far our probabilities where not continuous functions. For this example we need continuous functions and to reflect this in the notation we use small letters.</p>
+</div>
+</div>
+<p>First we need to get a relative vote for party <span class="math inline">\(x\)</span> which might come from the last elections or a prior poll. We assume <span class="math inline">\(\mu = 20\%\)</span> and express the uncertainty in our estimate with a normal distribution with standard deviation of <span class="math inline">\(\sigma = 5\%\)</span>.</p>
+<p>The resulting probability distribution becomes <span class="math display">\[
+p(x) = \mathcal{N}[\mu, \sigma^2](x) = \frac{1}{\sqrt{2 \pi \sigma^2}}\mathrm{e}^{-\frac{(x - \mu)^2}{2\sigma^2}}
+\]</span> and in our case we get <span class="math inline">\(p(x) = \mathcal{N}[0.2, 0.05^2](x)\)</span>.</p>
+<div id="cell-fig-statistics-bayesian-vote1" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> odeint</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.special</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>normaldist <span class="op">=</span> <span class="kw">lambda</span> mu, sigma, x: <span class="dv">1</span> <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> sigma<span class="op">**</span><span class="dv">2</span>) <span class="op">*</span> <span class="op">\</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    np.exp(<span class="op">-</span> (x <span class="op">-</span> mu)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> sigma<span class="op">**</span><span class="dv">2</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="kw">lambda</span> x: normaldist(<span class="fl">0.2</span>, <span class="fl">0.05</span>, x)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1024</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p(x))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">1</span><span class="op">/</span><span class="dv">20</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$p(x)$"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-statistics-bayesian-vote1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-statistics-bayesian-vote1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="bayesian_files/figure-html/fig-statistics-bayesian-vote1-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;14.2: Probability density for our initial guess of the vote for party x."><img src="bayesian_files/figure-html/fig-statistics-bayesian-vote1-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-bayesian-vote1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.2: Probability density for our initial guess of the vote for party x.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Now we improvement our estimate by with the help of Bayes’ theorem by asking people what they vote on.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Of course this needs to be done in the proper way to make sure it is not biased. We assume to not be biased.</p>
+</div>
+</div>
+<p>The probability that exactly <span class="math inline">\(k\)</span> people of a random sample of size <span class="math inline">\(n\)</span> vote for party <span class="math inline">\(x\)</span> is a from combinatorics. <span class="math display">\[
+p(\frac{k}{n} | x) = \left(\begin{array}{c} k\\ n\end{array}\right) x^k (1-x)^{n-k}
+\]</span></p>
+<div id="cell-fig-statistics-bayesian-vote2" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> k, n, x: scipy.special.comb(n, k) <span class="op">*</span> np.<span class="bu">pow</span>(x, k) <span class="op">*</span> np.<span class="bu">pow</span>(<span class="dv">1</span><span class="op">-</span>x, n <span class="op">-</span> k)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="kw">lambda</span> x: fun(<span class="dv">2</span>, <span class="dv">10</span>, x)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1024</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p2(x))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">1</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$p(\frac</span><span class="sc">{5}{15}</span><span class="vs">|x)$"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-statistics-bayesian-vote2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-statistics-bayesian-vote2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="bayesian_files/figure-html/fig-statistics-bayesian-vote2-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;14.3: Probability density of k=5 positives out of n=15 samples."><img src="bayesian_files/figure-html/fig-statistics-bayesian-vote2-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-bayesian-vote2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.3: Probability density of k=5 positives out of n=15 samples.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In order to compute <span class="math inline">\(p(\frac{k}{n})\)</span> need to integrate our two results <span class="math display">\[
+p(\frac{k}{n}) = \int_0^1 p(\frac{k}{n} | x) p(x)\,\mathrm{d}x
+\]</span></p>
+<p>So for a given sample size <span class="math inline">\(n\)</span> and positive samples <span class="math inline">\(k\)</span> we get a new distribution.</p>
+<div id="cell-fig-statistics-bayesian-vote3" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p3 <span class="op">=</span> <span class="kw">lambda</span> k, n: scipy.integrate.quad(<span class="kw">lambda</span> x: fun(k, n, x) <span class="op">*</span> p(x), <span class="dv">0</span>, <span class="dv">1</span>)[<span class="dv">0</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>p4 <span class="op">=</span> <span class="kw">lambda</span> k, n ,x: p(x) <span class="op">*</span> fun(k, n, x) <span class="op">/</span> p3(k, n)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1024</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p4(<span class="dv">5</span>, <span class="dv">15</span>, x), label<span class="op">=</span><span class="vs">r"$n=5, k=15$"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p4(<span class="dv">50</span>, <span class="dv">150</span>, x), <span class="st">":"</span>, label<span class="op">=</span><span class="vs">r"$n=50, k=150$"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.gca().set_aspect(1)</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$p(x|\frac</span><span class="sc">{k}{n}</span><span class="vs">)$"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-statistics-bayesian-vote3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-statistics-bayesian-vote3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="bayesian_files/figure-html/fig-statistics-bayesian-vote3-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;14.4: Parameter likelihood after a survey with k=5 positives out of n=15 samples (solid - blue) and k=15 out of n=150 samples (dotted)."><img src="bayesian_files/figure-html/fig-statistics-bayesian-vote3-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-bayesian-vote3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.4: Parameter likelihood after a survey with k=5 positives out of n=15 samples (solid - blue) and k=15 out of n=150 samples (dotted).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Lambert2018-ll" class="csl-entry" role="listitem">
+Lambert, Ben. 2018. <em>A Student’s Guide to Bayesian Statistics</em>. London, England: SAGE Publications.
+</div>
+<div id="ref-mehrle" class="csl-entry" role="listitem">
+Mehrle, Andreas. 2024. <span>“<span>Data Science</span>.”</span> <em>Management Center Innsbruck, Reader for the Course</em>.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -944,12 +1300,44 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> Peter Kandolf</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/statistics/bayesian.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/statistics/bayesian.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

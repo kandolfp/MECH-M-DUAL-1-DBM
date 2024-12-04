@@ -500,7 +500,7 @@ f(t) = \cos(97 t\, 2\pi) + \cos(777 t\, 2\pi)
 <p>The sparsity of the sample allows us to reconstruct the signal by sampling randomly with an average sampling rate of <span class="math inline">\(128 \mathrm{Hz}\)</span>, well below the Shannon-Nyquist threshold.</p>
 <p>The code relies on the CoSaMP implementation <span class="citation" data-cites="NEEDELL2009301">Needell and Tropp (<a href="../references.html#ref-NEEDELL2009301" role="doc-biblioref">2009</a>)</span> provided on <a href="https://github.com/avirmaux/CoSaMP/tree/master">gitHub</a> and included below so we can work with it.</p>
 <p>The code is adapted from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 3.3)</span></p>
-<div id="ccf061b7" class="cell" data-execution_count="1">
+<div id="0f2a91f3" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>CoSaMP algorithm form gitHub, now print.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -863,7 +863,7 @@ Figure&nbsp;13.3: Cross-validation mean square error of Lasso fit, the green cir
 </div>
 </div>
 <p>The resulting coefficients for the best fit with lasso are</p>
-<div id="43c67dd9" class="cell styled-output" data-execution_count="5">
+<div id="6cb67164" class="cell styled-output" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>array([ 0.        ,  0.        ,  1.0978465 ,  0.        , -0.        ,
        -0.        , -1.06495486,  0.        ,  0.        ,  0.        ])</code></pre>
@@ -920,7 +920,7 @@ X = L + S.
 <div class="callout-body-container">
 <div id="exm-sensing-rpca" class="theorem example">
 <p><span class="theorem-title"><strong>Example 13.3 (Robust principal component analysis with Yale B dataset)</strong></span> The following implementation of RPCA can be found in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 121</a>)</span> with the same application to the eigenfaces dataset.</p>
-<div id="d60fe585" class="cell" data-execution_count="6">
+<div id="59de5dda" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Robust principal component analysis and helper functions</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> shrink(X, tau):</span>
@@ -952,7 +952,7 @@ X = L + S.
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L, S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="505f53f0" class="cell" data-execution_count="7">
+<div id="331c467a" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1862,7 +1862,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

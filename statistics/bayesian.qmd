@@ -5,14 +5,251 @@ lightbox: true
 
 In the middle of the eighteenth century Joshua Bayes, a Presbyterian minister, set the ground work and as it so often happens was first not acknowledged by his peers.
 
-The basic rule is often illustrated via a Vann diagram for sets.
+The basic rule is often illustrated via a Venn diagram for sets.
+
+::: {#fig-statistics-venn}
+
+![](../_assets/statistics/vann.svg)
+
+Venn diagram illustrating the principal of joint probabilities.
+:::
+
+
 Translated into a statistic problem this becomes:
-What is the probability, that a number is both, in set $A$ and set $B$ and we get 
+What is the probability, that a number is both, in set $A$ and set $B$. 
+
+Before we can write this down proper we need to introduce some notation.
+With $P(A)$ we denote the probability of the event $A$ and $P(A, B, \ldots)$ the probability of all events listed combined.
+Furthermore we call $P(\neg A)$ the probability of _not_ $A$, i.e. $P(\neg A) = 1 - P(A)$.
+
+::: {.callout appearance="simple"}
+:::: {#def-statistics-independent} 
+## Independent events - unconditional probability
+
+We call two events $A$ and $B$ independent if the fact that we know $A$ happened does not give us any insight the probability that $B$ happens or vice versa. 
+
+In this case the probability of both events happening is
 $$
-P(A, B) = P(B|A) P(A) = P(A|B)P(B)
+P(A, B) = P(A) P(B).
+$$
+
+An example is the classic coin toss.
+After throwing the first coin that lands on heads we have no information what the second toss will likely be. 
+
+So if we say $A$ represents _first flip heads_, $B$ _second flip heads_ we get
+$$
+P(A, B) = P(A) P(B) = \frac12 \frac12 = \frac14,
+$$
+or if $B$ represents _both flips tail_ we get:
+$$
+P(A, B) = P(A) P(B) = \frac12 0 = 0.
+$$
+::::
+:::
+
+Now what happens when the two events are not independent.
+
+::: {.callout appearance="simple"}
+:::: {#def-statistics-dependent} 
+## Dependent events - conditional probability
+
+If two events $A$ and $B$ are not independent and the probability of event $B$ is not zero, i.e. $P(B)\neq 0$ we define the conditional probability of $A$ under the condition $B$ as $P(A | B)$ and we get the relation
+$$
+P(A | B) = \frac{P(A, B)}{P(B)}.
+$$
+::::
+:::
+
+Therefore, if we return to our Venn diagram in @fig-statistics-venn we can see this relation played out. 
+As $P(A|B)$ can be understood as the fraction of probability $B$ that intersects with $A$.
+
+::: {.callout appearance="simple"}
+:::: {#def-statistics-ljp} 
+## Law of joint probabilities
+For two events $A$ and $B$ the following relation
+$$
+P(A, B) = P(B|A) P(A) = P(A|B) P(B)
 $$ 
-and this equation is called the **law of joint probabilities**.
-With $P(X)$ we describe the probability of event $X$ and with $P(X|Y)$ is the probability of event $X$ under the condition of the event $Y$ and in we find the most common representation
+is called the **law of joint probabilities**.
+::::
+:::
+
+::: {.callout appearance="simple"}
+:::: {#def-statistics-bayesianth} 
+## Bayes' theorem
+For two events $A$ and $B$ as well as there dependent probabilities the following relation is called Bayes' theorem
 $$
 P(A|B) = \frac{P(B|A) P(A)}{P(B)}.
 $$
+::::
+:::
+
+::: {.callout-note}
+If $A$ and $B$ are independent we get
+$$
+P(A|B) = P(A).
+$$
+:::
+
+Let us look at this with an example.
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-statistics-cancerscreeing}
+
+## Cancer Screening 
+
+Let us assume we look at a medical procedure that tests for something like prostate or breast cancer.
+
+This test for $cancer$ is quite reliable with a true positive rate of $80\%$ and a true negative rate with $90\%$. 
+This translates into the probabilities
+$$
+\begin{align}
+P(+ | cancer) = 0.8,\\
+P(+ | \neg cancer) = 0.1.
+\end{align}
+$$
+furthermore we assume that only $1\%$ of all the people taking the exam actually have cancer, i.e.
+$$
+P(cancer) = 0.01.
+$$
+
+From Beyes' theorem we can compute the probability (or likelihood) to have cancer when receiving a positive test result as
+$$
+P(cancer | +) = \frac{P(+ | cancer) P(cancer)}{P(+)}
+$$
+The part we do not know in this equation is $P(+)$ but we can compute this with @def-statistics-ljp as
+$$
+\begin{align}
+P(+) &= P(+, cancer) + P(+, \neg cancer) \\
+     &= P(+| cancer)P(cancer) + P(+| \neg cancer) P(\neg cancer)\\
+     &= 0.8 \cdot 0.01 + 0.1 \cdot 0.99 = 0.107.
+\end{align}
+$$
+
+Overall, this allow us to compute
+$$
+P(cancer | +) = \frac{P(+ | cancer) P(cancer)}{P(+)} = \frac{0.8 \cdot 0.01}{0.107} = 0.07477.
+$$
+
+[Compare @Lambert2018-ll, Section 3.6.2]
+::::
+:::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+## {{< fa pen-to-square >}} Exercise - Bayes' Theorem?
+
+(@) A person is known to lie half the time.
+This person throws a die and reports it is a 4 (four). \
+\
+What is the probability that it is actually a four?
+
+(@) There are 3 urns containing 3 white and 2 black, 2 white and 4 black, as well as 4 white and 1 black ball respectively. Each urn can be chosen with equal probability. \
+\
+What is the likelihood that a white ball is drawn?
+:::
+
+## Election prediction as instructive example
+
+What Bayes was after was the basic question of data science: find the parameters of a model given the outcome data together with the model.
+
+The theorem can be used as an update for the probability we have with additional information and therefore fitting our parameters.
+
+Let us explain this with the help of the basics for election forecasts (this example follows the notes of @mehrle).
+
+::: {.callout-note}
+So far our probabilities where not continuous functions.
+For this example we need continuous functions and to reflect this in the notation we use small letters.
+:::
+
+First we need to get a relative vote for party $x$ which might come from the last elections or a prior poll.
+We assume $\mu = 20\%$ and express the uncertainty in our estimate with a normal distribution with standard deviation of $\sigma = 5\%$. 
+
+The resulting probability distribution becomes
+$$
+p(x) = \mathcal{N}[\mu, \sigma^2](x) = \frac{1}{\sqrt{2 \pi \sigma^2}}\mathrm{e}^{-\frac{(x - \mu)^2}{2\sigma^2}}
+$$
+and in our case we get $p(x) = \mathcal{N}[0.2, 0.05^2](x)$.
+
+```{python}
+#| label: fig-statistics-bayesian-vote1
+#| fig-cap: "Probability density for our initial guess of the vote for party x."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+%config InlineBackend.figure_formats = ["svg"]
+
+import scipy.special
+normaldist = lambda mu, sigma, x: 1 / np.sqrt(2 * np.pi * sigma**2) * \
+    np.exp(- (x - mu)**2 / (2 * sigma**2))
+
+p = lambda x: normaldist(0.2, 0.05, x)
+
+x = np.linspace(0, 1, 1024)
+plt.figure()
+plt.plot(x, p(x))
+plt.gca().set_aspect(1/20)
+plt.xlabel(r"$x$")
+plt.ylabel(r"$p(x)$")
+plt.show()
+```
+
+Now we improvement our estimate by with the help of Bayes' theorem by asking people what they vote on.
+
+::: {.callout-note}
+Of course this needs to be done in the proper way to make sure it is not biased.
+We assume to not be biased.
+:::
+
+The probability that exactly $k$ people of a random sample of size $n$ vote for party $x$ is a from combinatorics.
+$$
+p(\frac{k}{n} | x) = \left(\begin{array}{c} k\\ n\end{array}\right) x^k (1-x)^{n-k}
+$$
+
+```{python}
+#| label: fig-statistics-bayesian-vote2
+#| fig-cap: "Probability density of k=5 positives out of n=15 samples."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import scipy
+
+fun = lambda k, n, x: scipy.special.comb(n, k) * np.pow(x, k) * np.pow(1-x, n - k)
+p2 = lambda x: fun(2, 10, x)
+
+x = np.linspace(0, 1, 1024)
+plt.figure()
+plt.plot(x, p2(x))
+plt.gca().set_aspect(1)
+plt.xlabel(r"$x$")
+plt.ylabel(r"$p(\frac{5}{15}|x)$")
+plt.show()
+```
+
+In order to compute $p(\frac{k}{n})$ need to integrate our two results
+$$
+p(\frac{k}{n}) = \int_0^1 p(\frac{k}{n} | x) p(x)\,\mathrm{d}x
+$$
+
+So for a given sample size $n$ and positive samples $k$ we get a new distribution.
+
+```{python}
+#| label: fig-statistics-bayesian-vote3
+#| fig-cap: "Parameter likelihood after a survey with k=5 positives out of n=15 samples (solid - blue) and k=15 out of n=150 samples (dotted)."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+
+p3 = lambda k, n: scipy.integrate.quad(lambda x: fun(k, n, x) * p(x), 0, 1)[0]
+
+p4 = lambda k, n ,x: p(x) * fun(k, n, x) / p3(k, n)
+
+x = np.linspace(0, 1, 1024)
+plt.figure()
+plt.plot(x, p4(5, 15, x), label=r"$n=5, k=15$")
+plt.plot(x, p4(50, 150, x), ":", label=r"$n=50, k=150$")
+plt.legend()
+#plt.gca().set_aspect(1)
+plt.xlabel(r"$x$")
+plt.ylabel(r"$p(x|\frac{k}{n})$")
+plt.show()
+```

@@ -47,6 +47,7 @@ book:
     - part: statistics/index.qmd
       chapters:
         - statistics/bayesian.qmd
+        - statistics/kalman.qmd
     - summary.qmd
     - references.qmd
 

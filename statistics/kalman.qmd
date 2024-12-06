@@ -1,0 +1,230 @@
+---
+lightbox: true
+---
+# Kalman Filter {#sec-statistic-kalman}
+
+The Kalman Filter is one of the most important contributions to engineering sciences in the 20th century and it helped to develop the space program. 
+
+The filter is an iterative process to estimate the parameters of that describe some system. 
+In engineering terms it is used to estimate the underlying states of a state space model via a two-step predictor-corrector approach. 
+For both, the state and the uncertainty $P$ in this state, normal distributions are assumed and the updates are computed analytically. 
+
+::: {.callout-important}
+We follow @Faragher for this introduction.
+:::
+
+The algorithm assumes that we have a state at time $k$ that evolved from a prior state at time $k-1$ from the following equation
+$$
+x_k = F_k x_{k-1} + B_k u_k + w_k,
+$$ {#eq-kalman_base}
+with $x_k$ being the state vector, $u_k$ contains the control inputs like position, velocity, etc., $F_k$ is called the state transition matrix, $B_k$ the control input matrix, and last $w_k$ contains the noise of the process.
+The process noise $w_k$ is assumed to be drawn from a zero mean multivariate normal distribution with covariance matrix $Q_k$.
+Furthermore, we measure the system according to the model
+$$
+z_k = H_k x_k + \nu_k
+$$
+for $z_k$ being the measurements, $H_k$ the transformation matrix and $\nu_k$ contains the measurement noise.
+
+For this introduction we us a simple example with a train going along a track.
+Therefore,
+$$
+\begin{align}
+x_k &= \left[
+    \begin{array}{c} \mathrm{x}_k \\ \dot{\mathrm{x}}_k\end{array}
+\right].
+\end{align}
+$$
+As the train can be accelerated or the driver can use the break this will be our input parameters. 
+We can model them as a function $f_k$ and the train mass is constant with $m$.
+As a result $u_t$ has the form
+$$
+u_k = \frac{f_k}{m}.
+$$
+We assume that to move from state $k-1$ to $k$ the time $\Delta t$ is needed. 
+Hence, 
+$$
+\begin{align}
+\mathrm{x}_k &= \mathrm{x}_{k-1} + (\dot{\mathrm{x}}_{k-1} \Delta t) + \frac{f_k (\Delta t)^2}{2m}\\
+\dot{\mathrm{x}}_k &= \dot{\mathrm{x}}_{k-1}\frac{f_k \Delta t}{m}.
+\end{align}
+$$
+or in matrix form
+$$
+x_k = \left[
+    \begin{array}{c} \mathrm{x}_k \\ \dot{\mathrm{x}}_k\end{array}
+\right] = 
+\left[
+    \begin{array}{cc} 1 & \Delta t\\ 0 & 1 \end{array}
+\right]
+\left[
+    \begin{array}{c} \mathrm{x}_{k-1} \\ \dot{\mathrm{x}}_{k-1}\end{array}
+\right]
++
+\frac{f_k}{m}
+\left[
+    \begin{array}{c} \frac{(\Delta t)^2}{2} \\ \Delta t\end{array}
+\right]
+$$
+and we can see the matrices of our initial problem statement. 
+As it is not possible to observe the true state of the system directly we use the Kalman filter as an algorithm to determine an estimate of $x_k$.
+As the system includes uncertainties the state is given in terms of probability density functions rather than discrete values. 
+
+So how can we derive an estimate for the current step from known steps and the uncertainty we have in the system.
+This uncertainty is model as normal distribution and the parameters are stored in the covariance matrix $P_k$ (zero mean is assumed).
+As mentioned before we need to do a prediction and the standard equation for the Kalman filter is 
+$$
+\hat{x}_{k|k-1} = F_k \hat{x}_{k-1|k-1} + B_k u_k,
+$$ {#eq-kalman_update}
+and
+$$
+P_{k|k-1} = F_k P_{k-1|k-1} F_k^{\mathrm{T}}+ Q_k.
+$$
+Here $\star_{k|k-1}$ denotes the state at time $t_k$ derived from the state at time $t_{k-1}$.
+
+To get the second equation we need to know that the variance associated with the prediction $\hat{x}_{k|k-1}$ of the unknown true value $x_k$ is given by
+$$
+P_{k|k-1} = E\left[(x_k - x_{k|k-1})(x_k - x_{k|k-1})^{\mathrm{T}}\right].
+$$
+If we now compute the difference of @eq-kalman_base and @eq-kalman_update we note that the state estimation errors as well as the process noise are uncorrelated and therefore their correlation is zero. 
+
+The measurement update equations are given by
+$$
+\hat{x}_{k|k} = \hat{x}_{k|k-1} + K_k(z_k - H_k \hat{x}_{k|k-1})
+$$
+and
+$$
+P_{k|k} = P_{k|k-1} + K_k H_k P_{k|k-1}
+$$
+for 
+$$
+K_k = P_{k|k} H_k^{\mathrm{T}}(H_kP_{k|-1}H_k^{\mathrm{T}} + R_k)^{-1}.
+$$
+Here, $R_k$ is the covariance of the measurement noise.
+
+To make (more) sense of the above formula we should consider the train example in more detail.
+
+At time $t=0$ (and $k=0$) our tain is at a specific position but due to measurement uncertainty this position is expressed as a probability distribution.
+As mentioned before we use a normal Gaussian distribution with mean $\mu_0$ and variance $\delta_0^2$.
+
+::: {.callout-note}
+Going back to our model description before, we have $\hat{x}_{1|0} = \mu_0$ and $P_{1|0}=\sigma_0^2$.
+:::
+
+```{python}
+#| label: fig-kalman-train1
+#| fig-cap: "Position of the train"
+#| fig-subcap:
+#|   - "Position at time t=0."
+#|   - "Position at time t=1."
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+%config InlineBackend.figure_formats = ["svg"]
+
+f = lambda mu, sigma, x: 1 / np.sqrt(2 * np.pi * sigma**2) * \
+    np.exp(- (x - mu)**2 / (2 * sigma**2))
+
+x = np.linspace(0, 5, 1024)
+plt.figure()
+plt.plot(x, f(1, 0.1, x), label=r"t=0")
+plt.gca().set_aspect(5 / (3 * 5))
+plt.ylim([0, 5])
+plt.legend()
+plt.figure()
+plt.plot(x, f(1.8, 0.15, x), label=r"t=1")
+plt.gca().set_aspect(5 / (3 * 5))
+plt.legend()
+plt.ylim([0, 5])
+plt.show()
+```
+
+Now we can predict the position of the train at $t=1$ ($k=1$) with the data we know at time $t=0$ like its maximum speed, possible acceleration and deceleration, etc.. 
+This is can be done via @eq-kalman_base.
+We can see a possible outcome in @fig-kalman-train1-2 where the train has moved in positive direction but the variance has increased indicating the increased uncertainty in the position du to the fact that we do not have noise from the acceleration or deceleration happening in the span $\Delta t$.
+
+Now at time $t=1$ we can measure the position of the train.
+We do so via a radio signal and of course this process is also having some noise added to it resulting in a Gaussian probability to the position.
+
+::: {.callout-important}
+A key feature of the normal (Gaussian) distribution is that fact that the _product of two Gaussian distributions_ is again a Gaussian distribution.
+
+This process can be repeated over and over again and we always end up with a Gaussian distribution. 
+This is a main feature in the Kalman filter.
+
+$$
+\begin{align}
+\mathcal{N}[\mu_1, \sigma_1](x) \cdot \mathcal{N}[\mu_2, \sigma_2](x) &= 
+\frac{1}{\sqrt{2 \pi \sigma_1^2}}\mathrm{e}^{-\frac{(x - \mu_1)^2}{2\sigma_1^2}} \cdot
+\frac{1}{\sqrt{2 \pi \sigma_2^2}}\mathrm{e}^{-\frac{(x - \mu_2)^2}{2\sigma_2^2}} \\
+&=
+\frac{1}{2 \pi \sqrt{\sigma_1^2\sigma_2^2}}\mathrm{e}^{-\left(\frac{(x - \mu_1)^2}{2\sigma_1^2} + \frac{(x - \mu_2)^2}{2\sigma_2^2}\right)}\\
+&=
+\frac{1}{\sqrt{2 \pi \sigma^2}}\mathrm{e}^{-\frac{(x - \mu)^2}{2\sigma^2}} \\
+&= \mathcal{N}[\mu, \sigma](x)
+\end{align}
+$$
+with 
+$$
+\mu = \frac{\mu_1 \sigma_2^2 + \mu_2 \sigma_1^2}{\sigma_1^2 + \sigma_2^2} = \mu_1 + \frac{\sigma_1^2 (\mu_2 - \mu_1)}{\sigma_1^2 + \sigma_2^2}\qquad
+\sigma^2 = \frac{\sigma_1^2 \sigma_2^2}{\sigma_1^2 + \sigma_2^2} = \sigma_1^2 - \frac{\sigma_1^4}{\sigma_1^2 + \sigma_2^2}
+$$ {#eq-kalman-update2}
+:::
+
+Let us use this to get an estimate of our train after the measurement by multiplying the two Gaussian distributions, as seen in @fig-kalman-train2.
+```{python}
+#| label: fig-kalman-train2
+#| fig-cap: "Position of the train at t=1 with measurement and resulting distribution."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+%config InlineBackend.figure_formats = ["svg"]
+
+f = lambda mu, sigma, x: 1 / np.sqrt(2 * np.pi * sigma**2) * \
+    np.exp(- (x - mu)**2 / (2 * sigma**2))
+
+update = lambda mu, sigma: ((mu[0] * np.pow(sigma[1], 2) + mu[1] * np.pow(sigma[0], 2)) / (np.sum(np.pow(sigma, 2))), np.prod(sigma) / np.sqrt(np.sum(np.pow(sigma, 2))))
+
+x = np.linspace(0, 5, 1024)
+plt.figure()
+plt.plot(x, f(1.8, 0.2, x), label=r"predictor")
+plt.plot(x, f(2, 0.1, x), label=r"corrector")
+#plt.plot(x, (f(1.8, 0.2, x) * f(2, 0.1, x)), label=r"updated position")
+plt.plot(x, f(*update([1.8, 2.0], [0.2, 0.1]), x), label=r"updated position")
+plt.gca().set_aspect(5 / (3 * 5))
+plt.legend()
+plt.ylim([0, 5])
+plt.show()
+```
+The new distribution considers the information of our guess and the update provided by the measurement and therefore our best estimation of the current position of the train.
+@eq-kalman-update2 represents the update step of the Kalman filter @eq-kalman_update.
+
+To bring in all the components of the Kalman filter we assume that the measurement and the prediction is not in the same domain and therefore we need the matrix $H_k$.
+
+To do so assume that the signal for the estimate is a radio signal that travels with the speed of light $c$ and therefore we need to transform $\mathcal{N}[\mu_2, \sigma_2](x)$ as $\mathcal{N}[\frac{\mu_2}{c}, \frac{\sigma_2}{c}](x)$ and our update becomes
+
+$$
+\mu = \mu_1 + K (\mu_2 - H \mu_1) \qquad \sigma^2 = \sigma_1^2 - KH\sigma_1^2,
+$$
+with 
+$$
+H = \frac{1}{c} \qquad K = \frac{H\sigma_1^2}{H^2\sigma_1^2+\sigma_2^2}.
+$$
+
+::: {.callout-note}
+Going back to our model description before, we have $z_{k} = \mu_2$ and $R_{k}=\sigma_2^2$, $H=H_k$, $K=K_k$.
+:::
+
+This the qualities given in the notes it is easy to see how the Kalman filter fits into our little illustration.
+
+There are three main applications for the Kalman filter in engineering which differ mainly in the input provide to the model:
+
+1. Measurement - since by definition the input is not known, it is neglected in
+the model ($u_k = 0$)
+1. Control - the input is calculated by the controller and therefore known and 
+considered ($u_k = -K_k x_k$)
+1. Sensor fusion - the input is provided by a measurement from a complementary sensor ($u_k = z_{k}$ )

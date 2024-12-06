@@ -85,9 +85,20 @@ $$
 :::
 
 ::: {.callout-note}
-If $A$ and $B$ are independent we get
+We have some further properties that follow from the above definitions for two events $A$ and $B$. 
+
+If they are independent we get
 $$
 P(A|B) = P(A).
+$$
+
+Furthermore, if $\neg B$ denotes the negative of $B$ we have
+$$
+P(A) = P(A, B) + P(A, \neg B)
+$$
+and therefore we get
+$$
+P(A|B) = \frac{P(B|A) P(A)}{P(B|A)P(A) + P(B|\neg A)P(\neg A)}
 $$
 :::
 

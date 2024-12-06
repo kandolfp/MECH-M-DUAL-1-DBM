@@ -444,11 +444,16 @@ plt.show()
 ::::
 
 
-What Bayes was after was the basic question of data science: find the parameters of a model given the outcome data together with the model.
+## Bayes' theorem in action
 
+What Bayes was after was the basic question of data science: find the parameters of a model given the outcome data together with the model.
 The theorem can be used as an update for the probability we have with additional information and therefore fitting our parameters.
 
-Let us explain this with the help of the basics for election forecasts (this example follows the notes of @mehrle).
+Let us look at some more elaborate examples to show how Bayes theorem can be used. 
+
+### Election prediction as instructive example
+
+Here we give a rudimentary introduction to election forecasts (this example follows the notes @mehrle).
 
 ::: {.callout-note}
 So far our probabilities where not continuous functions.
@@ -471,10 +476,8 @@ and in our case we get $p(x) = \mathcal{N}[0.2, 0.05^2](x)$.
 #| code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import odeint
 %config InlineBackend.figure_formats = ["svg"]
 
-import scipy.special
 normaldist = lambda mu, sigma, x: 1 / np.sqrt(2 * np.pi * sigma**2) * \
     np.exp(- (x - mu)**2 / (2 * sigma**2))
 
@@ -483,22 +486,23 @@ p = lambda x: normaldist(0.2, 0.05, x)
 x = np.linspace(0, 1, 1024)
 plt.figure()
 plt.plot(x, p(x))
-plt.gca().set_aspect(1/20)
+plt.grid("major")
+plt.gca().set_aspect(1/(3 * 8))
 plt.xlabel(r"$x$")
 plt.ylabel(r"$p(x)$")
 plt.show()
 ```
 
-Now we improvement our estimate by with the help of Bayes' theorem by asking people what they vote on.
+Now we improvement our estimate with the help of Bayes' theorem by asking _random_ people what they will vote.
 
 ::: {.callout-note}
 Of course this needs to be done in the proper way to make sure it is not biased.
 We assume to not be biased.
 :::
 
-The probability that exactly $k$ people of a random sample of size $n$ vote for party $x$ is a from combinatorics.
+The probability that exactly $k$ people of a random sample of size $n$ vote for party $x$ is a best described with a binomial distribution
 $$
-p(\frac{k}{n} | x) = \left(\begin{array}{c} k\\ n\end{array}\right) x^k (1-x)^{n-k}
+p(\frac{k}{n} | x) = \left(\begin{array}{c} n\\ k\end{array}\right) x^k (1-x)^{n-k}.
 $$
 
 ```{python}
@@ -508,19 +512,20 @@ $$
 #| code-summary: "Show the code for the figure"
 import scipy
 
-fun = lambda k, n, x: scipy.special.comb(n, k) * np.pow(x, k) * np.pow(1-x, n - k)
-p2 = lambda x: fun(2, 10, x)
+bino = lambda k, n, x: scipy.special.comb(n, k) * np.pow(x, k) * np.pow(1-x, n - k)
+p2 = lambda x: bino(2, 10, x)
 
 x = np.linspace(0, 1, 1024)
 plt.figure()
 plt.plot(x, p2(x))
+plt.grid("major")
 plt.gca().set_aspect(1)
 plt.xlabel(r"$x$")
 plt.ylabel(r"$p(\frac{5}{15}|x)$")
 plt.show()
 ```
 
-In order to compute $p(\frac{k}{n})$ need to integrate our two results
+In order to compute $p(\frac{k}{n})$ we need to integrate our two results
 $$
 p(\frac{k}{n}) = \int_0^1 p(\frac{k}{n} | x) p(x)\,\mathrm{d}x
 $$
@@ -533,17 +538,23 @@ So for a given sample size $n$ and positive samples $k$ we get a new distributio
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 
-p3 = lambda k, n: scipy.integrate.quad(lambda x: fun(k, n, x) * p(x), 0, 1)[0]
+p3 = lambda k, n: scipy.integrate.quad(lambda x: bino(k, n, x) * p(x), 0, 1)[0]
 
-p4 = lambda k, n ,x: p(x) * fun(k, n, x) / p3(k, n)
+p4 = lambda k, n ,x: p(x) * bino(k, n, x) / p3(k, n)
 
 x = np.linspace(0, 1, 1024)
 plt.figure()
 plt.plot(x, p4(5, 15, x), label=r"$n=5, k=15$")
 plt.plot(x, p4(50, 150, x), ":", label=r"$n=50, k=150$")
 plt.legend()
-#plt.gca().set_aspect(1)
+plt.grid("major")
+plt.gca().set_aspect(1 / (3 * 14))
 plt.xlabel(r"$x$")
 plt.ylabel(r"$p(x|\frac{k}{n})$")
 plt.show()
 ```
+In @fig-statistics-bayesian-vote3 we can see that the peak moves from $0.2$ closer to $\tfrac13$ (our pooling results) and the bigger our sample size gets the more likely our change is (we get closer).
+
+::: {.callout-warning}
+A pint that is often criticised regarding the _Bayesian inference_ we applied here is that it is highly dependent on the initial guess (@fig-statistics-bayesian-vote1).
+:::

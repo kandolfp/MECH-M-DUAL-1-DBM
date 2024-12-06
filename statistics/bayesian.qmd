@@ -147,7 +147,7 @@ $$
 :::
 
 ::: {.callout-tip appearance="simple" collapse="true" icon=false}
-## {{< fa pen-to-square >}} Exercise - Bayes' Theorem?
+## {{< fa pen-to-square >}} Exercise - Bayes' theorem?
 
 (@) A person is known to lie half the time.
 This person throws a die and reports it is a 4 (four). \
@@ -159,7 +159,290 @@ What is the probability that it is actually a four?
 What is the likelihood that a white ball is drawn?
 :::
 
-## Election prediction as instructive example
+## Random variable
+
+A random variable $X$ (often also called random quantity or stochastic variable) is a variable that is dependent on _random events_ and is a function defined on a probability space $(\Omega, \mathcal{F}, P)$.
+$\Omega$ is called the sample space of all possible outcomes, $\mathcal{F}$ the event space (a set of outcomes in the sample space), and $P$ is the probability function which assigns each event in the event space a probability as a number between $0$ and $1$. 
+
+A very simple random variable is the one describing a coin toss.
+It is one for heads and zero for tails.
+To increase the complexity we can search for a random variable that tells us how often tails was the result for $n$ coin tosses. 
+
+To get a better idea what $(\Omega, \mathcal{F}, P)$ and $X$ is we should ask a the following question: _How likely is the value of $X=2$?_
+
+To answer this question we need to find the probability of the event $\{\omega\,:\, X(\omega) = 2\} that can be expressed via $P$ as $P(X=2)=p_X(2)$.
+
+If we record all this probabilities of outcomes of $X$ results in the **probability distribution** of $X$.
+If this probability distribution is real valued we get the **cumulative distribution function** (CDF)
+$$
+F_X(x) = P(X\leq x).
+$$
+
+### Discrete random variables
+
+We have already seen a discrete random variable as _the number of heads for $n$ coin tosses_, other possibilities are _the number of children for a person_.
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-statistics-cointoss}
+
+## Coin toss
+
+For the coin toss we have $\Omega=\{heads, tails\}$ and 
+$$
+X(\omega) = 
+\begin{cases}
+1, \quad \text{if}\, \omega = heads,\\
+0, \quad \text{if}\, \omega = tails.
+\end{cases}
+$$
+for a _fair coin_ the function 
+$$
+F_X(x) = 
+\begin{cases}
+\frac12, \quad \text{if}\, y = 1,\\
+\frac12, \quad \text{if}\, y = 0.
+\end{cases}
+$$
+
+Of course this does not mean we will get exactly $\frac12$ for $n$ tosses but with the rule of large numbers we see that it will end up there for a lot of flips
+```{python}
+#| label: fig-statistics-cointossln
+#| fig-cap: "Rule of large numbers for coin toss, coin toss simulated by a random numbers smaller or grater than 0.5."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+%config InlineBackend.figure_formats = ["svg"]
+np.random.seed(6020)
+
+x = range(1, 1_001, 2)
+y = []
+for n in x:
+    y.append(np.sum(np.random.rand(n) < 0.5) / n)
+
+plt.plot(x, y)
+plt.plot([0, max(x)], [1/2,  1/2])
+plt.gca().set_aspect(1000 / (3))
+plt.show()
+```
+::::
+:::
+
+### Continuous random variable
+
+If the cumulative distribution function is continuous everywhere we get have a continuous random variable. 
+For such variables it makes more sense to not look for an exact equality with a number but rather, what is the probability that $X$ lies between $[a, b]$.
+
+Example could be the height of a person (if we can measure continuously).
+In this example it the probability that a person is exactly $185m$ is zero but the question if somebodies hight is in $[180, 190)$ makes sense.
+
+## Probability distributions
+
+It is instructive to look at some of the most common probability distributions so that we know what we can describe by these them. 
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-statistics-binomial_dist}
+
+## Binomial distribution
+
+The binomial distribution is a discrete probability function with parameters $n$ and $p$. 
+It describes the number of successes in a sequence of $n$ independent experiments, where $p$ describes the probability of the experiment being a success. 
+
+The probability density function is
+$$
+f(x) = \left(\begin{array}{c} n\\ x\end{array}\right) p^k (1-p)^{n-k},
+$$
+with 
+$$
+\left(\begin{array}{c} n\\ x\end{array}\right) = \frac{n!}{k!(n-k)!}.
+$$
+It measures the probability that we get exactly $x$ successes in $n$ independent trials.
+
+The corresponding CDF is 
+$$
+F(x) = \sum_{i=0}^{\lfloor x \rfloor}\left(\begin{array}{c} n\\ i\end{array}\right) p^i(1-p)^{n-i}.
+$$
+
+```{python}
+#| label: fig-statistics-binomial
+#| fig-cap: "Binomial distribution - basic functions."
+#| fig-subcap:
+#|   - "Probability density function."
+#|   - "Cumulative distribution function."
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+%config InlineBackend.figure_formats = ["svg"]
+
+
+f = lambda n, p, x: np.vectorize(lambda x: math.comb(n, x))(x) * np.pow(p, x) * np.pow(1 - p, n - x)
+
+helper = lambda n, p, x: np.sum(f(n, p, np.arange(0, x + 1)))
+cfd = lambda n, p, x: np.vectorize(lambda x: helper(n, p, x))(x)
+
+x = np.arange(0, 40)
+plt.figure()
+plt.plot(x, f(20, 0.5, x), "o", label=r"$n=20, p=\frac{1}{2}$")
+plt.plot(x, f(20, 0.7, x), "x", label=r"$n=20, p=\frac{7}{10}$")
+plt.plot(x, f(40, 0.5, x), "d", label=r"$n=40, p=\frac{1}{2}$")
+plt.gca().set_aspect(40/(3 * 0.2))
+plt.legend()
+plt.figure()
+plt.plot(x, cfd(20, 0.5, x), "o", label=r"$n=20, p=\frac{1}{2}$")
+plt.plot(x, cfd(20, 0.7, x), "x", label=r"$n=20, p=\frac{7}{10}$")
+plt.plot(x, cfd(40, 0.5, x), "d", label=r"$n=40, p=\frac{1}{2}$")
+plt.gca().set_aspect(40/(3 * 1))
+plt.legend()
+plt.show()
+```
+:::
+::::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-statistics-bernoulli_dist}
+
+## Bernoulli distribution
+
+The Bernoulli distribution is a discrete probability function which takes the value $1$ with probability $p$ and the value $0$ with probability $q=1-p$.
+It is how we can model a coin toss or anything that is expressed in a _yes-no question_.
+
+It is the special case of a Binomial distribution @exm-statistics-binomial_dist with $n=1$.
+
+The probability density function becomes
+$$
+f(x) = p^x (1-p)^{1-x} \quad\text{for}\quad x\in \{0,1\}
+$$
+and the corresponding CDF 
+$$
+F(x) = \begin{cases}
+0 \quad &\text{if}\, x \leq 0,\\
+1-p \quad &\text{if}\, 0\leq x \le 1,\\
+1 \quad &\text{if}\, x \geq 1.
+\end{cases}
+$$
+::::
+:::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-statistics-cont_dist}
+
+## Continuous uniform distribution
+The continuous uniform distribution is also called the rectangular distribution and describes an outcome that lies between certain bounds. 
+
+The probability density function is
+$$
+f(x) = 
+\begin{cases}
+\frac{1}{b-a} \quad &\text{if}\_ a \leq x \leq b,\\
+0 \quad &\text{else.}
+\end{cases}
+$$
+and the corresponding CDF 
+$$
+F(x) = 
+\begin{cases}
+\frac{x-a}{b-a} \quad &\text{if}\_ a \leq x \leq b,\\
+0 \quad &\text{else.}
+\end{cases}
+$$
+
+```{python}
+#| label: fig-statistics-cud
+#| fig-cap: "Continuous uniform distribution - basic functions."
+#| fig-subcap:
+#|   - "Probability density function."
+#|   - "Cumulative distribution function."
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+%config InlineBackend.figure_formats = ["svg"]
+a = 0
+b = 1
+f = lambda x: np.astype((x >= a) & (x < b), float) / (b - a)
+cfd = lambda x: (x - a) / (b - a) * np.astype((x >= a) & (x < b) , float) + np.astype((x >= b) , float)
+x = np.linspace(-1, 2, 1024)
+plt.figure()
+plt.plot(x, f(x))
+plt.gca().set_aspect(3/(3 * 1))
+plt.figure()
+plt.plot(x, cfd(x))
+plt.gca().set_aspect(3/(3 * 1))
+plt.show()
+
+```
+:::
+::::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-statistics-normal_dist}
+
+## Normal distribution
+
+The normal distribution or Gaussian distribution is a continuous probability function for a real valued random variable. 
+
+The probability density function is
+$$
+f(x) = \mathcal{N}[\mu, \sigma^2](x) = \frac{1}{\sqrt{2 \pi \sigma^2}}\mathrm{e}^{-\frac{(x - \mu)^2}{2\sigma^2}},
+$$
+where $\mu$ is called the mean and the parameter $\delta^2$ is the called the variance.
+The standard deviation of the distribution is $\sigma$.
+For $\mu = 0$ and $\sigma^2=1$ it is called the **standard normal distribution**.
+
+The corresponding CDF of the standard normal distribution is
+$$
+\Phi(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^x \mathrm{e}^{-\frac{t^2}{2}}\, \mathrm{d}t,
+$$
+and the generic form is 
+$$
+F(x) = \Phi\left(\frac{x-\mu}{\sigma}\right).
+$$
+$\Phi(x)$ is expressed in terms of the error function
+$$
+\Phi(x) = \frac12\left(1 + \operatorname{erf}\left(\frac{x}{\sqrt{2}}\right)\right), \quad\text{with}\quad \operatorname{erf}(x) = \frac{1}{\sqrt{2}}\int_{0}^x\mathrm{e}^{-t^2}\, \mathrm{d}t.
+$$
+
+```{python}
+#| label: fig-statistics-nd
+#| fig-cap: "Normal distribution - basic functions."
+#| fig-subcap:
+#|   - "Probability density function."
+#|   - "Cumulative distribution function."
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+%config InlineBackend.figure_formats = ["svg"]
+
+f = lambda mu, sigma, x: 1 / np.sqrt(2 * np.pi * sigma**2) * \
+    np.exp(- (x - mu)**2 / (2 * sigma**2))
+
+phi = np.vectorize(lambda x: 1/2 * (1 + math.erf(x / np.sqrt(2))))
+cfd = lambda mu, sigma, x: phi((x - mu) / sigma)
+x = np.linspace(-3, 3, 1024)
+plt.figure()
+plt.plot(x, f(0, 1, x), label=r"$\mu=0$, $\sigma^2=1$")
+plt.plot(x, f(0, np.sqrt(0.1), x), label=r"$\mu=0$, $\sigma^2=0.1$")
+plt.plot(x, f(1/2, np.sqrt(0.5), x), label=r"$\mu=\frac{1}{2}$, $\sigma^2=0.5$")
+plt.gca().set_aspect(6/(3 * 1.25))
+plt.legend()
+plt.figure()
+plt.plot(x, cfd(0, 1, x), label=r"$\mu=0$, $\sigma^2=1$")
+plt.plot(x, cfd(0, np.sqrt(0.1), x), label=r"$\mu=0$, $\sigma^2=0.1$")
+plt.plot(x, cfd(1/2, np.sqrt(0.5), x), label=r"$\mu=\frac{1}{2}$, $\sigma^2=0.5$")
+plt.gca().set_aspect(6/(3 * 1))
+plt.legend()
+plt.show()
+```
+:::
+::::
+
 
 What Bayes was after was the basic question of data science: find the parameters of a model given the outcome data together with the model.
 

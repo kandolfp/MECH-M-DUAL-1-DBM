@@ -216,6 +216,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
+import scipy.special
 
 x = range(1, 1_001, 2)
 y = []

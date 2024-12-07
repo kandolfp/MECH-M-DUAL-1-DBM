@@ -506,6 +506,16 @@ plt.show()
 What Bayes was after was the basic question of data science: find the parameters of a model given the outcome data together with the model.
 The theorem can be used as an update for the probability we have with additional information and therefore fitting our parameters.
 
+Before we get to an example let us consider the terms of the theorem once more. 
+
+1. The prior expresses our initial believe of the outcome. If we know nothing about it we can use an non-informative prior like the uniform distribution.
+
+1. The likelihood is similar to a probability distribution but the integral is not 1. As the name suggest it is the likelihood of a certain experiment result as a function of the parameters of the _model_. If we select the likelihood as a conjugate to the prior we know the shape of the posterior and this can speed up the calculation.
+
+1. The denominator are there to normalize the posterior so that the posterior becomes a probability distribution with integral 1.
+
+1. The posterior are our main result of the so called Bayers inference. If we have multiple samples we can use it as the prior for the next.
+
 Let us look at some more elaborate examples to show how Bayes theorem can be used. 
 
 ### Election prediction as instructive example

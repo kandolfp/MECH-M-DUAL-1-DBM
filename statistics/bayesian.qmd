@@ -446,6 +446,60 @@ plt.show()
 :::
 ::::
 
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-statistics-normal_gammainv}
+
+## Inverse $\Gamma$ distribution
+The main use of the inverse $\Gamma$ distribution is in Bayesian statistics.
+
+The probability density function is given by
+$$
+f(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}\frac{1}{x^{\alpha+1}}\mathrm{e}^{-\frac{\beta}{x}},
+$$
+for the shape parameter $\alpha$, the scale parameter $\beta$ and the name giving $\Gamma$ function.
+
+The corresponding CDF is
+$$
+F(x) = \frac{\Gamma\left(\alpha, \frac{\beta}{x}\right)}{\Gamma(\alpha)}
+$$
+where the numerator is called the upper incomplete gamma function.
+
+```{python}
+#| label: fig-statistics-gammainv
+#| fig-cap: "Inverse Gamma distribution - basic functions."
+#| fig-subcap:
+#|   - "Probability density function."
+#|   - "Cumulative distribution function."
+#| layout-ncol: 1
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+import scipy
+%config InlineBackend.figure_formats = ["svg"]
+
+f = lambda alpha, beta, x: np.pow(beta, alpha) / math.gamma(alpha) * np.pow(1/x, 1 + alpha) * np.exp(-beta/x)
+
+cfd = lambda alpha, beta, x: scipy.special.gdtr(alpha, beta, x)
+x = np.linspace(1e-3, 3, 1024)
+plt.figure()
+plt.plot(x, f(1, 1, x), label=r"$\alpha=1$, $\beta=1$")
+plt.plot(x, f(3, 1, x), label=r"$\alpha=3$, $\beta=1$")
+plt.plot(x, f(3, 0.5, x), label=r"$\alpha=3$, $\beta=0.5$")
+plt.gca().set_aspect(4/(3 * 5))
+plt.legend()
+plt.figure()
+plt.plot(x, cfd(1, 1, x), label=r"$\mu=0$, $\sigma^2=1$")
+plt.plot(x, cfd(3, 1, x), label=r"$\mu=0$, $\sigma^2=0.1$")
+plt.plot(x, cfd(3, 0.5, x), label=r"$\mu=\frac{1}{2}$, $\sigma^2=0.5$")
+plt.gca().set_aspect(6/(3 * 1))
+plt.legend()
+plt.show()
+```
+
+::::
+:::
 
 ## Bayes' theorem in action
 

@@ -626,3 +626,117 @@ In @fig-statistics-bayesian-vote3 we can see that the peak moves from $0.2$ clos
 ::: {.callout-warning}
 A point that is often criticised regarding the _Bayesian inference_ we applied here is that it is highly dependent on the initial guess (@fig-statistics-bayesian-vote1).
 :::
+
+### Material properties
+
+To identify material properties such as strength we can also use Bayes' theorem.
+
+::: {.callout-important}
+This example follows the notes @mehrle but as we do not have the data the plots are not generated interactively.
+:::
+
+Again we start with an initial guess, in this case for the yield stress with $90\%$ of the samples endure in our experiment. 
+
+For steel _S235JR_ this is $R_{aH,0} = 235 \mathrm{MPa}$.
+We use a Gaussian normal distribution with $\mu_0 = 270\mathrm{MPa}$ and $\sigma_0 = 27.3 \mathrm{MPa}$.
+
+```{python}
+#| label: fig-statistics-bayesian-material1
+#| fig-cap: "Initial assumption for the yield stress of the material, the coloured part represents the 90% of samples that have a yield stress larger than 235."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+%config InlineBackend.figure_formats = ["svg"]
+
+normaldist = lambda mu, sigma, x: 1 / np.sqrt(2 * np.pi * sigma**2) * \
+    np.exp(- (x - mu)**2 / (2 * sigma**2))
+Finv = lambda mu, sigma, p: mu + sigma * np.sqrt(2) * scipy.special.erfinv(2 * p - 1) 
+
+mu_0 = 270
+sigma_0 = 27.31
+RaH_0 = Finv(mu_0, sigma_0, 0.1)
+
+p = lambda x: normaldist(mu_0, sigma_0, x)
+
+x = np.linspace(0, 400, 1024)
+plt.figure()
+plt.plot(x, p(x))
+plt.fill_between(x, p(x), where=(x > RaH_0))
+my_max = np.round(np.max(p(x)), 3)
+plt.plot([RaH_0, RaH_0], [0, my_max])
+plt.grid("major")
+plt.gca().set_aspect(400/(3 * my_max))
+plt.xlabel(r"$x$")
+plt.ylabel(r"$p(R_{aH})$")
+plt.show()
+```
+
+This time our parameters $\mu$ and $\sigma$ are uncertain and need to be modified, furthermore, they do not follow a binomial distribution but our assumption is that they are better described by a normal distribution
+$$
+p(\mu) = \mathcal{N}(\mu_0, \sigma_{\mu_0}),\quad\text{with}\quad \sigma_{\mu_0} = \frac{\mu_0}{10},
+$$
+and
+$$
+p(\sigma) = \mathcal{N}(\sigma_0, \sigma_{\sigma_0}),\quad\text{with}\quad \sigma_{\sigma_0} = \frac{\sigma_0}{10}.
+$$
+
+The likelihood of drawing a sample with yield strength $R_{aH}^{(i)}$ we calculate the dependent probabilities separate by fixing the _current_ values of $\mu = \check{\mu}$ and $\sigma = \check{\sigma}$, respectively.
+$$
+p\left(R_{aH}^{(i)} | \mu \right) = \mathcal{N}[\mu, \check{\sigma}](R_{aH}^{(i)})
+$$
+and 
+$$
+p\left(R_{aH}^{(i)} | \sigma \right) = \mathcal{N}[\check{\mu}, \sigma](R_{aH}^{(i)})
+$$
+and with Bayes' theorem we can compute
+$$
+p\left( \mu | R_{aH}^{(i)}\right)  = \frac{p\left(R_{aH}^{(i)} | \mu \right) p(\mu)}{\int p\left(R_{aH}^{(i)} | \mu \right) p(\mu)\,\mathrm{d}\mu},
+$$
+and
+$$
+p\left( \sigma | R_{aH}^{(i)}\right)  = \frac{p\left(R_{aH}^{(i)} | \sigma \right) p(\sigma)}{\int p\left(R_{aH}^{(i)} | \sigma \right) p(\sigma)\,\mathrm{d}\sigma},
+$$
+
+Now by computing the inverse from our above probabilities we can update our $\mu_0$ and $\sigma_0$ accordingly.
+This we can continue for several samples.
+```{python}
+#| label: fig-statistics-bayesian-material2
+#| fig-cap: "Update after 10 and 100 iterations"
+#| code-fold: true
+#| eval: true
+#| echo: false
+#| code-summary: "Show the code for the figure"
+import scipy
+normaldist = lambda mu, sigma, x: 1 / np.sqrt(2 * np.pi * sigma**2) * \
+    np.exp(- (x - mu)**2 / (2 * sigma**2))
+
+p_RaH = lambda mu, sigma, x: normaldist(mu, sigma, x)
+
+plt.plot(x, p_RaH(mu_0, sigma_0, x))
+plt.plot(x, p_RaH(290, 30, x))
+plt.plot(x, p_RaH(300, 37, x))
+plt.gca().set_aspect(400/(3 * 0.015))
+plt.grid("major")
+plt.show()
+```
+
+The mean converges relatively fast and stays but the deviation still changes after 100 sample drawn.
+This is due to the fact that the two variables are not independent of each other and the assumption that of a normal distribution is not a good estimate for $\sigma$.
+
+## Conjugate priors
+
+The above updates are relatively expensive in terms of computing and are not handy.
+The idea is to find the updates analytically. 
+
+In general this is not _likely to happen_ but for certain combinations of density functions the convert neatly into each other under Bayers' theorem.
+
+For the normal distribution this is the case and the update becomes
+$$
+\frac{1}{\sigma_{k+1}^2} = \frac{1}{\sigma_{k}^2} + \frac{1}{\sigma^2}, 
+$$
+and 
+$$
+\mu_{k+1} = \left(\frac{\mu_k}{\sigma_{k}^2} + \frac{\mu}{\sigma^2}\right)\sigma^2_{k+1}, 
+$$
+

@@ -81,6 +81,8 @@ For two events $A$ and $B$ as well as there dependent probabilities the followin
 $$
 P(A|B) = \frac{P(B|A) P(A)}{P(B)}.
 $$
+
+The term $P(A|B)$ is usually called the **posterior probability density** (posterior for short), $P(A)$ the **prior**, $P(B|A)$ the **likelihood**, and finally the term $P(B)$ the **denominator**.
 ::::
 :::
 

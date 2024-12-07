@@ -613,6 +613,7 @@ x = np.linspace(0, 1, 1024)
 plt.figure()
 plt.plot(x, p4(5, 15, x), label=r"$n=5, k=15$")
 plt.plot(x, p4(50, 150, x), ":", label=r"$n=50, k=150$")
+plt.plot(x, p4(0, 15, x), "-.", label=r"$n=0, k=15$")
 plt.legend()
 plt.grid("major")
 plt.gca().set_aspect(1 / (3 * 14))
@@ -623,5 +624,5 @@ plt.show()
 In @fig-statistics-bayesian-vote3 we can see that the peak moves from $0.2$ closer to $\tfrac13$ (our pooling results) and the bigger our sample size gets the more likely our change is (we get closer).
 
 ::: {.callout-warning}
-A pint that is often criticised regarding the _Bayesian inference_ we applied here is that it is highly dependent on the initial guess (@fig-statistics-bayesian-vote1).
+A point that is often criticised regarding the _Bayesian inference_ we applied here is that it is highly dependent on the initial guess (@fig-statistics-bayesian-vote1).
 :::

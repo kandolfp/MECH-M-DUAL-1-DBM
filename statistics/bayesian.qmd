@@ -239,6 +239,20 @@ For such variables it makes more sense to not look for an exact equality with a 
 Example could be the height of a person (if we can measure continuously).
 In this example it the probability that a person is exactly $185m$ is zero but the question if somebodies hight is in $[180, 190)$ makes sense.
 
+::: {.callout-note}
+We introduced the Laplace transform in @sec-signal-laplace. 
+It finds an application in probability theory where the Laplace transform of a random variable $X$ is defined as the expected value of $X$ with probability density function $f$, i.e.
+
+$$
+\mathcal{L}\{f\}(s) = \mathrm{E}\left[\mathrm{e}^{- s X}\right].
+$$
+
+Furthermore, we can recover the copulative distribution function  of a continuous random variable $X$ as 
+$$
+F_X(x) = \mathcal{L}^{-1}\left\{ \frac{1}{s} \mathrm{E}\left[\mathrm{e}^{- s X}\right]\right\}(x) = \mathcal{L}^{-1}\left\{ \frac{1}{s} \mathcal{L}\{f\}(s)\right\}(x).
+$$
+:::
+
 ## Probability distributions
 
 It is instructive to look at some of the most common probability distributions so that we know what we can describe by these them. 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>11&nbsp; Two-Dimensional Transform – Basics of Data Science</title>
+<title>12&nbsp; Two-Dimensional Transform – Basics of Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -149,7 +149,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../signal/index.html">Signal Processing</a></li><li class="breadcrumb-item"><a href="../signal/twodim.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../signal/index.html">Signal Processing</a></li><li class="breadcrumb-item"><a href="../signal/twodim.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -293,14 +293,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../signal/laplace.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Laplace Transform</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../signal/wavelet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../signal/twodim.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span></a>
   </div>
 </li>
       </ul>
@@ -317,13 +323,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sensing/sparsity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sensing/compsensing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></a>
   </div>
 </li>
       </ul>
@@ -340,13 +346,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statistics/bayesian.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statistics/kalman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span></a>
   </div>
 </li>
       </ul>
@@ -373,17 +379,17 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#fourier" id="toc-fourier" class="nav-link active" data-scroll-target="#fourier"><span class="header-section-number">11.1</span> Fourier</a></li>
-  <li><a href="#wavelet" id="toc-wavelet" class="nav-link" data-scroll-target="#wavelet"><span class="header-section-number">11.2</span> Wavelet</a></li>
+  <li><a href="#fourier" id="toc-fourier" class="nav-link active" data-scroll-target="#fourier"><span class="header-section-number">12.1</span> Fourier</a></li>
+  <li><a href="#wavelet" id="toc-wavelet" class="nav-link" data-scroll-target="#wavelet"><span class="header-section-number">12.2</span> Wavelet</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/signal/twodim.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../signal/index.html">Signal Processing</a></li><li class="breadcrumb-item"><a href="../signal/twodim.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../signal/index.html">Signal Processing</a></li><li class="breadcrumb-item"><a href="../signal/twodim.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-signal-2d" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span></h1>
+<h1 class="title"><span id="sec-signal-2d" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span></h1>
 </div>
 
 
@@ -401,8 +407,8 @@ window.Quarto = {
 
 
 <p>There is nothing preventing us from extending the transforms we discussed before to 2D. One of the most common applications are image processing.</p>
-<section id="fourier" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="fourier"><span class="header-section-number">11.1</span> Fourier</h2>
+<section id="fourier" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="fourier"><span class="header-section-number">12.1</span> Fourier</h2>
 <p>If we apply FFT to a matrix <span class="math inline">\(X\in\mathrm{R}^{m\times n}\)</span> we can simply apply the 1D version to every row and than to every column of the resulting matrix. The other way round will produce the same final result.</p>
 <p>This is shown in the code below but note we should use the more efficient <code>np.fft.fft2</code>.</p>
 <details class="code-fold">
@@ -452,7 +458,7 @@ window.Quarto = {
 <div id="fig-mci_signal2d_fft-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_fft-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_fft-output-1.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft" title="Figure&nbsp;11.1&nbsp;(a): Original image."><img src="twodim_files/figure-html/fig-mci_signal2d_fft-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft-output-1.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft" title="Figure&nbsp;12.1&nbsp;(a): Original image."><img src="twodim_files/figure-html/fig-mci_signal2d_fft-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Original image.
@@ -464,7 +470,7 @@ window.Quarto = {
 <div id="fig-mci_signal2d_fft-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_fft-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_fft-output-2.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft" title="Figure&nbsp;11.1&nbsp;(b): Image after applying FFT on each individual row"><img src="twodim_files/figure-html/fig-mci_signal2d_fft-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft-output-2.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft" title="Figure&nbsp;12.1&nbsp;(b): Image after applying FFT on each individual row"><img src="twodim_files/figure-html/fig-mci_signal2d_fft-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Image after applying FFT on each individual row
@@ -478,7 +484,7 @@ window.Quarto = {
 <div id="fig-mci_signal2d_fft-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_fft-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_fft-output-3.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft" title="Figure&nbsp;11.1&nbsp;(c): Image after applying FFT on each individual column"><img src="twodim_files/figure-html/fig-mci_signal2d_fft-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft-output-3.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft" title="Figure&nbsp;12.1&nbsp;(c): Image after applying FFT on each individual column"><img src="twodim_files/figure-html/fig-mci_signal2d_fft-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) Image after applying FFT on each individual column
@@ -490,7 +496,7 @@ window.Quarto = {
 <div id="fig-mci_signal2d_fft-4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_fft-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_fft-output-4.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft" title="Figure&nbsp;11.1&nbsp;(d): Row and column wise FFT (order does not matter)"><img src="twodim_files/figure-html/fig-mci_signal2d_fft-output-4.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft-output-4.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft" title="Figure&nbsp;12.1&nbsp;(d): Row and column wise FFT (order does not matter)"><img src="twodim_files/figure-html/fig-mci_signal2d_fft-output-4.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (d) Row and column wise FFT (order does not matter)
@@ -501,7 +507,7 @@ window.Quarto = {
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mci_signal2d_fft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.1: Image of MCI I and the row/column wise FFT.
+Figure&nbsp;12.1: Image of MCI I and the row/column wise FFT.
 </figcaption>
 </figure>
 </div>
@@ -543,7 +549,7 @@ Figure&nbsp;11.1: Image of MCI I and the row/column wise FFT.
 <div id="fig-mci_signal2d_fft_compress-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_fft_compress-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-1.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_compress" title="Figure&nbsp;11.2&nbsp;(a): Original image."><img src="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_compress"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-1.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_compress" title="Figure&nbsp;12.2&nbsp;(a): Original image."><img src="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_compress"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft_compress-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Original image.
@@ -555,7 +561,7 @@ Figure&nbsp;11.1: Image of MCI I and the row/column wise FFT.
 <div id="fig-mci_signal2d_fft_compress-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_fft_compress-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-2.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_compress" title="Figure&nbsp;11.2&nbsp;(b): 5% of FFT coefficients"><img src="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_compress"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-2.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_compress" title="Figure&nbsp;12.2&nbsp;(b): 5% of FFT coefficients"><img src="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_compress"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft_compress-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) 5% of FFT coefficients
@@ -569,7 +575,7 @@ Figure&nbsp;11.1: Image of MCI I and the row/column wise FFT.
 <div id="fig-mci_signal2d_fft_compress-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_fft_compress-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-3.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_compress" title="Figure&nbsp;11.2&nbsp;(c): 1% of FFT coefficients"><img src="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_compress"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-3.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_compress" title="Figure&nbsp;12.2&nbsp;(c): 1% of FFT coefficients"><img src="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_compress"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft_compress-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) 1% of FFT coefficients
@@ -581,7 +587,7 @@ Figure&nbsp;11.1: Image of MCI I and the row/column wise FFT.
 <div id="fig-mci_signal2d_fft_compress-4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_fft_compress-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-4.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_compress" title="Figure&nbsp;11.2&nbsp;(d): 0.2% of FFT coefficients"><img src="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-4.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_compress"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-4.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_compress" title="Figure&nbsp;12.2&nbsp;(d): 0.2% of FFT coefficients"><img src="twodim_files/figure-html/fig-mci_signal2d_fft_compress-output-4.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_compress"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft_compress-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (d) 0.2% of FFT coefficients
@@ -592,7 +598,7 @@ Figure&nbsp;11.1: Image of MCI I and the row/column wise FFT.
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mci_signal2d_fft_compress-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.2: Image of MCI I and the reconstruction with various amounts of FFT coefficients left.
+Figure&nbsp;12.2: Image of MCI I and the reconstruction with various amounts of FFT coefficients left.
 </figcaption>
 </figure>
 </div>
@@ -644,7 +650,7 @@ Figure&nbsp;11.2: Image of MCI I and the reconstruction with various amounts of 
 <div id="fig-mci_signal2d_fft_de-noise-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_fft_de-noise-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-1.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_de-noise" title="Figure&nbsp;11.3&nbsp;(a): Noisy image."><img src="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_de-noise"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-1.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_de-noise" title="Figure&nbsp;12.3&nbsp;(a): Noisy image."><img src="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_de-noise"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft_de-noise-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Noisy image.
@@ -656,7 +662,7 @@ Figure&nbsp;11.2: Image of MCI I and the reconstruction with various amounts of 
 <div id="fig-mci_signal2d_fft_de-noise-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_fft_de-noise-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-2.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_de-noise" title="Figure&nbsp;11.3&nbsp;(b): Noisy FFT coefficients"><img src="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_de-noise"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-2.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_de-noise" title="Figure&nbsp;12.3&nbsp;(b): Noisy FFT coefficients"><img src="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_de-noise"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft_de-noise-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Noisy FFT coefficients
@@ -670,7 +676,7 @@ Figure&nbsp;11.2: Image of MCI I and the reconstruction with various amounts of 
 <div id="fig-mci_signal2d_fft_de-noise-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_fft_de-noise-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-3.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_de-noise" title="Figure&nbsp;11.3&nbsp;(c): Filtered/De-noised image"><img src="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_de-noise"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-3.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_de-noise" title="Figure&nbsp;12.3&nbsp;(c): Filtered/De-noised image"><img src="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_de-noise"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft_de-noise-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) Filtered/De-noised image
@@ -682,7 +688,7 @@ Figure&nbsp;11.2: Image of MCI I and the reconstruction with various amounts of 
 <div id="fig-mci_signal2d_fft_de-noise-4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_fft_de-noise-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-4.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_de-noise" title="Figure&nbsp;11.3&nbsp;(d): Filtered/De-noised FFT coefficients"><img src="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-4.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_de-noise"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-4.svg" class="lightbox" data-gallery="fig-mci_signal2d_fft_de-noise" title="Figure&nbsp;12.3&nbsp;(d): Filtered/De-noised FFT coefficients"><img src="twodim_files/figure-html/fig-mci_signal2d_fft_de-noise-output-4.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_fft_de-noise"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_fft_de-noise-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (d) Filtered/De-noised FFT coefficients
@@ -693,13 +699,13 @@ Figure&nbsp;11.2: Image of MCI I and the reconstruction with various amounts of 
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mci_signal2d_fft_de-noise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.3: Image of MCI I and the reconstruction with various amounts of FFT coefficients left.
+Figure&nbsp;12.3: Image of MCI I and the reconstruction with various amounts of FFT coefficients left.
 </figcaption>
 </figure>
 </div>
 </section>
-<section id="wavelet" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="wavelet"><span class="header-section-number">11.2</span> Wavelet</h2>
+<section id="wavelet" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="wavelet"><span class="header-section-number">12.2</span> Wavelet</h2>
 <p>Similar to the FFT also the Wavelet transform is used in much the same situations.</p>
 <p>Before we go on and apply the wavelet transform in the same situations we show how the multi level approach looks like for an image. For the image we use the <em>Daubechies 1</em> wavelets.</p>
 <div id="cell-fig-mci_signal2d_wavelet" class="cell" data-execution_count="4">
@@ -732,10 +738,10 @@ Figure&nbsp;11.3: Image of MCI I and the reconstruction with various amounts of 
 <div id="fig-mci_signal2d_wavelet" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mci_signal2d_wavelet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_wavelet-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;11.4: First three levels of the discrete wavelet transform."><img src="twodim_files/figure-html/fig-mci_signal2d_wavelet-output-1.svg" class="img-fluid figure-img"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_wavelet-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;12.4: First three levels of the discrete wavelet transform."><img src="twodim_files/figure-html/fig-mci_signal2d_wavelet-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mci_signal2d_wavelet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.4: First three levels of the discrete wavelet transform.
+Figure&nbsp;12.4: First three levels of the discrete wavelet transform.
 </figcaption>
 </figure>
 </div>
@@ -784,7 +790,7 @@ Figure&nbsp;11.4: First three levels of the discrete wavelet transform.
 <div id="fig-mci_signal2d_wavelet_compress-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_wavelet_compress-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-1.svg" class="lightbox" data-gallery="fig-mci_signal2d_wavelet_compress" title="Figure&nbsp;11.5&nbsp;(a): Original image."><img src="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_wavelet_compress"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-1.svg" class="lightbox" data-gallery="fig-mci_signal2d_wavelet_compress" title="Figure&nbsp;12.5&nbsp;(a): Original image."><img src="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_wavelet_compress"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_wavelet_compress-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Original image.
@@ -796,7 +802,7 @@ Figure&nbsp;11.4: First three levels of the discrete wavelet transform.
 <div id="fig-mci_signal2d_wavelet_compress-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_wavelet_compress-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-2.svg" class="lightbox" data-gallery="fig-mci_signal2d_wavelet_compress" title="Figure&nbsp;11.5&nbsp;(b): 5% of wavelets"><img src="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_wavelet_compress"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-2.svg" class="lightbox" data-gallery="fig-mci_signal2d_wavelet_compress" title="Figure&nbsp;12.5&nbsp;(b): 5% of wavelets"><img src="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_wavelet_compress"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_wavelet_compress-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) 5% of wavelets
@@ -810,7 +816,7 @@ Figure&nbsp;11.4: First three levels of the discrete wavelet transform.
 <div id="fig-mci_signal2d_wavelet_compress-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_wavelet_compress-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-3.svg" class="lightbox" data-gallery="fig-mci_signal2d_wavelet_compress" title="Figure&nbsp;11.5&nbsp;(c): 1% of wavelets"><img src="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_wavelet_compress"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-3.svg" class="lightbox" data-gallery="fig-mci_signal2d_wavelet_compress" title="Figure&nbsp;12.5&nbsp;(c): 1% of wavelets"><img src="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_wavelet_compress"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_wavelet_compress-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) 1% of wavelets
@@ -822,7 +828,7 @@ Figure&nbsp;11.4: First three levels of the discrete wavelet transform.
 <div id="fig-mci_signal2d_wavelet_compress-4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_signal2d_wavelet_compress-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-4.svg" class="lightbox" data-gallery="fig-mci_signal2d_wavelet_compress" title="Figure&nbsp;11.5&nbsp;(d): 0.2% of wavelets"><img src="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-4.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_wavelet_compress"></a>
+<a href="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-4.svg" class="lightbox" data-gallery="fig-mci_signal2d_wavelet_compress" title="Figure&nbsp;12.5&nbsp;(d): 0.2% of wavelets"><img src="twodim_files/figure-html/fig-mci_signal2d_wavelet_compress-output-4.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_signal2d_wavelet_compress"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_signal2d_wavelet_compress-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (d) 0.2% of wavelets
@@ -833,7 +839,7 @@ Figure&nbsp;11.4: First three levels of the discrete wavelet transform.
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mci_signal2d_wavelet_compress-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.5: Image of MCI I and the reconstruction with various amounts of wavelets.
+Figure&nbsp;12.5: Image of MCI I and the reconstruction with various amounts of wavelets.
 </figcaption>
 </figure>
 </div>
@@ -1410,7 +1416,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../signal/wavelet.html" class="pagination-link" aria-label="Wavelet transform">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1433,7 +1439,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":false});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"selector":".lightbox","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

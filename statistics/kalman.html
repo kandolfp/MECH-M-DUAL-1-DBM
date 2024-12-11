@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>15&nbsp; Kalman Filter – Basics of Data Science</title>
+<title>16&nbsp; Kalman Filter – Basics of Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -169,7 +169,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../statistics/kalman.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Kalman Filter</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../statistics/kalman.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Kalman Filter</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -313,14 +313,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../signal/laplace.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Laplace Transform</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../signal/wavelet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../signal/twodim.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span></a>
   </div>
 </li>
       </ul>
@@ -337,13 +343,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sensing/sparsity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sensing/compsensing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></a>
   </div>
 </li>
       </ul>
@@ -360,13 +366,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statistics/bayesian.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statistics/kalman.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span></a>
   </div>
 </li>
       </ul>
@@ -394,9 +400,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../statistics/kalman.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Kalman Filter</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../statistics/kalman.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Kalman Filter</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-statistic-kalman" class="quarto-section-identifier"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span></h1>
+<h1 class="title"><span id="sec-statistic-kalman" class="quarto-section-identifier"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span></h1>
 </div>
 
 
@@ -430,7 +436,7 @@ Important
 </div>
 <p>The algorithm assumes that we have a state at time <span class="math inline">\(k\)</span> that evolved from a prior state at time <span class="math inline">\(k-1\)</span> from the following equation <span id="eq-kalman_base"><span class="math display">\[
 x_k = F_k x_{k-1} + B_k u_k + w_k,
-\tag{15.1}\]</span></span> with <span class="math inline">\(x_k\)</span> being the state vector, <span class="math inline">\(u_k\)</span> contains the control inputs like position, velocity, etc., <span class="math inline">\(F_k\)</span> is called the state transition matrix, <span class="math inline">\(B_k\)</span> the control input matrix, and last <span class="math inline">\(w_k\)</span> contains the noise of the process. The process noise <span class="math inline">\(w_k\)</span> is assumed to be drawn from a zero mean multivariate normal distribution with covariance matrix <span class="math inline">\(Q_k\)</span>. Furthermore, we measure the system according to the model <span class="math display">\[
+\tag{16.1}\]</span></span> with <span class="math inline">\(x_k\)</span> being the state vector, <span class="math inline">\(u_k\)</span> contains the control inputs like position, velocity, etc., <span class="math inline">\(F_k\)</span> is called the state transition matrix, <span class="math inline">\(B_k\)</span> the control input matrix, and last <span class="math inline">\(w_k\)</span> contains the noise of the process. The process noise <span class="math inline">\(w_k\)</span> is assumed to be drawn from a zero mean multivariate normal distribution with covariance matrix <span class="math inline">\(Q_k\)</span>. Furthermore, we measure the system according to the model <span class="math display">\[
 z_k = H_k x_k + \nu_k
 \]</span> for <span class="math inline">\(z_k\)</span> being the measurements, <span class="math inline">\(H_k\)</span> the transformation matrix and <span class="math inline">\(\nu_k\)</span> contains the measurement noise.</p>
 <p>For this introduction we us a simple example with a train going along a track. Therefore, <span class="math display">\[
@@ -464,12 +470,12 @@ x_k = \left[
 \]</span> and we can see the matrices of our initial problem statement. As it is not possible to observe the true state of the system directly we use the Kalman filter as an algorithm to determine an estimate of <span class="math inline">\(x_k\)</span>. As the system includes uncertainties the state is given in terms of probability density functions rather than discrete values.</p>
 <p>So how can we derive an estimate for the current step from known steps and the uncertainty we have in the system. This uncertainty is model as normal distribution and the parameters are stored in the covariance matrix <span class="math inline">\(P_k\)</span> (zero mean is assumed). As mentioned before we need to do a prediction and the standard equation for the Kalman filter is <span id="eq-kalman_update"><span class="math display">\[
 \hat{x}_{k|k-1} = F_k \hat{x}_{k-1|k-1} + B_k u_k,
-\tag{15.2}\]</span></span> and <span class="math display">\[
+\tag{16.2}\]</span></span> and <span class="math display">\[
 P_{k|k-1} = F_k P_{k-1|k-1} F_k^{\mathrm{T}}+ Q_k.
 \]</span> Here <span class="math inline">\(\star_{k|k-1}\)</span> denotes the state at time <span class="math inline">\(t_k\)</span> derived from the state at time <span class="math inline">\(t_{k-1}\)</span>.</p>
 <p>To get the second equation we need to know that the variance associated with the prediction <span class="math inline">\(\hat{x}_{k|k-1}\)</span> of the unknown true value <span class="math inline">\(x_k\)</span> is given by <span class="math display">\[
 P_{k|k-1} = E\left[(x_k - x_{k|k-1})(x_k - x_{k|k-1})^{\mathrm{T}}\right].
-\]</span> If we now compute the difference of <a href="#eq-kalman_base" class="quarto-xref">Equation&nbsp;<span>15.1</span></a> and <a href="#eq-kalman_update" class="quarto-xref">Equation&nbsp;<span>15.2</span></a> we note that the state estimation errors as well as the process noise are uncorrelated and therefore their correlation is zero.</p>
+\]</span> If we now compute the difference of <a href="#eq-kalman_base" class="quarto-xref">Equation&nbsp;<span>16.1</span></a> and <a href="#eq-kalman_update" class="quarto-xref">Equation&nbsp;<span>16.2</span></a> we note that the state estimation errors as well as the process noise are uncorrelated and therefore their correlation is zero.</p>
 <p>The measurement update equations are given by <span class="math display">\[
 \hat{x}_{k|k} = \hat{x}_{k|k-1} + K_k(z_k - H_k \hat{x}_{k|k-1})
 \]</span> and <span class="math display">\[
@@ -502,15 +508,15 @@ Note
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> mu, sigma, x: <span class="dv">1</span> <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> sigma<span class="op">**</span><span class="dv">2</span>) <span class="op">*</span> <span class="op">\</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    np.exp(<span class="op">-</span> (x <span class="op">-</span> mu)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> sigma<span class="op">**</span><span class="dv">2</span>))</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">1024</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="fl">2.5</span>, <span class="dv">1024</span>)</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">1</span>, <span class="fl">0.1</span>, x), label<span class="op">=</span><span class="vs">r"t=0"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">5</span> <span class="op">/</span> (<span class="dv">3</span> <span class="op">*</span> <span class="dv">5</span>))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">2.5</span> <span class="op">/</span> (<span class="dv">3</span> <span class="op">*</span> <span class="dv">5</span>))</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="dv">0</span>, <span class="dv">5</span>])</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="fl">1.8</span>, <span class="fl">0.15</span>, x), label<span class="op">=</span><span class="vs">r"t=1"</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">5</span> <span class="op">/</span> (<span class="dv">3</span> <span class="op">*</span> <span class="dv">5</span>))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="fl">1.6</span>, <span class="fl">0.15</span>, x), label<span class="op">=</span><span class="vs">r"t=1"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">2.5</span> <span class="op">/</span> (<span class="dv">3</span> <span class="op">*</span> <span class="dv">5</span>))</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="dv">0</span>, <span class="dv">5</span>])</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -523,7 +529,7 @@ Note
 <div id="fig-kalman-train1-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-kalman-train1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="kalman_files/figure-html/fig-kalman-train1-output-1.svg" class="lightbox" data-gallery="fig-kalman-train1" title="Figure&nbsp;15.1&nbsp;(a): Position at time t=0."><img src="kalman_files/figure-html/fig-kalman-train1-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-kalman-train1"></a>
+<a href="kalman_files/figure-html/fig-kalman-train1-output-1.svg" class="lightbox" data-gallery="fig-kalman-train1" title="Figure&nbsp;16.1&nbsp;(a): Position at time t=0."><img src="kalman_files/figure-html/fig-kalman-train1-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-kalman-train1"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-kalman-train1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Position at time t=0.
@@ -537,7 +543,7 @@ Note
 <div id="fig-kalman-train1-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-kalman-train1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="kalman_files/figure-html/fig-kalman-train1-output-2.svg" class="lightbox" data-gallery="fig-kalman-train1" title="Figure&nbsp;15.1&nbsp;(b): Position at time t=1."><img src="kalman_files/figure-html/fig-kalman-train1-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-kalman-train1"></a>
+<a href="kalman_files/figure-html/fig-kalman-train1-output-2.svg" class="lightbox" data-gallery="fig-kalman-train1" title="Figure&nbsp;16.1&nbsp;(b): Position at time t=1."><img src="kalman_files/figure-html/fig-kalman-train1-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-kalman-train1"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-kalman-train1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Position at time t=1.
@@ -548,11 +554,11 @@ Note
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kalman-train1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.1: Position of the train
+Figure&nbsp;16.1: Position of the train
 </figcaption>
 </figure>
 </div>
-<p>Now we can predict the position of the train at <span class="math inline">\(t=1\)</span> (<span class="math inline">\(k=1\)</span>) with the data we know at time <span class="math inline">\(t=0\)</span> like its maximum speed, possible acceleration and deceleration, etc.. This is can be done via <a href="#eq-kalman_base" class="quarto-xref">Equation&nbsp;<span>15.1</span></a>. We can see a possible outcome in <a href="#fig-kalman-train1-2" class="quarto-xref">Figure&nbsp;<span>15.1 (b)</span></a> where the train has moved in positive direction but the variance has increased indicating the increased uncertainty in the position du to the fact that we do not have noise from the acceleration or deceleration happening in the span <span class="math inline">\(\Delta t\)</span>.</p>
+<p>Now we can predict the position of the train at <span class="math inline">\(t=1\)</span> (<span class="math inline">\(k=1\)</span>) with the data we know at time <span class="math inline">\(t=0\)</span> like its maximum speed, possible acceleration and deceleration, etc.. This is can be done via <a href="#eq-kalman_base" class="quarto-xref">Equation&nbsp;<span>16.1</span></a>. We can see a possible outcome in <a href="#fig-kalman-train1-2" class="quarto-xref">Figure&nbsp;<span>16.1 (b)</span></a> where the train has moved in positive direction but the variance has increased indicating the increased uncertainty in the position du to the fact that we do not have noise from the acceleration or deceleration happening in the span <span class="math inline">\(\Delta t\)</span>.</p>
 <p>Now at time <span class="math inline">\(t=1\)</span> we can measure the position of the train. We do so via a radio signal and of course this process is also having some noise added to it resulting in a Gaussian probability to the position.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -580,10 +586,10 @@ Important
 \]</span> with <span id="eq-kalman-update2"><span class="math display">\[
 \mu = \frac{\mu_1 \sigma_2^2 + \mu_2 \sigma_1^2}{\sigma_1^2 + \sigma_2^2} = \mu_1 + \frac{\sigma_1^2 (\mu_2 - \mu_1)}{\sigma_1^2 + \sigma_2^2}\qquad
 \sigma^2 = \frac{\sigma_1^2 \sigma_2^2}{\sigma_1^2 + \sigma_2^2} = \sigma_1^2 - \frac{\sigma_1^4}{\sigma_1^2 + \sigma_2^2}
-\tag{15.3}\]</span></span></p>
+\tag{16.3}\]</span></span></p>
 </div>
 </div>
-<p>Let us use this to get an estimate of our train after the measurement by multiplying the two Gaussian distributions, as seen in <a href="#fig-kalman-train2" class="quarto-xref">Figure&nbsp;<span>15.2</span></a>.</p>
+<p>Let us use this to get an estimate of our train after the measurement by multiplying the two Gaussian distributions, as seen in <a href="#fig-kalman-train2" class="quarto-xref">Figure&nbsp;<span>16.2</span></a>.</p>
 <div id="cell-fig-kalman-train2" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
@@ -597,31 +603,30 @@ Important
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>update <span class="op">=</span> <span class="kw">lambda</span> mu, sigma: ((mu[<span class="dv">0</span>] <span class="op">*</span> np.<span class="bu">pow</span>(sigma[<span class="dv">1</span>], <span class="dv">2</span>) <span class="op">+</span> mu[<span class="dv">1</span>] <span class="op">*</span> np.<span class="bu">pow</span>(sigma[<span class="dv">0</span>], <span class="dv">2</span>)) <span class="op">/</span> (np.<span class="bu">sum</span>(np.<span class="bu">pow</span>(sigma, <span class="dv">2</span>))), np.prod(sigma) <span class="op">/</span> np.sqrt(np.<span class="bu">sum</span>(np.<span class="bu">pow</span>(sigma, <span class="dv">2</span>))))</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">1024</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="fl">2.5</span>, <span class="dv">1024</span>)</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="fl">1.8</span>, <span class="fl">0.2</span>, x), label<span class="op">=</span><span class="vs">r"predictor"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="fl">1.6</span>, <span class="fl">0.2</span>, x), label<span class="op">=</span><span class="vs">r"predictor"</span>)</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">2</span>, <span class="fl">0.1</span>, x), label<span class="op">=</span><span class="vs">r"corrector"</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.plot(x, (f(1.8, 0.2, x) * f(2, 0.1, x)), label=r"updated position")</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="op">*</span>update([<span class="fl">1.8</span>, <span class="fl">2.0</span>], [<span class="fl">0.2</span>, <span class="fl">0.1</span>]), x), label<span class="op">=</span><span class="vs">r"updated position"</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">5</span> <span class="op">/</span> (<span class="dv">3</span> <span class="op">*</span> <span class="dv">5</span>))</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="dv">0</span>, <span class="dv">5</span>])</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="op">*</span>update([<span class="fl">1.6</span>, <span class="fl">2.0</span>], [<span class="fl">0.2</span>, <span class="fl">0.1</span>]), x), label<span class="op">=</span><span class="vs">r"updated position"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">2.5</span> <span class="op">/</span> (<span class="dv">3</span> <span class="op">*</span> <span class="dv">5</span>))</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="dv">0</span>, <span class="dv">5</span>])</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-kalman-train2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-kalman-train2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="kalman_files/figure-html/fig-kalman-train2-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;15.2: Position of the train at t=1 with measurement and resulting distribution."><img src="kalman_files/figure-html/fig-kalman-train2-output-1.svg" class="img-fluid figure-img"></a>
+<a href="kalman_files/figure-html/fig-kalman-train2-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;16.2: Position of the train at t=1 with measurement and resulting distribution."><img src="kalman_files/figure-html/fig-kalman-train2-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kalman-train2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.2: Position of the train at t=1 with measurement and resulting distribution.
+Figure&nbsp;16.2: Position of the train at t=1 with measurement and resulting distribution.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The new distribution considers the information of our guess and the update provided by the measurement and therefore our best estimation of the current position of the train. <a href="#eq-kalman-update2" class="quarto-xref">Equation&nbsp;<span>15.3</span></a> represents the update step of the Kalman filter <a href="#eq-kalman_update" class="quarto-xref">Equation&nbsp;<span>15.2</span></a>.</p>
+<p>The new distribution considers the information of our guess and the update provided by the measurement and therefore our best estimation of the current position of the train. <a href="#eq-kalman-update2" class="quarto-xref">Equation&nbsp;<span>16.3</span></a> represents the update step of the Kalman filter <a href="#eq-kalman_update" class="quarto-xref">Equation&nbsp;<span>16.2</span></a>.</p>
 <p>To bring in all the components of the Kalman filter we assume that the measurement and the prediction is not in the same domain and therefore we need the matrix <span class="math inline">\(H_k\)</span>.</p>
 <p>To do so assume that the signal for the estimate is a radio signal that travels with the speed of light <span class="math inline">\(c\)</span> and therefore we need to transform <span class="math inline">\(\mathcal{N}[\mu_2, \sigma_2](x)\)</span> as <span class="math inline">\(\mathcal{N}[\frac{\mu_2}{c}, \frac{\sigma_2}{c}](x)\)</span> and our update becomes</p>
 <p><span class="math display">\[
@@ -1225,7 +1230,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../statistics/bayesian.html" class="pagination-link" aria-label="Bayesian Statistics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1248,7 +1253,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

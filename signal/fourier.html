@@ -84,7 +84,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../signal/wavelet.html" rel="next">
+<link href="../signal/laplace.html" rel="next">
 <link href="../signal/index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -318,14 +318,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../signal/laplace.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Laplace Transform</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../signal/wavelet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../signal/twodim.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span></a>
   </div>
 </li>
       </ul>
@@ -342,13 +348,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sensing/sparsity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sensing/compsensing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></a>
   </div>
 </li>
       </ul>
@@ -365,13 +371,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statistics/bayesian.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statistics/kalman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span></a>
   </div>
 </li>
       </ul>
@@ -711,7 +717,7 @@ Figure&nbsp;9.1: Fourier transform of a two hat functions.
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Implement the code yourself by filling out the missing sections:</p>
-<div id="28d8e77b" class="cell" data-execution_count="2">
+<div id="05218e8a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -949,7 +955,7 @@ Note
 </div>
 <p>As we can transfer the properties of the Fourier transform to the DFT we get the nice properties for sampled signals.</p>
 <p>The downside of the DFT is that it does not scale well for large <span class="math inline">\(N\)</span> as the matrix-vector multiplication is <span class="math inline">\(\mathcal{O}(N^2)\)</span> and becomes slow.</p>
-<div id="fbc727a5" class="cell" data-execution_count="3">
+<div id="f2fdc030" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show code for the computation of the DFT matrix.</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1210,7 +1216,7 @@ Figure&nbsp;9.2: Signal noise filter with FFT.
 </figure>
 </div>
 <p>As can be seen in the <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span>9.2 (c)</span></a>, the reconstruction is not exact. This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. In particular:</p>
-<div id="a259fe20" class="cell" data-execution_count="5">
+<div id="3b85a1cc" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -1268,7 +1274,7 @@ Figure&nbsp;9.2: Signal noise filter with FFT.
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Implement the code yourself by filling out the missing sections:</p>
-<div id="50ce217e" class="cell" data-execution_count="6">
+<div id="c3ad3621" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
@@ -1665,7 +1671,7 @@ Figure&nbsp;9.4: Simulation of the heat equation in 1D.
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Implement the code yourself by filling out the missing sections:</p>
-<div id="11094d0a" class="cell" data-execution_count="9">
+<div id="8141267d" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
@@ -1971,8 +1977,8 @@ Figure&nbsp;9.6: Time integration of the Burger’s equation
 </div>
 <div class="callout-body-container">
 <div id="exm-fourier-fft-gec" class="theorem example">
-<p><span class="theorem-title"><strong>Example 9.7 (Ground Emitter Circuit)</strong></span> We can use FFT to compute some base properties of a ground emitter circuit <a href="#fig-fft-gec-1" class="quarto-xref">Figure&nbsp;<span>9.7 (a)</span></a> and how the signal is propagated through this circuit <a href="#fig-fft-gec-2" class="quarto-xref">Figure&nbsp;<span>9.7 (b)</span></a>.</p>
-<div id="36b5f1ba" class="cell" data-execution_count="12">
+<p><span class="theorem-title"><strong>Example 9.7 (Ground Emitter Circuit)</strong></span> We can use FFT to compute some base properties of a ground emitter circuit <a href="#fig-fft-gec-1" class="quarto-xref">Figure&nbsp;<span>10.5 (a)</span></a> and how the signal is propagated through this circuit <a href="#fig-fft-gec-2" class="quarto-xref">Figure&nbsp;<span>10.5 (b)</span></a>.</p>
+<div id="af6fe46f" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the raw data for the example</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2260,21 +2266,7 @@ Note
 <p>The spectrogram resolves both but with reduced resolution. This effect manifests differently at different locations of the chirp signal. At the left where the frequency is almost constant, the band becomes narrower, whereas at the right it becomes wider due to the increased blur in horizontal direction. The product of the uncertainties of these quantities has a minimal value. In this context time and frequency domain respectively represent the extremes.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>There is also the Laplace transform that can be understood as a generalized Fourier transform. This transform is also heavily used in the transformation of PDEs to simpler ODEs or ODEs into algebraic equations.</p>
-<p>Nevertheless, we do not cover this transform here, for the interested reader we recommend <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, sec. 2.5</a>)</span> as it introduces the Laplace transform with the tools we covered here.</p>
-</div>
-</div>
-<p>The Fourier transform always assumes a harmonic nature in the signal it is applied to. Therefore, it is best suited for e.g.&nbsp;music, rotating machines or vibrations. For other signals, especially with discontinuous parts (Gibbs phenomenon) there are more adequate bases functions. We look at these in the next section.</p>
+<p>The Fourier transform always assumes a harmonic nature in the signal it is applied to. Therefore, it is best suited for e.g.&nbsp;music, rotating machines or vibrations. For other signals, especially with discontinuous parts (Gibbs phenomenon) there are more adequate bases functions. We look at these in the next section <a href="wavelet.html" class="quarto-xref"><span>Chapter 11</span></a> but first we look at the Laplace transform <a href="laplace.html" class="quarto-xref"><span>Chapter 10</span></a>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -2865,8 +2857,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../signal/wavelet.html" class="pagination-link" aria-label="Wavelet transform">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../signal/laplace.html" class="pagination-link" aria-label="Laplace Transform">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Laplace Transform</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -2884,7 +2876,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

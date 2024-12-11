@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>10&nbsp; Wavelet transform – Basics of Data Science</title>
+<title>11&nbsp; Wavelet transform – Basics of Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../signal/twodim.html" rel="next">
-<link href="../signal/fourier.html" rel="prev">
+<link href="../signal/laplace.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -149,7 +149,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../signal/index.html">Signal Processing</a></li><li class="breadcrumb-item"><a href="../signal/wavelet.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet transform</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../signal/index.html">Signal Processing</a></li><li class="breadcrumb-item"><a href="../signal/wavelet.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Wavelet transform</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -293,14 +293,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../signal/laplace.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Laplace Transform</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../signal/wavelet.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../signal/twodim.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span></a>
   </div>
 </li>
       </ul>
@@ -317,13 +323,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sensing/sparsity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sensing/compsensing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></a>
   </div>
 </li>
       </ul>
@@ -340,13 +346,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statistics/bayesian.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statistics/kalman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span></a>
   </div>
 </li>
       </ul>
@@ -374,9 +380,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../signal/index.html">Signal Processing</a></li><li class="breadcrumb-item"><a href="../signal/wavelet.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet transform</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../signal/index.html">Signal Processing</a></li><li class="breadcrumb-item"><a href="../signal/wavelet.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Wavelet transform</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-signal-wavelet" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></h1>
+<h1 class="title"><span id="sec-signal-wavelet" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></h1>
 </div>
 
 
@@ -405,7 +411,7 @@ window.Quarto = {
 </div>
 <div class="callout-body-container">
 <div id="exm-wavelet-haar" class="theorem example">
-<p><span class="theorem-title"><strong>Example 10.1 (The Haar wavelet)</strong></span> The <em>mother</em> wavelet is defined as the step function <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 11.1 (The Haar wavelet)</strong></span> The <em>mother</em> wavelet is defined as the step function <span class="math display">\[
 \psi(t) =
 \begin{cases}
 \begin{array}{rl}
@@ -456,7 +462,7 @@ window.Quarto = {
 <div id="fig-wavelet-haar-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-wavelet-haar-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="wavelet_files/figure-html/fig-wavelet-haar-output-1.svg" class="lightbox" data-gallery="fig-wavelet-haar" title="Figure&nbsp;10.1&nbsp;(a): Scaling 1 and translation 0."><img src="wavelet_files/figure-html/fig-wavelet-haar-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-wavelet-haar"></a>
+<a href="wavelet_files/figure-html/fig-wavelet-haar-output-1.svg" class="lightbox" data-gallery="fig-wavelet-haar" title="Figure&nbsp;11.1&nbsp;(a): Scaling 1 and translation 0."><img src="wavelet_files/figure-html/fig-wavelet-haar-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-wavelet-haar"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-wavelet-haar-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Scaling 1 and translation 0.
@@ -470,7 +476,7 @@ window.Quarto = {
 <div id="fig-wavelet-haar-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-wavelet-haar-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="wavelet_files/figure-html/fig-wavelet-haar-output-2.svg" class="lightbox" data-gallery="fig-wavelet-haar" title="Figure&nbsp;10.1&nbsp;(b): Scaling 1/2 and translation 0."><img src="wavelet_files/figure-html/fig-wavelet-haar-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-wavelet-haar"></a>
+<a href="wavelet_files/figure-html/fig-wavelet-haar-output-2.svg" class="lightbox" data-gallery="fig-wavelet-haar" title="Figure&nbsp;11.1&nbsp;(b): Scaling 1/2 and translation 0."><img src="wavelet_files/figure-html/fig-wavelet-haar-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-wavelet-haar"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-wavelet-haar-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Scaling 1/2 and translation 0.
@@ -484,7 +490,7 @@ window.Quarto = {
 <div id="fig-wavelet-haar-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-wavelet-haar-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="wavelet_files/figure-html/fig-wavelet-haar-output-3.svg" class="lightbox" data-gallery="fig-wavelet-haar" title="Figure&nbsp;10.1&nbsp;(c): Scaling 1/2 and translation 1/2."><img src="wavelet_files/figure-html/fig-wavelet-haar-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-wavelet-haar"></a>
+<a href="wavelet_files/figure-html/fig-wavelet-haar-output-3.svg" class="lightbox" data-gallery="fig-wavelet-haar" title="Figure&nbsp;11.1&nbsp;(c): Scaling 1/2 and translation 1/2."><img src="wavelet_files/figure-html/fig-wavelet-haar-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-wavelet-haar"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-wavelet-haar-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) Scaling 1/2 and translation 1/2.
@@ -495,7 +501,7 @@ window.Quarto = {
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wavelet-haar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.1: Haar wavelets for the first two levels of multi resolution.
+Figure&nbsp;11.1: Haar wavelets for the first two levels of multi resolution.
 </figcaption>
 </figure>
 </div>
@@ -511,7 +517,7 @@ Figure&nbsp;10.1: Haar wavelets for the first two levels of multi resolution.
 </div>
 <div class="callout-body-container">
 <div id="exm-wavelet-maxicanhat" class="theorem example">
-<p><span class="theorem-title"><strong>Example 10.2 (The Maxican hat wavelet)</strong></span> The <em>mother</em> wavelet is defined as the is the negative normalized second derivative of a Gaussian function, <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 11.2 (The Maxican hat wavelet)</strong></span> The <em>mother</em> wavelet is defined as the is the negative normalized second derivative of a Gaussian function, <span class="math display">\[
 \psi(t) = (1 - t)^2\, \mathrm{e}^{-\tfrac{t}{2}}
 \]</span></p>
 <details class="code-fold">
@@ -555,7 +561,7 @@ Figure&nbsp;10.1: Haar wavelets for the first two levels of multi resolution.
 <div id="fig-wavelet-mexicanhat-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-wavelet-mexicanhat-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="wavelet_files/figure-html/fig-wavelet-mexicanhat-output-1.svg" class="lightbox" data-gallery="fig-wavelet-mexicanhat" title="Figure&nbsp;10.2&nbsp;(a): Scaling 1 and translation 0."><img src="wavelet_files/figure-html/fig-wavelet-mexicanhat-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-wavelet-mexicanhat"></a>
+<a href="wavelet_files/figure-html/fig-wavelet-mexicanhat-output-1.svg" class="lightbox" data-gallery="fig-wavelet-mexicanhat" title="Figure&nbsp;11.2&nbsp;(a): Scaling 1 and translation 0."><img src="wavelet_files/figure-html/fig-wavelet-mexicanhat-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-wavelet-mexicanhat"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-wavelet-mexicanhat-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Scaling 1 and translation 0.
@@ -569,7 +575,7 @@ Figure&nbsp;10.1: Haar wavelets for the first two levels of multi resolution.
 <div id="fig-wavelet-mexicanhat-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-wavelet-mexicanhat-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="wavelet_files/figure-html/fig-wavelet-mexicanhat-output-2.svg" class="lightbox" data-gallery="fig-wavelet-mexicanhat" title="Figure&nbsp;10.2&nbsp;(b): Scaling 1/2 and translation 0."><img src="wavelet_files/figure-html/fig-wavelet-mexicanhat-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-wavelet-mexicanhat"></a>
+<a href="wavelet_files/figure-html/fig-wavelet-mexicanhat-output-2.svg" class="lightbox" data-gallery="fig-wavelet-mexicanhat" title="Figure&nbsp;11.2&nbsp;(b): Scaling 1/2 and translation 0."><img src="wavelet_files/figure-html/fig-wavelet-mexicanhat-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-wavelet-mexicanhat"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-wavelet-mexicanhat-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Scaling 1/2 and translation 0.
@@ -583,7 +589,7 @@ Figure&nbsp;10.1: Haar wavelets for the first two levels of multi resolution.
 <div id="fig-wavelet-mexicanhat-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-wavelet-mexicanhat-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="wavelet_files/figure-html/fig-wavelet-mexicanhat-output-3.svg" class="lightbox" data-gallery="fig-wavelet-mexicanhat" title="Figure&nbsp;10.2&nbsp;(c): Scaling 1/2 and translation 1/2."><img src="wavelet_files/figure-html/fig-wavelet-mexicanhat-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-wavelet-mexicanhat"></a>
+<a href="wavelet_files/figure-html/fig-wavelet-mexicanhat-output-3.svg" class="lightbox" data-gallery="fig-wavelet-mexicanhat" title="Figure&nbsp;11.2&nbsp;(c): Scaling 1/2 and translation 1/2."><img src="wavelet_files/figure-html/fig-wavelet-mexicanhat-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-wavelet-mexicanhat"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-wavelet-mexicanhat-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) Scaling 1/2 and translation 1/2.
@@ -594,7 +600,7 @@ Figure&nbsp;10.1: Haar wavelets for the first two levels of multi resolution.
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wavelet-mexicanhat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.2: Mexican hat wavelets for the first two levels of multi resolution.
+Figure&nbsp;11.2: Mexican hat wavelets for the first two levels of multi resolution.
 </figcaption>
 </figure>
 </div>
@@ -612,7 +618,7 @@ Figure&nbsp;10.2: Mexican hat wavelets for the first two levels of multi resolut
 </div>
 <div class="callout-body-container">
 <div id="def-wavelet-cwt" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 10.1 (Continuous Wavelet Transform)</strong></span> The continuous wavelet transform is given by <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 11.1 (Continuous Wavelet Transform)</strong></span> The continuous wavelet transform is given by <span class="math display">\[
 \mathcal{W}_\psi\{f\}(a, b) = \langle f, \psi_{a, b} \rangle = \int_{-\infty}^\infty f(t)\overline{\psi}_{a,b}\, \mathrm{d}t,
 \]</span> this is only true for a bounded wavelet <span class="math inline">\(\psi\)</span> <span class="math display">\[
 C_\psi = \int_{-\infty}^\infty \frac{|\hat{\psi}(\tau)|^2}{|\tau|}\, \mathrm{d}\tau,
@@ -631,7 +637,7 @@ f(t) = \frac{1}{C_\psi} \int_{-\infty}^\infty \int_{-\infty}^\infty\mathcal{W}_\
 </div>
 <div class="callout-body-container">
 <div id="def-wavelet-dwt" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 10.2 (Discrete Wavelet Transform)</strong></span> The discrete wavelet transform is given by <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 11.2 (Discrete Wavelet Transform)</strong></span> The discrete wavelet transform is given by <span class="math display">\[
 \mathcal{W}_\psi\{f\}(j, k) = \langle f, \psi_{j, k} \rangle = \int_{-\infty}^\infty f(t)\overline{\psi}_{j, k}\, \mathrm{d}t,
 \]</span> where <span class="math inline">\(\psi_{j, k}\)</span> is a discrete family of wavelets <span class="math display">\[
 \psi_{j, k}(t) = \frac{1}{a^j}\psi\left(\frac{t - k b}{a^j}\right).
@@ -662,7 +668,7 @@ Note
 </div>
 <div class="callout-body-container">
 <div id="exm-wavelet-haar-1d" class="theorem example">
-<p><span class="theorem-title"><strong>Example 10.3 (Signal analysis with the Haar wavelet)</strong></span> To start and get an idea how the analysis works we use an instructive example. We have a piecewise constant function as <span class="math inline">\(v = [3, 1, 0, 4, 0, 6, 9, 9]^{\mathrm{T}}\)</span> <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 11.3 (Signal analysis with the Haar wavelet)</strong></span> To start and get an idea how the analysis works we use an instructive example. We have a piecewise constant function as <span class="math inline">\(v = [3, 1, 0, 4, 0, 6, 9, 9]^{\mathrm{T}}\)</span> <span class="math display">\[
 f(x) = \sum_{i=1}^{8} v_i \chi_{[i-1, i)},
 \]</span> where <span class="math inline">\(\chi_{[c, d)}\)</span> is the indicator function that is 1 on the interval <span class="math inline">\([c, d)\)</span> and zero everywhere else.</p>
 <p>Now let us proceed through the levels of the transform to see what is happening, we select <span class="math inline">\(a=2\)</span> and <span class="math inline">\(b=1\)</span>:</p>
@@ -816,16 +822,16 @@ f(x) = \sum_{i=1}^{8} v_i \chi_{[i-1, i)},
 <span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="cell-fig-wavelet-haar-1d" class="cell quarto-layout-panel" data-layout-ncol="1" data-execution_count="3">
+<div id="cell-fig-wavelet-haar-1d" class="cell quarto-layout-panel" data-execution_count="3" data-layout-ncol="1">
 <div class="quarto-layout-row">
 <div class="cell-output cell-output-display quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <div id="fig-wavelet-haar-1d" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-wavelet-haar-1d-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="wavelet_files/figure-html/fig-wavelet-haar-1d-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;10.3: Scaling 1 and translation 0."><img src="wavelet_files/figure-html/fig-wavelet-haar-1d-output-1.svg" class="img-fluid figure-img"></a>
+<a href="wavelet_files/figure-html/fig-wavelet-haar-1d-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;11.3: Scaling 1 and translation 0."><img src="wavelet_files/figure-html/fig-wavelet-haar-1d-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wavelet-haar-1d-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.3: Scaling 1 and translation 0.
+Figure&nbsp;11.3: Scaling 1 and translation 0.
 </figcaption>
 </figure>
 </div>
@@ -1411,13 +1417,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../signal/fourier.html" class="pagination-link" aria-label="Fourier Transform">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fourier Transform</span></span>
+      <a href="../signal/laplace.html" class="pagination-link" aria-label="Laplace Transform">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Laplace Transform</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../signal/twodim.html" class="pagination-link" aria-label="Two-Dimensional Transform">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1435,7 +1441,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

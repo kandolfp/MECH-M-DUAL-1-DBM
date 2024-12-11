@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>13&nbsp; Compressed Sensing – Basics of Data Science</title>
+<title>14&nbsp; Compressed Sensing – Basics of Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -169,7 +169,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sensing/index.html">Sparsity and compression</a></li><li class="breadcrumb-item"><a href="../sensing/compsensing.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sensing/index.html">Sparsity and compression</a></li><li class="breadcrumb-item"><a href="../sensing/compsensing.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -313,14 +313,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../signal/laplace.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Laplace Transform</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../signal/wavelet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../signal/twodim.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span></a>
   </div>
 </li>
       </ul>
@@ -337,13 +343,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sensing/sparsity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sensing/compsensing.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></a>
   </div>
 </li>
       </ul>
@@ -360,13 +366,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statistics/bayesian.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statistics/kalman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span></a>
   </div>
 </li>
       </ul>
@@ -393,19 +399,19 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-theoretic-basics-of-compressed-sensing" id="toc-the-theoretic-basics-of-compressed-sensing" class="nav-link active" data-scroll-target="#the-theoretic-basics-of-compressed-sensing"><span class="header-section-number">13.1</span> The theoretic basics of compressed sensing</a></li>
-  <li><a href="#sparse-regression" id="toc-sparse-regression" class="nav-link" data-scroll-target="#sparse-regression"><span class="header-section-number">13.2</span> Sparse Regression</a></li>
-  <li><a href="#robust-principal-component-analysis-rpca" id="toc-robust-principal-component-analysis-rpca" class="nav-link" data-scroll-target="#robust-principal-component-analysis-rpca"><span class="header-section-number">13.3</span> Robust Principal Component Analysis (RPCA)</a></li>
-  <li><a href="#sparse-sensor-placement" id="toc-sparse-sensor-placement" class="nav-link" data-scroll-target="#sparse-sensor-placement"><span class="header-section-number">13.4</span> Sparse Sensor Placement</a></li>
+  <li><a href="#the-theoretic-basics-of-compressed-sensing" id="toc-the-theoretic-basics-of-compressed-sensing" class="nav-link active" data-scroll-target="#the-theoretic-basics-of-compressed-sensing"><span class="header-section-number">14.1</span> The theoretic basics of compressed sensing</a></li>
+  <li><a href="#sparse-regression" id="toc-sparse-regression" class="nav-link" data-scroll-target="#sparse-regression"><span class="header-section-number">14.2</span> Sparse Regression</a></li>
+  <li><a href="#robust-principal-component-analysis-rpca" id="toc-robust-principal-component-analysis-rpca" class="nav-link" data-scroll-target="#robust-principal-component-analysis-rpca"><span class="header-section-number">14.3</span> Robust Principal Component Analysis (RPCA)</a></li>
+  <li><a href="#sparse-sensor-placement" id="toc-sparse-sensor-placement" class="nav-link" data-scroll-target="#sparse-sensor-placement"><span class="header-section-number">14.4</span> Sparse Sensor Placement</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/sensing/compsensing.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sensing/index.html">Sparsity and compression</a></li><li class="breadcrumb-item"><a href="../sensing/compsensing.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sensing/index.html">Sparsity and compression</a></li><li class="breadcrumb-item"><a href="../sensing/compsensing.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-sensing-compressed-sensing" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></h1>
+<h1 class="title"><span id="sec-sensing-compressed-sensing" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></h1>
 </div>
 
 
@@ -431,7 +437,7 @@ window.Quarto = {
 </div>
 <div class="callout-body-container">
 <div id="def-sensing-compressed-sensing" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 13.1 (Compressed Sensing)</strong></span> For a signal <span class="math inline">\(x\)</span> that is <span class="math inline">\(K\)</span>-sparse in <span class="math inline">\(\mathcal{B}\)</span> with matrix <span class="math inline">\(B\)</span> we need <span class="math inline">\(n\)</span> measurements and can compress them to <span class="math inline">\(K\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition 14.1 (Compressed Sensing)</strong></span> For a signal <span class="math inline">\(x\)</span> that is <span class="math inline">\(K\)</span>-sparse in <span class="math inline">\(\mathcal{B}\)</span> with matrix <span class="math inline">\(B\)</span> we need <span class="math inline">\(n\)</span> measurements and can compress them to <span class="math inline">\(K\)</span>.</p>
 <p>In compressed sensing we collect <span class="math inline">\(p\)</span> randomly chosen or <em>compressed</em> measurements and solve for the <span class="math inline">\(K\)</span> elements of <span class="math inline">\(s\)</span> that are not zero, with <span class="math inline">\(K &lt; p \ll n\)</span>.</p>
 <p>We can represent <span class="math inline">\(p\)</span> linear measurements of <span class="math inline">\(x\)</span> as the matrix <span class="math inline">\(C\in\mathbb{R}^{p\times n}\)</span> and thus <span class="math display">\[
 y = C x.
@@ -448,8 +454,8 @@ y = C x = C B s = D s,
 <p>As we will see, the selection of the matrix <span class="math inline">\(C\)</span> is important to allow for the optimization to be such that we do not need brute-force to look for <span class="math inline">\(\check{s}\)</span>. This brute-force search is combinatorial in <span class="math inline">\(n\)</span> and <span class="math inline">\(K\)</span>, for a fixed (known) <span class="math inline">\(K\)</span> but significantly larger for unknown <span class="math inline">\(K\)</span>.</p>
 <p>Under certain condition on <span class="math inline">\(C\)</span> we can relax the conditions to a convex <span class="math inline">\(\ell_1\)</span>-minimization <span id="eq-sparse-l1"><span class="math display">\[
 \check{s} = \operatorname{argmin}_s \| s \|_1, \quad \text{subject to} \quad y = C B s.
-\tag{13.1}\]</span></span></p>
-<p>In order to have <a href="#eq-sparse-l1" class="quarto-xref">Equation&nbsp;<span>13.1</span></a> converge with high properbility we need to following assumptions to be met (precise description will follow):</p>
+\tag{14.1}\]</span></span></p>
+<p>In order to have <a href="#eq-sparse-l1" class="quarto-xref">Equation&nbsp;<span>14.1</span></a> converge with high properbility we need to following assumptions to be met (precise description will follow):</p>
 <ol type="1">
 <li>The measurement matrix <span class="math inline">\(C\)</span> must be <em>incoherent</em> with respect to the sparsifying basis <span class="math inline">\(\mathcal{B}\)</span>, i.e.&nbsp;the rows of <span class="math inline">\(C\)</span> do not correlate with the columns of <span class="math inline">\(B\)</span>.</li>
 <li>The number of measurements <span class="math inline">\(p\)</span> must be sufficiently large, on the order of <span class="math display">\[
@@ -466,7 +472,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In <a href="sparsity.html#fig-mci_sparsity_fft_compress" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> we illustrated compressed sensing with a <span class="math inline">\(4016 \times 6016\)</span> image. With our 5% of Fourier coefficients this puts the sparsity <span class="math inline">\(K = 0.05 \times 4016 \times 6016 \approx 1 208 013\)</span> and with <span class="math inline">\(k_1=3\)</span> we would stay with <span class="math inline">\(p\)</span> 3.6 million measurements and about 15% of the original pixels.</p>
+<p>In <a href="sparsity.html#fig-mci_sparsity_fft_compress" class="quarto-xref">Figure&nbsp;<span>13.1</span></a> we illustrated compressed sensing with a <span class="math inline">\(4016 \times 6016\)</span> image. With our 5% of Fourier coefficients this puts the sparsity <span class="math inline">\(K = 0.05 \times 4016 \times 6016 \approx 1 208 013\)</span> and with <span class="math inline">\(k_1=3\)</span> we would stay with <span class="math inline">\(p\)</span> 3.6 million measurements and about 15% of the original pixels.</p>
 <p>The trick part is how to select them, which is why compressed sensing is not used much in imaging, except for some cases like magnetic resonance imaging (MRI) for patience that can not stay still or sedation is risky.</p>
 </div>
 </div>
@@ -500,13 +506,13 @@ Note
 </div>
 <div class="callout-body-container">
 <div id="exm-sensing-recovery-audio" class="theorem example">
-<p><span class="theorem-title"><strong>Example 13.1 (Recovering an Audio Signal from Sparse Measurements)</strong></span> Let us consider a audio signal consisting of a two-tone audio signal <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 14.1 (Recovering an Audio Signal from Sparse Measurements)</strong></span> Let us consider a audio signal consisting of a two-tone audio signal <span class="math display">\[
 f(t) = \cos(97 t\, 2\pi) + \cos(777 t\, 2\pi)
 \]</span> which is sparse in the frequency domain (transformation via FFT). The highest frequency is <span class="math inline">\(777 \mathrm{Hz}\)</span> and therefore the Shannon-Nyquist theorem tells us we should sample with at least <span class="math inline">\(1554 \mathrm{Hz}\)</span>.</p>
 <p>The sparsity of the sample allows us to reconstruct the signal by sampling randomly with an average sampling rate of <span class="math inline">\(128 \mathrm{Hz}\)</span>, well below the Shannon-Nyquist threshold.</p>
 <p>The code relies on the CoSaMP implementation <span class="citation" data-cites="NEEDELL2009301">Needell and Tropp (<a href="../references.html#ref-NEEDELL2009301" role="doc-biblioref">2009</a>)</span> provided on <a href="https://github.com/avirmaux/CoSaMP/tree/master">gitHub</a> and included below so we can work with it.</p>
 <p>The code is adapted from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 3.3)</span></p>
-<div id="4e2fdddf" class="cell" data-execution_count="1">
+<div id="705eb4b8" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>CoSaMP algorithm form gitHub, now print.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -617,7 +623,7 @@ f(t) = \cos(97 t\, 2\pi) + \cos(777 t\, 2\pi)
 <div id="fig-sensing_compsensing_signal-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_compsensing_signal-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-1.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal" title="Figure&nbsp;13.1&nbsp;(a): Time window of the signal, the x marks sampling points in the domain."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal"></a>
+<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-1.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal" title="Figure&nbsp;14.1&nbsp;(a): Time window of the signal, the x marks sampling points in the domain."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_compsensing_signal-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Time window of the signal, the x marks sampling points in the domain.
@@ -631,7 +637,7 @@ f(t) = \cos(97 t\, 2\pi) + \cos(777 t\, 2\pi)
 <div id="fig-sensing_compsensing_signal-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_compsensing_signal-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-2.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal" title="Figure&nbsp;13.1&nbsp;(b): Time window of the reconstructed signal from the above measurements."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal"></a>
+<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-2.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal" title="Figure&nbsp;14.1&nbsp;(b): Time window of the reconstructed signal from the above measurements."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_compsensing_signal-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Time window of the reconstructed signal from the above measurements.
@@ -645,7 +651,7 @@ f(t) = \cos(97 t\, 2\pi) + \cos(777 t\, 2\pi)
 <div id="fig-sensing_compsensing_signal-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_compsensing_signal-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-3.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal" title="Figure&nbsp;13.1&nbsp;(c): Power spectral density of the original and reconstructed signal."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal"></a>
+<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-3.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal" title="Figure&nbsp;14.1&nbsp;(c): Power spectral density of the original and reconstructed signal."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_compsensing_signal-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) Power spectral density of the original and reconstructed signal.
@@ -656,11 +662,11 @@ f(t) = \cos(97 t\, 2\pi) + \cos(777 t\, 2\pi)
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sensing_compsensing_signal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.1: Compressed sensing reconstruction of a two frequency audio signal, entire time from [0, 1].
+Figure&nbsp;14.1: Compressed sensing reconstruction of a two frequency audio signal, entire time from [0, 1].
 </figcaption>
 </figure>
 </div>
-<p>The CoSaMP algorithm works in the discrete cosine transform basis, which can be derived from the FFT. For this algorithm we sample <span class="math inline">\(p=128\)</span> points in time from the <span class="math inline">\(N = 4096\)</span> high resolution sampling. We therefore know exactly the timing of these samples. If we would sample uniformly in time we fail, see <a href="#fig-sensing_compsensing_signal2" class="quarto-xref">Figure&nbsp;<span>13.2</span></a>. This happens because we see an aliasing effect for the high-frequency domain resulting in erroneous frequency peaks. If we compare the samples in <a href="#fig-sensing_compsensing_signal-1" class="quarto-xref">Figure&nbsp;<span>13.1 (a)</span></a> and <a href="#fig-sensing_compsensing_signal2-1" class="quarto-xref">Figure&nbsp;<span>13.2 (a)</span></a> it is hard to see the difference.</p>
+<p>The CoSaMP algorithm works in the discrete cosine transform basis, which can be derived from the FFT. For this algorithm we sample <span class="math inline">\(p=128\)</span> points in time from the <span class="math inline">\(N = 4096\)</span> high resolution sampling. We therefore know exactly the timing of these samples. If we would sample uniformly in time we fail, see <a href="#fig-sensing_compsensing_signal2" class="quarto-xref">Figure&nbsp;<span>14.2</span></a>. This happens because we see an aliasing effect for the high-frequency domain resulting in erroneous frequency peaks. If we compare the samples in <a href="#fig-sensing_compsensing_signal-1" class="quarto-xref">Figure&nbsp;<span>14.1 (a)</span></a> and <a href="#fig-sensing_compsensing_signal2-1" class="quarto-xref">Figure&nbsp;<span>14.2 (a)</span></a> it is hard to see the difference.</p>
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ttt <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">1</span>, p)</span>
@@ -706,7 +712,7 @@ Figure&nbsp;13.1: Compressed sensing reconstruction of a two frequency audio sig
 <div id="fig-sensing_compsensing_signal2-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_compsensing_signal2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-1.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal2" title="Figure&nbsp;13.2&nbsp;(a): Time window of the signal, the x marks sampling points in the domain."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal2"></a>
+<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-1.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal2" title="Figure&nbsp;14.2&nbsp;(a): Time window of the signal, the x marks sampling points in the domain."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal2"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_compsensing_signal2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Time window of the signal, the x marks sampling points in the domain.
@@ -720,7 +726,7 @@ Figure&nbsp;13.1: Compressed sensing reconstruction of a two frequency audio sig
 <div id="fig-sensing_compsensing_signal2-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_compsensing_signal2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-2.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal2" title="Figure&nbsp;13.2&nbsp;(b): Time window of the reconstructed signal from the above measurements."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal2"></a>
+<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-2.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal2" title="Figure&nbsp;14.2&nbsp;(b): Time window of the reconstructed signal from the above measurements."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal2"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_compsensing_signal2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Time window of the reconstructed signal from the above measurements.
@@ -734,7 +740,7 @@ Figure&nbsp;13.1: Compressed sensing reconstruction of a two frequency audio sig
 <div id="fig-sensing_compsensing_signal2-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_compsensing_signal2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-3.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal2" title="Figure&nbsp;13.2&nbsp;(c): Power spectral density of the original and reconstructed signal."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal2"></a>
+<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-3.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal2" title="Figure&nbsp;14.2&nbsp;(c): Power spectral density of the original and reconstructed signal."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal2"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_compsensing_signal2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) Power spectral density of the original and reconstructed signal.
@@ -745,7 +751,7 @@ Figure&nbsp;13.1: Compressed sensing reconstruction of a two frequency audio sig
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sensing_compsensing_signal2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.2: Compressed sensing reconstruction of a two frequency audio signal, entire time from [0, 1] - sampling uniform in time.
+Figure&nbsp;14.2: Compressed sensing reconstruction of a two frequency audio signal, entire time from [0, 1] - sampling uniform in time.
 </figcaption>
 </figure>
 </div>
@@ -755,10 +761,10 @@ Figure&nbsp;13.2: Compressed sensing reconstruction of a two frequency audio sig
 </div>
 </div>
 </div>
-<section id="the-theoretic-basics-of-compressed-sensing" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="the-theoretic-basics-of-compressed-sensing"><span class="header-section-number">13.1</span> The theoretic basics of compressed sensing</h2>
+<section id="the-theoretic-basics-of-compressed-sensing" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="the-theoretic-basics-of-compressed-sensing"><span class="header-section-number">14.1</span> The theoretic basics of compressed sensing</h2>
 <p>Now that we have seen compressed sensing in action we need to bring in the theoretical basics that form this theory.</p>
-<p>The key feature is to look into the geometry of sparse vectors and how these vectors are transformed via random measurements. More precisely, for large enough <span class="math inline">\(p\)</span> (amount of measurements) our matrix <span class="math inline">\(D = CB\)</span> of <a href="#def-sensing-compressed-sensing" class="quarto-xref">Definition&nbsp;<span>13.1</span></a> preserves the distance and inner product structure of sparse vectors. In turn this means, we need to find a matrix <span class="math inline">\(C\)</span> such that <span class="math inline">\(D\)</span> is a near-isometry map on sparse vectors.</p>
+<p>The key feature is to look into the geometry of sparse vectors and how these vectors are transformed via random measurements. More precisely, for large enough <span class="math inline">\(p\)</span> (amount of measurements) our matrix <span class="math inline">\(D = CB\)</span> of <a href="#def-sensing-compressed-sensing" class="quarto-xref">Definition&nbsp;<span>14.1</span></a> preserves the distance and inner product structure of sparse vectors. In turn this means, we need to find a matrix <span class="math inline">\(C\)</span> such that <span class="math inline">\(D\)</span> is a near-isometry map on sparse vectors.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -789,7 +795,7 @@ y = D s
 </div>
 <div class="callout-body-container">
 <div id="def-sensing-rip" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 13.2 (Restricted Isometry Property (RIP))</strong></span> For <span class="math inline">\(p\)</span> incoherent measurements the matrix <span class="math inline">\(D=CB\)</span> satisfies a <strong>restricted isometry property</strong> (RIP) for sparse vectors <span class="math inline">\(s\)</span></p>
+<p><span class="theorem-title"><strong>Definition 14.2 (Restricted Isometry Property (RIP))</strong></span> For <span class="math inline">\(p\)</span> incoherent measurements the matrix <span class="math inline">\(D=CB\)</span> satisfies a <strong>restricted isometry property</strong> (RIP) for sparse vectors <span class="math inline">\(s\)</span></p>
 <p><span class="math display">\[
 (1-\delta_K)\|s\|_2^2 \leq \|C B s\|_2^2 \leq (1+\delta_K)\|s\|_2^2,
 \]</span> with the restricted isometry constant <span class="math inline">\(\delta_K\)</span>. For a small enough <span class="math inline">\(\delta_K\)</span> <span class="math inline">\(CB\)</span> acts as a near-isometry on <span class="math inline">\(K\)</span>-sparse vectors.</p>
@@ -799,10 +805,10 @@ y = D s
 </div>
 </div>
 <p>It is difficult to compute the <span class="math inline">\(\delta_K\)</span> in the RIP and as <span class="math inline">\(C\)</span> may be selected at random there is more information included in the statistical properties of <span class="math inline">\(\delta_K\)</span> for a family of matrices <span class="math inline">\(C\)</span>. In general, increasing <span class="math inline">\(p\)</span> ill decrease <span class="math inline">\(\delta_K\)</span>, same as having incoherence vectors and both improve the properties of <span class="math inline">\(CB\)</span> by bringing it closer to an isometry.</p>
-<p>Luckily, there exist generic sampling matrices <span class="math inline">\(C\)</span> that are sufficiently incoherent with resect to nearly all transform bases. In particular, Gaussian and Bernoulli random measurement matrices satisfy <a href="#def-sensing-rip" class="quarto-xref">Definition&nbsp;<span>13.2</span></a> for a generic <span class="math inline">\(B\)</span> (with high probability).</p>
+<p>Luckily, there exist generic sampling matrices <span class="math inline">\(C\)</span> that are sufficiently incoherent with resect to nearly all transform bases. In particular, Gaussian and Bernoulli random measurement matrices satisfy <a href="#def-sensing-rip" class="quarto-xref">Definition&nbsp;<span>14.2</span></a> for a generic <span class="math inline">\(B\)</span> (with high probability).</p>
 </section>
-<section id="sparse-regression" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="sparse-regression"><span class="header-section-number">13.2</span> Sparse Regression</h2>
+<section id="sparse-regression" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="sparse-regression"><span class="header-section-number">14.2</span> Sparse Regression</h2>
 <p>Let us return to regression for a moment an in particular to the LASSO method introduced in <a href="../regression/optimizers.html#sec-regression-optimizers-lasso" class="quarto-xref"><span>Section 8.1.1</span></a>. We have seen that <span class="math inline">\(\ell_1\)</span>, i.e.&nbsp;the <span class="math inline">\(\|\cdot\|_1\)</span>, promotes sparsity and we can use this to create a more robust method that rejects outliers.</p>
 <p>We split up our points into a training and test set (the classic 80:20 split). For the test set an varying the parameter <span class="math inline">\(\lambda_1\)</span> through a range of values we create a <em>fit</em> with the training set and test against the test set.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
@@ -812,7 +818,7 @@ y = D s
 </div>
 <div class="callout-body-container">
 <div id="exm-sensing-lasso" class="theorem example">
-<p><span class="theorem-title"><strong>Example 13.2 (LASSO fit for a regression problem)</strong></span> For our <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 14.2 (LASSO fit for a regression problem)</strong></span> For our <span class="math display">\[
 A x = b
 \]</span> problem, we consider a problem the dimensions as <span class="math inline">\(200\)</span> observations with <span class="math inline">\(10\)</span> candidate predictions. This results in a matrix <span class="math inline">\(A\in\mathcal{R}^{200 \times 10}\)</span> and we select the vector <span class="math inline">\(b\in\mathcal{R}^{200}\)</span> as the linear combination of exactly two of theses <span class="math inline">\(10\)</span> candidates. As a result, the vector <span class="math inline">\(x\)</span> is <span class="math inline">\(2\)</span>-sparse by construction, and the aim is to recover this. In order to give the algorithm something to work on we add noise to <span class="math inline">\(b\)</span> resulting in no zero element in <span class="math inline">\(b\)</span>.</p>
 <p>To perform a <span class="math inline">\(10\)</span> fold cross validation <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> for the LASSO method we use the features of <code>sklearn</code> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
@@ -859,17 +865,17 @@ A x = b
 <div id="fig-sensing_lasso" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sensing_lasso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="compsensing_files/figure-html/fig-sensing_lasso-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;13.3: Cross-validation mean square error of Lasso fit, the green circle marks the optimal choice, the blue line the mean error of the k-folds and the error bar the maximal and minimal error form the k-folds."><img src="compsensing_files/figure-html/fig-sensing_lasso-output-1.svg" class="img-fluid figure-img"></a>
+<a href="compsensing_files/figure-html/fig-sensing_lasso-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;14.3: Cross-validation mean square error of Lasso fit, the green circle marks the optimal choice, the blue line the mean error of the k-folds and the error bar the maximal and minimal error form the k-folds."><img src="compsensing_files/figure-html/fig-sensing_lasso-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sensing_lasso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.3: Cross-validation mean square error of Lasso fit, the green circle marks the optimal choice, the blue line the mean error of the k-folds and the error bar the maximal and minimal error form the k-folds.
+Figure&nbsp;14.3: Cross-validation mean square error of Lasso fit, the green circle marks the optimal choice, the blue line the mean error of the k-folds and the error bar the maximal and minimal error form the k-folds.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>The resulting coefficients for the best fit with lasso are</p>
-<div id="fd06b40c" class="cell styled-output" data-execution_count="5">
+<div id="331d2cf3" class="cell styled-output" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>array([ 0.        ,  0.        ,  1.0978465 ,  0.        , -0.        ,
        -0.        , -1.06495486,  0.        ,  0.        ,  0.        ])</code></pre>
@@ -896,8 +902,8 @@ Note
 </div>
 </div>
 </section>
-<section id="robust-principal-component-analysis-rpca" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="robust-principal-component-analysis-rpca"><span class="header-section-number">13.3</span> Robust Principal Component Analysis (RPCA)</h2>
+<section id="robust-principal-component-analysis-rpca" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="robust-principal-component-analysis-rpca"><span class="header-section-number">14.3</span> Robust Principal Component Analysis (RPCA)</h2>
 <p>We discussed the principal component analysis in <a href="../matrixdc/svd.html#sec-matrixdc-pca" class="quarto-xref"><span>Section 5.2</span></a> as an application for the SVD. Similar as regression, also the PCA is sensitive to outliers and <em>corrupt data</em>. In <span class="citation" data-cites="10.1145/1970392.1970395">Candès et al. (<a href="../references.html#ref-10.1145/1970392.1970395" role="doc-biblioref">2011</a>)</span> an algorithm to make it more robust was developed.</p>
 <p>The main idea of the paper is to decompose a matrix <span class="math inline">\(X\)</span> into a structured low-rank matrix <span class="math inline">\(L\)</span> and a sparse matrix <span class="math inline">\(S\)</span> containing the outliers and corrupt data <span class="math display">\[
 X = L + S.
@@ -905,10 +911,10 @@ X = L + S.
 <p>It might not be immediately obvious but applications of this split are video surveillance where the background is represented by <span class="math inline">\(L\)</span> and the foreground objects in <span class="math inline">\(L\)</span>, face recognition with the eigenfaces in <span class="math inline">\(L\)</span> and shadows, occlusions (like glasses or masks) are in <span class="math inline">\(S\)</span>.</p>
 <p>The task boils down to an optimization problem of the form <span id="eq-rpca-org"><span class="math display">\[
 \min_{L, S} \operatorname{rank}(L) + \| S \|_0 \quad\text{subject to}\quad L+S = X,
-\tag{13.2}\]</span></span> where unfortunately both parts are not convex but we can search for it with <em>high probability</em> using <span id="eq-rpca-pcp"><span class="math display">\[
+\tag{14.2}\]</span></span> where unfortunately both parts are not convex but we can search for it with <em>high probability</em> using <span id="eq-rpca-pcp"><span class="math display">\[
 \min_{L, S} \|L\|_{\star} + \lambda \| S \|_1 \quad\text{subject to}\quad L+S = X.
-\tag{13.3}\]</span></span> In <a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> <span class="math inline">\(\|\cdot\|_{\star}\)</span> is called the <em>nuclear norm</em> consisting of the sum of all singular values and we use it as our proxy for the <span class="math inline">\(\operatorname{rank}\)</span>.</p>
-<p><a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> is called <em>principal component pursuit</em> (PCP) and in <span class="citation" data-cites="10.1145/1970392.1970395">Candès et al. (<a href="../references.html#ref-10.1145/1970392.1970395" role="doc-biblioref">2011</a>)</span> the authors show that <a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> converges to <a href="#eq-rpca-org" class="quarto-xref">Equation&nbsp;<span>13.2</span></a> for</p>
+\tag{14.3}\]</span></span> In <a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>14.3</span></a> <span class="math inline">\(\|\cdot\|_{\star}\)</span> is called the <em>nuclear norm</em> consisting of the sum of all singular values and we use it as our proxy for the <span class="math inline">\(\operatorname{rank}\)</span>.</p>
+<p><a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>14.3</span></a> is called <em>principal component pursuit</em> (PCP) and in <span class="citation" data-cites="10.1145/1970392.1970395">Candès et al. (<a href="../references.html#ref-10.1145/1970392.1970395" role="doc-biblioref">2011</a>)</span> the authors show that <a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>14.3</span></a> converges to <a href="#eq-rpca-org" class="quarto-xref">Equation&nbsp;<span>14.2</span></a> for</p>
 <ol type="1">
 <li><span class="math inline">\(\lambda = 1/\sqrt{\max(n,m)}\)</span> for <span class="math inline">\(X^{m \times n}\)</span>,</li>
 <li><span class="math inline">\(L\)</span> is not sparse,</li>
@@ -925,8 +931,8 @@ X = L + S.
 </div>
 <div class="callout-body-container">
 <div id="exm-sensing-rpca" class="theorem example">
-<p><span class="theorem-title"><strong>Example 13.3 (Robust principal component analysis with Yale B dataset)</strong></span> The following implementation of RPCA can be found in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 121</a>)</span> with the same application to the eigenfaces dataset.</p>
-<div id="18f7b527" class="cell" data-execution_count="6">
+<p><span class="theorem-title"><strong>Example 14.3 (Robust principal component analysis with Yale B dataset)</strong></span> The following implementation of RPCA can be found in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 121</a>)</span> with the same application to the eigenfaces dataset.</p>
+<div id="eb894cc4" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Robust principal component analysis and helper functions</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> shrink(X, tau):</span>
@@ -958,7 +964,7 @@ X = L + S.
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L, S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="c58c9be5" class="cell" data-execution_count="7">
+<div id="8f3ab540" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1008,7 +1014,7 @@ X = L + S.
 <div id="fig-sensing_rpca-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_rpca-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/sensing/X_2.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(a): X for image 3"><img src="../_assets/sensing/X_2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+<a href="../_assets/sensing/X_2.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;14.4&nbsp;(a): X for image 3"><img src="../_assets/sensing/X_2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) <span class="math inline">\(X\)</span> for image 3
@@ -1020,7 +1026,7 @@ X = L + S.
 <div id="fig-sensing_rpca-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_rpca-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/sensing/L_2.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(b): L for image 3"><img src="../_assets/sensing/L_2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+<a href="../_assets/sensing/L_2.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;14.4&nbsp;(b): L for image 3"><img src="../_assets/sensing/L_2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) <span class="math inline">\(L\)</span> for image 3
@@ -1032,7 +1038,7 @@ X = L + S.
 <div id="fig-sensing_rpca-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_rpca-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/sensing/S_2.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(c): S for image 3"><img src="../_assets/sensing/S_2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+<a href="../_assets/sensing/S_2.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;14.4&nbsp;(c): S for image 3"><img src="../_assets/sensing/S_2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) <span class="math inline">\(S\)</span> for image 3
@@ -1046,7 +1052,7 @@ X = L + S.
 <div id="fig-sensing_rpca-4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_rpca-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/sensing/X_3.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(d): X for image 4"><img src="../_assets/sensing/X_3.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+<a href="../_assets/sensing/X_3.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;14.4&nbsp;(d): X for image 4"><img src="../_assets/sensing/X_3.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (d) <span class="math inline">\(X\)</span> for image 4
@@ -1058,7 +1064,7 @@ X = L + S.
 <div id="fig-sensing_rpca-5" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_rpca-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/sensing/L_3.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(e): L for image 4"><img src="../_assets/sensing/L_3.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+<a href="../_assets/sensing/L_3.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;14.4&nbsp;(e): L for image 4"><img src="../_assets/sensing/L_3.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (e) <span class="math inline">\(L\)</span> for image 4
@@ -1070,7 +1076,7 @@ X = L + S.
 <div id="fig-sensing_rpca-6" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_rpca-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/sensing/S_3.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(f): S for image 4"><img src="../_assets/sensing/S_3.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+<a href="../_assets/sensing/S_3.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;14.4&nbsp;(f): S for image 4"><img src="../_assets/sensing/S_3.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (f) <span class="math inline">\(S\)</span> for image 4
@@ -1084,7 +1090,7 @@ X = L + S.
 <div id="fig-sensing_rpca-7" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_rpca-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/sensing/X_-1.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(g): X for image 3 with comic disguise"><img src="../_assets/sensing/X_-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+<a href="../_assets/sensing/X_-1.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;14.4&nbsp;(g): X for image 3 with comic disguise"><img src="../_assets/sensing/X_-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (g) <span class="math inline">\(X\)</span> for image 3 with comic disguise
@@ -1096,7 +1102,7 @@ X = L + S.
 <div id="fig-sensing_rpca-8" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_rpca-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/sensing/L_-1.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(h): L for image 3 with comic disguise"><img src="../_assets/sensing/L_-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+<a href="../_assets/sensing/L_-1.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;14.4&nbsp;(h): L for image 3 with comic disguise"><img src="../_assets/sensing/L_-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (h) <span class="math inline">\(L\)</span> for image 3 with comic disguise
@@ -1108,7 +1114,7 @@ X = L + S.
 <div id="fig-sensing_rpca-9" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_rpca-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/sensing/S_-1.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(i): S for image 3 with comic disguise"><img src="../_assets/sensing/S_-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+<a href="../_assets/sensing/S_-1.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;14.4&nbsp;(i): S for image 3 with comic disguise"><img src="../_assets/sensing/S_-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (i) <span class="math inline">\(S\)</span> for image 3 with comic disguise
@@ -1119,19 +1125,19 @@ X = L + S.
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sensing_rpca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.4: RPCA decomposition for the Yale B dataset.
+Figure&nbsp;14.4: RPCA decomposition for the Yale B dataset.
 </figcaption>
 </figure>
 </div>
-<p>In <a href="#fig-sensing_rpca" class="quarto-xref">Figure&nbsp;<span>13.4</span></a> we can see that RPCA effectively filters out occluded regions and shadows form <span class="math inline">\(X\)</span> in <span class="math inline">\(L\)</span>. The missing part is filled in with the most consistent low-rank feature from the provided dataset. In our case we include all faces from the first person plus the third image with a fake moustache.</p>
+<p>In <a href="#fig-sensing_rpca" class="quarto-xref">Figure&nbsp;<span>14.4</span></a> we can see that RPCA effectively filters out occluded regions and shadows form <span class="math inline">\(X\)</span> in <span class="math inline">\(L\)</span>. The missing part is filled in with the most consistent low-rank feature from the provided dataset. In our case we include all faces from the first person plus the third image with a fake moustache.</p>
 <p>We need to stress, that we can not use this setup to reconstruct a different face obscured by a moustache.</p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="sparse-sensor-placement" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="sparse-sensor-placement"><span class="header-section-number">13.4</span> Sparse Sensor Placement</h2>
+<section id="sparse-sensor-placement" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="sparse-sensor-placement"><span class="header-section-number">14.4</span> Sparse Sensor Placement</h2>
 <p>So far we have looked how to reconstruct a signal with random measurements in a generic basis. But how about placing sensors at the correct points to reconstruct the signal with high probability. This can dramatically reduce the amount of data to measure.</p>
 <p>We can set <em>tailored sensors</em> for a particular library (our basis) instead of <em>random sensors</em> in a generic library.</p>
 <p>Amongst other things, this can be used to reconstruct faces, or classify signals, see <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, chap. 3.8</a>)</span> and references within.</p>
@@ -1143,7 +1149,7 @@ Figure&nbsp;13.4: RPCA decomposition for the Yale B dataset.
 </div>
 <div class="callout-body-container">
 <div id="exm-sensing-sparse-sensor-placement" class="theorem example">
-<p><span class="theorem-title"><strong>Example 13.4 (Sea Surface Temperature (SST) sensors)</strong></span> For a given dataset of sea surface temperature as training data we would like to place (sparse) sensors optimal that allow us to reconstruct the temperature at any other location. This is achieved with the <code>SSPOR</code> algorithm from <span class="citation" data-cites="8361090">Manohar et al. (<a href="../references.html#ref-8361090" role="doc-biblioref">2018</a>)</span>.</p>
+<p><span class="theorem-title"><strong>Example 14.4 (Sea Surface Temperature (SST) sensors)</strong></span> For a given dataset of sea surface temperature as training data we would like to place (sparse) sensors optimal that allow us to reconstruct the temperature at any other location. This is achieved with the <code>SSPOR</code> algorithm from <span class="citation" data-cites="8361090">Manohar et al. (<a href="../references.html#ref-8361090" role="doc-biblioref">2018</a>)</span>.</p>
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ftplib <span class="im">import</span> FTP</span>
@@ -1217,7 +1223,7 @@ Figure&nbsp;13.4: RPCA decomposition for the Yale B dataset.
 <div id="fig-sensing_sst-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_sst-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="compsensing_files/figure-html/fig-sensing_sst-output-1.svg" class="lightbox" data-gallery="fig-sensing_sst" title="Figure&nbsp;13.5&nbsp;(a): Sea surface temperature."><img src="compsensing_files/figure-html/fig-sensing_sst-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_sst"></a>
+<a href="compsensing_files/figure-html/fig-sensing_sst-output-1.svg" class="lightbox" data-gallery="fig-sensing_sst" title="Figure&nbsp;14.5&nbsp;(a): Sea surface temperature."><img src="compsensing_files/figure-html/fig-sensing_sst-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_sst"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_sst-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Sea surface temperature.
@@ -1231,7 +1237,7 @@ Figure&nbsp;13.4: RPCA decomposition for the Yale B dataset.
 <div id="fig-sensing_sst-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sensing_sst-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="compsensing_files/figure-html/fig-sensing_sst-output-2.svg" class="lightbox" data-gallery="fig-sensing_sst" title="Figure&nbsp;13.5&nbsp;(b): Optimal learned sensor placements to recover sea surface temperature"><img src="compsensing_files/figure-html/fig-sensing_sst-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_sst"></a>
+<a href="compsensing_files/figure-html/fig-sensing_sst-output-2.svg" class="lightbox" data-gallery="fig-sensing_sst" title="Figure&nbsp;14.5&nbsp;(b): Optimal learned sensor placements to recover sea surface temperature"><img src="compsensing_files/figure-html/fig-sensing_sst-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_sst"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_sst-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Optimal learned sensor placements to recover sea surface temperature
@@ -1242,7 +1248,7 @@ Figure&nbsp;13.4: RPCA decomposition for the Yale B dataset.
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sensing_sst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.5: Finding optimal sensor placements to recover the sea surface temperature.
+Figure&nbsp;14.5: Finding optimal sensor placements to recover the sea surface temperature.
 </figcaption>
 </figure>
 </div>
@@ -1845,7 +1851,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../sensing/sparsity.html" class="pagination-link" aria-label="Sparsity and Compression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1868,7 +1874,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

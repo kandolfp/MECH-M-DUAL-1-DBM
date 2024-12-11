@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>14&nbsp; Bayesian Statistics – Basics of Data Science</title>
+<title>15&nbsp; Bayesian Statistics – Basics of Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -171,7 +171,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../statistics/bayesian.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../statistics/bayesian.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -315,14 +315,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../signal/laplace.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Laplace Transform</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../signal/wavelet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../signal/twodim.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span></a>
   </div>
 </li>
       </ul>
@@ -339,13 +345,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sensing/sparsity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sensing/compsensing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></a>
   </div>
 </li>
       </ul>
@@ -362,13 +368,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statistics/bayesian.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statistics/kalman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span></a>
   </div>
 </li>
       </ul>
@@ -395,27 +401,27 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#random-variable" id="toc-random-variable" class="nav-link active" data-scroll-target="#random-variable"><span class="header-section-number">14.1</span> Random variable</a>
+  <li><a href="#random-variable" id="toc-random-variable" class="nav-link active" data-scroll-target="#random-variable"><span class="header-section-number">15.1</span> Random variable</a>
   <ul class="collapse">
-  <li><a href="#discrete-random-variables" id="toc-discrete-random-variables" class="nav-link" data-scroll-target="#discrete-random-variables"><span class="header-section-number">14.1.1</span> Discrete random variables</a></li>
-  <li><a href="#continuous-random-variable" id="toc-continuous-random-variable" class="nav-link" data-scroll-target="#continuous-random-variable"><span class="header-section-number">14.1.2</span> Continuous random variable</a></li>
+  <li><a href="#discrete-random-variables" id="toc-discrete-random-variables" class="nav-link" data-scroll-target="#discrete-random-variables"><span class="header-section-number">15.1.1</span> Discrete random variables</a></li>
+  <li><a href="#continuous-random-variable" id="toc-continuous-random-variable" class="nav-link" data-scroll-target="#continuous-random-variable"><span class="header-section-number">15.1.2</span> Continuous random variable</a></li>
   </ul></li>
-  <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions"><span class="header-section-number">14.2</span> Probability distributions</a></li>
-  <li><a href="#bayes-theorem-in-action" id="toc-bayes-theorem-in-action" class="nav-link" data-scroll-target="#bayes-theorem-in-action"><span class="header-section-number">14.3</span> Bayes’ theorem in action</a>
+  <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions"><span class="header-section-number">15.2</span> Probability distributions</a></li>
+  <li><a href="#bayes-theorem-in-action" id="toc-bayes-theorem-in-action" class="nav-link" data-scroll-target="#bayes-theorem-in-action"><span class="header-section-number">15.3</span> Bayes’ theorem in action</a>
   <ul class="collapse">
-  <li><a href="#election-prediction-as-instructive-example" id="toc-election-prediction-as-instructive-example" class="nav-link" data-scroll-target="#election-prediction-as-instructive-example"><span class="header-section-number">14.3.1</span> Election prediction as instructive example</a></li>
-  <li><a href="#material-properties" id="toc-material-properties" class="nav-link" data-scroll-target="#material-properties"><span class="header-section-number">14.3.2</span> Material properties</a></li>
+  <li><a href="#election-prediction-as-instructive-example" id="toc-election-prediction-as-instructive-example" class="nav-link" data-scroll-target="#election-prediction-as-instructive-example"><span class="header-section-number">15.3.1</span> Election prediction as instructive example</a></li>
+  <li><a href="#material-properties" id="toc-material-properties" class="nav-link" data-scroll-target="#material-properties"><span class="header-section-number">15.3.2</span> Material properties</a></li>
   </ul></li>
-  <li><a href="#conjugate-priors" id="toc-conjugate-priors" class="nav-link" data-scroll-target="#conjugate-priors"><span class="header-section-number">14.4</span> Conjugate priors</a></li>
+  <li><a href="#conjugate-priors" id="toc-conjugate-priors" class="nav-link" data-scroll-target="#conjugate-priors"><span class="header-section-number">15.4</span> Conjugate priors</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/statistics/bayesian.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../statistics/bayesian.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../statistics/bayesian.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-statistic-bayesian" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></h1>
+<h1 class="title"><span id="sec-statistic-bayesian" class="quarto-section-identifier"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></h1>
 </div>
 
 
@@ -437,10 +443,10 @@ window.Quarto = {
 <div id="fig-statistics-venn" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-statistics-venn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/statistics/vann.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;14.1: Venn diagram illustrating the principal of joint probabilities."><img src="../_assets/statistics/vann.svg" class="img-fluid figure-img"></a>
+<a href="../_assets/statistics/vann.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;15.1: Venn diagram illustrating the principal of joint probabilities."><img src="../_assets/statistics/vann.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-venn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.1: Venn diagram illustrating the principal of joint probabilities.
+Figure&nbsp;15.1: Venn diagram illustrating the principal of joint probabilities.
 </figcaption>
 </figure>
 </div>
@@ -453,7 +459,7 @@ Figure&nbsp;14.1: Venn diagram illustrating the principal of joint probabilities
 </div>
 <div class="callout-body-container">
 <div id="def-statistics-independent" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 14.1 (Independent events - unconditional probability)</strong></span> We call two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> independent if the fact that we know <span class="math inline">\(A\)</span> happened does not give us any insight the probability that <span class="math inline">\(B\)</span> happens or vice versa.</p>
+<p><span class="theorem-title"><strong>Definition 15.1 (Independent events - unconditional probability)</strong></span> We call two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> independent if the fact that we know <span class="math inline">\(A\)</span> happened does not give us any insight the probability that <span class="math inline">\(B\)</span> happens or vice versa.</p>
 <p>In this case the probability of both events happening is <span class="math display">\[
 P(A, B) = P(A) P(B).
 \]</span></p>
@@ -475,14 +481,14 @@ P(A, B) = P(A) P(B) = \frac12 0 = 0.
 </div>
 <div class="callout-body-container">
 <div id="def-statistics-dependent" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 14.2 (Dependent events - conditional probability)</strong></span> If two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are not independent and the probability of event <span class="math inline">\(B\)</span> is not zero, i.e.&nbsp;<span class="math inline">\(P(B)\neq 0\)</span> we define the conditional probability of <span class="math inline">\(A\)</span> under the condition <span class="math inline">\(B\)</span> as <span class="math inline">\(P(A | B)\)</span> and we get the relation <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 15.2 (Dependent events - conditional probability)</strong></span> If two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are not independent and the probability of event <span class="math inline">\(B\)</span> is not zero, i.e.&nbsp;<span class="math inline">\(P(B)\neq 0\)</span> we define the conditional probability of <span class="math inline">\(A\)</span> under the condition <span class="math inline">\(B\)</span> as <span class="math inline">\(P(A | B)\)</span> and we get the relation <span class="math display">\[
 P(A | B) = \frac{P(A, B)}{P(B)}.
 \]</span></p>
 </div>
 </div>
 </div>
 </div>
-<p>Therefore, if we return to our Venn diagram in <a href="#fig-statistics-venn" class="quarto-xref">Figure&nbsp;<span>14.1</span></a> we can see this relation played out. As <span class="math inline">\(P(A|B)\)</span> can be understood as the fraction of probability <span class="math inline">\(B\)</span> that intersects with <span class="math inline">\(A\)</span>.</p>
+<p>Therefore, if we return to our Venn diagram in <a href="#fig-statistics-venn" class="quarto-xref">Figure&nbsp;<span>15.1</span></a> we can see this relation played out. As <span class="math inline">\(P(A|B)\)</span> can be understood as the fraction of probability <span class="math inline">\(B\)</span> that intersects with <span class="math inline">\(A\)</span>.</p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -490,7 +496,7 @@ P(A | B) = \frac{P(A, B)}{P(B)}.
 </div>
 <div class="callout-body-container">
 <div id="def-statistics-ljp" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 14.3 (Law of joint probabilities)</strong></span> For two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> the following relation <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 15.3 (Law of joint probabilities)</strong></span> For two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> the following relation <span class="math display">\[
 P(A, B) = P(B|A) P(A) = P(A|B) P(B)
 \]</span> is called the <strong>law of joint probabilities</strong>.</p>
 </div>
@@ -504,7 +510,7 @@ P(A, B) = P(B|A) P(A) = P(A|B) P(B)
 </div>
 <div class="callout-body-container">
 <div id="def-statistics-bayesianth" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 14.4 (Bayes’ theorem)</strong></span> For two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> as well as there dependent probabilities the following relation is called Bayes’ theorem <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 15.4 (Bayes’ theorem)</strong></span> For two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> as well as there dependent probabilities the following relation is called Bayes’ theorem <span class="math display">\[
 P(A|B) = \frac{P(B|A) P(A)}{P(B)}.
 \]</span></p>
 <p>The term <span class="math inline">\(P(A|B)\)</span> is usually called the <strong>posterior probability density</strong> (posterior for short), <span class="math inline">\(P(A)\)</span> the <strong>prior</strong>, <span class="math inline">\(P(B|A)\)</span> the <strong>likelihood</strong>, and finally the term <span class="math inline">\(P(B)\)</span> the <strong>denominator</strong>.</p>
@@ -541,7 +547,7 @@ P(A|B) = \frac{P(B|A) P(A)}{P(B|A)P(A) + P(B|\neg A)P(\neg A)}
 </div>
 <div class="callout-body-container">
 <div id="exm-statistics-cancerscreeing" class="theorem example">
-<p><span class="theorem-title"><strong>Example 14.1 (Cancer Screening)</strong></span> Let us assume we look at a medical procedure that tests for something like prostate or breast cancer.</p>
+<p><span class="theorem-title"><strong>Example 15.1 (Cancer Screening)</strong></span> Let us assume we look at a medical procedure that tests for something like prostate or breast cancer.</p>
 <p>This test for <span class="math inline">\(cancer\)</span> is quite reliable with a true positive rate of <span class="math inline">\(80\%\)</span> and a true negative rate with <span class="math inline">\(90\%\)</span>. This translates into the probabilities <span class="math display">\[
 \begin{align}
 P(+ | cancer) = 0.8,\\
@@ -552,7 +558,7 @@ P(cancer) = 0.01.
 \]</span></p>
 <p>From Beyes’ theorem we can compute the probability (or likelihood) to have cancer when receiving a positive test result as <span class="math display">\[
 P(cancer | +) = \frac{P(+ | cancer) P(cancer)}{P(+)}
-\]</span> The part we do not know in this equation is <span class="math inline">\(P(+)\)</span> but we can compute this with <a href="#def-statistics-ljp" class="quarto-xref">Definition&nbsp;<span>14.3</span></a> as <span class="math display">\[
+\]</span> The part we do not know in this equation is <span class="math inline">\(P(+)\)</span> but we can compute this with <a href="#def-statistics-ljp" class="quarto-xref">Definition&nbsp;<span>15.3</span></a> as <span class="math display">\[
 \begin{align}
 P(+) &amp;= P(+, cancer) + P(+, \neg cancer) \\
      &amp;= P(+| cancer)P(cancer) + P(+| \neg cancer) P(\neg cancer)\\
@@ -580,18 +586,18 @@ P(cancer | +) = \frac{P(+ | cancer) P(cancer)}{P(+)} = \frac{0.8 \cdot 0.01}{0.1
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol class="example" type="1">
-<li><p>A person is known to lie half the time. This person throws a die and reports it is a 4 (four).<br>
+<li><p>A person is known to lie one third the time. This person throws a die and reports it is a 4 (four).<br>
 <br>
 What is the probability that it is actually a four?</p></li>
-<li><p>There are 3 urns containing 3 white and 2 black, 2 white and 4 black, as well as 4 white and 1 black ball respectively. Each urn can be chosen with equal probability.<br>
+<li><p>There are 3 urns containing 3 white and 2 black, 2 white and 3 black, as well as 4 white and 1 black ball respectively. Each urn can be chosen with equal probability.<br>
 <br>
 What is the likelihood that a white ball is drawn?</p></li>
 </ol>
 </div>
 </div>
 </div>
-<section id="random-variable" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="random-variable"><span class="header-section-number">14.1</span> Random variable</h2>
+<section id="random-variable" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="random-variable"><span class="header-section-number">15.1</span> Random variable</h2>
 <p>A random variable <span class="math inline">\(X\)</span> (often also called random quantity or stochastic variable) is a variable that is dependent on <em>random events</em> and is a function defined on a probability space <span class="math inline">\((\Omega, \mathcal{F}, P)\)</span>. <span class="math inline">\(\Omega\)</span> is called the sample space of all possible outcomes, <span class="math inline">\(\mathcal{F}\)</span> the event space (a set of outcomes in the sample space), and <span class="math inline">\(P\)</span> is the probability function which assigns each event in the event space a probability as a number between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>.</p>
 <p>A very simple random variable is the one describing a coin toss. It is one for heads and zero for tails. To increase the complexity we can search for a random variable that tells us how often tails was the result for <span class="math inline">\(n\)</span> coin tosses.</p>
 <p>To get a better idea what <span class="math inline">\((\Omega, \mathcal{F}, P)\)</span> and <span class="math inline">\(X\)</span> is we should ask a the following question: <em>How likely is the value of <span class="math inline">\(X=2\)</span>?</em></p>
@@ -599,8 +605,8 @@ What is the likelihood that a white ball is drawn?</p></li>
 <p>If we record all this probabilities of outcomes of <span class="math inline">\(X\)</span> results in the <strong>probability distribution</strong> of <span class="math inline">\(X\)</span>. If this probability distribution is real valued we get the <strong>cumulative distribution function</strong> (CDF) <span class="math display">\[
 F_X(x) = P(X\leq x).
 \]</span></p>
-<section id="discrete-random-variables" class="level3" data-number="14.1.1">
-<h3 data-number="14.1.1" class="anchored" data-anchor-id="discrete-random-variables"><span class="header-section-number">14.1.1</span> Discrete random variables</h3>
+<section id="discrete-random-variables" class="level3" data-number="15.1.1">
+<h3 data-number="15.1.1" class="anchored" data-anchor-id="discrete-random-variables"><span class="header-section-number">15.1.1</span> Discrete random variables</h3>
 <p>We have already seen a discrete random variable as <em>the number of heads for <span class="math inline">\(n\)</span> coin tosses</em>, other possibilities are <em>the number of children for a person</em>.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
@@ -609,7 +615,7 @@ F_X(x) = P(X\leq x).
 </div>
 <div class="callout-body-container">
 <div id="exm-statistics-cointoss" class="theorem example">
-<p><span class="theorem-title"><strong>Example 14.2 (Coin toss)</strong></span> For the coin toss we have <span class="math inline">\(\Omega=\{heads, tails\}\)</span> and <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 15.2 (Coin toss)</strong></span> For the coin toss we have <span class="math inline">\(\Omega=\{heads, tails\}\)</span> and <span class="math display">\[
 X(\omega) =
 \begin{cases}
 1, \quad \text{if}\, \omega = heads,\\
@@ -646,10 +652,10 @@ F_X(x) =
 <div id="fig-statistics-cointossln" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-statistics-cointossln-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="bayesian_files/figure-html/fig-statistics-cointossln-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;14.2: Rule of large numbers for coin toss, coin toss simulated by a random numbers smaller or grater than 0.5."><img src="bayesian_files/figure-html/fig-statistics-cointossln-output-1.svg" class="img-fluid figure-img"></a>
+<a href="bayesian_files/figure-html/fig-statistics-cointossln-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;15.2: Rule of large numbers for coin toss, coin toss simulated by a random numbers smaller or grater than 0.5."><img src="bayesian_files/figure-html/fig-statistics-cointossln-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-cointossln-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.2: Rule of large numbers for coin toss, coin toss simulated by a random numbers smaller or grater than 0.5.
+Figure&nbsp;15.2: Rule of large numbers for coin toss, coin toss simulated by a random numbers smaller or grater than 0.5.
 </figcaption>
 </figure>
 </div>
@@ -660,14 +666,33 @@ Figure&nbsp;14.2: Rule of large numbers for coin toss, coin toss simulated by a 
 </div>
 </div>
 </section>
-<section id="continuous-random-variable" class="level3" data-number="14.1.2">
-<h3 data-number="14.1.2" class="anchored" data-anchor-id="continuous-random-variable"><span class="header-section-number">14.1.2</span> Continuous random variable</h3>
+<section id="continuous-random-variable" class="level3" data-number="15.1.2">
+<h3 data-number="15.1.2" class="anchored" data-anchor-id="continuous-random-variable"><span class="header-section-number">15.1.2</span> Continuous random variable</h3>
 <p>If the cumulative distribution function is continuous everywhere we get have a continuous random variable. For such variables it makes more sense to not look for an exact equality with a number but rather, what is the probability that <span class="math inline">\(X\)</span> lies between <span class="math inline">\([a, b]\)</span>.</p>
 <p>Example could be the height of a person (if we can measure continuously). In this example it the probability that a person is exactly <span class="math inline">\(185m\)</span> is zero but the question if somebodies hight is in <span class="math inline">\([180, 190)\)</span> makes sense.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We introduced the Laplace transform in <a href="../signal/laplace.html" class="quarto-xref"><span>Chapter 10</span></a>. It finds an application in probability theory where the Laplace transform of a random variable <span class="math inline">\(X\)</span> is defined as the expected value of <span class="math inline">\(X\)</span> with probability density function <span class="math inline">\(f\)</span>, i.e.</p>
+<p><span class="math display">\[
+\mathcal{L}\{f\}(s) = \mathrm{E}\left[\mathrm{e}^{- s X}\right].
+\]</span></p>
+<p>Furthermore, we can recover the copulative distribution function of a continuous random variable <span class="math inline">\(X\)</span> as <span class="math display">\[
+F_X(x) = \mathcal{L}^{-1}\left\{ \frac{1}{s} \mathrm{E}\left[\mathrm{e}^{- s X}\right]\right\}(x) = \mathcal{L}^{-1}\left\{ \frac{1}{s} \mathcal{L}\{f\}(s)\right\}(x).
+\]</span></p>
+</div>
+</div>
 </section>
 </section>
-<section id="probability-distributions" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="probability-distributions"><span class="header-section-number">14.2</span> Probability distributions</h2>
+<section id="probability-distributions" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="probability-distributions"><span class="header-section-number">15.2</span> Probability distributions</h2>
 <p>It is instructive to look at some of the most common probability distributions so that we know what we can describe by these them.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
@@ -676,7 +701,7 @@ Figure&nbsp;14.2: Rule of large numbers for coin toss, coin toss simulated by a 
 </div>
 <div class="callout-body-container">
 <div id="exm-statistics-binomial_dist" class="theorem example">
-<p><span class="theorem-title"><strong>Example 14.3 (Binomial distribution)</strong></span> The binomial distribution is a discrete probability function with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>. It describes the number of successes in a sequence of <span class="math inline">\(n\)</span> independent experiments, where <span class="math inline">\(p\)</span> describes the probability of the experiment being a success.</p>
+<p><span class="theorem-title"><strong>Example 15.3 (Binomial distribution)</strong></span> The binomial distribution is a discrete probability function with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>. It describes the number of successes in a sequence of <span class="math inline">\(n\)</span> independent experiments, where <span class="math inline">\(p\)</span> describes the probability of the experiment being a success.</p>
 <p>The probability density function is <span class="math display">\[
 f(x) = \left(\begin{array}{c} n\\ x\end{array}\right) p^k (1-p)^{n-k},
 \]</span> with <span class="math display">\[
@@ -721,7 +746,7 @@ F(x) = \sum_{i=0}^{\lfloor x \rfloor}\left(\begin{array}{c} n\\ i\end{array}\rig
 <div id="fig-statistics-binomial-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-statistics-binomial-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="bayesian_files/figure-html/fig-statistics-binomial-output-1.svg" class="lightbox" data-gallery="fig-statistics-binomial" title="Figure&nbsp;14.3&nbsp;(a): Probability density function."><img src="bayesian_files/figure-html/fig-statistics-binomial-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-binomial"></a>
+<a href="bayesian_files/figure-html/fig-statistics-binomial-output-1.svg" class="lightbox" data-gallery="fig-statistics-binomial" title="Figure&nbsp;15.3&nbsp;(a): Probability density function."><img src="bayesian_files/figure-html/fig-statistics-binomial-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-binomial"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-statistics-binomial-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Probability density function.
@@ -735,7 +760,7 @@ F(x) = \sum_{i=0}^{\lfloor x \rfloor}\left(\begin{array}{c} n\\ i\end{array}\rig
 <div id="fig-statistics-binomial-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-statistics-binomial-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="bayesian_files/figure-html/fig-statistics-binomial-output-2.svg" class="lightbox" data-gallery="fig-statistics-binomial" title="Figure&nbsp;14.3&nbsp;(b): Cumulative distribution function."><img src="bayesian_files/figure-html/fig-statistics-binomial-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-binomial"></a>
+<a href="bayesian_files/figure-html/fig-statistics-binomial-output-2.svg" class="lightbox" data-gallery="fig-statistics-binomial" title="Figure&nbsp;15.3&nbsp;(b): Cumulative distribution function."><img src="bayesian_files/figure-html/fig-statistics-binomial-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-binomial"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-statistics-binomial-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Cumulative distribution function.
@@ -746,7 +771,7 @@ F(x) = \sum_{i=0}^{\lfloor x \rfloor}\left(\begin{array}{c} n\\ i\end{array}\rig
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-binomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.3: Binomial distribution - basic functions.
+Figure&nbsp;15.3: Binomial distribution - basic functions.
 </figcaption>
 </figure>
 </div>
@@ -761,8 +786,8 @@ Figure&nbsp;14.3: Binomial distribution - basic functions.
 </div>
 <div class="callout-body-container">
 <div id="exm-statistics-bernoulli_dist" class="theorem example">
-<p><span class="theorem-title"><strong>Example 14.4 (Bernoulli distribution)</strong></span> The Bernoulli distribution is a discrete probability function which takes the value <span class="math inline">\(1\)</span> with probability <span class="math inline">\(p\)</span> and the value <span class="math inline">\(0\)</span> with probability <span class="math inline">\(q=1-p\)</span>. It is how we can model a coin toss or anything that is expressed in a <em>yes-no question</em>.</p>
-<p>It is the special case of a Binomial distribution <a href="#exm-statistics-binomial_dist" class="quarto-xref">Example&nbsp;<span>14.3</span></a> with <span class="math inline">\(n=1\)</span>.</p>
+<p><span class="theorem-title"><strong>Example 15.4 (Bernoulli distribution)</strong></span> The Bernoulli distribution is a discrete probability function which takes the value <span class="math inline">\(1\)</span> with probability <span class="math inline">\(p\)</span> and the value <span class="math inline">\(0\)</span> with probability <span class="math inline">\(q=1-p\)</span>. It is how we can model a coin toss or anything that is expressed in a <em>yes-no question</em>.</p>
+<p>It is the special case of a Binomial distribution <a href="#exm-statistics-binomial_dist" class="quarto-xref">Example&nbsp;<span>15.3</span></a> with <span class="math inline">\(n=1\)</span>.</p>
 <p>The probability density function becomes <span class="math display">\[
 f(x) = p^x (1-p)^{1-x} \quad\text{for}\quad x\in \{0,1\}
 \]</span> and the corresponding CDF <span class="math display">\[
@@ -783,7 +808,7 @@ F(x) = \begin{cases}
 </div>
 <div class="callout-body-container">
 <div id="exm-statistics-cont_dist" class="theorem example">
-<p><span class="theorem-title"><strong>Example 14.5 (Continuous uniform distribution)</strong></span> The continuous uniform distribution is also called the rectangular distribution and describes an outcome that lies between certain bounds.</p>
+<p><span class="theorem-title"><strong>Example 15.5 (Continuous uniform distribution)</strong></span> The continuous uniform distribution is also called the rectangular distribution and describes an outcome that lies between certain bounds.</p>
 <p>The probability density function is <span class="math display">\[
 f(x) =
 \begin{cases}
@@ -823,7 +848,7 @@ F(x) =
 <div id="fig-statistics-cud-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-statistics-cud-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="bayesian_files/figure-html/fig-statistics-cud-output-1.svg" class="lightbox" data-gallery="fig-statistics-cud" title="Figure&nbsp;14.4&nbsp;(a): Probability density function."><img src="bayesian_files/figure-html/fig-statistics-cud-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-cud"></a>
+<a href="bayesian_files/figure-html/fig-statistics-cud-output-1.svg" class="lightbox" data-gallery="fig-statistics-cud" title="Figure&nbsp;15.4&nbsp;(a): Probability density function."><img src="bayesian_files/figure-html/fig-statistics-cud-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-cud"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-statistics-cud-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Probability density function.
@@ -837,7 +862,7 @@ F(x) =
 <div id="fig-statistics-cud-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-statistics-cud-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="bayesian_files/figure-html/fig-statistics-cud-output-2.svg" class="lightbox" data-gallery="fig-statistics-cud" title="Figure&nbsp;14.4&nbsp;(b): Cumulative distribution function."><img src="bayesian_files/figure-html/fig-statistics-cud-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-cud"></a>
+<a href="bayesian_files/figure-html/fig-statistics-cud-output-2.svg" class="lightbox" data-gallery="fig-statistics-cud" title="Figure&nbsp;15.4&nbsp;(b): Cumulative distribution function."><img src="bayesian_files/figure-html/fig-statistics-cud-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-cud"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-statistics-cud-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Cumulative distribution function.
@@ -848,7 +873,7 @@ F(x) =
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-cud-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.4: Continuous uniform distribution - basic functions.
+Figure&nbsp;15.4: Continuous uniform distribution - basic functions.
 </figcaption>
 </figure>
 </div>
@@ -863,7 +888,7 @@ Figure&nbsp;14.4: Continuous uniform distribution - basic functions.
 </div>
 <div class="callout-body-container">
 <div id="exm-statistics-normal_dist" class="theorem example">
-<p><span class="theorem-title"><strong>Example 14.6 (Normal distribution)</strong></span> The normal distribution or Gaussian distribution is a continuous probability function for a real valued random variable.</p>
+<p><span class="theorem-title"><strong>Example 15.6 (Normal distribution)</strong></span> The normal distribution or Gaussian distribution is a continuous probability function for a real valued random variable.</p>
 <p>The probability density function is <span class="math display">\[
 f(x) = \mathcal{N}[\mu, \sigma^2](x) = \frac{1}{\sqrt{2 \pi \sigma^2}}\mathrm{e}^{-\frac{(x - \mu)^2}{2\sigma^2}},
 \]</span> where <span class="math inline">\(\mu\)</span> is called the mean and the parameter <span class="math inline">\(\delta^2\)</span> is the called the variance. The standard deviation of the distribution is <span class="math inline">\(\sigma\)</span>. For <span class="math inline">\(\mu = 0\)</span> and <span class="math inline">\(\sigma^2=1\)</span> it is called the <strong>standard normal distribution</strong>.</p>
@@ -909,7 +934,7 @@ F(x) = \Phi\left(\frac{x-\mu}{\sigma}\right).
 <div id="fig-statistics-nd-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-statistics-nd-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="bayesian_files/figure-html/fig-statistics-nd-output-1.svg" class="lightbox" data-gallery="fig-statistics-nd" title="Figure&nbsp;14.5&nbsp;(a): Probability density function."><img src="bayesian_files/figure-html/fig-statistics-nd-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-nd"></a>
+<a href="bayesian_files/figure-html/fig-statistics-nd-output-1.svg" class="lightbox" data-gallery="fig-statistics-nd" title="Figure&nbsp;15.5&nbsp;(a): Probability density function."><img src="bayesian_files/figure-html/fig-statistics-nd-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-nd"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-statistics-nd-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Probability density function.
@@ -923,7 +948,7 @@ F(x) = \Phi\left(\frac{x-\mu}{\sigma}\right).
 <div id="fig-statistics-nd-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-statistics-nd-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="bayesian_files/figure-html/fig-statistics-nd-output-2.svg" class="lightbox" data-gallery="fig-statistics-nd" title="Figure&nbsp;14.5&nbsp;(b): Cumulative distribution function."><img src="bayesian_files/figure-html/fig-statistics-nd-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-nd"></a>
+<a href="bayesian_files/figure-html/fig-statistics-nd-output-2.svg" class="lightbox" data-gallery="fig-statistics-nd" title="Figure&nbsp;15.5&nbsp;(b): Cumulative distribution function."><img src="bayesian_files/figure-html/fig-statistics-nd-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-nd"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-statistics-nd-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Cumulative distribution function.
@@ -934,7 +959,7 @@ F(x) = \Phi\left(\frac{x-\mu}{\sigma}\right).
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-nd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.5: Normal distribution - basic functions.
+Figure&nbsp;15.5: Normal distribution - basic functions.
 </figcaption>
 </figure>
 </div>
@@ -949,7 +974,7 @@ Figure&nbsp;14.5: Normal distribution - basic functions.
 </div>
 <div class="callout-body-container">
 <div id="exm-statistics-normal_gammainv" class="theorem example">
-<p><span class="theorem-title"><strong>Example 14.7 (Inverse <span class="math inline">\(\Gamma\)</span> distribution)</strong></span> The main use of the inverse <span class="math inline">\(\Gamma\)</span> distribution is in Bayesian statistics.</p>
+<p><span class="theorem-title"><strong>Example 15.7 (Inverse <span class="math inline">\(\Gamma\)</span> distribution)</strong></span> The main use of the inverse <span class="math inline">\(\Gamma\)</span> distribution is in Bayesian statistics.</p>
 <p>The probability density function is given by <span class="math display">\[
 f(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}\frac{1}{x^{\alpha+1}}\mathrm{e}^{-\frac{\beta}{x}},
 \]</span> for the shape parameter <span class="math inline">\(\alpha\)</span>, the scale parameter <span class="math inline">\(\beta\)</span> and the name giving <span class="math inline">\(\Gamma\)</span> function.</p>
@@ -990,7 +1015,7 @@ F(x) = \frac{\Gamma\left(\alpha, \frac{\beta}{x}\right)}{\Gamma(\alpha)}
 <div id="fig-statistics-gammainv-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-statistics-gammainv-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="bayesian_files/figure-html/fig-statistics-gammainv-output-1.svg" class="lightbox" data-gallery="fig-statistics-gammainv" title="Figure&nbsp;14.6&nbsp;(a): Probability density function."><img src="bayesian_files/figure-html/fig-statistics-gammainv-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-gammainv"></a>
+<a href="bayesian_files/figure-html/fig-statistics-gammainv-output-1.svg" class="lightbox" data-gallery="fig-statistics-gammainv" title="Figure&nbsp;15.6&nbsp;(a): Probability density function."><img src="bayesian_files/figure-html/fig-statistics-gammainv-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-gammainv"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-statistics-gammainv-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Probability density function.
@@ -1004,7 +1029,7 @@ F(x) = \frac{\Gamma\left(\alpha, \frac{\beta}{x}\right)}{\Gamma(\alpha)}
 <div id="fig-statistics-gammainv-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-statistics-gammainv-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="bayesian_files/figure-html/fig-statistics-gammainv-output-2.svg" class="lightbox" data-gallery="fig-statistics-gammainv" title="Figure&nbsp;14.6&nbsp;(b): Cumulative distribution function."><img src="bayesian_files/figure-html/fig-statistics-gammainv-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-gammainv"></a>
+<a href="bayesian_files/figure-html/fig-statistics-gammainv-output-2.svg" class="lightbox" data-gallery="fig-statistics-gammainv" title="Figure&nbsp;15.6&nbsp;(b): Cumulative distribution function."><img src="bayesian_files/figure-html/fig-statistics-gammainv-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-statistics-gammainv"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-statistics-gammainv-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Cumulative distribution function.
@@ -1015,7 +1040,7 @@ F(x) = \frac{\Gamma\left(\alpha, \frac{\beta}{x}\right)}{\Gamma(\alpha)}
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-gammainv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.6: Inverse Gamma distribution - basic functions.
+Figure&nbsp;15.6: Inverse Gamma distribution - basic functions.
 </figcaption>
 </figure>
 </div>
@@ -1024,8 +1049,8 @@ Figure&nbsp;14.6: Inverse Gamma distribution - basic functions.
 </div>
 </div>
 </section>
-<section id="bayes-theorem-in-action" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="bayes-theorem-in-action"><span class="header-section-number">14.3</span> Bayes’ theorem in action</h2>
+<section id="bayes-theorem-in-action" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="bayes-theorem-in-action"><span class="header-section-number">15.3</span> Bayes’ theorem in action</h2>
 <p>What Bayes was after was the basic question of data science: find the parameters of a model given the outcome data together with the model. The theorem can be used as an update for the probability we have with additional information and therefore fitting our parameters.</p>
 <p>Before we get to an example let us consider the terms of the theorem once more.</p>
 <ol type="1">
@@ -1035,8 +1060,8 @@ Figure&nbsp;14.6: Inverse Gamma distribution - basic functions.
 <li><p>The posterior are our main result of the so called Bayers inference. If we have multiple samples we can use it as the prior for the next.</p></li>
 </ol>
 <p>Let us look at some more elaborate examples to show how Bayes theorem can be used.</p>
-<section id="election-prediction-as-instructive-example" class="level3" data-number="14.3.1">
-<h3 data-number="14.3.1" class="anchored" data-anchor-id="election-prediction-as-instructive-example"><span class="header-section-number">14.3.1</span> Election prediction as instructive example</h3>
+<section id="election-prediction-as-instructive-example" class="level3" data-number="15.3.1">
+<h3 data-number="15.3.1" class="anchored" data-anchor-id="election-prediction-as-instructive-example"><span class="header-section-number">15.3.1</span> Election prediction as instructive example</h3>
 <p>Here we give a rudimentary introduction to election forecasts (this example follows the notes <span class="citation" data-cites="mehrle">Mehrle (<a href="../references.html#ref-mehrle" role="doc-biblioref">2024</a>)</span>).</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1080,10 +1105,10 @@ p(x) = \mathcal{N}[\mu, \sigma^2](x) = \frac{1}{\sqrt{2 \pi \sigma^2}}\mathrm{e}
 <div id="fig-statistics-bayesian-vote1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-statistics-bayesian-vote1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="bayesian_files/figure-html/fig-statistics-bayesian-vote1-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;14.7: Probability density for our initial guess of the vote for party x."><img src="bayesian_files/figure-html/fig-statistics-bayesian-vote1-output-1.svg" class="img-fluid figure-img"></a>
+<a href="bayesian_files/figure-html/fig-statistics-bayesian-vote1-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;15.7: Probability density for our initial guess of the vote for party x."><img src="bayesian_files/figure-html/fig-statistics-bayesian-vote1-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-bayesian-vote1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.7: Probability density for our initial guess of the vote for party x.
+Figure&nbsp;15.7: Probability density for our initial guess of the vote for party x.
 </figcaption>
 </figure>
 </div>
@@ -1127,10 +1152,10 @@ p(\frac{k}{n} | x) = \left(\begin{array}{c} n\\ k\end{array}\right) x^k (1-x)^{n
 <div id="fig-statistics-bayesian-vote2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-statistics-bayesian-vote2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="bayesian_files/figure-html/fig-statistics-bayesian-vote2-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;14.8: Probability density of k=5 positives out of n=15 samples."><img src="bayesian_files/figure-html/fig-statistics-bayesian-vote2-output-1.svg" class="img-fluid figure-img"></a>
+<a href="bayesian_files/figure-html/fig-statistics-bayesian-vote2-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;15.8: Probability density of k=5 positives out of n=15 samples."><img src="bayesian_files/figure-html/fig-statistics-bayesian-vote2-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-bayesian-vote2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.8: Probability density of k=5 positives out of n=15 samples.
+Figure&nbsp;15.8: Probability density of k=5 positives out of n=15 samples.
 </figcaption>
 </figure>
 </div>
@@ -1163,16 +1188,16 @@ p(\frac{k}{n}) = \int_0^1 p(\frac{k}{n} | x) p(x)\,\mathrm{d}x
 <div id="fig-statistics-bayesian-vote3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-statistics-bayesian-vote3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="bayesian_files/figure-html/fig-statistics-bayesian-vote3-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;14.9: Parameter likelihood after a survey with k=5 positives out of n=15 samples (solid - blue) and k=15 out of n=150 samples (dotted)."><img src="bayesian_files/figure-html/fig-statistics-bayesian-vote3-output-1.svg" class="img-fluid figure-img"></a>
+<a href="bayesian_files/figure-html/fig-statistics-bayesian-vote3-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;15.9: Parameter likelihood after a survey with k=5 positives out of n=15 samples (solid - blue) and k=15 out of n=150 samples (dotted)."><img src="bayesian_files/figure-html/fig-statistics-bayesian-vote3-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-bayesian-vote3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.9: Parameter likelihood after a survey with k=5 positives out of n=15 samples (solid - blue) and k=15 out of n=150 samples (dotted).
+Figure&nbsp;15.9: Parameter likelihood after a survey with k=5 positives out of n=15 samples (solid - blue) and k=15 out of n=150 samples (dotted).
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>In <a href="#fig-statistics-bayesian-vote3" class="quarto-xref">Figure&nbsp;<span>14.9</span></a> we can see that the peak moves from <span class="math inline">\(0.2\)</span> closer to <span class="math inline">\(\tfrac13\)</span> (our pooling results) and the bigger our sample size gets the more likely our change is (we get closer).</p>
+<p>In <a href="#fig-statistics-bayesian-vote3" class="quarto-xref">Figure&nbsp;<span>15.9</span></a> we can see that the peak moves from <span class="math inline">\(0.2\)</span> closer to <span class="math inline">\(\tfrac13\)</span> (our pooling results) and the bigger our sample size gets the more likely our change is (we get closer).</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1183,12 +1208,12 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A point that is often criticised regarding the <em>Bayesian inference</em> we applied here is that it is highly dependent on the initial guess (<a href="#fig-statistics-bayesian-vote1" class="quarto-xref">Figure&nbsp;<span>14.7</span></a>).</p>
+<p>A point that is often criticised regarding the <em>Bayesian inference</em> we applied here is that it is highly dependent on the initial guess (<a href="#fig-statistics-bayesian-vote1" class="quarto-xref">Figure&nbsp;<span>15.7</span></a>).</p>
 </div>
 </div>
 </section>
-<section id="material-properties" class="level3" data-number="14.3.2">
-<h3 data-number="14.3.2" class="anchored" data-anchor-id="material-properties"><span class="header-section-number">14.3.2</span> Material properties</h3>
+<section id="material-properties" class="level3" data-number="15.3.2">
+<h3 data-number="15.3.2" class="anchored" data-anchor-id="material-properties"><span class="header-section-number">15.3.2</span> Material properties</h3>
 <p>To identify material properties such as strength we can also use Bayes’ theorem.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1238,10 +1263,10 @@ Important
 <div id="fig-statistics-bayesian-material1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-statistics-bayesian-material1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="bayesian_files/figure-html/fig-statistics-bayesian-material1-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;14.10: Initial assumption for the yield stress of the material, the coloured part represents the 90% of samples that have a yield stress larger than 235."><img src="bayesian_files/figure-html/fig-statistics-bayesian-material1-output-1.svg" class="img-fluid figure-img"></a>
+<a href="bayesian_files/figure-html/fig-statistics-bayesian-material1-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;15.10: Initial assumption for the yield stress of the material, the coloured part represents the 90% of samples that have a yield stress larger than 235."><img src="bayesian_files/figure-html/fig-statistics-bayesian-material1-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-bayesian-material1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.10: Initial assumption for the yield stress of the material, the coloured part represents the 90% of samples that have a yield stress larger than 235.
+Figure&nbsp;15.10: Initial assumption for the yield stress of the material, the coloured part represents the 90% of samples that have a yield stress larger than 235.
 </figcaption>
 </figure>
 </div>
@@ -1267,10 +1292,10 @@ p\left( \sigma | R_{aH}^{(i)}\right)  = \frac{p\left(R_{aH}^{(i)} | \sigma \righ
 <div id="fig-statistics-bayesian-material2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-statistics-bayesian-material2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="bayesian_files/figure-html/fig-statistics-bayesian-material2-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Figure&nbsp;14.11: Update after 10 and 100 iterations"><img src="bayesian_files/figure-html/fig-statistics-bayesian-material2-output-1.svg" class="img-fluid figure-img"></a>
+<a href="bayesian_files/figure-html/fig-statistics-bayesian-material2-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Figure&nbsp;15.11: Update after 10 and 100 iterations"><img src="bayesian_files/figure-html/fig-statistics-bayesian-material2-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-bayesian-material2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.11: Update after 10 and 100 iterations
+Figure&nbsp;15.11: Update after 10 and 100 iterations
 </figcaption>
 </figure>
 </div>
@@ -1279,8 +1304,8 @@ Figure&nbsp;14.11: Update after 10 and 100 iterations
 <p>The mean converges relatively fast and stays but the deviation still changes after 100 sample drawn. This is due to the fact that the two variables are not independent of each other and the assumption that of a normal distribution is not a good estimate for <span class="math inline">\(\sigma\)</span>.</p>
 </section>
 </section>
-<section id="conjugate-priors" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="conjugate-priors"><span class="header-section-number">14.4</span> Conjugate priors</h2>
+<section id="conjugate-priors" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="conjugate-priors"><span class="header-section-number">15.4</span> Conjugate priors</h2>
 <p>The above updates are relatively expensive in terms of computing and are not handy. The idea is to find the updates analytically.</p>
 <p>In general this is not <em>likely to happen</em> but for certain combinations of density functions the convert neatly into each other under Bayers’ theorem.</p>
 <p>For the normal distribution this is the case and the update becomes <span class="math display">\[
@@ -1873,7 +1898,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="../statistics/kalman.html" class="pagination-link" aria-label="Kalman Filter">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1891,7 +1916,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

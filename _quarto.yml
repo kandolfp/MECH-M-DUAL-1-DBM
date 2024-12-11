@@ -38,6 +38,7 @@ book:
     - part: signal/index.qmd
       chapters:
         - signal/fourier.qmd
+        - signal/laplace.qmd
         - signal/wavelet.qmd
         - signal/twodim.qmd
     - part: sensing/index.qmd

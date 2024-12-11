@@ -1,0 +1,481 @@
+---
+lightbox: true
+---
+# Laplace Transform {#sec-signal-laplace}
+
+The Fourier Transform is only possible for well-behaved functions that are Lebesgue integrable, i.e. $f(x) \ in L^1[(-\infty, \infty)]$. 
+This excludes functions like the exponential $\mathrm{e}^{\lambda t}$ or the Heaviside function. 
+
+In order to tackle these _badly behaved _ functions we can use the Laplace transform, which is basically a one sided Fourier-like transform. 
+
+::: {.callout appearance="simple"}
+:::: {#def-signal-laplace-transform} 
+## The Laplace Transform
+
+A function $f\,:\, [0, \infty) \to \mathbb{R}$ is called laplace transposable if
+$$
+F(s) = \mathcal{L}\{f(t)\} := \int_{0}^{\infty} f(t)\mathrm{e}^{-s t}\, \mathrm{d}t
+$$
+exists for all $s\in\mathrm{R}$.
+In this case we call $F(s) \equiv \mathcal{L}\{f(t)\}$ the **Laplace transform** of $f(t)$.
+
+The **inverse Laplace transform** is defined as 
+$$
+f(t) = \mathcal{L}^{-1}\{F(s)\} = \frac{1}{s \pi \mathrm{i}} \int_{\gamma - \mathrm{i} \infty}^{\gamma + \mathrm{i} \infty} F(x)\mathrm{e}^{s t}\, \mathrm{d}s
+$$
+for the complex valued $s=\gamma + \mathrm{i} \omega$.
+
+It is quite common to use the capitalized function name for the Laplace transform, as we did here.
+::::
+:::
+
+To give a better understanding of theses formula we follow the _derivation_ from [@Brunton2022, Section 2.5].
+
+Let us consider the function $f(t)=\mathrm{e}^{\lambda t}$.
+As mentioned before we can not directly use the Fourier transform as the function is not bounded.
+In order to trap the function for $t\to\infty$ we multiply by $\mathrm{e}^{-\gamma t}$ where $\gamma$ is damping more that $f$ grows.
+In order to handle $t\to-\infty$ we multiply by the Heaviside function
+$$
+H(t) = 
+\begin{cases}
+0, &t \leq 0,\\
+1, &t \ge 0,
+\end{cases}
+$$
+and transform it into a _one-sided_ function as in definition @def-signal-laplace-transform required.
+We end up with the function
+$$
+\underline{f}(t) = f(t) \mathrm{e}^{-\gamma t}H(t) = 
+\begin{cases}
+0, &t \leq 0,\\
+f(t)\mathrm{e}^{-\gamma t}, &t \ge 0.
+\end{cases}
+$$
+Taking the Laplace transform we get
+$$
+\begin{align}
+\hat{\underline{f}}(\omega) = \mathcal{F}\{\underline{f}(t)\} &= 
+\int_{-\infty}^\infty \underline{f}(t)\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t = 
+\int_{0}^\infty f(t)\mathrm{e}^{-\gamma t}\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t = \\
+&= \int_{0}^\infty f(t)\mathrm{e}^{-(\gamma + \omega) t}\, \mathrm{d}t =
+\int_{0}^\infty f(t)\mathrm{e}^{-s t}\, \mathrm{d}t = \\
+&= \mathcal{L}\{f(t)\} = F(s)
+\end{align}
+$$
+giving rise to the Laplace transform. 
+
+To get the inverse we start with the inverse Fourier transform of $\hat{\underline{f}}(\omega)$
+$$
+\underline{f}(t) = \mathcal{F}^{-1}\{\hat{\underline{f}}(\omega)\} = \frac{1}{2\pi} \int_{-\infty}^\infty \hat{\underline{f}}(\omega) \mathrm{e}^{\mathrm{i}\omega t}\, \mathrm{d}\omega.
+$$
+Multiply both sides with $\mathrm{e}^{\gamma t}$ we get
+$$
+\begin{align}
+f(t)H(t) = \underline{f}(t)\mathrm{e}^{\gamma t} &= \frac{1}{2\pi} \int_{-\infty}^\infty \mathrm{e}^{\gamma t} \hat{\underline{f}}(\omega) \mathrm{e}^{\mathrm{i}\omega t}\, \mathrm{d}\omega = \\
+&=
+\frac{1}{2\pi} \int_{-\infty}^\infty \hat{\underline{f}}(\omega) \mathrm{e}^{(\gamma + \mathrm{i}\omega) t}\, \mathrm{d}\omega
+\end{align}
+$$
+By a change of variables $s=\gamma + \mathrm{i}\omega$ we get $\mathrm{d}\omega = \tfrac{1}{\mathrm{i}} \mathrm{d}s$ and 
+$$
+f(t)H(t) = \frac{1}{s \pi \mathrm{i}} \int_{\gamma - \mathrm{i} \infty}^{\gamma + \mathrm{i} \infty} F(x)\mathrm{e}^{s t}\, \mathrm{d}s = \mathcal{L}^{-1}\{F(s)\}.
+$$
+
+::: {.callout-note}
+Form this derivation we see that the Laplace transform is a generalized Fourier transform for a broader spectrum of functions.
+
+Sometimes the Laplace transform is simpler than the Fourier transform.
+In particular this is the case for the Dirac delta function that has infinitely many frequencies in Fourier domain but is constant $1$ in Laplace domain.
+We will  use this to compute the impulse response of systems with _forcing_.
+:::
+
+A lot of the properties we saw for the Fourier transform carry over to the Laplace transform. 
+
+(@) **Linearity**
+$$
+\mathcal{L}\{\alpha f(t) + \beta g(t)\} = 
+\alpha \mathcal{L}\{f(t)\} + \beta \mathcal{L}\{g(t)\} = 
+\alpha F(s)+ \beta G(s).
+$$
+
+(@) **Conjugation** 
+$$
+\mathcal{L}\{\overline{f(t)}\} = \overline{\hat{f}(\overline{s})}.
+$$
+
+(@) **Scaling**, for $\alpha \geq 0$
+$$
+\mathcal{L}\{f(\alpha t)\} = \frac{1}{\alpha}F\left(\frac{s}{\alpha}\right).
+$$
+
+(@) **Drift in time**, for $a\in\mathbb{R}$
+$$
+\mathcal{L}\{f(t - a)H(t - a)\} = \mathrm{e}^{-a s}F(s)
+$$
+and 
+$$
+\mathcal{L}\{f(t)H(t - a)\} = \mathrm{e}^{-a s}\mathcal{L}\{f(t+a)\}.
+$$
+
+(@) **Drift in frequency**, for $a\in\mathbb{R}$
+
+$$
+\mathrm{e}^{a t} \mathcal{F}\{f(t)\} = F(s - a).
+$$
+
+(@) **Derivative in time**
+$$
+\mathcal{F}\{\partial_t f(t)\} = s F(s) - f(0)
+$$
+We are going to prove this by going through the lines
+$$
+\begin{align}
+\mathcal{L}\left\{\frac{d}{d\,t}f(t)\right\} &= \int_{0}^\infty f'(t)\mathrm{e}^{-s t}\, \mathrm{d}t \\
+&= \left[f(t)\mathrm{e}^{-s t}\right]_{0}^\infty - \int_{0}^\infty f(t) (- s\mathrm{e}^{-s t})\, \mathrm{d}t \\
+&= -f(0) + s \mathcal{L}\{f(t)\}
+\end{align}
+$$
+For higher derivatives we get
+$$
+\mathcal{L}\{\partial_t^n f(t)\} = s^n F(s) \sum_{k=1}^n s^{n-k} f^{(k-1)}(0).
+$$
+
+(@) **Integral in time**
+$$
+\mathcal{L}\left\{\int_0^t f(\tau)\, \mathrm{d}\tau\right\} = \frac{1}{s} F(s).
+$$
+
+(@) **Derivative in frequency**
+$$
+\mathcal{L}\{t^n f(t)\} = (-1)^n \partial_\omega^n F(s)
+$$
+
+(@) **Integral in frequency**
+$$
+\mathcal{L}\left\{\frac{1}{t} f(t)\right\} = \int_s^\infty F(u)\, \mathrm{d}u. 
+$$
+
+(@) The **convolution** of two functions is defined as 
+$$
+(f \ast g)(t) = \int_{0}^{\infty}f(\tau) g(t - \tau)\, \mathrm{d}\tau,
+$$
+and for the Fourier transform
+$$
+\mathcal{L}\{(f \ast g)(t)\} = F(s) \cdot G(s).
+$$
+
+::: {.callout-important}
+The following examples are mostly from @Meyberg1992-ws.
+:::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-laplace-basicfunc}
+
+## Laplace transform of some basic functions
+
+1. For the constant $f(t) = 1$ function  we get
+$$
+\mathcal{L}\{f(t)\} = \frac{1}{s},\quad s>0.
+$$
+
+1. For the exponential $f(t) = \mathrm{e}^{\lambda t}$ we get
+$$
+\mathcal{L}\{f(t)\} = \frac{1}{s- \lambda},\quad s>\lambda\in\mathcal{R}.
+$$
+
+1. For the cosine $f(t) = \cos{\omega t}$ we get
+$$
+\mathcal{L}\{f(t)\} = \frac{s}{s^2 + \omega^2},\quad s>0.
+$$
+
+1. For the sine $f(t) = \sin{\omega t}$ we get
+$$
+\mathcal{L}\{f(t)\} = \frac{\omega}{s^2 + \omega^2},\quad s>0.
+$$
+
+::::
+:::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-laplace-step}
+
+## Laplace transform of a step function
+
+For a rectangle with width $a\geq 0$ and height $1$ we get
+$$
+f(t) = H(t) - H(t-a) 
+$$
+we get
+$$
+\mathcal{L}\{f(t)\} = \frac{1 -  \mathrm{e}^{-a s}}{s}
+$$
+
+We can _extend_ this to a step function 
+$$
+g(t) = \sum_{n=0}^\infty H(t-na)
+$$
+and we get
+$$
+\mathcal{L}\{g(t)\} = \frac{1}{s (1- \mathrm{e}^{-a s})}
+$$
+::::
+:::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-laplace-cam-drive}
+
+## Cam drive
+
+A cam drive has an elastic and lightly damped punch $S$ with eigenfrequency $\omega = 2$.
+
+![Cam drive schematics](../_assets/signal/cam_drive.svg){#fig-laplace-cam}
+
+We excite the system with a half-wave sine of half the eigenfrequency.
+$$
+\begin{align}
+x_A(t) &= \frac{1}{2}(\sin t + |\sin t|) \\
+&= 
+\begin{cases}
+\sin(t), & 2 n \pi \leq t \le (2n+1)\pi,\\
+0 , & (2n+1)\pi \leq t \le (2n + 2)\pi,
+\end{cases}
+\quad \text{for}\quad n = 0, 1, 2, \ldots \\
+&= \sum_{n=0}^\infty H(t - n \pi) \sin(t-n\pi).
+\end{align}
+$$
+
+For the excitement of $S$ the initial value problem
+$$
+\ddot{x} + 4 x = x_A(t), \quad x(0) = \dot{x}(0) = 0,
+$$
+is given.
+
+Via the Laplace transform we can solve for $X(s)$ in
+$$
+s^2 X(s) + 4 X(s) = \sum_{n=0}^\infty \frac{1}{1+s^2} \mathrm{e}^{-n \pi s}
+$$
+and obtain 
+$$
+X(s) = \frac{1}{(1+s^2)(s^2 + 4)} \sum_{n=0}^\infty \mathrm{-n \pi s}.
+$$
+
+Via the inverse Laplace transform we can get back to $x(t)$
+$$
+x(t) = \frac{1}{6}(\sin(t) + |\sin(t)|)- \frac{\sin(2t)}{6}\sum_0^\infty H(t-n\pi)
+$$
+and without the heavy side function
+$$
+x(t) = \begin{cases}
+\frac{1}{3} \sin (t) - \frac{2n+1}{6} \sin(2t), & 2 n \pi \leq t \le (2n+1)\pi, \\
+- \frac{n+1}{3} \sin(2t), &(2n+1)\pi \leq t \le (2n + 2)\pi.
+\end{cases}
+$$
+
+
+```{python}
+#| label: fig-laplace-cam-drive2
+#| fig-cap: "Exciting function and response, we indicate the growth rate as a dotted line."
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+%config InlineBackend.figure_formats = ["svg"]
+
+heavy_side = lambda t: np.ones_like(t) * (t>=0)
+g = lambda n, t: (heavy_side(t - 2 * n * np.pi) - heavy_side(t - (2 * n + 1) * np.pi))
+h = lambda n, t: (heavy_side(t - (2 * n + 1) * np.pi) - heavy_side(t - (2 * n + 2) * np.pi))
+
+xa = lambda t: 1 / 2 * (np.sin(t) + np.abs(np.sin(t)))
+
+fun1 = lambda n, t: (1 / 3 * np.sin(t) - (2 * n + 1) / 6 * np.sin(2 * t)) * g(n, t)
+fun2 = lambda n, t:-1 * (n + 1) / 3 * np.sin(2 * t) * h(n, t)
+funn = lambda n, t: fun1(n, t) + fun2(n, t) 
+fun = lambda t: funn(0, t) + funn(1, t) + funn(2, t) + funn(3, t)
+
+t = np.linspace(0, 8 * np.pi, 1024)
+i = np.argmax(funn(0, t))
+j = np.argmax(funn(3, t))
+k = (funn(3, t[j]) - funn(0, t[i])) / (t[j] - t[i])
+line = lambda t: k * (t - t[i]) + funn(0, t[i])
+
+plt.plot(t, xa(t), "--", label=r"$x_A$")
+plt.plot(t, fun(t), label=r"$x$")
+plt.plot(t, line(t), "k:")
+plt.xlabel(r"t")
+plt.ylabel(r"x")
+plt.legend()
+plt.gca().set_aspect(8*np.pi / (3 * 3.0))
+plt.ylim([-1.5, 1.5])
+```
+::::
+:::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-laplace-electric-circuit}
+
+## Electric Circuit
+
+For the electric components $R$ (resistor), $C$ capacitor, and $L$ coil we can use the Laplace transform to show how voltage $u(t)$ and current $i(t)$ is transformed. 
+
+We need to assume that $i(0)=0$ than we get
+
+::::: {#tbl-signal-laplace}
+| component  | $u(t)$ and $i(t)$ | Laplace transform |
+| --- | --- | --- |
+| R | $u_R(t) = R i(t)$ | $U_r(s) = R I(s) |
+| C | $u_C(t) = \frac{1}{x} \int_0^t i(\tau)\, \mathrm{d}\tau$ | $U_C(s) = \frac{1}{sC}I(s)$ |
+| L | $u_L(t) = L \frac{\mathrm{d} i}{\mathrm{d} t}$ | $U_L(s) = sL I(s)$ |
+
+Laplace transform for common electrical components
+::::: 
+
+An Ohm's law applies for 
+$$
+U(s) = Z(s) I(s), \quad Z(s) \in \{R, \frac{1}{Cs}, Ls\}
+$$
+
+For a RCL electric circuit 
+
+![RCL oscillating circuit](../_assets/signal/rcl.svg){#fig-laplace-rcl}
+
+we have 
+$$
+u(t) = u_R(t) + u_c(t) + u_L(t)
+$$
+and we get for the Laplace transformed current $I(s)$
+$$
+I(s) = \frac{U(s)}{R+\frac{1}{sC}+ sL} = \frac{s C U(s)}{s^2 LC + s RC + 1} = Z(s) U(s)
+$$
+and
+$$
+i(t) = \mathcal{L}^{-1}\{z(t)\} \ast u(t).
+$$
+::::
+:::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-laplace-lti}
+
+## The Linear Time Invariant transfer function of LTI Systems
+
+In signal and and control theory the **transfer function** $H(s)$ is used the describe a system. 
+If we assume that at $t=0$ we have an initial state (zero state) we get the relation between input signal $x(t)$ and output signal $y(t)$ in the Laplace space as 
+$$
+Y(s) = H(s) Y(s)
+$$
+and consequently 
+$$
+y(t) = h(t) \ast x(t)
+$$
+where $h(t)= \mathcal{L}^{-1}\{H(s)\}$ is called the **impulse response**. 
+
+![Linear Time invariant System](../_assets/signal/lti_sys.svg){#fig-laplace-lti}
+
+The relation between $x$ and $y$ can often be described via a linear differential equation with constant coefficients.
+In these cases
+$$
+\alpha_n y^{(n)} + \alpha_{n-1} y^{(n-1)} + \cdots + \alpha_1 \dot{y} + \alpha_0 y = x(t)
+$$
+and for $y(0) = \dot{y}(0) = \cdots = y^{(n)}(0) = 0$ we get
+$$
+H(s) = \frac{1}{\alpha_n s^n + \alpha_{n-1}s^{n-1} + \cdots \alpha_1 s + \alpha_0}.
+$$
+
+We can rewrite this as 
+$$
+\alpha_n(s H(s) - \frac{1}{\alpha_n}) + \alpha_{n-1}s^{n-1} H(s) + \cdots + \alpha_1 s H(s) + \alpha_0 H(s) = 0
+$$
+and with the properties of the Laplace transform we get
+$$
+\alpha_n h^{(n)} + \alpha_{n-1} h^{(n-1)} + \cdots + \alpha_1 \dot{h} + \alpha_0 h = 0
+$$
+with $h(0) = \dot{h}(0) = \cdots = h^{(n-2)}(0) = 0$, and $h^{(n-1)}(0) \tfrac{1}{\alpha_n}$.
+
+This tells us the _answer_ to the zero input signal $x(t) = 0$ is the solution of above initial value problem with initial state as an impulse of size $\tfrac{1}{\alpha_n}$.
+
+In terms of the Dirac-delta function $\delta(t)$ the function $h(t)$ is the answer to the initial value problem
+$$
+\alpha_n h^{(n-1)} + \alpha_{n-1} h^{(n-1)} + \cdots + \alpha_1 \dot{h} + \alpha_0 h = \delta(t).
+$$
+::::
+:::
+
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-laplace-rc_lowpass}
+
+## The RC low pass filter
+
+The RC low pass filter
+
+::::: {#fig-fft-gec}
+
+![First order RC low pass](../_assets/signal/rc_low_pass.svg){#fig-laplace-rclowpass-1}
+
+![Second order RC low pass](../_assets/signal/rc_low_pass2.svg){#fig-laplace-rclowpass-2}
+
+The electric circuit for the low pass filters.
+:::::
+
+has the transfer function 
+$$
+H(s) = \frac{1}{sRC + 1}
+$$
+and the impulse response
+$$
+h(t) = \frac{1}{RC}\mathrm{e}^{-\frac{t}{RC}}.
+$$
+
+```{python}
+#| label: fig-laplace-rclowpass
+#| fig-cap: "Impulse response for the first order RC low pass filter"
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+%config InlineBackend.figure_formats = ["svg"]
+
+RC = 1 
+heavy_side = lambda t: np.ones_like(t) * (t>=0)
+fun = lambda t: 1 / RC * np.exp(-t / RC) * heavy_side(t)
+t = np.linspace(-0.5, 8.5, 1024)
+
+plt.plot(t, fun(t))
+plt.text(-0.4, 0.96, r"$\frac{1}{RC}$")
+plt.xlabel(r"t")
+plt.ylabel(r"y")
+plt.gca().set_aspect(9 / (3 * 1.0))
+```
+
+If we extend this to a second order low pass filter @fig-laplace-rclowpass-2 we get
+$$
+H(s) = \frac{1}{(sRC + 1)^2}
+$$
+and the impulse response 
+$$
+h(t) = \frac{1}{(RC)^2}t\mathrm{e}^{-\frac{t}{RC}}.
+$$
+
+```{python}
+#| label: fig-laplace-rclowpass2
+#| fig-cap: "Impulse response for the first order RC low pass filter"
+#| code-fold: true
+#| code-summary: "Show the code for the figure"
+import numpy as np
+import matplotlib.pyplot as plt
+%config InlineBackend.figure_formats = ["svg"]
+
+RC = 1 
+heavy_side = lambda t: np.ones_like(t) * (t>=0)
+fun = lambda t: 1 / RC**2 * t * np.exp(-t / RC) * heavy_side(t)
+t = np.linspace(-0.5, 8.5, 1024)
+
+plt.plot(t, fun(t))
+plt.text(-0.5, 0.95/(np.exp(1)), r"$\frac{1}{RC \mathrm{e}}$")
+plt.text(0.8, -0.05, r"$RC$")
+plt.plot([-0.1, 1, 1], [1/np.exp(1), 1/np.exp(1), 0], "k:")
+plt.xlabel(r"t")
+plt.ylabel(r"y")
+plt.gca().set_aspect(9 / (3 * 0.37))
+```
+::::
+:::

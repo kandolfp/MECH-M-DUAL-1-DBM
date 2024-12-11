@@ -1572,14 +1572,7 @@ The product of the uncertainties of these quantities has a minimal value.
 In this context time and frequency domain respectively represent the extremes.
 :::
 
-::: {.callout-note}
-There is also the Laplace transform that can be understood as a generalized Fourier transform.
-This transform is also heavily used in the transformation of PDEs to simpler ODEs or ODEs into algebraic equations. 
-
-Nevertheless, we do not cover this transform here, for the interested reader we recommend [@Brunton2022, Section 2.5] as it introduces the Laplace transform with the tools we covered here. 
-:::
-
 The Fourier transform always assumes a harmonic nature in the signal it is applied to. 
 Therefore, it is best suited for e.g. music, rotating machines or vibrations. 
 For other signals, especially with discontinuous parts (Gibbs phenomenon) there are more adequate bases functions. 
-We look at these in the next section.
+We look at these in the next section @sec-signal-wavelet but first we look at the Laplace transform @sec-signal-laplace.

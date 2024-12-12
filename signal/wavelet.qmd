@@ -192,7 +192,7 @@ There also exists a _fast_ wavelet transform that reduces the computational comp
 ## Signal analysis with the Haar wavelet
 
 To start and get an idea how the analysis works we use an instructive example. 
-We have a piecewise constant function as $v = [3, 1, 0, 4, 0, 6, 9, 9]^{\mathrm{T}}$
+We have a piecewise constant function as $v = [3, 1, 0, 4, 0, 6, 9, 9]^{\mathsf{T}}$
 $$
 f(x) = \sum_{i=1}^{8} v_i \chi_{[i-1, i)},
 $$

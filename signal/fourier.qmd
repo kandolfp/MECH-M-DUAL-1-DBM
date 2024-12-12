@@ -544,9 +544,9 @@ The main idea of the FFT is to exploit symmetries in the Fourier transform and t
 
 If we assume that $N = 2^n$, i.e. a power of $2$, in particular $N=2M$, and $F_N$ denotes the matrix of @eq-dft for dimension $N$ and we have $\hat{f} = F_N f$ and $f = \tfrac1N \overline{F_N} \hat{f}$.
 By splitting $f$ in the even and odd indices as 
-$$e = [f_0, f_2, \ldots, f_{N-2}]^{\mathrm{T}}\in \mathbb{C}^{M}$$
+$$e = [f_0, f_2, \ldots, f_{N-2}]^{\mathsf{T}}\in \mathbb{C}^{M}$$
 and 
-$$o = [f_1, f_3, \ldots, f_{N-1}]^{\mathrm{T}}\in \mathbb{C}^{M}$$
+$$o = [f_1, f_3, \ldots, f_{N-1}]^{\mathsf{T}}\in \mathbb{C}^{M}$$
 and for @eq-dft we get
 $$
 \begin{align}
@@ -555,9 +555,9 @@ $$
 \end{align}
 $$
 If we further split $\hat{f}$ in an upper and lower part 
-$$u = [\hat{f}_0, \hat{f}_2, \ldots, \hat{f}_{M-1}]^{\mathrm{T}}\in \mathbb{C}^{M}$$
+$$u = [\hat{f}_0, \hat{f}_2, \ldots, \hat{f}_{M-1}]^{\mathsf{T}}\in \mathbb{C}^{M}$$
 and 
-$$l = [\hat{f}_{M}, \hat{f}_{M+1}, \ldots, \hat{f}_{N-1}]^{\mathrm{T}}\in \mathbb{C}^{M}$$
+$$l = [\hat{f}_{M}, \hat{f}_{M+1}, \ldots, \hat{f}_{N-1}]^{\mathsf{T}}\in \mathbb{C}^{M}$$
 and with the property $\omega^{k+M} = \omega^k \omega^M = - \omega^k$ we get
 
 $$

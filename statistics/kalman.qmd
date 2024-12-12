@@ -77,13 +77,13 @@ $$
 $$ {#eq-kalman_update}
 and
 $$
-P_{k|k-1} = F_k P_{k-1|k-1} F_k^{\mathrm{T}}+ Q_k.
+P_{k|k-1} = F_k P_{k-1|k-1} F_k^{\mathsf{T}}+ Q_k.
 $$
 Here $\star_{k|k-1}$ denotes the state at time $t_k$ derived from the state at time $t_{k-1}$.
 
 To get the second equation we need to know that the variance associated with the prediction $\hat{x}_{k|k-1}$ of the unknown true value $x_k$ is given by
 $$
-P_{k|k-1} = E\left[(x_k - x_{k|k-1})(x_k - x_{k|k-1})^{\mathrm{T}}\right].
+P_{k|k-1} = E\left[(x_k - x_{k|k-1})(x_k - x_{k|k-1})^{\mathsf{T}}\right].
 $$
 If we now compute the difference of @eq-kalman_base and @eq-kalman_update we note that the state estimation errors as well as the process noise are uncorrelated and therefore their correlation is zero. 
 
@@ -97,7 +97,7 @@ P_{k|k} = P_{k|k-1} + K_k H_k P_{k|k-1}
 $$
 for 
 $$
-K_k = P_{k|k} H_k^{\mathrm{T}}(H_kP_{k|-1}H_k^{\mathrm{T}} + R_k)^{-1}.
+K_k = P_{k|k} H_k^{\mathsf{T}}(H_kP_{k|-1}H_k^{\mathsf{T}} + R_k)^{-1}.
 $$
 Here, $R_k$ is the covariance of the measurement noise.
 

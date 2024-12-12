@@ -116,10 +116,10 @@ Let us assume we look at a medical procedure that tests for something like prost
 This test for $cancer$ is quite reliable with a true positive rate of $80\%$ and a true negative rate with $90\%$. 
 This translates into the probabilities
 $$
-\begin{align}
+\begin{aligned}
 P(+ | cancer) = 0.8,\\
 P(+ | \neg cancer) = 0.1.
-\end{align}
+\end{aligned}
 $$
 furthermore we assume that only $1\%$ of all the people taking the exam actually have cancer, i.e.
 $$
@@ -132,11 +132,11 @@ P(cancer | +) = \frac{P(+ | cancer) P(cancer)}{P(+)}
 $$
 The part we do not know in this equation is $P(+)$ but we can compute this with @def-statistics-ljp as
 $$
-\begin{align}
+\begin{aligned}
 P(+) &= P(+, cancer) + P(+, \neg cancer) \\
      &= P(+| cancer)P(cancer) + P(+| \neg cancer) P(\neg cancer)\\
      &= 0.8 \cdot 0.01 + 0.1 \cdot 0.99 = 0.107.
-\end{align}
+\end{aligned}
 $$
 
 Overall, this allow us to compute

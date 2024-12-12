@@ -53,14 +53,14 @@ f(t)\mathrm{e}^{-\gamma t}, &t \ge 0.
 $$
 Taking the Laplace transform we get
 $$
-\begin{align}
+\begin{aligned}
 \hat{\underline{f}}(\omega) = \mathcal{F}\{\underline{f}(t)\} &= 
 \int_{-\infty}^\infty \underline{f}(t)\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t = 
 \int_{0}^\infty f(t)\mathrm{e}^{-\gamma t}\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t = \\
 &= \int_{0}^\infty f(t)\mathrm{e}^{-(\gamma + \omega) t}\, \mathrm{d}t =
 \int_{0}^\infty f(t)\mathrm{e}^{-s t}\, \mathrm{d}t = \\
 &= \mathcal{L}\{f(t)\} = F(s)
-\end{align}
+\end{aligned}
 $$
 giving rise to the Laplace transform. 
 
@@ -70,11 +70,11 @@ $$
 $$
 Multiply both sides with $\mathrm{e}^{\gamma t}$ we get
 $$
-\begin{align}
+\begin{aligned}
 f(t)H(t) = \underline{f}(t)\mathrm{e}^{\gamma t} &= \frac{1}{2\pi} \int_{-\infty}^\infty \mathrm{e}^{\gamma t} \hat{\underline{f}}(\omega) \mathrm{e}^{\mathrm{i}\omega t}\, \mathrm{d}\omega = \\
 &=
 \frac{1}{2\pi} \int_{-\infty}^\infty \hat{\underline{f}}(\omega) \mathrm{e}^{(\gamma + \mathrm{i}\omega) t}\, \mathrm{d}\omega
-\end{align}
+\end{aligned}
 $$
 By a change of variables $s=\gamma + \mathrm{i}\omega$ we get $\mathrm{d}\omega = \tfrac{1}{\mathrm{i}} \mathrm{d}s$ and 
 $$
@@ -129,11 +129,11 @@ $$
 $$
 We are going to prove this by going through the lines
 $$
-\begin{align}
+\begin{aligned}
 \mathcal{L}\left\{\frac{d}{d\,t}f(t)\right\} &= \int_{0}^\infty f'(t)\mathrm{e}^{-s t}\, \mathrm{d}t \\
 &= \left[f(t)\mathrm{e}^{-s t}\right]_{0}^\infty - \int_{0}^\infty f(t) (- s\mathrm{e}^{-s t})\, \mathrm{d}t \\
 &= -f(0) + s \mathcal{L}\{f(t)\}
-\end{align}
+\end{aligned}
 $$
 For higher derivatives we get
 $$
@@ -232,7 +232,7 @@ A cam drive has an elastic and lightly damped punch $S$ with eigenfrequency $\om
 
 We excite the system with a half-wave sine of half the eigenfrequency.
 $$
-\begin{align}
+\begin{aligned}
 x_A(t) &= \frac{1}{2}(\sin t + |\sin t|) \\
 &= 
 \begin{cases}
@@ -241,7 +241,7 @@ x_A(t) &= \frac{1}{2}(\sin t + |\sin t|) \\
 \end{cases}
 \quad \text{for}\quad n = 0, 1, 2, \ldots \\
 &= \sum_{n=0}^\infty H(t - n \pi) \sin(t-n\pi).
-\end{align}
+\end{aligned}
 $$
 
 For the excitement of $S$ the initial value problem

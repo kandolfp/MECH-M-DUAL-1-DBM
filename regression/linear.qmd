@@ -250,7 +250,7 @@ $$
 With the matrix form 
 $$
 X = \left[
-\begin{array}{cccc}
+\begin{array}{ccccc}
 1 & x_1    &x_1^2  & \cdots &x_1^m  \\
 1 & x_2    &x_2^2  & \cdots &x_2^m  \\
 1 & \vdots &\vdots & \ddots &\vdots \\

@@ -131,9 +131,7 @@ For an $n \times n$ black and white image there are $2^{n^2}$ possible images.
 So for a $20 \times 20$ image we already have $2^{400}$ possible images which a number with a number with 121 digits and it is assumed that there are (only) about $10^{82}$ atoms in the universe.
 
 ::: {#fig-sparsity-pixelspace}
-[![](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*FIm11cfKof-67M3Swxrhqg.png)](https://medium.com/@erictuanle/constructing-probability-model-for-data-6e25bb2fd6cb)
-
-[Medium article](https://medium.com/@erictuanle/constructing-probability-model-for-data-6e25bb2fd6cb) discussing probability models for data.
+![Illustration to show the fastness of pixel (image) space in comparison to images we can make sense of aka _natural_ images.](../_assets/sensing/pixel_space.svg)
 :::
 
 So finding structure in images, especially in images with high resolution is not surprising.

@@ -39,7 +39,7 @@ $$
 H(t) = 
 \begin{cases}
 0, &t \leq 0,\\
-1, &t \ge 0,
+1, &t > 0,
 \end{cases}
 $$
 and transform it into a _one-sided_ function as in definition @def-signal-laplace-transform required.
@@ -48,10 +48,10 @@ $$
 \underline{f}(t) = f(t) \mathrm{e}^{-\gamma t}H(t) = 
 \begin{cases}
 0, &t \leq 0,\\
-f(t)\mathrm{e}^{-\gamma t}, &t \ge 0.
+f(t)\mathrm{e}^{-\gamma t}, &t > 0.
 \end{cases}
 $$
-Taking the Laplace transform we get
+Taking the Fourier transform we get
 $$
 \begin{aligned}
 \hat{\underline{f}}(\omega) = \mathcal{F}\{\underline{f}(t)\} &= 
@@ -120,12 +120,12 @@ $$
 (@) **Drift in frequency**, for $a\in\mathbb{R}$
 
 $$
-\mathrm{e}^{a t} \mathcal{F}\{f(t)\} = F(s - a).
+\mathrm{e}^{a t} \mathcal{L}\{f(t)\} = F(s - a).
 $$
 
 (@) **Derivative in time**
 $$
-\mathcal{F}\{\partial_t f(t)\} = s F(s) - f(0)
+\mathcal{L}\{\partial_t f(t)\} = s F(s) - f(0)
 $$
 We are going to prove this by going through the lines
 $$
@@ -137,7 +137,7 @@ $$
 $$
 For higher derivatives we get
 $$
-\mathcal{L}\{\partial_t^n f(t)\} = s^n F(s) \sum_{k=1}^n s^{n-k} f^{(k-1)}(0).
+\mathcal{L}\{\partial_t^n f(t)\} = s^n F(s) - \sum_{k=1}^n s^{n-k} f^{(k-1)}(0).
 $$
 
 (@) **Integral in time**
@@ -256,7 +256,7 @@ s^2 X(s) + 4 X(s) = \sum_{n=0}^\infty \frac{1}{1+s^2} \mathrm{e}^{-n \pi s}
 $$
 and obtain 
 $$
-X(s) = \frac{1}{(1+s^2)(s^2 + 4)} \sum_{n=0}^\infty \mathrm{-n \pi s}.
+X(s) = \frac{1}{(1+s^2)(s^2 + 4)} \sum_{n=0}^\infty \mathrm{e}^{-n \pi s}.
 $$
 
 Via the inverse Laplace transform we can get back to $x(t)$
@@ -322,7 +322,7 @@ We need to assume that $i(0)=0$ than we get
 ::::: {#tbl-signal-laplace}
 | component  | $u(t)$ and $i(t)$ | Laplace transform |
 | --- | --- | --- |
-| R | $u_R(t) = R i(t)$ | $U_r(s) = R I(s) |
+| R | $u_R(t) = R i(t)$ | $U_r(s) = R I(s)$ |
 | C | $u_C(t) = \frac{1}{x} \int_0^t i(\tau)\, \mathrm{d}\tau$ | $U_C(s) = \frac{1}{sC}I(s)$ |
 | L | $u_L(t) = L \frac{\mathrm{d} i}{\mathrm{d} t}$ | $U_L(s) = sL I(s)$ |
 

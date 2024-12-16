@@ -440,18 +440,18 @@ x_k = F_k x_{k-1} + B_k u_k + w_k,
 z_k = H_k x_k + \nu_k
 \]</span> for <span class="math inline">\(z_k\)</span> being the measurements, <span class="math inline">\(H_k\)</span> the transformation matrix and <span class="math inline">\(\nu_k\)</span> contains the measurement noise.</p>
 <p>For this introduction we us a simple example with a train going along a track. Therefore, <span class="math display">\[
-\begin{align}
+\begin{aligned}
 x_k &amp;= \left[
     \begin{array}{c} \mathrm{x}_k \\ \dot{\mathrm{x}}_k\end{array}
 \right].
-\end{align}
+\end{aligned}
 \]</span> As the train can be accelerated or the driver can use the break this will be our input parameters. We can model them as a function <span class="math inline">\(f_k\)</span> and the train mass is constant with <span class="math inline">\(m\)</span>. As a result <span class="math inline">\(u_t\)</span> has the form <span class="math display">\[
 u_k = \frac{f_k}{m}.
 \]</span> We assume that to move from state <span class="math inline">\(k-1\)</span> to <span class="math inline">\(k\)</span> the time <span class="math inline">\(\Delta t\)</span> is needed. Hence, <span class="math display">\[
-\begin{align}
+\begin{aligned}
 \mathrm{x}_k &amp;= \mathrm{x}_{k-1} + (\dot{\mathrm{x}}_{k-1} \Delta t) + \frac{f_k (\Delta t)^2}{2m}\\
 \dot{\mathrm{x}}_k &amp;= \dot{\mathrm{x}}_{k-1}\frac{f_k \Delta t}{m}.
-\end{align}
+\end{aligned}
 \]</span> or in matrix form <span class="math display">\[
 x_k = \left[
     \begin{array}{c} \mathrm{x}_k \\ \dot{\mathrm{x}}_k\end{array}
@@ -471,17 +471,17 @@ x_k = \left[
 <p>So how can we derive an estimate for the current step from known steps and the uncertainty we have in the system. This uncertainty is model as normal distribution and the parameters are stored in the covariance matrix <span class="math inline">\(P_k\)</span> (zero mean is assumed). As mentioned before we need to do a prediction and the standard equation for the Kalman filter is <span id="eq-kalman_update"><span class="math display">\[
 \hat{x}_{k|k-1} = F_k \hat{x}_{k-1|k-1} + B_k u_k,
 \tag{16.2}\]</span></span> and <span class="math display">\[
-P_{k|k-1} = F_k P_{k-1|k-1} F_k^{\mathrm{T}}+ Q_k.
+P_{k|k-1} = F_k P_{k-1|k-1} F_k^{\mathsf{T}}+ Q_k.
 \]</span> Here <span class="math inline">\(\star_{k|k-1}\)</span> denotes the state at time <span class="math inline">\(t_k\)</span> derived from the state at time <span class="math inline">\(t_{k-1}\)</span>.</p>
 <p>To get the second equation we need to know that the variance associated with the prediction <span class="math inline">\(\hat{x}_{k|k-1}\)</span> of the unknown true value <span class="math inline">\(x_k\)</span> is given by <span class="math display">\[
-P_{k|k-1} = E\left[(x_k - x_{k|k-1})(x_k - x_{k|k-1})^{\mathrm{T}}\right].
+P_{k|k-1} = E\left[(x_k - x_{k|k-1})(x_k - x_{k|k-1})^{\mathsf{T}}\right].
 \]</span> If we now compute the difference of <a href="#eq-kalman_base" class="quarto-xref">Equation&nbsp;<span>16.1</span></a> and <a href="#eq-kalman_update" class="quarto-xref">Equation&nbsp;<span>16.2</span></a> we note that the state estimation errors as well as the process noise are uncorrelated and therefore their correlation is zero.</p>
 <p>The measurement update equations are given by <span class="math display">\[
 \hat{x}_{k|k} = \hat{x}_{k|k-1} + K_k(z_k - H_k \hat{x}_{k|k-1})
 \]</span> and <span class="math display">\[
 P_{k|k} = P_{k|k-1} + K_k H_k P_{k|k-1}
 \]</span> for <span class="math display">\[
-K_k = P_{k|k} H_k^{\mathrm{T}}(H_kP_{k|-1}H_k^{\mathrm{T}} + R_k)^{-1}.
+K_k = P_{k|k} H_k^{\mathsf{T}}(H_kP_{k|-1}H_k^{\mathsf{T}} + R_k)^{-1}.
 \]</span> Here, <span class="math inline">\(R_k\)</span> is the covariance of the measurement noise.</p>
 <p>To make (more) sense of the above formula we should consider the train example in more detail.</p>
 <p>At time <span class="math inline">\(t=0\)</span> (and <span class="math inline">\(k=0\)</span>) our tain is at a specific position but due to measurement uncertainty this position is expressed as a probability distribution. As mentioned before we use a normal Gaussian distribution with mean <span class="math inline">\(\mu_0\)</span> and variance <span class="math inline">\(\delta_0^2\)</span>.</p>
@@ -573,7 +573,7 @@ Important
 <p>A key feature of the normal (Gaussian) distribution is that fact that the <em>product of two Gaussian distributions</em> is again a Gaussian distribution.</p>
 <p>This process can be repeated over and over again and we always end up with a Gaussian distribution. This is a main feature in the Kalman filter.</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \mathcal{N}[\mu_1, \sigma_1](x) \cdot \mathcal{N}[\mu_2, \sigma_2](x) &amp;=
 \frac{1}{\sqrt{2 \pi \sigma_1^2}}\mathrm{e}^{-\frac{(x - \mu_1)^2}{2\sigma_1^2}} \cdot
 \frac{1}{\sqrt{2 \pi \sigma_2^2}}\mathrm{e}^{-\frac{(x - \mu_2)^2}{2\sigma_2^2}} \\
@@ -582,7 +582,7 @@ Important
 &amp;=
 \frac{1}{\sqrt{2 \pi \sigma^2}}\mathrm{e}^{-\frac{(x - \mu)^2}{2\sigma^2}} \\
 &amp;= \mathcal{N}[\mu, \sigma](x)
-\end{align}
+\end{aligned}
 \]</span> with <span id="eq-kalman-update2"><span class="math display">\[
 \mu = \frac{\mu_1 \sigma_2^2 + \mu_2 \sigma_1^2}{\sigma_1^2 + \sigma_2^2} = \mu_1 + \frac{\sigma_1^2 (\mu_2 - \mu_1)}{\sigma_1^2 + \sigma_2^2}\qquad
 \sigma^2 = \frac{\sigma_1^2 \sigma_2^2}{\sigma_1^2 + \sigma_2^2} = \sigma_1^2 - \frac{\sigma_1^4}{\sigma_1^2 + \sigma_2^2}
@@ -1253,7 +1253,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

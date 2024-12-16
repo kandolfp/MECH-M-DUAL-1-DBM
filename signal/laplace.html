@@ -444,32 +444,32 @@ f(t) = \mathcal{L}^{-1}\{F(s)\} = \frac{1}{s \pi \mathrm{i}} \int_{\gamma - \mat
 H(t) =
 \begin{cases}
 0, &amp;t \leq 0,\\
-1, &amp;t \ge 0,
+1, &amp;t &gt; 0,
 \end{cases}
 \]</span> and transform it into a <em>one-sided</em> function as in definition <a href="#def-signal-laplace-transform" class="quarto-xref">Definition&nbsp;<span>10.1</span></a> required. We end up with the function <span class="math display">\[
 \underline{f}(t) = f(t) \mathrm{e}^{-\gamma t}H(t) =
 \begin{cases}
 0, &amp;t \leq 0,\\
-f(t)\mathrm{e}^{-\gamma t}, &amp;t \ge 0.
+f(t)\mathrm{e}^{-\gamma t}, &amp;t &gt; 0.
 \end{cases}
-\]</span> Taking the Laplace transform we get <span class="math display">\[
-\begin{align}
+\]</span> Taking the Fourier transform we get <span class="math display">\[
+\begin{aligned}
 \hat{\underline{f}}(\omega) = \mathcal{F}\{\underline{f}(t)\} &amp;=
 \int_{-\infty}^\infty \underline{f}(t)\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t =
 \int_{0}^\infty f(t)\mathrm{e}^{-\gamma t}\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t = \\
 &amp;= \int_{0}^\infty f(t)\mathrm{e}^{-(\gamma + \omega) t}\, \mathrm{d}t =
 \int_{0}^\infty f(t)\mathrm{e}^{-s t}\, \mathrm{d}t = \\
 &amp;= \mathcal{L}\{f(t)\} = F(s)
-\end{align}
+\end{aligned}
 \]</span> giving rise to the Laplace transform.</p>
 <p>To get the inverse we start with the inverse Fourier transform of <span class="math inline">\(\hat{\underline{f}}(\omega)\)</span> <span class="math display">\[
 \underline{f}(t) = \mathcal{F}^{-1}\{\hat{\underline{f}}(\omega)\} = \frac{1}{2\pi} \int_{-\infty}^\infty \hat{\underline{f}}(\omega) \mathrm{e}^{\mathrm{i}\omega t}\, \mathrm{d}\omega.
 \]</span> Multiply both sides with <span class="math inline">\(\mathrm{e}^{\gamma t}\)</span> we get <span class="math display">\[
-\begin{align}
+\begin{aligned}
 f(t)H(t) = \underline{f}(t)\mathrm{e}^{\gamma t} &amp;= \frac{1}{2\pi} \int_{-\infty}^\infty \mathrm{e}^{\gamma t} \hat{\underline{f}}(\omega) \mathrm{e}^{\mathrm{i}\omega t}\, \mathrm{d}\omega = \\
 &amp;=
 \frac{1}{2\pi} \int_{-\infty}^\infty \hat{\underline{f}}(\omega) \mathrm{e}^{(\gamma + \mathrm{i}\omega) t}\, \mathrm{d}\omega
-\end{align}
+\end{aligned}
 \]</span> By a change of variables <span class="math inline">\(s=\gamma + \mathrm{i}\omega\)</span> we get <span class="math inline">\(\mathrm{d}\omega = \tfrac{1}{\mathrm{i}} \mathrm{d}s\)</span> and <span class="math display">\[
 f(t)H(t) = \frac{1}{s \pi \mathrm{i}} \int_{\gamma - \mathrm{i} \infty}^{\gamma + \mathrm{i} \infty} F(x)\mathrm{e}^{s t}\, \mathrm{d}s = \mathcal{L}^{-1}\{F(s)\}.
 \]</span></p>
@@ -508,19 +508,19 @@ Note
 <li><p><strong>Drift in frequency</strong>, for <span class="math inline">\(a\in\mathbb{R}\)</span></p></li>
 </ol>
 <p><span class="math display">\[
-\mathrm{e}^{a t} \mathcal{F}\{f(t)\} = F(s - a).
+\mathrm{e}^{a t} \mathcal{L}\{f(t)\} = F(s - a).
 \]</span></p>
 <ol start="6" class="example" type="1">
 <li><p><strong>Derivative in time</strong> <span class="math display">\[
-\mathcal{F}\{\partial_t f(t)\} = s F(s) - f(0)
+\mathcal{L}\{\partial_t f(t)\} = s F(s) - f(0)
 \]</span> We are going to prove this by going through the lines <span class="math display">\[
-\begin{align}
+\begin{aligned}
 \mathcal{L}\left\{\frac{d}{d\,t}f(t)\right\} &amp;= \int_{0}^\infty f'(t)\mathrm{e}^{-s t}\, \mathrm{d}t \\
 &amp;= \left[f(t)\mathrm{e}^{-s t}\right]_{0}^\infty - \int_{0}^\infty f(t) (- s\mathrm{e}^{-s t})\, \mathrm{d}t \\
 &amp;= -f(0) + s \mathcal{L}\{f(t)\}
-\end{align}
+\end{aligned}
 \]</span> For higher derivatives we get <span class="math display">\[
-\mathcal{L}\{\partial_t^n f(t)\} = s^n F(s) \sum_{k=1}^n s^{n-k} f^{(k-1)}(0).
+\mathcal{L}\{\partial_t^n f(t)\} = s^n F(s) - \sum_{k=1}^n s^{n-k} f^{(k-1)}(0).
 \]</span></p></li>
 <li><p><strong>Integral in time</strong> <span class="math display">\[
 \mathcal{L}\left\{\int_0^t f(\tau)\, \mathrm{d}\tau\right\} = \frac{1}{s} F(s).
@@ -616,7 +616,7 @@ Figure&nbsp;10.1: Cam drive schematics
 </figure>
 </div>
 <p>We excite the system with a half-wave sine of half the eigenfrequency. <span class="math display">\[
-\begin{align}
+\begin{aligned}
 x_A(t) &amp;= \frac{1}{2}(\sin t + |\sin t|) \\
 &amp;=
 \begin{cases}
@@ -625,7 +625,7 @@ x_A(t) &amp;= \frac{1}{2}(\sin t + |\sin t|) \\
 \end{cases}
 \quad \text{for}\quad n = 0, 1, 2, \ldots \\
 &amp;= \sum_{n=0}^\infty H(t - n \pi) \sin(t-n\pi).
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>For the excitement of <span class="math inline">\(S\)</span> the initial value problem <span class="math display">\[
 \ddot{x} + 4 x = x_A(t), \quad x(0) = \dot{x}(0) = 0,
@@ -633,7 +633,7 @@ x_A(t) &amp;= \frac{1}{2}(\sin t + |\sin t|) \\
 <p>Via the Laplace transform we can solve for <span class="math inline">\(X(s)\)</span> in <span class="math display">\[
 s^2 X(s) + 4 X(s) = \sum_{n=0}^\infty \frac{1}{1+s^2} \mathrm{e}^{-n \pi s}
 \]</span> and obtain <span class="math display">\[
-X(s) = \frac{1}{(1+s^2)(s^2 + 4)} \sum_{n=0}^\infty \mathrm{-n \pi s}.
+X(s) = \frac{1}{(1+s^2)(s^2 + 4)} \sum_{n=0}^\infty \mathrm{e}^{-n \pi s}.
 \]</span></p>
 <p>Via the inverse Laplace transform we can get back to <span class="math inline">\(x(t)\)</span> <span class="math display">\[
 x(t) = \frac{1}{6}(\sin(t) + |\sin(t)|)- \frac{\sin(2t)}{6}\sum_0^\infty H(t-n\pi)
@@ -725,7 +725,7 @@ Table&nbsp;10.1: Laplace transform for common electrical components
 <tr class="odd">
 <td>R</td>
 <td><span class="math inline">\(u_R(t) = R i(t)\)</span></td>
-<td>$U_r(s) = R I(s)</td>
+<td><span class="math inline">\(U_r(s) = R I(s)\)</span></td>
 </tr>
 <tr class="even">
 <td>C</td>
@@ -1524,7 +1524,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","loop":false,"openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

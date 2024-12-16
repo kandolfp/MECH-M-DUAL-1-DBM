@@ -549,21 +549,21 @@ P(A|B) = \frac{P(B|A) P(A)}{P(B|A)P(A) + P(B|\neg A)P(\neg A)}
 <div id="exm-statistics-cancerscreeing" class="theorem example">
 <p><span class="theorem-title"><strong>Example 15.1 (Cancer Screening)</strong></span> Let us assume we look at a medical procedure that tests for something like prostate or breast cancer.</p>
 <p>This test for <span class="math inline">\(cancer\)</span> is quite reliable with a true positive rate of <span class="math inline">\(80\%\)</span> and a true negative rate with <span class="math inline">\(90\%\)</span>. This translates into the probabilities <span class="math display">\[
-\begin{align}
+\begin{aligned}
 P(+ | cancer) = 0.8,\\
 P(+ | \neg cancer) = 0.1.
-\end{align}
+\end{aligned}
 \]</span> furthermore we assume that only <span class="math inline">\(1\%\)</span> of all the people taking the exam actually have cancer, i.e. <span class="math display">\[
 P(cancer) = 0.01.
 \]</span></p>
 <p>From Beyes’ theorem we can compute the probability (or likelihood) to have cancer when receiving a positive test result as <span class="math display">\[
 P(cancer | +) = \frac{P(+ | cancer) P(cancer)}{P(+)}
 \]</span> The part we do not know in this equation is <span class="math inline">\(P(+)\)</span> but we can compute this with <a href="#def-statistics-ljp" class="quarto-xref">Definition&nbsp;<span>15.3</span></a> as <span class="math display">\[
-\begin{align}
+\begin{aligned}
 P(+) &amp;= P(+, cancer) + P(+, \neg cancer) \\
      &amp;= P(+| cancer)P(cancer) + P(+| \neg cancer) P(\neg cancer)\\
      &amp;= 0.8 \cdot 0.01 + 0.1 \cdot 0.99 = 0.107.
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>Overall, this allow us to compute <span class="math display">\[
 P(cancer | +) = \frac{P(+ | cancer) P(cancer)}{P(+)} = \frac{0.8 \cdot 0.01}{0.107} = 0.07477.
@@ -1916,7 +1916,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

@@ -518,15 +518,15 @@ f(g + L) = f(t),\quad\forall t \in \mathbb{R}.
 <p><span class="theorem-title"><strong>Definition 9.4 (Fourier Series)</strong></span> For a <span class="math inline">\(L\)</span>-periodic function <span class="math inline">\(f(t)\)</span> we can write <span id="eq-fs"><span class="math display">\[
 f(t) = \frac{a_0}{2} + \sum_{k=1}^\infty \left(a_k \cos\left(\omega k t \right)+ b_k \sin\left(\omega k t\right)\right),
 \tag{9.1}\]</span></span> for <span class="math display">\[
-\begin{align}
-a_k = \frac{2}{L}\int_0^L f(t) \cos\left(\omega k t \right)\, \mathrm{d}t,\\
-b_k = \frac{2}{L}\int_0^L f(t) \sin\left(\omega k t \right)\, \mathrm{d}t.
-\end{align}
+\begin{aligned}
+a_k &amp;= \frac{2}{L}\int_0^L f(t) \cos\left(\omega k t \right)\, \mathrm{d}t,\\
+b_k &amp;= \frac{2}{L}\int_0^L f(t) \sin\left(\omega k t \right)\, \mathrm{d}t.
+\end{aligned}
 \]</span> where we can view the last two equations as the projection onto the orthogonal basis <span class="math inline">\(\{\cos(k t), \sin(k t)\}_{k=0}^\infty\)</span>, i.e. <span class="math display">\[
-\begin{align}
-a_k = \frac{1}{\|\cos\left(\omega k t\right)\|_2^2} \langle f(t), \cos\left(\omega k t\right)\rangle, \\
-b_k = \frac{1}{\|\sin\left(\omega k t\right)\|_2^2} \langle f(t), \sin\left(\omega k t\right)\rangle.
-\end{align}
+\begin{aligned}
+a_k &amp;= \frac{1}{\|\cos\left(\omega k t\right)\|_2^2} \langle f(t), \cos\left(\omega k t\right)\rangle, \\
+b_k &amp;= \frac{1}{\|\sin\left(\omega k t\right)\|_2^2} \langle f(t), \sin\left(\omega k t\right)\rangle.
+\end{aligned}
 \]</span></p>
 <p>If we perform a partial reconstruction by truncating the series at <span class="math inline">\(M\)</span> we get <span class="math display">\[
 \hat{f}_M(t) = \frac{a_0}{2} + \sum_{k=1}^M \left(a_k \cos\left(\omega k t \right)+ b_k \sin\left(\omega k t \right)\right).
@@ -717,7 +717,7 @@ Figure&nbsp;9.1: Fourier transform of a two hat functions.
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Implement the code yourself by filling out the missing sections:</p>
-<div id="05218e8a" class="cell" data-execution_count="2">
+<div id="b2a192d4" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -882,12 +882,12 @@ Note
 <li><p><strong>Derivative in time</strong> <span class="math display">\[
 \mathcal{F}\{\partial_t f(t)\} = \mathrm{i} \omega \hat{f}(\omega)
 \]</span> We are going to prove this by going through the lines <span class="math display">\[
-\begin{align}
+\begin{aligned}
 \mathcal{F}\left\{\frac{d}{d\,t}f(t)\right\} &amp;= \int_{-\infty}^\infty f'(t)\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t \\
 &amp;= \left[f(t)\mathrm{e}^{-\mathrm{i}\omega t}\right]_{-\infty}^\infty - \int_{-\infty}^\infty -\mathrm{i} \omega f(t)\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t \\
 &amp;= \mathrm{i} \omega \int_{-\infty}^\infty f(t)\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t \\
 &amp;= \mathrm{i} \omega \mathcal{F}\{f(t)\}
-\end{align}
+\end{aligned}
 \]</span> For higher derivatives we get <span class="math display">\[
 \mathcal{F}\{\partial_t^n f(t)\} = \mathrm{i}^n \omega^n \hat{f}(\omega)
 \]</span></p></li>
@@ -955,7 +955,7 @@ Note
 </div>
 <p>As we can transfer the properties of the Fourier transform to the DFT we get the nice properties for sampled signals.</p>
 <p>The downside of the DFT is that it does not scale well for large <span class="math inline">\(N\)</span> as the matrix-vector multiplication is <span class="math inline">\(\mathcal{O}(N^2)\)</span> and becomes slow.</p>
-<div id="f2fdc030" class="cell" data-execution_count="3">
+<div id="3756abd5" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show code for the computation of the DFT matrix.</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1009,17 +1009,17 @@ Note
 </div>
 <div class="callout-body-container">
 <div id="def-fourier-fft" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 9.7 (Fast-Fourier Transform)</strong></span> If we assume that <span class="math inline">\(N = 2^n\)</span>, i.e.&nbsp;a power of <span class="math inline">\(2\)</span>, in particular <span class="math inline">\(N=2M\)</span>, and <span class="math inline">\(F_N\)</span> denotes the matrix of <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span>9.4</span></a> for dimension <span class="math inline">\(N\)</span> and we have <span class="math inline">\(\hat{f} = F_N f\)</span> and <span class="math inline">\(f = \tfrac1N \overline{F_N} \hat{f}\)</span>. By splitting <span class="math inline">\(f\)</span> in the even and odd indices as <span class="math display">\[e = [f_0, f_2, \ldots, f_{N-2}]^{\mathrm{T}}\in \mathbb{C}^{M}\]</span> and <span class="math display">\[o = [f_1, f_3, \ldots, f_{N-1}]^{\mathrm{T}}\in \mathbb{C}^{M}\]</span> and for <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span>9.4</span></a> we get <span class="math display">\[
-\begin{align}
+<p><span class="theorem-title"><strong>Definition 9.7 (Fast-Fourier Transform)</strong></span> If we assume that <span class="math inline">\(N = 2^n\)</span>, i.e.&nbsp;a power of <span class="math inline">\(2\)</span>, in particular <span class="math inline">\(N=2M\)</span>, and <span class="math inline">\(F_N\)</span> denotes the matrix of <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span>9.4</span></a> for dimension <span class="math inline">\(N\)</span> and we have <span class="math inline">\(\hat{f} = F_N f\)</span> and <span class="math inline">\(f = \tfrac1N \overline{F_N} \hat{f}\)</span>. By splitting <span class="math inline">\(f\)</span> in the even and odd indices as <span class="math display">\[e = [f_0, f_2, \ldots, f_{N-2}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and <span class="math display">\[o = [f_1, f_3, \ldots, f_{N-1}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and for <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span>9.4</span></a> we get <span class="math display">\[
+\begin{aligned}
 \hat{f}_k &amp;= \sum_{j=0}^{N-1}f_j\, \omega^{j k} = \sum_{j=0}^{M-1}f_{2j}\, \omega^{(2j) k} + \sum_{j=0}^{M-1}f_{2j+1}\, \omega^{(2j+1) k} \\
 &amp;= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} + \omega^k\sum_{j=0}^{M-1}o_{j}\, (\omega^2)^{j k}.
-\end{align}
-\]</span> If we further split <span class="math inline">\(\hat{f}\)</span> in an upper and lower part <span class="math display">\[u = [\hat{f}_0, \hat{f}_2, \ldots, \hat{f}_{M-1}]^{\mathrm{T}}\in \mathbb{C}^{M}\]</span> and <span class="math display">\[l = [\hat{f}_{M}, \hat{f}_{M+1}, \ldots, \hat{f}_{N-1}]^{\mathrm{T}}\in \mathbb{C}^{M}\]</span> and with the property <span class="math inline">\(\omega^{k+M} = \omega^k \omega^M = - \omega^k\)</span> we get</p>
+\end{aligned}
+\]</span> If we further split <span class="math inline">\(\hat{f}\)</span> in an upper and lower part <span class="math display">\[u = [\hat{f}_0, \hat{f}_2, \ldots, \hat{f}_{M-1}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and <span class="math display">\[l = [\hat{f}_{M}, \hat{f}_{M+1}, \ldots, \hat{f}_{N-1}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and with the property <span class="math inline">\(\omega^{k+M} = \omega^k \omega^M = - \omega^k\)</span> we get</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 u_k &amp;= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} + \omega^k\sum_{j=0}^{M-1}o_{j}\, (\omega^2)^{j k},\\
 l_k &amp;= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} - \omega^k\sum_{j=0}^{M-1}o_{j}\, (\omega^2)^{j k}.
-\end{align}
+\end{aligned}
 \]</span> This results in the more visual matrix representation <span class="math display">\[
 \hat{f}= F_N f =
 \left[
@@ -1216,7 +1216,7 @@ Figure&nbsp;9.2: Signal noise filter with FFT.
 </figure>
 </div>
 <p>As can be seen in the <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span>9.2 (c)</span></a>, the reconstruction is not exact. This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. In particular:</p>
-<div id="3b85a1cc" class="cell" data-execution_count="5">
+<div id="38d9db58" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -1274,7 +1274,7 @@ Figure&nbsp;9.2: Signal noise filter with FFT.
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Implement the code yourself by filling out the missing sections:</p>
-<div id="c3ad3621" class="cell" data-execution_count="6">
+<div id="8ca04243" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
@@ -1367,10 +1367,10 @@ Figure&nbsp;9.2: Signal noise filter with FFT.
 <div class="callout-body-container">
 <div id="exm-fourier-fft-spectralderiv" class="theorem example">
 <p><span class="theorem-title"><strong>Example 9.3 (Spectral derivative)</strong></span> We compute the so called spectral derivative for the function <span class="math display">\[
-\begin{align}
+\begin{aligned}
 f(t) &amp;= \cos(t) \exp\left(-\frac{t^2}{25}\right) \\
 \partial_t f(t) &amp;= -\sin(t) \exp\left(-\frac{t^2}{25}\right) - \frac{2}{25}t f(t)
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>In order to porovide something to compare our results to we also compute the forward Euler finite-differences for the derivative <span class="math display">\[
 \partial_t f(t_k) \approx \frac{f(t_{k+1}) - f(t_k)}{t_{k+1} - t_k}.
@@ -1546,10 +1546,10 @@ Caution
 \hat{u}(t, \omega) = \mathrm{e}^{-\alpha^2\omega^2 t} \hat{u}(0, \omega).
 \]</span> where <span class="math inline">\(\hat{u}(0, \omega)\)</span> is nothing else than the Fourier transform of the initial temperature distribution at time <span class="math inline">\(t=0\)</span>. To compute the inverse Fourier transform we can make use of the convolution property introduced above.</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 u(t, x) &amp;= \mathcal{F}^{-1}\{\hat{u}(t, \omega)\} = \mathcal{F}^{-1}\{\mathrm{e}^{-\alpha^2\omega^2 t}\} \ast u(0, x) \\
 &amp;= \frac{1}{2 \alpha \sqrt{\pi t}} \mathrm{e}^{-\tfrac{x^2}{4\alpha^2t}} \ast u(0, x).
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>For the numerical computation it is more convenient to stay in the frequency domain and use <span class="math inline">\(\kappa\)</span> as before.</p>
 <p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.5 and Code 2.6)</span>.</p>
@@ -1671,7 +1671,7 @@ Figure&nbsp;9.4: Simulation of the heat equation in 1D.
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Implement the code yourself by filling out the missing sections:</p>
-<div id="8141267d" class="cell" data-execution_count="9">
+<div id="4e299521" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
@@ -1978,7 +1978,7 @@ Figure&nbsp;9.6: Time integration of the Burger’s equation
 <div class="callout-body-container">
 <div id="exm-fourier-fft-gec" class="theorem example">
 <p><span class="theorem-title"><strong>Example 9.7 (Ground Emitter Circuit)</strong></span> We can use FFT to compute some base properties of a ground emitter circuit <a href="#fig-fft-gec-1" class="quarto-xref">Figure&nbsp;<span>10.5 (a)</span></a> and how the signal is propagated through this circuit <a href="#fig-fft-gec-2" class="quarto-xref">Figure&nbsp;<span>10.5 (b)</span></a>.</p>
-<div id="af6fe46f" class="cell" data-execution_count="12">
+<div id="5b071895" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the raw data for the example</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2876,7 +2876,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false,"closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

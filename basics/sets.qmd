@@ -152,6 +152,8 @@ plt.show()
 ```
 
 What is shown in @fig-quartiles is often combined into a single [boxplot](https://en.wikipedia.org/wiki/Box_plot) (see @fig-boxplot) that provides way more information at once.
+
+::: {.content-visible when-format="html"}
 ```{python}
 #| label: fig-boxplot
 #| fig-cap: "Boxplot done in plotly with whiskers following 3/2 IQR."
@@ -164,6 +166,25 @@ fig.add_trace(go.Box(y=data["nm"], name="Standard"))
 fig.add_trace(go.Box(y=data["nm"], name="With points", boxpoints="all"))
 fig.show()
 ```
+:::
+
+::: {.content-visible unless-format="html"}
+```{python}
+#| fig-cap: "Boxplot done in plotly with whiskers following 3/2 IQR."
+#| code-fold: true
+#| eval: false
+#| code-summary: "Show the code for the figure"
+import plotly.graph_objects as go
+
+fig = go.Figure()
+fig.add_trace(go.Box(y=data["nm"], name="Standard"))
+fig.add_trace(go.Box(y=data["nm"], name="With points", boxpoints="all"))
+fig.show()
+```
+
+![Boxplot done in plotly with whiskers following 3/2 IQR.](../_assets/basics/boxplot_fig2.2.png){#fig-boxplot width="80%"}
+:::
+
 The plot contains the box which is defined by the 1st quantile $Q_1$ and the 3rd quantile $Q_3$, with the median as line in between these two.
 Furthermore, we can see the whiskers which help us identify so called outliers.
 By default they are defined as $\pm 1.5(Q_3 - Q_1)$, where ($Q_3 - Q_1$) is often called the _interquartile range_ (IQR).
@@ -270,13 +291,15 @@ For our dataset we can, for example, check:
 1. the _living area in $m^2$_ - `wfl` vs. the _net rent_ - `nm`
 1. the _year of construction_ - `bj` vs. if _central heating_ - `zh0` is available
 1. the _year of construction_ - `bj` vs. the _city district_ - `bez`
+
+::: {.content-visible when-format="html"}
 ```{python}
 #| label: fig-correlation
 #| fig-cap: "Scatterplot to investigate correlations in the data set."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
-
 from plotly.subplots import make_subplots
+
 fig = make_subplots(rows=3, cols=1)
 
 fig.add_trace(go.Scatter(x=data["wfl"], y=data["nm"], mode="markers"), row=1, col=1)
@@ -293,6 +316,34 @@ fig.update_yaxes(title_text="city district", row=3, col=1)
 
 fig.show()
 ```
+:::
+
+::: {.content-visible unless-format="html"}
+```{python}
+#| fig-cap: "Scatterplot to investigate correlations in the data set."
+#| code-fold: true
+#| eval: false
+#| code-summary: "Show the code for the figure"
+from plotly.subplots import make_subplots
+
+fig = make_subplots(rows=3, cols=1)
+
+fig.add_trace(go.Scatter(x=data["wfl"], y=data["nm"], mode="markers"), row=1, col=1)
+fig.update_xaxes(title_text="living area in m^2", row=1, col=1)
+fig.update_yaxes(title_text="net rent", row=1, col=1)
+
+fig.add_trace(go.Scatter(x=data["bj"], y=data["zh0"], mode="markers"), row=2, col=1)
+fig.update_xaxes(title_text="year of construction", row=2, col=1)
+fig.update_yaxes(title_text="central heating", row=2, col=1)
+
+fig.add_trace(go.Scatter(x=data["bj"], y=data["bez"], mode="markers"), row=3, col=1)
+fig.update_xaxes(title_text="year of construction", row=3, col=1)
+fig.update_yaxes(title_text="city district", row=3, col=1)
+
+fig.show()
+```
+![Scatterplot to investigate correlations in the data set.](../_assets/basics/scatter_fig2.5.png){#fig-correlation}
+:::
 
 In the first plot of @fig-correlation we see that the rent tends to go up with the size of the flat but there are for sure some rather cheap options in terms of space.
 

@@ -92,6 +92,7 @@ $$
 \partial_\delta F(\delta) = 0 \Leftrightarrow \delta = \frac{x_1^2 + 9 x_2^2}{2 x_1^2 + 54 x_2^2}.
 $$
 
+::::: {.content-visible when-format="html"}
 ```{python}
 #| label: fig-gd-ex1
 #| fig-cap: "Gradient descent applied for the function $f(x) = x_1^2 + 3x_2^2$."
@@ -111,9 +112,11 @@ delta = lambda x: (x[0]**2 + 9 * x[1]**2)/(2 * x[0]**2 + 54 * x[1]**2)
 Z = f(X, Y)
 
 fig = go.Figure()
-fig.add_trace(go.Surface(z=Z, x=X, y=Y, colorscale='greys', name="Function"))
+fig.add_trace(go.Surface(z=Z, x=X, y=Y,
+                        colorscale='greys', name="Function"))
 fig.update_traces(contours_z=dict(show=True, usecolormap=True,
-                                  highlightcolor="limegreen", project_z=True))
+                                  highlightcolor="limegreen",
+                                  project_z=True))
 fig.update_scenes(xaxis_title_text=r"x_1",  
                   yaxis_title_text=r"x_2",  
                   zaxis_title_text=r"f(x)")
@@ -127,10 +130,59 @@ while diff > 1e-10:
     diff = np.linalg.norm(z[-1] - z[-2])
     x = np.vstack((x, x_new))
 
-fig.add_scatter3d(x=x[:, 0], y=x[:, 1], z=z, line_color='red', name="Descent path")
+fig.add_scatter3d(x=x[:, 0], y=x[:, 1], z=z,
+                  line_color='red', name="Descent path")
 
 fig.show()
 ```
+:::::
+
+::::: {.content-visible unless-format="html"}
+```{python}
+#| code-fold: true
+#| eval: false
+#| code-summary: "Show the code for the figure"
+import plotly.graph_objects as go
+import numpy as np
+
+x_ = np.linspace(-3, 3, 20)
+y_ = np.linspace(-3, 3, 20)
+X, Y = np.meshgrid(x_, y_)
+
+f = lambda x, y: np.pow(x, 2) + 3 * np.pow(y, 2)
+grad_f = lambda x: x * np.array([2, 6]).reshape(x.shape)
+delta = lambda x: (x[0]**2 + 9 * x[1]**2)/(2 * x[0]**2 + 54 * x[1]**2)
+
+Z = f(X, Y)
+
+fig = go.Figure()
+fig.add_trace(go.Surface(z=Z, x=X, y=Y,
+                        colorscale='greys', name="Function"))
+fig.update_traces(contours_z=dict(show=True, usecolormap=True,
+                                  highlightcolor="limegreen",
+                                  project_z=True))
+fig.update_scenes(xaxis_title_text=r"x_1",  
+                  yaxis_title_text=r"x_2",  
+                  zaxis_title_text=r"f(x)")
+x = np.array([3, 2]).reshape((1, 2))
+z = np.array(f(x[0, 0], x[0, 1]))
+diff = 1
+
+while diff > 1e-10:
+    x_new = x[-1, :] - delta(x[-1, :]) * grad_f(x[-1, :])
+    z = np.hstack((z, f(x_new[0], x_new[1])))
+    diff = np.linalg.norm(z[-1] - z[-2])
+    x = np.vstack((x, x_new))
+
+fig.add_scatter3d(x=x[:, 0], y=x[:, 1], z=z,
+                  line_color='red', name="Descent path")
+
+fig.show()
+```
+
+![Gradient descent applied for the function $f(x) = x_1^2 + 3x_2^2$.](../_assets/regression/gd.png){#fig-gd-ex1 width="80%"}
+:::::
+
 ::::
 :::
 

@@ -321,12 +321,7 @@ $$
 
 ```{python}
 #| label: fig-wavelet-haar-1d
-#| fig-cap: "Mexican hat wavelets for the first two levels of multi resolution."
-#| fig-subcap:
-#|   - "Scaling 1 and translation 0."
-#|   - "Scaling 1/2 and translation 0."
-#|   - "Scaling 1/2 and translation 1/2."
-#| layout-ncol: 1
+#| fig-cap: "Haar wavelets for the first three levels of multi resolution analysis."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 import numpy as np

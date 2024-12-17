@@ -164,5 +164,21 @@ cython_debug/
 /.quarto/
 /_book/
 *.tex
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+*.fdb_latexmk
+*.synctex.gz
+*.quarto_ipynb
+*_files
 
 Course_*

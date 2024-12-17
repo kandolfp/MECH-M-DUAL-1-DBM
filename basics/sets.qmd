@@ -302,15 +302,18 @@ from plotly.subplots import make_subplots
 
 fig = make_subplots(rows=3, cols=1)
 
-fig.add_trace(go.Scatter(x=data["wfl"], y=data["nm"], mode="markers"), row=1, col=1)
+fig.add_trace(go.Scatter(x=data["wfl"], y=data["nm"], mode="markers"),
+                row=1, col=1)
 fig.update_xaxes(title_text="living area in m^2", row=1, col=1)
 fig.update_yaxes(title_text="net rent", row=1, col=1)
 
-fig.add_trace(go.Scatter(x=data["bj"], y=data["zh0"], mode="markers"), row=2, col=1)
+fig.add_trace(go.Scatter(x=data["bj"], y=data["zh0"], mode="markers"),
+                row=2, col=1)
 fig.update_xaxes(title_text="year of construction", row=2, col=1)
 fig.update_yaxes(title_text="central heating", row=2, col=1)
 
-fig.add_trace(go.Scatter(x=data["bj"], y=data["bez"], mode="markers"), row=3, col=1)
+fig.add_trace(go.Scatter(x=data["bj"], y=data["bez"], mode="markers"),
+                row=3, col=1)
 fig.update_xaxes(title_text="year of construction", row=3, col=1)
 fig.update_yaxes(title_text="city district", row=3, col=1)
 
@@ -328,15 +331,18 @@ from plotly.subplots import make_subplots
 
 fig = make_subplots(rows=3, cols=1)
 
-fig.add_trace(go.Scatter(x=data["wfl"], y=data["nm"], mode="markers"), row=1, col=1)
+fig.add_trace(go.Scatter(x=data["wfl"], y=data["nm"], mode="markers"),
+                row=1, col=1)
 fig.update_xaxes(title_text="living area in m^2", row=1, col=1)
 fig.update_yaxes(title_text="net rent", row=1, col=1)
 
-fig.add_trace(go.Scatter(x=data["bj"], y=data["zh0"], mode="markers"), row=2, col=1)
+fig.add_trace(go.Scatter(x=data["bj"], y=data["zh0"], mode="markers"),
+                row=2, col=1)
 fig.update_xaxes(title_text="year of construction", row=2, col=1)
 fig.update_yaxes(title_text="central heating", row=2, col=1)
 
-fig.add_trace(go.Scatter(x=data["bj"], y=data["bez"], mode="markers"), row=3, col=1)
+fig.add_trace(go.Scatter(x=data["bj"], y=data["bez"], mode="markers"),
+                row=3, col=1)
 fig.update_xaxes(title_text="year of construction", row=3, col=1)
 fig.update_yaxes(title_text="city district", row=3, col=1)
 

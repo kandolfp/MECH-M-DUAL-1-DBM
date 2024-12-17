@@ -212,7 +212,8 @@ plt.gca().set_aspect(1.5)
 plt.figure(1)
 plt.plot(t, f_hat[0, :], label=rf"$a_{0}$")
 for i in range(M):
-    plt.plot(t, a[i] * np.cos(w * (i+1) * t), label=rf"$a_{i+1}\cos({i+1}\omega t)$")
+    plt.plot(t, a[i] * np.cos(w * (i+1) * t),
+             label=rf"$a_{i+1}\cos({i+1}\omega t)$")
 plt.legend(ncol=np.ceil((M + 1) / 2), bbox_to_anchor=(1, -0.1))
 plt.xticks([])
 plt.gca().set_aspect(1.5)
@@ -298,7 +299,8 @@ plt.gca().set_aspect(1.5)
 plt.figure(1)
 plt.plot(t, f_hat[0, :], label=rf"$a_{0}$")
 for i in range(M):
-    plt.plot(t, a[i] * np.cos(w * (i+1) * t), label=rf"$a_{i+1}\cos({i+1}\omega t)$")
+    plt.plot(t, a[i] * np.cos(w * (i+1) * t),
+             label=rf"$a_{i+1}\cos({i+1}\omega t)$")
 plt.legend(ncol=np.ceil((M + 1)/2), bbox_to_anchor=(1, -0.1))
 plt.xticks([])
 plt.gca().set_aspect(1.5)
@@ -852,7 +854,8 @@ a, b = -15, 15
 L = b - a
 
 fun = lambda t: np.cos(t) * np.exp(-np.power(t, 2) / 25)
-dfun = lambda t: -(np.sin(t) * np.exp(-np.power(t, 2) / 25) + (2 / 25) * t * fun(t))
+dfun = lambda t: -(np.sin(t) * np.exp(-np.power(t, 2) / 25) + \
+                 (2 / 25) * t * fun(t))
 
 def fD(N, fun, dfun, a, b):
     t = np.linspace(a, b, N, endpoint=False)

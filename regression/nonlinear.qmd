@@ -231,7 +231,8 @@ def gd(c, delta, X, y, n, stop=1e-10):
 
 # The data
 x = np.arange(1, 11)
-y = np.array([0.2, 0.5, 0.3, 0.5, 1.0, 1.5, 1.8, 2.0, 2.3, 2.2]).reshape((-1, 1))
+y = np.array([0.2, 0.5, 0.3, 0.5, 1.0, 
+              1.5, 1.8, 2.0, 2.3, 2.2]).reshape((-1, 1))
 
 X = np.array([x, np.ones(x.shape)]).T
 delta = 0.002
@@ -307,7 +308,8 @@ def sgd(c, delta, X, y, n, indices=-1, stop=1e-10):
 
 # The data
 x = np.arange(1, 11)
-y = np.array([0.2, 0.5, 0.3, 0.5, 1.0, 1.5, 1.8, 2.0, 2.3, 2.2]).reshape((-1, 1))
+y = np.array([0.2, 0.5, 0.3, 0.5, 1.0, 
+              1.5, 1.8, 2.0, 2.3, 2.2]).reshape((-1, 1))
 
 X = np.array([x, np.ones(x.shape)]).T
 delta = 0.002

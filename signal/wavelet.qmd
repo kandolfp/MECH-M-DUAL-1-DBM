@@ -51,7 +51,8 @@ from scipy.integrate import odeint
 N = 1000
 a, b = -0.25, 1.25
 t = np.linspace(a, b, N, endpoint=False)
-mother = lambda t: np.astype((t >= 0) & (t < 1/2), float) - np.astype((t >= 1/2) & (t < 1), float)
+mother = lambda t: np.heaviside(t, 1) - np.heaviside(t - 1/2, 1) - \
+                   (np.heaviside(t - 1/2, 1) - np.heaviside(t - 1, 1))
 psi = lambda t, a, b: 1 / np.sqrt(a) * mother((t - b) / a)
 
 plt.figure(0)
@@ -338,7 +339,7 @@ N = 1000
 a, b = 0, 8
 t = np.linspace(a, b, N, endpoint=False)
 v = np.array([3, 1, 0, 4, 0, 6, 9, 9])
-chi = lambda t, a, b: np.astype((t >= a) & (t < b), float)
+chi = lambda t, a, b: np.heaviside(t - a, 1) - np.heaviside(t - b, 1)
 mother = lambda t: chi(t, 0, 1/2) - chi(1/2, 1)
 psi = lambda t, a, b: 1 / np.sqrt(a) * mother((t - b) / a, 2)
 

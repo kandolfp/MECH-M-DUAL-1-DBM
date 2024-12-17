@@ -511,7 +511,9 @@ import matplotlib.pyplot as plt
 def rgb2gray(rgb):
     return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
 
-response = requests.get("https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos/raw/refs/heads/main/DATA/allFaces.mat")
+response = requests.get(
+    "https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos"
+    "/raw/refs/heads/main/DATA/allFaces.mat")
 
 data = scipy.io.loadmat(io.BytesIO(response.content))
 faces = data["faces"]
@@ -520,7 +522,9 @@ n = int(data["n"][0,0])
 nfaces = np.ndarray.flatten(data['nfaces'])
 
 XX = faces[:,:nfaces[0]]
-im = np.asarray(iio.imread("https://raw.githubusercontent.com/dynamicslab/databook_python/refs/heads/master/DATA/mustache.jpg"))
+im = np.asarray(iio.imread(
+    "https://raw.githubusercontent.com/dynamicslab/databook_python"
+    "/refs/heads/master/DATA/mustache.jpg"))
 A = np.round(rgb2gray(im)/255).astype("uint8")
 X = np.append(XX, (XX[:, 2] * A.T.flatten()).reshape((-1, 1)), axis=1)
 

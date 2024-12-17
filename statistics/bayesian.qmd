@@ -295,7 +295,8 @@ import math
 %config InlineBackend.figure_formats = ["svg"]
 
 
-f = lambda n, p, x: np.vectorize(lambda x: math.comb(n, x))(x) * np.pow(p, x) * np.pow(1 - p, n - x)
+f = lambda n, p, x: np.vectorize(lambda x: math.comb(n, x))(x) * \
+                    np.pow(p, x) * np.pow(1 - p, n - x)
 
 helper = lambda n, p, x: np.sum(f(n, p, np.arange(0, x + 1)))
 cfd = lambda n, p, x: np.vectorize(lambda x: helper(n, p, x))(x)
@@ -381,7 +382,8 @@ import matplotlib.pyplot as plt
 a = 0
 b = 1
 f = lambda x: np.astype((x >= a) & (x < b), float) / (b - a)
-cfd = lambda x: (x - a) / (b - a) * np.astype((x >= a) & (x < b) , float) + np.astype((x >= b) , float)
+cfd = lambda x: (x - a) / (b - a) * np.astype((x >= a) & (x < b) , float) + \
+                np.astype((x >= b) , float)
 x = np.linspace(-1, 2, 1024)
 plt.figure()
 plt.plot(x, f(x))
@@ -444,15 +446,21 @@ phi = np.vectorize(lambda x: 1/2 * (1 + math.erf(x / np.sqrt(2))))
 cfd = lambda mu, sigma, x: phi((x - mu) / sigma)
 x = np.linspace(-3, 3, 1024)
 plt.figure()
-plt.plot(x, f(0, 1, x), label=r"$\mu=0$, $\sigma^2=1$")
-plt.plot(x, f(0, np.sqrt(0.1), x), label=r"$\mu=0$, $\sigma^2=0.1$")
-plt.plot(x, f(1/2, np.sqrt(0.5), x), label=r"$\mu=\frac{1}{2}$, $\sigma^2=0.5$")
+plt.plot(x, f(0, 1, x),
+         label=r"$\mu=0$, $\sigma^2=1$")
+plt.plot(x, f(0, np.sqrt(0.1), x),
+         label=r"$\mu=0$, $\sigma^2=0.1$")
+plt.plot(x, f(1/2, np.sqrt(0.5), x),
+         label=r"$\mu=\frac{1}{2}$, $\sigma^2=0.5$")
 plt.gca().set_aspect(6/(3 * 1.25))
 plt.legend()
 plt.figure()
-plt.plot(x, cfd(0, 1, x), label=r"$\mu=0$, $\sigma^2=1$")
-plt.plot(x, cfd(0, np.sqrt(0.1), x), label=r"$\mu=0$, $\sigma^2=0.1$")
-plt.plot(x, cfd(1/2, np.sqrt(0.5), x), label=r"$\mu=\frac{1}{2}$, $\sigma^2=0.5$")
+plt.plot(x, cfd(0, 1, x),
+         label=r"$\mu=0$, $\sigma^2=1$")
+plt.plot(x, cfd(0, np.sqrt(0.1), x),
+         label=r"$\mu=0$, $\sigma^2=0.1$")
+plt.plot(x, cfd(1/2, np.sqrt(0.5), x),
+         label=r"$\mu=\frac{1}{2}$, $\sigma^2=0.5$")
 plt.gca().set_aspect(6/(3 * 1))
 plt.legend()
 plt.show()
@@ -493,7 +501,8 @@ import math
 import scipy
 %config InlineBackend.figure_formats = ["svg"]
 
-f = lambda alpha, beta, x: np.pow(beta, alpha) / math.gamma(alpha) * np.pow(1/x, 1 + alpha) * np.exp(-beta/x)
+f = lambda alpha, beta, x: np.pow(beta, alpha) / math.gamma(alpha) * \
+                           np.pow(1/x, 1 + alpha) * np.exp(-beta/x)
 
 cfd = lambda alpha, beta, x: scipy.special.gdtr(alpha, beta, x)
 x = np.linspace(1e-3, 3, 1024)
@@ -593,7 +602,8 @@ $$
 #| code-summary: "Show the code for the figure"
 import scipy
 
-bino = lambda k, n, x: scipy.special.comb(n, k) * np.pow(x, k) * np.pow(1-x, n - k)
+bino = lambda k, n, x: scipy.special.comb(n, k) * np.pow(x, k) * \
+                       np.pow(1-x, n - k)
 p2 = lambda x: bino(2, 10, x)
 
 x = np.linspace(0, 1, 1024)
@@ -665,7 +675,8 @@ import matplotlib.pyplot as plt
 
 normaldist = lambda mu, sigma, x: 1 / np.sqrt(2 * np.pi * sigma**2) * \
     np.exp(- (x - mu)**2 / (2 * sigma**2))
-Finv = lambda mu, sigma, p: mu + sigma * np.sqrt(2) * scipy.special.erfinv(2 * p - 1) 
+Finv = lambda mu, sigma, p: mu + sigma * np.sqrt(2) * \
+                            scipy.special.erfinv(2 * p - 1) 
 
 mu_0 = 270
 sigma_0 = 27.31

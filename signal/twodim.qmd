@@ -28,7 +28,9 @@ import imageio.v3 as iio
 import numpy as np
 %config InlineBackend.figure_formats = ['svg']
 
-im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
+im = np.asarray(iio.imread(
+    "https://www.mci.edu/en/download/27-logos-bilder?"
+    "download=618:mci-eu-web"))
 
 def rgb2gray(rgb):
     return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
@@ -79,7 +81,9 @@ import imageio.v3 as iio
 import numpy as np
 %config InlineBackend.figure_formats = ['svg']
 
-im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
+im = np.asarray(iio.imread(
+    "https://www.mci.edu/en/download/27-logos-bilder?"
+    "download=618:mci-eu-web"))
 
 def rgb2gray(rgb):
     return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
@@ -123,7 +127,9 @@ import numpy as np
 %config InlineBackend.figure_formats = ['svg']
 np.random.seed(6020)
 
-im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
+im = np.asarray(iio.imread(
+    "https://www.mci.edu/en/download/27-logos-bilder?"
+    "download=618:mci-eu-web"))
 
 def rgb2gray(rgb):
     return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
@@ -144,7 +150,8 @@ myplot(A_noise)
 myplot(F)
 
 nx, ny = A.shape
-X, Y = np.meshgrid(np.arange(-ny/2 + 1, ny / 2 + 1), np.arange(-nx / 2 + 1, nx / 2 + 1))
+X, Y = np.meshgrid(np.arange(-ny/2 + 1, ny / 2 + 1),
+                   np.arange(-nx / 2 + 1, nx / 2 + 1))
 R2 = np.power(X, 2) + np.power(Y, 2)
 ind = R2 < 150**2
 A_noise_fft_shift_filter = A_noise_fft_shift * ind
@@ -173,7 +180,9 @@ import numpy as np
 import pywt
 %config InlineBackend.figure_formats = ['svg']
 
-im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
+im = np.asarray(iio.imread(
+    "https://www.mci.edu/en/download/27-logos-bilder?"
+    "download=618:mci-eu-web"))
 
 def rgb2gray(rgb):
     return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
@@ -210,7 +219,9 @@ import numpy as np
 import pywt
 %config InlineBackend.figure_formats = ['svg']
 
-im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
+im = np.asarray(iio.imread(
+    "https://www.mci.edu/en/download/27-logos-bilder?"
+    "download=618:mci-eu-web"))
 
 def rgb2gray(rgb):
     return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])

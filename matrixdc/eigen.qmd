@@ -495,9 +495,11 @@ import matplotlib.pyplot as plt
 import imageio.v3 as iio
 import numpy as np
 import numpy.linalg as LA
-%config InlineBackend.figure_formats = ['svg']
+%config InlineBackend.figure_formats = ["svg"]
 
-im = np.asarray(iio.imread("https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"))
+im = np.asarray(iio.imread(
+    "https://www.mci.edu/en/download/27-logos-bilder?"
+    "download=618:mci-eu-web"))
 
 def rgb2gray(rgb):
     return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])

@@ -148,8 +148,9 @@ $$
 ::::
 :::
 
-::: {.callout-tip appearance="simple" collapse="true" icon=false}
-## {{< fa pen-to-square >}} Exercise - Bayes' theorem?
+::: {.callout-caution appearance="simple" collapse="true" icon=false}
+:::: {#exr-statistics-bayes}
+## Bayes' theorem?
 
 (@) A person is known to lie one third the time.
 This person throws a die and reports it is a 4 (four). \
@@ -159,6 +160,7 @@ What is the probability that it is actually a four?
 (@) There are 3 urns containing 3 white and 2 black, 2 white and 3 black, as well as 4 white and 1 black ball respectively. Each urn can be chosen with equal probability. \
 \
 What is the likelihood that a white ball is drawn?
+::::
 :::
 
 ## Random variable

@@ -140,9 +140,9 @@ axs[5].set_yticks([])
 plt.subplots_adjust(top = 0.99, bottom=0.1, hspace=0.35, wspace=0.2)
 plt.show()
 ```
-
-::: {.callout-tip appearance="simple" collapse="true" icon=false}
-:::: {#exr-lasso_reg}
+::: {.content-visible when-format="html"}
+:::: {.callout-caution appearance="simple" collapse="true" icon=false}
+::::: {#exr-lasso_reg}
 
 ## Implement the above optimization yourself.
 
@@ -192,6 +192,7 @@ axs[5].set_yticks([])
 plt.subplots_adjust(top = 0.99, bottom=0.1, hspace=0.35, wspace=0.2)
 plt.show()
 ```
+:::::
 ::::
 :::
 

@@ -233,8 +233,10 @@ plt.show()
 ::::
 :::
 
-::: {.callout-tip appearance="simple" collapse="true" icon=false}
-## {{< fa pen-to-square >}} Exercise - Self implementation @exm-fourier-hat
+::: {.content-visible when-format="html"}
+:::: {.callout-caution appearance="simple" collapse="true" icon=false}
+::::: {#exr-fourier-hat-self}
+## Self implementation @exm-fourier-hat
 
 Implement the code yourself by filling out the missing sections:
 
@@ -316,7 +318,10 @@ plt.gca().set_aspect(1.5)
 
 plt.show()
 ```
+:::::
+::::
 :::
+
 
 ::: {.callout-note}
 The phenomenon that the truncated Fourier series oscillates in @fig-fourier_hat-3 due to the discontinuity of the function is called the Gibbs phenomenon.
@@ -730,8 +735,10 @@ Note: For @fig-fourier_fft_denoise-3 we discarded the imaginary part of the reco
 ::::
 :::
 
-::: {.callout-tip appearance="simple" collapse="true" icon=false}
-## {{< fa pen-to-square >}} Exercise - Self implementation @exm-fourier-fft-den
+::: {.content-visible when-format="html"}
+:::: {.callout-caution appearance="simple" collapse="true" icon=false}
+::::: {#exr-fourier-fft-den-self}
+## Self implementation @exm-fourier-fft-den
 
 Implement the code yourself by filling out the missing sections:
 
@@ -803,12 +810,16 @@ plt.gca().set_aspect(5e-3)
 plt.show()
 
 ```
+:::::
+::::
 :::
 
-::: {.callout-tip appearance="simple" collapse="true" icon=false}
-## {{< fa pen-to-square >}} Exercise - DFT vs. FFT
+::: {.callout-caution appearance="simple" collapse="true" icon=false}
+:::: {#exr-fourier-fft-den}
+## DFT vs. FFT
 
 Implement @exm-fourier-fft-den with DFT and FFT such that you can evaluate the runtime and create a plot showing the different runtime as well as check if the two produce the same result
+::::
 :::
 
 For the Fourier transform we stated that the multiplication with $\mathcal{F}\{\partial f\}=\mathrm{i}\omega\mathcal{F}\{f\}$, similarly we can derive a formula for the numerical derivative of a sampled function by multiplying each entry of the transformed vector by $\mathrm{i}\kappa$ for $\kappa=\tfrac{2\pi k}{N}$.
@@ -938,7 +949,7 @@ The same is true with the Fourier transformation.
 
 As mentioned before, Fourier introduced it to solve the heat equation and we will do the same.
 
-::: {.callout-caution}
+::: {.callout-important}
 Above we have always transformed the _time_ component of a function into the frequency domain via FFT.
 In the next example we have the time evolution of a signal and therefore the function depends on time and space.
 We apply the FFT to the space component to compute the derivative in _frequency_ domain w.r.t. the transformed variable. 
@@ -1050,8 +1061,10 @@ plt.show()
 ::::
 :::
 
-::: {.callout-tip appearance="simple" collapse="true" icon=false}
-## {{< fa pen-to-square >}} Exercise - Self implementation @exm-fourier-fft-heat
+::: {.content-visible when-format="html"}
+:::: {.callout-caution appearance="simple" collapse="true" icon=false}
+::::: {#exr-fourier-fft-heat-self}
+## Self implementation @exm-fourier-fft-heat
 
 Implement the code yourself by filling out the missing sections:
 
@@ -1119,6 +1132,8 @@ plt.gca().axes.get_xaxis().set_ticks([])
 plt.gca().axes.get_yaxis().set_ticks([])
 plt.show()
 ```
+:::::
+::::
 :::
 
 

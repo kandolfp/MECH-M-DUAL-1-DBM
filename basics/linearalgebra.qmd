@@ -78,9 +78,11 @@ print(f"{w=}")
 While in math we start indices with 1, Python starts with 0.
 :::
 
-::: {.callout-tip appearance="simple" collapse="true" icon=false}
-## {{< fa pen-to-square >}} Exercise - Vector space in Python
+::: {.callout-caution appearance="simple" collapse="true" icon=false}
+:::: {#exr-basics-vectorspace-python}
+## Vector space in Python
 Create some vectors and scalars with `np.array` and check the above statements with `+` and `*`.
+::::
 :::
 
 From vectors we can move to matrices, where
@@ -119,11 +121,13 @@ print(f"{A[:, 2]=}")
 Consequently we can say that a vector is a $n \times 1$ matrix.
 It is sometimes also referred to as _column vector_ and its counterpart a $1 \times n$ matrix as a _row vector_.
 
-::: {.callout-tip appearance="simple" collapse="true" icon=false}
-## {{< fa pen-to-square >}} Exercise - Matrix as vector space?
+::: {.callout-caution appearance="simple" collapse="true" icon=false}
+:::: {#exr-basics-mv-space}
+## Matrix as vector space?
 How do we need to define $+$ and $\cdot$ to say that $(\mathbb{R}^{m \times n}, + ,\cdot)$ is forming a vector space?
 
 Does `np.array`, `+`, `*` fulfil the properties of a vector space?
+::::
 :::
 
 If we want to refer to a row or a column of a matrix $A$ we will use the following short hands:
@@ -247,13 +251,15 @@ For a ${m \times p}$ matrix $A$ and a ${p \times n}$ matrix $B$ the matrix-matri
 $$C=AB \quad \Rightarrow\quad c_{ij} = \sum_{k=1}^p a_{ik}b_{kj}$$
 forms a ${m \times n}$ matrix.
 
-::: {.callout-tip appearance="simple" collapse="true" icon=false}
-## {{< fa pen-to-square >}} Exercise - Matrix multiplication?
+::: {.callout-caution appearance="simple" collapse="true" icon=false}
+:::: {#exr-basics-mm}
+## Matrix multiplication?
 Show that the matrix multiplication is:
 
 - associative
 - (left and right) distributive
 - but not commutative
+::::
 :::
 
 ```{python}

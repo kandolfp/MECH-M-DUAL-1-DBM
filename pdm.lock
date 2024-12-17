@@ -1803,7 +1803,7 @@ files = [
 
 [[package]]
 name = "quarto-cli"
-version = "1.5.57"
+version = "1.6.37"
 summary = "Open-source scientific and technical publishing system built on Pandoc."
 groups = ["default"]
 dependencies = [
@@ -1812,7 +1812,7 @@ dependencies = [
     "wheel",
 ]
 files = [
-    {file = "quarto_cli-1.5.57.tar.gz", hash = "sha256:13a2198cc8f1c57b0ec0a8c325c3bec805fc5b98b53f9664aaba3bfaebe0f447"},
+    {file = "quarto_cli-1.6.37.tar.gz", hash = "sha256:bb36e8cf2d783e827769209104ec073e9f29ec058fd6ab9409a7258bd015f5db"},
 ]
 
 [[package]]

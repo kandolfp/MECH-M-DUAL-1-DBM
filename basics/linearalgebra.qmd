@@ -387,8 +387,9 @@ I_4 = np.eye(n)
 print(f"{I_4=}")
 ```
 
-::: {.callout-caution appearance="simple" collapse="true" icon=false}
-## {{< fa circle-check >}} Example - Standard basis
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-basics-std-basis}
+## Standard basis
 ```{python}
 #| classes: styled-output
 #| error: true
@@ -413,6 +414,7 @@ print(f"{LA.norm(x-y)=}")
 ```
 
 See [`numpy.testing`](https://numpy.org/doc/stable/reference/routines.testing.html#) for more ways of testing in `numpy`.
+::::
 :::
 
 ## The inverse of a matrix
@@ -466,8 +468,10 @@ $$
 ::::
 :::
 
-::: {.callout-caution appearance="simple" collapse="true" icon=false}
-## {{< fa circle-check >}} Example - basis change
+::: {.callout-tip appearance="simple" collapse="true" icon=false}
+:::: {#exm-basics-basis-change}
+
+## Basis Change
 
 For 
 $$
@@ -509,6 +513,7 @@ $$
 and therefore, $v = 5c_1 + 2c_2 + 0 c_3$.
 
 (Compare [Wikipedia](https://de.wikipedia.org/wiki/Basiswechsel_(Vektorraum)))
+::::
 :::
 
 There are special basis vectors, respectively matrices that allow for easy computation of the inverse.

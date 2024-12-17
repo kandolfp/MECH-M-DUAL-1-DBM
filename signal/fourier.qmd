@@ -503,9 +503,14 @@ As we can transfer the properties of the Fourier transform to the DFT we get the
 
 The downside of the DFT is that it does not scale well for large $N$ as the matrix-vector multiplication is $\mathcal{O}(N^2)$ and becomes slow. 
 
+
+::: {.callout-tip}
+
+Code for the computation of the DFT matrix. 
+
 ```{python}
 #| code-fold: true
-#| code-summary: "Show code for the computation of the DFT matrix."
+#| code-summary: "Show the code."
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -516,6 +521,7 @@ w = np.exp(-1j * 2 * np.pi / N )
 J, K = np.meshgrid(np.arange(N), np.arange(N))
 DFT = np.power(w, J*K)
 ```
+:::
 
 ## Fast Fourier Transform
 

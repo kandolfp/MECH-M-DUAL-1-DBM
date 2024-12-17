@@ -160,9 +160,9 @@ import matplotlib.pyplot as plt
 
 # Parameters
 L = 2 * np.pi
-M = 7
+M = 5
 M2 = 50
-N = 100
+N = 512
 # Hat functions
 fun = lambda t, L: 0 if abs(t) > L / 4 else (1 - np.sign(t) * t * 4 / L)
 fun2 = lambda t, L: 0 if abs(t) > L / 4 else 1
@@ -249,9 +249,9 @@ import matplotlib.pyplot as plt
 
 # Parameters
 L = 2 * np.pi   # Interval
-M = 7           # Nodes for the first function
+M = 5           # Nodes for the first function
 M2 = 50         # Nodes for the second function
-N = 101         # Interpolation points
+N = 512         # Interpolation points
 # Hat functions
 fun = lambda x, L: # tooth
 fun2 = lambda x, L: # step

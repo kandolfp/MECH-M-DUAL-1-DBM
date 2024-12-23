@@ -204,7 +204,7 @@ Now let us proceed through the levels of the transform to see what is happening,
 $$
 \mathcal{W}\{f\}(1, :) =
 \left( 
-						\begin{array}{c c c c c c c c}
+						\begin{array}{cccccccc}
 							\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}&0&0&0&0&0&0\\
 							0&0&\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}&0&0&0&0\\
 							0&0&0&0&\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}&0&0\\
@@ -235,7 +235,7 @@ $$
                                 \sqrt{2}\\
                                 -2\sqrt{2}\\
                                 -3\sqrt{2}\\
-                                 0\\
+                                 0
 							\end{array}
 						\right]
 $$
@@ -244,7 +244,7 @@ We than apply the next level just for the first half
 $$
 \mathcal{W}\{f\}(2, :) =
 \left( 
-						\begin{array}{c c c c c c c c}
+						\begin{array}{cccccccc}
 							\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}&0&0&0&0&0&0\\
 							0&0&\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}&0&0&0&0\\
                             \frac{1}{\sqrt{2}}&\frac{-1}{\sqrt{2}}&0&0&0&0&0&0\\
@@ -252,7 +252,7 @@ $$
 							0&0&0&0&1&0&0&0\\
 							0&0&0&0&0&1&0&0\\
 							0&0&0&0&0&0&1&0\\
-							0&0&0&0&0&0&0&1\\
+							0&0&0&0&0&0&0&1
 						\end{array}
 					\right) 
                     \left[
@@ -264,7 +264,7 @@ $$
                                 \sqrt{2}\\
                                 -2\sqrt{2}\\
                                 -3\sqrt{2}\\
-                                 0\\
+                                 0
 							\end{array}
 						\right]=\left[
 							\begin{array}{c}
@@ -275,7 +275,7 @@ $$
                                 \sqrt{2}\\
                                 -2\sqrt{2}\\
                                 -3\sqrt{2}\\
-                                 0\\
+                                 0
 							\end{array}
 						\right]
 $$
@@ -283,7 +283,7 @@ and our final step
 $$
 \mathcal{W}\{f\}(3, :) =
 \left( 
-						\begin{array}{c c c c c c c c}
+						\begin{array}{cccccccc}
 							\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}&0&0&0&0&0&0\\
 								\frac{1}{\sqrt{2}}&\frac{-1}{\sqrt{2}}&0&0&0&0&0&0\\
 								0&0&1&0&0&0&0&0\\
@@ -291,7 +291,7 @@ $$
 								0&0&0&0&1&0&0&0\\
 								0&0&0&0&0&1&0&0\\
 								0&0&0&0&0&0&1&0\\
-								0&0&0&0&0&0&0&1\\
+								0&0&0&0&0&0&0&1
 						\end{array}
 					\right) 
                     \left[
@@ -303,7 +303,7 @@ $$
                                 \sqrt{2}\\
                                 -2\sqrt{2}\\
                                 -3\sqrt{2}\\
-                                 0\\
+                                 0
 							\end{array}
 						\right]=\left[
 							\begin{array}{c}
@@ -314,7 +314,7 @@ $$
                                 \sqrt{2}\\
                                 -2\sqrt{2}\\
                                 -3\sqrt{2}\\
-                                 0\\
+                                 0
 							\end{array}
 						\right]
 $$

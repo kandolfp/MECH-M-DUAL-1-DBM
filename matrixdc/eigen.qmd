@@ -322,7 +322,7 @@ Let us walk through this with an example from [@Downey2024VibrationMechanicsPrac
 
 ## Two Story Building
 
-![Two story frame where the floors have different dynamic properties.](../_assets/matrixdc/TwoStoryBuilding.svg){#fig-twostorybuilding}
+![Two story frame where the floors have different dynamic properties.](../_assets/matrixdc/TwoStoryBuilding){#fig-twostorybuilding}
 
 In @fig-twostorybuilding we can see a two story building consisting of a two column frame with a floor.
 The first floor columns are fixed at the base and have a height $h$, the second floor is fixed to the first and has the same height.
@@ -437,9 +437,9 @@ The following figure visualizes the two modes.
 
 ::: {#fig-twosotrybuildingmodes layout-ncol=2}
 
-![First mode](../_assets/matrixdc/TwoStoryBuildingMode1.svg){#fig-tsm1}
+![First mode](../_assets/matrixdc/TwoStoryBuildingMode1){#fig-tsm1}
 
-![Second mode](../_assets/matrixdc/TwoStoryBuildingMode2.svg){#fig-tsm2}
+![Second mode](../_assets/matrixdc/TwoStoryBuildingMode2){#fig-tsm2}
 
 Model of a two story building with the shape of the modes according to the modal analysis.
 :::
@@ -489,6 +489,15 @@ This approximation can be used to reduce the storage demand of an image.
 ```{python}
 #| label: fig-mci_headquater
 #| fig-cap: "Image of MCI I and the reconstruction with approximated matrix."
+#| fig-subcap:
+#|      - "Absolute value of Eigenvalues from largest to smallest"
+#|      - "0.1% of eigenvalue"
+#|      - "10% of eigenvalue"
+#|      - "25% of eigenvalue"
+#|      - "50% of eigenvalue"
+#|      - "75% of eigenvalue"
+#|      - "original image"
+#| layout: [[1], [1, 1, 1], [1, 1, 1]]
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
@@ -512,38 +521,26 @@ order = np.argsort(np.abs(lam_))
 lam = lam_[order[::-1]]
 V = V_[:, order[::-1]]
 
-rec = [1/1000, 10/100, 25/100, 50/100, 1]
+rec = [1/1000, 10/100, 25/100, 50/100, 75/100]
 Vinv = LA.inv(V)
 
-fig = plt.figure()
-ax_eig = fig.add_subplot(3,1,1)
-ax_eig.plot((np.abs(lam)))
-ax_eig.set_yscale("log")
-ax_eig.set_ylabel(r"$|\lambda_i|$")
-#ax_eig.set_xlabel("$i$")
-ax_eig.set_title("absolute value of the eigenvalues")
-ax_eig.set_aspect("auto", "box")
+plt.figure()
+plt.plot((np.abs(lam)))
+plt.yscale("log")
+plt.ylabel(r"$|\lambda_i|$")
+plt.xlabel("index")
+plt.gca().set_aspect(7e1)
 
-axs = [] 
-axs.append(fig.add_subplot(3, 3, 9))
-axs.append(fig.add_subplot(3, 3, 8))
-axs.append(fig.add_subplot(3, 3, 7))
-axs.append(fig.add_subplot(3, 3, 6))
-axs.append(fig.add_subplot(3, 3, 5))
-axs.append(fig.add_subplot(3, 3, 4))
-
-for i, p in enumerate(rec):
+for p in rec:
+    plt.figure()
     r = int(np.ceil(len(lam) * p))
     A_r = np.real(V[:, 0:r] @ np.diag(lam[0:r], 0) @ Vinv[0:r, :])
-    axs[i].imshow(A_r, cmap=plt.get_cmap("gray"))
-    axs[i].set_axis_off()
-    r = r - 1
-    axs[i].set_title(f"${r=}$")
+    plt.imshow(A_r, cmap=plt.get_cmap("gray"))
+    plt.gca().set_axis_off()
 
-axs[5].imshow(im_cut, cmap=plt.get_cmap("gray"))
-axs[5].set_axis_off()
-axs[5].set_title(f"Original image")
-plt.subplots_adjust(top = 0.99, bottom=0.01, hspace=0.35, wspace=0.001)
+plt.figure()
+plt.imshow(im_cut, cmap=plt.get_cmap("gray"))
+plt.gca().set_axis_off()
 plt.show()
 ```
 

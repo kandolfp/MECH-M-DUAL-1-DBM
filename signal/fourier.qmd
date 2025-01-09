@@ -241,7 +241,7 @@ plt.show()
 Implement the code yourself by filling out the missing sections:
 
 ```{python}
-#| code-fold: false
+#| code-fold: true
 #| eval: false
 #| code-summary: "Code fragment for implementation."
 import numpy as np
@@ -749,7 +749,7 @@ Note: For @fig-fourier_fft_denoise-3 we discarded the imaginary part of the reco
 Implement the code yourself by filling out the missing sections:
 
 ```{python}
-#| code-fold: false
+#| code-fold: true
 #| eval: false
 #| code-summary: "Code fragment for implementation."
 import numpy as np
@@ -1334,6 +1334,8 @@ The following example is taken from [@Meyberg1992-ws].
 
 We can use FFT to compute some base properties of a ground emitter circuit @fig-fft-gec-1 and how the signal is propagated through this circuit @fig-fft-gec-2.
 
+![Electric circuit](../_assets/signal/electric_circuit.svg){#fig-fft-gec-1}
+
 ```{python}
 #| code-fold: true
 #| echo: true
@@ -1387,23 +1389,16 @@ effective_value = np.linalg.norm(yy[1:])
 harmonic_distortion = np.linalg.norm(yy[3:-2])/np.linalg.norm(yy[1:])
 ```
 
-::::: {#fig-fft-gec}
-
-![Electric circuit](../_assets/signal/electric_circuit.svg){#fig-fft-gec-1}
-
-![Signal transition](../_assets/signal/signals.svg){#fig-fft-gec-2}
-
-The electric circuit and the signal transition for our example.
-:::::
-
-The transition of the transistor is approximately that of a diode and is illustrated in the $u_{BE}$ vs. $i_C$ diagram on the top left (orange signal). 
-The exiting function on the bottom is a normal sine wave with $50\mathrm{Hz}$.
+The transition of the transistor can be approximated by a diode and is illustrated in the $u_{BE}$ vs. $i_C$ diagram on the top left (orange signal in @fig-fft-gec-2). 
+The exciting function $u$ on the bottom left is a normal sine wave with $50\mathrm{Hz}$.
 
 All together we get the equation
 $$
 i_c = \mathrm{e}^{1.2 + 0.8 \sin(2 \pi 50 t)} - 1
 $$
 for the current in $[\mathrm{mA}]$ running through the transistor. 
+
+![Signal transition for the electric circuit shown above](../_assets/signal/signals){#fig-fft-gec-2}
 
 We can see, that the signal is boosted depending on the characteristic curve of the diode, i.e. the positive part of the sine more than the negative part.
 If we compute take the fourier transform as illustrated with the red points on the curve on the right we get from the FFT coefficients $c_i$:

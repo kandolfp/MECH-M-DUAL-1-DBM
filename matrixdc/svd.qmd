@@ -1,3 +1,6 @@
+---
+lightbox: true
+---
 # Singular Value Decomposition {#sec-matrixdc-svd}
 
 We start off with the so called _eigendecomposition_.
@@ -70,7 +73,7 @@ The singular value decomposition always exists, is real and all singular vectors
 
 Again, to visualize the composition helps to better understand what is happening
 
-![Singular Value Decomposition](../_assets/matrixdc/SVD.svg){.lightbox}
+![Singular Value Decomposition](../_assets/matrixdc/SVD)
 
 In the case that of $m\geq n$ we can save storage by reducing the matrices $U$ and $\Sigma$, to their counterpart $U_1$ and $\Sigma_1$ by removing the zeros.
 
@@ -95,7 +98,7 @@ $$
 ::::
 :::
 
-![Thin SVD](../_assets/matrixdc/ThinSVD.svg){.lightbox}
+![Thin SVD](../_assets/matrixdc/ThinSVD)
 
 In Python we can compute the (Thin)SVD as follows
 
@@ -161,13 +164,22 @@ This is often called the _truncated SVD_.
 ::::
 :::
 
-![Truncated SVD](../_assets/matrixdc/TruncatedSVD.svg){.lightbox}
+![Truncated SVD](../_assets/matrixdc/TruncatedSVD)
 
 We can use this for image compression.
 
 ```{python}
 #| label: fig-mci_headquater_svd
 #| fig-cap: "Image of MCI I and the reconstruction with reduced rank matrices."
+#| fig-subcap:
+#|      - "Singular values from largest to smallest"
+#|      - "0.1% of eigenvalue"
+#|      - "10% of eigenvalue"
+#|      - "25% of eigenvalue"
+#|      - "50% of eigenvalue"
+#|      - "75% of eigenvalue"
+#|      - "original image"
+#| layout: [[1], [1, 1, 1], [1, 1, 1]]
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
@@ -188,36 +200,25 @@ im_scale = im_gray[1500:3001, 1500:3001] / 255
 
 U, s, Vh = LA.svd(im_scale, full_matrices=False)
 
-rec = [1/1000, 10/100, 25/100, 50/100, 1]
+rec = [1/1000, 10/100, 25/100, 50/100, 75/100]
 
-fig = plt.figure()
-ax_eig = fig.add_subplot(3, 1, 1)
-ax_eig.plot(s)
-ax_eig.set_yscale("log")
-ax_eig.set_ylabel(r"$|\sigma_i|$")
-ax_eig.set_title("singular value")
-ax_eig.set_aspect("auto", "box")
+plt.figure()
+plt.plot(s)
+plt.yscale("log")
+plt.ylabel(r"$|\sigma_i|$")
+plt.xlabel("index")
+plt.gca().set_aspect(5e1)
 
-axs = [] 
-axs.append(fig.add_subplot(3, 3, 9))
-axs.append(fig.add_subplot(3, 3, 8))
-axs.append(fig.add_subplot(3, 3, 7))
-axs.append(fig.add_subplot(3, 3, 6))
-axs.append(fig.add_subplot(3, 3, 5))
-axs.append(fig.add_subplot(3, 3, 4))
-
-for i, p in enumerate(rec):
+for p in rec:
+    plt.figure()
     r = int(np.ceil(len(s) * p))
     A_r = U[:, :r] @ np.diag(s[:r]) @ Vh[:r, :]
-    axs[i].imshow(A_r, cmap=plt.get_cmap("gray"))
-    axs[i].set_axis_off()
-    r = r - 1
-    axs[i].set_title(f"${r=}$")
+    plt.imshow(A_r, cmap=plt.get_cmap("gray"))
+    plt.gca().set_axis_off()
 
-axs[5].imshow(im_scale, cmap=plt.get_cmap("gray"))
-axs[5].set_axis_off()
-axs[5].set_title(f"Original image")
-plt.subplots_adjust(top = 0.99, bottom=0.01, hspace=0.35, wspace=0.001)
+plt.figure()
+plt.imshow(im_scale, cmap=plt.get_cmap("gray"))
+plt.gca().set_axis_off()
 plt.show()
 ```
 
@@ -240,6 +241,14 @@ $$
 ```{python}
 #| label: fig-mci_headquater_svd_modes
 #| fig-cap: "Modes of the SVD decomposition of the MCI I image."
+#| fig-subcap:
+#|      - "First mode"
+#|      - "Second mode"
+#|      - "Third mode"
+#|      - "Fourth mode"
+#|      - "Fifth mode"
+#|      - "Sixth mode"
+#| layout: [[1, 1, 1], [1, 1, 1]]
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
@@ -249,23 +258,12 @@ import numpy.linalg as LA
 
 rec = [0, 1, 2, 3, 4, 5]
 
-fig = plt.figure()
-axs = [] 
-axs.append(fig.add_subplot(3, 3, 1))
-axs.append(fig.add_subplot(3, 3, 2))
-axs.append(fig.add_subplot(3, 3, 3))
-axs.append(fig.add_subplot(3, 3, 4))
-axs.append(fig.add_subplot(3, 3, 5))
-axs.append(fig.add_subplot(3, 3, 6))
-
-for i, r in enumerate(rec):
+for r in rec:
+    plt.figure()
     M_r = np.outer(U[:, r], Vh[r, :])
-    axs[i].imshow(M_r, cmap=plt.get_cmap("gray"))
-    axs[i].set_axis_off()
-    r = r + 1
-    axs[i].set_title(f"${r=}$")
+    plt.imshow(M_r, cmap=plt.get_cmap("gray"))
+    plt.gca().set_axis_off()
 
-plt.subplots_adjust(top = 0.99, bottom=0.01, hspace=0.35, wspace=0.001)
 plt.show()
 ```
 ::: {.callout-note}

@@ -207,7 +207,7 @@ For example, in @exm-lregfallenobject we stopped with degree 2 for our polynomia
 
 One of the leading assumptions to use in such a case is:
 
-> Among competing hypotheses, the one with the fewest assumptions should be selected, or when you have two competing theories that make exactly the same predictions, the simpler one is the more likely.
+> _Among competing hypotheses, the one with the fewest assumptions should be selected, or when you have two competing theories that make exactly the same predictions, the simpler one is the more likely._
 - Occam's razor
 
 This plays an intimate role in over- and underfitting of models.
@@ -274,8 +274,8 @@ Meaning we need to check if our model is any good.
 
 A classic method is the _k-fold cross validation_:
 
-> Take random portions of your data and build a model. Do this $k$ times and average the parameter scores (regression loadings) to produce a cross-validated model. 
-> Test the model predictions against withheld (extrapolation) data and evaluate whether the model is actually any good. 
+> _Take random portions of your data and build a model. Do this $k$ times and average the parameter scores (regression loadings) to produce a cross-validated model._
+> _Test the model predictions against withheld (extrapolation) data and evaluate whether the model is actually any good._ 
 - [see @Brunton2022, pp. 159]
 
 As we can see, there are a lot of further paths to investigate but for now this concludes our excursion into regression.

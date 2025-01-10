@@ -109,7 +109,6 @@ The code is adapted from [@Brunton2022, Code 3.3]
 #| code-summary: "CoSaMP algorithm form gitHub, now print."
 import numpy as np
 
-
 def cosamp(phi, u, s, epsilon=1e-10, max_iter=1000):
     """
     Return an `s`-sparse approximation of the target signal
@@ -124,11 +123,11 @@ def cosamp(phi, u, s, epsilon=1e-10, max_iter=1000):
     halt = False
     while not halt:
         it += 1
-        #print("Iteration {}\r".format(it), end="")
         
         y = np.dot(np.transpose(phi), v)
-        omega = np.argsort(y)[-(2*s):] # large components
-        omega = np.union1d(omega, a.nonzero()[0]) # use set instead?
+        # large components
+        omega = np.argsort(y)[-(2*s):]
+        omega = np.union1d(omega, a.nonzero()[0])
         phiT = phi[:, omega]
         b = np.zeros(phi.shape[1])
         # Solve Least Square
@@ -173,18 +172,24 @@ f_hat = np.fft.fft(f)
 PSD = np.abs(f_hat)**2 / N
 
 ## Randomly sample signal
-p = 128 # num. random samples, p = N/32
+# num. random samples
+p = N // 32
 perm = np.floor(np.random.rand(p) * N).astype(int)
 y = f[perm]
 
 ## Solve compressed sensing problem
-Psi = dct(np.identity(N)) # Build Psi
-Theta = Psi[perm, :]       # Measure rows of Psi
+# Build Psi
+Psi = dct(np.identity(N))
+# Measure rows of Psi
+Theta = Psi[perm, :]
 
-s = cosamp(Theta, y, s=10, epsilon=1.e-10, max_iter=10) # CS via matching pursuit
+# CS via matching pursuit
+s = cosamp(Theta, y, s=10, epsilon=1.e-10, max_iter=10)
 frec = idct(s)
-frec_hat = np.fft.fft(frec, N) # computes the (fast) discrete fourier transform
-PSDrec = np.abs(frec_hat)**2 / N # Power spectrum (how much power in each freq)
+# computes the (fast) discrete fourier transform
+frec_hat = np.fft.fft(frec, N)
+# Power spectrum (how much power in each freq)
+PSDrec = np.abs(frec_hat)**2 / N
 
 time_window = np.array([512, 768]) / N
 freq = np.arange(N)
@@ -237,13 +242,14 @@ ttt = np.random.uniform(0, 1, p)
 y = fun(ttt)
 
 ## Solve compressed sensing problem
-Psi = dct(np.identity(N)) # Build Psi
-Theta = Psi[perm, :]       # Measure rows of Psi
+Psi = dct(np.identity(N))
+Theta = Psi[perm, :]
 
-s = cosamp(Theta, y, s=10, epsilon=1.e-10, max_iter=10) # CS via matching pursuit
+# CS via matching pursuit
+s = cosamp(Theta, y, s=10, epsilon=1.e-10, max_iter=10) 
 frec = idct(s)
-frec_hat = np.fft.fft(frec, N) # computes the (fast) discrete fourier transform
-PSDrec = np.abs(frec_hat)**2 / N # Power spectrum (how much power in each freq)
+frec_hat = np.fft.fft(frec, N)
+PSDrec = np.abs(frec_hat)**2 / N
 
 plt.figure()
 plt.plot(t, f, "k")
@@ -388,7 +394,9 @@ Lmean = lassoCV.mse_path_.mean(axis=-1)
 error = [np.min(lassoCV.mse_path_, axis=-1), 
          np.max(lassoCV.mse_path_, axis=-1)] / np.sqrt(cv)
 plt.errorbar(lassoCV.alphas_, Lmean, yerr=error, ecolor="lightgray")
-plt.plot(lassoCV.alpha_, Lmean[lassoCV.alphas_==lassoCV.alpha_], "go", mfc='none')
+plt.plot(lassoCV.alpha_,
+         Lmean[lassoCV.alphas_==lassoCV.alpha_],
+         "go", mfc='none')
 plt.xscale("log")
 plt.ylabel("Means Square Error")
 plt.xlabel(r"$\lambda_1$")
@@ -606,7 +614,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import netCDF4
 import pysensors as ps
-
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
 
@@ -625,7 +632,6 @@ for filename in filenames:
 ftp.quit()
 
 f = netCDF4.Dataset('sst.wkmean.1990-present.nc')
-
 lat,lon = f.variables['lat'], f.variables['lon']
 SST = f.variables['sst']
 sst = SST[:]
@@ -655,7 +661,7 @@ sensors = model.get_selected_sensors()
 # Plot sensor locations
 temp = np.transpose(0 * X[1,:])
 temp[sensors] = 1
-img = 0*snapshot
+img = 0 * snapshot
 img[masks] = temp
 plt.figure()
 plt.imshow(snapshot, cmap=plt.cm.coolwarm)

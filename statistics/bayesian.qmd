@@ -150,14 +150,14 @@ $$
 
 ::: {.callout-caution appearance="simple" collapse="true" icon=false}
 :::: {#exr-statistics-bayes}
-## Bayes' theorem?
+## Bayes' theorem
 
-(@) A person is known to lie one third the time.
+1. A person is known to lie one third the time.
 This person throws a die and reports it is a 4 (four). \
 \
 What is the probability that it is actually a four?
-
-(@) There are 3 urns containing 3 white and 2 black, 2 white and 3 black, as well as 4 white and 1 black ball respectively. Each urn can be chosen with equal probability. \
+\
+1. There are 3 urns containing 3 white and 2 black, 2 white and 3 black, as well as 4 white and 1 black ball respectively. Each urn can be chosen with equal probability. \
 \
 What is the likelihood that a white ball is drawn?
 ::::
@@ -594,7 +594,7 @@ We assume to not be biased.
 
 The probability that exactly $k$ people of a random sample of size $n$ vote for party $x$ is a best described with a binomial distribution
 $$
-p(\frac{k}{n} | x) = \left(\begin{array}{c} n\\ k\end{array}\right) x^k (1-x)^{n-k}.
+p\left(\frac{k}{n} | x\right) = \left(\begin{array}{c} n\\ k\end{array}\right) x^k (1-x)^{n-k}.
 $$
 
 ```{python}
@@ -620,7 +620,7 @@ plt.show()
 
 In order to compute $p(\frac{k}{n})$ we need to integrate our two results
 $$
-p(\frac{k}{n}) = \int_0^1 p(\frac{k}{n} | x) p(x)\,\mathrm{d}x
+p\left(\frac{k}{n}\right) = \int_0^1 p\left(\frac{k}{n} | x\right) p(x)\,\mathrm{d}x
 $$
 
 So for a given sample size $n$ and positive samples $k$ we get a new distribution.

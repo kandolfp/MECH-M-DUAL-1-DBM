@@ -14,3 +14,12 @@ Individual sources are cited at the appropriate spot throughout document at hand
 We want to thank Mirjam Ziselsberger and Matthias Panny for testing, checking, suggestions and general proofreading.
 
 These notes are built with [Quarto](https://quarto.org/).
+
+::: {.content-visible unless-format="html"}
+:::: {.callout-note}
+To allow acceptable formatting for multiple output formats like _html_ or _pdf_ some figures are numbered differently.
+Furthermore, the interactive content in _html_ that is produced for example with `plotly` content is static in _pdf_.
+
+Furthermore, the numbering of some lists is in the _pdf_ not consistent with regards to the _html_.
+::::
+:::

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -91,12 +91,12 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-29e2c20b02301cfff04dc8050bf30c7e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-43df0d6f53b733b42d37fa7808e17715.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-bbb4ab346ed2948d3a2a60dc9ba93ba5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-54b5e27635ce7b559bdb01e89402beb6.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -439,14 +439,14 @@ f(t) = \mathcal{L}^{-1}\{F(s)\} = \frac{1}{s \pi \mathrm{i}} \int_{\gamma - \mat
 </div>
 </div>
 </div>
-<p>To give a better understanding of theses formula we follow the <em>derivation</em> from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, sec. 2.5</a>)</span>.</p>
+<p>To give a better understanding of theses formula we follow the <em>derivation</em> from <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, sec. 2.5</a>)</span>.</p>
 <p>Let us consider the function <span class="math inline">\(f(t)=\mathrm{e}^{\lambda t}\)</span>. As mentioned before we can not directly use the Fourier transform as the function is not bounded. In order to trap the function for <span class="math inline">\(t\to\infty\)</span> we multiply by <span class="math inline">\(\mathrm{e}^{-\gamma t}\)</span> where <span class="math inline">\(\gamma\)</span> is damping more that <span class="math inline">\(f\)</span> grows. In order to handle <span class="math inline">\(t\to-\infty\)</span> we multiply by the Heaviside function <span class="math display">\[
 H(t) =
 \begin{cases}
 0, &amp;t \leq 0,\\
 1, &amp;t &gt; 0,
 \end{cases}
-\]</span> and transform it into a <em>one-sided</em> function as in definition <a href="#def-signal-laplace-transform" class="quarto-xref">Definition&nbsp;<span>10.1</span></a> required. We end up with the function <span class="math display">\[
+\]</span> and transform it into a <em>one-sided</em> function as in definition <a href="#def-signal-laplace-transform" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-signal-laplace-transform</span></a> required. We end up with the function <span class="math display">\[
 \underline{f}(t) = f(t) \mathrm{e}^{-\gamma t}H(t) =
 \begin{cases}
 0, &amp;t \leq 0,\\
@@ -547,7 +547,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The following examples are mostly from <span class="citation" data-cites="Meyberg1992-ws">Meyberg and Vachenauer (<a href="../references.html#ref-Meyberg1992-ws" role="doc-biblioref">1992</a>)</span>.</p>
+<p>The following examples are mostly from <span class="citation" data-cites="Meyberg1992-ws">Meyberg and Vachenauer (<a href="#ref-Meyberg1992-ws" role="doc-biblioref">1992</a>)</span>.</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-tip no-icon">
@@ -651,30 +651,33 @@ x(t) = \begin{cases}
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>heavy_side <span class="op">=</span> <span class="kw">lambda</span> t: np.ones_like(t) <span class="op">*</span> (t<span class="op">&gt;=</span><span class="dv">0</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="kw">lambda</span> n, t: (heavy_side(t <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> n <span class="op">*</span> np.pi) <span class="op">-</span> heavy_side(t <span class="op">-</span> (<span class="dv">2</span> <span class="op">*</span> n <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> np.pi))</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="kw">lambda</span> n, t: (heavy_side(t <span class="op">-</span> (<span class="dv">2</span> <span class="op">*</span> n <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> np.pi) <span class="op">-</span> heavy_side(t <span class="op">-</span> (<span class="dv">2</span> <span class="op">*</span> n <span class="op">+</span> <span class="dv">2</span>) <span class="op">*</span> np.pi))</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>xa <span class="op">=</span> <span class="kw">lambda</span> t: <span class="dv">1</span> <span class="op">/</span> <span class="dv">2</span> <span class="op">*</span> (np.sin(t) <span class="op">+</span> np.<span class="bu">abs</span>(np.sin(t)))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="kw">lambda</span> n, t: (np.heaviside(t <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> n <span class="op">*</span> np.pi, <span class="dv">1</span>) <span class="op">-</span> <span class="op">\</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                  np.heaviside(t <span class="op">-</span> (<span class="dv">2</span> <span class="op">*</span> n <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> np.pi, <span class="dv">1</span>))</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="kw">lambda</span> n, t: (np.heaviside(t <span class="op">-</span> (<span class="dv">2</span> <span class="op">*</span> n <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> np.pi, <span class="dv">1</span>) <span class="op">-</span> <span class="op">\</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                  np.heaviside(t <span class="op">-</span> (<span class="dv">2</span> <span class="op">*</span> n <span class="op">+</span> <span class="dv">2</span>) <span class="op">*</span> np.pi, <span class="dv">1</span>))</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>fun1 <span class="op">=</span> <span class="kw">lambda</span> n, t: (<span class="dv">1</span> <span class="op">/</span> <span class="dv">3</span> <span class="op">*</span> np.sin(t) <span class="op">-</span> (<span class="dv">2</span> <span class="op">*</span> n <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">6</span> <span class="op">*</span> np.sin(<span class="dv">2</span> <span class="op">*</span> t)) <span class="op">*</span> g(n, t)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>fun2 <span class="op">=</span> <span class="kw">lambda</span> n, t:<span class="op">-</span><span class="dv">1</span> <span class="op">*</span> (n <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">3</span> <span class="op">*</span> np.sin(<span class="dv">2</span> <span class="op">*</span> t) <span class="op">*</span> h(n, t)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>funn <span class="op">=</span> <span class="kw">lambda</span> n, t: fun1(n, t) <span class="op">+</span> fun2(n, t) </span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> t: funn(<span class="dv">0</span>, t) <span class="op">+</span> funn(<span class="dv">1</span>, t) <span class="op">+</span> funn(<span class="dv">2</span>, t) <span class="op">+</span> funn(<span class="dv">3</span>, t)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">8</span> <span class="op">*</span> np.pi, <span class="dv">1024</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> np.argmax(funn(<span class="dv">0</span>, t))</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>j <span class="op">=</span> np.argmax(funn(<span class="dv">3</span>, t))</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> (funn(<span class="dv">3</span>, t[j]) <span class="op">-</span> funn(<span class="dv">0</span>, t[i])) <span class="op">/</span> (t[j] <span class="op">-</span> t[i])</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>line <span class="op">=</span> <span class="kw">lambda</span> t: k <span class="op">*</span> (t <span class="op">-</span> t[i]) <span class="op">+</span> funn(<span class="dv">0</span>, t[i])</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>plt.plot(t, xa(t), <span class="st">"--"</span>, label<span class="op">=</span><span class="vs">r"$x_A$"</span>)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>plt.plot(t, fun(t), label<span class="op">=</span><span class="vs">r"$x$"</span>)</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>plt.plot(t, line(t), <span class="st">"k:"</span>)</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"t"</span>)</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"x"</span>)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">8</span><span class="op">*</span>np.pi <span class="op">/</span> (<span class="dv">3</span> <span class="op">*</span> <span class="fl">3.0</span>))</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>xa <span class="op">=</span> <span class="kw">lambda</span> t: <span class="dv">1</span> <span class="op">/</span> <span class="dv">2</span> <span class="op">*</span> (np.sin(t) <span class="op">+</span> np.<span class="bu">abs</span>(np.sin(t)))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>fun1 <span class="op">=</span> <span class="kw">lambda</span> n, t: (<span class="dv">1</span> <span class="op">/</span> <span class="dv">3</span> <span class="op">*</span> np.sin(t) <span class="op">-</span> (<span class="dv">2</span> <span class="op">*</span> n <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">6</span> <span class="op">*</span> <span class="op">\</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                     np.sin(<span class="dv">2</span> <span class="op">*</span> t)) <span class="op">*</span> g(n, t)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>fun2 <span class="op">=</span> <span class="kw">lambda</span> n, t:<span class="op">-</span><span class="dv">1</span> <span class="op">*</span> (n <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">3</span> <span class="op">*</span> np.sin(<span class="dv">2</span> <span class="op">*</span> t) <span class="op">*</span> h(n, t)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>funn <span class="op">=</span> <span class="kw">lambda</span> n, t: fun1(n, t) <span class="op">+</span> fun2(n, t) </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> t: funn(<span class="dv">0</span>, t) <span class="op">+</span> funn(<span class="dv">1</span>, t) <span class="op">+</span> funn(<span class="dv">2</span>, t) <span class="op">+</span> funn(<span class="dv">3</span>, t)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">8</span> <span class="op">*</span> np.pi, <span class="dv">1024</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> np.argmax(funn(<span class="dv">0</span>, t))</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>j <span class="op">=</span> np.argmax(funn(<span class="dv">3</span>, t))</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> (funn(<span class="dv">3</span>, t[j]) <span class="op">-</span> funn(<span class="dv">0</span>, t[i])) <span class="op">/</span> (t[j] <span class="op">-</span> t[i])</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>line <span class="op">=</span> <span class="kw">lambda</span> t: k <span class="op">*</span> (t <span class="op">-</span> t[i]) <span class="op">+</span> funn(<span class="dv">0</span>, t[i])</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>plt.plot(t, xa(t), <span class="st">"--"</span>, label<span class="op">=</span><span class="vs">r"$x_A$"</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>plt.plot(t, fun(t), label<span class="op">=</span><span class="vs">r"$x$"</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>plt.plot(t, line(t), <span class="st">"k:"</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"t"</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"x"</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">8</span><span class="op">*</span>np.pi <span class="op">/</span> (<span class="dv">3</span> <span class="op">*</span> <span class="fl">3.0</span>))</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-laplace-cam-drive2" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -857,15 +860,14 @@ h(t) = \frac{1}{RC}\mathrm{e}^{-\frac{t}{RC}}.
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>RC <span class="op">=</span> <span class="dv">1</span> </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>heavy_side <span class="op">=</span> <span class="kw">lambda</span> t: np.ones_like(t) <span class="op">*</span> (t<span class="op">&gt;=</span><span class="dv">0</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> t: <span class="dv">1</span> <span class="op">/</span> RC <span class="op">*</span> np.exp(<span class="op">-</span>t <span class="op">/</span> RC) <span class="op">*</span> heavy_side(t)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">8.5</span>, <span class="dv">1024</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.plot(t, fun(t))</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt.text(<span class="op">-</span><span class="fl">0.4</span>, <span class="fl">0.96</span>, <span class="vs">r"$\frac</span><span class="sc">{1}{RC}</span><span class="vs">$"</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"t"</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"y"</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">9</span> <span class="op">/</span> (<span class="dv">3</span> <span class="op">*</span> <span class="fl">1.0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> t: <span class="dv">1</span> <span class="op">/</span> RC <span class="op">*</span> np.exp(<span class="op">-</span>t <span class="op">/</span> RC) <span class="op">*</span> np.heaviside(t, <span class="dv">1</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">8.5</span>, <span class="dv">1024</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.plot(t, fun(t))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.text(<span class="op">-</span><span class="fl">0.4</span>, <span class="fl">0.96</span>, <span class="vs">r"$\frac</span><span class="sc">{1}{RC}</span><span class="vs">$"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"t"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"y"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">9</span> <span class="op">/</span> (<span class="dv">3</span> <span class="op">*</span> <span class="fl">1.0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-laplace-rclowpass" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -880,7 +882,7 @@ Figure&nbsp;10.6: Impulse response for the first order RC low pass filter
 </div>
 </div>
 </div>
-<p>If we extend this to a second order low pass filter <a href="#fig-laplace-rclowpass-2" class="quarto-xref">Figure&nbsp;<span>10.5 (b)</span></a> we get <span class="math display">\[
+<p>If we extend this to a second order low pass filter <a href="#fig-laplace-rclowpass-2" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-laplace-rclowpass-2</span></a> we get <span class="math display">\[
 H(s) = \frac{1}{(sRC + 1)^2}
 \]</span> and the impulse response <span class="math display">\[
 h(t) = \frac{1}{(RC)^2}t\mathrm{e}^{-\frac{t}{RC}}.
@@ -893,17 +895,16 @@ h(t) = \frac{1}{(RC)^2}t\mathrm{e}^{-\frac{t}{RC}}.
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>RC <span class="op">=</span> <span class="dv">1</span> </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>heavy_side <span class="op">=</span> <span class="kw">lambda</span> t: np.ones_like(t) <span class="op">*</span> (t<span class="op">&gt;=</span><span class="dv">0</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> t: <span class="dv">1</span> <span class="op">/</span> RC<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> t <span class="op">*</span> np.exp(<span class="op">-</span>t <span class="op">/</span> RC) <span class="op">*</span> heavy_side(t)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">8.5</span>, <span class="dv">1024</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.plot(t, fun(t))</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.text(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.95</span><span class="op">/</span>(np.exp(<span class="dv">1</span>)), <span class="vs">r"$\frac</span><span class="sc">{1}</span><span class="vs">{RC \mathrm</span><span class="sc">{e}</span><span class="vs">}$"</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.text(<span class="fl">0.8</span>, <span class="op">-</span><span class="fl">0.05</span>, <span class="vs">r"$RC$"</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="op">-</span><span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">1</span>], [<span class="dv">1</span><span class="op">/</span>np.exp(<span class="dv">1</span>), <span class="dv">1</span><span class="op">/</span>np.exp(<span class="dv">1</span>), <span class="dv">0</span>], <span class="st">"k:"</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"t"</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"y"</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">9</span> <span class="op">/</span> (<span class="dv">3</span> <span class="op">*</span> <span class="fl">0.37</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> t: <span class="dv">1</span> <span class="op">/</span> RC<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> t <span class="op">*</span> np.exp(<span class="op">-</span>t <span class="op">/</span> RC) <span class="op">*</span> np.heaviside(t, <span class="dv">1</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">8.5</span>, <span class="dv">1024</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.plot(t, fun(t))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.text(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.95</span><span class="op">/</span>(np.exp(<span class="dv">1</span>)), <span class="vs">r"$\frac</span><span class="sc">{1}</span><span class="vs">{RC \mathrm</span><span class="sc">{e}</span><span class="vs">}$"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.text(<span class="fl">0.8</span>, <span class="op">-</span><span class="fl">0.05</span>, <span class="vs">r"$RC$"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="op">-</span><span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">1</span>], [<span class="dv">1</span><span class="op">/</span>np.exp(<span class="dv">1</span>), <span class="dv">1</span><span class="op">/</span>np.exp(<span class="dv">1</span>), <span class="dv">0</span>], <span class="st">"k:"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"t"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"y"</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">9</span> <span class="op">/</span> (<span class="dv">3</span> <span class="op">*</span> <span class="fl">0.37</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-laplace-rclowpass2" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -924,7 +925,7 @@ Figure&nbsp;10.7: Impulse response for the first order RC low pass filter
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Brunton2022" class="csl-entry" role="listitem">
 Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engineering - Machine Learning, Dynamical Systems, and Control</em>. 2nd ed. Cambridge: Cambridge University Press.
 </div>
@@ -1160,8 +1161,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1272,7 +1271,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1524,7 +1522,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -91,12 +91,12 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-29e2c20b02301cfff04dc8050bf30c7e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-43df0d6f53b733b42d37fa7808e17715.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-bbb4ab346ed2948d3a2a60dc9ba93ba5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-54b5e27635ce7b559bdb01e89402beb6.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -433,7 +433,7 @@ window.Quarto = {
 </header>
 
 
-<p>We start off with the so called <em>eigendecomposition</em>. The main idea is to compute a decomposition (or factorization) of a square matrix into a canonical form. We will represent a matrix by its <em>eigenvalues</em> and <em>eigenvectors</em>. In order to do so we need to recall some more definitions from our favourite linear algebra book, such as <span class="citation" data-cites="GoluLoan">Golub and Van Loan (<a href="../references.html#ref-GoluLoan" role="doc-biblioref">2013</a>)</span>.</p>
+<p>We start off with the so called <em>eigendecomposition</em>. The main idea is to compute a decomposition (or factorization) of a square matrix into a canonical form. We will represent a matrix by its <em>eigenvalues</em> and <em>eigenvectors</em>. In order to do so we need to recall some more definitions from our favourite linear algebra book, such as <span class="citation" data-cites="GoluLoan">Golub and Van Loan (<a href="#ref-GoluLoan" role="doc-biblioref">2013</a>)</span>.</p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -444,7 +444,7 @@ window.Quarto = {
 <p><span class="theorem-title"><strong>Definition 4.1 (Determinant)</strong></span> If <span class="math inline">\(A = (a) \in \mathbb{R}^{1\times1}\)</span> (a single number), then its <em>determinant</em> is given by <span class="math inline">\(\det(A) = a\)</span>. Now, the determinant of <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> is defined in terms of order-<span class="math inline">\((n-1)\)</span> determinants: <span class="math display">\[
 \det(A) = \sum_{j=1}^n (-1)^{j+1} a_{1j}\det(A_1j),
 \]</span> where <span class="math inline">\(A_1j\)</span> is a <span class="math inline">\((n-1) \times (n-1)\)</span> matrix obtained by deleting the first row and the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(A\)</span>.</p>
-<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
 </div>
 </div>
 </div>
@@ -468,7 +468,7 @@ window.Quarto = {
 \]</span></li>
 </ol>
 <p>So let us check in <code>numpy</code>:</p>
-<div id="dcd7c5bc" class="cell styled-output" data-execution_count="1">
+<div id="5a333acb" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -513,13 +513,13 @@ p(\lambda) = \det(A - \lambda I).
 \]</span> If all of the eigenvalues are real (in <span class="math inline">\(\mathbb{R}\)</span>) we can sort them from largest to smallest <span class="math display">\[
 \lambda_n(A) \leq \cdots \leq \lambda_2(A) \leq \lambda_1(A),
 \]</span> and we denote the largest by <span class="math inline">\(\lambda_{max}(A) = \lambda_1(A)\)</span> and the smallest by <span class="math inline">\(\lambda_{min}(A) = \lambda_n(A)\)</span>, respectively.</p>
-<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
 </div>
 </div>
 </div>
 </div>
 <p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
-<div id="24f2204d" class="cell styled-output" data-execution_count="2">
+<div id="efc1a30c" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> LA.eigvals(A)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lam_sort <span class="op">=</span> np.sort(lam)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -560,13 +560,13 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
                         0 &amp; \dots &amp; 0 &amp; \lambda_n \\  \end{array}
 \right].
 \]</span> This is called the <em>eigendecomposition</em> of the matrix <span class="math inline">\(A\)</span>.</p>
-<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
 </div>
 </div>
 </div>
 </div>
 <p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
-<div id="9b2b4932" class="cell styled-output" data-execution_count="3">
+<div id="a9c9a381" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lam, V <span class="op">=</span> LA.eig(A)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_eigen <span class="op">=</span> np.diag(lam)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -593,7 +593,7 @@ A_eigen2=array([[1.10000000e+01, 0.00000000e+00, 0.00000000e+00],
 np.allclose(A_eigen, A_eigen2)=True</code></pre>
 </div>
 </div>
-<p>We can use what we have learned about the basis of a vector space and the transformation between two bases, see <a href="../basics/linearalgebra.html#sec-intro-linearalgebra-basis" class="quarto-xref"><span>Section 1.3</span></a> to get a different interpretation of the eigendecomposition.</p>
+<p>We can use what we have learned about the basis of a vector space and the transformation between two bases, see <a href="#sec-intro-linearalgebra-basis" class="quarto-xref"><span class="quarto-unresolved-ref">sec-intro-linearalgebra-basis</span></a> to get a different interpretation of the eigendecomposition.</p>
 <p>We recall, if <span class="math inline">\(x\)</span> is represented in the standard basis with matrix <span class="math inline">\(I\)</span> we can change to the basis represented by <span class="math inline">\(V\)</span> and therefore <span class="math inline">\(\hat{x} = V^{-1}x\)</span>.</p>
 <p>Consequently, the equation <span class="math display">\[
 A = V \Lambda V^{-1}
@@ -690,7 +690,7 @@ x_{n} &amp; = &amp; x^{(n-1)} \\
 \right]
 }_x.
 \]</span></p>
-<p>We transformed it into a system of coupled 1st order ODEs <span class="math inline">\(\dot{x}=Ax\)</span> and we can solve this as seen above. More importantly, the characteristic polynomial of <a href="#eq-hoode" class="quarto-xref">Equation&nbsp;<span>4.2</span></a> is equal to the characteristic polynomial of <a href="#def-eigenvalues" class="quarto-xref">Definition&nbsp;<span>4.2</span></a> and the eigenvalues are the roots of this polynomial.</p>
+<p>We transformed it into a system of coupled 1st order ODEs <span class="math inline">\(\dot{x}=Ax\)</span> and we can solve this as seen above. More importantly, the characteristic polynomial of <a href="#eq-hoode" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-hoode</span></a> is equal to the characteristic polynomial of <a href="#def-eigenvalues" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-eigenvalues</span></a> and the eigenvalues are the roots of this polynomial.</p>
 </section>
 <section id="generalized-eigenvalue-problem" class="level3" data-number="4.1.4">
 <h3 data-number="4.1.4" class="anchored" data-anchor-id="generalized-eigenvalue-problem"><span class="header-section-number">4.1.4</span> Generalized eigenvalue problem</h3>
@@ -710,13 +710,13 @@ M\ddot{u} + K u = 0, \quad u(0) = u_0,
 \lambda(A,B) = \{z\in\mathbb{C}: \det(A-zB)=0\}.
 \]</span> If <span class="math inline">\(\lambda \in \lambda(A,B)\)</span> and <span class="math inline">\(0\neq v\in\mathbb{C}^n\)</span> satisfies <span id="eq-gevp"><span class="math display">\[
 A v = \lambda B v,
-\tag{4.4}\]</span></span> then <span class="math inline">\(v\)</span> is an <em>eigenvector</em> of <span class="math inline">\(A-\lambda B\)</span>. The problem of finding a nontrivial solution to <a href="#eq-gevp" class="quarto-xref">Equation&nbsp;<span>4.4</span></a> is called the <em>generalized eigenvalue problem</em>.</p>
-<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, chap. 7.7</a>)</span></p>
+\tag{4.4}\]</span></span> then <span class="math inline">\(v\)</span> is an <em>eigenvector</em> of <span class="math inline">\(A-\lambda B\)</span>. The problem of finding a nontrivial solution to <a href="#eq-gevp" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-gevp</span></a> is called the <em>generalized eigenvalue problem</em>.</p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, chap. 7.7</a>)</span></p>
 </div>
 </div>
 </div>
 </div>
-<p>In our example <a href="#eq-ma" class="quarto-xref">Equation&nbsp;<span>4.3</span></a> the eigenvalues are <span class="math inline">\(\lambda = \omega^2\)</span> and correspond to the square of the natural frequencies and the eigenvectors <span class="math inline">\(v=u\)</span> correspond to the modes of vibration.</p>
+<p>In our example <a href="#eq-ma" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-ma</span></a> the eigenvalues are <span class="math inline">\(\lambda = \omega^2\)</span> and correspond to the square of the natural frequencies and the eigenvectors <span class="math inline">\(v=u\)</span> correspond to the modes of vibration.</p>
 <p>If <span class="math inline">\(M\)</span> is invertible we can write <span class="math display">\[
 M^{-1}(K -\omega^2 M ) u_0 = (M^{-1}K -\omega^2 I ) u_0 = 0.
 \]</span></p>
@@ -730,10 +730,10 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In most cases inverting the matrix is not recommended, to directly solve the generalized eigenvalue problem, see <span class="citation" data-cites="GoluLoan">(<a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, chap. 7.7</a>)</span> for details.</p>
+<p>In most cases inverting the matrix is not recommended, to directly solve the generalized eigenvalue problem, see <span class="citation" data-cites="GoluLoan">(<a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, chap. 7.7</a>)</span> for details.</p>
 </div>
 </div>
-<p>Let us walk through this with an example from <span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(<a href="../references.html#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, sec. 8.3</a>)</span>.</p>
+<p>Let us walk through this with an example from <span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(<a href="#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, sec. 8.3</a>)</span>.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -745,14 +745,14 @@ Warning
 <div id="fig-twostorybuilding" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-twostorybuilding-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/matrixdc/TwoStoryBuilding.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;4.1: Two story frame where the floors have different dynamic properties."><img src="../_assets/matrixdc/TwoStoryBuilding.svg" class="img-fluid figure-img"></a>
+<a href="../_assets/matrixdc/TwoStoryBuilding.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;4.1: Two story frame where the floors have different dynamic properties."><img src="../_assets/matrixdc/TwoStoryBuilding.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-twostorybuilding-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4.1: Two story frame where the floors have different dynamic properties.
 </figcaption>
 </figure>
 </div>
-<p>In <a href="#fig-twostorybuilding" class="quarto-xref">Figure&nbsp;<span>4.1</span></a> we can see a two story building consisting of a two column frame with a floor. The first floor columns are fixed at the base and have a height <span class="math inline">\(h\)</span>, the second floor is fixed to the first and has the same height. The columns of each frame are modelled as beams with flexural rigidity <span class="math inline">\(EI\)</span> and <span class="math inline">\(2 EI\)</span>, respectively Where <span class="math inline">\(E\)</span> is called <em>Young’s modulus</em> and <span class="math inline">\(I\)</span> the <em>second moment of area</em>. The mass is centred at the floor level.</p>
+<p>In <a href="#fig-twostorybuilding" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-twostorybuilding</span></a> we can see a two story building consisting of a two column frame with a floor. The first floor columns are fixed at the base and have a height <span class="math inline">\(h\)</span>, the second floor is fixed to the first and has the same height. The columns of each frame are modelled as beams with flexural rigidity <span class="math inline">\(EI\)</span> and <span class="math inline">\(2 EI\)</span>, respectively Where <span class="math inline">\(E\)</span> is called <em>Young’s modulus</em> and <span class="math inline">\(I\)</span> the <em>second moment of area</em>. The mass is centred at the floor level.</p>
 <p>This allows us to model such a building as a system with two degrees of freedom <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> as the displacement indicated in blue. The dashed blue line would be such a displacement for the frame.</p>
 <p>The resulting equations of motion become <span class="math display">\[
 \begin{array}{r}
@@ -772,7 +772,7 @@ k_1 + k_2 &amp; -k_2 \\
 \end{array}
 \right].
 \]</span></p>
-<p>For the derivation of the stiffness coefficients we refer to <span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(<a href="../references.html#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, 188</a>)</span> and recall the result here as follows <span class="math display">\[
+<p>For the derivation of the stiffness coefficients we refer to <span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(<a href="#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, 188</a>)</span> and recall the result here as follows <span class="math display">\[
 k_1 = \frac{48 EI}{h^3}, \quad k_2 = \frac{24 EI}{h^3}.
 \]</span> This results in the stiffness matrix <span class="math display">\[
 K = \underbrace{\frac{24 EI}{h^3}}_{=k}
@@ -787,7 +787,7 @@ K = \underbrace{\frac{24 EI}{h^3}}_{=k}
 \]</span> and solving this equation for <span class="math inline">\(\omega^2\)</span> results in <span class="math display">\[
 \omega_1^2 = \frac{k}{2m}, \quad \omega_2^2 = \frac{2k}{m}.
 \]</span></p>
-<p>To compute the eigenvectors <span class="math inline">\(v_1\)</span> and <span class="math inline">\(v_2\)</span> we use <a href="#eq-eigenvector" class="quarto-xref">Equation&nbsp;<span>4.1</span></a>, i.e.&nbsp;for <span class="math inline">\(v_1\)</span> this reads as <span class="math display">\[
+<p>To compute the eigenvectors <span class="math inline">\(v_1\)</span> and <span class="math inline">\(v_2\)</span> we use <a href="#eq-eigenvector" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-eigenvector</span></a>, i.e.&nbsp;for <span class="math inline">\(v_1\)</span> this reads as <span class="math display">\[
 -\frac{k}{2m} \left[
 \begin{array}{cc}
 2m &amp; 0 \\
@@ -844,7 +844,7 @@ v_2 = \left[\begin{array}{c}
 <div id="fig-tsm1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-tsm1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/matrixdc/TwoStoryBuildingMode1.svg" class="lightbox" data-gallery="fig-twosotrybuildingmodes" title="Figure&nbsp;4.2&nbsp;(a): First mode"><img src="../_assets/matrixdc/TwoStoryBuildingMode1.svg" class="img-fluid figure-img" data-ref-parent="fig-twosotrybuildingmodes"></a>
+<a href="../_assets/matrixdc/TwoStoryBuildingMode1.png" class="lightbox" data-gallery="fig-twosotrybuildingmodes" title="Figure&nbsp;4.2&nbsp;(a): First mode"><img src="../_assets/matrixdc/TwoStoryBuildingMode1.png" class="img-fluid figure-img" data-ref-parent="fig-twosotrybuildingmodes"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-tsm1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) First mode
@@ -856,7 +856,7 @@ v_2 = \left[\begin{array}{c}
 <div id="fig-tsm2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-tsm2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/matrixdc/TwoStoryBuildingMode2.svg" class="lightbox" data-gallery="fig-twosotrybuildingmodes" title="Figure&nbsp;4.2&nbsp;(b): Second mode"><img src="../_assets/matrixdc/TwoStoryBuildingMode2.svg" class="img-fluid figure-img" data-ref-parent="fig-twosotrybuildingmodes"></a>
+<a href="../_assets/matrixdc/TwoStoryBuildingMode2.png" class="lightbox" data-gallery="fig-twosotrybuildingmodes" title="Figure&nbsp;4.2&nbsp;(b): Second mode"><img src="../_assets/matrixdc/TwoStoryBuildingMode2.png" class="img-fluid figure-img" data-ref-parent="fig-twosotrybuildingmodes"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-tsm2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Second mode
@@ -871,7 +871,7 @@ Figure&nbsp;4.2: Model of a two story building with the shape of the modes accor
 </figcaption>
 </figure>
 </div>
-<p>Two wrap up the example our overall temporal response consists of the time invariant part defined by our eigenvectors <span class="math inline">\(v_1\)</span>, and <span class="math inline">\(v_2\)</span>, as well as the time dependent part with our eigenfrequencies <span class="math inline">\(\omega_1\)</span> and <span class="math inline">\(\omega_2\)</span> as well as the constants <span class="math inline">\(A_1\)</span>, <span class="math inline">\(A_2\)</span>, <span class="math inline">\(\phi_1\)</span>, <span class="math inline">\(\phi_2\)</span> depending on the initial condition <span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(see <a href="../references.html#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, chap. 5</a>)</span>. <span class="math display">\[
+<p>Two wrap up the example our overall temporal response consists of the time invariant part defined by our eigenvectors <span class="math inline">\(v_1\)</span>, and <span class="math inline">\(v_2\)</span>, as well as the time dependent part with our eigenfrequencies <span class="math inline">\(\omega_1\)</span> and <span class="math inline">\(\omega_2\)</span> as well as the constants <span class="math inline">\(A_1\)</span>, <span class="math inline">\(A_2\)</span>, <span class="math inline">\(\phi_1\)</span>, <span class="math inline">\(\phi_2\)</span> depending on the initial condition <span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(see <a href="#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, chap. 5</a>)</span>. <span class="math display">\[
 \left[\begin{array}{c}
 x_1(t)\\
 x_2(t)
@@ -887,7 +887,7 @@ A_2 \sin(\omega_2 t + \phi_2)
 \end{array}
 \right]
 \]</span></p>
-<p><span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(Compare <a href="../references.html#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, chap. 8.3</a>, pp.&nbsp;189-191)</span></p>
+<p><span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(Compare <a href="#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, chap. 8.3</a>, pp.&nbsp;189-191)</span></p>
 </div>
 </div>
 </div>
@@ -909,73 +909,150 @@ A\approx A_r = V\Lambda U^{\mathsf{T}} = \sum_{i=1}^r\lambda_i v_i u_i^{\mathsf{
 </figure>
 </div>
 <p>This approximation can be used to reduce the storage demand of an image.</p>
-<div id="cell-fig-mci_headquater" class="cell" data-execution_count="4">
+<div class="cell" data-layout="[[1],[1,1,1],[1,1,1]]" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> LA</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">'svg'</span>]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>im <span class="op">=</span> np.asarray(iio.imread(<span class="st">"https://www.mci.edu/en/download/27-logos-bilder?download=618:mci-eu-web"</span>))</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rgb2gray(rgb):</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.dot(rgb[...,:<span class="dv">3</span>], [<span class="fl">0.2989</span>, <span class="fl">0.5870</span>, <span class="fl">0.1140</span>])</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>im_gray <span class="op">=</span> rgb2gray(im)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>im_cut <span class="op">=</span> im_gray[<span class="dv">1500</span>:<span class="dv">3001</span>,<span class="dv">1500</span>:<span class="dv">3001</span>] <span class="op">/</span> <span class="dv">255</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>lam_, V_ <span class="op">=</span> LA.eig(im_cut)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>order <span class="op">=</span> np.argsort(np.<span class="bu">abs</span>(lam_))</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> lam_[order[::<span class="op">-</span><span class="dv">1</span>]]</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> V_[:, order[::<span class="op">-</span><span class="dv">1</span>]]</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>rec <span class="op">=</span> [<span class="dv">1</span><span class="op">/</span><span class="dv">1000</span>, <span class="dv">10</span><span class="op">/</span><span class="dv">100</span>, <span class="dv">25</span><span class="op">/</span><span class="dv">100</span>, <span class="dv">50</span><span class="op">/</span><span class="dv">100</span>, <span class="dv">1</span>]</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>Vinv <span class="op">=</span> LA.inv(V)</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>ax_eig <span class="op">=</span> fig.add_subplot(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>ax_eig.plot((np.<span class="bu">abs</span>(lam)))</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>ax_eig.set_yscale(<span class="st">"log"</span>)</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>ax_eig.set_ylabel(<span class="vs">r"$|\lambda_i|$"</span>)</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co">#ax_eig.set_xlabel("$i$")</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>ax_eig.set_title(<span class="st">"absolute value of the eigenvalues"</span>)</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>ax_eig.set_aspect(<span class="st">"auto"</span>, <span class="st">"box"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>im <span class="op">=</span> np.asarray(iio.imread(</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://www.mci.edu/en/download/27-logos-bilder?"</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"download=618:mci-eu-web"</span>))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rgb2gray(rgb):</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.dot(rgb[...,:<span class="dv">3</span>], [<span class="fl">0.2989</span>, <span class="fl">0.5870</span>, <span class="fl">0.1140</span>])</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>im_gray <span class="op">=</span> rgb2gray(im)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>im_cut <span class="op">=</span> im_gray[<span class="dv">1500</span>:<span class="dv">3001</span>,<span class="dv">1500</span>:<span class="dv">3001</span>] <span class="op">/</span> <span class="dv">255</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>lam_, V_ <span class="op">=</span> LA.eig(im_cut)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>order <span class="op">=</span> np.argsort(np.<span class="bu">abs</span>(lam_))</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> lam_[order[::<span class="op">-</span><span class="dv">1</span>]]</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> V_[:, order[::<span class="op">-</span><span class="dv">1</span>]]</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>rec <span class="op">=</span> [<span class="dv">1</span><span class="op">/</span><span class="dv">1000</span>, <span class="dv">10</span><span class="op">/</span><span class="dv">100</span>, <span class="dv">25</span><span class="op">/</span><span class="dv">100</span>, <span class="dv">50</span><span class="op">/</span><span class="dv">100</span>, <span class="dv">75</span><span class="op">/</span><span class="dv">100</span>]</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>Vinv <span class="op">=</span> LA.inv(V)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>plt.plot((np.<span class="bu">abs</span>(lam)))</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>plt.yscale(<span class="st">"log"</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$|\lambda_i|$"</span>)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"index"</span>)</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">7e1</span>)</span>
 <span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>axs <span class="op">=</span> [] </span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">9</span>))</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">8</span>))</span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">7</span>))</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">6</span>))</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">5</span>))</span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>axs.append(fig.add_subplot(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>))</span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, p <span class="kw">in</span> <span class="bu">enumerate</span>(rec):</span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="bu">int</span>(np.ceil(<span class="bu">len</span>(lam) <span class="op">*</span> p))</span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    A_r <span class="op">=</span> np.real(V[:, <span class="dv">0</span>:r] <span class="op">@</span> np.diag(lam[<span class="dv">0</span>:r], <span class="dv">0</span>) <span class="op">@</span> Vinv[<span class="dv">0</span>:r, :])</span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    axs[i].imshow(A_r, cmap<span class="op">=</span>plt.get_cmap(<span class="st">"gray"</span>))</span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>    axs[i].set_axis_off()</span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> r <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>    axs[i].set_title(<span class="ss">f"$</span><span class="sc">{</span>r<span class="op">=</span><span class="sc">}</span><span class="ss">$"</span>)</span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">5</span>].imshow(im_cut, cmap<span class="op">=</span>plt.get_cmap(<span class="st">"gray"</span>))</span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">5</span>].set_axis_off()</span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">5</span>].set_title(<span class="ss">f"Original image"</span>)</span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(top <span class="op">=</span> <span class="fl">0.99</span>, bottom<span class="op">=</span><span class="fl">0.01</span>, hspace<span class="op">=</span><span class="fl">0.35</span>, wspace<span class="op">=</span><span class="fl">0.001</span>)</span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> rec:</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="bu">int</span>(np.ceil(<span class="bu">len</span>(lam) <span class="op">*</span> p))</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    A_r <span class="op">=</span> np.real(V[:, <span class="dv">0</span>:r] <span class="op">@</span> np.diag(lam[<span class="dv">0</span>:r], <span class="dv">0</span>) <span class="op">@</span> Vinv[<span class="dv">0</span>:r, :])</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    plt.imshow(A_r, cmap<span class="op">=</span>plt.get_cmap(<span class="st">"gray"</span>))</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    plt.gca().set_axis_off()</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>plt.imshow(im_cut, cmap<span class="op">=</span>plt.get_cmap(<span class="st">"gray"</span>))</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>plt.gca().set_axis_off()</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display">
-<div id="fig-mci_headquater" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-mci_headquater" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mci_headquater-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="eigen_files/figure-html/fig-mci_headquater-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;4.3: Image of MCI I and the reconstruction with approximated matrix."><img src="eigen_files/figure-html/fig-mci_headquater-output-1.svg" class="img-fluid figure-img"></a>
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mci_headquater" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-mci_headquater-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mci_headquater-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="eigen_files/figure-html/fig-mci_headquater-output-1.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;4.3&nbsp;(a): Absolute value of Eigenvalues from largest to smallest"><img src="eigen_files/figure-html/fig-mci_headquater-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_headquater-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Absolute value of Eigenvalues from largest to smallest
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mci_headquater" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-mci_headquater-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mci_headquater-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="eigen_files/figure-html/fig-mci_headquater-output-2.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;4.3&nbsp;(b): 0.1% of eigenvalue"><img src="eigen_files/figure-html/fig-mci_headquater-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_headquater-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) 0.1% of eigenvalue
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mci_headquater" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-mci_headquater-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mci_headquater-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="eigen_files/figure-html/fig-mci_headquater-output-3.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;4.3&nbsp;(c): 10% of eigenvalue"><img src="eigen_files/figure-html/fig-mci_headquater-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_headquater-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) 10% of eigenvalue
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mci_headquater" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-mci_headquater-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mci_headquater-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="eigen_files/figure-html/fig-mci_headquater-output-4.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;4.3&nbsp;(d): 25% of eigenvalue"><img src="eigen_files/figure-html/fig-mci_headquater-output-4.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_headquater-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) 25% of eigenvalue
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mci_headquater" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-mci_headquater-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mci_headquater-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="eigen_files/figure-html/fig-mci_headquater-output-5.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;4.3&nbsp;(e): 50% of eigenvalue"><img src="eigen_files/figure-html/fig-mci_headquater-output-5.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_headquater-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(e) 50% of eigenvalue
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mci_headquater" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-mci_headquater-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mci_headquater-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="eigen_files/figure-html/fig-mci_headquater-output-6.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;4.3&nbsp;(f): 75% of eigenvalue"><img src="eigen_files/figure-html/fig-mci_headquater-output-6.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_headquater-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(f) 75% of eigenvalue
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mci_headquater" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-mci_headquater-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mci_headquater-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="eigen_files/figure-html/fig-mci_headquater-output-7.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;4.3&nbsp;(g): original image"><img src="eigen_files/figure-html/fig-mci_headquater-output-7.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_headquater-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(g) original image
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mci_headquater-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4.3: Image of MCI I and the reconstruction with approximated matrix.
 </figcaption>
 </figure>
-</div>
 </div>
 </div>
 </section>
@@ -992,7 +1069,7 @@ Figure&nbsp;4.3: Image of MCI I and the reconstruction with approximated matrix.
 <p>Therefore, we will look into a generalized decomposition called the <em>singular value decomposition</em> in the next section.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Downey2024VibrationMechanicsPractical" class="csl-entry" role="listitem">
 Downey, Austin, and Laura Micheli. 2024. <span>“Vibration Mechanics: A Practical Introduction for Mechanical, Civil, and Aerospace Engineers.”</span> <a href="https://doi.org/10.5281/ZENODO.12539013">https://doi.org/10.5281/ZENODO.12539013</a>.
 </div>
@@ -1229,8 +1306,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1341,7 +1416,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1593,7 +1667,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","loop":false,"closeEffect":"zoom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -91,14 +91,12 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-29e2c20b02301cfff04dc8050bf30c7e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-43df0d6f53b733b42d37fa7808e17715.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-bbb4ab346ed2948d3a2a60dc9ba93ba5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-54b5e27635ce7b559bdb01e89402beb6.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -438,7 +436,7 @@ window.Quarto = {
 
 
 <p>The fourier transform helps us convert a signal from the time domain to the frequency domain. In this section our main concern is going to be one dimensional signals, but the concepts can be applied to multiple dimensions.</p>
-<p>Before we can start defining the <em>Fourier Series</em> we need to extend our notion of vector space to functions space. This is done with <em>Hilbert</em> spaces. The computational rules follow the same principal as in <a href="../basics/linearalgebra.html#def-vectorspace" class="quarto-xref">Definition&nbsp;<span>1.1</span></a>, what we want to investigate is the inner product.</p>
+<p>Before we can start defining the <em>Fourier Series</em> we need to extend our notion of vector space to functions space. This is done with <em>Hilbert</em> spaces. The computational rules follow the same principal as in <a href="#def-vectorspace" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-vectorspace</span></a>, what we want to investigate is the inner product.</p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -453,7 +451,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>At first this looks strange but it is closely related to our already known <a href="../basics/linearalgebra.html#def-dotproduct" class="quarto-xref">Definition&nbsp;<span>1.3</span></a>.</p>
+<p>At first this looks strange but it is closely related to our already known <a href="#def-dotproduct" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-dotproduct</span></a>.</p>
 <p>As a first step, if we move from real to complex vector spaces the transpose is replaced by the conjugate transposed or hermit transpose, in notation the <span class="math inline">\(^\mathbf{T}\)</span> becomes <span class="math inline">\(^\mathbf{H}\)</span>.</p>
 <p>Now consider a discrete version of <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> at regular intervals <span class="math inline">\(\Delta x = \frac{b-a}{n-1}\)</span> where <span class="math display">\[
 f_i = f(x_i) = f(a + (i - 1) \Delta x),\quad i = 1, \ldots n,
@@ -537,7 +535,7 @@ b_k &amp;= \frac{1}{\|\sin\left(\omega k t\right)\|_2^2} \langle f(t), \sin\left
 </div>
 <p>With the help of Euler’s formula: <span id="eq-euler"><span class="math display">\[
 \mathrm{e}^{\mathrm{i} k t} = \cos(k t) + \mathrm{i} \sin(k t)
-\tag{9.2}\]</span></span> we can rewrite <a href="#eq-fs" class="quarto-xref">Equation&nbsp;<span>9.1</span></a> as <span class="math display">\[
+\tag{9.2}\]</span></span> we can rewrite <a href="#eq-fs" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-fs</span></a> as <span class="math display">\[
 f(t) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\omega\mathrm{i} k t}
 \]</span> with <span class="math display">\[
 c_k = \frac{1}{L} \int_0^L f(t) \mathrm{e}^{-\omega\mathrm{i} k t}\, \mathrm{d}t.
@@ -567,85 +565,86 @@ Note
 <p><span class="theorem-title"><strong>Example 9.1 (Fourier Series of Hat functions)</strong></span> We test the Fourier Series with two different hat functions. The first represents a triangle with constant slope up and down, the second a rectangle with infinite slope in the corners.</p>
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
-<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
-<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
-<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi</span>
-<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">7</span></span>
-<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a>M2 <span class="op">=</span> <span class="dv">50</span></span>
-<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
-<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Hat functions</span></span>
-<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> t, L: <span class="dv">0</span> <span class="cf">if</span> <span class="bu">abs</span>(t) <span class="op">&gt;</span> L <span class="op">/</span> <span class="dv">4</span> <span class="cf">else</span> (<span class="dv">1</span> <span class="op">-</span> np.sign(t) <span class="op">*</span> t <span class="op">*</span> <span class="dv">4</span> <span class="op">/</span> L)</span>
-<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>fun2 <span class="op">=</span> <span class="kw">lambda</span> t, L: <span class="dv">0</span> <span class="cf">if</span> <span class="bu">abs</span>(t) <span class="op">&gt;</span> L <span class="op">/</span> <span class="dv">4</span> <span class="cf">else</span> <span class="dv">1</span></span>
-<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-14"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># t</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-15" class="code-annotation-target"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="op">-</span>L<span class="op">/</span><span class="dv">2</span>, L<span class="op">/</span><span class="dv">2</span>, N, endpoint<span class="op">=</span><span class="va">False</span>)</span>
-<span id="annotated-cell-3-16"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> t[<span class="dv">1</span>] <span class="op">-</span> t[<span class="dv">0</span>]</span>
-<span id="annotated-cell-3-17"><a href="#annotated-cell-3-17" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.pi <span class="op">*</span> <span class="dv">2</span> <span class="op">/</span> L</span>
-<span id="annotated-cell-3-18"><a href="#annotated-cell-3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-19"><a href="#annotated-cell-3-19" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> np.fromiter(<span class="bu">map</span>(<span class="kw">lambda</span> t: fun(t, L), t), t.dtype)</span>
-<span id="annotated-cell-3-20"><a href="#annotated-cell-3-20" aria-hidden="true" tabindex="-1"></a>f2 <span class="op">=</span> np.fromiter(<span class="bu">map</span>(<span class="kw">lambda</span> t: fun2(t, L), t), t.dtype)</span>
-<span id="annotated-cell-3-21"><a href="#annotated-cell-3-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-22"><a href="#annotated-cell-3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Necessary functions</span></span>
-<span id="annotated-cell-3-23"><a href="#annotated-cell-3-23" aria-hidden="true" tabindex="-1"></a>scalarproduct <span class="op">=</span> <span class="kw">lambda</span> f, g, dt: dt <span class="op">*</span> np.vecdot(f, g)</span>
-<span id="annotated-cell-3-24"><a href="#annotated-cell-3-24" aria-hidden="true" tabindex="-1"></a>a_coeff <span class="op">=</span> <span class="kw">lambda</span> n, f: <span class="dv">2</span> <span class="op">/</span> L <span class="op">*</span> scalarproduct(f, np.cos(w <span class="op">*</span> n <span class="op">*</span> t), dt)</span>
-<span id="annotated-cell-3-25"><a href="#annotated-cell-3-25" aria-hidden="true" tabindex="-1"></a>b_coeff <span class="op">=</span> <span class="kw">lambda</span> n, f: <span class="dv">2</span> <span class="op">/</span> L <span class="op">*</span> scalarproduct(f, np.sin(w <span class="op">*</span> n <span class="op">*</span> t), dt)</span>
-<span id="annotated-cell-3-26"><a href="#annotated-cell-3-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-27"><a href="#annotated-cell-3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># f_hat_0</span></span>
-<span id="annotated-cell-3-28"><a href="#annotated-cell-3-28" aria-hidden="true" tabindex="-1"></a>f_hat <span class="op">=</span> np.zeros((M <span class="op">+</span> <span class="dv">1</span>, N))</span>
-<span id="annotated-cell-3-29"><a href="#annotated-cell-3-29" aria-hidden="true" tabindex="-1"></a>f_hat[<span class="dv">0</span>, :] <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span> <span class="op">*</span> a_coeff(<span class="dv">0</span>, f)</span>
-<span id="annotated-cell-3-30"><a href="#annotated-cell-3-30" aria-hidden="true" tabindex="-1"></a>f2_hat <span class="op">=</span> np.zeros((M2 <span class="op">+</span> <span class="dv">1</span>, N))</span>
-<span id="annotated-cell-3-31"><a href="#annotated-cell-3-31" aria-hidden="true" tabindex="-1"></a>f2_hat[<span class="dv">0</span>, :] <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span> <span class="op">*</span> a_coeff(<span class="dv">0</span>, f2)</span>
-<span id="annotated-cell-3-32"><a href="#annotated-cell-3-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-33"><a href="#annotated-cell-3-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Computation of the approximation</span></span>
-<span id="annotated-cell-3-34"><a href="#annotated-cell-3-34" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.zeros(M)</span>
-<span id="annotated-cell-3-35"><a href="#annotated-cell-3-35" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.zeros(M)</span>
-<span id="annotated-cell-3-36"><a href="#annotated-cell-3-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
-<span id="annotated-cell-3-37"><a href="#annotated-cell-3-37" aria-hidden="true" tabindex="-1"></a>    a[i] <span class="op">=</span> a_coeff(i <span class="op">+</span> <span class="dv">1</span>, f)</span>
-<span id="annotated-cell-3-38"><a href="#annotated-cell-3-38" aria-hidden="true" tabindex="-1"></a>    b[i] <span class="op">=</span> b_coeff(i <span class="op">+</span> <span class="dv">1</span>, f)</span>
-<span id="annotated-cell-3-39"><a href="#annotated-cell-3-39" aria-hidden="true" tabindex="-1"></a>    f_hat[i <span class="op">+</span> <span class="dv">1</span>, :] <span class="op">=</span> f_hat[i, :] <span class="op">+</span> <span class="op">\</span></span>
-<span id="annotated-cell-3-40"><a href="#annotated-cell-3-40" aria-hidden="true" tabindex="-1"></a>        a[i] <span class="op">*</span> np.cos(w <span class="op">*</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> t) <span class="op">+</span> <span class="op">\</span></span>
-<span id="annotated-cell-3-41"><a href="#annotated-cell-3-41" aria-hidden="true" tabindex="-1"></a>        b[i] <span class="op">*</span> np.sin(w <span class="op">*</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> t)</span>
-<span id="annotated-cell-3-42"><a href="#annotated-cell-3-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-43"><a href="#annotated-cell-3-43" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M2):</span>
-<span id="annotated-cell-3-44"><a href="#annotated-cell-3-44" aria-hidden="true" tabindex="-1"></a>    f2_hat[i <span class="op">+</span> <span class="dv">1</span>, :] <span class="op">=</span> f2_hat[i, :] <span class="op">+</span> <span class="op">\</span></span>
-<span id="annotated-cell-3-45"><a href="#annotated-cell-3-45" aria-hidden="true" tabindex="-1"></a>        a_coeff(i <span class="op">+</span> <span class="dv">1</span>, f2) <span class="op">*</span> np.cos(w <span class="op">*</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> t) <span class="op">+</span> <span class="op">\</span></span>
-<span id="annotated-cell-3-46"><a href="#annotated-cell-3-46" aria-hidden="true" tabindex="-1"></a>        b_coeff(i <span class="op">+</span> <span class="dv">1</span>, f2) <span class="op">*</span> np.sin(w <span class="op">*</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> t)</span>
-<span id="annotated-cell-3-47"><a href="#annotated-cell-3-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-48"><a href="#annotated-cell-3-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Figures</span></span>
-<span id="annotated-cell-3-49"><a href="#annotated-cell-3-49" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">0</span>)</span>
-<span id="annotated-cell-3-50"><a href="#annotated-cell-3-50" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
-<span id="annotated-cell-3-51"><a href="#annotated-cell-3-51" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_hat[<span class="op">-</span><span class="dv">1</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f_7}</span><span class="vs">$"</span>)</span>
-<span id="annotated-cell-3-52"><a href="#annotated-cell-3-52" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
-<span id="annotated-cell-3-53"><a href="#annotated-cell-3-53" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="annotated-cell-3-54"><a href="#annotated-cell-3-54" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
-<span id="annotated-cell-3-55"><a href="#annotated-cell-3-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-56"><a href="#annotated-cell-3-56" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">1</span>)</span>
-<span id="annotated-cell-3-57"><a href="#annotated-cell-3-57" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_hat[<span class="dv">0</span>, :], label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span><span class="dv">0</span><span class="sc">}</span><span class="vs">$"</span>)</span>
-<span id="annotated-cell-3-58"><a href="#annotated-cell-3-58" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
-<span id="annotated-cell-3-59"><a href="#annotated-cell-3-59" aria-hidden="true" tabindex="-1"></a>    plt.plot(t, a[i] <span class="op">*</span> np.cos(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> t), label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\cos(</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\omega t)$"</span>)</span>
-<span id="annotated-cell-3-60"><a href="#annotated-cell-3-60" aria-hidden="true" tabindex="-1"></a>plt.legend(ncol<span class="op">=</span>np.ceil((M <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">2</span>), bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="op">-</span><span class="fl">0.1</span>))</span>
-<span id="annotated-cell-3-61"><a href="#annotated-cell-3-61" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
-<span id="annotated-cell-3-62"><a href="#annotated-cell-3-62" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
-<span id="annotated-cell-3-63"><a href="#annotated-cell-3-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-64"><a href="#annotated-cell-3-64" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">2</span>)</span>
-<span id="annotated-cell-3-65"><a href="#annotated-cell-3-65" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
-<span id="annotated-cell-3-66"><a href="#annotated-cell-3-66" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">7</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_7$"</span>)</span>
-<span id="annotated-cell-3-67"><a href="#annotated-cell-3-67" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">20</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{20}</span><span class="vs">$"</span>)</span>
-<span id="annotated-cell-3-68"><a href="#annotated-cell-3-68" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">50</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{50}</span><span class="vs">$"</span>)</span>
-<span id="annotated-cell-3-69"><a href="#annotated-cell-3-69" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="annotated-cell-3-70"><a href="#annotated-cell-3-70" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="annotated-cell-3-71"><a href="#annotated-cell-3-71" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
-<span id="annotated-cell-3-72"><a href="#annotated-cell-3-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-73"><a href="#annotated-cell-3-73" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="annotated-cell-2-3"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
+<span id="annotated-cell-2-4"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
+<span id="annotated-cell-2-6"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi</span>
+<span id="annotated-cell-2-7"><a href="#annotated-cell-2-7" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">5</span></span>
+<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8" aria-hidden="true" tabindex="-1"></a>M2 <span class="op">=</span> <span class="dv">50</span></span>
+<span id="annotated-cell-2-9"><a href="#annotated-cell-2-9" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">512</span></span>
+<span id="annotated-cell-2-10"><a href="#annotated-cell-2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Hat functions</span></span>
+<span id="annotated-cell-2-11"><a href="#annotated-cell-2-11" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> t, L: <span class="dv">0</span> <span class="cf">if</span> <span class="bu">abs</span>(t) <span class="op">&gt;</span> L <span class="op">/</span> <span class="dv">4</span> <span class="cf">else</span> (<span class="dv">1</span> <span class="op">-</span> np.sign(t) <span class="op">*</span> t <span class="op">*</span> <span class="dv">4</span> <span class="op">/</span> L)</span>
+<span id="annotated-cell-2-12"><a href="#annotated-cell-2-12" aria-hidden="true" tabindex="-1"></a>fun2 <span class="op">=</span> <span class="kw">lambda</span> t, L: <span class="dv">0</span> <span class="cf">if</span> <span class="bu">abs</span>(t) <span class="op">&gt;</span> L <span class="op">/</span> <span class="dv">4</span> <span class="cf">else</span> <span class="dv">1</span></span>
+<span id="annotated-cell-2-13"><a href="#annotated-cell-2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-14"><a href="#annotated-cell-2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># t</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-15" class="code-annotation-target"><a href="#annotated-cell-2-15" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="op">-</span>L<span class="op">/</span><span class="dv">2</span>, L<span class="op">/</span><span class="dv">2</span>, N, endpoint<span class="op">=</span><span class="va">False</span>)</span>
+<span id="annotated-cell-2-16"><a href="#annotated-cell-2-16" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> t[<span class="dv">1</span>] <span class="op">-</span> t[<span class="dv">0</span>]</span>
+<span id="annotated-cell-2-17"><a href="#annotated-cell-2-17" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.pi <span class="op">*</span> <span class="dv">2</span> <span class="op">/</span> L</span>
+<span id="annotated-cell-2-18"><a href="#annotated-cell-2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-19"><a href="#annotated-cell-2-19" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> np.fromiter(<span class="bu">map</span>(<span class="kw">lambda</span> t: fun(t, L), t), t.dtype)</span>
+<span id="annotated-cell-2-20"><a href="#annotated-cell-2-20" aria-hidden="true" tabindex="-1"></a>f2 <span class="op">=</span> np.fromiter(<span class="bu">map</span>(<span class="kw">lambda</span> t: fun2(t, L), t), t.dtype)</span>
+<span id="annotated-cell-2-21"><a href="#annotated-cell-2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-22"><a href="#annotated-cell-2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Necessary functions</span></span>
+<span id="annotated-cell-2-23"><a href="#annotated-cell-2-23" aria-hidden="true" tabindex="-1"></a>scalarproduct <span class="op">=</span> <span class="kw">lambda</span> f, g, dt: dt <span class="op">*</span> np.vecdot(f, g)</span>
+<span id="annotated-cell-2-24"><a href="#annotated-cell-2-24" aria-hidden="true" tabindex="-1"></a>a_coeff <span class="op">=</span> <span class="kw">lambda</span> n, f: <span class="dv">2</span> <span class="op">/</span> L <span class="op">*</span> scalarproduct(f, np.cos(w <span class="op">*</span> n <span class="op">*</span> t), dt)</span>
+<span id="annotated-cell-2-25"><a href="#annotated-cell-2-25" aria-hidden="true" tabindex="-1"></a>b_coeff <span class="op">=</span> <span class="kw">lambda</span> n, f: <span class="dv">2</span> <span class="op">/</span> L <span class="op">*</span> scalarproduct(f, np.sin(w <span class="op">*</span> n <span class="op">*</span> t), dt)</span>
+<span id="annotated-cell-2-26"><a href="#annotated-cell-2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-27"><a href="#annotated-cell-2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># f_hat_0</span></span>
+<span id="annotated-cell-2-28"><a href="#annotated-cell-2-28" aria-hidden="true" tabindex="-1"></a>f_hat <span class="op">=</span> np.zeros((M <span class="op">+</span> <span class="dv">1</span>, N))</span>
+<span id="annotated-cell-2-29"><a href="#annotated-cell-2-29" aria-hidden="true" tabindex="-1"></a>f_hat[<span class="dv">0</span>, :] <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span> <span class="op">*</span> a_coeff(<span class="dv">0</span>, f)</span>
+<span id="annotated-cell-2-30"><a href="#annotated-cell-2-30" aria-hidden="true" tabindex="-1"></a>f2_hat <span class="op">=</span> np.zeros((M2 <span class="op">+</span> <span class="dv">1</span>, N))</span>
+<span id="annotated-cell-2-31"><a href="#annotated-cell-2-31" aria-hidden="true" tabindex="-1"></a>f2_hat[<span class="dv">0</span>, :] <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span> <span class="op">*</span> a_coeff(<span class="dv">0</span>, f2)</span>
+<span id="annotated-cell-2-32"><a href="#annotated-cell-2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-33"><a href="#annotated-cell-2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Computation of the approximation</span></span>
+<span id="annotated-cell-2-34"><a href="#annotated-cell-2-34" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.zeros(M)</span>
+<span id="annotated-cell-2-35"><a href="#annotated-cell-2-35" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.zeros(M)</span>
+<span id="annotated-cell-2-36"><a href="#annotated-cell-2-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
+<span id="annotated-cell-2-37"><a href="#annotated-cell-2-37" aria-hidden="true" tabindex="-1"></a>    a[i] <span class="op">=</span> a_coeff(i <span class="op">+</span> <span class="dv">1</span>, f)</span>
+<span id="annotated-cell-2-38"><a href="#annotated-cell-2-38" aria-hidden="true" tabindex="-1"></a>    b[i] <span class="op">=</span> b_coeff(i <span class="op">+</span> <span class="dv">1</span>, f)</span>
+<span id="annotated-cell-2-39"><a href="#annotated-cell-2-39" aria-hidden="true" tabindex="-1"></a>    f_hat[i <span class="op">+</span> <span class="dv">1</span>, :] <span class="op">=</span> f_hat[i, :] <span class="op">+</span> <span class="op">\</span></span>
+<span id="annotated-cell-2-40"><a href="#annotated-cell-2-40" aria-hidden="true" tabindex="-1"></a>        a[i] <span class="op">*</span> np.cos(w <span class="op">*</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> t) <span class="op">+</span> <span class="op">\</span></span>
+<span id="annotated-cell-2-41"><a href="#annotated-cell-2-41" aria-hidden="true" tabindex="-1"></a>        b[i] <span class="op">*</span> np.sin(w <span class="op">*</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> t)</span>
+<span id="annotated-cell-2-42"><a href="#annotated-cell-2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-43"><a href="#annotated-cell-2-43" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M2):</span>
+<span id="annotated-cell-2-44"><a href="#annotated-cell-2-44" aria-hidden="true" tabindex="-1"></a>    f2_hat[i <span class="op">+</span> <span class="dv">1</span>, :] <span class="op">=</span> f2_hat[i, :] <span class="op">+</span> <span class="op">\</span></span>
+<span id="annotated-cell-2-45"><a href="#annotated-cell-2-45" aria-hidden="true" tabindex="-1"></a>        a_coeff(i <span class="op">+</span> <span class="dv">1</span>, f2) <span class="op">*</span> np.cos(w <span class="op">*</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> t) <span class="op">+</span> <span class="op">\</span></span>
+<span id="annotated-cell-2-46"><a href="#annotated-cell-2-46" aria-hidden="true" tabindex="-1"></a>        b_coeff(i <span class="op">+</span> <span class="dv">1</span>, f2) <span class="op">*</span> np.sin(w <span class="op">*</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> t)</span>
+<span id="annotated-cell-2-47"><a href="#annotated-cell-2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-48"><a href="#annotated-cell-2-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Figures</span></span>
+<span id="annotated-cell-2-49"><a href="#annotated-cell-2-49" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">0</span>)</span>
+<span id="annotated-cell-2-50"><a href="#annotated-cell-2-50" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
+<span id="annotated-cell-2-51"><a href="#annotated-cell-2-51" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_hat[<span class="op">-</span><span class="dv">1</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f_7}</span><span class="vs">$"</span>)</span>
+<span id="annotated-cell-2-52"><a href="#annotated-cell-2-52" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
+<span id="annotated-cell-2-53"><a href="#annotated-cell-2-53" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="annotated-cell-2-54"><a href="#annotated-cell-2-54" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
+<span id="annotated-cell-2-55"><a href="#annotated-cell-2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-56"><a href="#annotated-cell-2-56" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">1</span>)</span>
+<span id="annotated-cell-2-57"><a href="#annotated-cell-2-57" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_hat[<span class="dv">0</span>, :], label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span><span class="dv">0</span><span class="sc">}</span><span class="vs">$"</span>)</span>
+<span id="annotated-cell-2-58"><a href="#annotated-cell-2-58" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
+<span id="annotated-cell-2-59"><a href="#annotated-cell-2-59" aria-hidden="true" tabindex="-1"></a>    plt.plot(t, a[i] <span class="op">*</span> np.cos(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> t),</span>
+<span id="annotated-cell-2-60"><a href="#annotated-cell-2-60" aria-hidden="true" tabindex="-1"></a>             label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\cos(</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\omega t)$"</span>)</span>
+<span id="annotated-cell-2-61"><a href="#annotated-cell-2-61" aria-hidden="true" tabindex="-1"></a>plt.legend(ncol<span class="op">=</span>np.ceil((M <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">2</span>), bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="op">-</span><span class="fl">0.1</span>))</span>
+<span id="annotated-cell-2-62"><a href="#annotated-cell-2-62" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
+<span id="annotated-cell-2-63"><a href="#annotated-cell-2-63" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
+<span id="annotated-cell-2-64"><a href="#annotated-cell-2-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-65"><a href="#annotated-cell-2-65" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">2</span>)</span>
+<span id="annotated-cell-2-66"><a href="#annotated-cell-2-66" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
+<span id="annotated-cell-2-67"><a href="#annotated-cell-2-67" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">7</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_7$"</span>)</span>
+<span id="annotated-cell-2-68"><a href="#annotated-cell-2-68" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">20</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{20}</span><span class="vs">$"</span>)</span>
+<span id="annotated-cell-2-69"><a href="#annotated-cell-2-69" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">50</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{50}</span><span class="vs">$"</span>)</span>
+<span id="annotated-cell-2-70"><a href="#annotated-cell-2-70" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
+<span id="annotated-cell-2-71"><a href="#annotated-cell-2-71" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="annotated-cell-2-72"><a href="#annotated-cell-2-72" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
+<span id="annotated-cell-2-73"><a href="#annotated-cell-2-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-74"><a href="#annotated-cell-2-74" aria-hidden="true" tabindex="-1"></a>plt.show()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="15" data-code-annotation="1">Not including the endpoint is important, as this is part of the periodicity of the function.</span>
+<span data-code-cell="annotated-cell-2" data-code-lines="15" data-code-annotation="1">Not including the endpoint is important, as this is part of the periodicity of the function.</span>
 </dd>
 </dl>
 </div>
@@ -704,28 +703,25 @@ Figure&nbsp;9.1: Fourier transform of a two hat functions.
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-caution no-icon">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-<i class="fa-solid fa-pen-to-square" aria-label="pen-to-square"></i> Exercise - Self implementation <a href="#exm-fourier-hat" class="quarto-xref">Example&nbsp;<span>9.1</span></a>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Implement the code yourself by filling out the missing sections:</p>
-<div id="b2a192d4" class="cell" data-execution_count="2">
+<div class="callout-body-container">
+<div id="exr-fourier-hat-self" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 9.1 (Self implementation <a href="#exm-fourier-hat" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-fourier-hat</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
+<div id="29094541" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi   <span class="co"># Interval</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">7</span>           <span class="co"># Nodes for the first function</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">5</span>           <span class="co"># Nodes for the first function</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>M2 <span class="op">=</span> <span class="dv">50</span>         <span class="co"># Nodes for the second function</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">101</span>         <span class="co"># Interpolation points</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">512</span>         <span class="co"># Interpolation points</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Hat functions</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> x, L: <span class="co"># tooth</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>fun2 <span class="op">=</span> <span class="kw">lambda</span> x, L: <span class="co"># step</span></span>
@@ -775,21 +771,24 @@ Figure&nbsp;9.1: Fourier transform of a two hat functions.
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">1</span>)</span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_hat[<span class="dv">0</span>, :], label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span><span class="dv">0</span><span class="sc">}</span><span class="vs">$"</span>)</span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    plt.plot(t, a[i] <span class="op">*</span> np.cos(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> t), label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\cos(</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\omega t)$"</span>)</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>plt.legend(ncol<span class="op">=</span>np.ceil((M <span class="op">+</span> <span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span>), bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="op">-</span><span class="fl">0.1</span>))</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">2</span>)</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">7</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_7$"</span>)</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">20</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{20}</span><span class="vs">$"</span>)</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">50</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{50}</span><span class="vs">$"</span>)</span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    plt.plot(t, a[i] <span class="op">*</span> np.cos(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> t),</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>             label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\cos(</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\omega t)$"</span>)</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>plt.legend(ncol<span class="op">=</span>np.ceil((M <span class="op">+</span> <span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span>), bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="op">-</span><span class="fl">0.1</span>))</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">2</span>)</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">7</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_7$"</span>)</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">20</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{20}</span><span class="vs">$"</span>)</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">50</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{50}</span><span class="vs">$"</span>)</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </div>
 </div>
 </div>
@@ -804,7 +803,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The phenomenon that the truncated Fourier series oscillates in <a href="#fig-fourier_hat-3" class="quarto-xref">Figure&nbsp;<span>9.1 (c)</span></a> due to the discontinuity of the function is called the Gibbs phenomenon.</p>
+<p>The phenomenon that the truncated Fourier series oscillates in <a href="#fig-fourier_hat-3" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fourier_hat-3</span></a> due to the discontinuity of the function is called the Gibbs phenomenon.</p>
 </div>
 </div>
 </section>
@@ -955,9 +954,20 @@ Note
 </div>
 <p>As we can transfer the properties of the Fourier transform to the DFT we get the nice properties for sampled signals.</p>
 <p>The downside of the DFT is that it does not scale well for large <span class="math inline">\(N\)</span> as the matrix-vector multiplication is <span class="math inline">\(\mathcal{O}(N^2)\)</span> and becomes slow.</p>
-<div id="3756abd5" class="cell" data-execution_count="3">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Code for the computation of the DFT matrix.</p>
+<div id="57dfe6eb" class="cell" data-execution_count="3">
 <details class="code-fold">
-<summary>Show code for the computation of the DFT matrix.</summary>
+<summary>Show the code.</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -969,10 +979,12 @@ Note
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>DFT <span class="op">=</span> np.power(w, J<span class="op">*</span>K)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</div>
+</div>
 </section>
 <section id="fast-fourier-transform" class="level2" data-number="9.4">
 <h2 data-number="9.4" class="anchored" data-anchor-id="fast-fourier-transform"><span class="header-section-number">9.4</span> Fast Fourier Transform</h2>
-<p>In 1965, James W. Cooley (IBM) and John W. Tukey (Princeton) developed the so called <em>fast Fourier transform</em> (FFT) that scales with <span class="math inline">\(\mathcal{O}(N \log(N))\)</span>. which becomes almost linear for large enough <span class="math inline">\(N\)</span>, see <span class="citation" data-cites="Cooley1965">Cooley and Tukey (<a href="../references.html#ref-Cooley1965" role="doc-biblioref">1965</a>)</span>.</p>
+<p>In 1965, James W. Cooley (IBM) and John W. Tukey (Princeton) developed the so called <em>fast Fourier transform</em> (FFT) that scales with <span class="math inline">\(\mathcal{O}(N \log(N))\)</span>. which becomes almost linear for large enough <span class="math inline">\(N\)</span>, see <span class="citation" data-cites="Cooley1965">Cooley and Tukey (<a href="#ref-Cooley1965" role="doc-biblioref">1965</a>)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -985,7 +997,7 @@ Note
 <div class="callout-body-container callout-body">
 <p>To give an idea of what this change means and why this algorithm was a game changer. Audio is most of the time sampled with 44.1kHz, i.e.&nbsp;44 100 samples per second. For a 10s audio clip the vector <span class="math inline">\(f\)</span> will have the length <span class="math inline">\(N = 4.41 \times 10^5\)</span>. The DFT computation (without generating the matrix) results ins approximately <span class="math inline">\(2\times 10^{11}\)</span> multiplications. The FFT on the other hand requires <span class="math inline">\(6\times 10^6\)</span> leading to a speed-up of about <span class="math inline">\(30 000\)</span>.</p>
 <p>How this influenced our world we know from the use in our daily communication networks.</p>
-<p><span class="citation" data-cites="Brunton2022">(Compare <a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 65–66</a>)</span></p>
+<p><span class="citation" data-cites="Brunton2022">(Compare <a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 65–66</a>)</span></p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -998,7 +1010,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We should note that Cooley and Tukey where not the first to propose a FFT but the provided the formulation used today. Gauss already formulated the FFT 150 years earlier in 1805 for orbital approximations. Apparently, he did the necessary computations in his head and needed a fast algorithm so he developed the FFT. Gauss being Gauss did not see this as something important and it did not get published until 1866 in his compiled notes, <span class="citation" data-cites="Gauss">Gauß (<a href="../references.html#ref-Gauss" role="doc-biblioref">1866</a>)</span>.</p>
+<p>We should note that Cooley and Tukey where not the first to propose a FFT but the provided the formulation used today. Gauss already formulated the FFT 150 years earlier in 1805 for orbital approximations. Apparently, he did the necessary computations in his head and needed a fast algorithm so he developed the FFT. Gauss being Gauss did not see this as something important and it did not get published until 1866 in his compiled notes, <span class="citation" data-cites="Gauss">Gauß (<a href="#ref-Gauss" role="doc-biblioref">1866</a>)</span>.</p>
 </div>
 </div>
 <p>The main idea of the FFT is to exploit symmetries in the Fourier transform and to relate the <span class="math inline">\(N\)</span>-dimensional DFT to a lower dimensional DFT by reordering the coefficients.</p>
@@ -1009,7 +1021,7 @@ Note
 </div>
 <div class="callout-body-container">
 <div id="def-fourier-fft" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 9.7 (Fast-Fourier Transform)</strong></span> If we assume that <span class="math inline">\(N = 2^n\)</span>, i.e.&nbsp;a power of <span class="math inline">\(2\)</span>, in particular <span class="math inline">\(N=2M\)</span>, and <span class="math inline">\(F_N\)</span> denotes the matrix of <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span>9.4</span></a> for dimension <span class="math inline">\(N\)</span> and we have <span class="math inline">\(\hat{f} = F_N f\)</span> and <span class="math inline">\(f = \tfrac1N \overline{F_N} \hat{f}\)</span>. By splitting <span class="math inline">\(f\)</span> in the even and odd indices as <span class="math display">\[e = [f_0, f_2, \ldots, f_{N-2}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and <span class="math display">\[o = [f_1, f_3, \ldots, f_{N-1}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and for <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span>9.4</span></a> we get <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 9.7 (Fast-Fourier Transform)</strong></span> If we assume that <span class="math inline">\(N = 2^n\)</span>, i.e.&nbsp;a power of <span class="math inline">\(2\)</span>, in particular <span class="math inline">\(N=2M\)</span>, and <span class="math inline">\(F_N\)</span> denotes the matrix of <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-dft</span></a> for dimension <span class="math inline">\(N\)</span> and we have <span class="math inline">\(\hat{f} = F_N f\)</span> and <span class="math inline">\(f = \tfrac1N \overline{F_N} \hat{f}\)</span>. By splitting <span class="math inline">\(f\)</span> in the even and odd indices as <span class="math display">\[e = [f_0, f_2, \ldots, f_{N-2}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and <span class="math display">\[o = [f_1, f_3, \ldots, f_{N-1}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and for <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-dft</span></a> we get <span class="math display">\[
 \begin{aligned}
 \hat{f}_k &amp;= \sum_{j=0}^{N-1}f_j\, \omega^{j k} = \sum_{j=0}^{M-1}f_{2j}\, \omega^{(2j) k} + \sum_{j=0}^{M-1}f_{2j+1}\, \omega^{(2j+1) k} \\
 &amp;= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} + \omega^k\sum_{j=0}^{M-1}o_{j}\, (\omega^2)^{j k}.
@@ -1078,14 +1090,14 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The original FFT paper <span class="citation" data-cites="Cooley1965">(<a href="../references.html#ref-Cooley1965" role="doc-biblioref">Cooley and Tukey 1965</a>)</span> uses bit flipping and similar techniques to boost performance even more. It can even be implemented to allow for in place computation to save storage.</p>
+<p>The original FFT paper <span class="citation" data-cites="Cooley1965">(<a href="#ref-Cooley1965" role="doc-biblioref">Cooley and Tukey 1965</a>)</span> uses bit flipping and similar techniques to boost performance even more. It can even be implemented to allow for in place computation to save storage.</p>
 <p>IMAGE</p>
-<p><span class="citation" data-cites="Meyberg1992-ws">(Compare <a href="../references.html#ref-Meyberg1992-ws" role="doc-biblioref">Meyberg and Vachenauer 1992, 331</a>)</span></p>
+<p><span class="citation" data-cites="Meyberg1992-ws">(Compare <a href="#ref-Meyberg1992-ws" role="doc-biblioref">Meyberg and Vachenauer 1992, 331</a>)</span></p>
 </div>
 </div>
 <section id="examples-for-the-fft-in-action" class="level3" data-number="9.4.1">
 <h3 data-number="9.4.1" class="anchored" data-anchor-id="examples-for-the-fft-in-action"><span class="header-section-number">9.4.1</span> Examples for the FFT in action</h3>
-<p>In order to give an idea how FFT works in an application we follow the examples given in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 66–76</a>)</span>.</p>
+<p>In order to give an idea how FFT works in an application we follow the examples given in <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 66–76</a>)</span>.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1215,8 +1227,8 @@ Figure&nbsp;9.2: Signal noise filter with FFT.
 </figcaption>
 </figure>
 </div>
-<p>As can be seen in the <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span>9.2 (c)</span></a>, the reconstruction is not exact. This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. In particular:</p>
-<div id="38d9db58" class="cell" data-execution_count="5">
+<p>As can be seen in the <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fourier_fft_denoise-3</span></a>, the reconstruction is not exact. This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. In particular:</p>
+<div id="3a7dab6c" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -1256,25 +1268,22 @@ Figure&nbsp;9.2: Signal noise filter with FFT.
 </div>
 </div>
 </div>
-<p>Note: For <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span>9.2 (c)</span></a> we discarded the imaginary part of the reconstruction.</p>
+<p>Note: For <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fourier_fft_denoise-3</span></a> we discarded the imaginary part of the reconstruction.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-caution no-icon">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-<i class="fa-solid fa-pen-to-square" aria-label="pen-to-square"></i> Exercise - Self implementation <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span>9.2</span></a>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Implement the code yourself by filling out the missing sections:</p>
-<div id="8ca04243" class="cell" data-execution_count="6">
+<div class="callout-body-container">
+<div id="exr-fourier-fft-den-self" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 9.2 (Self implementation <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-fourier-fft-den</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
+<div id="6e808c40" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
@@ -1337,28 +1346,32 @@ Figure&nbsp;9.2: Signal noise filter with FFT.
 <span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">5e-3</span>)</span>
 <span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+</div>
+<div class="callout callout-style-simple callout-caution no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<i class="fa-solid fa-pen-to-square" aria-label="pen-to-square"></i> Exercise - DFT vs.&nbsp;FFT
+Exercise DFT vs.&nbsp;FFT
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Implement <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span>9.2</span></a> with DFT and FFT such that you can evaluate the runtime and create a plot showing the different runtime as well as check if the two produce the same result</p>
+<div id="exr-fourier-fft-den" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 9.3 (DFT vs.&nbsp;FFT)</strong></span> Implement <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-fourier-fft-den</span></a> with DFT and FFT such that you can evaluate the runtime and create a plot showing the different runtime as well as check if the two produce the same result</p>
+</div>
 </div>
 </div>
 </div>
 <p>For the Fourier transform we stated that the multiplication with <span class="math inline">\(\mathcal{F}\{\partial f\}=\mathrm{i}\omega\mathcal{F}\{f\}\)</span>, similarly we can derive a formula for the numerical derivative of a sampled function by multiplying each entry of the transformed vector by <span class="math inline">\(\mathrm{i}\kappa\)</span> for <span class="math inline">\(\kappa=\tfrac{2\pi k}{N}\)</span>. <span class="math inline">\(\kappa\)</span> is called the discrete wavenumber associated with the component <span class="math inline">\(k\)</span>.</p>
-<p>Let us explore this with the example stated in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 68–69</a>)</span>.</p>
+<p>Let us explore this with the example stated in <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 68–69</a>)</span>.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1387,78 +1400,79 @@ f(t) &amp;= \cos(t) \exp\left(-\frac{t^2}{25}\right) \\
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> b <span class="op">-</span> a</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> t: np.cos(t) <span class="op">*</span> np.exp(<span class="op">-</span>np.power(t, <span class="dv">2</span>) <span class="op">/</span> <span class="dv">25</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>dfun <span class="op">=</span> <span class="kw">lambda</span> t: <span class="op">-</span>(np.sin(t) <span class="op">*</span> np.exp(<span class="op">-</span>np.power(t, <span class="dv">2</span>) <span class="op">/</span> <span class="dv">25</span>) <span class="op">+</span> (<span class="dv">2</span> <span class="op">/</span> <span class="dv">25</span>) <span class="op">*</span> t <span class="op">*</span> fun(t))</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fD(N, fun, dfun, a, b):</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> np.linspace(a, b, N, endpoint<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    dt <span class="op">=</span> t[<span class="dv">1</span>] <span class="op">-</span> t[<span class="dv">0</span>]</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> fun(t)</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    df_DD <span class="op">=</span> np.diff(f) <span class="op">/</span> dt</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    df_DD <span class="op">=</span> np.append(df_DD, (f[<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> f[<span class="dv">0</span>]) <span class="op">/</span> dt)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_DD, np.linalg.norm(df_DD <span class="op">-</span> dfun(t)) <span class="op">/</span> np.linalg.norm(df_DD)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> spD(N, fun, dfun, a, b):</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> np.linspace(a, b, N, endpoint<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> fun(t)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    fhat <span class="op">=</span> np.fft.fft(f)</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    kappa <span class="op">=</span> np.fft.fftfreq(N, (b <span class="op">-</span> a) <span class="op">/</span> (N <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi))</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    df_hat <span class="op">=</span> kappa <span class="op">*</span> fhat <span class="op">*</span> (<span class="ot">1j</span>)</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    df_r <span class="op">=</span> np.fft.ifft(df_hat).real</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_r, np.linalg.norm(df_r <span class="op">-</span> dfun(t)) <span class="op">/</span> np.linalg.norm(df_r)</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>dfun <span class="op">=</span> <span class="kw">lambda</span> t: <span class="op">-</span>(np.sin(t) <span class="op">*</span> np.exp(<span class="op">-</span>np.power(t, <span class="dv">2</span>) <span class="op">/</span> <span class="dv">25</span>) <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                 (<span class="dv">2</span> <span class="op">/</span> <span class="dv">25</span>) <span class="op">*</span> t <span class="op">*</span> fun(t))</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fD(N, fun, dfun, a, b):</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> np.linspace(a, b, N, endpoint<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    dt <span class="op">=</span> t[<span class="dv">1</span>] <span class="op">-</span> t[<span class="dv">0</span>]</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> fun(t)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    df_DD <span class="op">=</span> np.diff(f) <span class="op">/</span> dt</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    df_DD <span class="op">=</span> np.append(df_DD, (f[<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> f[<span class="dv">0</span>]) <span class="op">/</span> dt)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_DD, np.linalg.norm(df_DD <span class="op">-</span> dfun(t)) <span class="op">/</span> np.linalg.norm(df_DD)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> spD(N, fun, dfun, a, b):</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> np.linspace(a, b, N, endpoint<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> fun(t)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    fhat <span class="op">=</span> np.fft.fft(f)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    kappa <span class="op">=</span> np.fft.fftfreq(N, (b <span class="op">-</span> a) <span class="op">/</span> (N <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi))</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    df_hat <span class="op">=</span> kappa <span class="op">*</span> fhat <span class="op">*</span> (<span class="ot">1j</span>)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    df_r <span class="op">=</span> np.fft.ifft(df_hat).real</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_r, np.linalg.norm(df_r <span class="op">-</span> dfun(t)) <span class="op">/</span> np.linalg.norm(df_r)</span>
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Finite differences</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>df_fD, e <span class="op">=</span> fD(N, fun, dfun, a, b)</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Spectral derivative</span></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>df_spD, e <span class="op">=</span> spD(N, fun, dfun, a, b)</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Figures</span></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(a, b, N, endpoint<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">0</span>)</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>plt.plot(t, dfun(t), label<span class="op">=</span><span class="st">"Exact"</span>)</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_fD, <span class="st">"-."</span>, label<span class="op">=</span><span class="st">"Finite Differences"</span>)</span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_spD, <span class="st">"--"</span>, label<span class="op">=</span><span class="st">"Spectral"</span>)</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"t"</span>)</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$\partial_t f$"</span>)</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">5</span>)</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">1</span>)</span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">19</span></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="bu">range</span>(<span class="dv">3</span>, n)</span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>e_spD <span class="op">=</span> np.ones(<span class="bu">len</span>(M))</span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>e_fD <span class="op">=</span> np.ones(<span class="bu">len</span>(M))</span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, j <span class="kw">in</span> <span class="bu">enumerate</span>(M):</span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>    _, e_fD[i] <span class="op">=</span> fD(<span class="dv">2</span><span class="op">**</span>j, fun, dfun, a, b)</span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>    _, e_spD[i] <span class="op">=</span> spD(<span class="dv">2</span><span class="op">**</span>j, fun, dfun, a, b)</span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>plt.loglog(np.<span class="bu">pow</span>(<span class="dv">2</span>, M), e_fD, label<span class="op">=</span><span class="st">"Finite differences"</span>)</span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>plt.loglog(np.<span class="bu">pow</span>(<span class="dv">2</span>, M), e_spD, label<span class="op">=</span><span class="st">"Spectral derivative"</span>)</span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"N"</span>)</span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Relative Error"</span>)</span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">2.5e-1</span>)</span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>fun_saw <span class="op">=</span> <span class="kw">lambda</span> t, L: <span class="dv">0</span> <span class="cf">if</span> <span class="bu">abs</span>(t) <span class="op">&gt;</span> L <span class="op">/</span> <span class="dv">4</span> <span class="cf">else</span> (<span class="dv">1</span> <span class="op">-</span> np.sign(t) <span class="op">*</span> t <span class="op">*</span> <span class="dv">4</span> <span class="op">/</span> L)</span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="op">-</span>np.pi, np.pi</span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> b <span class="op">-</span> a</span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>fun2 <span class="op">=</span> <span class="kw">lambda</span> t: np.fromiter(<span class="bu">map</span>(<span class="kw">lambda</span> t: fun_saw(t, L), t), t.dtype)</span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">10</span></span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(a, b, N, endpoint<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">2</span>)</span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>df_spD, _ <span class="op">=</span> spD(N, fun2, fun2, a, b)</span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>df_fD, _ <span class="op">=</span> fD(N, fun2, fun2, a, b)</span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>plt.plot(t, fun2(t), label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_fD, <span class="st">"-."</span>, label<span class="op">=</span><span class="st">"Finite derivative"</span>)</span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_spD, <span class="st">"--"</span>, label<span class="op">=</span><span class="st">"Spectral derivative"</span>)</span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"t"</span>)</span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$f, \partial_t f$"</span>)</span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Finite differences</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>df_fD, e <span class="op">=</span> fD(N, fun, dfun, a, b)</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Spectral derivative</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>df_spD, e <span class="op">=</span> spD(N, fun, dfun, a, b)</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Figures</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(a, b, N, endpoint<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">0</span>)</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>plt.plot(t, dfun(t), label<span class="op">=</span><span class="st">"Exact"</span>)</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_fD, <span class="st">"-."</span>, label<span class="op">=</span><span class="st">"Finite Differences"</span>)</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_spD, <span class="st">"--"</span>, label<span class="op">=</span><span class="st">"Spectral"</span>)</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"t"</span>)</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$\partial_t f$"</span>)</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">5</span>)</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">1</span>)</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">19</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="bu">range</span>(<span class="dv">3</span>, n)</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>e_spD <span class="op">=</span> np.ones(<span class="bu">len</span>(M))</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>e_fD <span class="op">=</span> np.ones(<span class="bu">len</span>(M))</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, j <span class="kw">in</span> <span class="bu">enumerate</span>(M):</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>    _, e_fD[i] <span class="op">=</span> fD(<span class="dv">2</span><span class="op">**</span>j, fun, dfun, a, b)</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>    _, e_spD[i] <span class="op">=</span> spD(<span class="dv">2</span><span class="op">**</span>j, fun, dfun, a, b)</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>plt.loglog(np.<span class="bu">pow</span>(<span class="dv">2</span>, M), e_fD, label<span class="op">=</span><span class="st">"Finite differences"</span>)</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>plt.loglog(np.<span class="bu">pow</span>(<span class="dv">2</span>, M), e_spD, label<span class="op">=</span><span class="st">"Spectral derivative"</span>)</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"N"</span>)</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Relative Error"</span>)</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">2.5e-1</span>)</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>fun_saw <span class="op">=</span> <span class="kw">lambda</span> t, L: <span class="dv">0</span> <span class="cf">if</span> <span class="bu">abs</span>(t) <span class="op">&gt;</span> L <span class="op">/</span> <span class="dv">4</span> <span class="cf">else</span> (<span class="dv">1</span> <span class="op">-</span> np.sign(t) <span class="op">*</span> t <span class="op">*</span> <span class="dv">4</span> <span class="op">/</span> L)</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="op">-</span>np.pi, np.pi</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> b <span class="op">-</span> a</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>fun2 <span class="op">=</span> <span class="kw">lambda</span> t: np.fromiter(<span class="bu">map</span>(<span class="kw">lambda</span> t: fun_saw(t, L), t), t.dtype)</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">10</span></span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(a, b, N, endpoint<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">2</span>)</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>df_spD, _ <span class="op">=</span> spD(N, fun2, fun2, a, b)</span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>df_fD, _ <span class="op">=</span> fD(N, fun2, fun2, a, b)</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>plt.plot(t, fun2(t), label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_fD, <span class="st">"-."</span>, label<span class="op">=</span><span class="st">"Finite derivative"</span>)</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_spD, <span class="st">"--"</span>, label<span class="op">=</span><span class="st">"Spectral derivative"</span>)</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"t"</span>)</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$f, \partial_t f$"</span>)</span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="fig-fourier_fft_spectralderivative" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1511,20 +1525,20 @@ Figure&nbsp;9.3: Computing the derivative of a function
 </figcaption>
 </figure>
 </div>
-<p>As can be seen in <a href="#fig-fourier_fft_spectralderivative-2" class="quarto-xref">Figure&nbsp;<span>9.3 (b)</span></a> we can reduce the error of both methods by increasing <span class="math inline">\(N\)</span>. Nevertheless, the spectral method is more accurate and converges faster.</p>
+<p>As can be seen in <a href="#fig-fourier_fft_spectralderivative-2" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fourier_fft_spectralderivative-2</span></a> we can reduce the error of both methods by increasing <span class="math inline">\(N\)</span>. Nevertheless, the spectral method is more accurate and converges faster.</p>
 </div>
 </div>
 </div>
 </div>
-<p>In <a href="../matrixdc/eigen.html#sec-eigen-lode" class="quarto-xref"><span>Section 4.1.2</span></a> we have already seen how the eigendecomposition can be used to compute the solution of ordinary differential equations by changing the basis and transforming the equation into a basis that can be handled easy. The same is true with the Fourier transformation.</p>
+<p>In <a href="#sec-eigen-lode" class="quarto-xref"><span class="quarto-unresolved-ref">sec-eigen-lode</span></a> we have already seen how the eigendecomposition can be used to compute the solution of ordinary differential equations by changing the basis and transforming the equation into a basis that can be handled easy. The same is true with the Fourier transformation.</p>
 <p>As mentioned before, Fourier introduced it to solve the heat equation and we will do the same.</p>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1552,7 +1566,7 @@ u(t, x) &amp;= \mathcal{F}^{-1}\{\hat{u}(t, \omega)\} = \mathcal{F}^{-1}\{\mathr
 \end{aligned}
 \]</span></p>
 <p>For the numerical computation it is more convenient to stay in the frequency domain and use <span class="math inline">\(\kappa\)</span> as before.</p>
-<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.5 and Code 2.6)</span>.</p>
+<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.5 and Code 2.6)</span>.</p>
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1658,20 +1672,15 @@ Figure&nbsp;9.4: Simulation of the heat equation in 1D.
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-caution no-icon">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-<i class="fa-solid fa-pen-to-square" aria-label="pen-to-square"></i> Exercise - Self implementation <a href="#exm-fourier-fft-heat" class="quarto-xref">Example&nbsp;<span>9.4</span></a>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Implement the code yourself by filling out the missing sections:</p>
-<div id="4e299521" class="cell" data-execution_count="9">
+<div class="callout-body-container">
+<div id="exr-fourier-fft-heat-self" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 9.4 (Self implementation <a href="#exm-fourier-fft-heat" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-fourier-fft-heat</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
+<div id="a46dfa1f" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
@@ -1735,6 +1744,7 @@ Figure&nbsp;9.4: Simulation of the heat equation in 1D.
 </div>
 </div>
 </div>
+</div>
 <p>Next, we look at the transport equation.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
@@ -1746,7 +1756,7 @@ Figure&nbsp;9.4: Simulation of the heat equation in 1D.
 <p><span class="theorem-title"><strong>Example 9.5 (Transport or advection)</strong></span> The transport equation in 1D is given by <span class="math display">\[
 \dot{u} = - c \partial_x u.
 \]</span> It is called the transport equation, as the initial value simply propagates in time to the right hand side of the domain with speed <span class="math inline">\(c\)</span>, i.e.&nbsp;<span class="math inline">\(u(t, x) = u(0, x -c t)\)</span>. The solution is simply computed by exchanging the right hand side from the above code.</p>
-<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.5 and Code 2.6)</span>.</p>
+<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.5 and Code 2.6)</span>.</p>
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1769,51 +1779,52 @@ Figure&nbsp;9.4: Simulation of the heat equation in 1D.
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>u0 <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>np.cosh(x)</span>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>u0hat <span class="op">=</span> np.fft.fft(u0)</span>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co"># SciPy's odeint function doesn't play well with complex numbers, so we recast </span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co"># the state u0hat from an N-element complex vector to a 2N-element real vector</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>u0hat_ri <span class="op">=</span> np.concatenate((u0hat.real, u0hat.imag))</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate in Fourier frequency domain</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> <span class="fl">0.025</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">600</span><span class="op">*</span>dt, dt)</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rhsWave(uhat_ri,t,kappa,c):</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    uhat <span class="op">=</span> uhat_ri[:N] <span class="op">+</span> (<span class="ot">1j</span>) <span class="op">*</span> uhat_ri[N:]</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    d_uhat <span class="op">=</span> <span class="op">-</span>c <span class="op">*</span> (<span class="ot">1j</span> ) <span class="op">*</span>kappa <span class="op">*</span> uhat</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    d_uhat_ri <span class="op">=</span> np.concatenate((d_uhat.real, d_uhat.imag)).astype(<span class="st">'float64'</span>)</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d_uhat_ri</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>uhat_ri <span class="op">=</span> odeint(rhsWave, u0hat_ri, T, args<span class="op">=</span>(kappa, c))</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>uhat <span class="op">=</span> uhat_ri[:, :N] <span class="op">+</span> (<span class="ot">1j</span>) <span class="op">*</span> uhat_ri[:, N:]</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> np.zeros_like(uhat)</span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(T)):</span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    u[k, :] <span class="op">=</span> np.fft.ifft(uhat[k, :])</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> u.real    </span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Waterfall plot</span></span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"$t$"</span>)</span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r"$u(t, x)$"</span>)</span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>ax.set_zticks([])</span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>u_plot <span class="op">=</span> u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">60</span>, :]</span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(u_plot.shape[<span class="dv">0</span>]):</span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>    ys <span class="op">=</span> j <span class="op">*</span> np.ones(u_plot.shape[<span class="dv">1</span>])</span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, ys, u_plot[j, :])</span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Image plot</span></span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.flipud(u), aspect<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$t \to$"</span>)</span>
-<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_xaxis().set_ticks([])</span>
-<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_yaxis().set_ticks([])</span>
-<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co"># SciPy's odeint function doesn't play well with complex numbers,</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co"># so we recast the state u0hat from an N-element complex vector </span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co"># to a 2N-element real vector</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>u0hat_ri <span class="op">=</span> np.concatenate((u0hat.real, u0hat.imag))</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate in Fourier frequency domain</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> <span class="fl">0.025</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">600</span><span class="op">*</span>dt, dt)</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rhsWave(uhat_ri,t,kappa,c):</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    uhat <span class="op">=</span> uhat_ri[:N] <span class="op">+</span> (<span class="ot">1j</span>) <span class="op">*</span> uhat_ri[N:]</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    d_uhat <span class="op">=</span> <span class="op">-</span>c <span class="op">*</span> (<span class="ot">1j</span> ) <span class="op">*</span>kappa <span class="op">*</span> uhat</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    d_uhat_ri <span class="op">=</span> np.concatenate((d_uhat.real, d_uhat.imag)).astype(<span class="st">'float64'</span>)</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d_uhat_ri</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>uhat_ri <span class="op">=</span> odeint(rhsWave, u0hat_ri, T, args<span class="op">=</span>(kappa, c))</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>uhat <span class="op">=</span> uhat_ri[:, :N] <span class="op">+</span> (<span class="ot">1j</span>) <span class="op">*</span> uhat_ri[:, N:]</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> np.zeros_like(uhat)</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(T)):</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    u[k, :] <span class="op">=</span> np.fft.ifft(uhat[k, :])</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> u.real    </span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Waterfall plot</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"$x$"</span>)</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"$t$"</span>)</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r"$u(t, x)$"</span>)</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>ax.set_zticks([])</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>u_plot <span class="op">=</span> u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">60</span>, :]</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(u_plot.shape[<span class="dv">0</span>]):</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>    ys <span class="op">=</span> j <span class="op">*</span> np.ones(u_plot.shape[<span class="dv">1</span>])</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, ys, u_plot[j, :])</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Image plot</span></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.flipud(u), aspect<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$t \to$"</span>)</span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_xaxis().set_ticks([])</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_yaxis().set_ticks([])</span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="fig-fourier_fft_advection" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1869,7 +1880,7 @@ Figure&nbsp;9.5: Computing the derivative of a function
 \]</span> The equation consists of a nonlinear convection part <span class="math inline">\(u \partial_t u\)</span> as well as diffusion. The convection part is designed in such a way that larger amplitudes travel faster and therefore causes a shock wave to form.</p>
 <p>Regarding the solution of this equation, the interesting part is that we need to map back and forth between the Fourier space and time space to apply the nonlinearity.</p>
 <p>This example is also very useful to test the capabilities of your solver as by decreasing the diffusion factor further and further we can approach an infinitely steep shock and in theory it can break like an ocean wave.</p>
-<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.5 and Code 2.6)</span>.</p>
+<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.5 and Code 2.6)</span>.</p>
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1969,7 +1980,7 @@ Figure&nbsp;9.6: Time integration of the Burger’s equation
 </div>
 </div>
 </div>
-<p>The following example is taken from <span class="citation" data-cites="Meyberg1992-ws">(<a href="../references.html#ref-Meyberg1992-ws" role="doc-biblioref">Meyberg and Vachenauer 1992</a>)</span>.</p>
+<p>The following example is taken from <span class="citation" data-cites="Meyberg1992-ws">(<a href="#ref-Meyberg1992-ws" role="doc-biblioref">Meyberg and Vachenauer 1992</a>)</span>.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1977,8 +1988,18 @@ Figure&nbsp;9.6: Time integration of the Burger’s equation
 </div>
 <div class="callout-body-container">
 <div id="exm-fourier-fft-gec" class="theorem example">
-<p><span class="theorem-title"><strong>Example 9.7 (Ground Emitter Circuit)</strong></span> We can use FFT to compute some base properties of a ground emitter circuit <a href="#fig-fft-gec-1" class="quarto-xref">Figure&nbsp;<span>10.5 (a)</span></a> and how the signal is propagated through this circuit <a href="#fig-fft-gec-2" class="quarto-xref">Figure&nbsp;<span>10.5 (b)</span></a>.</p>
-<div id="5b071895" class="cell" data-execution_count="12">
+<p><span class="theorem-title"><strong>Example 9.7 (Ground Emitter Circuit)</strong></span> We can use FFT to compute some base properties of a ground emitter circuit <a href="#fig-fft-gec-1" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fft-gec-1</span></a> and how the signal is propagated through this circuit <a href="#fig-fft-gec-2" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fft-gec-2</span></a>.</p>
+<div id="fig-fft-gec-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fft-gec-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../_assets/signal/electric_circuit.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;9.7: Electric circuit"><img src="../_assets/signal/electric_circuit.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fft-gec-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.7: Electric circuit
+</figcaption>
+</figure>
+</div>
+<div id="28ef3fbe" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the raw data for the example</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2030,39 +2051,20 @@ Figure&nbsp;9.6: Time integration of the Burger’s equation
 <span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>harmonic_distortion <span class="op">=</span> np.linalg.norm(yy[<span class="dv">3</span>:<span class="op">-</span><span class="dv">2</span>])<span class="op">/</span>np.linalg.norm(yy[<span class="dv">1</span>:])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="fig-fft-gec" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-fft-gec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="fig-fft-gec-1" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-fft-gec-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/signal/electric_circuit.svg" class="lightbox" data-gallery="fig-fft-gec" title="Figure&nbsp;9.7&nbsp;(a): Electric circuit"><img src="../_assets/signal/electric_circuit.svg" class="img-fluid figure-img" data-ref-parent="fig-fft-gec"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fft-gec-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(a) Electric circuit
-</figcaption>
-</figure>
-</div>
-<div id="fig-fft-gec-2" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-fft-gec-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/signal/signals.svg" class="lightbox" data-gallery="fig-fft-gec" title="Figure&nbsp;9.7&nbsp;(b): Signal transition"><img src="../_assets/signal/signals.svg" class="img-fluid figure-img" data-ref-parent="fig-fft-gec"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fft-gec-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(b) Signal transition
-</figcaption>
-</figure>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fft-gec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.7: The electric circuit and the signal transition for our example.
-</figcaption>
-</figure>
-</div>
-<p>The transition of the transistor is approximately that of a diode and is illustrated in the <span class="math inline">\(u_{BE}\)</span> vs.&nbsp;<span class="math inline">\(i_C\)</span> diagram on the top left (orange signal). The exiting function on the bottom is a normal sine wave with <span class="math inline">\(50\mathrm{Hz}\)</span>.</p>
+<p>The transition of the transistor can be approximated by a diode and is illustrated in the <span class="math inline">\(u_{BE}\)</span> vs.&nbsp;<span class="math inline">\(i_C\)</span> diagram on the top left (orange signal in <a href="#fig-fft-gec-2" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fft-gec-2</span></a>). The exciting function <span class="math inline">\(u\)</span> on the bottom left is a normal sine wave with <span class="math inline">\(50\mathrm{Hz}\)</span>.</p>
 <p>All together we get the equation <span class="math display">\[
 i_c = \mathrm{e}^{1.2 + 0.8 \sin(2 \pi 50 t)} - 1
 \]</span> for the current in <span class="math inline">\([\mathrm{mA}]\)</span> running through the transistor.</p>
+<div id="fig-fft-gec-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fft-gec-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../_assets/signal/signals.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;9.8: Signal transition for the electric circuit shown above"><img src="../_assets/signal/signals.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fft-gec-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.8: Signal transition for the electric circuit shown above
+</figcaption>
+</figure>
+</div>
 <p>We can see, that the signal is boosted depending on the characteristic curve of the diode, i.e.&nbsp;the positive part of the sine more than the negative part. If we compute take the fourier transform as illustrated with the red points on the curve on the right we get from the FFT coefficients <span class="math inline">\(c_i\)</span>:</p>
 <ol type="1">
 <li>the direct current component:</li>
@@ -2138,16 +2140,16 @@ g(t - \tau) =  \mathrm{e}^{-\tfrac{(t-\tau)^2}{a^2}}.
 <div id="fig-fourier_gabor" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fourier_gabor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="fourier_files/figure-html/fig-fourier_gabor-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Figure&nbsp;9.8: Signal with Gaussian kernel"><img src="fourier_files/figure-html/fig-fourier_gabor-output-1.svg" class="img-fluid figure-img"></a>
+<a href="fourier_files/figure-html/fig-fourier_gabor-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Figure&nbsp;9.9: Signal with Gaussian kernel"><img src="fourier_files/figure-html/fig-fourier_gabor-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fourier_gabor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.8: Signal with Gaussian kernel
+Figure&nbsp;9.9: Signal with Gaussian kernel
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-fourier_gabor" class="quarto-xref">Figure&nbsp;<span>9.8</span></a> illustrates the sliding time window with the spread as <span class="math inline">\(a\)</span> and the center <span class="math inline">\(\tau\)</span>. The inverse is given as <span class="math display">\[
+<p><a href="#fig-fourier_gabor" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fourier_gabor</span></a> illustrates the sliding time window with the spread as <span class="math inline">\(a\)</span> and the center <span class="math inline">\(\tau\)</span>. The inverse is given as <span class="math display">\[
 f(t) = \mathcal{G}^{-1}\{G_f(t, \omega)\} = \frac{1}{2 \pi \|g\|^2} = \int_{-\infty}^\infty\int_{-\infty}^\infty G_f(\tau, \omega) \mathrm{e}^{\mathrm{i}\omega\tau}\overline{g}(t - \tau)\, \mathrm{d}\omega\, \mathrm{d}t.
 \]</span></p>
 <p>As with the Fourier transform the application of the Gabor transform is usually done in its discrete form.</p>
@@ -2167,7 +2169,7 @@ g_{j,k} = \mathrm{e}^{{\mathrm{i}2 \pi j\Delta\omega t}} g(t- k\Delta t)
 </div>
 </div>
 </div>
-<p>The following example is taken from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 77–78</a>)</span>.</p>
+<p>The following example is taken from <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 77–78</a>)</span>.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -2178,7 +2180,7 @@ g_{j,k} = \mathrm{e}^{{\mathrm{i}2 \pi j\Delta\omega t}} g(t- k\Delta t)
 <p><span class="theorem-title"><strong>Example 9.8 (Gabor transform for a quadratic chirp)</strong></span> As example we use an oscillating cosine function where the frequency of the oscillation increases as a quadratic function in time: <span class="math display">\[
 f(t) = \cos(2\pi\, t\, h(t)), \quad \text{with}\quad h(t) = h_0 + (h_1 - h_0)\frac{t}{3 t_1^2},
 \]</span> where the frequency shifts from <span class="math inline">\(h_0\)</span> to <span class="math inline">\(h_1\)</span> between <span class="math inline">\(t=0\)</span> and <span class="math inline">\(t=t_1\)</span>.</p>
-<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.9)</span>.</p>
+<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.9)</span>.</p>
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2218,7 +2220,7 @@ f(t) = \cos(2\pi\, t\, h(t)), \quad \text{with}\quad h(t) = h_0 + (h_1 - h_0)\fr
 <div id="fig-fourier_dgt_chirp-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-fourier_dgt_chirp-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="fourier_files/figure-html/fig-fourier_dgt_chirp-output-1.svg" class="lightbox" data-gallery="fig-fourier_dgt_chirp" title="Figure&nbsp;9.9&nbsp;(a): Power spectral density of the signal."><img src="fourier_files/figure-html/fig-fourier_dgt_chirp-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-fourier_dgt_chirp"></a>
+<a href="fourier_files/figure-html/fig-fourier_dgt_chirp-output-1.svg" class="lightbox" data-gallery="fig-fourier_dgt_chirp" title="Figure&nbsp;9.10&nbsp;(a): Power spectral density of the signal."><img src="fourier_files/figure-html/fig-fourier_dgt_chirp-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-fourier_dgt_chirp"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fourier_dgt_chirp-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Power spectral density of the signal.
@@ -2232,7 +2234,7 @@ f(t) = \cos(2\pi\, t\, h(t)), \quad \text{with}\quad h(t) = h_0 + (h_1 - h_0)\fr
 <div id="fig-fourier_dgt_chirp-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-fourier_dgt_chirp-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="fourier_files/figure-html/fig-fourier_dgt_chirp-output-2.svg" class="lightbox" data-gallery="fig-fourier_dgt_chirp" title="Figure&nbsp;9.9&nbsp;(b): Spectrogram."><img src="fourier_files/figure-html/fig-fourier_dgt_chirp-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-fourier_dgt_chirp"></a>
+<a href="fourier_files/figure-html/fig-fourier_dgt_chirp-output-2.svg" class="lightbox" data-gallery="fig-fourier_dgt_chirp" title="Figure&nbsp;9.10&nbsp;(b): Spectrogram."><img src="fourier_files/figure-html/fig-fourier_dgt_chirp-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-fourier_dgt_chirp"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fourier_dgt_chirp-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Spectrogram.
@@ -2243,7 +2245,7 @@ f(t) = \cos(2\pi\, t\, h(t)), \quad \text{with}\quad h(t) = h_0 + (h_1 - h_0)\fr
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fourier_dgt_chirp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.9: Quadratic chirp signal
+Figure&nbsp;9.10: Quadratic chirp signal
 </figcaption>
 </figure>
 </div>
@@ -2266,10 +2268,10 @@ Note
 <p>The spectrogram resolves both but with reduced resolution. This effect manifests differently at different locations of the chirp signal. At the left where the frequency is almost constant, the band becomes narrower, whereas at the right it becomes wider due to the increased blur in horizontal direction. The product of the uncertainties of these quantities has a minimal value. In this context time and frequency domain respectively represent the extremes.</p>
 </div>
 </div>
-<p>The Fourier transform always assumes a harmonic nature in the signal it is applied to. Therefore, it is best suited for e.g.&nbsp;music, rotating machines or vibrations. For other signals, especially with discontinuous parts (Gibbs phenomenon) there are more adequate bases functions. We look at these in the next section <a href="wavelet.html" class="quarto-xref"><span>Chapter 11</span></a> but first we look at the Laplace transform <a href="laplace.html" class="quarto-xref"><span>Chapter 10</span></a>.</p>
+<p>The Fourier transform always assumes a harmonic nature in the signal it is applied to. Therefore, it is best suited for e.g.&nbsp;music, rotating machines or vibrations. For other signals, especially with discontinuous parts (Gibbs phenomenon) there are more adequate bases functions. We look at these in the next section <a href="#sec-signal-wavelet" class="quarto-xref"><span class="quarto-unresolved-ref">sec-signal-wavelet</span></a> but first we look at the Laplace transform <a href="#sec-signal-laplace" class="quarto-xref"><span class="quarto-unresolved-ref">sec-signal-laplace</span></a>.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Brunton2022" class="csl-entry" role="listitem">
 Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engineering - Machine Learning, Dynamical Systems, and Control</em>. 2nd ed. Cambridge: Cambridge University Press.
 </div>
@@ -2512,8 +2514,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -2624,7 +2624,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -2876,7 +2875,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false,"closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

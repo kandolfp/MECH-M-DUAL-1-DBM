@@ -409,7 +409,7 @@ $$
 c_2 \sum_k x_k \exp(2 c_1 x_k) - \sum_k x_k y_k \exp(c_1 x_k) =0,
 $$
 $$
-c_2 \sum_k \exp(2 c_1 x_k) - \sum_k y_k \exp(c_1 x_k) =0.\\
+c_2 \sum_k \exp(2 c_1 x_k) - \sum_k y_k \exp(c_1 x_k) =0.
 $$
 
 This non-linear system can not be solved in a straight forward fashion but we can avoid it by linearization with the simple transformation
@@ -437,7 +437,7 @@ We take a look at the population growth were the data is kindly provided by @owi
 ::::: {.content-visible when-format="html"}
 ```{python}
 #| label: fig-reg_wp
-#| fig-cap: "Line fit with different norms. Top without outliers, bottom with one outlier."
+#| fig-cap: "Regression analysis for world population with different scales for y axis."
 #| fig-subcap: 
 #|   - "World population with regression lines normal scale."
 #|   - "World population with regression lines logarithmic scale." 
@@ -573,14 +573,11 @@ fig2.update_layout(legend=dict(
 ))
 fig2.show()
 ```
-:::::: {#fig-reg_wp}
 
-![World population with regression lines normal scale.](../_assets/regression/population1.png){#fig-reg_wp-1 width="70%"}
+![World population with regression lines normal scale.](../_assets/regression/population1.png){#fig-reg_wp-1 width="60%"}
 
-![World population with regression lines logarithmic scale.](../_assets/regression/population2.png){#fig-reg_wp-2 width="70%"}
+![World population with regression lines logarithmic scale.](../_assets/regression/population2.png){#fig-reg_wp-2 width="60%"}
 
-Line fit with different norms. Top without outliers, bottom with one outlier.
-::::::
 :::::
 ::::
 :::

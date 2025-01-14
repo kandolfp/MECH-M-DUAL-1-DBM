@@ -24,7 +24,7 @@ jobs:
         run: |
           sudo apt-get install -qq language-pack-de librsvg2-bin
           pdm install 
-          pdm run quarto tinytex
+          pdm run quarto install tinytex
           pdm run quarto render .
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

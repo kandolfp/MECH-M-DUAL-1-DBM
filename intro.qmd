@@ -1,6 +1,26 @@
 # Introduction {.unnumbered}
 
-In this class we are going to look at the basics behind modern day Data Science.
-We will always try to not only discuss the theory but also use Python to illustrate it and work on it programmatically.
+In this class we are going to look at the basic concepts behind modern day Data Science techniques.
+We will always try to not only discuss the theory but also use [Python](https://www.python.org/) to illustrate the content programmatically.
 
-For the class we will orient ourself on the first couple of chapters of @Brunton2022, where we will highlight sections with lose similarity.
+The main reference for these notes is the excellent @Brunton2022, see citations throughout the notes.
+If python code is adapted form code blocks provided by @Brunton2022, see [github](https://github.com/dynamicslab/databook_python) this is indicated and for these blocks you can also find the MATLAB equivalent in the book or on [github](https://github.com/dynamicslab/databook_matlab).
+
+These notes are intended for engineering students and therefore the mathematical concepts will rarely include rigorous proofs.
+
+We start of by recalling the main concepts of @sec-intro-linearalgebra and some statistics on @sec-intro-sets to make sure everybody as an the same page for notation and problematically in Python. 
+
+We continue with matrix decomposition, namely @sec-matrixdc-eigen and @sec-matrixdc-svd.
+These basic decomposition are used to illustrate certain concepts we need in later chapters but also to show how the change of basis is influencing problems, their solution and computational properties.
+Furthermore, we dive into the first concepts used in machine learning where matrix computations build the foundation.
+As illustration we use applications for engineering and image processing.
+
+The SVD allows us to neatly transition to @sec-regression-linear, generalize to @sec-regression-nonlinear and discuss optimization and learning properties with the help of @sec-regression-optimizers-lasso and @sec-regression-optimizers-msou in @sec-regression-optimizers.
+We mainly use toy examples but where appropriate we look at the world population or unemployment data to illustrate a concept.
+
+In the next part we look at aspects of signal processing often found in engineering and especially mechatronics and therefore we discuss @sec-signal-fourier, @sec-signal-laplace as well as @sec-signal-wavelet transform and how they are extended to @sec-signal-2d.
+Examples range from toy examples to solving electric circuit problems or image processing.
+
+The fifth part is based on @Brunton2022 Chapter 3 where we look at aspects of @sec-sensing-sparsity as well as the rather new topic of @sec-sensing-compressed-sensing.
+
+To round the content of these notes we look at statistics with some basis of @sec-statistic-bayesian and the engineering application via @sec-statistic-kalman.

@@ -1,7 +1,10 @@
 # Summary {.unnumbered}
 
-TBD.
+This concludes our introduction to the basis of data science with a focus on engineering topics.
 
-## Collection of interesting reads
+These notes introduced the main concepts with a clear focus of accurate mathematical representation and close illustration with programmatic examples.
 
-- [Semantic Versioning](https://semver.org/) How to design the version of your project.
+If we need to sum up the main concept that is present in large sections of these notes it is that the correct representation is key in finding good concepts of computer based processing,
+To this extend the second key concept is to make sure the concepts can be handled via a computer and the student, so theory and programmatic application go hand in hand. 
+
+Both concepts stay true if we move to more evolved data science methods in further classes.

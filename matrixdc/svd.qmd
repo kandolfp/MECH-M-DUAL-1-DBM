@@ -2,11 +2,9 @@
 lightbox: true
 ---
 # Singular Value Decomposition {#sec-matrixdc-svd}
-
-We start off with the so called _eigendecomposition_.
-The main idea is to compute a decomposition (or factorization) of a square matrix into a canonical form.
-We will represent a matrix by its _eigenvalues_ and _eigenvectors_.
-In order to do so we need to recall some more definitions from our favourite linear algebra book, such as @GoluLoan.
+The Singular Value Decomposition (SVD) is an orthogonal matrix reduction.
+In contrast to the previously discussed Eigendecomposition it can be applied to rectangular matrices.
+As we will see the interpretation of the SVD can be linked to the eigendecomposition but first, lets provide a proper definition.
 
 ::: {.callout appearance="simple"}
 :::: {#thm-svd} 
@@ -32,7 +30,7 @@ where $\sigma_1 \geq \sigma_2 \geq \ldots \sigma_p \geq 0$.
 :::
 
 ::: {.callout-note}
-We call $\sigma_i$ a _singular value_ of $A$, the $u_i$ are called the _left singular values_ of $A$ and $v_i$ the _right singular values_ of $A$.
+We call $\sigma_i$ a _singular value_ of $A$, the $u_i$ are called the _left singular vectors_ of $A$ and $v_i$ the _right singular vectors_ of $A$.
 Furthermore, $\sigma_{max} (A)$ is the largest singular value of $A$ and $\sigma_{min} (A)$ is the smallest singular value of $A$.
 :::
 

@@ -33,28 +33,28 @@ For a set $V$ over a [field](https://en.wikipedia.org/wiki/Field_(mathematics)) 
 For the vector addition we need to have
 
 1. associativity
-$$ u + (v + w) = (u + v) +w,$$
+    $$ u + (v + w) = (u + v) +w,$$
 
 2. commutativity
-$$u + v = v + u,$$
+    $$u + v = v + u,$$
 
 3. there needs to exists an identity element $0\in \mathbb{R}^n$, i.e. the zero vector such that
-$$v + 0 =  v,$$
+    $$v + 0 =  v,$$
 
 4. there needs to exist an inverse element
-$$v + w =  0\quad \Rightarrow w\equiv -v,$$
-and this element is usually denoted by $-v$.
+    $$v + w =  0\quad \Rightarrow w\equiv -v,$$
+    and this element is usually denoted by $-v$.
 
 For the scalar multiplication we need to have
 
 5. associativity
-$$\alpha(\beta v) = (\alpha\beta)v,$$
+    $$\alpha(\beta v) = (\alpha\beta)v,$$
 6. distributivity with respect to the vector addition
-$$\alpha(u + v) = \alpha u + \alpha v,$$
+    $$\alpha(u + v) = \alpha u + \alpha v,$$
 7. distributivity of the scalar addition
-$$(\alpha + \beta)v = \alpha v + \beta v,$$
+    $$(\alpha + \beta)v = \alpha v + \beta v,$$
 8. and there needs to exist a multiplicative identity element $1\in\mathbb{R}$
-$$1 v = v.$$
+    $$1 v = v.$$
 ::::
 :::
 
@@ -438,6 +438,7 @@ $$ (AB)^{-1} = B^{-1}A^{-1},$$
 - the inverse of the transpose is the transpose of the inverse
 $$ (A^{-1})^{\mathsf{T}} = (A^{\mathsf{T}})^{-1} \equiv A^{-\mathsf{T}}.$$
 
+::: {.content-visible when-format="html"}
 ```{python}
 #| classes: styled-output
 #| error: true
@@ -448,8 +449,25 @@ print(f"{X=}")
 print(f"{A @ X=}")
 print(f"{np.allclose(A @ X, np.eye(A.shape[0]))=}")
 # Note that the equality is hard to achieve for floats
-np.testing.assert_equal(A @ X, np.eye(A.shape[0]))
+np.testing.assert_equal(A @ X, np.eye(A.shape[0]), verbose=False)
 ```
+:::
+
+::: {.content-visible unless-format="html"}
+```{python}
+#| classes: styled-output
+#| error: true
+A = np.random.rand(3, 3)
+print(f"{A=}")
+X = LA.inv(A)
+print(f"{X=}")
+print(f"{A @ X=}")
+print(f"{np.allclose(A @ X, np.eye(A.shape[0]))=}")
+# Note that the equality is hard to achieve for floats
+# Error message can currently not be displayed in pdf
+# np.testing.assert_equal(A @ X, np.eye(A.shape[0]), verbose=False)
+```
+:::
 
 ::: {.callout appearance="simple"}
 :::: {#def-changebasis} 

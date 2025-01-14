@@ -486,7 +486,7 @@ P(A | B) = \frac{P(A, B)}{P(B)}.
 </div>
 </div>
 </div>
-<p>Therefore, if we return to our Venn diagram in <a href="#fig-statistics-venn" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-statistics-venn</span></a> we can see this relation played out. As <span class="math inline">\(P(A|B)\)</span> can be understood as the fraction of probability <span class="math inline">\(B\)</span> that intersects with <span class="math inline">\(A\)</span>.</p>
+<p>Therefore, if we return to our Venn diagram in <a href="#fig-statistics-venn" class="quarto-xref">Figure&nbsp;<span>15.1</span></a> we can see this relation played out. As <span class="math inline">\(P(A|B)\)</span> can be understood as the fraction of probability <span class="math inline">\(B\)</span> that intersects with <span class="math inline">\(A\)</span>.</p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -556,7 +556,7 @@ P(cancer) = 0.01.
 \]</span></p>
 <p>From Beyes’ theorem we can compute the probability (or likelihood) to have cancer when receiving a positive test result as <span class="math display">\[
 P(cancer | +) = \frac{P(+ | cancer) P(cancer)}{P(+)}
-\]</span> The part we do not know in this equation is <span class="math inline">\(P(+)\)</span> but we can compute this with <a href="#def-statistics-ljp" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-statistics-ljp</span></a> as <span class="math display">\[
+\]</span> The part we do not know in this equation is <span class="math inline">\(P(+)\)</span> but we can compute this with <a href="#def-statistics-ljp" class="quarto-xref">Definition&nbsp;<span>15.3</span></a> as <span class="math display">\[
 \begin{aligned}
 P(+) &amp;= P(+, cancer) + P(+, \neg cancer) \\
      &amp;= P(+| cancer)P(cancer) + P(+| \neg cancer) P(\neg cancer)\\
@@ -566,7 +566,7 @@ P(+) &amp;= P(+, cancer) + P(+, \neg cancer) \\
 <p>Overall, this allow us to compute <span class="math display">\[
 P(cancer | +) = \frac{P(+ | cancer) P(cancer)}{P(+)} = \frac{0.8 \cdot 0.01}{0.107} = 0.07477.
 \]</span></p>
-<p><span class="citation" data-cites="Lambert2018-ll">(Compare <a href="#ref-Lambert2018-ll" role="doc-biblioref">Lambert 2018, sec. 3.6.2</a>)</span></p>
+<p><span class="citation" data-cites="Lambert2018-ll">(Compare <a href="../references.html#ref-Lambert2018-ll" role="doc-biblioref">Lambert 2018, sec. 3.6.2</a>)</span></p>
 </div>
 </div>
 </div>
@@ -676,7 +676,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We introduced the Laplace transform in <a href="#sec-signal-laplace" class="quarto-xref"><span class="quarto-unresolved-ref">sec-signal-laplace</span></a>. It finds an application in probability theory where the Laplace transform of a random variable <span class="math inline">\(X\)</span> is defined as the expected value of <span class="math inline">\(X\)</span> with probability density function <span class="math inline">\(f\)</span>, i.e.</p>
+<p>We introduced the Laplace transform in <a href="../signal/laplace.html" class="quarto-xref"><span>Chapter 10</span></a>. It finds an application in probability theory where the Laplace transform of a random variable <span class="math inline">\(X\)</span> is defined as the expected value of <span class="math inline">\(X\)</span> with probability density function <span class="math inline">\(f\)</span>, i.e.</p>
 <p><span class="math display">\[
 \mathcal{L}\{f\}(s) = \mathrm{E}\left[\mathrm{e}^{- s X}\right].
 \]</span></p>
@@ -784,7 +784,7 @@ Figure&nbsp;15.3: Binomial distribution - basic functions.
 <div class="callout-body-container">
 <div id="exm-statistics-bernoulli_dist" class="theorem example">
 <p><span class="theorem-title"><strong>Example 15.4 (Bernoulli distribution)</strong></span> The Bernoulli distribution is a discrete probability function which takes the value <span class="math inline">\(1\)</span> with probability <span class="math inline">\(p\)</span> and the value <span class="math inline">\(0\)</span> with probability <span class="math inline">\(q=1-p\)</span>. It is how we can model a coin toss or anything that is expressed in a <em>yes-no question</em>.</p>
-<p>It is the special case of a Binomial distribution <a href="#exm-statistics-binomial_dist" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-statistics-binomial_dist</span></a> with <span class="math inline">\(n=1\)</span>.</p>
+<p>It is the special case of a Binomial distribution <a href="#exm-statistics-binomial_dist" class="quarto-xref">Example&nbsp;<span>15.3</span></a> with <span class="math inline">\(n=1\)</span>.</p>
 <p>The probability density function becomes <span class="math display">\[
 f(x) = p^x (1-p)^{1-x} \quad\text{for}\quad x\in \{0,1\}
 \]</span> and the corresponding CDF <span class="math display">\[
@@ -1067,7 +1067,7 @@ Figure&nbsp;15.6: Inverse Gamma distribution - basic functions.
 <p>Let us look at some more elaborate examples to show how Bayes theorem can be used.</p>
 <section id="election-prediction-as-instructive-example" class="level3" data-number="15.3.1">
 <h3 data-number="15.3.1" class="anchored" data-anchor-id="election-prediction-as-instructive-example"><span class="header-section-number">15.3.1</span> Election prediction as instructive example</h3>
-<p>Here we give a rudimentary introduction to election forecasts (this example follows the notes <span class="citation" data-cites="mehrle">Mehrle (<a href="#ref-mehrle" role="doc-biblioref">2024</a>)</span>).</p>
+<p>Here we give a rudimentary introduction to election forecasts (this example follows the notes <span class="citation" data-cites="mehrle">Mehrle (<a href="../references.html#ref-mehrle" role="doc-biblioref">2024</a>)</span>).</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1203,7 +1203,7 @@ Figure&nbsp;15.9: Parameter likelihood after a survey with k=5 positives out of 
 </div>
 </div>
 </div>
-<p>In <a href="#fig-statistics-bayesian-vote3" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-statistics-bayesian-vote3</span></a> we can see that the peak moves from <span class="math inline">\(0.2\)</span> closer to <span class="math inline">\(\tfrac13\)</span> (our pooling results) and the bigger our sample size gets the more likely our change is (we get closer).</p>
+<p>In <a href="#fig-statistics-bayesian-vote3" class="quarto-xref">Figure&nbsp;<span>15.9</span></a> we can see that the peak moves from <span class="math inline">\(0.2\)</span> closer to <span class="math inline">\(\tfrac13\)</span> (our pooling results) and the bigger our sample size gets the more likely our change is (we get closer).</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1214,7 +1214,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A point that is often criticised regarding the <em>Bayesian inference</em> we applied here is that it is highly dependent on the initial guess (<a href="#fig-statistics-bayesian-vote1" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-statistics-bayesian-vote1</span></a>).</p>
+<p>A point that is often criticised regarding the <em>Bayesian inference</em> we applied here is that it is highly dependent on the initial guess (<a href="#fig-statistics-bayesian-vote1" class="quarto-xref">Figure&nbsp;<span>15.7</span></a>).</p>
 </div>
 </div>
 </section>
@@ -1231,7 +1231,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This example follows the notes <span class="citation" data-cites="mehrle">Mehrle (<a href="#ref-mehrle" role="doc-biblioref">2024</a>)</span> but as we do not have the data the plots are not generated interactively.</p>
+<p>This example follows the notes <span class="citation" data-cites="mehrle">Mehrle (<a href="../references.html#ref-mehrle" role="doc-biblioref">2024</a>)</span> but as we do not have the data the plots are not generated interactively.</p>
 </div>
 </div>
 <p>Again we start with an initial guess, in this case for the yield stress with <span class="math inline">\(90\%\)</span> of the samples endure in our experiment.</p>
@@ -1322,7 +1322,7 @@ Figure&nbsp;15.11: Update after 10 and 100 iterations
 \]</span></p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-Lambert2018-ll" class="csl-entry" role="listitem">
 Lambert, Ben. 2018. <em>A Student’s Guide to Bayesian Statistics</em>. London, England: SAGE Publications.
 </div>

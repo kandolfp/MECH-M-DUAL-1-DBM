@@ -433,7 +433,7 @@ window.Quarto = {
 <p>As we have seen in the previous section the task of regression usually results in an optimization problem. It is worth investigating this further by looking closely on the <span id="eq-axb"><span class="math display">\[
 A x = b
 \tag{8.1}\]</span></span> problem for different dimensions of <span class="math inline">\(A\)</span>.</p>
-<p>We investigate the impact of restricting our solution not just by <a href="#eq-axb" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-axb</span></a> but with the help of the <span class="math inline">\(\ell_1\)</span> and <span class="math inline">\(\ell_2\)</span> norm imposed on the solution <span class="math inline">\(x\)</span>. As we have seen in <a href="#fig-linear_reg" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-linear_reg</span></a> the choice of norm has an implication on the result and the same is true here.</p>
+<p>We investigate the impact of restricting our solution not just by <a href="#eq-axb" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> but with the help of the <span class="math inline">\(\ell_1\)</span> and <span class="math inline">\(\ell_2\)</span> norm imposed on the solution <span class="math inline">\(x\)</span>. As we have seen in <a href="linear.html#fig-linear_reg" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> the choice of norm has an implication on the result and the same is true here.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -444,19 +444,19 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This section is mainly based on <span class="citation" data-cites="Brunton2022">Brunton and Kutz (<a href="#ref-Brunton2022" role="doc-biblioref">2022</a>)</span>, Section 4.3.</p>
+<p>This section is mainly based on <span class="citation" data-cites="Brunton2022">Brunton and Kutz (<a href="../references.html#ref-Brunton2022" role="doc-biblioref">2022</a>)</span>, Section 4.3.</p>
 </div>
 </div>
 <section id="over-determined-systems" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="over-determined-systems"><span class="header-section-number">8.1</span> Over-Determined Systems</h2>
-<p>We speak of an over-determined system if we have more rows than columns, i.e.&nbsp;<span class="math inline">\(A\)</span> is tall and skinny and in general there is no solution to <a href="#eq-axb" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-axb</span></a> but rather we minimize the error according to a norm, see <a href="#sec-regr-linear-ols" class="quarto-xref"><span class="quarto-unresolved-ref">sec-regr-linear-ols</span></a>. If we further impose a restriction on <span class="math inline">\(x\)</span> we can select a more specific solution.</p>
+<p>We speak of an over-determined system if we have more rows than columns, i.e.&nbsp;<span class="math inline">\(A\)</span> is tall and skinny and in general there is no solution to <a href="#eq-axb" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> but rather we minimize the error according to a norm, see <a href="linear.html#sec-regr-linear-ols" class="quarto-xref"><span>Section 6.1</span></a>. If we further impose a restriction on <span class="math inline">\(x\)</span> we can select a more specific solution.</p>
 <p>The generalized form is <span id="eq-reg-optimizers"><span class="math display">\[
 x = \underset{v}{\operatorname{argmin}} \|Av - b\|_2 + \lambda_1 \|v\|_1 + \lambda_2\|v\|_2
 \tag{8.2}\]</span></span> where the parameters <span class="math inline">\(\lambda_1\)</span> and <span class="math inline">\(\lambda_2\)</span> are called the <em>penalization coefficients</em>, with respect to the norm. Selecting these coefficients is the first step towards <em>model selection</em>.</p>
 <p>Let us have a look at this in action for solving a <em>random</em> system with different parameters <span class="math inline">\(\lambda_1\)</span> and setting <span class="math inline">\(\lambda_2\)</span>.</p>
 <section id="sec-regression-optimizers-lasso" class="level3" data-number="8.1.1">
 <h3 data-number="8.1.1" class="anchored" data-anchor-id="sec-regression-optimizers-lasso"><span class="header-section-number">8.1.1</span> LASSO</h3>
-<p>The <em>least absolute shrinkage and selection operator</em> LASSO solves <a href="#eq-reg-optimizers" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-reg-optimizers</span></a> with <span class="math inline">\(\lambda_1 &gt; 0\)</span> and <span class="math inline">\(\lambda_2=0\)</span>, i.e.&nbsp;only optimizing with the <span class="math inline">\(\ell_1\)</span> norm. The theory tells us that for increasing <span class="math inline">\(\lambda_1\)</span> we should get more and more zeros in our solution <span class="math inline">\(x\)</span>.</p>
+<p>The <em>least absolute shrinkage and selection operator</em> LASSO solves <a href="#eq-reg-optimizers" class="quarto-xref">Equation&nbsp;<span>8.2</span></a> with <span class="math inline">\(\lambda_1 &gt; 0\)</span> and <span class="math inline">\(\lambda_2=0\)</span>, i.e.&nbsp;only optimizing with the <span class="math inline">\(\ell_1\)</span> norm. The theory tells us that for increasing <span class="math inline">\(\lambda_1\)</span> we should get more and more zeros in our solution <span class="math inline">\(x\)</span>.</p>
 <div id="cell-fig-opt_lambda1" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
@@ -516,11 +516,11 @@ Figure&nbsp;8.1: LASSO regression coefficients of an over-determined system with
 </div>
 </div>
 </div>
-<p>The last row of <a href="#fig-opt_lambda1" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-opt_lambda1</span></a> confirms this quite impressively, interesting enough the solution also becomes positive.</p>
+<p>The last row of <a href="#fig-opt_lambda1" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> confirms this quite impressively, interesting enough the solution also becomes positive.</p>
 </section>
 <section id="ridge" class="level3" data-number="8.1.2">
 <h3 data-number="8.1.2" class="anchored" data-anchor-id="ridge"><span class="header-section-number">8.1.2</span> RIDGE</h3>
-<p>The Ridge Regression solves <a href="#eq-reg-optimizers" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-reg-optimizers</span></a> with <span class="math inline">\(\lambda_1 = 0\)</span> and <span class="math inline">\(\lambda_2 &gt; 0\)</span>, i.e.&nbsp;only optimizing with the <span class="math inline">\(\ell_2\)</span> norm. The theory tells us that for for increasing <span class="math inline">\(\lambda_1\)</span> we should get more and more zeros in our solution <span class="math inline">\(x\)</span>.</p>
+<p>The Ridge Regression solves <a href="#eq-reg-optimizers" class="quarto-xref">Equation&nbsp;<span>8.2</span></a> with <span class="math inline">\(\lambda_1 = 0\)</span> and <span class="math inline">\(\lambda_2 &gt; 0\)</span>, i.e.&nbsp;only optimizing with the <span class="math inline">\(\ell_2\)</span> norm. The theory tells us that for for increasing <span class="math inline">\(\lambda_1\)</span> we should get more and more zeros in our solution <span class="math inline">\(x\)</span>.</p>
 <div id="cell-fig-opt_lambda2" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
@@ -588,7 +588,7 @@ Figure&nbsp;8.2: Ridge regression coefficients of an over-determined system with
 <div class="callout-body-container">
 <div id="exr-lasso_reg" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.1 (Implement the above optimization yourself.)</strong></span> Fill out the missing parts:</p>
-<div id="8e709545" class="cell" data-execution_count="3">
+<div id="d26f57b1" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -642,12 +642,12 @@ Figure&nbsp;8.2: Ridge regression coefficients of an over-determined system with
 <h2 data-number="8.2" class="anchored" data-anchor-id="sec-regression-optimizers-msou"><span class="header-section-number">8.2</span> Model Selection/Identification and over-/underfitting</h2>
 <p>Let us use the results we have obtain so far for a discussion on <em>model selection</em>.</p>
 <p>So far, we have mostly explicitly proposed a model that we think will fit our data and we have seen that even it this case we can still choose multiple parameters to fin tune our selection.</p>
-<p>Now consider the other possibility, we have data where the model is unknown. For example, in <a href="#exm-lregfallenobject" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-lregfallenobject</span></a> we stopped with degree 2 for our polynomial because we know about Newton’s principles, if we don’t know it, we might extend the model for a higher degree.</p>
+<p>Now consider the other possibility, we have data where the model is unknown. For example, in <a href="linear.html#exm-lregfallenobject" class="quarto-xref">Example&nbsp;<span>6.1</span></a> we stopped with degree 2 for our polynomial because we know about Newton’s principles, if we don’t know it, we might extend the model for a higher degree.</p>
 <p>One of the leading assumptions to use in such a case is:</p>
 <blockquote class="blockquote">
 <p><em>Among competing hypotheses, the one with the fewest assumptions should be selected, or when you have two competing theories that make exactly the same predictions, the simpler one is the more likely.</em> - Occam’s razor</p>
 </blockquote>
-<p>This plays an intimate role in over- and underfitting of models. To illustrate this we recall <a href="#exm-regression-linear-poly" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-linear-poly</span></a> with <a href="#fig-linear_reg_poly" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-linear_reg_poly</span></a> as seen below once more.</p>
+<p>This plays an intimate role in over- and underfitting of models. To illustrate this we recall <a href="linear.html#exm-regression-linear-poly" class="quarto-xref">Example&nbsp;<span>6.2</span></a> with <a href="linear.html#fig-linear_reg_poly" class="quarto-xref">Figure&nbsp;<span>6.2</span></a> as seen below once more.</p>
 <div id="cell-fig-linear_reg_poly2" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div id="fig-linear_reg_poly2" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -668,12 +668,12 @@ Figure&nbsp;8.3: Fitting for different degrees of polynomial <span class="math i
 <p>As a consequence model selection should always be followed by a cross-validation. Meaning we need to check if our model is any good.</p>
 <p>A classic method is the <em>k-fold cross validation</em>:</p>
 <blockquote class="blockquote">
-<p><em>Take random portions of your data and build a model. Do this <span class="math inline">\(k\)</span> times and average the parameter scores (regression loadings) to produce a cross-validated model.</em> <em>Test the model predictions against withheld (extrapolation) data and evaluate whether the model is actually any good.</em> - <span class="citation" data-cites="Brunton2022">(see <a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 159</a>)</span></p>
+<p><em>Take random portions of your data and build a model. Do this <span class="math inline">\(k\)</span> times and average the parameter scores (regression loadings) to produce a cross-validated model.</em> <em>Test the model predictions against withheld (extrapolation) data and evaluate whether the model is actually any good.</em> - <span class="citation" data-cites="Brunton2022">(see <a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 159</a>)</span></p>
 </blockquote>
 <p>As we can see, there are a lot of further paths to investigate but for now this concludes our excursion into regression.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-Brunton2022" class="csl-entry" role="listitem">
 Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engineering - Machine Learning, Dynamical Systems, and Control</em>. 2nd ed. Cambridge: Cambridge University Press.
 </div>

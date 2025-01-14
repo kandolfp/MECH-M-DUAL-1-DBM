@@ -431,7 +431,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We follow <span class="citation" data-cites="Faragher">Faragher (<a href="#ref-Faragher" role="doc-biblioref">2012</a>)</span> for this introduction.</p>
+<p>We follow <span class="citation" data-cites="Faragher">Faragher (<a href="../references.html#ref-Faragher" role="doc-biblioref">2012</a>)</span> for this introduction.</p>
 </div>
 </div>
 <p>The algorithm assumes that we have a state at time <span class="math inline">\(k\)</span> that evolved from a prior state at time <span class="math inline">\(k-1\)</span> from the following equation <span id="eq-kalman_base"><span class="math display">\[
@@ -475,7 +475,7 @@ P_{k|k-1} = F_k P_{k-1|k-1} F_k^{\mathsf{T}}+ Q_k.
 \]</span> Here <span class="math inline">\(\star_{k|k-1}\)</span> denotes the state at time <span class="math inline">\(t_k\)</span> derived from the state at time <span class="math inline">\(t_{k-1}\)</span>.</p>
 <p>To get the second equation we need to know that the variance associated with the prediction <span class="math inline">\(\hat{x}_{k|k-1}\)</span> of the unknown true value <span class="math inline">\(x_k\)</span> is given by <span class="math display">\[
 P_{k|k-1} = E\left[(x_k - x_{k|k-1})(x_k - x_{k|k-1})^{\mathsf{T}}\right].
-\]</span> If we now compute the difference of <a href="#eq-kalman_base" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-kalman_base</span></a> and <a href="#eq-kalman_update" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-kalman_update</span></a> we note that the state estimation errors as well as the process noise are uncorrelated and therefore their correlation is zero.</p>
+\]</span> If we now compute the difference of <a href="#eq-kalman_base" class="quarto-xref">Equation&nbsp;<span>16.1</span></a> and <a href="#eq-kalman_update" class="quarto-xref">Equation&nbsp;<span>16.2</span></a> we note that the state estimation errors as well as the process noise are uncorrelated and therefore their correlation is zero.</p>
 <p>The measurement update equations are given by <span class="math display">\[
 \hat{x}_{k|k} = \hat{x}_{k|k-1} + K_k(z_k - H_k \hat{x}_{k|k-1})
 \]</span> and <span class="math display">\[
@@ -558,7 +558,7 @@ Figure&nbsp;16.1: Position of the train
 </figcaption>
 </figure>
 </div>
-<p>Now we can predict the position of the train at <span class="math inline">\(t=1\)</span> (<span class="math inline">\(k=1\)</span>) with the data we know at time <span class="math inline">\(t=0\)</span> like its maximum speed, possible acceleration and deceleration, etc.. This is can be done via <a href="#eq-kalman_base" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-kalman_base</span></a>. We can see a possible outcome in <a href="#fig-kalman-train1-2" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-kalman-train1-2</span></a> where the train has moved in positive direction but the variance has increased indicating the increased uncertainty in the position du to the fact that we do not have noise from the acceleration or deceleration happening in the span <span class="math inline">\(\Delta t\)</span>.</p>
+<p>Now we can predict the position of the train at <span class="math inline">\(t=1\)</span> (<span class="math inline">\(k=1\)</span>) with the data we know at time <span class="math inline">\(t=0\)</span> like its maximum speed, possible acceleration and deceleration, etc.. This is can be done via <a href="#eq-kalman_base" class="quarto-xref">Equation&nbsp;<span>16.1</span></a>. We can see a possible outcome in <a href="#fig-kalman-train1-2" class="quarto-xref">Figure&nbsp;<span>16.1 (b)</span></a> where the train has moved in positive direction but the variance has increased indicating the increased uncertainty in the position du to the fact that we do not have noise from the acceleration or deceleration happening in the span <span class="math inline">\(\Delta t\)</span>.</p>
 <p>Now at time <span class="math inline">\(t=1\)</span> we can measure the position of the train. We do so via a radio signal and of course this process is also having some noise added to it resulting in a Gaussian probability to the position.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -589,7 +589,7 @@ Important
 \tag{16.3}\]</span></span></p>
 </div>
 </div>
-<p>Let us use this to get an estimate of our train after the measurement by multiplying the two Gaussian distributions, as seen in <a href="#fig-kalman-train2" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-kalman-train2</span></a>.</p>
+<p>Let us use this to get an estimate of our train after the measurement by multiplying the two Gaussian distributions, as seen in <a href="#fig-kalman-train2" class="quarto-xref">Figure&nbsp;<span>16.2</span></a>.</p>
 <div id="cell-fig-kalman-train2" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
@@ -629,7 +629,7 @@ Figure&nbsp;16.2: Position of the train at t=1 with measurement and resulting di
 </div>
 </div>
 </div>
-<p>The new distribution considers the information of our guess and the update provided by the measurement and therefore our best estimation of the current position of the train. <a href="#eq-kalman-update2" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-kalman-update2</span></a> represents the update step of the Kalman filter <a href="#eq-kalman_update" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-kalman_update</span></a>.</p>
+<p>The new distribution considers the information of our guess and the update provided by the measurement and therefore our best estimation of the current position of the train. <a href="#eq-kalman-update2" class="quarto-xref">Equation&nbsp;<span>16.3</span></a> represents the update step of the Kalman filter <a href="#eq-kalman_update" class="quarto-xref">Equation&nbsp;<span>16.2</span></a>.</p>
 <p>To bring in all the components of the Kalman filter we assume that the measurement and the prediction is not in the same domain and therefore we need the matrix <span class="math inline">\(H_k\)</span>.</p>
 <p>To do so assume that the signal for the estimate is a radio signal that travels with the speed of light <span class="math inline">\(c\)</span> and therefore we need to transform <span class="math inline">\(\mathcal{N}[\mu_2, \sigma_2](x)\)</span> as <span class="math inline">\(\mathcal{N}[\frac{\mu_2}{c}, \frac{\sigma_2}{c}](x)\)</span> and our update becomes</p>
 <p><span class="math display">\[
@@ -659,7 +659,7 @@ Note
 </ol>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-Faragher" class="csl-entry" role="listitem">
 Faragher, Ramsey. 2012. <span>“Understanding the Basis of the Kalman Filter via a Simple and Intuitive Derivation.”</span> <em>IEEE Signal Processing Magazine</em> 29 (5): 128–32.
 </div>

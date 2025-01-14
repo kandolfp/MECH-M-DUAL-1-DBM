@@ -380,79 +380,78 @@ As could be expected, the Fourier transform has properties that lead to computat
 
 For tow functions $f, g \in L^1[(-\infty, \infty)]$ and $\alpha, \beta\in\mathbb{C}$ the following properties hold:
 
-(@) **Linearity**
-$$
-\mathcal{F}\{\alpha f(t) + \beta g(t)\} = 
-\alpha \mathcal{F}\{f(t)\} + \beta \mathcal{F}\{g(t)\} = 
-\alpha \hat{f}(\omega)+ \beta \hat{g}(\omega),
-$$
-and 
-$$
-\mathcal{F}^{-1}\{\alpha \hat{f}(\omega) + \beta \hat{g}(\omega)\} = 
-\alpha \mathcal{F}^{-1}\{\hat{f}(\omega)\} + \beta \mathcal{F}^{-1}\{\hat{g}(\omega)\} = 
-\alpha f(t) + \beta g(t).
-$$
+1.  **Linearity**
+    $$
+    \mathcal{F}\{\alpha f(t) + \beta g(t)\} = 
+    \alpha \mathcal{F}\{f(t)\} + \beta \mathcal{F}\{g(t)\} = 
+    \alpha \hat{f}(\omega)+ \beta \hat{g}(\omega),
+    $$
+    and 
+    $$
+    \mathcal{F}^{-1}\{\alpha \hat{f}(\omega) + \beta \hat{g}(\omega)\} = 
+    \alpha \mathcal{F}^{-1}\{\hat{f}(\omega)\} + \beta \mathcal{F}^{-1}\{\hat{g}(\omega)\} = 
+    \alpha f(t) + \beta g(t).
+    $$
 
-(@) **Conjugation** 
-$$
-\mathcal{F}\{\overline{f(t)}\} = \overline{\hat{f}(-\omega)}.
-$$
+2. **Conjugation** 
+    $$
+    \mathcal{F}\{\overline{f(t)}\} = \overline{\hat{f}(-\omega)}.
+    $$
 
-(@) **Scaling**, for $\alpha \neq 0$
-$$
-\mathcal{F}\{f(\alpha t)\} = \frac{1}{|\alpha|}\hat{f}\left(\frac{\omega}{\alpha}\right).
-$$
+3. **Scaling**, for $\alpha \neq 0$
+    $$
+    \mathcal{F}\{f(\alpha t)\} = \frac{1}{|\alpha|}\hat{f}\left(\frac{\omega}{\alpha}\right).
+    $$
 
-(@) **Drift in time**, for $a\in\mathbb{R}$
-$$
-\mathcal{F}\{f(t - a)\} = \mathrm{e}^{-\mathrm{i}\omega a}\hat{f}(\omega).
-$$
+4. **Drift in time**, for $a\in\mathbb{R}$
+    $$
+    \mathcal{F}\{f(t - a)\} = \mathrm{e}^{-\mathrm{i}\omega a}\hat{f}(\omega).
+    $$
 
-(@) **Drift in frequency**, for $a\in\mathbb{R}$
+5. **Drift in frequency**, for $a\in\mathbb{R}$
+    $$
+    \mathrm{e}^{\mathrm{i} a t} \mathcal{F}\{f(t)\} = \hat{f}(\omega - a).
+    $$
 
-$$
-\mathrm{e}^{\mathrm{i} a t} \mathcal{F}\{f(t)\} = \hat{f}(\omega - a).
-$$
+6. If $f$ is **even** or **odd**, than $\hat{f}$ is even or odd, respectively.
 
-(@) If $f$ is **even** or **odd**, than $\hat{f}$ is even or odd, respectively.
+7. **Derivative in time**
+    $$
+    \mathcal{F}\{\partial_t f(t)\} = \mathrm{i} \omega \hat{f}(\omega)
+    $$
+    We are going to prove this by going through the lines
+    $$
+    \begin{aligned}
+    \mathcal{F}\left\{\frac{d}{d\,t}f(t)\right\} &= \int_{-\infty}^\infty f'(t)\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t \\
+    &= \left[f(t)\mathrm{e}^{-\mathrm{i}\omega t}\right]_{-\infty}^\infty - \int_{-\infty}^\infty -\mathrm{i} \omega f(t)\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t \\
+    &= \mathrm{i} \omega \int_{-\infty}^\infty f(t)\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t \\
+    &= \mathrm{i} \omega \mathcal{F}\{f(t)\}
+    \end{aligned}
+    $$
+    For higher derivatives we get
+    $$
+    \mathcal{F}\{\partial_t^n f(t)\} = \mathrm{i}^n \omega^n \hat{f}(\omega)
+    $$
 
-(@) **Derivative in time**
-$$
-\mathcal{F}\{\partial_t f(t)\} = \mathrm{i} \omega \hat{f}(\omega)
-$$
-We are going to prove this by going through the lines
-$$
-\begin{aligned}
-\mathcal{F}\left\{\frac{d}{d\,t}f(t)\right\} &= \int_{-\infty}^\infty f'(t)\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t \\
-&= \left[f(t)\mathrm{e}^{-\mathrm{i}\omega t}\right]_{-\infty}^\infty - \int_{-\infty}^\infty -\mathrm{i} \omega f(t)\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t \\
-&= \mathrm{i} \omega \int_{-\infty}^\infty f(t)\mathrm{e}^{-\mathrm{i}\omega t}\, \mathrm{d}t \\
-&= \mathrm{i} \omega \mathcal{F}\{f(t)\}
-\end{aligned}
-$$
-For higher derivatives we get
-$$
-\mathcal{F}\{\partial_t^n f(t)\} = \mathrm{i}^n \omega^n \hat{f}(\omega)
-$$
+8. **Derivative in frequency**
+    $$
+    \mathcal{F}\{t^n f(t)\} = \mathrm{i}^n \partial_\omega^n\hat{f}(\omega)
+    $$
 
-(@) **Derivative in frequency**
-$$
-\mathcal{F}\{t^n f(t)\} = \mathrm{i}^n \partial_\omega^n\hat{f}(\omega)
-$$
+9. The **convolution** of two functions is defined as 
+    $$
+    (f \ast g)(t) = \int_{-\infty}^{\infty}f(t - \xi) g(\xi)\, \mathrm{d}\xi,
+    $$
+    and for the Fourier transform
+    $$
+    \mathcal{F}\{(f \ast g)(t)\} = \hat{f} \cdot \hat{g}.
+    $$
 
-(@) The **convolution** of two functions is defined as 
-$$
-(f \ast g)(t) = \int_{-\infty}^{\infty}f(t - \xi) g(\xi)\, \mathrm{d}\xi,
-$$
-and for the Fourier transform
-$$
-\mathcal{F}\{(f \ast g)(t)\} = \hat{f} \cdot \hat{g}.
-$$
-
-(@) **Parseval's Theorem**
-$$
-\|f\|_2^2 = \int_{-\infty}^{\infty}|f(t)|^2\, \mathrm{d}t = \frac{1}{2 \pi}\int_{-\infty}^{\infty}|\hat{f}(\omega)|^2\, \mathrm{d}\omega
-$$
-stating that the Fourier Transform preserves the 2-norm up to a scaling factor.
+10. **Parseval's Theorem**
+    $$
+    \|f\|_2^2 = \int_{-\infty}^{\infty}|f(t)|^2\, \mathrm{d}t = \frac{1}{2 \pi}\int_{-\infty}^{\infty}|\hat{f}(\omega)|^2\, \mathrm{d}\omega
+    $$
+    stating that the Fourier Transform preserves the 2-norm up to a scaling factor.
 
 ## Discrete Fourier Transform
 

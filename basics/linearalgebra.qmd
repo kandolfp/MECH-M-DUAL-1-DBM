@@ -32,25 +32,28 @@ For a set $V$ over a [field](https://en.wikipedia.org/wiki/Field_(mathematics)) 
 
 For the vector addition we need to have
 
-(@) associativity
+1. associativity
 $$ u + (v + w) = (u + v) +w,$$
-(@) commutativity
+
+2. commutativity
 $$u + v = v + u,$$
-(@) there needs to exists an identity element $0\in \mathbb{R}^n$, i.e. the zero vector such that
+
+3. there needs to exists an identity element $0\in \mathbb{R}^n$, i.e. the zero vector such that
 $$v + 0 =  v,$$
-(@) there needs to exist an inverse element
+
+4. there needs to exist an inverse element
 $$v + w =  0\quad \Rightarrow w\equiv -v,$$
 and this element is usually denoted by $-v$.
 
 For the scalar multiplication we need to have
 
-(@) associativity
+5. associativity
 $$\alpha(\beta v) = (\alpha\beta)v,$$
-(@) distributivity with respect to the vector addition
+6. distributivity with respect to the vector addition
 $$\alpha(u + v) = \alpha u + \alpha v,$$
-(@) distributivity of the scalar addition
+7. distributivity of the scalar addition
 $$(\alpha + \beta)v = \alpha v + \beta v,$$
-(@) and there needs to exist a multiplicative identity element $1\in\mathbb{R}$
+8. and there needs to exist a multiplicative identity element $1\in\mathbb{R}$
 $$1 v = v.$$
 ::::
 :::

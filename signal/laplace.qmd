@@ -91,78 +91,77 @@ We will  use this to compute the impulse response of systems with _forcing_.
 
 A lot of the properties we saw for the Fourier transform carry over to the Laplace transform. 
 
-(@) **Linearity**
-$$
-\mathcal{L}\{\alpha f(t) + \beta g(t)\} = 
-\alpha \mathcal{L}\{f(t)\} + \beta \mathcal{L}\{g(t)\} = 
-\alpha F(s)+ \beta G(s).
-$$
+1. **Linearity**
+    $$
+    \mathcal{L}\{\alpha f(t) + \beta g(t)\} = 
+    \alpha \mathcal{L}\{f(t)\} + \beta \mathcal{L}\{g(t)\} = 
+    \alpha F(s)+ \beta G(s).
+    $$
 
-(@) **Conjugation** 
-$$
-\mathcal{L}\{\overline{f(t)}\} = \overline{\hat{f}(\overline{s})}.
-$$
+2. **Conjugation** 
+    $$
+    \mathcal{L}\{\overline{f(t)}\} = \overline{\hat{f}(\overline{s})}.
+    $$
 
-(@) **Scaling**, for $\alpha \geq 0$
-$$
-\mathcal{L}\{f(\alpha t)\} = \frac{1}{\alpha}F\left(\frac{s}{\alpha}\right).
-$$
+3. **Scaling**, for $\alpha \geq 0$
+    $$
+    \mathcal{L}\{f(\alpha t)\} = \frac{1}{\alpha}F\left(\frac{s}{\alpha}\right).
+    $$
 
-(@) **Drift in time**, for $a\in\mathbb{R}$
-$$
-\mathcal{L}\{f(t - a)H(t - a)\} = \mathrm{e}^{-a s}F(s)
-$$
-and 
-$$
-\mathcal{L}\{f(t)H(t - a)\} = \mathrm{e}^{-a s}\mathcal{L}\{f(t+a)\}.
-$$
+4. **Drift in time**, for $a\in\mathbb{R}$
+    $$
+    \mathcal{L}\{f(t - a)H(t - a)\} = \mathrm{e}^{-a s}F(s)
+    $$
+    and 
+    $$
+    \mathcal{L}\{f(t)H(t - a)\} = \mathrm{e}^{-a s}\mathcal{L}\{f(t+a)\}.
+    $$
 
-(@) **Drift in frequency**, for $a\in\mathbb{R}$
+5. **Drift in frequency**, for $a\in\mathbb{R}$
+    $$
+    \mathrm{e}^{a t} \mathcal{L}\{f(t)\} = F(s - a).
+    $$
 
-$$
-\mathrm{e}^{a t} \mathcal{L}\{f(t)\} = F(s - a).
-$$
+6. **Derivative in time**
+    $$
+    \mathcal{L}\{\partial_t f(t)\} = s F(s) - f(0)
+    $$
+    We are going to prove this by going through the lines
+    $$
+    \begin{aligned}
+    \mathcal{L}\left\{\frac{d}{d\,t}f(t)\right\} &= \int_{0}^\infty f'(t)\mathrm{e}^{-s t}\, \mathrm{d}t \\
+    &= \left[f(t)\mathrm{e}^{-s t}\right]_{0}^\infty - \int_{0}^\infty f(t) (- s\mathrm{e}^{-s t})\, \mathrm{d}t \\
+    &= -f(0) + s \mathcal{L}\{f(t)\}
+    \end{aligned}
+    $$
+    For higher derivatives we get
+    $$
+    \mathcal{L}\{\partial_t^n f(t)\} = s^n F(s) - \sum_{k=1}^n s^{n-k} f^{(k-1)}(0).
+    $$
 
-(@) **Derivative in time**
-$$
-\mathcal{L}\{\partial_t f(t)\} = s F(s) - f(0)
-$$
-We are going to prove this by going through the lines
-$$
-\begin{aligned}
-\mathcal{L}\left\{\frac{d}{d\,t}f(t)\right\} &= \int_{0}^\infty f'(t)\mathrm{e}^{-s t}\, \mathrm{d}t \\
-&= \left[f(t)\mathrm{e}^{-s t}\right]_{0}^\infty - \int_{0}^\infty f(t) (- s\mathrm{e}^{-s t})\, \mathrm{d}t \\
-&= -f(0) + s \mathcal{L}\{f(t)\}
-\end{aligned}
-$$
-For higher derivatives we get
-$$
-\mathcal{L}\{\partial_t^n f(t)\} = s^n F(s) - \sum_{k=1}^n s^{n-k} f^{(k-1)}(0).
-$$
+7. **Integral in time**
+    $$
+    \mathcal{L}\left\{\int_0^t f(\tau)\, \mathrm{d}\tau\right\} = \frac{1}{s} F(s).
+    $$
 
-(@) **Integral in time**
-$$
-\mathcal{L}\left\{\int_0^t f(\tau)\, \mathrm{d}\tau\right\} = \frac{1}{s} F(s).
-$$
+8. **Derivative in frequency**
+    $$
+    \mathcal{L}\{t^n f(t)\} = (-1)^n \partial_\omega^n F(s)
+    $$
 
-(@) **Derivative in frequency**
-$$
-\mathcal{L}\{t^n f(t)\} = (-1)^n \partial_\omega^n F(s)
-$$
+9. **Integral in frequency**
+    $$
+    \mathcal{L}\left\{\frac{1}{t} f(t)\right\} = \int_s^\infty F(u)\, \mathrm{d}u. 
+    $$
 
-(@) **Integral in frequency**
-$$
-\mathcal{L}\left\{\frac{1}{t} f(t)\right\} = \int_s^\infty F(u)\, \mathrm{d}u. 
-$$
-
-(@) The **convolution** of two functions is defined as 
-$$
-(f \ast g)(t) = \int_{0}^{\infty}f(\tau) g(t - \tau)\, \mathrm{d}\tau,
-$$
-and for the Fourier transform
-$$
-\mathcal{L}\{(f \ast g)(t)\} = F(s) \cdot G(s).
-$$
+10. The **convolution** of two functions is defined as 
+    $$
+    (f \ast g)(t) = \int_{0}^{\infty}f(\tau) g(t - \tau)\, \mathrm{d}\tau,
+    $$
+    and for the Laplace transform
+    $$
+    \mathcal{L}\{(f \ast g)(t)\} = F(s) \cdot G(s).
+    $$
 
 ::: {.callout-important}
 The following examples are mostly from @Meyberg1992-ws.

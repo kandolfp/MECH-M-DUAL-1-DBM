@@ -468,7 +468,7 @@ window.Quarto = {
 \]</span></li>
 </ol>
 <p>So let us check in <code>numpy</code>:</p>
-<div id="5a333acb" class="cell styled-output" data-execution_count="1">
+<div id="faffa41b" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -519,7 +519,7 @@ p(\lambda) = \det(A - \lambda I).
 </div>
 </div>
 <p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
-<div id="efc1a30c" class="cell styled-output" data-execution_count="2">
+<div id="f35fcd85" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> LA.eigvals(A)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lam_sort <span class="op">=</span> np.sort(lam)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -566,7 +566,7 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
 </div>
 </div>
 <p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
-<div id="a9c9a381" class="cell styled-output" data-execution_count="3">
+<div id="5746ec2b" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lam, V <span class="op">=</span> LA.eig(A)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_eigen <span class="op">=</span> np.diag(lam)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -745,7 +745,7 @@ Warning
 <div id="fig-twostorybuilding" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-twostorybuilding-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/matrixdc/TwoStoryBuilding.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;4.1: Two story frame where the floors have different dynamic properties."><img src="../_assets/matrixdc/TwoStoryBuilding.png" class="img-fluid figure-img"></a>
+<a href="../_assets/matrixdc/TwoStoryBuilding.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;4.1: Two story frame where the floors have different dynamic properties."><img src="../_assets/matrixdc/TwoStoryBuilding.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-twostorybuilding-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4.1: Two story frame where the floors have different dynamic properties.
@@ -844,7 +844,7 @@ v_2 = \left[\begin{array}{c}
 <div id="fig-tsm1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-tsm1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/matrixdc/TwoStoryBuildingMode1.png" class="lightbox" data-gallery="fig-twosotrybuildingmodes" title="Figure&nbsp;4.2&nbsp;(a): First mode"><img src="../_assets/matrixdc/TwoStoryBuildingMode1.png" class="img-fluid figure-img" data-ref-parent="fig-twosotrybuildingmodes"></a>
+<a href="../_assets/matrixdc/TwoStoryBuildingMode1.svg" class="lightbox" data-gallery="fig-twosotrybuildingmodes" title="Figure&nbsp;4.2&nbsp;(a): First mode"><img src="../_assets/matrixdc/TwoStoryBuildingMode1.svg" class="img-fluid figure-img" data-ref-parent="fig-twosotrybuildingmodes"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-tsm1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) First mode
@@ -856,7 +856,7 @@ v_2 = \left[\begin{array}{c}
 <div id="fig-tsm2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-tsm2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/matrixdc/TwoStoryBuildingMode2.png" class="lightbox" data-gallery="fig-twosotrybuildingmodes" title="Figure&nbsp;4.2&nbsp;(b): Second mode"><img src="../_assets/matrixdc/TwoStoryBuildingMode2.png" class="img-fluid figure-img" data-ref-parent="fig-twosotrybuildingmodes"></a>
+<a href="../_assets/matrixdc/TwoStoryBuildingMode2.svg" class="lightbox" data-gallery="fig-twosotrybuildingmodes" title="Figure&nbsp;4.2&nbsp;(b): Second mode"><img src="../_assets/matrixdc/TwoStoryBuildingMode2.svg" class="img-fluid figure-img" data-ref-parent="fig-twosotrybuildingmodes"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-tsm2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Second mode

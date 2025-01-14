@@ -711,7 +711,7 @@ Figure&nbsp;9.1: Fourier transform of a two hat functions.
 <div class="callout-body-container">
 <div id="exr-fourier-hat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 9.1 (Self implementation <a href="#exm-fourier-hat" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-fourier-hat</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="29094541" class="cell" data-execution_count="2">
+<div id="4e24f7f0" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -852,7 +852,7 @@ Note
 </div>
 <p>As could be expected, the Fourier transform has properties that lead to computational advantages.</p>
 <p>For tow functions <span class="math inline">\(f, g \in L^1[(-\infty, \infty)]\)</span> and <span class="math inline">\(\alpha, \beta\in\mathbb{C}\)</span> the following properties hold:</p>
-<ol class="example" type="1">
+<ol type="1">
 <li><p><strong>Linearity</strong> <span class="math display">\[
 \mathcal{F}\{\alpha f(t) + \beta g(t)\} =
 \alpha \mathcal{F}\{f(t)\} + \beta \mathcal{F}\{g(t)\} =
@@ -871,12 +871,9 @@ Note
 <li><p><strong>Drift in time</strong>, for <span class="math inline">\(a\in\mathbb{R}\)</span> <span class="math display">\[
 \mathcal{F}\{f(t - a)\} = \mathrm{e}^{-\mathrm{i}\omega a}\hat{f}(\omega).
 \]</span></p></li>
-<li><p><strong>Drift in frequency</strong>, for <span class="math inline">\(a\in\mathbb{R}\)</span></p></li>
-</ol>
-<p><span class="math display">\[
+<li><p><strong>Drift in frequency</strong>, for <span class="math inline">\(a\in\mathbb{R}\)</span> <span class="math display">\[
 \mathrm{e}^{\mathrm{i} a t} \mathcal{F}\{f(t)\} = \hat{f}(\omega - a).
-\]</span></p>
-<ol start="6" class="example" type="1">
+\]</span></p></li>
 <li><p>If <span class="math inline">\(f\)</span> is <strong>even</strong> or <strong>odd</strong>, than <span class="math inline">\(\hat{f}\)</span> is even or odd, respectively.</p></li>
 <li><p><strong>Derivative in time</strong> <span class="math display">\[
 \mathcal{F}\{\partial_t f(t)\} = \mathrm{i} \omega \hat{f}(\omega)
@@ -965,7 +962,7 @@ Tip
 </div>
 <div class="callout-body-container callout-body">
 <p>Code for the computation of the DFT matrix.</p>
-<div id="57dfe6eb" class="cell" data-execution_count="3">
+<div id="bfe85a69" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code.</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1228,7 +1225,7 @@ Figure&nbsp;9.2: Signal noise filter with FFT.
 </figure>
 </div>
 <p>As can be seen in the <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fourier_fft_denoise-3</span></a>, the reconstruction is not exact. This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. In particular:</p>
-<div id="3a7dab6c" class="cell" data-execution_count="5">
+<div id="ad7faf23" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -1281,7 +1278,7 @@ Figure&nbsp;9.2: Signal noise filter with FFT.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-den-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 9.2 (Self implementation <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-fourier-fft-den</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="6e808c40" class="cell" data-execution_count="6">
+<div id="bfe68efa" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1680,7 +1677,7 @@ Figure&nbsp;9.4: Simulation of the heat equation in 1D.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-heat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 9.4 (Self implementation <a href="#exm-fourier-fft-heat" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-fourier-fft-heat</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="a46dfa1f" class="cell" data-execution_count="9">
+<div id="2fbfacec" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
@@ -1999,7 +1996,7 @@ Figure&nbsp;9.7: Electric circuit
 </figcaption>
 </figure>
 </div>
-<div id="28ef3fbe" class="cell" data-execution_count="12">
+<div id="db897ac5" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the raw data for the example</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2058,7 +2055,7 @@ i_c = \mathrm{e}^{1.2 + 0.8 \sin(2 \pi 50 t)} - 1
 <div id="fig-fft-gec-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fft-gec-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/signal/signals.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;9.8: Signal transition for the electric circuit shown above"><img src="../_assets/signal/signals.png" class="img-fluid figure-img"></a>
+<a href="../_assets/signal/signals.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;9.8: Signal transition for the electric circuit shown above"><img src="../_assets/signal/signals.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fft-gec-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;9.8: Signal transition for the electric circuit shown above

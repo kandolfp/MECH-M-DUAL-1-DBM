@@ -488,7 +488,7 @@ Note
 </div>
 </div>
 <p>A lot of the properties we saw for the Fourier transform carry over to the Laplace transform.</p>
-<ol class="example" type="1">
+<ol type="1">
 <li><p><strong>Linearity</strong> <span class="math display">\[
 \mathcal{L}\{\alpha f(t) + \beta g(t)\} =
 \alpha \mathcal{L}\{f(t)\} + \beta \mathcal{L}\{g(t)\} =
@@ -505,12 +505,9 @@ Note
 \]</span> and <span class="math display">\[
 \mathcal{L}\{f(t)H(t - a)\} = \mathrm{e}^{-a s}\mathcal{L}\{f(t+a)\}.
 \]</span></p></li>
-<li><p><strong>Drift in frequency</strong>, for <span class="math inline">\(a\in\mathbb{R}\)</span></p></li>
-</ol>
-<p><span class="math display">\[
+<li><p><strong>Drift in frequency</strong>, for <span class="math inline">\(a\in\mathbb{R}\)</span> <span class="math display">\[
 \mathrm{e}^{a t} \mathcal{L}\{f(t)\} = F(s - a).
-\]</span></p>
-<ol start="6" class="example" type="1">
+\]</span></p></li>
 <li><p><strong>Derivative in time</strong> <span class="math display">\[
 \mathcal{L}\{\partial_t f(t)\} = s F(s) - f(0)
 \]</span> We are going to prove this by going through the lines <span class="math display">\[
@@ -533,7 +530,7 @@ Note
 \]</span></p></li>
 <li><p>The <strong>convolution</strong> of two functions is defined as <span class="math display">\[
 (f \ast g)(t) = \int_{0}^{\infty}f(\tau) g(t - \tau)\, \mathrm{d}\tau,
-\]</span> and for the Fourier transform <span class="math display">\[
+\]</span> and for the Laplace transform <span class="math display">\[
 \mathcal{L}\{(f \ast g)(t)\} = F(s) \cdot G(s).
 \]</span></p></li>
 </ol>

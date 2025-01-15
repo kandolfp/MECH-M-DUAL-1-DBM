@@ -22,9 +22,10 @@ jobs:
         
       - name: Install dependencies, render
         run: |
+          set -e
           sudo apt-get install -qq language-pack-de librsvg2-bin
           pdm install
-          pdm run quarto render --to html .
+          pdm run quarto render --to html
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       

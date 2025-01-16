@@ -1,0 +1,15 @@
+{
+    "access_right": "open",
+    "creators": [
+        {
+            "orcid": "0000-0003-3601-0852",
+            "name": "Kandolf, Peter"
+        }
+    ],
+    "description": "Course material for a ~3 * 15 hours (5 ECTS) course on basic concepts for data science. All the topics are presented with the Python implementation included. We cover matrix decompositions, regression, signal processing, sparsity and compressed sensing and a bit of statistics.",
+    "keywords": ["Python", "matrix computations", "matrix decompositions", "regression", "signal processing", "data science"],
+    "license": "cc-by-nc-sa-4.0",
+    "publication_date": "2025-01-16",
+    "title": "MECH-M-DUAL-1-DBM - Grundlagen datenbasierter Methoden",
+    "upload_type": "lesson"
+}

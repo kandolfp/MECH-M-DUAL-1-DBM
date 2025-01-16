@@ -1,10 +1,13 @@
-# WS24 MECH-M-DUAL-1-DBM - Grundlagen datenbasierter Methoden
+# MECH-M-DUAL-1-DBM - Grundlagen datenbasierter Methoden
 
 Course material for a ~3 * 15 hours (5 ECTS) course on basic concepts for data science. All the topics are presented with the Python implementation included. We cover matrix decompositions, regression, signal processing, sparsity and compressed sensing and a bit of statistics. 
 
 # Citing this project
 
-T.B.D.
+[Citation information](CITATION.cff)
+
+[![DOI](https://zenodo.org/badge/{861305042}.svg)](https://zenodo.org/badge/latestdoi/{861305042})
+
 
 # Development
 
@@ -36,3 +39,5 @@ or the html version
 ```
  pdm run quarto render --to html
 ```
+
+You can also find a pdf in the [releases](https://github.com/kandolfp/MECH-M-DUAL-1-DBM/releases)

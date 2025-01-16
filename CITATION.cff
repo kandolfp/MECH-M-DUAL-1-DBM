@@ -5,7 +5,7 @@ authors:
   orcid: 0000-0003-3601-0852
 cff-version: 1.2.0
 date-released: '2025-01-16'
-doi: 
+doi: 10.5281/zenodo.14671708
 keywords:
 - Python
 - matrix computations

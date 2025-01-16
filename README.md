@@ -6,7 +6,7 @@ Course material for a ~3 * 15 hours (5 ECTS) course on basic concepts for data s
 
 [Citation information](CITATION.cff)
 
-[![DOI](https://zenodo.org/badge/{861305042}.svg)](https://zenodo.org/badge/latestdoi/{861305042})
+[![DOI](https://zenodo.org/badge/861305042.svg)](https://zenodo.org/badge/latestdoi/861305042)
 
 
 # Development

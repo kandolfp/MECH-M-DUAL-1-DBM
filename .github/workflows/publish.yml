@@ -21,7 +21,22 @@ jobs:
 
       - name: Set up PDM
         uses: pdm-project/setup-pdm@v4
-        
+      - name: Create pdf test
+        run: |
+          set -e
+          sudo apt-get install -qq language-pack-de librsvg2-bin
+          pdm install
+          pdm add yq
+          pdm run quarto install tinytex
+          pdm run quarto render --to pdf
+          TAG=$(git tag -l | tail -n 1)
+          FILENAME=$(pdm run yq -r ".book.title" _quarto.yml | tr ' ' '-')
+          cp ./_book/$FILENAME.pdf $FILENAME-$TAG.pdf
+          echo "FILE_NAME=$FILENAME-$TAG.pdf" >> $GITHUB_ENV
+          ls -alrt
+          bla
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install dependencies, render
         run: |
           set -e

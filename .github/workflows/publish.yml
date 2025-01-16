@@ -35,9 +35,23 @@ jobs:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
           FOLDER: _book
-#      - name: Render and Publish
-#        uses: quarto-dev/quarto-actions/publish@v2
-#        with:
-#          target: gh-pages
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create pdf
+        run: |
+          set -e
+          pdm install
+          pdm add yq
+          pdm run quarto install tinytex
+          pdm run quarto render --to pdf
+          TAG=$(git tag -l | tail -n 1)
+          FILENAME=$(pdm run yq -r ".book.title" _quarto.yml | tr ' ' '-')
+          mv _book/$FILENAME.pdf _books/$FILENAME-$TAG.pdf
+          echo "FILE_NAME=$(_books/$FILENAME-$TAG.pdf)" >> $GITHUB_ENV
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: startsWith(github.ref, 'refs/tags/')
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ${{ env.FILE_NAME }}
+          fail_on_unmatched_files: true

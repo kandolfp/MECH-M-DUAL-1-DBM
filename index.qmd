@@ -1,7 +1,3 @@
-:::{.callout-warning}
-The notes presented here are still under construction and can change without warning.
-:::
-
 ## Preface {.unnumbered}
 
 These are the lecture notes for the _Grundlagen der Datenbasierten Methoden_ class, part of the _MCI | The Entrepreneurial School_ master for [Mechatronik - Automation, Robotics & AI](https://www.mci.edu/de/studium/master/mechatronik-automation-robotics-ai#im_studium) in the winter term 2024/25.

@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:d8f67edafe42d200edfd3b2b57e623d23c530c9c000079127d3ebee8688c52fe"
+content_hash = "sha256:eea9a8009a41a1463bad90647c5315ac8faa11ba3ab202d5a689b80b5568c10e"
 
 [[metadata.targets]]
 requires_python = "==3.12.*"
@@ -37,6 +37,17 @@ marker = "platform_system == \"Darwin\""
 files = [
     {file = "appnope-0.1.4-py2.py3-none-any.whl", hash = "sha256:502575ee11cd7a28c0205f379b525beefebab9d161b7c964670864014ed7213c"},
     {file = "appnope-0.1.4.tar.gz", hash = "sha256:1de3860566df9caf38f01f86f65e0e13e379af54f9e4bee1e66b48f2efffd1ee"},
+]
+
+[[package]]
+name = "argcomplete"
+version = "3.5.3"
+requires_python = ">=3.8"
+summary = "Bash tab completion for argparse"
+groups = ["default"]
+files = [
+    {file = "argcomplete-3.5.3-py3-none-any.whl", hash = "sha256:2ab2c4a215c59fd6caaff41a869480a23e8f6a5f910b266c1808037f4e375b61"},
+    {file = "argcomplete-3.5.3.tar.gz", hash = "sha256:c12bf50eded8aebb298c7b7da7a5ff3ee24dffd9f5281867dfe1424b58c55392"},
 ]
 
 [[package]]
@@ -2101,6 +2112,17 @@ files = [
 ]
 
 [[package]]
+name = "tomlkit"
+version = "0.13.2"
+requires_python = ">=3.8"
+summary = "Style preserving TOML library"
+groups = ["default"]
+files = [
+    {file = "tomlkit-0.13.2-py3-none-any.whl", hash = "sha256:7a974427f6e119197f670fbbbeae7bef749a6c14e793db934baefc1b5f03efde"},
+    {file = "tomlkit-0.13.2.tar.gz", hash = "sha256:fff5fe59a87295b278abd31bec92c15d9bc4a06885ab12bcea52c71119392e79"},
+]
+
+[[package]]
 name = "tornado"
 version = "6.4.1"
 requires_python = ">=3.8"
@@ -2293,6 +2315,34 @@ dependencies = [
 files = [
     {file = "xarray-2024.10.0-py3-none-any.whl", hash = "sha256:ae1d38cb44a0324dfb61e492394158ae22389bf7de9f3c174309c17376df63a0"},
     {file = "xarray-2024.10.0.tar.gz", hash = "sha256:e369e2bac430e418c2448e5b96f07da4635f98c1319aa23cfeb3fbcb9a01d2e0"},
+]
+
+[[package]]
+name = "xmltodict"
+version = "0.14.2"
+requires_python = ">=3.6"
+summary = "Makes working with XML feel like you are working with JSON"
+groups = ["default"]
+files = [
+    {file = "xmltodict-0.14.2-py2.py3-none-any.whl", hash = "sha256:20cc7d723ed729276e808f26fb6b3599f786cbc37e06c65e192ba77c40f20aac"},
+    {file = "xmltodict-0.14.2.tar.gz", hash = "sha256:201e7c28bb210e374999d1dde6382923ab0ed1a8a5faeece48ab525b7810a553"},
+]
+
+[[package]]
+name = "yq"
+version = "3.4.3"
+requires_python = ">=3.8"
+summary = "Command-line YAML/XML processor - jq wrapper for YAML/XML documents"
+groups = ["default"]
+dependencies = [
+    "PyYAML>=5.3.1",
+    "argcomplete>=1.8.1",
+    "tomlkit>=0.11.6",
+    "xmltodict>=0.11.0",
+]
+files = [
+    {file = "yq-3.4.3-py3-none-any.whl", hash = "sha256:547e34bc3caacce83665fd3429bf7c85f8e8b6b9aaee3f953db1ad716ff3434d"},
+    {file = "yq-3.4.3.tar.gz", hash = "sha256:ba586a1a6f30cf705b2f92206712df2281cd320280210e7b7b80adcb8f256e3b"},
 ]
 
 [[package]]

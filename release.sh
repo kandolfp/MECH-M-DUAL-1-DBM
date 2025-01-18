@@ -81,3 +81,10 @@ sed -i "s/^date-released: .*$/date-released: \'$DATE\'/g" CITATION.cff
 git add :
 git commit -m "release: new version -> $NEW_VERSION"
 git tag -a v$NEW_VERSION -m "$2"
+
+read -rp $'\033[34;5mDo you want to push the release and run ci/cd [y]?: \033[0m' proceed
+if [ "$proceed" != "y" ]
+  then
+    exit 0
+fi
+git push --follow-tags

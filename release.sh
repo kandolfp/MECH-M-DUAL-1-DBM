@@ -49,7 +49,6 @@ workflow() {
   NEW_VERSION="${a[0]}.${a[1]}.${a[2]}"
   set_version "$VERSION" "$NEW_VERSION" "$1"
   TAG=$(echo $1 | cut -d / -f 1)
-  echo "$TAG-$NEW_VERSION" >> mytags
 }
 
 while getopts "h" arg; do
@@ -78,8 +77,8 @@ DATE=$(date '+%Y-%m-%d')
 pdm run yq --arg date "$DATE" '.publication_date = $date' .zenodo.json > .zenodo.json_
 mv .zenodo.json_ .zenodo.json
 sed -i "s/^date-released: .*$/date-released: \'$DATE\'/g" CITATION.cff
-git add :
-git commit -m "release: new version -> $NEW_VERSION"
+git add .zenodo.json CITATION.cff pyproject.toml
+git commit -m "release: new version -> $NEW_VERSION $2"
 git tag -a v$NEW_VERSION -m "$2"
 
 read -rp $'\033[34;5mDo you want to push the release and run ci/cd [y]?: \033[0m' proceed

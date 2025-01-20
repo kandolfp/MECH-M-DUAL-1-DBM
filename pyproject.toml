@@ -1,6 +1,6 @@
 [project]
 name = "DBM"
-version = "1.0.1"
+version = "1.0.0"
 description = "Class"
 authors = [
     {name = "Peter Kandolf", email = "peter.kandolf@mci.edu"},

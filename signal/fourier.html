@@ -430,7 +430,7 @@ window.Quarto = {
 
 
 <p>The fourier transform helps us convert a signal from the time domain to the frequency domain. In this section our main concern is going to be one dimensional signals, but the concepts can be applied to multiple dimensions.</p>
-<p>Before we can start defining the <em>Fourier Series</em> we need to extend our notion of vector space to functions space. This is done with <em>Hilbert</em> spaces. The computational rules follow the same principal as in <a href="#def-vectorspace" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-vectorspace</span></a>, what we want to investigate is the inner product.</p>
+<p>Before we can start defining the <em>Fourier Series</em> we need to extend our notion of vector space to functions space. This is done with <em>Hilbert</em> spaces. The computational rules follow the same principal as in <a href="../basics/linearalgebra.html#def-vectorspace" class="quarto-xref">Definition&nbsp;<span>1.1</span></a>, what we want to investigate is the inner product.</p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -445,7 +445,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>At first this looks strange but it is closely related to our already known <a href="#def-dotproduct" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-dotproduct</span></a>.</p>
+<p>At first this looks strange but it is closely related to our already known <a href="../basics/linearalgebra.html#def-dotproduct" class="quarto-xref">Definition&nbsp;<span>1.3</span></a>.</p>
 <p>As a first step, if we move from real to complex vector spaces the transpose is replaced by the conjugate transposed or hermit transpose, in notation the <span class="math inline">\(^\mathbf{T}\)</span> becomes <span class="math inline">\(^\mathbf{H}\)</span>.</p>
 <p>Now consider a discrete version of <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> at regular intervals <span class="math inline">\(\Delta x = \frac{b-a}{n-1}\)</span> where <span class="math display">\[
 f_i = f(x_i) = f(a + (i - 1) \Delta x),\quad i = 1, \ldots n,
@@ -529,7 +529,7 @@ b_k &amp;= \frac{1}{\|\sin\left(\omega k t\right)\|_2^2} \langle f(t), \sin\left
 </div>
 <p>With the help of Euler’s formula: <span id="eq-euler"><span class="math display">\[
 \mathrm{e}^{\mathrm{i} k t} = \cos(k t) + \mathrm{i} \sin(k t)
-\tag{8.2}\]</span></span> we can rewrite <a href="#eq-fs" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-fs</span></a> as <span class="math display">\[
+\tag{8.2}\]</span></span> we can rewrite <a href="#eq-fs" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> as <span class="math display">\[
 f(t) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\omega\mathrm{i} k t}
 \]</span> with <span class="math display">\[
 c_k = \frac{1}{L} \int_0^L f(t) \mathrm{e}^{-\omega\mathrm{i} k t}\, \mathrm{d}t.
@@ -704,8 +704,8 @@ Figure&nbsp;8.1: Fourier transform of a two hat functions.
 </div>
 <div class="callout-body-container">
 <div id="exr-fourier-hat-self" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 8.1 (Self implementation <a href="#exm-fourier-hat" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-fourier-hat</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="a5fb8f78" class="cell" data-execution_count="2">
+<p><span class="theorem-title"><strong>Exercise 8.1 (Self implementation <a href="#exm-fourier-hat" class="quarto-xref">Example&nbsp;<span>8.1</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
+<div id="72251507" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -797,7 +797,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The phenomenon that the truncated Fourier series oscillates in <a href="#fig-fourier_hat-3" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fourier_hat-3</span></a> due to the discontinuity of the function is called the Gibbs phenomenon.</p>
+<p>The phenomenon that the truncated Fourier series oscillates in <a href="#fig-fourier_hat-3" class="quarto-xref">Figure&nbsp;<span>8.1 (c)</span></a> due to the discontinuity of the function is called the Gibbs phenomenon.</p>
 </div>
 </div>
 </section>
@@ -956,7 +956,7 @@ Tip
 </div>
 <div class="callout-body-container callout-body">
 <p>Code for the computation of the DFT matrix.</p>
-<div id="f4a4235a" class="cell" data-execution_count="3">
+<div id="e7f4138b" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code.</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -975,7 +975,7 @@ Tip
 </section>
 <section id="fast-fourier-transform" class="level2" data-number="8.4">
 <h2 data-number="8.4" class="anchored" data-anchor-id="fast-fourier-transform"><span class="header-section-number">8.4</span> Fast Fourier Transform</h2>
-<p>In 1965, James W. Cooley (IBM) and John W. Tukey (Princeton) developed the so called <em>fast Fourier transform</em> (FFT) that scales with <span class="math inline">\(\mathcal{O}(N \log(N))\)</span>. which becomes almost linear for large enough <span class="math inline">\(N\)</span>, see <span class="citation" data-cites="Cooley1965">Cooley and Tukey (<a href="#ref-Cooley1965" role="doc-biblioref">1965</a>)</span>.</p>
+<p>In 1965, James W. Cooley (IBM) and John W. Tukey (Princeton) developed the so called <em>fast Fourier transform</em> (FFT) that scales with <span class="math inline">\(\mathcal{O}(N \log(N))\)</span>. which becomes almost linear for large enough <span class="math inline">\(N\)</span>, see <span class="citation" data-cites="Cooley1965">Cooley and Tukey (<a href="../references.html#ref-Cooley1965" role="doc-biblioref">1965</a>)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -988,7 +988,7 @@ Note
 <div class="callout-body-container callout-body">
 <p>To give an idea of what this change means and why this algorithm was a game changer. Audio is most of the time sampled with 44.1kHz, i.e.&nbsp;44 100 samples per second. For a 10s audio clip the vector <span class="math inline">\(f\)</span> will have the length <span class="math inline">\(N = 4.41 \times 10^5\)</span>. The DFT computation (without generating the matrix) results ins approximately <span class="math inline">\(2\times 10^{11}\)</span> multiplications. The FFT on the other hand requires <span class="math inline">\(6\times 10^6\)</span> leading to a speed-up of about <span class="math inline">\(30 000\)</span>.</p>
 <p>How this influenced our world we know from the use in our daily communication networks.</p>
-<p><span class="citation" data-cites="Brunton2022">(Compare <a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 65–66</a>)</span></p>
+<p><span class="citation" data-cites="Brunton2022">(Compare <a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 65–66</a>)</span></p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1001,7 +1001,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We should note that Cooley and Tukey where not the first to propose a FFT but the provided the formulation used today. Gauss already formulated the FFT 150 years earlier in 1805 for orbital approximations. Apparently, he did the necessary computations in his head and needed a fast algorithm so he developed the FFT. Gauss being Gauss did not see this as something important and it did not get published until 1866 in his compiled notes, <span class="citation" data-cites="Gauss">Gauß (<a href="#ref-Gauss" role="doc-biblioref">1866</a>)</span>.</p>
+<p>We should note that Cooley and Tukey where not the first to propose a FFT but the provided the formulation used today. Gauss already formulated the FFT 150 years earlier in 1805 for orbital approximations. Apparently, he did the necessary computations in his head and needed a fast algorithm so he developed the FFT. Gauss being Gauss did not see this as something important and it did not get published until 1866 in his compiled notes, <span class="citation" data-cites="Gauss">Gauß (<a href="../references.html#ref-Gauss" role="doc-biblioref">1866</a>)</span>.</p>
 </div>
 </div>
 <p>The main idea of the FFT is to exploit symmetries in the Fourier transform and to relate the <span class="math inline">\(N\)</span>-dimensional DFT to a lower dimensional DFT by reordering the coefficients.</p>
@@ -1012,7 +1012,7 @@ Note
 </div>
 <div class="callout-body-container">
 <div id="def-fourier-fft" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 8.7 (Fast-Fourier Transform)</strong></span> If we assume that <span class="math inline">\(N = 2^n\)</span>, i.e.&nbsp;a power of <span class="math inline">\(2\)</span>, in particular <span class="math inline">\(N=2M\)</span>, and <span class="math inline">\(F_N\)</span> denotes the matrix of <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-dft</span></a> for dimension <span class="math inline">\(N\)</span> and we have <span class="math inline">\(\hat{f} = F_N f\)</span> and <span class="math inline">\(f = \tfrac1N \overline{F_N} \hat{f}\)</span>. By splitting <span class="math inline">\(f\)</span> in the even and odd indices as <span class="math display">\[e = [f_0, f_2, \ldots, f_{N-2}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and <span class="math display">\[o = [f_1, f_3, \ldots, f_{N-1}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and for <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-dft</span></a> we get <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 8.7 (Fast-Fourier Transform)</strong></span> If we assume that <span class="math inline">\(N = 2^n\)</span>, i.e.&nbsp;a power of <span class="math inline">\(2\)</span>, in particular <span class="math inline">\(N=2M\)</span>, and <span class="math inline">\(F_N\)</span> denotes the matrix of <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span>8.4</span></a> for dimension <span class="math inline">\(N\)</span> and we have <span class="math inline">\(\hat{f} = F_N f\)</span> and <span class="math inline">\(f = \tfrac1N \overline{F_N} \hat{f}\)</span>. By splitting <span class="math inline">\(f\)</span> in the even and odd indices as <span class="math display">\[e = [f_0, f_2, \ldots, f_{N-2}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and <span class="math display">\[o = [f_1, f_3, \ldots, f_{N-1}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and for <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span>8.4</span></a> we get <span class="math display">\[
 \begin{aligned}
 \hat{f}_k &amp;= \sum_{j=0}^{N-1}f_j\, \omega^{j k} = \sum_{j=0}^{M-1}f_{2j}\, \omega^{(2j) k} + \sum_{j=0}^{M-1}f_{2j+1}\, \omega^{(2j+1) k} \\
 &amp;= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} + \omega^k\sum_{j=0}^{M-1}o_{j}\, (\omega^2)^{j k}.
@@ -1081,14 +1081,14 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The original FFT paper <span class="citation" data-cites="Cooley1965">(<a href="#ref-Cooley1965" role="doc-biblioref">Cooley and Tukey 1965</a>)</span> uses bit flipping and similar techniques to boost performance even more. It can even be implemented to allow for in place computation to save storage.</p>
+<p>The original FFT paper <span class="citation" data-cites="Cooley1965">(<a href="../references.html#ref-Cooley1965" role="doc-biblioref">Cooley and Tukey 1965</a>)</span> uses bit flipping and similar techniques to boost performance even more. It can even be implemented to allow for in place computation to save storage.</p>
 <p>IMAGE</p>
-<p><span class="citation" data-cites="Meyberg1992-ws">(Compare <a href="#ref-Meyberg1992-ws" role="doc-biblioref">Meyberg and Vachenauer 1992, 331</a>)</span></p>
+<p><span class="citation" data-cites="Meyberg1992-ws">(Compare <a href="../references.html#ref-Meyberg1992-ws" role="doc-biblioref">Meyberg and Vachenauer 1992, 331</a>)</span></p>
 </div>
 </div>
 <section id="examples-for-the-fft-in-action" class="level3" data-number="8.4.1">
 <h3 data-number="8.4.1" class="anchored" data-anchor-id="examples-for-the-fft-in-action"><span class="header-section-number">8.4.1</span> Examples for the FFT in action</h3>
-<p>In order to give an idea how FFT works in an application we follow the examples given in <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 66–76</a>)</span>.</p>
+<p>In order to give an idea how FFT works in an application we follow the examples given in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 66–76</a>)</span>.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1218,8 +1218,8 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 </figcaption>
 </figure>
 </div>
-<p>As can be seen in the <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fourier_fft_denoise-3</span></a>, the reconstruction is not exact. This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. In particular:</p>
-<div id="4e0d9fff" class="cell" data-execution_count="5">
+<p>As can be seen in the <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span>8.2 (c)</span></a>, the reconstruction is not exact. This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. In particular:</p>
+<div id="94e64345" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -1259,7 +1259,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 </div>
 </div>
 </div>
-<p>Note: For <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fourier_fft_denoise-3</span></a> we discarded the imaginary part of the reconstruction.</p>
+<p>Note: For <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span>8.2 (c)</span></a> we discarded the imaginary part of the reconstruction.</p>
 </div>
 </div>
 </div>
@@ -1271,8 +1271,8 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 </div>
 <div class="callout-body-container">
 <div id="exr-fourier-fft-den-self" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 8.2 (Self implementation <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-fourier-fft-den</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="211c7e34" class="cell" data-execution_count="6">
+<p><span class="theorem-title"><strong>Exercise 8.2 (Self implementation <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span>8.2</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
+<div id="ef39177a" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1356,13 +1356,13 @@ Exercise DFT vs.&nbsp;FFT
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div id="exr-fourier-fft-den" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 8.3 (DFT vs.&nbsp;FFT)</strong></span> Implement <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-fourier-fft-den</span></a> with DFT and FFT such that you can evaluate the runtime and create a plot showing the different runtime as well as check if the two produce the same result</p>
+<p><span class="theorem-title"><strong>Exercise 8.3 (DFT vs.&nbsp;FFT)</strong></span> Implement <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span>8.2</span></a> with DFT and FFT such that you can evaluate the runtime and create a plot showing the different runtime as well as check if the two produce the same result</p>
 </div>
 </div>
 </div>
 </div>
 <p>For the Fourier transform we stated that the multiplication with <span class="math inline">\(\mathcal{F}\{\partial f\}=\mathrm{i}\omega\mathcal{F}\{f\}\)</span>, similarly we can derive a formula for the numerical derivative of a sampled function by multiplying each entry of the transformed vector by <span class="math inline">\(\mathrm{i}\kappa\)</span> for <span class="math inline">\(\kappa=\tfrac{2\pi k}{N}\)</span>. <span class="math inline">\(\kappa\)</span> is called the discrete wavenumber associated with the component <span class="math inline">\(k\)</span>.</p>
-<p>Let us explore this with the example stated in <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 68–69</a>)</span>.</p>
+<p>Let us explore this with the example stated in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 68–69</a>)</span>.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1516,12 +1516,12 @@ Figure&nbsp;8.3: Computing the derivative of a function
 </figcaption>
 </figure>
 </div>
-<p>As can be seen in <a href="#fig-fourier_fft_spectralderivative-2" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fourier_fft_spectralderivative-2</span></a> we can reduce the error of both methods by increasing <span class="math inline">\(N\)</span>. Nevertheless, the spectral method is more accurate and converges faster.</p>
+<p>As can be seen in <a href="#fig-fourier_fft_spectralderivative-2" class="quarto-xref">Figure&nbsp;<span>8.3 (b)</span></a> we can reduce the error of both methods by increasing <span class="math inline">\(N\)</span>. Nevertheless, the spectral method is more accurate and converges faster.</p>
 </div>
 </div>
 </div>
 </div>
-<p>In <a href="#sec-eigen-lode" class="quarto-xref"><span class="quarto-unresolved-ref">sec-eigen-lode</span></a> we have already seen how the eigendecomposition can be used to compute the solution of ordinary differential equations by changing the basis and transforming the equation into a basis that can be handled easy. The same is true with the Fourier transformation.</p>
+<p>In <a href="../matrixdc/eigen.html#sec-eigen-lode" class="quarto-xref"><span>Section 3.1.2</span></a> we have already seen how the eigendecomposition can be used to compute the solution of ordinary differential equations by changing the basis and transforming the equation into a basis that can be handled easy. The same is true with the Fourier transformation.</p>
 <p>As mentioned before, Fourier introduced it to solve the heat equation and we will do the same.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1557,7 +1557,7 @@ u(t, x) &amp;= \mathcal{F}^{-1}\{\hat{u}(t, \omega)\} = \mathcal{F}^{-1}\{\mathr
 \end{aligned}
 \]</span></p>
 <p>For the numerical computation it is more convenient to stay in the frequency domain and use <span class="math inline">\(\kappa\)</span> as before.</p>
-<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.5 and Code 2.6)</span>.</p>
+<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.5 and Code 2.6)</span>.</p>
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1670,8 +1670,8 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 </div>
 <div class="callout-body-container">
 <div id="exr-fourier-fft-heat-self" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 8.4 (Self implementation <a href="#exm-fourier-fft-heat" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-fourier-fft-heat</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="0b3d93a8" class="cell" data-execution_count="9">
+<p><span class="theorem-title"><strong>Exercise 8.4 (Self implementation <a href="#exm-fourier-fft-heat" class="quarto-xref">Example&nbsp;<span>8.4</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
+<div id="297de3ef" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
@@ -1747,7 +1747,7 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 <p><span class="theorem-title"><strong>Example 8.5 (Transport or advection)</strong></span> The transport equation in 1D is given by <span class="math display">\[
 \dot{u} = - c \partial_x u.
 \]</span> It is called the transport equation, as the initial value simply propagates in time to the right hand side of the domain with speed <span class="math inline">\(c\)</span>, i.e.&nbsp;<span class="math inline">\(u(t, x) = u(0, x -c t)\)</span>. The solution is simply computed by exchanging the right hand side from the above code.</p>
-<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.5 and Code 2.6)</span>.</p>
+<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.5 and Code 2.6)</span>.</p>
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1871,7 +1871,7 @@ Figure&nbsp;8.5: Computing the derivative of a function
 \]</span> The equation consists of a nonlinear convection part <span class="math inline">\(u \partial_t u\)</span> as well as diffusion. The convection part is designed in such a way that larger amplitudes travel faster and therefore causes a shock wave to form.</p>
 <p>Regarding the solution of this equation, the interesting part is that we need to map back and forth between the Fourier space and time space to apply the nonlinearity.</p>
 <p>This example is also very useful to test the capabilities of your solver as by decreasing the diffusion factor further and further we can approach an infinitely steep shock and in theory it can break like an ocean wave.</p>
-<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.5 and Code 2.6)</span>.</p>
+<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.5 and Code 2.6)</span>.</p>
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1971,7 +1971,7 @@ Figure&nbsp;8.6: Time integration of the Burger’s equation
 </div>
 </div>
 </div>
-<p>The following example is taken from <span class="citation" data-cites="Meyberg1992-ws">(<a href="#ref-Meyberg1992-ws" role="doc-biblioref">Meyberg and Vachenauer 1992</a>)</span>.</p>
+<p>The following example is taken from <span class="citation" data-cites="Meyberg1992-ws">(<a href="../references.html#ref-Meyberg1992-ws" role="doc-biblioref">Meyberg and Vachenauer 1992</a>)</span>.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1979,7 +1979,7 @@ Figure&nbsp;8.6: Time integration of the Burger’s equation
 </div>
 <div class="callout-body-container">
 <div id="exm-fourier-fft-gec" class="theorem example">
-<p><span class="theorem-title"><strong>Example 8.7 (Ground Emitter Circuit)</strong></span> We can use FFT to compute some base properties of a ground emitter circuit <a href="#fig-fft-gec-1" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fft-gec-1</span></a> and how the signal is propagated through this circuit <a href="#fig-fft-gec-2" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fft-gec-2</span></a>.</p>
+<p><span class="theorem-title"><strong>Example 8.7 (Ground Emitter Circuit)</strong></span> We can use FFT to compute some base properties of a ground emitter circuit <a href="#fig-fft-gec-1" class="quarto-xref">Figure&nbsp;<span>8.7</span></a> and how the signal is propagated through this circuit <a href="#fig-fft-gec-2" class="quarto-xref">Figure&nbsp;<span>8.8</span></a>.</p>
 <div id="fig-fft-gec-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fft-gec-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1990,7 +1990,7 @@ Figure&nbsp;8.7: Electric circuit
 </figcaption>
 </figure>
 </div>
-<div id="98cdf7fc" class="cell" data-execution_count="12">
+<div id="e7f7e91c" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the raw data for the example</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2042,7 +2042,7 @@ Figure&nbsp;8.7: Electric circuit
 <span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>harmonic_distortion <span class="op">=</span> np.linalg.norm(yy[<span class="dv">3</span>:<span class="op">-</span><span class="dv">2</span>])<span class="op">/</span>np.linalg.norm(yy[<span class="dv">1</span>:])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>The transition of the transistor can be approximated by a diode and is illustrated in the <span class="math inline">\(u_{BE}\)</span> vs.&nbsp;<span class="math inline">\(i_C\)</span> diagram on the top left (orange signal in <a href="#fig-fft-gec-2" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fft-gec-2</span></a>). The exciting function <span class="math inline">\(u\)</span> on the bottom left is a normal sine wave with <span class="math inline">\(50\mathrm{Hz}\)</span>.</p>
+<p>The transition of the transistor can be approximated by a diode and is illustrated in the <span class="math inline">\(u_{BE}\)</span> vs.&nbsp;<span class="math inline">\(i_C\)</span> diagram on the top left (orange signal in <a href="#fig-fft-gec-2" class="quarto-xref">Figure&nbsp;<span>8.8</span></a>). The exciting function <span class="math inline">\(u\)</span> on the bottom left is a normal sine wave with <span class="math inline">\(50\mathrm{Hz}\)</span>.</p>
 <p>All together we get the equation <span class="math display">\[
 i_c = \mathrm{e}^{1.2 + 0.8 \sin(2 \pi 50 t)} - 1
 \]</span> for the current in <span class="math inline">\([\mathrm{mA}]\)</span> running through the transistor.</p>
@@ -2140,7 +2140,7 @@ Figure&nbsp;8.9: Signal with Gaussian kernel
 </div>
 </div>
 </div>
-<p><a href="#fig-fourier_gabor" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-fourier_gabor</span></a> illustrates the sliding time window with the spread as <span class="math inline">\(a\)</span> and the center <span class="math inline">\(\tau\)</span>. The inverse is given as <span class="math display">\[
+<p><a href="#fig-fourier_gabor" class="quarto-xref">Figure&nbsp;<span>8.9</span></a> illustrates the sliding time window with the spread as <span class="math inline">\(a\)</span> and the center <span class="math inline">\(\tau\)</span>. The inverse is given as <span class="math display">\[
 f(t) = \mathcal{G}^{-1}\{G_f(t, \omega)\} = \frac{1}{2 \pi \|g\|^2} = \int_{-\infty}^\infty\int_{-\infty}^\infty G_f(\tau, \omega) \mathrm{e}^{\mathrm{i}\omega\tau}\overline{g}(t - \tau)\, \mathrm{d}\omega\, \mathrm{d}t.
 \]</span></p>
 <p>As with the Fourier transform the application of the Gabor transform is usually done in its discrete form.</p>
@@ -2160,7 +2160,7 @@ g_{j,k} = \mathrm{e}^{{\mathrm{i}2 \pi j\Delta\omega t}} g(t- k\Delta t)
 </div>
 </div>
 </div>
-<p>The following example is taken from <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 77–78</a>)</span>.</p>
+<p>The following example is taken from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 77–78</a>)</span>.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -2171,7 +2171,7 @@ g_{j,k} = \mathrm{e}^{{\mathrm{i}2 \pi j\Delta\omega t}} g(t- k\Delta t)
 <p><span class="theorem-title"><strong>Example 8.8 (Gabor transform for a quadratic chirp)</strong></span> As example we use an oscillating cosine function where the frequency of the oscillation increases as a quadratic function in time: <span class="math display">\[
 f(t) = \cos(2\pi\, t\, h(t)), \quad \text{with}\quad h(t) = h_0 + (h_1 - h_0)\frac{t}{3 t_1^2},
 \]</span> where the frequency shifts from <span class="math inline">\(h_0\)</span> to <span class="math inline">\(h_1\)</span> between <span class="math inline">\(t=0\)</span> and <span class="math inline">\(t=t_1\)</span>.</p>
-<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.9)</span>.</p>
+<p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.9)</span>.</p>
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2259,10 +2259,10 @@ Note
 <p>The spectrogram resolves both but with reduced resolution. This effect manifests differently at different locations of the chirp signal. At the left where the frequency is almost constant, the band becomes narrower, whereas at the right it becomes wider due to the increased blur in horizontal direction. The product of the uncertainties of these quantities has a minimal value. In this context time and frequency domain respectively represent the extremes.</p>
 </div>
 </div>
-<p>The Fourier transform always assumes a harmonic nature in the signal it is applied to. Therefore, it is best suited for e.g.&nbsp;music, rotating machines or vibrations. For other signals, especially with discontinuous parts (Gibbs phenomenon) there are more adequate bases functions. We look at these in the next section <a href="#sec-signal-wavelet" class="quarto-xref"><span class="quarto-unresolved-ref">sec-signal-wavelet</span></a> but first we look at the Laplace transform <a href="#sec-signal-laplace" class="quarto-xref"><span class="quarto-unresolved-ref">sec-signal-laplace</span></a>.</p>
+<p>The Fourier transform always assumes a harmonic nature in the signal it is applied to. Therefore, it is best suited for e.g.&nbsp;music, rotating machines or vibrations. For other signals, especially with discontinuous parts (Gibbs phenomenon) there are more adequate bases functions. We look at these in the next section <a href="wavelet.html" class="quarto-xref"><span>Chapter 10</span></a> but first we look at the Laplace transform <a href="laplace.html" class="quarto-xref"><span>Chapter 9</span></a>.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-Brunton2022" class="csl-entry" role="listitem">
 Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engineering - Machine Learning, Dynamical Systems, and Control</em>. 2nd ed. Cambridge: Cambridge University Press.
 </div>

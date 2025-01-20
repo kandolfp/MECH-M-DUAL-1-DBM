@@ -376,22 +376,22 @@ window.Quarto = {
 </header>
 
 
-<p>In previous parts we have already discussed how changing a coordinate system or basis (<a href="#def-changebasis" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-changebasis</span></a>) can simplify expression or computation, see <a href="#sec-matrixdc-eigen" class="quarto-xref"><span class="quarto-unresolved-ref">sec-matrixdc-eigen</span></a> and <a href="#sec-matrixdc-svd" class="quarto-xref"><span class="quarto-unresolved-ref">sec-matrixdc-svd</span></a>, among others.</p>
-<p>One of the most fundamental coordinate transformations was introduced by J.-B. Joseph Fourier in the early 1800s. While investigating <em>heat</em> he discovered that sine and cosine functions with increasing frequency form an orthogonal basis (<a href="#def-basis" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-basis</span></a> &amp; <a href="#def-orthonormal" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-orthonormal</span></a>). In fact, the sine and cosine functions for an eigenbasis for the heat equation <span class="math display">\[
+<p>In previous parts we have already discussed how changing a coordinate system or basis (<a href="../basics/linearalgebra.html#def-changebasis" class="quarto-xref">Definition&nbsp;<span>1.8</span></a>) can simplify expression or computation, see <a href="../matrixdc/eigen.html" class="quarto-xref"><span>3&nbsp; Eigendecomposition</span></a> and <a href="../matrixdc/svd.html" class="quarto-xref"><span>4&nbsp; Singular Value Decomposition</span></a>, among others.</p>
+<p>One of the most fundamental coordinate transformations was introduced by J.-B. Joseph Fourier in the early 1800s. While investigating <em>heat</em> he discovered that sine and cosine functions with increasing frequency form an orthogonal basis (<a href="../basics/linearalgebra.html#def-basis" class="quarto-xref">Definition&nbsp;<span>1.6</span></a> &amp; <a href="../basics/linearalgebra.html#def-orthonormal" class="quarto-xref">Definition&nbsp;<span>1.9</span></a>). In fact, the sine and cosine functions for an eigenbasis for the heat equation <span class="math display">\[
 \frac{\partial u}{\partial t} = \Delta u
 \]</span> and solving it becomes trivial once you determine the corresponding eigenvalues that are connected to the geometry, amplitudes, and boundary conditions.</p>
 <p>In the 200+ years since, this discovery has not only founded new corners of mathematics but also allows via the <em>fast fourier transform</em> or FFT the real-time image and audio compression that make our global communication networks work.</p>
 <p>In the same area the related wavelets where developed to for advanced signal processing and compression.</p>
 <p>In this section we are going to discuss basics of signal processing in terms of these and other signal transformations, see</p>
 <ul>
-<li><a href="#sec-signal-fourier" class="quarto-xref"><span class="quarto-unresolved-ref">sec-signal-fourier</span></a></li>
-<li><a href="#sec-signal-wavelet" class="quarto-xref"><span class="quarto-unresolved-ref">sec-signal-wavelet</span></a></li>
-<li><a href="#sec-signal-2d" class="quarto-xref"><span class="quarto-unresolved-ref">sec-signal-2d</span></a></li>
+<li><a href="fourier.html" class="quarto-xref"><span>8&nbsp; Fourier Transform</span></a></li>
+<li><a href="wavelet.html" class="quarto-xref"><span>10&nbsp; Wavelet transform</span></a></li>
+<li><a href="twodim.html" class="quarto-xref"><span>11&nbsp; Two-Dimensional Transform</span></a></li>
 </ul>
-<p>Parts of this section are based on <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, chap. 2</a>)</span>.</p>
+<p>Parts of this section are based on <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, chap. 2</a>)</span>.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-Brunton2022" class="csl-entry" role="listitem">
 Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engineering - Machine Learning, Dynamical Systems, and Control</em>. 2nd ed. Cambridge: Cambridge University Press.
 </div>

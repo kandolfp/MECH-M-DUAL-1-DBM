@@ -77,6 +77,7 @@ DATE=$(date '+%Y-%m-%d')
 pdm run yq --arg date "$DATE" '.publication_date = $date' .zenodo.json > .zenodo.json_
 mv .zenodo.json_ .zenodo.json
 sed -i "s/^date-released: .*$/date-released: \'$DATE\'/g" CITATION.cff
+sed -i "s/^version: .*$/version: v$NEW_VERSION/g" CITATION.cff
 git add .zenodo.json CITATION.cff pyproject.toml
 git commit -m "release: new version -> $NEW_VERSION $2"
 git tag -a v$NEW_VERSION -m "$2"

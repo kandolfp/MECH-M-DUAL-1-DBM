@@ -437,13 +437,12 @@ We take a look at the population growth were the data is kindly provided by @owi
 ::::: {.content-visible when-format="html"}
 ```{python}
 #| label: fig-reg_wp
-#| fig-cap: "Regression analysis for world population with different scales for y axis."
-#| fig-subcap: 
+#| fig-cap: 
 #|   - "World population with regression lines normal scale."
 #|   - "World population with regression lines logarithmic scale." 
 #| layout-ncol: 1
 #| code-fold: true
-#| code-summary: "Show the code for the figure"
+#| code-summary: "Show the code for the figures"
 
 from owid.catalog import charts
 import numpy as np

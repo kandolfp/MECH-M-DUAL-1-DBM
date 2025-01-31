@@ -427,7 +427,7 @@ window.Quarto = {
 </header>
 
 
-<p>We start off with the so called <em>eigendecomposition</em>. The main idea is to compute a decomposition (or factorization) of a square matrix into a canonical form. We will represent a matrix by its <em>eigenvalues</em> and <em>eigenvectors</em>. In order to do so we need to recall some more definitions from our favourite linear algebra book, such as <span class="citation" data-cites="GoluLoan">Golub and Van Loan (<a href="#ref-GoluLoan" role="doc-biblioref">2013</a>)</span>.</p>
+<p>We start off with the so called <em>eigendecomposition</em>. The main idea is to compute a decomposition (or factorization) of a square matrix into a canonical form. We will represent a matrix by its <em>eigenvalues</em> and <em>eigenvectors</em>. In order to do so we need to recall some more definitions from our favourite linear algebra book, such as <span class="citation" data-cites="GoluLoan">Golub and Van Loan (<a href="../references.html#ref-GoluLoan" role="doc-biblioref">2013</a>)</span>.</p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -438,7 +438,7 @@ window.Quarto = {
 <p><span class="theorem-title"><strong>Definition 3.1 (Determinant)</strong></span> If <span class="math inline">\(A = (a) \in \mathbb{R}^{1\times1}\)</span> (a single number), then its <em>determinant</em> is given by <span class="math inline">\(\det(A) = a\)</span>. Now, the determinant of <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> is defined in terms of order-<span class="math inline">\((n-1)\)</span> determinants: <span class="math display">\[
 \det(A) = \sum_{j=1}^n (-1)^{j+1} a_{1j}\det(A_1j),
 \]</span> where <span class="math inline">\(A_1j\)</span> is a <span class="math inline">\((n-1) \times (n-1)\)</span> matrix obtained by deleting the first row and the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(A\)</span>.</p>
-<p><span class="citation" data-cites="GoluLoan">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
 </div>
 </div>
 </div>
@@ -462,7 +462,7 @@ window.Quarto = {
 \]</span></li>
 </ol>
 <p>So let us check in <code>numpy</code>:</p>
-<div id="5ac6c837" class="cell styled-output" data-execution_count="1">
+<div id="7bc7bfe6" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -507,13 +507,13 @@ p(\lambda) = \det(A - \lambda I).
 \]</span> If all of the eigenvalues are real (in <span class="math inline">\(\mathbb{R}\)</span>) we can sort them from largest to smallest <span class="math display">\[
 \lambda_n(A) \leq \cdots \leq \lambda_2(A) \leq \lambda_1(A),
 \]</span> and we denote the largest by <span class="math inline">\(\lambda_{max}(A) = \lambda_1(A)\)</span> and the smallest by <span class="math inline">\(\lambda_{min}(A) = \lambda_n(A)\)</span>, respectively.</p>
-<p><span class="citation" data-cites="GoluLoan">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
 </div>
 </div>
 </div>
 </div>
 <p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
-<div id="69a3a72d" class="cell styled-output" data-execution_count="2">
+<div id="85888848" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> LA.eigvals(A)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lam_sort <span class="op">=</span> np.sort(lam)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -554,13 +554,13 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
                         0 &amp; \dots &amp; 0 &amp; \lambda_n \\  \end{array}
 \right].
 \]</span> This is called the <em>eigendecomposition</em> of the matrix <span class="math inline">\(A\)</span>.</p>
-<p><span class="citation" data-cites="GoluLoan">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, 66–67</a>)</span></p>
 </div>
 </div>
 </div>
 </div>
 <p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
-<div id="4b6a9557" class="cell styled-output" data-execution_count="3">
+<div id="229a6c3c" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lam, V <span class="op">=</span> LA.eig(A)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_eigen <span class="op">=</span> np.diag(lam)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -587,7 +587,7 @@ A_eigen2=array([[1.10000000e+01, 0.00000000e+00, 0.00000000e+00],
 np.allclose(A_eigen, A_eigen2)=True</code></pre>
 </div>
 </div>
-<p>We can use what we have learned about the basis of a vector space and the transformation between two bases, see <a href="#sec-intro-linearalgebra-basis" class="quarto-xref"><span class="quarto-unresolved-ref">sec-intro-linearalgebra-basis</span></a> to get a different interpretation of the eigendecomposition.</p>
+<p>We can use what we have learned about the basis of a vector space and the transformation between two bases, see <a href="../basics/linearalgebra.html#sec-intro-linearalgebra-basis" class="quarto-xref"><span>Section 1.3</span></a> to get a different interpretation of the eigendecomposition.</p>
 <p>We recall, if <span class="math inline">\(x\)</span> is represented in the standard basis with matrix <span class="math inline">\(I\)</span> we can change to the basis represented by <span class="math inline">\(V\)</span> and therefore <span class="math inline">\(\hat{x} = V^{-1}x\)</span>.</p>
 <p>Consequently, the equation <span class="math display">\[
 A = V \Lambda V^{-1}
@@ -684,7 +684,7 @@ x_{n} &amp; = &amp; x^{(n-1)} \\
 \right]
 }_x.
 \]</span></p>
-<p>We transformed it into a system of coupled 1st order ODEs <span class="math inline">\(\dot{x}=Ax\)</span> and we can solve this as seen above. More importantly, the characteristic polynomial of <a href="#eq-hoode" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-hoode</span></a> is equal to the characteristic polynomial of <a href="#def-eigenvalues" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-eigenvalues</span></a> and the eigenvalues are the roots of this polynomial.</p>
+<p>We transformed it into a system of coupled 1st order ODEs <span class="math inline">\(\dot{x}=Ax\)</span> and we can solve this as seen above. More importantly, the characteristic polynomial of <a href="#eq-hoode" class="quarto-xref">Equation&nbsp;<span>3.2</span></a> is equal to the characteristic polynomial of <a href="#def-eigenvalues" class="quarto-xref">Definition&nbsp;<span>3.2</span></a> and the eigenvalues are the roots of this polynomial.</p>
 </section>
 <section id="generalized-eigenvalue-problem" class="level3" data-number="3.1.4">
 <h3 data-number="3.1.4" class="anchored" data-anchor-id="generalized-eigenvalue-problem"><span class="header-section-number">3.1.4</span> Generalized eigenvalue problem</h3>
@@ -704,13 +704,13 @@ M\ddot{u} + K u = 0, \quad u(0) = u_0,
 \lambda(A,B) = \{z\in\mathbb{C}: \det(A-zB)=0\}.
 \]</span> If <span class="math inline">\(\lambda \in \lambda(A,B)\)</span> and <span class="math inline">\(0\neq v\in\mathbb{C}^n\)</span> satisfies <span id="eq-gevp"><span class="math display">\[
 A v = \lambda B v,
-\tag{3.4}\]</span></span> then <span class="math inline">\(v\)</span> is an <em>eigenvector</em> of <span class="math inline">\(A-\lambda B\)</span>. The problem of finding a nontrivial solution to <a href="#eq-gevp" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-gevp</span></a> is called the <em>generalized eigenvalue problem</em>.</p>
-<p><span class="citation" data-cites="GoluLoan">(Compare <a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, chap. 7.7</a>)</span></p>
+\tag{3.4}\]</span></span> then <span class="math inline">\(v\)</span> is an <em>eigenvector</em> of <span class="math inline">\(A-\lambda B\)</span>. The problem of finding a nontrivial solution to <a href="#eq-gevp" class="quarto-xref">Equation&nbsp;<span>3.4</span></a> is called the <em>generalized eigenvalue problem</em>.</p>
+<p><span class="citation" data-cites="GoluLoan">(Compare <a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, chap. 7.7</a>)</span></p>
 </div>
 </div>
 </div>
 </div>
-<p>In our example <a href="#eq-ma" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-ma</span></a> the eigenvalues are <span class="math inline">\(\lambda = \omega^2\)</span> and correspond to the square of the natural frequencies and the eigenvectors <span class="math inline">\(v=u\)</span> correspond to the modes of vibration.</p>
+<p>In our example <a href="#eq-ma" class="quarto-xref">Equation&nbsp;<span>3.3</span></a> the eigenvalues are <span class="math inline">\(\lambda = \omega^2\)</span> and correspond to the square of the natural frequencies and the eigenvectors <span class="math inline">\(v=u\)</span> correspond to the modes of vibration.</p>
 <p>If <span class="math inline">\(M\)</span> is invertible we can write <span class="math display">\[
 M^{-1}(K -\omega^2 M ) u_0 = (M^{-1}K -\omega^2 I ) u_0 = 0.
 \]</span></p>
@@ -724,10 +724,10 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In most cases inverting the matrix is not recommended, to directly solve the generalized eigenvalue problem, see <span class="citation" data-cites="GoluLoan">(<a href="#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, chap. 7.7</a>)</span> for details.</p>
+<p>In most cases inverting the matrix is not recommended, to directly solve the generalized eigenvalue problem, see <span class="citation" data-cites="GoluLoan">(<a href="../references.html#ref-GoluLoan" role="doc-biblioref">Golub and Van Loan 2013, chap. 7.7</a>)</span> for details.</p>
 </div>
 </div>
-<p>Let us walk through this with an example from <span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(<a href="#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, sec. 8.3</a>)</span>.</p>
+<p>Let us walk through this with an example from <span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(<a href="../references.html#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, sec. 8.3</a>)</span>.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -746,7 +746,7 @@ Figure&nbsp;3.1: Two story frame where the floors have different dynamic propert
 </figcaption>
 </figure>
 </div>
-<p>In <a href="#fig-twostorybuilding" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-twostorybuilding</span></a> we can see a two story building consisting of a two column frame with a floor. The first floor columns are fixed at the base and have a height <span class="math inline">\(h\)</span>, the second floor is fixed to the first and has the same height. The columns of each frame are modelled as beams with flexural rigidity <span class="math inline">\(EI\)</span> and <span class="math inline">\(2 EI\)</span>, respectively Where <span class="math inline">\(E\)</span> is called <em>Young’s modulus</em> and <span class="math inline">\(I\)</span> the <em>second moment of area</em>. The mass is centred at the floor level.</p>
+<p>In <a href="#fig-twostorybuilding" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> we can see a two story building consisting of a two column frame with a floor. The first floor columns are fixed at the base and have a height <span class="math inline">\(h\)</span>, the second floor is fixed to the first and has the same height. The columns of each frame are modelled as beams with flexural rigidity <span class="math inline">\(EI\)</span> and <span class="math inline">\(2 EI\)</span>, respectively Where <span class="math inline">\(E\)</span> is called <em>Young’s modulus</em> and <span class="math inline">\(I\)</span> the <em>second moment of area</em>. The mass is centred at the floor level.</p>
 <p>This allows us to model such a building as a system with two degrees of freedom <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> as the displacement indicated in blue. The dashed blue line would be such a displacement for the frame.</p>
 <p>The resulting equations of motion become <span class="math display">\[
 \begin{array}{r}
@@ -766,7 +766,7 @@ k_1 + k_2 &amp; -k_2 \\
 \end{array}
 \right].
 \]</span></p>
-<p>For the derivation of the stiffness coefficients we refer to <span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(<a href="#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, 188</a>)</span> and recall the result here as follows <span class="math display">\[
+<p>For the derivation of the stiffness coefficients we refer to <span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(<a href="../references.html#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, 188</a>)</span> and recall the result here as follows <span class="math display">\[
 k_1 = \frac{48 EI}{h^3}, \quad k_2 = \frac{24 EI}{h^3}.
 \]</span> This results in the stiffness matrix <span class="math display">\[
 K = \underbrace{\frac{24 EI}{h^3}}_{=k}
@@ -781,7 +781,7 @@ K = \underbrace{\frac{24 EI}{h^3}}_{=k}
 \]</span> and solving this equation for <span class="math inline">\(\omega^2\)</span> results in <span class="math display">\[
 \omega_1^2 = \frac{k}{2m}, \quad \omega_2^2 = \frac{2k}{m}.
 \]</span></p>
-<p>To compute the eigenvectors <span class="math inline">\(v_1\)</span> and <span class="math inline">\(v_2\)</span> we use <a href="#eq-eigenvector" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-eigenvector</span></a>, i.e.&nbsp;for <span class="math inline">\(v_1\)</span> this reads as <span class="math display">\[
+<p>To compute the eigenvectors <span class="math inline">\(v_1\)</span> and <span class="math inline">\(v_2\)</span> we use <a href="#eq-eigenvector" class="quarto-xref">Equation&nbsp;<span>3.1</span></a>, i.e.&nbsp;for <span class="math inline">\(v_1\)</span> this reads as <span class="math display">\[
 -\frac{k}{2m} \left[
 \begin{array}{cc}
 2m &amp; 0 \\
@@ -865,7 +865,7 @@ Figure&nbsp;3.2: Model of a two story building with the shape of the modes accor
 </figcaption>
 </figure>
 </div>
-<p>Two wrap up the example our overall temporal response consists of the time invariant part defined by our eigenvectors <span class="math inline">\(v_1\)</span>, and <span class="math inline">\(v_2\)</span>, as well as the time dependent part with our eigenfrequencies <span class="math inline">\(\omega_1\)</span> and <span class="math inline">\(\omega_2\)</span> as well as the constants <span class="math inline">\(A_1\)</span>, <span class="math inline">\(A_2\)</span>, <span class="math inline">\(\phi_1\)</span>, <span class="math inline">\(\phi_2\)</span> depending on the initial condition <span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(see <a href="#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, chap. 5</a>)</span>. <span class="math display">\[
+<p>Two wrap up the example our overall temporal response consists of the time invariant part defined by our eigenvectors <span class="math inline">\(v_1\)</span>, and <span class="math inline">\(v_2\)</span>, as well as the time dependent part with our eigenfrequencies <span class="math inline">\(\omega_1\)</span> and <span class="math inline">\(\omega_2\)</span> as well as the constants <span class="math inline">\(A_1\)</span>, <span class="math inline">\(A_2\)</span>, <span class="math inline">\(\phi_1\)</span>, <span class="math inline">\(\phi_2\)</span> depending on the initial condition <span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(see <a href="../references.html#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, chap. 5</a>)</span>. <span class="math display">\[
 \left[\begin{array}{c}
 x_1(t)\\
 x_2(t)
@@ -881,7 +881,7 @@ A_2 \sin(\omega_2 t + \phi_2)
 \end{array}
 \right]
 \]</span></p>
-<p><span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(Compare <a href="#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, chap. 8.3</a>, pp.&nbsp;189-191)</span></p>
+<p><span class="citation" data-cites="Downey2024VibrationMechanicsPractical">(Compare <a href="../references.html#ref-Downey2024VibrationMechanicsPractical" role="doc-biblioref">Downey and Micheli 2024, chap. 8.3</a>, pp.&nbsp;189-191)</span></p>
 </div>
 </div>
 </div>
@@ -1063,7 +1063,7 @@ Figure&nbsp;3.3: Image of MCI I and the reconstruction with approximated matrix.
 <p>Therefore, we will look into a generalized decomposition called the <em>singular value decomposition</em> in the next section.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-Downey2024VibrationMechanicsPractical" class="csl-entry" role="listitem">
 Downey, Austin, and Laura Micheli. 2024. <span>“Vibration Mechanics: A Practical Introduction for Mechanical, Civil, and Aerospace Engineers.”</span> <a href="https://doi.org/10.5281/ZENODO.12539013">https://doi.org/10.5281/ZENODO.12539013</a>.
 </div>

@@ -386,7 +386,7 @@ np.random.seed(6020)
 
 df = pd.read_excel("../_assets/regression/AUT_UE10-19.ods", engine="odf")
 
-locale.setlocale(locale.LC_ALL, locale.locale_alias["de_at"])
+locale.setlocale(locale.LC_ALL, 'de_AT.utf8')
 select = "Gesamt Bestand"
 df["date"] = pd.to_datetime(df["Monat"], format="%B %Y")
 df["month"] = pd.to_datetime(df["Monat"], format="%B %Y").dt.month

@@ -48,7 +48,7 @@ If we now increase $n\to \infty$ we get $\Delta x \to 0$ and the sum transforms 
 ## Hilbert two norm
 The _Hilbert two norm_ of the function $f(x)$ is defined for $x \in [a, b]$ as:
 $$
-\|f\|_2 = \sqrt{\langle f(x), g(x)\rangle} = \left(\int_a^b f(x) \overline{f}(x)\,\mathrm{d}x\right)^{\frac12},
+\|f\|_2 = \sqrt{\langle f(x), f(x)\rangle} = \left(\int_a^b f(x) \overline{f}(x)\,\mathrm{d}x\right)^{\frac12},
 $$
 where $\overline{f}(x)$ denotes the complex conjugate. 
 

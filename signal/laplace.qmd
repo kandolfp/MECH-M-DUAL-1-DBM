@@ -3,7 +3,7 @@ lightbox: true
 ---
 # Laplace Transform {#sec-signal-laplace}
 
-The Fourier Transform is only possible for well-behaved functions that are Lebesgue integrable, i.e. $f(x) \ in L^1[(-\infty, \infty)]$. 
+The Fourier Transform is only possible for well-behaved functions that are Lebesgue integrable, i.e. $f(x) \in L^1[(-\infty, \infty)]$. 
 This excludes functions like the exponential $\mathrm{e}^{\lambda t}$ or the Heaviside function. 
 
 In order to tackle these _badly behaved _ functions we can use the Laplace transform, which is basically a one sided Fourier-like transform. 
@@ -12,7 +12,7 @@ In order to tackle these _badly behaved _ functions we can use the Laplace trans
 :::: {#def-signal-laplace-transform} 
 ## The Laplace Transform
 
-A function $f\,:\, [0, \infty) \to \mathbb{R}$ is called laplace transposable if
+A function $f\,:\, [0, \infty) \to \mathbb{R}$ is called Laplace-transformable if
 $$
 F(s) = \mathcal{L}\{f(t)\} := \int_{0}^{\infty} f(t)\mathrm{e}^{-s t}\, \mathrm{d}t
 $$
@@ -21,7 +21,7 @@ In this case we call $F(s) \equiv \mathcal{L}\{f(t)\}$ the **Laplace transform**
 
 The **inverse Laplace transform** is defined as 
 $$
-f(t) = \mathcal{L}^{-1}\{F(s)\} = \frac{1}{s \pi \mathrm{i}} \int_{\gamma - \mathrm{i} \infty}^{\gamma + \mathrm{i} \infty} F(x)\mathrm{e}^{s t}\, \mathrm{d}s
+f(t) = \mathcal{L}^{-1}\{F(s)\} = \frac{1}{2 \pi \mathrm{i}} \int_{\gamma - \mathrm{i} \infty}^{\gamma + \mathrm{i} \infty} F(s)\mathrm{e}^{s t}\, \mathrm{d}s
 $$
 for the complex valued $s=\gamma + \mathrm{i} \omega$.
 
@@ -78,7 +78,7 @@ f(t)H(t) = \underline{f}(t)\mathrm{e}^{\gamma t} &= \frac{1}{2\pi} \int_{-\infty
 $$
 By a change of variables $s=\gamma + \mathrm{i}\omega$ we get $\mathrm{d}\omega = \tfrac{1}{\mathrm{i}} \mathrm{d}s$ and 
 $$
-f(t)H(t) = \frac{1}{s \pi \mathrm{i}} \int_{\gamma - \mathrm{i} \infty}^{\gamma + \mathrm{i} \infty} F(x)\mathrm{e}^{s t}\, \mathrm{d}s = \mathcal{L}^{-1}\{F(s)\}.
+f(t)H(t) = \frac{1}{2 \pi \mathrm{i}} \int_{\gamma - \mathrm{i} \infty}^{\gamma + \mathrm{i} \infty} F(x)\mathrm{e}^{s t}\, \mathrm{d}s = \mathcal{L}^{-1}\{F(s)\}.
 $$
 
 ::: {.callout-note}
@@ -179,7 +179,7 @@ $$
 
 1. For the exponential $f(t) = \mathrm{e}^{\lambda t}$ we get
 $$
-\mathcal{L}\{f(t)\} = \frac{1}{s- \lambda},\quad s>\lambda\in\mathcal{R}.
+\mathcal{L}\{f(t)\} = \frac{1}{s- \lambda},\quad s>\lambda\in\mathbb{R}.
 $$
 
 1. For the cosine $f(t) = \cos{\omega t}$ we get
@@ -360,10 +360,10 @@ $$
 
 ## The Linear Time Invariant transfer function of LTI Systems
 
-In signal and and control theory the **transfer function** $H(s)$ is used the describe a system. 
+In signal and control theory the **transfer function** $H(s)$ is used the describe a system. 
 If we assume that at $t=0$ we have an initial state (zero state) we get the relation between input signal $x(t)$ and output signal $y(t)$ in the Laplace space as 
 $$
-Y(s) = H(s) Y(s)
+Y(s) = H(s) X(s)
 $$
 and consequently 
 $$
@@ -385,13 +385,13 @@ $$
 
 We can rewrite this as 
 $$
-\alpha_n(s H(s) - \frac{1}{\alpha_n}) + \alpha_{n-1}s^{n-1} H(s) + \cdots + \alpha_1 s H(s) + \alpha_0 H(s) = 0
+\alpha_n(s^n H(s) - \frac{1}{\alpha_n}) + \alpha_{n-1}s^{n-1} H(s) + \cdots + \alpha_1 s H(s) + \alpha_0 H(s) = 0
 $$
 and with the properties of the Laplace transform we get
 $$
 \alpha_n h^{(n)} + \alpha_{n-1} h^{(n-1)} + \cdots + \alpha_1 \dot{h} + \alpha_0 h = 0
 $$
-with $h(0) = \dot{h}(0) = \cdots = h^{(n-2)}(0) = 0$, and $h^{(n-1)}(0) \tfrac{1}{\alpha_n}$.
+with $h(0) = \dot{h}(0) = \cdots = h^{(n-2)}(0) = 0$, and $h^{(n-1)}(0) = \tfrac{1}{\alpha_n}$.
 
 This tells us the _answer_ to the zero input signal $x(t) = 0$ is the solution of above initial value problem with initial state as an impulse of size $\tfrac{1}{\alpha_n}$.
 
@@ -441,7 +441,7 @@ fun = lambda t: 1 / RC * np.exp(-t / RC) * np.heaviside(t, 1)
 t = np.linspace(-0.5, 8.5, 1024)
 
 plt.plot(t, fun(t))
-plt.text(-0.4, 0.96, r"$\frac{1}{RC}$")
+plt.text(-0.4, 0.94, r"$\frac{1}{RC}$")
 plt.xlabel(r"t")
 plt.ylabel(r"y")
 plt.gca().set_aspect(9 / (3 * 1.0))
@@ -470,7 +470,7 @@ fun = lambda t: 1 / RC**2 * t * np.exp(-t / RC) * np.heaviside(t, 1)
 t = np.linspace(-0.5, 8.5, 1024)
 
 plt.plot(t, fun(t))
-plt.text(-0.5, 0.95/(np.exp(1)), r"$\frac{1}{RC \mathrm{e}}$")
+plt.text(-0.5, 0.94/(np.exp(1)), r"$\frac{1}{RC \mathrm{e}}$")
 plt.text(0.8, -0.05, r"$RC$")
 plt.plot([-0.1, 1, 1], [1/np.exp(1), 1/np.exp(1), 0], "k:")
 plt.xlabel(r"t")

@@ -38,11 +38,11 @@ After throwing the first coin that lands on heads we have no information what th
 
 So if we say $A$ represents _first flip heads_, $B$ _second flip heads_ we get
 $$
-P(A, B) = P(A) P(B) = \frac12 \frac12 = \frac14,
+P(A, B) = P(A) P(B) = \frac12 \cdot \frac12 = \frac14,
 $$
 or if $B$ represents _both flips tail_ we get:
 $$
-P(A, B) = P(A) P(B) = \frac12 0 = 0.
+P(A, B) = P(A) P(B) = \frac12 \cdot 0 = 0.
 $$
 ::::
 :::
@@ -77,7 +77,7 @@ is called the **law of joint probabilities**.
 ::: {.callout appearance="simple"}
 :::: {#def-statistics-bayesianth} 
 ## Bayes' theorem
-For two events $A$ and $B$ as well as there dependent probabilities the following relation is called Bayes' theorem
+For two events $A$ and $B$ as well as their dependent probabilities, the following relation is called Bayes' theorem
 $$
 P(A|B) = \frac{P(B|A) P(A)}{P(B)}.
 $$
@@ -174,7 +174,7 @@ To increase the complexity we can search for a random variable that tells us how
 
 To get a better idea what $(\Omega, \mathcal{F}, P)$ and $X$ is we should ask a the following question: _How likely is the value of $X=2$?_
 
-To answer this question we need to find the probability of the event $\{\omega\,:\, X(\omega) = 2\} that can be expressed via $P$ as $P(X=2)=p_X(2)$.
+To answer this question we need to find the probability of the event $\{\omega\,:\, X(\omega) = 2\}$ that can be expressed via $P$ as $P(X=2)=p_X(2)$.
 
 If we record all this probabilities of outcomes of $X$ results in the **probability distribution** of $X$.
 If this probability distribution is real valued we get the **cumulative distribution function** (CDF)
@@ -269,11 +269,11 @@ It describes the number of successes in a sequence of $n$ independent experiment
 
 The probability density function is
 $$
-f(x) = \left(\begin{array}{c} n\\ x\end{array}\right) p^k (1-p)^{n-k},
+f(x) = \left(\begin{array}{c} n\\ x\end{array}\right) p^x (1-p)^{n-x},
 $$
 with 
 $$
-\left(\begin{array}{c} n\\ x\end{array}\right) = \frac{n!}{k!(n-k)!}.
+\left(\begin{array}{c} n\\ x\end{array}\right) = \frac{n!}{x!(n-x)!}.
 $$
 It measures the probability that we get exactly $x$ successes in $n$ independent trials.
 
@@ -356,7 +356,7 @@ The probability density function is
 $$
 f(x) = 
 \begin{cases}
-\frac{1}{b-a} \quad &\text{if}\_ a \leq x \leq b,\\
+\frac{1}{b-a} \quad &\text{if}\, a \leq x \leq b,\\
 0 \quad &\text{else.}
 \end{cases}
 $$
@@ -364,7 +364,7 @@ and the corresponding CDF
 $$
 F(x) = 
 \begin{cases}
-\frac{x-a}{b-a} \quad &\text{if}\_ a \leq x \leq b,\\
+\frac{x-a}{b-a} \quad &\text{if}\, a \leq x \leq b,\\
 0 \quad &\text{else.}
 \end{cases}
 $$
@@ -384,7 +384,7 @@ import matplotlib.pyplot as plt
 a = 0
 b = 1
 f = lambda x: np.astype((x >= a) & (x < b), float) / (b - a)
-cfd = lambda x: (x - a) / (b - a) * np.astype((x >= a) & (x < b) , float) + \
+cfd = lambda x: (x - a) / (b - a) * np.astype((x >= a) & (x < b) , float) +\
                 np.astype((x >= b) , float)
 x = np.linspace(-1, 2, 1024)
 plt.figure()
@@ -410,7 +410,7 @@ The probability density function is
 $$
 f(x) = \mathcal{N}[\mu, \sigma^2](x) = \frac{1}{\sqrt{2 \pi \sigma^2}}\mathrm{e}^{-\frac{(x - \mu)^2}{2\sigma^2}},
 $$
-where $\mu$ is called the mean and the parameter $\delta^2$ is the called the variance.
+where $\mu$ is called the mean and the parameter $\sigma^2$ is the called the variance.
 The standard deviation of the distribution is $\sigma$.
 For $\mu = 0$ and $\sigma^2=1$ it is called the **standard normal distribution**.
 
@@ -585,7 +585,7 @@ plt.ylabel(r"$p(x)$")
 plt.show()
 ```
 
-Now we improvement our estimate with the help of Bayes' theorem by asking _random_ people what they will vote.
+Now we improve our estimate with the help of Bayes' theorem by asking _random_ people what they will vote.
 
 ::: {.callout-note}
 Of course this needs to be done in the proper way to make sure it is not biased.
@@ -594,7 +594,7 @@ We assume to not be biased.
 
 The probability that exactly $k$ people of a random sample of size $n$ vote for party $x$ is a best described with a binomial distribution
 $$
-p\left(\frac{k}{n} | x\right) = \left(\begin{array}{c} n\\ k\end{array}\right) x^k (1-x)^{n-k}.
+p\left(\frac{k}{n} \middle| x\right) = \left(\begin{array}{c} n\\ k\end{array}\right) x^k (1-x)^{n-k}.
 $$
 
 ```{python}
@@ -620,7 +620,7 @@ plt.show()
 
 In order to compute $p(\frac{k}{n})$ we need to integrate our two results
 $$
-p\left(\frac{k}{n}\right) = \int_0^1 p\left(\frac{k}{n} | x\right) p(x)\,\mathrm{d}x
+p\left(\frac{k}{n}\right) = \int_0^1 p\left(\frac{k}{n} \middle| x\right) p(x)\,\mathrm{d}x
 $$
 
 So for a given sample size $n$ and positive samples $k$ we get a new distribution.
@@ -630,8 +630,8 @@ So for a given sample size $n$ and positive samples $k$ we get a new distributio
 #| fig-cap: "Parameter likelihood after a survey with k=5 positives out of n=15 samples (solid - blue) and k=15 out of n=150 samples (dotted)."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
-
-p3 = lambda k, n: scipy.integrate.quad(lambda x: bino(k, n, x) * p(x), 0, 1)[0]
+from scipy.integrate import quad
+p3 = lambda k, n: quad(lambda x: bino(k, n, x) * p(x), 0, 1)[0]
 
 p4 = lambda k, n ,x: p(x) * bino(k, n, x) / p3(k, n)
 
@@ -710,19 +710,19 @@ $$
 
 The likelihood of drawing a sample with yield strength $R_{aH}^{(i)}$ we calculate the dependent probabilities separate by fixing the _current_ values of $\mu = \check{\mu}$ and $\sigma = \check{\sigma}$, respectively.
 $$
-p\left(R_{aH}^{(i)} | \mu \right) = \mathcal{N}[\mu, \check{\sigma}](R_{aH}^{(i)})
+p\left(R_{aH}^{(i)}\, \middle|\, \mu \right) = \mathcal{N}[\mu, \check{\sigma}](R_{aH}^{(i)})
 $$
 and 
 $$
-p\left(R_{aH}^{(i)} | \sigma \right) = \mathcal{N}[\check{\mu}, \sigma](R_{aH}^{(i)})
+p\left(R_{aH}^{(i)}\, \middle|\, \sigma \right) = \mathcal{N}[\check{\mu}, \sigma](R_{aH}^{(i)})
 $$
 and with Bayes' theorem we can compute
 $$
-p\left( \mu | R_{aH}^{(i)}\right)  = \frac{p\left(R_{aH}^{(i)} | \mu \right) p(\mu)}{\int p\left(R_{aH}^{(i)} | \mu \right) p(\mu)\,\mathrm{d}\mu},
+p\left( \mu \, \middle|\, R_{aH}^{(i)}\right)  = \frac{p\left(R_{aH}^{(i)}\, \middle|\, \mu \right) p(\mu)}{\int p\left(R_{aH}^{(i)}\, \middle|\, \mu \right) p(\mu)\,\mathrm{d}\mu},
 $$
 and
 $$
-p\left( \sigma | R_{aH}^{(i)}\right)  = \frac{p\left(R_{aH}^{(i)} | \sigma \right) p(\sigma)}{\int p\left(R_{aH}^{(i)} | \sigma \right) p(\sigma)\,\mathrm{d}\sigma},
+p\left( \sigma \, \middle|\, R_{aH}^{(i)}\right)  = \frac{p\left(R_{aH}^{(i)}\, \middle|\, \sigma \right) p(\sigma)}{\int p\left(R_{aH}^{(i)}\, \middle|\, \sigma \right) p(\sigma)\,\mathrm{d}\sigma},
 $$
 
 Now by computing the inverse from our above probabilities we can update our $\mu_0$ and $\sigma_0$ accordingly.

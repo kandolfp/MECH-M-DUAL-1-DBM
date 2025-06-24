@@ -7,7 +7,7 @@ By expressing our data in this basis most coefficients are zero or small.
 The zero coefficients give rise to sparsity and the almost zero coefficients allow us to compress the data further without loosing too much information.
 We have seen this in the Eigendecomposition, the singular value decomposition, within regression choices, the Fourier transform, the Wavelet transform, and in other such transformations not covered here. 
 
-Recent development in mathematics have given rise to the field of _compressed sensing_, where not high dimensional signals are collected and transformed or compressed but we start by a acquiring _compressed_ signals and solve for the sparsest high-dimensional signal that is _consistent_ with the collected data.
+Recent development in mathematics have given rise to the field of _compressed sensing_, where not high dimensional signals are collected and transformed or compressed but we start by acquiring _compressed_ signals and solve for the sparsest high-dimensional signal that is _consistent_ with the collected data.
 
 Here we will discuss sparsity and compression and give an outlook on compressed sensing.
 We have already seen multiple examples and we will use this chapter to contextualize these results and combine them to give rise to new ideas and further aspects.
@@ -15,7 +15,7 @@ We have already seen multiple examples and we will use this chapter to contextua
 It is worth mentioning that quite often sparsity gives rise to so called _parsimonious_ models that avoid overfitting and remain interpretable because they have a low number of terms.
 This fits neatly into the discussion of Occam's razor: the simplest explanation is in general the correct one.
 Simple can also mean the least coefficients and this means sparsity.
-Furthermore, it can also help to create more robust algorithms are outliers have less influence. 
+Furthermore, it can also help to create more robust algorithms where outliers have less influence. 
 
 ::: {.callout-important}
 Parts of this section are based on [@Brunton2022, Chapter 3].

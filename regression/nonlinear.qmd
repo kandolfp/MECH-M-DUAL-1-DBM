@@ -198,7 +198,7 @@ $$
 c^{(k+1)} = c^{(k)} - \delta (2 X^{\mathsf{T}} X c^{(k)} - 2 X^{\mathsf{T}} y)
 $$
 
-As $\delta$ is tricky to compute we go ahead and introduce we do not update it but prescribe it.
+As $\delta$ is tricky to compute we do not update it but prescribe it.
 This will not grant us the optimal convergence (if there is convergence) but if we choose it right we still get convergence. 
 
 ::: {.callout-note}
@@ -277,7 +277,7 @@ We call this method _Stochastic Gradient descent_ (SGD).
 In @fig-non-linear_reg_gd3 we see the convergence for randomly selecting 1, 3, and 6 indices of our possible 10.
 
 The downside of the SGD algorithm is that the algorithm does not settle down for a long time and will _jump_.
-In the other side it might get less stuck in local minima.
+On the other side, it might not get stuck in local minima as often.
 
 One possibility to try to get the strength of both is to use SDG to get a good guess for your initial value and SD for the fine tuning.
 ```{python}

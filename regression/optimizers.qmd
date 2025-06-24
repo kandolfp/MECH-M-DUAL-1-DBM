@@ -90,7 +90,7 @@ The last row of @fig-opt_lambda1 confirms this quite impressively, interesting e
 ### RIDGE 
 
 The Ridge Regression solves @eq-reg-optimizers with $\lambda_1 = 0$ and $\lambda_2 > 0$, i.e. only optimizing with the $\ell_2$ norm.
-The theory tells us that for for increasing $\lambda_1$ we should get more and more zeros in our solution $x$.
+The theory tells us that for increasing $\lambda_2$ we should get more and more zeros in our solution $x$.
 
 ```{python}
 #| label: fig-opt_lambda2

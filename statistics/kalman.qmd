@@ -5,7 +5,7 @@ lightbox: true
 
 The Kalman Filter is one of the most important contributions to engineering sciences in the 20th century and it helped to develop the space program. 
 
-The filter is an iterative process to estimate the parameters of that describe some system. 
+The filter is an iterative process to estimate the parameters of some system. 
 In engineering terms it is used to estimate the underlying states of a state space model via a two-step predictor-corrector approach. 
 For both, the state and the uncertainty $P$ in this state, normal distributions are assumed and the updates are computed analytically. 
 
@@ -36,7 +36,7 @@ x_k &= \left[
 $$
 As the train can be accelerated or the driver can use the break this will be our input parameters. 
 We can model them as a function $f_k$ and the train mass is constant with $m$.
-As a result $u_t$ has the form
+As a result $u_k$ has the form
 $$
 u_k = \frac{f_k}{m}.
 $$
@@ -149,7 +149,7 @@ Now at time $t=1$ we can measure the position of the train.
 We do so via a radio signal and of course this process is also having some noise added to it resulting in a Gaussian probability to the position.
 
 ::: {.callout-important}
-A key feature of the normal (Gaussian) distribution is that fact that the _product of two Gaussian distributions_ is again a Gaussian distribution.
+A key feature of the normal (Gaussian) distribution is the fact that the _product of two Gaussian distributions_ is again a Gaussian distribution.
 
 This process can be repeated over and over again and we always end up with a Gaussian distribution. 
 This is a main feature in the Kalman filter.
@@ -207,7 +207,7 @@ The new distribution considers the information of our guess and the update provi
 
 To bring in all the components of the Kalman filter we assume that the measurement and the prediction is not in the same domain and therefore we need the matrix $H_k$.
 
-To do so assume that the signal for the estimate is a radio signal that travels with the speed of light $c$ and therefore we need to transform $\mathcal{N}[\mu_2, \sigma_2](x)$ as $\mathcal{N}[\frac{\mu_2}{c}, \frac{\sigma_2}{c}](x)$ and our update becomes
+To do so, assume that the signal for the estimate is a radio signal that travels with the speed of light $c$ and therefore we need to transform $\mathcal{N}[\mu_2, \sigma_2](x)$ as $\mathcal{N}[\frac{\mu_2}{c}, \frac{\sigma_2}{c}](x)$ and our update becomes
 
 $$
 \mu = \mu_1 + K (\mu_2 - H \mu_1) \qquad \sigma^2 = \sigma_1^2 - KH\sigma_1^2,
@@ -221,7 +221,7 @@ $$
 Going back to our model description before, we have $z_{k} = \mu_2$ and $R_{k}=\sigma_2^2$, $H=H_k$, $K=K_k$.
 :::
 
-This the qualities given in the notes it is easy to see how the Kalman filter fits into our little illustration.
+With the quantities given in the note, it is easy to see how the Kalman filter fits into our little illustration.
 
 There are three main applications for the Kalman filter in engineering which differ mainly in the input provide to the model:
 

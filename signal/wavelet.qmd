@@ -85,7 +85,7 @@ Note that the Haar wavelets are orthogonal and provide a hierarchical basis for 
 
 ## The Maxican hat wavelet
 
-The _mother_ wavelet is defined as the is the negative normalized second derivative of a Gaussian function,
+The _mother_ wavelet is defined as the negative normalized second derivative of a Gaussian function,
 $$
 \psi(t) = (1 - t)^2\, \mathrm{e}^{-\tfrac{t}{2}}
 $$
@@ -137,8 +137,8 @@ plt.show()
 
 If we have a wavelet $\psi$, we can generate a new wavelet by convolution
 $$
-\psi \ast \phi
-$$,
+\psi \ast \phi,
+$$
 for a bounded and integrable function $\phi$.
 
 ::: {.callout appearance="simple"}
@@ -240,7 +240,7 @@ $$
 						\right]
 $$
 
-We than apply the next level just for the first half
+We then apply the next level just for the first half
 $$
 \mathcal{W}\{f\}(2, :) =
 \left( 

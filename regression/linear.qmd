@@ -183,12 +183,12 @@ $$
 c &= &\underset{v}{\operatorname{argmin}} \| y - Xv\|_2,\\
   &= &\underset{v}{\operatorname{argmin}} \langle y -Xv, y -Xv\rangle,\\
   &= &\underset{v}{\operatorname{argmin}} (y -Xv)^{\mathsf{T}} (y -Xv),\\
-  &= &\underset{v}{\operatorname{argmin}} y^{\mathsf{T}}y - y^{\mathsf{T}} X v - v^{\mathsf{T}} X^{\mathsf{T}} y + v^{\mathsf{T}} X^{\mathsf{T}} X v.\\
+  &= &\underset{v}{\operatorname{argmin}} \left[ y^{\mathsf{T}}y - y^{\mathsf{T}} X v - v^{\mathsf{T}} X^{\mathsf{T}} y + v^{\mathsf{T}} X^{\mathsf{T}} X v\right].\\
 \end{array}
 $$
 In order to find a solution we compute the derivative with respect to $v$ set it to $0$ and simplify, i.e.
 $$
-\frac{\mathrm{d}}{\mathrm{d}\,v} y^{\mathsf{T}}y- y^{\mathsf{T}} X v - v^{\mathsf{T}} X^{\mathsf{T}} y + v^{\mathsf{T}} X^{\mathsf{T}} X v = - 2X^{\mathsf{T}}y + 2 X^{\mathsf{T}}Xv 
+\frac{\mathrm{d}}{\mathrm{d}\,v} \left( y^{\mathsf{T}}y- y^{\mathsf{T}} X v - v^{\mathsf{T}} X^{\mathsf{T}} y + v^{\mathsf{T}} X^{\mathsf{T}} X v \right) = - 2X^{\mathsf{T}}y + 2 X^{\mathsf{T}}Xv 
 $$ {#eq-ols_gradient}
 and
 $$
@@ -214,10 +214,10 @@ E_2 = \sum_{k=1}^n(c_2 x_k + c_1 - y_k )^2
 $$
 and we find the solution by partial differentiation
 $$
-\frac{\mathrm{d} E_2}{\mathrm{d}\, c_1} = 0 \Leftrightarrow \sum_{k=1}^n 2 (c_2 x_k + c_1 - y_k ) = 0,
-$$
-$$
-\frac{\mathrm{d} E_2}{\mathrm{d}\, c_2} = 0 \Leftrightarrow \sum_{k=1}^n 2 (c_2 x_k + c_1 - y_k ) x_k = 0,
+\begin{aligned}
+\frac{\mathrm{d} E_2}{\mathrm{d}\, c_1} = 0 &\Leftrightarrow \sum_{k=1}^n 2 (c_2 x_k + c_1 - y_k ) &= 0,\\
+\frac{\mathrm{d} E_2}{\mathrm{d}\, c_2} = 0 &\Leftrightarrow \sum_{k=1}^n 2 (c_2 x_k + c_1 - y_k ) x_k &= 0,
+\end{aligned}
 $$
 and this results in the system
 $$
@@ -285,7 +285,7 @@ y(t) = y(0) + v(0) t - \frac{g}{2} t^2.
 $$
 So we get
 $$
-X{k-} = 
+X_{k-} = 
 \left[
     \begin{array}{ccc}
     1 & t_k & -\frac{1}{2} t_k^2 \\

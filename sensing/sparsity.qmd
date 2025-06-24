@@ -27,11 +27,11 @@ If the basis is generic such as the Fourier or Wavelet basis, i.e. we do not nee
 :::
 
 ::: {.callout-note}
-As we have seen in @sec-signal-2d images (and audio) signals are highly compressible in the Fourier and Wavelet basis with view most entries small or zero.
-By setting the small value to zero we reduce the density further without a high loss of quality.
+As we have seen in @sec-signal-2d images (and audio) signals are highly compressible in the Fourier and Wavelet basis with most entries small or zero.
+By setting the small values to zero we reduce the density further without a high loss of quality.
 
 We see this in JPEG compression for images and MP3 compression for audio signals.
-If we stream an audio signal on view an image on the web we only need to transfer $s$ and not $x$, saving bandwidth and storage as we go. 
+If we stream an audio signal or view an image on the web we only need to transfer $s$ and not $x$, saving bandwidth and storage as we go. 
 :::
 
 We have seen in @fig-mci_headquater_svd that we can use the SVD to reduce the size as well.
@@ -152,10 +152,10 @@ As can be seen in @fig-mci_sparsity_fft_compress2 we can express the clouds with
 It is not very surprising to have such structure in a so called _natural image_.
 The image or pixel space is big, very big.
 For an $n \times n$ black and white image there are $2^{n^2}$ possible images.
-So for a $20 \times 20$ image we already have $2^{400}$ possible images which a number with a number with 121 digits and it is assumed that there are (only) about $10^{82}$ atoms in the universe.
+So for a $20 \times 20$ image we already have $2^{400}$ possible images, a number with 121 digits and it is assumed that there are (only) about $10^{82}$ atoms in the universe.
 
 ![Illustration to show the fastness of pixel (image) space in comparison to images we can make sense of aka _natural_ images.](../_assets/sensing/pixel_space.svg){#fig-sparsity-pixelspace}
 
 So finding structure in images, especially in images with high resolution is not surprising.
 The rest is basically random noise.
-Most of the _dimensions_ of pixel space are only necessary if we want to encode this random noise images but for a cloud with some mountains and a building only need some dimensions and are therefore highly compressible. 
+Most of the _dimensions_ of pixel space are only necessary if we want to encode this random noise images but for a cloud with some mountains and a building we only need some dimensions and are therefore highly compressible. 

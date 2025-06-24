@@ -183,7 +183,7 @@ A x & = b  & \iff \\
 V \Lambda V^{-1} x & = b  & \iff \\
 \Lambda V^{-1} x & = V^{-1} b  & \iff \\
 V^{-1} x & = \Lambda^{-1}V^{-1} b  & \iff \\
-x & = V\Lambda^{-1}V^{-1} b  & \iff
+x & = V\Lambda^{-1}V^{-1} b
 \end{array}
 $$
 As $\Lambda^{-1} = \operatorname{diag}\left(\lambda_1^{-1}, \ldots, \lambda_n^{-1}\right)$ this is easy to compute once we have the eigenvalue decomposition.

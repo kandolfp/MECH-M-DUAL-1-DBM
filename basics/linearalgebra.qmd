@@ -136,7 +136,7 @@ Does `np.array`, `+`, `*` fulfil the properties of a vector space?
 If we want to refer to a row or a column of a matrix $A$ we will use the following short hands:
 
 - $A_{i-}$ for _row_ $i$,
-- $A_{-j}$ for _column $j$.
+- $A_{-j}$ for _column_ $j$.
 
 We can multiply a matrix with a vector, as long as the dimensions fit.
 Note that usually there is no $\cdot$ used to indicate multiplication:
@@ -306,16 +306,16 @@ $$ \| v \|_p = \left(\sum_i |v_i|^p\right)^{\frac{1}{p}},$$
 1. the $\infty$ norm
 $$ \| v \|_\infty = \max_i |v_i|.$$
 
-And for metrics:
+And for matrices:
 
 1. the one norm (column sum norm)
-$$ \| A \|_1 = max_j \sum_i |a_{ij}|,$$
+$$ \| A \|_1 = \max_j \sum_i |a_{ij}|,$$
 1. the Frobeniusnorm
 $$ \| A \| = \| A \|_F = \sqrt{\sum_i \sum_j |a_{ij}|^2},$$
 1. the $p$ norms are defined
 $$ \| A \|_p = \left(\sum_i \sum_j |a_{ij}|^p\right)^{\frac1p},$$
 1. the $\infty$ norm (row sum norm)
-$$ \| A \|_1 = max_i \sum_j |a_{ij}|.$$
+$$ \| A \|_1 = \max_i \sum_j |a_{ij}|.$$
 
 ```{python}
 #| classes: styled-output

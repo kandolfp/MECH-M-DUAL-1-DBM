@@ -31,7 +31,7 @@ f_i = f(x_i) = f(a + (i - 1) \Delta x),\quad i = 1, \ldots n,
 $$
 same for $g_i$ and accordingly $x_1 = a + 0 \Delta x = a$ and $x_n = a + (n - 1)\Delta x = b$.
 
-The inner product is than
+The inner product is then
 $$
 \langle f, g \rangle = \langle\left[\begin{array}{c}f_1 \\ f_2 \\ \vdots \\ f_n \end{array}\right], \left[\begin{array}{c}g_1 \\ g_2 \\ \vdots \\ g_n \end{array}\right] \rangle = \sum_{i=1}^n f_i \overline{g}_i = \sum_{i=1}^n f(x_i)\overline{g}(x_i).
 $$
@@ -353,7 +353,7 @@ which is a Riemann integral and the kernel becomes the Fourier Transform of our 
 ::: {.callout appearance="simple"}
 :::: {#def-fourier-transform} 
 ## Fourier Transform
-A function $f\,:\, \mathbb{R} \to \mathbb{R}$ is called fourier transposable if
+A function $f\,:\, \mathbb{R} \to \mathbb{R}$ is called _Fourier-transformable_ if
 $$
 \hat{f}(\omega) = \mathcal{F}\{f(t)\} = \int_{-\infty}^{\infty} f(t)\mathrm{e}^{-\mathrm{i} \omega t}\, \mathrm{d}t
 $$
@@ -372,7 +372,9 @@ $$
 The pair $(f, \hat{f})$ is often called the _Fourier transform pair_. 
 
 The two integrals converge, as long as both functions are Lebesgue integrable, i.e. 
-$$\int_{-\infty}^\infty|f(t)|\, \mathrm{d}t \le \infty,$$
+$$
+\int_{-\infty}^\infty|f(t)|\, \mathrm{d}t \le \infty \quad\text{and}\quad
+\int_{-\infty}^\infty|\hat{f}(\omega)|\, \mathrm{d}\omega \le \infty,$$
 or $f, \hat{f} \in L^1[(-\infty, \infty)]$.
 :::
 
@@ -455,7 +457,7 @@ For tow functions $f, g \in L^1[(-\infty, \infty)]$ and $\alpha, \beta\in\mathbb
 
 ## Discrete Fourier Transform
 
-The Discrete Fourier Transform (DFT) is a way of approximating the Fourier transform on discrete vectors of data and it essentially a discretized version of the Fourier transform by sampling the function and numerical integration. 
+The Discrete Fourier Transform (DFT) is a way of approximating the Fourier transform on discrete vectors of data and essentially it is nothing else than sampling the function and using numerical integration. 
 
 
 ::: {.callout appearance="simple"}
@@ -463,7 +465,7 @@ The Discrete Fourier Transform (DFT) is a way of approximating the Fourier trans
 
 ## Discrete-Fourier Transform
 For equally spaced values $t_k = k\Delta t$, for $k\in\mathbb{Z}$ and $\Delta t>0$ and the discrete values of the function evaluations $f_k=f(t_k)$.
-If the function is periodic with $L=N\Delta t$ than the discrete Fourier transform is given as
+If the function is periodic with $L=N\Delta t$ then the discrete Fourier transform is given as
 $$
 \hat{f}_k = \sum_{j=0}^{N-1}f_j\, \mathrm{e}^{-\mathrm{i} j k\tfrac{2 \pi}{N}},
 $${#eq-dft}
@@ -541,7 +543,7 @@ How this influenced our world we know from the use in our daily communication ne
 :::
 
 ::: {.callout-note}
-We should note that Cooley and Tukey where not the first to propose a FFT but the provided the formulation used today.
+We should note that Cooley and Tukey where not the first to propose a FFT but they provided the formulation used today.
 Gauss already formulated the FFT 150 years earlier in 1805 for orbital approximations.
 Apparently, he did the necessary computations in his head and needed a fast algorithm so he developed the FFT.
 Gauss being Gauss did not see this as something important and it did not get published until 1866 in his compiled notes, @Gauss.
@@ -554,19 +556,19 @@ The main idea of the FFT is to exploit symmetries in the Fourier transform and t
 
 ## Fast-Fourier Transform
 
-If we assume that $N = 2^n$, i.e. a power of $2$, in particular $N=2M$, and $F_N$ denotes the matrix of @eq-dft for dimension $N$ and we have $\hat{f} = F_N f$ and $f = \tfrac1N \overline{F_N} \hat{f}$.
-By splitting $f$ in the even and odd indices as 
+If we assume that $N = 2^n$, i.e. a power of $2$, in particular $N=2M$, and $F_N$ denotes the matrix of @eq-dft for dimension $N$ we get have $\hat{f} = F_N f$ and $f = \tfrac1N \overline{F_N} \hat{f}$.
+If we further split $f$ in the even and odd indices as 
 $$e = [f_0, f_2, \ldots, f_{N-2}]^{\mathsf{T}}\in \mathbb{C}^{M}$$
 and 
 $$o = [f_1, f_3, \ldots, f_{N-1}]^{\mathsf{T}}\in \mathbb{C}^{M}$$
-and for @eq-dft we get
+and with @eq-dft we get
 $$
 \begin{aligned}
 \hat{f}_k &= \sum_{j=0}^{N-1}f_j\, \omega^{j k} = \sum_{j=0}^{M-1}f_{2j}\, \omega^{(2j) k} + \sum_{j=0}^{M-1}f_{2j+1}\, \omega^{(2j+1) k} \\
 &= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} + \omega^k\sum_{j=0}^{M-1}o_{j}\, (\omega^2)^{j k}.
 \end{aligned}
 $$
-If we further split $\hat{f}$ in an upper and lower part 
+If we then split $\hat{f}$ in an upper and lower part 
 $$u = [\hat{f}_0, \hat{f}_2, \ldots, \hat{f}_{M-1}]^{\mathsf{T}}\in \mathbb{C}^{M}$$
 and 
 $$l = [\hat{f}_{M}, \hat{f}_{M+1}, \ldots, \hat{f}_{N-1}]^{\mathsf{T}}\in \mathbb{C}^{M}$$
@@ -610,7 +612,7 @@ D_M =
                          \vdots & \vdots & \ddots & \ddots &\vdots\\
                          0 & 0 & 0 & \dots & \omega^{(M-1)} \\
     \end{array}
-\right]
+\right].
 $$
 Now repeat this $n$ times.
 ::::
@@ -677,7 +679,7 @@ f2 = 120
 fun = lambda t: np.sin(2 * np.pi * f1 * t) + np.sin(2 * np.pi * f2 * t)
 
 f_clean = fun(t)
-f_noise = fun(t) + 2.5 * np.random.randn(len(t))              # Add some noise
+f_noise = fun(t) + 2.5 * np.random.randn(len(t))           # Add some noise
 
 fhat_noise = np.fft.fft(f_noise)
 fhat_clean = np.fft.fft(f_clean)
@@ -820,12 +822,10 @@ plt.show()
 :::
 
 ::: {.callout-caution appearance="simple" collapse="true" icon=false}
-## Exercise DFT vs. FFT
-
 :::: {#exr-fourier-fft-den}
 ## DFT vs. FFT
 
-Implement @exm-fourier-fft-den with DFT and FFT such that you can evaluate the runtime and create a plot showing the different runtime as well as check if the two produce the same result
+Implement @exm-fourier-fft-den with DFT and FFT such that you can evaluate the runtime and create a plot showing the different runtime as well as check if the two produce the same result.
 ::::
 :::
 
@@ -847,18 +847,18 @@ f(t) &= \cos(t) \exp\left(-\frac{t^2}{25}\right) \\
 \end{aligned}
 $$
 
-In order to porovide something to compare our results to we also compute the forward Euler finite-differences for the derivative
+In order to provide something to compare our results to we also compute the forward Euler finite-differences for the derivative
 $$
 \partial_t f(t_k) \approx \frac{f(t_{k+1}) - f(t_k)}{t_{k+1} - t_k}.
 $$
 
 ```{python}
 #| label: fig-fourier_fft_spectralderivative
-#| fig-cap: "Computing the derivative of a function"
+#| fig-cap: "Computing the derivative of a function."
 #| fig-subcap:
-#|   - "Computation of the derivative with different methods"
-#|   - "Accuracy of the methods for computing the derivative"
-#|   - "Gibbs phenomenon for the spectral derivative for discontinuous functions"
+#|   - "Computation of the derivative with different methods (Exact and spectral are almost the same)."
+#|   - "Accuracy of the methods for computing the derivative."
+#|   - "Gibbs phenomenon for the spectral derivative for discontinuous functions."
 #| layout-ncol: 1
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
@@ -937,7 +937,7 @@ t = np.linspace(a, b, N, endpoint=False)
 plt.figure(2)
 df_spD, _ = spD(N, fun2, fun2, a, b)
 df_fD, _ = fD(N, fun2, fun2, a, b)
-plt.plot(t, fun2(t), label=r"$f$")
+plt.plot(t, fun2(t), label=r"Function $f$")
 plt.plot(t, df_fD, "-.", label="Finite derivative")
 plt.plot(t, df_spD, "--", label="Spectral derivative")
 plt.xlabel("t")
@@ -951,7 +951,7 @@ Nevertheless, the spectral method is more accurate and converges faster.
 ::::
 :::
 
-In @sec-eigen-lode we have already seen how the eigendecomposition can be used to compute the solution of ordinary differential equations by changing the basis and transforming the equation into a basis that can be handled easy.
+In @sec-eigen-lode we have already seen how the eigendecomposition can be used to compute the solution of ordinary differential equations by changing the basis and transforming the equation into a basis that can be handled in a straightforward manner.
 The same is true with the Fourier transformation.
 
 As mentioned before, Fourier introduced it to solve the heat equation and we will do the same.
@@ -959,7 +959,9 @@ As mentioned before, Fourier introduced it to solve the heat equation and we wil
 ::: {.callout-important}
 Above we have always transformed the _time_ component of a function into the frequency domain via FFT.
 In the next example we have the time evolution of a signal and therefore the function depends on time and space.
-We apply the FFT to the space component to compute the derivative in _frequency_ domain w.r.t. the transformed variable. 
+We apply the FFT to the space component to compute the derivative in _frequency_ domain w.r.t. the transformed variable.
+
+This automatically results in periodic boundary conditions for the following examples, see especially @exm-fourier-fft-advection.
 :::
 
 ::: {.callout-tip appearance="simple" collapse="true" icon=false}
@@ -1156,7 +1158,9 @@ $$
 \dot{u} = - c \partial_x u.
 $$
 It is called the transport equation, as the initial value simply propagates in time to the right hand side of the domain with speed $c$, i.e. $u(t, x) = u(0, x -c t)$.
-The solution is simply computed by exchanging the right hand side from the above code. 
+The solution is simply computed by exchanging the right hand side from the above code.
+
+**Note**: In this example, we see the periodic boundary conditions implicitly provided by the space discretisation via Fourier transform.
 
 The majority of the following code is from [@Brunton2022, Code 2.5 and Code 2.6].
 
@@ -1200,7 +1204,7 @@ T = np.arange(0, 600*dt, dt)
 
 def rhsWave(uhat_ri,t,kappa,c):
     uhat = uhat_ri[:N] + (1j) * uhat_ri[N:]
-    d_uhat = -c * (1j ) *kappa * uhat
+    d_uhat = -c * (1j ) * kappa * uhat
     d_uhat_ri = np.concatenate((d_uhat.real, d_uhat.imag)).astype('float64')
     return d_uhat_ri
 
@@ -1403,7 +1407,7 @@ for the current in $[\mathrm{mA}]$ running through the transistor.
 ![Signal transition for the electric circuit shown above](../_assets/signal/signals){#fig-fft-gec-2}
 
 We can see, that the signal is boosted depending on the characteristic curve of the diode, i.e. the positive part of the sine more than the negative part.
-If we compute take the fourier transform as illustrated with the red points on the curve on the right we get from the FFT coefficients $c_i$:
+If we compute the fast fourier transform, as illustrated with the red discretisation points of the curve on the right hand side, we can interpret the FFT coefficients $c_i$ as follows:
 
 1. the direct current component:
 ```{python}
@@ -1448,7 +1452,7 @@ Technically it is the Fourier transform of the signal masked by a sliding window
 $$
 \mathcal{G}\{f\}(t, \omega) = G_f(t, \omega) = \int_{-\infty}^\infty f(\tau) \mathrm{e}^{-\mathrm{i}\omega\tau}\overline{g}(\tau - t)\, \mathrm{d}\tau.
 $$
-for the so called _kernel_ $g(t)$ a Gaussian bell curve is often used
+For the so called _kernel_ $g(t)$ a Gaussian bell curve is often used
 $$
 g(t - \tau) =  \mathrm{e}^{-\tfrac{(t-\tau)^2}{a^2}}.
 $$

@@ -560,7 +560,7 @@ $$
 $$
 
 The matrix $A^\dagger$ is often called the _Moore-Penrose left pseudo-inverse_ as it fulfils the [_Moore-Penrose conditions_](https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse) conditions.
-It is also the matrix to provides the minimal Frobenius norm solution to 
+It is also the matrix that attains the minimal Frobenius norm solution to 
 $$
 \min_{X \in \mathbb{R}^{m\times n}}\| A X - I_n\|_F.
 $$
@@ -599,7 +599,7 @@ we can outline the worst case, where $\epsilon_x$ aligns with the singular vecto
 $$
 A(x + \epsilon_x) = \sigma_{min}x + \sigma_{max}\epsilon_x.
 $$
-Consequently, the output signal-to-noise $\|b\|/\|\epsilon_b$ is equivalent with the input signal-to-noise $\|x\|/\|\epsilon_x$ and the factor between those two is $\kappa_2(A)$.
+Consequently, the output signal-to-noise $\|b\|/\epsilon_b$ is equivalent with the input signal-to-noise $\|x\|/\epsilon_x$ and the factor between those two is $\kappa_2(A)$.
 
 In this sense $\kappa_2$ can be extended for more general matrices.
 

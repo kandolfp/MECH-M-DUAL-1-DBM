@@ -8,7 +8,7 @@ One of the most common applications are image processing.
 
 ## Fourier
  
-If we apply FFT to a matrix $X\in\mathrm{R}^{m\times n}$ we can simply apply the 1D version to every row and than to every column of the resulting matrix.
+If we apply FFT to a matrix $X\in\mathrm{R}^{m\times n}$ we can simply apply the 1D version to every row and then to every column of the resulting matrix.
 The other way round will produce the same final result.
 
 This is shown in the code below but note we should use the more efficient `np.fft.fft2`.

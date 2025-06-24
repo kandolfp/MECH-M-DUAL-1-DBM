@@ -331,9 +331,9 @@ In particular, for $\delta_K < 1$ and therefore $(1-\delta_K) > 0$ and $(1+\delt
 :::
 
 It is difficult to compute the $\delta_K$ in the RIP and as $C$ may be selected at random there is more information included in the statistical properties of $\delta_K$ for a family of matrices $C$.
-In general, increasing $p$ ill decrease $\delta_K$, same as having incoherence vectors and both improve the properties of $CB$ by bringing it closer to an isometry.
+In general, increasing $p$ will decrease $\delta_K$, same as having incoherence vectors and both improve the properties of $CB$ by bringing it closer to an isometry.
 
-Luckily, there exist generic sampling matrices $C$ that are sufficiently incoherent with resect to nearly all transform bases.
+Luckily, there exist generic sampling matrices $C$ that are sufficiently incoherent with respect to nearly all transform bases.
 In particular, Gaussian and Bernoulli random measurement matrices satisfy @def-sensing-rip for a generic $B$ (with high probability).
 
 ## Sparse Regression
@@ -342,7 +342,7 @@ Let us return to regression for a moment an in particular to the LASSO method in
 We have seen that $\ell_1$, i.e. the $\|\cdot\|_1$, promotes sparsity and we can use this to create a more robust method that rejects outliers. 
 
 We split up our points into a training and test set (the classic 80:20 split). 
-For the test set an varying the parameter $\lambda_1$ through a range of values we create a _fit_ with the training set and test against the test set. 
+We vary the parameter $\lambda_1$ through a range of values to create a _fit_ with the training set and test against the test set. 
 
 ::: {.callout-tip appearance="simple" collapse="true" icon=false}
 :::: {#exm-sensing-lasso}
@@ -353,8 +353,8 @@ For our
 $$
 A x = b
 $$
-problem, we consider a problem the dimensions as $200$ observations with $10$ candidate predictions. 
-This results in a matrix $A\in\mathcal{R}^{200 \times 10}$ and we select the vector $b\in\mathcal{R}^{200}$ as the linear combination of exactly two of theses $10$ candidates.
+problem, we prescribe the dimensions as $200$ observations with $10$ candidate predictions. 
+This results in a matrix $A\in\mathbb{R}^{200 \times 10}$ and we select the vector $b\in\mathbb{R}^{200}$ as the linear combination of exactly two of theses $10$ candidates.
 As a result, the vector $x$ is $2$-sparse by construction, and the aim is to recover this.
 In order to give the algorithm something to work on we add noise to $b$ resulting in no zero element in $b$. 
 

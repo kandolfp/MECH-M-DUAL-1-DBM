@@ -16,8 +16,8 @@ In the same area, the related wavelets where developed for advanced signal proce
 
 In this section we are going to discuss basics of signal processing in terms of these and other signal transformations, see
 
-- @sec-signal-fourier
-- @sec-signal-wavelet
-- @sec-signal-2d
+- Fourier Transform in @sec-signal-fourier
+- Wavelet Transform in @sec-signal-wavelet
+- Two-Dimensional Transforms @sec-signal-2d
 
 Parts of this section are based on [@Brunton2022, Chapter 2].

@@ -9,10 +9,10 @@ where $c$ is found by optimizing for _a good fit_ of $f$ to the data.
 
 We split up the discussion along the well known topics:
 
-- @sec-regression-linear
-- @sec-regression-nonlinear
-   - @sec-regression-nonlinear-gd
-- @sec-regression-optimizers
-   - @sec-regression-optimizers-msou
+- Linear Regression in @sec-regression-linear
+- Non-linear Regression in @sec-regression-nonlinear
+   - Gradient Descent in @sec-regression-nonlinear-gd
+- Optimizers in @sec-regression-optimizers
+   - Model selection/identification and over-/underfitting in @sec-regression-optimizers-msou
 
 Parts of this section are based on [@Brunton2022, Section 4].

@@ -7,21 +7,22 @@ authors = [
 ]
 dependencies = [
     "jupyter>=1.1.1",
-    "matplotlib>=3.9.2",
+    "matplotlib>=3.10.3",
     "quarto-cli>=1.5.57",
     "pyqt5>=5.15.11",
-    "pandas>=2.2.3",
-    "plotly>=5.24.1",
-    "scipy>=1.14.1",
-    "imageio>=2.35.1",
+    "pandas>=2.3.0",
+    "plotly>=6.1.2",
+    "scipy>=1.16.0",
+    "imageio>=2.37.0",
     "owid-catalog>=0.3.11",
     "odfpy>=1.4.1",
     "DateTime>=5.5",
-    "pywavelets>=1.7.0",
-    "scikit-learn>=1.5.2",
+    "pywavelets>=1.8.0",
+    "scikit-learn>=1.7.0",
     "netCDF4>=1.7.2",
     "python-sensors>=0.3.5",
     "yq>=3.4.3",
+    "kaleido==0.2.1",
 ]
 requires-python = "==3.12.*"
 readme = "README.md"

@@ -105,12 +105,11 @@ In order to get an idea why the Fourier transform is useful in this scenario we 
 In order to make this feasible for interactive rendering we use only the upper left quarter of the image.
 :::
 
-::: {.content-visible when-format="html"}
+
 ```{python}
-#| label: fig-mci_sparsity_fft_compress2
-#| fig-cap: "Upper left quarter of the MCI I image as a 3D surface."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
+#| output: false
 import plotly.graph_objects as go
 import numpy as np
 %config InlineBackend.figure_formats = ['svg']
@@ -122,29 +121,29 @@ x = np.arange(B.shape[1])
 X,Y = np.meshgrid(x,y)
 fig = go.Figure()
 fig.add_trace(go.Surface(z=B, x=X, y=Y))
+fig.show()
+```
+::: {.content-visible when-format="html"}
+```{python}
+#| echo: false
+#| label: fig-mci_sparsity_fft_compress2
+#| fig-cap: "Upper left quarter of the MCI I image as a 3D surface."
 fig.show()
 ```
 :::
 
 ::: {.content-visible unless-format="html"}
+:::: {#fig-mci_sparsity_fft_compress2 fig-env="figure"}
 ```{python}
-#| code-fold: true
-#| eval: false
-#| code-summary: "Show the code for the figure"
-import plotly.graph_objects as go
-import numpy as np
-%config InlineBackend.figure_formats = ['svg']
-
-B = np.transpose(A[:int(A.shape[0]/2):5, :int(A.shape[1]/2):5])
-y = np.arange(B.shape[0])
-x = np.arange(B.shape[1])
-
-X,Y = np.meshgrid(x,y)
-fig = go.Figure()
-fig.add_trace(go.Surface(z=B, x=X, y=Y))
-fig.show()
+#| echo: false
+import plotly.io as pio
+from IPython.display import Image
+img = pio.to_image(fig, format="png", engine="kaleido")
+Image(img)
 ```
-![Upper left quarter of the MCI I image as a 3D surface.](../_assets/sensing/fft3d.png){#fig-mci_sparsity_fft_compress2 width="80%"}
+
+Upper left quarter of the MCI I image as a 3D surface.
+::::
 :::
 
 As can be seen in @fig-mci_sparsity_fft_compress2 we can express the clouds with view modes and even the raster of the building seams to fit this model nicely.

@@ -153,36 +153,39 @@ plt.show()
 
 What is shown in @fig-quartiles is often combined into a single [boxplot](https://en.wikipedia.org/wiki/Box_plot) (see @fig-boxplot) that provides way more information at once.
 
-::: {.content-visible when-format="html"}
 ```{python}
-#| label: fig-boxplot
-#| fig-cap: "Boxplot done in plotly with whiskers following 3/2 IQR."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
+#| output: false
 import plotly.graph_objects as go
 
 fig = go.Figure()
 fig.add_trace(go.Box(y=data["nm"], name="Standard"))
 fig.add_trace(go.Box(y=data["nm"], name="With points", boxpoints="all"))
+fig.show()
+```
+
+::: {.content-visible when-format="html"}
+```{python}
+#| label: fig-boxplot
+#| fig-cap: "Boxplot done in plotly with whiskers following 3/2 IQR."
+#| echo: false
 fig.show()
 ```
 :::
 
 ::: {.content-visible unless-format="html"}
+:::: {#fig-boxplot fig-env="figure"}
 ```{python}
-#| fig-cap: "Boxplot done in plotly with whiskers following 3/2 IQR."
-#| code-fold: true
-#| eval: false
-#| code-summary: "Show the code for the figure"
-import plotly.graph_objects as go
-
-fig = go.Figure()
-fig.add_trace(go.Box(y=data["nm"], name="Standard"))
-fig.add_trace(go.Box(y=data["nm"], name="With points", boxpoints="all"))
-fig.show()
+#| echo: false
+import plotly.io as pio
+from IPython.display import Image
+img = pio.to_image(fig, format="png", engine="kaleido")
+Image(img)
 ```
 
-![Boxplot done in plotly with whiskers following 3/2 IQR.](../_assets/basics/boxplot_fig2.2.png){#fig-boxplot width="80%"}
+Boxplot done in plotly with whiskers following 3/2 IQR.
+::::
 :::
 
 The plot contains the box which is defined by the 1st quantile $Q_1$ and the 3rd quantile $Q_3$, with the median as line in between these two.
@@ -292,12 +295,10 @@ For our dataset we can, for example, check:
 1. the _year of construction_ - `bj` vs. if _central heating_ - `zh0` is available
 1. the _year of construction_ - `bj` vs. the _city district_ - `bez`
 
-::: {.content-visible when-format="html"}
 ```{python}
-#| label: fig-correlation
-#| fig-cap: "Scatterplot to investigate correlations in the data set."
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
+#| output: false
 from plotly.subplots import make_subplots
 
 fig = make_subplots(rows=3, cols=1)
@@ -317,38 +318,29 @@ fig.add_trace(go.Scatter(x=data["bj"], y=data["bez"], mode="markers"),
 fig.update_xaxes(title_text="year of construction", row=3, col=1)
 fig.update_yaxes(title_text="city district", row=3, col=1)
 
+fig.show()
+```
+
+::: {.content-visible when-format="html"}
+```{python}
+#| label: fig-correlation
+#| fig-cap: "Scatterplot to investigate correlations in the data set."
+#| echo: false
 fig.show()
 ```
 :::
 
 ::: {.content-visible unless-format="html"}
+:::: {#fig-correlation fig-env="figure"}
 ```{python}
-#| fig-cap: "Scatterplot to investigate correlations in the data set."
-#| code-fold: true
-#| eval: false
-#| code-summary: "Show the code for the figure"
-from plotly.subplots import make_subplots
-
-fig = make_subplots(rows=3, cols=1)
-
-fig.add_trace(go.Scatter(x=data["wfl"], y=data["nm"], mode="markers"),
-                row=1, col=1)
-fig.update_xaxes(title_text="living area in m^2", row=1, col=1)
-fig.update_yaxes(title_text="net rent", row=1, col=1)
-
-fig.add_trace(go.Scatter(x=data["bj"], y=data["zh0"], mode="markers"),
-                row=2, col=1)
-fig.update_xaxes(title_text="year of construction", row=2, col=1)
-fig.update_yaxes(title_text="central heating", row=2, col=1)
-
-fig.add_trace(go.Scatter(x=data["bj"], y=data["bez"], mode="markers"),
-                row=3, col=1)
-fig.update_xaxes(title_text="year of construction", row=3, col=1)
-fig.update_yaxes(title_text="city district", row=3, col=1)
-
-fig.show()
+#| echo: false
+import plotly.io as pio
+from IPython.display import Image
+img = pio.to_image(fig, format="png", engine="kaleido")
+Image(img)
 ```
-![Scatterplot to investigate correlations in the data set.](../_assets/basics/scatter_fig2.5.png){#fig-correlation}
+
+Scatterplot to investigate correlations in the data set.
 :::
 
 In the first plot of @fig-correlation we see that the rent tends to go up with the size of the flat but there are for sure some rather cheap options in terms of space.

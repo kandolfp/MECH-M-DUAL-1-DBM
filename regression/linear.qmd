@@ -434,15 +434,10 @@ In order to apply it to the original function the parameters transform needs to 
 
 We take a look at the population growth were the data is kindly provided by @owid-population-growth. Have a look at there excellent work on [ourworldindata.org](https://ourworldindata.org/).
 
-::::: {.content-visible when-format="html"}
 ```{python}
-#| label: fig-reg_wp
-#| fig-cap: 
-#|   - "World population with regression lines normal scale."
-#|   - "World population with regression lines logarithmic scale." 
-#| layout-ncol: 1
 #| code-fold: true
 #| code-summary: "Show the code for the figures"
+#| output: false
 
 from owid.catalog import charts
 import numpy as np
@@ -502,81 +497,47 @@ fig2.update_layout(legend=dict(
     xanchor="left",
     x=0.01
 ))
+fig2.show()
+```
+::::: {.content-visible when-format="html"}
+```{python}
+#| label: fig-reg_wp-1
+#| fig-cap: "World population with regression lines normal scale."
+#| echo: false
+fig.show()
+```
+```{python}
+#| label: fig-reg_wp-2
+#| fig-cap: "World population with regression lines logarithmic scale."
+#| echo: false
 fig2.show()
 ```
 :::::
 ::::: {.content-visible unless-format="html"}
+:::::: {#fig-reg_wp-1 fig-env="figure"}
 ```{python}
-#| eval: false
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
-
-from owid.catalog import charts
-import numpy as np
-import scipy.optimize
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
-
-df = charts.get_data(
-    "https://ourworldindata.org/grapher/population?country=~OWID_WRL")
-data = df[df["entities"] == "World"]
-x = data["years"].to_numpy()
-y = data["population"].to_numpy()
-ylog = np.log(y)
-
-def fit3(x0, t):
-    x, y = t
-    return np.sum(np.power(np.abs(x0[0] * x + x0[1] - y), 2))
-
-start = [-np.inf, 0, 1700, 1900, 1980]
-
-yest = []
-```
-```{.python}
-for s in start:
-    filter = x >= s
-    t = (x[filter], ylog[filter])
-    x0 = np.array([1, 1])
-    b = scipy.optimize.fmin(fit3, x0, args=(t,), disp=False)
-    yest.append(np.exp(b[1]) * np.exp(b[0] * x))
-
-fig = go.Figure()
-fig2 = go.Figure()
-fig.add_trace(go.Scatter(mode="markers", x=data["years"],
-                y=data["population"], name="data"))
-fig2.add_trace(go.Scatter(mode="markers", x=data["years"],
-                y=data["population"], name="data"))
-
-for i, ye in enumerate(yest):
-    fig.add_trace(go.Scatter(x=x, y=ye, name=f"fit from {start[i]}"))
-    fig2.add_trace(go.Scatter(x=x, y=ye, name=f"fit from {start[i]}"))
-
-
-fig.update_xaxes(title_text="year", range=[1700, 2023])
-fig.update_yaxes(title_text="population")
-fig.update_layout(legend=dict(
-    yanchor="top",
-    y=0.99,
-    xanchor="left",
-    x=0.01
-))
-fig.show()
-
-fig2.update_xaxes(title_text="year", range=[1700, 2023])
-fig2.update_yaxes(title_text="population", type="log", range=[8.5,10])
-fig2.update_layout(legend=dict(
-    yanchor="top",
-    y=0.99,
-    xanchor="left",
-    x=0.01
-))
-fig2.show()
+#| echo: false
+import plotly.io as pio
+from IPython.display import Image
+img = pio.to_image(fig, format="png", engine="kaleido")
+Image(img)
 ```
 
-![World population with regression lines normal scale.](../_assets/regression/population1.png){#fig-reg_wp-1 width="60%"}
+World population with regression lines normal scale.
 
-![World population with regression lines logarithmic scale.](../_assets/regression/population2.png){#fig-reg_wp-2 width="60%"}
+::::::
+:::::: {#fig-reg_wp-2 fig-env="figure"}
+```{python}
+#| echo: false
+import plotly.io as pio
+from IPython.display import Image
+img = pio.to_image(fig2, format="png", engine="kaleido")
+Image(img)
+```
 
+World population with regression lines logarithmic scale.
+
+::::::
 :::::
 ::::
 :::

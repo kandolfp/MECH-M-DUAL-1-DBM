@@ -626,7 +626,24 @@ If $N$ is not a power of $2$ padding is used to make the size fit by extending t
 The original FFT paper [@Cooley1965] uses bit flipping and similar techniques to boost performance even more.
 It can even be implemented to allow for in place computation to save storage.
 
-IMAGE
+$$
+\begin{array}{|c|c|c|c|c|}
+\hline
+ & \text{bit flip} & M = 1 & M = 2 & M = 4 \\
+\hline
+c_0 & \xi_0 = c_0\ (c_{eee}) & \eta_0 = \xi_0 + w^0 \xi_1 & \zeta_0 = \eta_0 + w^0 \eta_2 & y_0 = \zeta_0 + w^0 \zeta_4 \\
+c_1 & \xi_1 = c_4\ (c_{eeo}) & \eta_1 = \xi_0 + w^4 \xi_1 & \zeta_1 = \eta_0 + w^2 \eta_3 & y_1 = \zeta_0 + w^1 \zeta_5 \\
+c_2 & \xi_2 = c_2\ (c_{eoe}) & \eta_2 = \xi_2 + w^0 \xi_3 & \zeta_2 = \eta_1 + w^4 \eta_2 & y_2 = \zeta_1 + w^2 \zeta_6 \\
+c_3 & \xi_3 = c_6\ (c_{eoo}) & \eta_3 = \xi_2 + w^4 \xi_3 & \zeta_3 = \eta_1 + w^6 \eta_3 & y_3 = \zeta_1 + w^3 \zeta_7 \\
+c_4 & \xi_4 = c_1\ (c_{oee}) & \eta_4 = \xi_4 + w^0 \xi_5 & \zeta_4 = \eta_4 + w^0 \eta_6 & y_4 = \zeta_2 + w^0 \zeta_4 \\
+c_5 & \xi_5 = c_5\ (c_{oeo}) & \eta_5 = \xi_4 + w^4 \xi_5 & \zeta_5 = \eta_4 + w^2 \eta_7 & y_5 = \zeta_2 + w^1 \zeta_5 \\
+c_6 & \xi_6 = c_3\ (c_{ooe}) & \eta_6 = \xi_6 + w^0 \xi_7 & \zeta_6 = \eta_5 + w^4 \eta_6 & y_6 = \zeta_3 + w^2 \zeta_6 \\
+c_7 & \xi_7 = c_7\ (c_{ooo}) & \eta_7 = \xi_6 + w^4 \xi_7 & \zeta_7 = \eta_5 + w^6 \eta_7 & y_7 = \zeta_3 + w^3 \zeta_7 \\
+\hline
+\end{array}
+$$
+
+In the above table $o$ stands for odd and $e$ for even.
 
 [Compare @Meyberg1992-ws, pp. 331]
 :::

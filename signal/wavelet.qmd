@@ -1,7 +1,7 @@
 ---
 lightbox: true
 ---
-# Wavelet transform {#sec-signal-wavelet}
+# Wavelet Transform {#sec-signal-wavelet}
 
 With Wavelets we extend the concept of the Fourier analysis to general orthogonal bases.
 This extensions is done in such a way that we can do a multi-resolution decomposition and thus partially overcome the uncertainty principal discussed before. 

@@ -385,7 +385,7 @@ $$
 
 We can rewrite this as 
 $$
-\alpha_n(s^n H(s) - \frac{1}{\alpha_n}) + \alpha_{n-1}s^{n-1} H(s) + \cdots + \alpha_1 s H(s) + \alpha_0 H(s) = 0
+\alpha_n \left( s^n H(s) - \frac{1}{\alpha_n} \right) + \alpha_{n-1}s^{n-1} H(s) + \cdots + \alpha_1 s H(s) + \alpha_0 H(s) = 0
 $$
 and with the properties of the Laplace transform we get
 $$

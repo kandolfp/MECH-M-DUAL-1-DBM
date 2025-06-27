@@ -60,6 +60,7 @@ format:
       light: [flatly, style.css]
       dark: [darkly, dark-style.css]
     lightbox: true
+    respect-user-color-scheme: true
     default-image-extension: svg
   pdf:
     documentclass: scrreprt

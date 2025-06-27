@@ -479,7 +479,7 @@ $$
 
 To make this a bit easier to understand the following illustration is helpful:
 
-![Low Rank Approximation](../_assets/matrixdc/lowrank){width=5.28in}
+![Low Rank Approximation](../_assets/matrixdc/lowrank){#fig-lowrank width=5.28in}
 
 This approximation can be used to reduce the storage demand of an image.
 

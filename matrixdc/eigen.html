@@ -638,7 +638,7 @@ window.Quarto = {
 \]</span></li>
 </ol>
 <p>So let us check in <code>numpy</code>:</p>
-<div id="42e4df12" class="cell styled-output" data-execution_count="1">
+<div id="3d29160d" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -689,7 +689,7 @@ p(\lambda) = \det(A - \lambda I).
 </div>
 </div>
 <p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
-<div id="3c1b0be6" class="cell styled-output" data-execution_count="2">
+<div id="c06936aa" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> LA.eigvals(A)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lam_sort <span class="op">=</span> np.sort(lam)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -736,7 +736,7 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
 </div>
 </div>
 <p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
-<div id="3380f9b6" class="cell styled-output" data-execution_count="3">
+<div id="44a73189" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lam, V <span class="op">=</span> LA.eig(A)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_eigen <span class="op">=</span> np.diag(lam)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -1072,10 +1072,14 @@ A = V\Lambda U^{\mathsf{T}} = \sum_{i=1}^n\lambda_i v_i u_i^{\mathsf{T}}
 A\approx A_r = V\Lambda U^{\mathsf{T}} = \sum_{i=1}^r\lambda_i v_i u_i^{\mathsf{T}}.
 \]</span></p>
 <p>To make this a bit easier to understand the following illustration is helpful:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../_assets/matrixdc/lowrank.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Low Rank Approximation"><img src="../_assets/matrixdc/lowrank.svg" class="img-fluid figure-img" style="width:5.28in" alt="Low Rank Approximation"></a></p>
-<figcaption>Low Rank Approximation</figcaption>
+<div id="fig-lowrank" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lowrank-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../_assets/matrixdc/lowrank.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;3.3: Low Rank Approximation"><img src="../_assets/matrixdc/lowrank.svg" class="img-fluid figure-img" style="width:5.28in"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lowrank-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3: Low Rank Approximation
+</figcaption>
 </figure>
 </div>
 <p>This approximation can be used to reduce the storage demand of an image.</p>
@@ -1133,7 +1137,7 @@ A\approx A_r = V\Lambda U^{\mathsf{T}} = \sum_{i=1}^r\lambda_i v_i u_i^{\mathsf{
 <div id="fig-mci_headquater-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_headquater-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="eigen_files/figure-html/fig-mci_headquater-output-1.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;3.3&nbsp;(a): Absolute value of Eigenvalues from largest to smallest"><img src="eigen_files/figure-html/fig-mci_headquater-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
+<a href="eigen_files/figure-html/fig-mci_headquater-output-1.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;3.4&nbsp;(a): Absolute value of Eigenvalues from largest to smallest"><img src="eigen_files/figure-html/fig-mci_headquater-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_headquater-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Absolute value of Eigenvalues from largest to smallest
@@ -1147,7 +1151,7 @@ A\approx A_r = V\Lambda U^{\mathsf{T}} = \sum_{i=1}^r\lambda_i v_i u_i^{\mathsf{
 <div id="fig-mci_headquater-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_headquater-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="eigen_files/figure-html/fig-mci_headquater-output-2.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;3.3&nbsp;(b): 0.1% of eigenvalue"><img src="eigen_files/figure-html/fig-mci_headquater-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
+<a href="eigen_files/figure-html/fig-mci_headquater-output-2.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;3.4&nbsp;(b): 0.1% of eigenvalue"><img src="eigen_files/figure-html/fig-mci_headquater-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_headquater-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) 0.1% of eigenvalue
@@ -1159,7 +1163,7 @@ A\approx A_r = V\Lambda U^{\mathsf{T}} = \sum_{i=1}^r\lambda_i v_i u_i^{\mathsf{
 <div id="fig-mci_headquater-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_headquater-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="eigen_files/figure-html/fig-mci_headquater-output-3.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;3.3&nbsp;(c): 10% of eigenvalue"><img src="eigen_files/figure-html/fig-mci_headquater-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
+<a href="eigen_files/figure-html/fig-mci_headquater-output-3.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;3.4&nbsp;(c): 10% of eigenvalue"><img src="eigen_files/figure-html/fig-mci_headquater-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_headquater-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) 10% of eigenvalue
@@ -1171,7 +1175,7 @@ A\approx A_r = V\Lambda U^{\mathsf{T}} = \sum_{i=1}^r\lambda_i v_i u_i^{\mathsf{
 <div id="fig-mci_headquater-4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_headquater-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="eigen_files/figure-html/fig-mci_headquater-output-4.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;3.3&nbsp;(d): 25% of eigenvalue"><img src="eigen_files/figure-html/fig-mci_headquater-output-4.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
+<a href="eigen_files/figure-html/fig-mci_headquater-output-4.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;3.4&nbsp;(d): 25% of eigenvalue"><img src="eigen_files/figure-html/fig-mci_headquater-output-4.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_headquater-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (d) 25% of eigenvalue
@@ -1185,7 +1189,7 @@ A\approx A_r = V\Lambda U^{\mathsf{T}} = \sum_{i=1}^r\lambda_i v_i u_i^{\mathsf{
 <div id="fig-mci_headquater-5" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_headquater-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="eigen_files/figure-html/fig-mci_headquater-output-5.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;3.3&nbsp;(e): 50% of eigenvalue"><img src="eigen_files/figure-html/fig-mci_headquater-output-5.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
+<a href="eigen_files/figure-html/fig-mci_headquater-output-5.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;3.4&nbsp;(e): 50% of eigenvalue"><img src="eigen_files/figure-html/fig-mci_headquater-output-5.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_headquater-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (e) 50% of eigenvalue
@@ -1197,7 +1201,7 @@ A\approx A_r = V\Lambda U^{\mathsf{T}} = \sum_{i=1}^r\lambda_i v_i u_i^{\mathsf{
 <div id="fig-mci_headquater-6" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_headquater-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="eigen_files/figure-html/fig-mci_headquater-output-6.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;3.3&nbsp;(f): 75% of eigenvalue"><img src="eigen_files/figure-html/fig-mci_headquater-output-6.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
+<a href="eigen_files/figure-html/fig-mci_headquater-output-6.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;3.4&nbsp;(f): 75% of eigenvalue"><img src="eigen_files/figure-html/fig-mci_headquater-output-6.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_headquater-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (f) 75% of eigenvalue
@@ -1209,7 +1213,7 @@ A\approx A_r = V\Lambda U^{\mathsf{T}} = \sum_{i=1}^r\lambda_i v_i u_i^{\mathsf{
 <div id="fig-mci_headquater-7" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mci_headquater-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="eigen_files/figure-html/fig-mci_headquater-output-7.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;3.3&nbsp;(g): original image"><img src="eigen_files/figure-html/fig-mci_headquater-output-7.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
+<a href="eigen_files/figure-html/fig-mci_headquater-output-7.svg" class="lightbox" data-gallery="fig-mci_headquater" title="Figure&nbsp;3.4&nbsp;(g): original image"><img src="eigen_files/figure-html/fig-mci_headquater-output-7.svg" class="img-fluid figure-img" data-ref-parent="fig-mci_headquater"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mci_headquater-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (g) original image
@@ -1220,7 +1224,7 @@ A\approx A_r = V\Lambda U^{\mathsf{T}} = \sum_{i=1}^r\lambda_i v_i u_i^{\mathsf{
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mci_headquater-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.3: Image of MCI I and the reconstruction with approximated matrix.
+Figure&nbsp;3.4: Image of MCI I and the reconstruction with approximated matrix.
 </figcaption>
 </figure>
 </div>

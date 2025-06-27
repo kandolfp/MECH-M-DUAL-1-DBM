@@ -1,6 +1,3 @@
----
-lightbox: true
----
 # Eigendecomposition {#sec-matrixdc-eigen}
 
 We start off with the so called _eigendecomposition_.
@@ -322,7 +319,7 @@ Let us walk through this with an example from [@Downey2024VibrationMechanicsPrac
 
 ## Two Story Building
 
-![Two story frame where the floors have different dynamic properties.](../_assets/matrixdc/TwoStoryBuilding){#fig-twostorybuilding}
+![Two story frame where the floors have different dynamic properties.](../_assets/matrixdc/TwoStoryBuilding){#fig-twostorybuilding width=2.95in}
 
 In @fig-twostorybuilding we can see a two story building consisting of a two column frame with a floor.
 The first floor columns are fixed at the base and have a height $h$, the second floor is fixed to the first and has the same height.
@@ -437,9 +434,9 @@ The following figure visualizes the two modes.
 
 ::: {#fig-twosotrybuildingmodes layout-ncol=2}
 
-![First mode](../_assets/matrixdc/TwoStoryBuildingMode1){#fig-tsm1}
+![First mode](../_assets/matrixdc/TwoStoryBuildingMode1){#fig-tsm1 width=3.24in}
 
-![Second mode](../_assets/matrixdc/TwoStoryBuildingMode2){#fig-tsm2}
+![Second mode](../_assets/matrixdc/TwoStoryBuildingMode2){#fig-tsm2 width=3.27in}
 
 Model of a two story building with the shape of the modes according to the modal analysis.
 :::
@@ -482,7 +479,7 @@ $$
 
 To make this a bit easier to understand the following illustration is helpful:
 
-![Low Rank Approximation](../_assets/matrixdc/lowrank.svg){.lightbox}
+![Low Rank Approximation](../_assets/matrixdc/lowrank){width=5.28in}
 
 This approximation can be used to reduce the storage demand of an image.
 

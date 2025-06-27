@@ -1,6 +1,3 @@
----
-lightbox: true
----
 # Laplace Transform {#sec-signal-laplace}
 
 The Fourier Transform is only possible for well-behaved functions that are Lebesgue integrable, i.e. $f(x) \in L^1[(-\infty, \infty)]$. 

@@ -1,6 +1,3 @@
----
-lightbox: true
----
 # Two-Dimensional Transform {#sec-signal-2d}
 
 There is nothing preventing us from extending the transforms we discussed before to 2D. 

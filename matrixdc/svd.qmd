@@ -1,6 +1,3 @@
----
-lightbox: true
----
 # Singular Value Decomposition {#sec-matrixdc-svd}
 The Singular Value Decomposition (SVD) is an orthogonal matrix reduction.
 In contrast to the previously discussed Eigendecomposition it can be applied to rectangular matrices.
@@ -69,11 +66,11 @@ $$
 The singular value decomposition always exists, is real and all singular vectors are positive.
 :::
 
-Again, to visualize the composition helps to better understand what is happening
+Again, to visualize the composition it helps to better understand what is happening.
 
-![Singular Value Decomposition](../_assets/matrixdc/SVD)
+![Singular Value Decomposition](../_assets/matrixdc/SVD){width=3.67in}
 
-In the case that of $m\geq n$ we can save storage by reducing the matrices $U$ and $\Sigma$, to their counterpart $U_1$ and $\Sigma_1$ by removing the zeros.
+In the case that $m\geq n$, we can save storage by reducing the matrices $U$ and $\Sigma$, to their counterpart $U_1$ and $\Sigma_1$ by removing the zeros.
 
 ::: {.callout appearance="simple"}
 :::: {#def-thinsvd} 
@@ -96,7 +93,7 @@ $$
 ::::
 :::
 
-![Thin SVD](../_assets/matrixdc/ThinSVD)
+![Thin SVD](../_assets/matrixdc/ThinSVD){width=2.88in}
 
 In Python we can compute the (Thin)SVD as follows
 
@@ -162,7 +159,7 @@ This is often called the _truncated SVD_.
 ::::
 :::
 
-![Truncated SVD](../_assets/matrixdc/TruncatedSVD)
+![Truncated SVD](../_assets/matrixdc/TruncatedSVD){width=2.88in}
 
 We can use this for image compression.
 
@@ -264,6 +261,7 @@ for r in rec:
 
 plt.show()
 ```
+
 ::: {.callout-note}
 The big advantage here is, that the selection is optimal.
 A disadvantage is that the need to store the basis separately and this increases the necessary storage.

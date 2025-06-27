@@ -1,6 +1,3 @@
----
-lightbox: true
----
 # Sparsity and Compression {#sec-sensing-sparsity}
 
 As we have seen before and maybe know from our own experience, most image and audio signals are highly compressible.

@@ -1,6 +1,3 @@
----
-lightbox: true
----
 # Wavelet Transform {#sec-signal-wavelet}
 
 With Wavelets we extend the concept of the Fourier analysis to general orthogonal bases.

@@ -1,6 +1,3 @@
----
-lightbox: true
----
 # Linear Regression {#sec-regression-linear}
 
 The general idea of linear regression is to approximate a _point cloud_ by a mathematical function, this is often called _curve fitting_ and it is closely related to optimization techniques, [compare @Brunton2022, Section 4.1].

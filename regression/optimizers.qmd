@@ -1,6 +1,3 @@
----
-lightbox: true
----
 # Optimizers {#sec-regression-optimizers}
 
 As we have seen in the previous section the task of regression usually results in an optimization problem.

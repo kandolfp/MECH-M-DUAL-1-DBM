@@ -1,6 +1,3 @@
----
-lightbox: true
----
 # Kalman Filter {#sec-statistic-kalman}
 
 The Kalman Filter is one of the most important contributions to engineering sciences in the 20th century and it helped to develop the space program. 

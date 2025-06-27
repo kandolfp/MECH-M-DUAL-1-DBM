@@ -1,6 +1,3 @@
----
-lightbox: true
----
 # Bayesian Statistics {#sec-statistic-bayesian}
 
 In the middle of the eighteenth century Joshua Bayes, a Presbyterian minister, set the ground work and as it so often happens was first not acknowledged by his peers.

@@ -1,6 +1,3 @@
----
-lightbox: true
----
 # Compressed Sensing {#sec-sensing-compressed-sensing}
 
 We use compression in everyday life extensively.

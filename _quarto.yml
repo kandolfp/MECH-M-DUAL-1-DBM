@@ -65,6 +65,9 @@ format:
   pdf:
     documentclass: scrreprt
     default-image-extension: png
+    code-overflow: wrap
+    monofont: "DejaVu Sans Mono"
+    cite-method: natbib
     keep-tex: true
     include-before-body: 
       - text: \ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced jigsaw, breakable, sharp corners, bottomrule=0mm, colback=white, after skip=-5mm, grow to left by=1mm, grow to right by=1mm]\end{tcolorbox}\vspace*{-0.1\baselineskip}}{\vspace*{-1.9\baselineskip}\begin{tcolorbox}[enhanced jigsaw, breakable, sharp corners, toprule=0mm, opacityback=0, grow to left by=1mm, grow to right by=1mm]\end{tcolorbox}}\fi

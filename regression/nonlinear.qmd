@@ -127,7 +127,10 @@ while diff > 1e-10:
 
 fig.add_scatter3d(x=x[:, 0], y=x[:, 1], z=z,
                   line_color='red', name="Descent path")
-
+camera = dict(
+    eye=dict(x=1.7, y=1.3, z=2.2)
+)
+fig.update_layout(scene_camera=camera)
 fig.show()
 ```
 ::::: {.content-visible when-format="html"}

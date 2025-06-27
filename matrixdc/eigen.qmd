@@ -284,7 +284,7 @@ $$
 $$ {#eq-ma}
 
 ::: {.callout appearance="simple"}
-:::: {#def-edc} 
+:::: {#def-gevp} 
 ## Generalized eigenvalue problem
 If $A, B \in \mathbb{C}^{n\times n}$, then the set of all matrices of the form $A-\lambda B$ with $\lambda\in\mathbb{C}$ is a _pencil_. The _generalized eigenvalues_ of $A-\lambda B$ are elements of the set $\lambda(A,B)$ defined by
 $$

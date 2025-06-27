@@ -41,7 +41,7 @@ $$
 If we now increase $n\to \infty$ we get $\Delta x \to 0$ and the sum transforms into the integral. 
 
 ::: {.callout appearance="simple"}
-:::: {#def-hilbert-innerproduct} 
+:::: {#def-hilbert-two-norm} 
 ## Hilbert two norm
 The _Hilbert two norm_ of the function $f(x)$ is defined for $x \in [a, b]$ as:
 $$
@@ -490,7 +490,7 @@ $$
 \left[
     \begin{array}{c} f_1 \\ f_2 \\ f_3 \\ \vdots \\ f_N \end{array}
 \right]
-$$ {#eq-dft}
+$$ {#eq-dft_matrix}
 with $\omega_N = \exp({-\mathrm{i} \tfrac{2 \pi}{N}})$. 
 
 ::: {.callout-note}

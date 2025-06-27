@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.37">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -86,17 +87,20 @@ div.csl-indent {
 <meta name="quarto:offset" content="../">
 <link href="../signal/laplace.html" rel="next">
 <link href="../signal/index.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-29e2c20b02301cfff04dc8050bf30c7e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-43df0d6f53b733b42d37fa7808e17715.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-af197cfaa1b998947a0d2985bb402727.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-ef41e933b1342006c60052580b4622d9.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-1e3068369e36718fca5120af1b2594eb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-9998c2ee6da4221bd56fa9d29e80e367.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-1e3068369e36718fca5120af1b2594eb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -163,7 +167,178 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -317,7 +492,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../signal/wavelet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet Transform</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -410,6 +585,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../signal/index.html">Signal Processing</a></li><li class="breadcrumb-item"><a href="../signal/fourier.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fourier Transform</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="sec-signal-fourier" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fourier Transform</span></span></h1>
@@ -450,7 +626,7 @@ window.Quarto = {
 <p>Now consider a discrete version of <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> at regular intervals <span class="math inline">\(\Delta x = \frac{b-a}{n-1}\)</span> where <span class="math display">\[
 f_i = f(x_i) = f(a + (i - 1) \Delta x),\quad i = 1, \ldots n,
 \]</span> same for <span class="math inline">\(g_i\)</span> and accordingly <span class="math inline">\(x_1 = a + 0 \Delta x = a\)</span> and <span class="math inline">\(x_n = a + (n - 1)\Delta x = b\)</span>.</p>
-<p>The inner product is than <span class="math display">\[
+<p>The inner product is then <span class="math display">\[
 \langle f, g \rangle = \langle\left[\begin{array}{c}f_1 \\ f_2 \\ \vdots \\ f_n \end{array}\right], \left[\begin{array}{c}g_1 \\ g_2 \\ \vdots \\ g_n \end{array}\right] \rangle = \sum_{i=1}^n f_i \overline{g}_i = \sum_{i=1}^n f(x_i)\overline{g}(x_i).
 \]</span></p>
 <p>As this sum will increase by increasing <span class="math inline">\(n\)</span> we should normalize it by the factor <span class="math inline">\(\Delta x\)</span>.</p>
@@ -463,7 +639,7 @@ f_i = f(x_i) = f(a + (i - 1) \Delta x),\quad i = 1, \ldots n,
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<div id="def-hilbert-innerproduct" class="theorem definition">
+<div id="def-hilbert-two-norm" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 8.2 (Hilbert two norm)</strong></span> The <em>Hilbert two norm</em> of the function <span class="math inline">\(f(x)\)</span> is defined for <span class="math inline">\(x \in [a, b]\)</span> as: <span class="math display">\[
 \|f\|_2 = \sqrt{\langle f(x), f(x)\rangle} = \left(\int_a^b f(x) \overline{f}(x)\,\mathrm{d}x\right)^{\frac12},
 \]</span> where <span class="math inline">\(\overline{f}(x)\)</span> denotes the complex conjugate.</p>
@@ -608,27 +784,27 @@ Note
 <span id="annotated-cell-2-47"><a href="#annotated-cell-2-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-2-48"><a href="#annotated-cell-2-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Figures</span></span>
 <span id="annotated-cell-2-49"><a href="#annotated-cell-2-49" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">0</span>)</span>
-<span id="annotated-cell-2-50"><a href="#annotated-cell-2-50" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
-<span id="annotated-cell-2-51"><a href="#annotated-cell-2-51" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_hat[<span class="op">-</span><span class="dv">1</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f_7}</span><span class="vs">$"</span>)</span>
+<span id="annotated-cell-2-50"><a href="#annotated-cell-2-50" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">f</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="annotated-cell-2-51"><a href="#annotated-cell-2-51" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_hat[<span class="op">-</span><span class="dv">1</span>, :], label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">hat{f_7}</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="annotated-cell-2-52"><a href="#annotated-cell-2-52" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
 <span id="annotated-cell-2-53"><a href="#annotated-cell-2-53" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="annotated-cell-2-54"><a href="#annotated-cell-2-54" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
 <span id="annotated-cell-2-55"><a href="#annotated-cell-2-55" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-2-56"><a href="#annotated-cell-2-56" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">1</span>)</span>
-<span id="annotated-cell-2-57"><a href="#annotated-cell-2-57" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_hat[<span class="dv">0</span>, :], label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span><span class="dv">0</span><span class="sc">}</span><span class="vs">$"</span>)</span>
+<span id="annotated-cell-2-57"><a href="#annotated-cell-2-57" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_hat[<span class="dv">0</span>, :], label<span class="op">=</span><span class="vs">rf"</span><span class="dv">$</span><span class="vs">a_</span><span class="sc">{</span><span class="dv">0</span><span class="sc">}</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="annotated-cell-2-58"><a href="#annotated-cell-2-58" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
 <span id="annotated-cell-2-59"><a href="#annotated-cell-2-59" aria-hidden="true" tabindex="-1"></a>    plt.plot(t, a[i] <span class="op">*</span> np.cos(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> t),</span>
-<span id="annotated-cell-2-60"><a href="#annotated-cell-2-60" aria-hidden="true" tabindex="-1"></a>             label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\cos(</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\omega t)$"</span>)</span>
+<span id="annotated-cell-2-60"><a href="#annotated-cell-2-60" aria-hidden="true" tabindex="-1"></a>             label<span class="op">=</span><span class="vs">rf"</span><span class="dv">$</span><span class="vs">a_</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="er">\</span><span class="vs">cos</span><span class="kw">(</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="er">\</span><span class="vs">omega t</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="annotated-cell-2-61"><a href="#annotated-cell-2-61" aria-hidden="true" tabindex="-1"></a>plt.legend(ncol<span class="op">=</span>np.ceil((M <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">2</span>), bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="op">-</span><span class="fl">0.1</span>))</span>
 <span id="annotated-cell-2-62"><a href="#annotated-cell-2-62" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
 <span id="annotated-cell-2-63"><a href="#annotated-cell-2-63" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
 <span id="annotated-cell-2-64"><a href="#annotated-cell-2-64" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-2-65"><a href="#annotated-cell-2-65" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">2</span>)</span>
-<span id="annotated-cell-2-66"><a href="#annotated-cell-2-66" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
-<span id="annotated-cell-2-67"><a href="#annotated-cell-2-67" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">7</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_7$"</span>)</span>
-<span id="annotated-cell-2-68"><a href="#annotated-cell-2-68" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">20</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{20}</span><span class="vs">$"</span>)</span>
-<span id="annotated-cell-2-69"><a href="#annotated-cell-2-69" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">50</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{50}</span><span class="vs">$"</span>)</span>
-<span id="annotated-cell-2-70"><a href="#annotated-cell-2-70" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
+<span id="annotated-cell-2-66"><a href="#annotated-cell-2-66" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">f</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="annotated-cell-2-67"><a href="#annotated-cell-2-67" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">7</span>, :], label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">hat{f}_7</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="annotated-cell-2-68"><a href="#annotated-cell-2-68" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">20</span>, :], label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">hat{f}_</span><span class="op">{20}</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="annotated-cell-2-69"><a href="#annotated-cell-2-69" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">50</span>, :], label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">hat{f}_</span><span class="op">{50}</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="annotated-cell-2-70"><a href="#annotated-cell-2-70" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="annotated-cell-2-71"><a href="#annotated-cell-2-71" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="annotated-cell-2-72"><a href="#annotated-cell-2-72" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
 <span id="annotated-cell-2-73"><a href="#annotated-cell-2-73" aria-hidden="true" tabindex="-1"></a></span>
@@ -705,7 +881,7 @@ Figure&nbsp;8.1: Fourier transform of a two hat functions.
 <div class="callout-body-container">
 <div id="exr-fourier-hat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.1 (Self implementation <a href="#exm-fourier-hat" class="quarto-xref">Example&nbsp;<span>8.1</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="05f35c44" class="cell" data-execution_count="2">
+<div id="cba5e488" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -756,27 +932,27 @@ Figure&nbsp;8.1: Fourier transform of a two hat functions.
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Figures</span></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">0</span>)</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_hat[<span class="op">-</span><span class="dv">1</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f_7}</span><span class="vs">$"</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">f</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_hat[<span class="op">-</span><span class="dv">1</span>, :], label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">hat{f_7}</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">1</span>)</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_hat[<span class="dv">0</span>, :], label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span><span class="dv">0</span><span class="sc">}</span><span class="vs">$"</span>)</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_hat[<span class="dv">0</span>, :], label<span class="op">=</span><span class="vs">rf"</span><span class="dv">$</span><span class="vs">a_</span><span class="sc">{</span><span class="dv">0</span><span class="sc">}</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
 <span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    plt.plot(t, a[i] <span class="op">*</span> np.cos(w <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> t),</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>             label<span class="op">=</span><span class="vs">rf"$a_</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\cos(</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="vs">\omega t)$"</span>)</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>             label<span class="op">=</span><span class="vs">rf"</span><span class="dv">$</span><span class="vs">a_</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="er">\</span><span class="vs">cos</span><span class="kw">(</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="er">\</span><span class="vs">omega t</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>plt.legend(ncol<span class="op">=</span>np.ceil((M <span class="op">+</span> <span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span>), bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="op">-</span><span class="fl">0.1</span>))</span>
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
 <span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">2</span>)</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2, label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">7</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_7$"</span>)</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">20</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{20}</span><span class="vs">$"</span>)</span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">50</span>, :], label<span class="op">=</span><span class="vs">r"$\hat</span><span class="sc">{f}</span><span class="vs">_</span><span class="sc">{50}</span><span class="vs">$"</span>)</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">f</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">7</span>, :], label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">hat{f}_7</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">20</span>, :], label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">hat{f}_</span><span class="op">{20}</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f2_hat[<span class="dv">50</span>, :], label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">hat{f}_</span><span class="op">{50}</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">1.5</span>)</span>
 <span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
@@ -820,7 +996,7 @@ f(t) = \lim_{\Delta \omega \to 0} \sum_{k=-\infty}^\infty \frac{\Delta \omega}{2
 </div>
 <div class="callout-body-container">
 <div id="def-fourier-transform" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 8.5 (Fourier Transform)</strong></span> A function <span class="math inline">\(f\,:\, \mathbb{R} \to \mathbb{R}\)</span> is called fourier transposable if <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 8.5 (Fourier Transform)</strong></span> A function <span class="math inline">\(f\,:\, \mathbb{R} \to \mathbb{R}\)</span> is called <em>Fourier-transformable</em> if <span class="math display">\[
 \hat{f}(\omega) = \mathcal{F}\{f(t)\} = \int_{-\infty}^{\infty} f(t)\mathrm{e}^{-\mathrm{i} \omega t}\, \mathrm{d}t
 \]</span> exists for all <span class="math inline">\(\omega\in\mathbb{R}\)</span>. In this case we call <span class="math inline">\(\hat{f}(\omega) \equiv \mathcal{F}\{f(t)\}\)</span> the <strong>Fourier transform</strong> of <span class="math inline">\(f(t)\)</span>.</p>
 <p>The <strong>inverse Fourier transform</strong> is defined as <span class="math display">\[
@@ -841,7 +1017,9 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>The pair <span class="math inline">\((f, \hat{f})\)</span> is often called the <em>Fourier transform pair</em>.</p>
-<p>The two integrals converge, as long as both functions are Lebesgue integrable, i.e.&nbsp; <span class="math display">\[\int_{-\infty}^\infty|f(t)|\, \mathrm{d}t \le \infty,\]</span> or <span class="math inline">\(f, \hat{f} \in L^1[(-\infty, \infty)]\)</span>.</p>
+<p>The two integrals converge, as long as both functions are Lebesgue integrable, i.e.&nbsp; <span class="math display">\[
+\int_{-\infty}^\infty|f(t)|\, \mathrm{d}t \le \infty \quad\text{and}\quad
+\int_{-\infty}^\infty|\hat{f}(\omega)|\, \mathrm{d}\omega \le \infty,\]</span> or <span class="math inline">\(f, \hat{f} \in L^1[(-\infty, \infty)]\)</span>.</p>
 </div>
 </div>
 <p>As could be expected, the Fourier transform has properties that lead to computational advantages.</p>
@@ -896,7 +1074,7 @@ Note
 </section>
 <section id="discrete-fourier-transform" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="discrete-fourier-transform"><span class="header-section-number">8.3</span> Discrete Fourier Transform</h2>
-<p>The Discrete Fourier Transform (DFT) is a way of approximating the Fourier transform on discrete vectors of data and it essentially a discretized version of the Fourier transform by sampling the function and numerical integration.</p>
+<p>The Discrete Fourier Transform (DFT) is a way of approximating the Fourier transform on discrete vectors of data and essentially it is nothing else than sampling the function and using numerical integration.</p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -904,7 +1082,7 @@ Note
 </div>
 <div class="callout-body-container">
 <div id="def-fourier-dft" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 8.6 (Discrete-Fourier Transform)</strong></span> For equally spaced values <span class="math inline">\(t_k = k\Delta t\)</span>, for <span class="math inline">\(k\in\mathbb{Z}\)</span> and <span class="math inline">\(\Delta t&gt;0\)</span> and the discrete values of the function evaluations <span class="math inline">\(f_k=f(t_k)\)</span>. If the function is periodic with <span class="math inline">\(L=N\Delta t\)</span> than the discrete Fourier transform is given as <span id="eq-dft"><span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 8.6 (Discrete-Fourier Transform)</strong></span> For equally spaced values <span class="math inline">\(t_k = k\Delta t\)</span>, for <span class="math inline">\(k\in\mathbb{Z}\)</span> and <span class="math inline">\(\Delta t&gt;0\)</span> and the discrete values of the function evaluations <span class="math inline">\(f_k=f(t_k)\)</span>. If the function is periodic with <span class="math inline">\(L=N\Delta t\)</span> then the discrete Fourier transform is given as <span id="eq-dft"><span class="math display">\[
 \hat{f}_k = \sum_{j=0}^{N-1}f_j\, \mathrm{e}^{-\mathrm{i} j k\tfrac{2 \pi}{N}},
 \tag{8.3}\]</span></span> and its inverse (iDFT) as <span class="math display">\[
 f_k = \frac{1}{N}\sum_{j=0}^{N-1}\hat{f}_j\, \mathrm{e}^{\mathrm{i} j k\tfrac{2 \pi}{N}}.
@@ -913,7 +1091,7 @@ f_k = \frac{1}{N}\sum_{j=0}^{N-1}\hat{f}_j\, \mathrm{e}^{\mathrm{i} j k\tfrac{2 
 </div>
 </div>
 </div>
-<p>As we can see, the DFT is a linear operator and therefore it can be written as a matrix vector product <span id="eq-dft"><span class="math display">\[
+<p>As we can see, the DFT is a linear operator and therefore it can be written as a matrix vector product <span id="eq-dft_matrix"><span class="math display">\[
 \left[
     \begin{array}{c} \hat{f}_1 \\ \hat{f}_2 \\ \hat{f}_3 \\ \vdots \\ \hat{f}_N \end{array}
 \right]
@@ -956,7 +1134,7 @@ Tip
 </div>
 <div class="callout-body-container callout-body">
 <p>Code for the computation of the DFT matrix.</p>
-<div id="496a293e" class="cell" data-execution_count="3">
+<div id="74c93d29" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code.</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1001,7 +1179,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We should note that Cooley and Tukey where not the first to propose a FFT but the provided the formulation used today. Gauss already formulated the FFT 150 years earlier in 1805 for orbital approximations. Apparently, he did the necessary computations in his head and needed a fast algorithm so he developed the FFT. Gauss being Gauss did not see this as something important and it did not get published until 1866 in his compiled notes, <span class="citation" data-cites="Gauss">Gauß (<a href="../references.html#ref-Gauss" role="doc-biblioref">1866</a>)</span>.</p>
+<p>We should note that Cooley and Tukey where not the first to propose a FFT but they provided the formulation used today. Gauss already formulated the FFT 150 years earlier in 1805 for orbital approximations. Apparently, he did the necessary computations in his head and needed a fast algorithm so he developed the FFT. Gauss being Gauss did not see this as something important and it did not get published until 1866 in his compiled notes, <span class="citation" data-cites="Gauss">Gauß (<a href="../references.html#ref-Gauss" role="doc-biblioref">1866</a>)</span>.</p>
 </div>
 </div>
 <p>The main idea of the FFT is to exploit symmetries in the Fourier transform and to relate the <span class="math inline">\(N\)</span>-dimensional DFT to a lower dimensional DFT by reordering the coefficients.</p>
@@ -1012,12 +1190,12 @@ Note
 </div>
 <div class="callout-body-container">
 <div id="def-fourier-fft" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 8.7 (Fast-Fourier Transform)</strong></span> If we assume that <span class="math inline">\(N = 2^n\)</span>, i.e.&nbsp;a power of <span class="math inline">\(2\)</span>, in particular <span class="math inline">\(N=2M\)</span>, and <span class="math inline">\(F_N\)</span> denotes the matrix of <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span>8.4</span></a> for dimension <span class="math inline">\(N\)</span> and we have <span class="math inline">\(\hat{f} = F_N f\)</span> and <span class="math inline">\(f = \tfrac1N \overline{F_N} \hat{f}\)</span>. By splitting <span class="math inline">\(f\)</span> in the even and odd indices as <span class="math display">\[e = [f_0, f_2, \ldots, f_{N-2}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and <span class="math display">\[o = [f_1, f_3, \ldots, f_{N-1}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and for <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span>8.4</span></a> we get <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 8.7 (Fast-Fourier Transform)</strong></span> If we assume that <span class="math inline">\(N = 2^n\)</span>, i.e.&nbsp;a power of <span class="math inline">\(2\)</span>, in particular <span class="math inline">\(N=2M\)</span>, and <span class="math inline">\(F_N\)</span> denotes the matrix of <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span>8.3</span></a> for dimension <span class="math inline">\(N\)</span> we get have <span class="math inline">\(\hat{f} = F_N f\)</span> and <span class="math inline">\(f = \tfrac1N \overline{F_N} \hat{f}\)</span>. If we further split <span class="math inline">\(f\)</span> in the even and odd indices as <span class="math display">\[e = [f_0, f_2, \ldots, f_{N-2}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and <span class="math display">\[o = [f_1, f_3, \ldots, f_{N-1}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and with <a href="#eq-dft" class="quarto-xref">Equation&nbsp;<span>8.3</span></a> we get <span class="math display">\[
 \begin{aligned}
 \hat{f}_k &amp;= \sum_{j=0}^{N-1}f_j\, \omega^{j k} = \sum_{j=0}^{M-1}f_{2j}\, \omega^{(2j) k} + \sum_{j=0}^{M-1}f_{2j+1}\, \omega^{(2j+1) k} \\
 &amp;= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} + \omega^k\sum_{j=0}^{M-1}o_{j}\, (\omega^2)^{j k}.
 \end{aligned}
-\]</span> If we further split <span class="math inline">\(\hat{f}\)</span> in an upper and lower part <span class="math display">\[u = [\hat{f}_0, \hat{f}_2, \ldots, \hat{f}_{M-1}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and <span class="math display">\[l = [\hat{f}_{M}, \hat{f}_{M+1}, \ldots, \hat{f}_{N-1}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and with the property <span class="math inline">\(\omega^{k+M} = \omega^k \omega^M = - \omega^k\)</span> we get</p>
+\]</span> If we then split <span class="math inline">\(\hat{f}\)</span> in an upper and lower part <span class="math display">\[u = [\hat{f}_0, \hat{f}_2, \ldots, \hat{f}_{M-1}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and <span class="math display">\[l = [\hat{f}_{M}, \hat{f}_{M+1}, \ldots, \hat{f}_{N-1}]^{\mathsf{T}}\in \mathbb{C}^{M}\]</span> and with the property <span class="math inline">\(\omega^{k+M} = \omega^k \omega^M = - \omega^k\)</span> we get</p>
 <p><span class="math display">\[
 \begin{aligned}
 u_k &amp;= \sum_{j=0}^{M-1}e_j\, (\omega^2)^{j k} + \omega^k\sum_{j=0}^{M-1}o_{j}\, (\omega^2)^{j k},\\
@@ -1052,7 +1230,7 @@ D_M =
                          \vdots &amp; \vdots &amp; \ddots &amp; \ddots &amp;\vdots\\
                          0 &amp; 0 &amp; 0 &amp; \dots &amp; \omega^{(M-1)} \\
     \end{array}
-\right]
+\right].
 \]</span> Now repeat this <span class="math inline">\(n\)</span> times.</p>
 </div>
 </div>
@@ -1082,7 +1260,23 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>The original FFT paper <span class="citation" data-cites="Cooley1965">(<a href="../references.html#ref-Cooley1965" role="doc-biblioref">Cooley and Tukey 1965</a>)</span> uses bit flipping and similar techniques to boost performance even more. It can even be implemented to allow for in place computation to save storage.</p>
-<p>IMAGE</p>
+<p><span class="math display">\[
+\begin{array}{|c|c|c|c|c|}
+\hline
+&amp; \text{bit flip} &amp; M = 1 &amp; M = 2 &amp; M = 4 \\
+\hline
+c_0 &amp; \xi_0 = c_0\ (c_{eee}) &amp; \eta_0 = \xi_0 + w^0 \xi_1 &amp; \zeta_0 = \eta_0 + w^0 \eta_2 &amp; y_0 = \zeta_0 + w^0 \zeta_4 \\
+c_1 &amp; \xi_1 = c_4\ (c_{eeo}) &amp; \eta_1 = \xi_0 + w^4 \xi_1 &amp; \zeta_1 = \eta_0 + w^2 \eta_3 &amp; y_1 = \zeta_0 + w^1 \zeta_5 \\
+c_2 &amp; \xi_2 = c_2\ (c_{eoe}) &amp; \eta_2 = \xi_2 + w^0 \xi_3 &amp; \zeta_2 = \eta_1 + w^4 \eta_2 &amp; y_2 = \zeta_1 + w^2 \zeta_6 \\
+c_3 &amp; \xi_3 = c_6\ (c_{eoo}) &amp; \eta_3 = \xi_2 + w^4 \xi_3 &amp; \zeta_3 = \eta_1 + w^6 \eta_3 &amp; y_3 = \zeta_1 + w^3 \zeta_7 \\
+c_4 &amp; \xi_4 = c_1\ (c_{oee}) &amp; \eta_4 = \xi_4 + w^0 \xi_5 &amp; \zeta_4 = \eta_4 + w^0 \eta_6 &amp; y_4 = \zeta_2 + w^0 \zeta_4 \\
+c_5 &amp; \xi_5 = c_5\ (c_{oeo}) &amp; \eta_5 = \xi_4 + w^4 \xi_5 &amp; \zeta_5 = \eta_4 + w^2 \eta_7 &amp; y_5 = \zeta_2 + w^1 \zeta_5 \\
+c_6 &amp; \xi_6 = c_3\ (c_{ooe}) &amp; \eta_6 = \xi_6 + w^0 \xi_7 &amp; \zeta_6 = \eta_5 + w^4 \eta_6 &amp; y_6 = \zeta_3 + w^2 \zeta_6 \\
+c_7 &amp; \xi_7 = c_7\ (c_{ooo}) &amp; \eta_7 = \xi_6 + w^4 \xi_7 &amp; \zeta_7 = \eta_5 + w^6 \eta_7 &amp; y_7 = \zeta_3 + w^3 \zeta_7 \\
+\hline
+\end{array}
+\]</span></p>
+<p>In the above table <span class="math inline">\(o\)</span> stands for odd and <span class="math inline">\(e\)</span> for even.</p>
 <p><span class="citation" data-cites="Meyberg1992-ws">(Compare <a href="../references.html#ref-Meyberg1992-ws" role="doc-biblioref">Meyberg and Vachenauer 1992, 331</a>)</span></p>
 </div>
 </div>
@@ -1119,7 +1313,7 @@ PSD(\hat{f})=\frac1N \|\hat{f}\|^2.
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> t: np.sin(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f1 <span class="op">*</span> t) <span class="op">+</span> np.sin(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> f2 <span class="op">*</span> t)</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>f_clean <span class="op">=</span> fun(t)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>f_noise <span class="op">=</span> fun(t) <span class="op">+</span> <span class="fl">2.5</span> <span class="op">*</span> np.random.randn(<span class="bu">len</span>(t))              <span class="co"># Add some noise</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>f_noise <span class="op">=</span> fun(t) <span class="op">+</span> <span class="fl">2.5</span> <span class="op">*</span> np.random.randn(<span class="bu">len</span>(t))           <span class="co"># Add some noise</span></span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>fhat_noise <span class="op">=</span> np.fft.fft(f_noise)</span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>fhat_clean <span class="op">=</span> np.fft.fft(f_clean)</span>
@@ -1141,7 +1335,7 @@ PSD(\hat{f})=\frac1N \|\hat{f}\|^2.
 <span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_noise, <span class="st">":"</span>, label<span class="op">=</span><span class="vs">r"Noisy"</span>)</span>
 <span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_clean, label<span class="op">=</span><span class="vs">r"Clean"</span>)</span>
 <span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time [s]"</span>)</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$f$"</span>)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">f</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>plt.xlim(t[<span class="dv">0</span>], t[<span class="op">-</span><span class="dv">1</span>])</span>
 <span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>)</span>
 <span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
@@ -1160,7 +1354,7 @@ PSD(\hat{f})=\frac1N \|\hat{f}\|^2.
 <span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>plt.plot(t, np.real(f_filtered), label<span class="op">=</span><span class="vs">r"Noisy"</span>)</span>
 <span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_clean, label<span class="op">=</span><span class="vs">r"Clean"</span>)</span>
 <span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time [s]"</span>)</span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$f$"</span>)</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">f</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>plt.xlim(t[<span class="dv">0</span>], t[<span class="op">-</span><span class="dv">1</span>])</span>
 <span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>)</span>
 <span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
@@ -1219,7 +1413,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 </figure>
 </div>
 <p>As can be seen in the <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span>8.2 (c)</span></a>, the reconstruction is not exact. This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. In particular:</p>
-<div id="fbe6d444" class="cell" data-execution_count="5">
+<div id="125bb76c" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -1272,7 +1466,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-den-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.2 (Self implementation <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span>8.2</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="3c09eb66" class="cell" data-execution_count="6">
+<div id="7c6a1205" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1312,7 +1506,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 <span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_noise, <span class="st">":"</span>, label<span class="op">=</span><span class="vs">r"Noisy"</span>)</span>
 <span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_clean, label<span class="op">=</span><span class="vs">r"Clean"</span>)</span>
 <span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time [s]"</span>)</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$f$"</span>)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">f</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>plt.xlim(t[<span class="dv">0</span>], t[<span class="op">-</span><span class="dv">1</span>])</span>
 <span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>)</span>
 <span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
@@ -1331,7 +1525,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 <span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>plt.plot(t, np.real(f_filtered), label<span class="op">=</span><span class="vs">r"Noisy"</span>)</span>
 <span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_clean, label<span class="op">=</span><span class="vs">r"Clean"</span>)</span>
 <span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time [s]"</span>)</span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$f$"</span>)</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">f</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>plt.xlim(t[<span class="dv">0</span>], t[<span class="op">-</span><span class="dv">1</span>])</span>
 <span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>)</span>
 <span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
@@ -1343,20 +1537,14 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-caution no-icon">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Exercise DFT vs.&nbsp;FFT
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<div class="callout-body-container">
 <div id="exr-fourier-fft-den" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 8.3 (DFT vs.&nbsp;FFT)</strong></span> Implement <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span>8.2</span></a> with DFT and FFT such that you can evaluate the runtime and create a plot showing the different runtime as well as check if the two produce the same result</p>
+<p><span class="theorem-title"><strong>Exercise 8.3 (DFT vs.&nbsp;FFT)</strong></span> Implement <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span>8.2</span></a> with DFT and FFT such that you can evaluate the runtime and create a plot showing the different runtime as well as check if the two produce the same result.</p>
 </div>
 </div>
 </div>
@@ -1376,7 +1564,7 @@ f(t) &amp;= \cos(t) \exp\left(-\frac{t^2}{25}\right) \\
 \partial_t f(t) &amp;= -\sin(t) \exp\left(-\frac{t^2}{25}\right) - \frac{2}{25}t f(t)
 \end{aligned}
 \]</span></p>
-<p>In order to porovide something to compare our results to we also compute the forward Euler finite-differences for the derivative <span class="math display">\[
+<p>In order to provide something to compare our results to we also compute the forward Euler finite-differences for the derivative <span class="math display">\[
 \partial_t f(t_k) \approx \frac{f(t_{k+1}) - f(t_k)}{t_{k+1} - t_k}.
 \]</span></p>
 <details class="code-fold">
@@ -1424,7 +1612,7 @@ f(t) &amp;= \cos(t) \exp\left(-\frac{t^2}{25}\right) \\
 <span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_fD, <span class="st">"-."</span>, label<span class="op">=</span><span class="st">"Finite Differences"</span>)</span>
 <span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_spD, <span class="st">"--"</span>, label<span class="op">=</span><span class="st">"Spectral"</span>)</span>
 <span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"t"</span>)</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$\partial_t f$"</span>)</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">partial_t f</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">5</span>)</span>
 <span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
@@ -1456,11 +1644,11 @@ f(t) &amp;= \cos(t) \exp\left(-\frac{t^2}{25}\right) \\
 <span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">2</span>)</span>
 <span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>df_spD, _ <span class="op">=</span> spD(N, fun2, fun2, a, b)</span>
 <span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>df_fD, _ <span class="op">=</span> fD(N, fun2, fun2, a, b)</span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>plt.plot(t, fun2(t), label<span class="op">=</span><span class="vs">r"$f$"</span>)</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>plt.plot(t, fun2(t), label<span class="op">=</span><span class="vs">r"Function </span><span class="dv">$</span><span class="vs">f</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_fD, <span class="st">"-."</span>, label<span class="op">=</span><span class="st">"Finite derivative"</span>)</span>
 <span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>plt.plot(t, df_spD, <span class="st">"--"</span>, label<span class="op">=</span><span class="st">"Spectral derivative"</span>)</span>
 <span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"t"</span>)</span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$f, \partial_t f$"</span>)</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">f, </span><span class="er">\</span><span class="vs">partial_t f</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
 <span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1473,10 +1661,10 @@ f(t) &amp;= \cos(t) \exp\left(-\frac{t^2}{25}\right) \\
 <div id="fig-fourier_fft_spectralderivative-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-fourier_fft_spectralderivative-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="fourier_files/figure-html/fig-fourier_fft_spectralderivative-output-1.svg" class="lightbox" data-gallery="fig-fourier_fft_spectralderivative" title="Figure&nbsp;8.3&nbsp;(a): Computation of the derivative with different methods"><img src="fourier_files/figure-html/fig-fourier_fft_spectralderivative-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-fourier_fft_spectralderivative"></a>
+<a href="fourier_files/figure-html/fig-fourier_fft_spectralderivative-output-1.svg" class="lightbox" data-gallery="fig-fourier_fft_spectralderivative" title="Figure&nbsp;8.3&nbsp;(a): Computation of the derivative with different methods (Exact and spectral are almost the same)."><img src="fourier_files/figure-html/fig-fourier_fft_spectralderivative-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-fourier_fft_spectralderivative"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fourier_fft_spectralderivative-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(a) Computation of the derivative with different methods
+(a) Computation of the derivative with different methods (Exact and spectral are almost the same).
 </figcaption>
 </figure>
 </div>
@@ -1487,10 +1675,10 @@ f(t) &amp;= \cos(t) \exp\left(-\frac{t^2}{25}\right) \\
 <div id="fig-fourier_fft_spectralderivative-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-fourier_fft_spectralderivative-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="fourier_files/figure-html/fig-fourier_fft_spectralderivative-output-2.svg" class="lightbox" data-gallery="fig-fourier_fft_spectralderivative" title="Figure&nbsp;8.3&nbsp;(b): Accuracy of the methods for computing the derivative"><img src="fourier_files/figure-html/fig-fourier_fft_spectralderivative-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-fourier_fft_spectralderivative"></a>
+<a href="fourier_files/figure-html/fig-fourier_fft_spectralderivative-output-2.svg" class="lightbox" data-gallery="fig-fourier_fft_spectralderivative" title="Figure&nbsp;8.3&nbsp;(b): Accuracy of the methods for computing the derivative."><img src="fourier_files/figure-html/fig-fourier_fft_spectralderivative-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-fourier_fft_spectralderivative"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fourier_fft_spectralderivative-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(b) Accuracy of the methods for computing the derivative
+(b) Accuracy of the methods for computing the derivative.
 </figcaption>
 </figure>
 </div>
@@ -1501,10 +1689,10 @@ f(t) &amp;= \cos(t) \exp\left(-\frac{t^2}{25}\right) \\
 <div id="fig-fourier_fft_spectralderivative-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-fourier_fft_spectralderivative-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="fourier_files/figure-html/fig-fourier_fft_spectralderivative-output-3.svg" class="lightbox" data-gallery="fig-fourier_fft_spectralderivative" title="Figure&nbsp;8.3&nbsp;(c): Gibbs phenomenon for the spectral derivative for discontinuous functions"><img src="fourier_files/figure-html/fig-fourier_fft_spectralderivative-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-fourier_fft_spectralderivative"></a>
+<a href="fourier_files/figure-html/fig-fourier_fft_spectralderivative-output-3.svg" class="lightbox" data-gallery="fig-fourier_fft_spectralderivative" title="Figure&nbsp;8.3&nbsp;(c): Gibbs phenomenon for the spectral derivative for discontinuous functions."><img src="fourier_files/figure-html/fig-fourier_fft_spectralderivative-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-fourier_fft_spectralderivative"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fourier_fft_spectralderivative-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(c) Gibbs phenomenon for the spectral derivative for discontinuous functions
+(c) Gibbs phenomenon for the spectral derivative for discontinuous functions.
 </figcaption>
 </figure>
 </div>
@@ -1512,7 +1700,7 @@ f(t) &amp;= \cos(t) \exp\left(-\frac{t^2}{25}\right) \\
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fourier_fft_spectralderivative-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.3: Computing the derivative of a function
+Figure&nbsp;8.3: Computing the derivative of a function.
 </figcaption>
 </figure>
 </div>
@@ -1521,7 +1709,7 @@ Figure&nbsp;8.3: Computing the derivative of a function
 </div>
 </div>
 </div>
-<p>In <a href="../matrixdc/eigen.html#sec-eigen-lode" class="quarto-xref"><span>Section 3.1.2</span></a> we have already seen how the eigendecomposition can be used to compute the solution of ordinary differential equations by changing the basis and transforming the equation into a basis that can be handled easy. The same is true with the Fourier transformation.</p>
+<p>In <a href="../matrixdc/eigen.html#sec-eigen-lode" class="quarto-xref"><span>Section 3.1.2</span></a> we have already seen how the eigendecomposition can be used to compute the solution of ordinary differential equations by changing the basis and transforming the equation into a basis that can be handled in a straightforward manner. The same is true with the Fourier transformation.</p>
 <p>As mentioned before, Fourier introduced it to solve the heat equation and we will do the same.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1534,6 +1722,7 @@ Important
 </div>
 <div class="callout-body-container callout-body">
 <p>Above we have always transformed the <em>time</em> component of a function into the frequency domain via FFT. In the next example we have the time evolution of a signal and therefore the function depends on time and space. We apply the FFT to the space component to compute the derivative in <em>frequency</em> domain w.r.t. the transformed variable.</p>
+<p>This automatically results in periodic boundary conditions for the following examples, see especially <a href="#exm-fourier-fft-advection" class="quarto-xref">Example&nbsp;<span>8.5</span></a>.</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-tip no-icon">
@@ -1603,9 +1792,9 @@ u(t, x) &amp;= \mathcal{F}^{-1}\{\hat{u}(t, \omega)\} = \mathcal{F}^{-1}\{\mathr
 <span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
 <span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
 <span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="co">#ax.view_init(elev=45, azim=-20, roll=0)</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"$t$"</span>)</span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r"$u(t, x)$"</span>)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">t</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">u</span><span class="kw">(</span><span class="vs">t, x</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>ax.set_zticks([])</span>
 <span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>u_plot <span class="op">=</span> u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="bu">int</span>(<span class="dv">1</span> <span class="op">/</span> dt), :]</span>
@@ -1616,8 +1805,8 @@ u(t, x) &amp;= \mathcal{F}^{-1}\{\hat{u}(t, \omega)\} = \mathcal{F}^{-1}\{\mathr
 <span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Image plot</span></span>
 <span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
 <span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.flipud(u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">100</span>]), aspect<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$t \to$"</span>)</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">t </span><span class="ch">\t</span><span class="vs">o</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_xaxis().set_ticks([])</span>
 <span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_yaxis().set_ticks([])</span>
 <span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1671,7 +1860,7 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-heat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.4 (Self implementation <a href="#exm-fourier-fft-heat" class="quarto-xref">Example&nbsp;<span>8.4</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="cd96ee8d" class="cell" data-execution_count="9">
+<div id="d88d7026" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
@@ -1713,9 +1902,9 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 <span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Waterfall plot</span></span>
 <span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
 <span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"$t$"</span>)</span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r"$u(t, x)$"</span>)</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">t</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">u</span><span class="kw">(</span><span class="vs">t, x</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>ax.set_zticks([])</span>
 <span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>u_plot <span class="op">=</span> u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="bu">int</span>(<span class="dv">1</span> <span class="op">/</span> dt), :]</span>
@@ -1726,8 +1915,8 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 <span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Image plot</span></span>
 <span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
 <span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.flipud(u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">100</span>]), aspect<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$t \to$"</span>)</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">t </span><span class="ch">\t</span><span class="vs">o</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_xaxis().set_ticks([])</span>
 <span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_yaxis().set_ticks([])</span>
 <span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1747,6 +1936,7 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 <p><span class="theorem-title"><strong>Example 8.5 (Transport or advection)</strong></span> The transport equation in 1D is given by <span class="math display">\[
 \dot{u} = - c \partial_x u.
 \]</span> It is called the transport equation, as the initial value simply propagates in time to the right hand side of the domain with speed <span class="math inline">\(c\)</span>, i.e.&nbsp;<span class="math inline">\(u(t, x) = u(0, x -c t)\)</span>. The solution is simply computed by exchanging the right hand side from the above code.</p>
+<p><strong>Note</strong>: In this example, we see the periodic boundary conditions implicitly provided by the space discretisation via Fourier transform.</p>
 <p>The majority of the following code is from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 2.5 and Code 2.6)</span>.</p>
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
@@ -1781,7 +1971,7 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 <span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rhsWave(uhat_ri,t,kappa,c):</span>
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    uhat <span class="op">=</span> uhat_ri[:N] <span class="op">+</span> (<span class="ot">1j</span>) <span class="op">*</span> uhat_ri[N:]</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    d_uhat <span class="op">=</span> <span class="op">-</span>c <span class="op">*</span> (<span class="ot">1j</span> ) <span class="op">*</span>kappa <span class="op">*</span> uhat</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    d_uhat <span class="op">=</span> <span class="op">-</span>c <span class="op">*</span> (<span class="ot">1j</span> ) <span class="op">*</span> kappa <span class="op">*</span> uhat</span>
 <span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    d_uhat_ri <span class="op">=</span> np.concatenate((d_uhat.real, d_uhat.imag)).astype(<span class="st">'float64'</span>)</span>
 <span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d_uhat_ri</span>
 <span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
@@ -1799,9 +1989,9 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 <span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Waterfall plot</span></span>
 <span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
 <span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"$t$"</span>)</span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r"$u(t, x)$"</span>)</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">t</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">u</span><span class="kw">(</span><span class="vs">t, x</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>ax.set_zticks([])</span>
 <span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>u_plot <span class="op">=</span> u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">60</span>, :]</span>
 <span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(u_plot.shape[<span class="dv">0</span>]):</span>
@@ -1811,8 +2001,8 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 <span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Image plot</span></span>
 <span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
 <span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.flipud(u), aspect<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$t \to$"</span>)</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">t </span><span class="ch">\t</span><span class="vs">o</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_xaxis().set_ticks([])</span>
 <span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_yaxis().set_ticks([])</span>
 <span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1911,9 +2101,9 @@ Figure&nbsp;8.5: Computing the derivative of a function
 <span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Waterfall plot</span></span>
 <span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
 <span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"$t$"</span>)</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r"$u(t, x)$"</span>)</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">t</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">u</span><span class="kw">(</span><span class="vs">t, x</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>ax.set_zticks([])</span>
 <span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>u_plot <span class="op">=</span> u[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>:<span class="dv">10</span>, :]</span>
@@ -1924,8 +2114,8 @@ Figure&nbsp;8.5: Computing the derivative of a function
 <span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Image plot</span></span>
 <span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
 <span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.flipud(u), aspect<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$t \to$"</span>)</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">t </span><span class="ch">\t</span><span class="vs">o</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_xaxis().set_ticks([])</span>
 <span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_yaxis().set_ticks([])</span>
 <span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1983,14 +2173,14 @@ Figure&nbsp;8.6: Time integration of the Burger’s equation
 <div id="fig-fft-gec-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fft-gec-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/signal/electric_circuit.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;8.7: Electric circuit"><img src="../_assets/signal/electric_circuit.svg" class="img-fluid figure-img"></a>
+<a href="../_assets/signal/electric_circuit.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;8.7: Electric circuit"><img src="../_assets/signal/electric_circuit.svg" class="img-fluid figure-img" style="width:2.28in"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fft-gec-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;8.7: Electric circuit
 </figcaption>
 </figure>
 </div>
-<div id="b19200b7" class="cell" data-execution_count="12">
+<div id="4c820399" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the raw data for the example</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2049,14 +2239,14 @@ i_c = \mathrm{e}^{1.2 + 0.8 \sin(2 \pi 50 t)} - 1
 <div id="fig-fft-gec-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fft-gec-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/signal/signals.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;8.8: Signal transition for the electric circuit shown above"><img src="../_assets/signal/signals.svg" class="img-fluid figure-img"></a>
+<a href="../_assets/signal/signals.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;8.8: Signal transition for the electric circuit shown above"><img src="../_assets/signal/signals.svg" class="img-fluid figure-img" style="width:4.88in"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fft-gec-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;8.8: Signal transition for the electric circuit shown above
 </figcaption>
 </figure>
 </div>
-<p>We can see, that the signal is boosted depending on the characteristic curve of the diode, i.e.&nbsp;the positive part of the sine more than the negative part. If we compute take the fourier transform as illustrated with the red points on the curve on the right we get from the FFT coefficients <span class="math inline">\(c_i\)</span>:</p>
+<p>We can see, that the signal is boosted depending on the characteristic curve of the diode, i.e.&nbsp;the positive part of the sine more than the negative part. If we compute the fast fourier transform, as illustrated with the red discretisation points of the curve on the right hand side, we can interpret the FFT coefficients <span class="math inline">\(c_i\)</span> as follows:</p>
 <ol type="1">
 <li>the direct current component:</li>
 </ol>
@@ -2087,7 +2277,7 @@ THD = \frac{\sqrt{\sum_{i=2}^{14} |c_i|^2}}{\sqrt{\sum_{i=1}^{15} |c_i|^2}}=0.19
 <p>The Fourier transform is computed as soon as all the values of a signal are sampled. It provides spectral information over the entire signal and not when in time certain frequencies occur, i.e.&nbsp;no temporal information. The Fourier transform can only characterize periodic and stationary signals. The time component is <em>used</em> during the integration and no longer present in the transformed signal.</p>
 <p>If both is needed in order to generate a spectrogram (plot frequency versus time), the Gabor transform brings remedy. Technically it is the Fourier transform of the signal masked by a sliding window <span class="math display">\[
 \mathcal{G}\{f\}(t, \omega) = G_f(t, \omega) = \int_{-\infty}^\infty f(\tau) \mathrm{e}^{-\mathrm{i}\omega\tau}\overline{g}(\tau - t)\, \mathrm{d}\tau.
-\]</span> for the so called <em>kernel</em> <span class="math inline">\(g(t)\)</span> a Gaussian bell curve is often used <span class="math display">\[
+\]</span> For the so called <em>kernel</em> <span class="math inline">\(g(t)\)</span> a Gaussian bell curve is often used <span class="math display">\[
 g(t - \tau) =  \mathrm{e}^{-\tfrac{(t-\tau)^2}{a^2}}.
 \]</span></p>
 <div id="cell-fig-fourier_gabor" class="cell" data-execution_count="16">
@@ -2115,10 +2305,10 @@ g(t - \tau) =  \mathrm{e}^{-\tfrac{(t-\tau)^2}{a^2}}.
 <span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Figures</span></span>
 <span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">0</span>)</span>
 <span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_clean, label<span class="op">=</span><span class="st">"Signal"</span>)</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>plt.plot(t, gauss, label<span class="op">=</span><span class="vs">r"$g(t-\tau)$"</span>)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>plt.plot(t, gauss, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">g</span><span class="kw">(</span><span class="vs">t-</span><span class="ch">\t</span><span class="vs">au</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.xlabel("Time [s]")</span></span>
 <span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.ylabel(r"$f$")</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>plt.xticks([<span class="fl">0.1</span>, <span class="fl">0.125</span>, <span class="fl">0.15</span>], [<span class="vs">r"$\tau - a$"</span>, <span class="vs">r"$\tau$"</span>, <span class="vs">r"$\tau + a$"</span>])</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>plt.xticks([<span class="fl">0.1</span>, <span class="fl">0.125</span>, <span class="fl">0.15</span>], [<span class="vs">r"</span><span class="dv">$</span><span class="ch">\t</span><span class="vs">au - a</span><span class="dv">$</span><span class="vs">"</span>, <span class="vs">r"</span><span class="dv">$</span><span class="ch">\t</span><span class="vs">au</span><span class="dv">$</span><span class="vs">"</span>, <span class="vs">r"</span><span class="dv">$</span><span class="ch">\t</span><span class="vs">au </span><span class="op">+</span><span class="vs"> a</span><span class="dv">$</span><span class="vs">"</span>])</span>
 <span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>plt.xlim(t[<span class="dv">0</span>], t[<span class="op">-</span><span class="dv">1</span>])</span>
 <span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>)</span>
 <span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>plt.yticks([])</span>
@@ -2270,7 +2460,7 @@ Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engine
 Cooley, James W., and John W. Tukey. 1965. <span>“An Algorithm for the Machine Calculation of Complex Fourier Series.”</span> <em>Mathematics of Computation</em> 19 (90): 297–301. <a href="https://doi.org/10.1090/s0025-5718-1965-0178586-1">https://doi.org/10.1090/s0025-5718-1965-0178586-1</a>.
 </div>
 <div id="ref-Gauss" class="csl-entry" role="listitem">
-Gauß, Carl Friedrich. 1866. <span>“Theoria Interpolationis Methodo Nova Tractata.”</span> Göttingen: Königliche Gesellschaft der Wissenschaften.
+Gauß, Carl Friedrich. 1866. <span>“Theoria Interpolationis Methodo Nova Tractata.”</span><a href=" http://resolver.sub.uni-goettingen.de/purl?DE-611-HS-3373323 ">http://resolver.sub.uni-goettingen.de/purl?DE-611-HS-3373323 </a>.
 </div>
 <div id="ref-Meyberg1992-ws" class="csl-entry" role="listitem">
 Meyberg, Kurt, and Peter Vachenauer. 1992. <em>H<span>ö</span>here Mathematik 2</em>. Springer-Lehrbuch. New York, NY: Springer.
@@ -2280,380 +2470,255 @@ Meyberg, Kurt, and Peter Vachenauer. 1992. <em>H<span>ö</span>here Mathematik 2
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/kandolfp\.github\.io\/MECH-M-DUAL-1-DBM\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
       });
     }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/kandolfp\.github\.io\/MECH-M-DUAL-1-DBM\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
         }
-        return container.innerHTML
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -2661,185 +2726,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../signal/index.html" class="pagination-link" aria-label="Signal Processing">

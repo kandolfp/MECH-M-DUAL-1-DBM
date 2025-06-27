@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.37">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -86,17 +87,20 @@ div.csl-indent {
 <meta name="quarto:offset" content="../">
 <link href="../statistics/kalman.html" rel="next">
 <link href="../statistics/index.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-29e2c20b02301cfff04dc8050bf30c7e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-43df0d6f53b733b42d37fa7808e17715.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-af197cfaa1b998947a0d2985bb402727.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-ef41e933b1342006c60052580b4622d9.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-1e3068369e36718fca5120af1b2594eb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-9998c2ee6da4221bd56fa9d29e80e367.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-1e3068369e36718fca5120af1b2594eb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -160,7 +164,178 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -314,7 +489,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../signal/wavelet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet transform</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet Transform</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -411,6 +586,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statistics/index.html">Statistics</a></li><li class="breadcrumb-item"><a href="../statistics/bayesian.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="sec-statistic-bayesian" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></h1>
@@ -435,7 +611,7 @@ window.Quarto = {
 <div id="fig-statistics-venn" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-statistics-venn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../_assets/statistics/vann.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;14.1: Venn diagram illustrating the principal of joint probabilities."><img src="../_assets/statistics/vann.svg" class="img-fluid figure-img"></a>
+<a href="../_assets/statistics/vann.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;14.1: Venn diagram illustrating the principal of joint probabilities."><img src="../_assets/statistics/vann.svg" class="img-fluid figure-img" style="width:4.16in"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistics-venn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;14.1: Venn diagram illustrating the principal of joint probabilities.
@@ -457,9 +633,9 @@ P(A, B) = P(A) P(B).
 \]</span></p>
 <p>An example is the classic coin toss. After throwing the first coin that lands on heads we have no information what the second toss will likely be.</p>
 <p>So if we say <span class="math inline">\(A\)</span> represents <em>first flip heads</em>, <span class="math inline">\(B\)</span> <em>second flip heads</em> we get <span class="math display">\[
-P(A, B) = P(A) P(B) = \frac12 \frac12 = \frac14,
+P(A, B) = P(A) P(B) = \frac12 \cdot \frac12 = \frac14,
 \]</span> or if <span class="math inline">\(B\)</span> represents <em>both flips tail</em> we get: <span class="math display">\[
-P(A, B) = P(A) P(B) = \frac12 0 = 0.
+P(A, B) = P(A) P(B) = \frac12 \cdot 0 = 0.
 \]</span></p>
 </div>
 </div>
@@ -502,7 +678,7 @@ P(A, B) = P(B|A) P(A) = P(A|B) P(B)
 </div>
 <div class="callout-body-container">
 <div id="def-statistics-bayesianth" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 14.4 (Bayes’ theorem)</strong></span> For two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> as well as there dependent probabilities the following relation is called Bayes’ theorem <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 14.4 (Bayes’ theorem)</strong></span> For two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> as well as their dependent probabilities, the following relation is called Bayes’ theorem <span class="math display">\[
 P(A|B) = \frac{P(B|A) P(A)}{P(B)}.
 \]</span></p>
 <p>The term <span class="math inline">\(P(A|B)\)</span> is usually called the <strong>posterior probability density</strong> (posterior for short), <span class="math inline">\(P(A)\)</span> the <strong>prior</strong>, <span class="math inline">\(P(B|A)\)</span> the <strong>likelihood</strong>, and finally the term <span class="math inline">\(P(B)\)</span> the <strong>denominator</strong>.</p>
@@ -591,7 +767,7 @@ What is the likelihood that a white ball is drawn?</li>
 <p>A random variable <span class="math inline">\(X\)</span> (often also called random quantity or stochastic variable) is a variable that is dependent on <em>random events</em> and is a function defined on a probability space <span class="math inline">\((\Omega, \mathcal{F}, P)\)</span>. <span class="math inline">\(\Omega\)</span> is called the sample space of all possible outcomes, <span class="math inline">\(\mathcal{F}\)</span> the event space (a set of outcomes in the sample space), and <span class="math inline">\(P\)</span> is the probability function which assigns each event in the event space a probability as a number between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>.</p>
 <p>A very simple random variable is the one describing a coin toss. It is one for heads and zero for tails. To increase the complexity we can search for a random variable that tells us how often tails was the result for <span class="math inline">\(n\)</span> coin tosses.</p>
 <p>To get a better idea what <span class="math inline">\((\Omega, \mathcal{F}, P)\)</span> and <span class="math inline">\(X\)</span> is we should ask a the following question: <em>How likely is the value of <span class="math inline">\(X=2\)</span>?</em></p>
-<p>To answer this question we need to find the probability of the event ${,:, X() = 2} that can be expressed via <span class="math inline">\(P\)</span> as <span class="math inline">\(P(X=2)=p_X(2)\)</span>.</p>
+<p>To answer this question we need to find the probability of the event <span class="math inline">\(\{\omega\,:\, X(\omega) = 2\}\)</span> that can be expressed via <span class="math inline">\(P\)</span> as <span class="math inline">\(P(X=2)=p_X(2)\)</span>.</p>
 <p>If we record all this probabilities of outcomes of <span class="math inline">\(X\)</span> results in the <strong>probability distribution</strong> of <span class="math inline">\(X\)</span>. If this probability distribution is real valued we get the <strong>cumulative distribution function</strong> (CDF) <span class="math display">\[
 F_X(x) = P(X\leq x).
 \]</span></p>
@@ -693,9 +869,9 @@ F_X(x) = \mathcal{L}^{-1}\left\{ \frac{1}{s} \mathrm{E}\left[\mathrm{e}^{- s X}\
 <div id="exm-statistics-binomial_dist" class="theorem example">
 <p><span class="theorem-title"><strong>Example 14.3 (Binomial distribution)</strong></span> The binomial distribution is a discrete probability function with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>. It describes the number of successes in a sequence of <span class="math inline">\(n\)</span> independent experiments, where <span class="math inline">\(p\)</span> describes the probability of the experiment being a success.</p>
 <p>The probability density function is <span class="math display">\[
-f(x) = \left(\begin{array}{c} n\\ x\end{array}\right) p^k (1-p)^{n-k},
+f(x) = \left(\begin{array}{c} n\\ x\end{array}\right) p^x (1-p)^{n-x},
 \]</span> with <span class="math display">\[
-\left(\begin{array}{c} n\\ x\end{array}\right) = \frac{n!}{k!(n-k)!}.
+\left(\begin{array}{c} n\\ x\end{array}\right) = \frac{n!}{x!(n-x)!}.
 \]</span> It measures the probability that we get exactly <span class="math inline">\(x\)</span> successes in <span class="math inline">\(n\)</span> independent trials.</p>
 <p>The corresponding CDF is <span class="math display">\[
 F(x) = \sum_{i=0}^{\lfloor x \rfloor}\left(\begin{array}{c} n\\ i\end{array}\right) p^i(1-p)^{n-i}.
@@ -716,15 +892,15 @@ F(x) = \sum_{i=0}^{\lfloor x \rfloor}\left(\begin{array}{c} n\\ i\end{array}\rig
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">40</span>)</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">20</span>, <span class="fl">0.5</span>, x), <span class="st">"o"</span>, label<span class="op">=</span><span class="vs">r"$n=20, p=\frac</span><span class="sc">{1}{2}</span><span class="vs">$"</span>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">20</span>, <span class="fl">0.7</span>, x), <span class="st">"x"</span>, label<span class="op">=</span><span class="vs">r"$n=20, p=\frac</span><span class="sc">{7}{10}</span><span class="vs">$"</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">40</span>, <span class="fl">0.5</span>, x), <span class="st">"d"</span>, label<span class="op">=</span><span class="vs">r"$n=40, p=\frac</span><span class="sc">{1}{2}</span><span class="vs">$"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">20</span>, <span class="fl">0.5</span>, x), <span class="st">"o"</span>, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">n=20, p=</span><span class="ch">\f</span><span class="vs">rac</span><span class="op">{1}{2}</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">20</span>, <span class="fl">0.7</span>, x), <span class="st">"x"</span>, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">n=20, p=</span><span class="ch">\f</span><span class="vs">rac</span><span class="op">{7}{10}</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">40</span>, <span class="fl">0.5</span>, x), <span class="st">"d"</span>, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">n=40, p=</span><span class="ch">\f</span><span class="vs">rac</span><span class="op">{1}{2}</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">40</span><span class="op">/</span>(<span class="dv">3</span> <span class="op">*</span> <span class="fl">0.2</span>))</span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>plt.plot(x, cfd(<span class="dv">20</span>, <span class="fl">0.5</span>, x), <span class="st">"o"</span>, label<span class="op">=</span><span class="vs">r"$n=20, p=\frac</span><span class="sc">{1}{2}</span><span class="vs">$"</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>plt.plot(x, cfd(<span class="dv">20</span>, <span class="fl">0.7</span>, x), <span class="st">"x"</span>, label<span class="op">=</span><span class="vs">r"$n=20, p=\frac</span><span class="sc">{7}{10}</span><span class="vs">$"</span>)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>plt.plot(x, cfd(<span class="dv">40</span>, <span class="fl">0.5</span>, x), <span class="st">"d"</span>, label<span class="op">=</span><span class="vs">r"$n=40, p=\frac</span><span class="sc">{1}{2}</span><span class="vs">$"</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>plt.plot(x, cfd(<span class="dv">20</span>, <span class="fl">0.5</span>, x), <span class="st">"o"</span>, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">n=20, p=</span><span class="ch">\f</span><span class="vs">rac</span><span class="op">{1}{2}</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>plt.plot(x, cfd(<span class="dv">20</span>, <span class="fl">0.7</span>, x), <span class="st">"x"</span>, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">n=20, p=</span><span class="ch">\f</span><span class="vs">rac</span><span class="op">{7}{10}</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>plt.plot(x, cfd(<span class="dv">40</span>, <span class="fl">0.5</span>, x), <span class="st">"d"</span>, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">n=40, p=</span><span class="ch">\f</span><span class="vs">rac</span><span class="op">{1}{2}</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">40</span><span class="op">/</span>(<span class="dv">3</span> <span class="op">*</span> <span class="dv">1</span>))</span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -803,13 +979,13 @@ F(x) = \begin{cases}
 <p>The probability density function is <span class="math display">\[
 f(x) =
 \begin{cases}
-\frac{1}{b-a} \quad &amp;\text{if}\_ a \leq x \leq b,\\
+\frac{1}{b-a} \quad &amp;\text{if}\, a \leq x \leq b,\\
 0 \quad &amp;\text{else.}
 \end{cases}
 \]</span> and the corresponding CDF <span class="math display">\[
 F(x) =
 \begin{cases}
-\frac{x-a}{b-a} \quad &amp;\text{if}\_ a \leq x \leq b,\\
+\frac{x-a}{b-a} \quad &amp;\text{if}\, a \leq x \leq b,\\
 0 \quad &amp;\text{else.}
 \end{cases}
 \]</span></p>
@@ -821,7 +997,7 @@ F(x) =
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.astype((x <span class="op">&gt;=</span> a) <span class="op">&amp;</span> (x <span class="op">&lt;</span> b), <span class="bu">float</span>) <span class="op">/</span> (b <span class="op">-</span> a)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>cfd <span class="op">=</span> <span class="kw">lambda</span> x: (x <span class="op">-</span> a) <span class="op">/</span> (b <span class="op">-</span> a) <span class="op">*</span> np.astype((x <span class="op">&gt;=</span> a) <span class="op">&amp;</span> (x <span class="op">&lt;</span> b) , <span class="bu">float</span>) <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>cfd <span class="op">=</span> <span class="kw">lambda</span> x: (x <span class="op">-</span> a) <span class="op">/</span> (b <span class="op">-</span> a) <span class="op">*</span> np.astype((x <span class="op">&gt;=</span> a) <span class="op">&amp;</span> (x <span class="op">&lt;</span> b) , <span class="bu">float</span>) <span class="op">+\</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                np.astype((x <span class="op">&gt;=</span> b) , <span class="bu">float</span>)</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1024</span>)</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
@@ -883,7 +1059,7 @@ Figure&nbsp;14.4: Continuous uniform distribution - basic functions.
 <p><span class="theorem-title"><strong>Example 14.6 (Normal distribution)</strong></span> The normal distribution or Gaussian distribution is a continuous probability function for a real valued random variable.</p>
 <p>The probability density function is <span class="math display">\[
 f(x) = \mathcal{N}[\mu, \sigma^2](x) = \frac{1}{\sqrt{2 \pi \sigma^2}}\mathrm{e}^{-\frac{(x - \mu)^2}{2\sigma^2}},
-\]</span> where <span class="math inline">\(\mu\)</span> is called the mean and the parameter <span class="math inline">\(\delta^2\)</span> is the called the variance. The standard deviation of the distribution is <span class="math inline">\(\sigma\)</span>. For <span class="math inline">\(\mu = 0\)</span> and <span class="math inline">\(\sigma^2=1\)</span> it is called the <strong>standard normal distribution</strong>.</p>
+\]</span> where <span class="math inline">\(\mu\)</span> is called the mean and the parameter <span class="math inline">\(\sigma^2\)</span> is the called the variance. The standard deviation of the distribution is <span class="math inline">\(\sigma\)</span>. For <span class="math inline">\(\mu = 0\)</span> and <span class="math inline">\(\sigma^2=1\)</span> it is called the <strong>standard normal distribution</strong>.</p>
 <p>The corresponding CDF of the standard normal distribution is <span class="math display">\[
 \Phi(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^x \mathrm{e}^{-\frac{t^2}{2}}\, \mathrm{d}t,
 \]</span> and the generic form is <span class="math display">\[
@@ -906,20 +1082,20 @@ F(x) = \Phi\left(\frac{x-\mu}{\sigma}\right).
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1024</span>)</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">0</span>, <span class="dv">1</span>, x),</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="vs">r"$\mu=0$, $\sigma^2=1$"</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="vs">r"</span><span class="dv">$\m</span><span class="vs">u=0</span><span class="dv">$</span><span class="vs">, </span><span class="dv">$\s</span><span class="vs">igma</span><span class="dv">^</span><span class="vs">2=1</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">0</span>, np.sqrt(<span class="fl">0.1</span>), x),</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="vs">r"$\mu=0$, $\sigma^2=0.1$"</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="vs">r"</span><span class="dv">$\m</span><span class="vs">u=0</span><span class="dv">$</span><span class="vs">, </span><span class="dv">$\s</span><span class="vs">igma</span><span class="dv">^</span><span class="vs">2=0</span><span class="dv">.</span><span class="vs">1</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, np.sqrt(<span class="fl">0.5</span>), x),</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="vs">r"$\mu=\frac</span><span class="sc">{1}{2}</span><span class="vs">$, $\sigma^2=0.5$"</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="vs">r"</span><span class="dv">$\m</span><span class="vs">u=</span><span class="ch">\f</span><span class="vs">rac</span><span class="op">{1}{2}</span><span class="dv">$</span><span class="vs">, </span><span class="dv">$\s</span><span class="vs">igma</span><span class="dv">^</span><span class="vs">2=0</span><span class="dv">.</span><span class="vs">5</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">6</span><span class="op">/</span>(<span class="dv">3</span> <span class="op">*</span> <span class="fl">1.25</span>))</span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>plt.plot(x, cfd(<span class="dv">0</span>, <span class="dv">1</span>, x),</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="vs">r"$\mu=0$, $\sigma^2=1$"</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="vs">r"</span><span class="dv">$\m</span><span class="vs">u=0</span><span class="dv">$</span><span class="vs">, </span><span class="dv">$\s</span><span class="vs">igma</span><span class="dv">^</span><span class="vs">2=1</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>plt.plot(x, cfd(<span class="dv">0</span>, np.sqrt(<span class="fl">0.1</span>), x),</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="vs">r"$\mu=0$, $\sigma^2=0.1$"</span>)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="vs">r"</span><span class="dv">$\m</span><span class="vs">u=0</span><span class="dv">$</span><span class="vs">, </span><span class="dv">$\s</span><span class="vs">igma</span><span class="dv">^</span><span class="vs">2=0</span><span class="dv">.</span><span class="vs">1</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>plt.plot(x, cfd(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, np.sqrt(<span class="fl">0.5</span>), x),</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="vs">r"$\mu=\frac</span><span class="sc">{1}{2}</span><span class="vs">$, $\sigma^2=0.5$"</span>)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="vs">r"</span><span class="dv">$\m</span><span class="vs">u=</span><span class="ch">\f</span><span class="vs">rac</span><span class="op">{1}{2}</span><span class="dv">$</span><span class="vs">, </span><span class="dv">$\s</span><span class="vs">igma</span><span class="dv">^</span><span class="vs">2=0</span><span class="dv">.</span><span class="vs">5</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">6</span><span class="op">/</span>(<span class="dv">3</span> <span class="op">*</span> <span class="dv">1</span>))</span>
 <span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -993,15 +1169,15 @@ F(x) = \frac{\Gamma\left(\alpha, \frac{\beta}{x}\right)}{\Gamma(\alpha)}
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>cfd <span class="op">=</span> <span class="kw">lambda</span> alpha, beta, x: scipy.special.gdtr(alpha, beta, x)</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="fl">1e-3</span>, <span class="dv">3</span>, <span class="dv">1024</span>)</span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">1</span>, <span class="dv">1</span>, x), label<span class="op">=</span><span class="vs">r"$\alpha=1$, $\beta=1$"</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">3</span>, <span class="dv">1</span>, x), label<span class="op">=</span><span class="vs">r"$\alpha=3$, $\beta=1$"</span>)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">3</span>, <span class="fl">0.5</span>, x), label<span class="op">=</span><span class="vs">r"$\alpha=3$, $\beta=0.5$"</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">1</span>, <span class="dv">1</span>, x), label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="ch">\a</span><span class="vs">lpha=1</span><span class="dv">$</span><span class="vs">, </span><span class="dv">$\b</span><span class="vs">eta=1</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">3</span>, <span class="dv">1</span>, x), label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="ch">\a</span><span class="vs">lpha=3</span><span class="dv">$</span><span class="vs">, </span><span class="dv">$\b</span><span class="vs">eta=1</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f(<span class="dv">3</span>, <span class="fl">0.5</span>, x), label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="ch">\a</span><span class="vs">lpha=3</span><span class="dv">$</span><span class="vs">, </span><span class="dv">$\b</span><span class="vs">eta=0</span><span class="dv">.</span><span class="vs">5</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">4</span><span class="op">/</span>(<span class="dv">3</span> <span class="op">*</span> <span class="dv">5</span>))</span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>plt.plot(x, cfd(<span class="dv">1</span>, <span class="dv">1</span>, x), label<span class="op">=</span><span class="vs">r"$\mu=0$, $\sigma^2=1$"</span>)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>plt.plot(x, cfd(<span class="dv">3</span>, <span class="dv">1</span>, x), label<span class="op">=</span><span class="vs">r"$\mu=0$, $\sigma^2=0.1$"</span>)</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>plt.plot(x, cfd(<span class="dv">3</span>, <span class="fl">0.5</span>, x), label<span class="op">=</span><span class="vs">r"$\mu=\frac</span><span class="sc">{1}{2}</span><span class="vs">$, $\sigma^2=0.5$"</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>plt.plot(x, cfd(<span class="dv">1</span>, <span class="dv">1</span>, x), label<span class="op">=</span><span class="vs">r"</span><span class="dv">$\m</span><span class="vs">u=0</span><span class="dv">$</span><span class="vs">, </span><span class="dv">$\s</span><span class="vs">igma</span><span class="dv">^</span><span class="vs">2=1</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>plt.plot(x, cfd(<span class="dv">3</span>, <span class="dv">1</span>, x), label<span class="op">=</span><span class="vs">r"</span><span class="dv">$\m</span><span class="vs">u=0</span><span class="dv">$</span><span class="vs">, </span><span class="dv">$\s</span><span class="vs">igma</span><span class="dv">^</span><span class="vs">2=0</span><span class="dv">.</span><span class="vs">1</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>plt.plot(x, cfd(<span class="dv">3</span>, <span class="fl">0.5</span>, x), label<span class="op">=</span><span class="vs">r"</span><span class="dv">$\m</span><span class="vs">u=</span><span class="ch">\f</span><span class="vs">rac</span><span class="op">{1}{2}</span><span class="dv">$</span><span class="vs">, </span><span class="dv">$\s</span><span class="vs">igma</span><span class="dv">^</span><span class="vs">2=0</span><span class="dv">.</span><span class="vs">5</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">6</span><span class="op">/</span>(<span class="dv">3</span> <span class="op">*</span> <span class="dv">1</span>))</span>
 <span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1096,8 +1272,8 @@ p(x) = \mathcal{N}[\mu, \sigma^2](x) = \frac{1}{\sqrt{2 \pi \sigma^2}}\mathrm{e}
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p(x))</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="st">"major"</span>)</span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">1</span><span class="op">/</span>(<span class="dv">3</span> <span class="op">*</span> <span class="dv">8</span>))</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$p(x)$"</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">p</span><span class="kw">(</span><span class="vs">x</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
@@ -1113,7 +1289,7 @@ Figure&nbsp;14.7: Probability density for our initial guess of the vote for part
 </div>
 </div>
 </div>
-<p>Now we improvement our estimate with the help of Bayes’ theorem by asking <em>random</em> people what they will vote.</p>
+<p>Now we improve our estimate with the help of Bayes’ theorem by asking <em>random</em> people what they will vote.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1128,7 +1304,7 @@ Note
 </div>
 </div>
 <p>The probability that exactly <span class="math inline">\(k\)</span> people of a random sample of size <span class="math inline">\(n\)</span> vote for party <span class="math inline">\(x\)</span> is a best described with a binomial distribution <span class="math display">\[
-p\left(\frac{k}{n} | x\right) = \left(\begin{array}{c} n\\ k\end{array}\right) x^k (1-x)^{n-k}.
+p\left(\frac{k}{n} \middle| x\right) = \left(\begin{array}{c} n\\ k\end{array}\right) x^k (1-x)^{n-k}.
 \]</span></p>
 <div id="cell-fig-statistics-bayesian-vote2" class="cell" data-execution_count="7">
 <details class="code-fold">
@@ -1144,8 +1320,8 @@ p\left(\frac{k}{n} | x\right) = \left(\begin{array}{c} n\\ k\end{array}\right) x
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p2(x))</span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="st">"major"</span>)</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">1</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$p(\frac</span><span class="sc">{5}{15}</span><span class="vs">|x)$"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">p</span><span class="kw">(</span><span class="ch">\f</span><span class="vs">rac</span><span class="op">{5}{15}</span><span class="cf">|</span><span class="vs">x</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
@@ -1162,27 +1338,28 @@ Figure&nbsp;14.8: Probability density of k=5 positives out of n=15 samples.
 </div>
 </div>
 <p>In order to compute <span class="math inline">\(p(\frac{k}{n})\)</span> we need to integrate our two results <span class="math display">\[
-p\left(\frac{k}{n}\right) = \int_0^1 p\left(\frac{k}{n} | x\right) p(x)\,\mathrm{d}x
+p\left(\frac{k}{n}\right) = \int_0^1 p\left(\frac{k}{n} \middle| x\right) p(x)\,\mathrm{d}x
 \]</span></p>
 <p>So for a given sample size <span class="math inline">\(n\)</span> and positive samples <span class="math inline">\(k\)</span> we get a new distribution.</p>
 <div id="cell-fig-statistics-bayesian-vote3" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p3 <span class="op">=</span> <span class="kw">lambda</span> k, n: scipy.integrate.quad(<span class="kw">lambda</span> x: bino(k, n, x) <span class="op">*</span> p(x), <span class="dv">0</span>, <span class="dv">1</span>)[<span class="dv">0</span>]</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>p4 <span class="op">=</span> <span class="kw">lambda</span> k, n ,x: p(x) <span class="op">*</span> bino(k, n, x) <span class="op">/</span> p3(k, n)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1024</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p4(<span class="dv">5</span>, <span class="dv">15</span>, x), label<span class="op">=</span><span class="vs">r"$n=5, k=15$"</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p4(<span class="dv">50</span>, <span class="dv">150</span>, x), <span class="st">":"</span>, label<span class="op">=</span><span class="vs">r"$n=50, k=150$"</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p4(<span class="dv">0</span>, <span class="dv">15</span>, x), <span class="st">"-."</span>, label<span class="op">=</span><span class="vs">r"$n=0, k=15$"</span>)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="st">"major"</span>)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">1</span> <span class="op">/</span> (<span class="dv">3</span> <span class="op">*</span> <span class="dv">14</span>))</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$p(x|\frac</span><span class="sc">{k}{n}</span><span class="vs">)$"</span>)</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> quad</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>p3 <span class="op">=</span> <span class="kw">lambda</span> k, n: quad(<span class="kw">lambda</span> x: bino(k, n, x) <span class="op">*</span> p(x), <span class="dv">0</span>, <span class="dv">1</span>)[<span class="dv">0</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>p4 <span class="op">=</span> <span class="kw">lambda</span> k, n ,x: p(x) <span class="op">*</span> bino(k, n, x) <span class="op">/</span> p3(k, n)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1024</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p4(<span class="dv">5</span>, <span class="dv">15</span>, x), label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">n=5, k=15</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p4(<span class="dv">50</span>, <span class="dv">150</span>, x), <span class="st">":"</span>, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">n=50, k=150</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p4(<span class="dv">0</span>, <span class="dv">15</span>, x), <span class="st">"-."</span>, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">n=0, k=15</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="st">"major"</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">1</span> <span class="op">/</span> (<span class="dv">3</span> <span class="op">*</span> <span class="dv">14</span>))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">p</span><span class="kw">(</span><span class="vs">x</span><span class="cf">|</span><span class="ch">\f</span><span class="vs">rac{k}{n}</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-statistics-bayesian-vote3" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1256,8 +1433,8 @@ Important
 <span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>plt.plot([RaH_0, RaH_0], [<span class="dv">0</span>, my_max])</span>
 <span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="st">"major"</span>)</span>
 <span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">400</span><span class="op">/</span>(<span class="dv">3</span> <span class="op">*</span> my_max))</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$x$"</span>)</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$p(R_</span><span class="sc">{aH}</span><span class="vs">)$"</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">p</span><span class="kw">(</span><span class="vs">R_{aH}</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
@@ -1279,13 +1456,13 @@ p(\mu) = \mathcal{N}(\mu_0, \sigma_{\mu_0}),\quad\text{with}\quad \sigma_{\mu_0}
 p(\sigma) = \mathcal{N}(\sigma_0, \sigma_{\sigma_0}),\quad\text{with}\quad \sigma_{\sigma_0} = \frac{\sigma_0}{10}.
 \]</span></p>
 <p>The likelihood of drawing a sample with yield strength <span class="math inline">\(R_{aH}^{(i)}\)</span> we calculate the dependent probabilities separate by fixing the <em>current</em> values of <span class="math inline">\(\mu = \check{\mu}\)</span> and <span class="math inline">\(\sigma = \check{\sigma}\)</span>, respectively. <span class="math display">\[
-p\left(R_{aH}^{(i)} | \mu \right) = \mathcal{N}[\mu, \check{\sigma}](R_{aH}^{(i)})
+p\left(R_{aH}^{(i)}\, \middle|\, \mu \right) = \mathcal{N}[\mu, \check{\sigma}](R_{aH}^{(i)})
 \]</span> and <span class="math display">\[
-p\left(R_{aH}^{(i)} | \sigma \right) = \mathcal{N}[\check{\mu}, \sigma](R_{aH}^{(i)})
+p\left(R_{aH}^{(i)}\, \middle|\, \sigma \right) = \mathcal{N}[\check{\mu}, \sigma](R_{aH}^{(i)})
 \]</span> and with Bayes’ theorem we can compute <span class="math display">\[
-p\left( \mu | R_{aH}^{(i)}\right)  = \frac{p\left(R_{aH}^{(i)} | \mu \right) p(\mu)}{\int p\left(R_{aH}^{(i)} | \mu \right) p(\mu)\,\mathrm{d}\mu},
+p\left( \mu \, \middle|\, R_{aH}^{(i)}\right)  = \frac{p\left(R_{aH}^{(i)}\, \middle|\, \mu \right) p(\mu)}{\int p\left(R_{aH}^{(i)}\, \middle|\, \mu \right) p(\mu)\,\mathrm{d}\mu},
 \]</span> and <span class="math display">\[
-p\left( \sigma | R_{aH}^{(i)}\right)  = \frac{p\left(R_{aH}^{(i)} | \sigma \right) p(\sigma)}{\int p\left(R_{aH}^{(i)} | \sigma \right) p(\sigma)\,\mathrm{d}\sigma},
+p\left( \sigma \, \middle|\, R_{aH}^{(i)}\right)  = \frac{p\left(R_{aH}^{(i)}\, \middle|\, \sigma \right) p(\sigma)}{\int p\left(R_{aH}^{(i)}\, \middle|\, \sigma \right) p(\sigma)\,\mathrm{d}\sigma},
 \]</span></p>
 <p>Now by computing the inverse from our above probabilities we can update our <span class="math inline">\(\mu_0\)</span> and <span class="math inline">\(\sigma_0\)</span> accordingly. This we can continue for several samples.</p>
 <div id="cell-fig-statistics-bayesian-material2" class="cell" data-execution_count="10">
@@ -1328,380 +1505,255 @@ Mehrle, Andreas. 2024. <span>“<span>Data Science</span>.”</span> <em>Managem
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/kandolfp\.github\.io\/MECH-M-DUAL-1-DBM\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
       });
     }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/kandolfp\.github\.io\/MECH-M-DUAL-1-DBM\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
         }
-        return container.innerHTML
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1709,185 +1761,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../statistics/index.html" class="pagination-link" aria-label="Statistics">

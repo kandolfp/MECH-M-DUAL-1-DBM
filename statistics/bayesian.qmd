@@ -6,7 +6,7 @@ The basic rule is often illustrated via a Venn diagram for sets.
 
 ::: {#fig-statistics-venn}
 
-![](../_assets/statistics/vann.svg)
+![](../_assets/statistics/vann){width=4.16in}
 
 Venn diagram illustrating the principal of joint probabilities.
 :::

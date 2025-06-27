@@ -224,7 +224,7 @@ $$
 
 A cam drive has an elastic and lightly damped punch $S$ with eigenfrequency $\omega = 2$.
 
-![Cam drive schematics](../_assets/signal/cam_drive.svg){#fig-laplace-cam}
+![Cam drive schematics](../_assets/signal/cam_drive){#fig-laplace-cam width=1.66in}
 
 We excite the system with a half-wave sine of half the eigenfrequency.
 $$
@@ -335,7 +335,7 @@ $$
 
 For a RCL electric circuit 
 
-![RCL oscillating circuit](../_assets/signal/rcl.svg){#fig-laplace-rcl}
+![RCL oscillating circuit](../_assets/signal/rcl){#fig-laplace-rcl width=1.92in}
 
 we have 
 $$
@@ -368,7 +368,7 @@ y(t) = h(t) \ast x(t)
 $$
 where $h(t)= \mathcal{L}^{-1}\{H(s)\}$ is called the **impulse response**. 
 
-![Linear Time invariant System](../_assets/signal/lti_sys.svg){#fig-laplace-lti}
+![Linear Time invariant System](../_assets/signal/lti_sys){#fig-laplace-lti width=2.17in}
 
 The relation between $x$ and $y$ can often be described via a linear differential equation with constant coefficients.
 In these cases
@@ -408,9 +408,9 @@ The RC low pass filter
 
 ::::: {#fig-fft-gec}
 
-![First order RC low pass](../_assets/signal/rc_low_pass.svg){#fig-laplace-rclowpass-1}
+![First order RC low pass](../_assets/signal/rc_low_pass){#fig-laplace-rclowpass-1 width=2.71in}
 
-![Second order RC low pass](../_assets/signal/rc_low_pass2.svg){#fig-laplace-rclowpass-2}
+![Second order RC low pass](../_assets/signal/rc_low_pass2){#fig-laplace-rclowpass-2 width=4.31in}
 
 The electric circuit for the low pass filters.
 :::::

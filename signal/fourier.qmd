@@ -1354,7 +1354,7 @@ The following example is taken from [@Meyberg1992-ws].
 
 We can use FFT to compute some base properties of a ground emitter circuit @fig-fft-gec-1 and how the signal is propagated through this circuit @fig-fft-gec-2.
 
-![Electric circuit](../_assets/signal/electric_circuit.svg){#fig-fft-gec-1}
+![Electric circuit](../_assets/signal/electric_circuit){#fig-fft-gec-1 width=2.28in}
 
 ```{python}
 #| code-fold: true
@@ -1418,7 +1418,7 @@ i_c = \mathrm{e}^{1.2 + 0.8 \sin(2 \pi 50 t)} - 1
 $$
 for the current in $[\mathrm{mA}]$ running through the transistor. 
 
-![Signal transition for the electric circuit shown above](../_assets/signal/signals){#fig-fft-gec-2}
+![Signal transition for the electric circuit shown above](../_assets/signal/signals){#fig-fft-gec-2 width=4.88in}
 
 We can see, that the signal is boosted depending on the characteristic curve of the diode, i.e. the positive part of the sine more than the negative part.
 If we compute the fast fourier transform, as illustrated with the red discretisation points of the curve on the right hand side, we can interpret the FFT coefficients $c_i$ as follows:

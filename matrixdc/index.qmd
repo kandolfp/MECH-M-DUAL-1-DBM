@@ -2,6 +2,6 @@
 
 There are a lot of different matrix decompositions and they can be used to fulfil several tasks.
 We are going to look into the _eigendecomposition_ as well as the _singular value decomposition_.
-Both of these can, for example, be used for picture compression and recognition.
+Both of these can, for example, be used for image compression and pattern recognition.
 
 For notation we are following again @GoluLoan, which has plenty more to offer than we cover in these notes.

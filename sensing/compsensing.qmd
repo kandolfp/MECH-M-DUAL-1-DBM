@@ -355,7 +355,7 @@ This results in a matrix $A\in\mathbb{R}^{200 \times 10}$ and we select the vect
 As a result, the vector $x$ is $2$-sparse by construction, and the aim is to recover this.
 In order to give the algorithm something to work on we add noise to $b$ resulting in no zero element in $b$. 
 
-To perform a $10$ fold cross validation [^1] for the LASSO method we use the features of `sklearn` [^2]. 
+To perform a $10$-fold cross validation [^1] for the LASSO method we use the features of `sklearn` [^2]. 
 
 ```{python}
 #| label: fig-sensing_lasso

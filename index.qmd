@@ -4,8 +4,8 @@ These are the lecture notes for the _Grundlagen der Datenbasierten Methoden_ cla
 
 ## Acknowledgements {.unnumbered}
 
-We want to thank the open source community for providing excellent tutorial and guides for Data Science topics in and with Python on the web.
-Individual sources are cited at the appropriate spot throughout document at hand.
+We want to thank the open-source community for providing excellent tutorials and guides on Data Science topics using Python.
+Individual sources are cited at the appropriate spot throughout the document at hand.
 
 We want to thank Mirjam Ziselsberger and Matthias Panny for testing, checking, suggestions and general proofreading.
 
@@ -16,6 +16,5 @@ These notes are built with [Quarto](https://quarto.org/).
 To allow acceptable formatting for multiple output formats like _html_ or _pdf_ some figures are numbered differently.
 Furthermore, the interactive content in _html_ that is produced for example with `plotly` content is static in _pdf_ and some compute output does not respect line breaks.
 
-Furthermore, the numbering of some lists is in the _pdf_ not consistent with regards to the _html_.
-::::
+Additionally, the numbering of some lists in the _pdf_ is not consistent with that in the _html_.
 :::

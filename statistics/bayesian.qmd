@@ -169,7 +169,7 @@ A very simple random variable is the one describing a coin toss.
 It is one for heads and zero for tails.
 To increase the complexity we can search for a random variable that tells us how often tails was the result for $n$ coin tosses. 
 
-To get a better idea what $(\Omega, \mathcal{F}, P)$ and $X$ is we should ask a the following question: _How likely is the value of $X=2$?_
+To better understand what $(\Omega, \mathcal{F}, P)$ and $X$ are, we should ask the following question: _How likely is the value of $X=2$?_
 
 To answer this question we need to find the probability of the event $\{\omega\,:\, X(\omega) = 2\}$ that can be expressed via $P$ as $P(X=2)=p_X(2)$.
 

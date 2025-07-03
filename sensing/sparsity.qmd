@@ -19,7 +19,9 @@ The vector $s$ is called $K$-sparse if it contains exactly $K$ non-zero elements
 It is important to note that this does not imply that $B$ is sparse.
 :::::
 
-If the basis is generic such as the Fourier or Wavelet basis, i.e. we do not need to store the matrix $B$ but can generate it on the spot, we only need to store the $K$ non-zero elements of $s$ to reconstruct the original signal.
+If the basis is generic such as the Fourier or Wavelet basis, i.e. we do not need to store the matrix $B$.
+Instead, we can generate it on the spot.
+In this case, we only need to store the $K$ non-zero elements of $s$ to reconstruct the original signal.
 ::::
 :::
 
@@ -28,7 +30,7 @@ As we have seen in @sec-signal-2d images (and audio) signals are highly compress
 By setting the small values to zero we reduce the density further without a high loss of quality.
 
 We see this in JPEG compression for images and MP3 compression for audio signals.
-If we stream an audio signal or view an image on the web we only need to transfer $s$ and not $x$, saving bandwidth and storage as we go. 
+When streaming an audio signal or viewing an image on the web, we only need to transfer $s$ and not $x$, thereby saving bandwidth and storage. 
 :::
 
 We have seen in @fig-mci_headquater_svd that we can use the SVD to reduce the size as well.

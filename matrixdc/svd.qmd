@@ -532,8 +532,8 @@ A x = b
 $$ {#eq-leq}
 where the matrix $A$, as well as the vector $b$ is known an $x$ is unknown.
 
-Depending on the structure of $A$ and the specific $b$ we have no, one, or infinitely many solutions.
-For now the interesting case is where $A$ is rectangular and therefore we have either an 
+Depending on the structure of $A$ and the specific $b$ we have no solution, a unique solution, or infinitely many solutions.
+For now, we focus on the case where $A$ is rectangular and therefore we have either an 
 
 - under-determined system $m\ll n$, so more unknowns than equations,
 - over-determined system $m\gg n$, so more equations than unknowns.

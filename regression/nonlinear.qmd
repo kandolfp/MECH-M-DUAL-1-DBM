@@ -323,7 +323,7 @@ plt.show()
 
 ## Categorical Variables
 
-Even with our excursion to non-linear regression we still had somewhat regular data to work with.
+Even with our excursion to non-linear regression we still had relatively structured data to work with.
 This is not always the case.
 Sometimes there are trends in the data, like per month, or day.
 The inclusion of categorical variables can help to control for trends in the data.

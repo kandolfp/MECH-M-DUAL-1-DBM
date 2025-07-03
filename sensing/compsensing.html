@@ -643,7 +643,7 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>In <a href="sparsity.html#fig-mci_sparsity_fft_compress" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> we illustrated compressed sensing with a <span class="math inline">\(4016 \times 6016\)</span> image. With our 5% of Fourier coefficients this puts the sparsity <span class="math inline">\(K = 0.05 \times 4016 \times 6016 \approx 1 208 013\)</span> and with <span class="math inline">\(k_1=3\)</span> we would stay with <span class="math inline">\(p\)</span> 3.6 million measurements and about 15% of the original pixels.</p>
-<p>The trick part is how to select them, which is why compressed sensing is not used much in imaging, except for some cases like magnetic resonance imaging (MRI) for patience that can not stay still or sedation is risky.</p>
+<p>The trick part is how to select them, which is why compressed sensing is not used much in imaging, except for some cases like magnetic resonance imaging (MRI) for patience that cannot stay still or sedation is risky.</p>
 </div>
 </div>
 <p>The idea of the two conditions is to make <span class="math inline">\(CB\)</span> act more or less like a unitary transformation on <span class="math inline">\(K\)</span>-sparse vectors <span class="math inline">\(s\)</span>, preserving relative distance between vectors and allowing for the <span class="math inline">\(\ell_1\)</span> convex optimization. We will see this in therms of the <em>restricted isometry property</em> (RIP).</p>
@@ -682,7 +682,7 @@ f(t) = \cos(97 t\, 2\pi) + \cos(777 t\, 2\pi)
 <p>The sparsity of the sample allows us to reconstruct the signal by sampling randomly with an average sampling rate of <span class="math inline">\(128 \mathrm{Hz}\)</span>, well below the Shannon-Nyquist threshold.</p>
 <p>The code relies on the CoSaMP implementation <span class="citation" data-cites="NEEDELL2009301">Needell and Tropp (<a href="../references.html#ref-NEEDELL2009301" role="doc-biblioref">2009</a>)</span> provided on <a href="https://github.com/avirmaux/CoSaMP/tree/master">gitHub</a> and included below so we can work with it.</p>
 <p>The code is adapted from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 3.3)</span></p>
-<div id="5b7db614" class="cell" data-execution_count="1">
+<div id="72c63bfb" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>CoSaMP algorithm form gitHub, now print.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -997,7 +997,7 @@ y = D s
 <p><span class="theorem-title"><strong>Example 13.2 (LASSO fit for a regression problem)</strong></span> For our <span class="math display">\[
 A x = b
 \]</span> problem, we prescribe the dimensions as <span class="math inline">\(200\)</span> observations with <span class="math inline">\(10\)</span> candidate predictions. This results in a matrix <span class="math inline">\(A\in\mathbb{R}^{200 \times 10}\)</span> and we select the vector <span class="math inline">\(b\in\mathbb{R}^{200}\)</span> as the linear combination of exactly two of theses <span class="math inline">\(10\)</span> candidates. As a result, the vector <span class="math inline">\(x\)</span> is <span class="math inline">\(2\)</span>-sparse by construction, and the aim is to recover this. In order to give the algorithm something to work on we add noise to <span class="math inline">\(b\)</span> resulting in no zero element in <span class="math inline">\(b\)</span>.</p>
-<p>To perform a <span class="math inline">\(10\)</span> fold cross validation <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> for the LASSO method we use the features of <code>sklearn</code> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>To perform a <span class="math inline">\(10\)</span>-fold cross validation <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> for the LASSO method we use the features of <code>sklearn</code> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <div id="cell-fig-sensing_lasso" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
@@ -1053,7 +1053,7 @@ Figure&nbsp;13.3: Cross-validation mean square error of Lasso fit, the green cir
 </div>
 </div>
 <p>The resulting coefficients for the best fit with lasso are</p>
-<div id="545a127c" class="cell styled-output" data-execution_count="5">
+<div id="77e32287" class="cell styled-output" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>array([ 0.        ,  0.        ,  1.0978465 ,  0.        , -0.        ,
        -0.        , -1.06495486,  0.        ,  0.        ,  0.        ])</code></pre>
@@ -1110,7 +1110,7 @@ X = L + S.
 <div class="callout-body-container">
 <div id="exm-sensing-rpca" class="theorem example">
 <p><span class="theorem-title"><strong>Example 13.3 (Robust principal component analysis with Yale B dataset)</strong></span> The following implementation of RPCA can be found in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 121</a>)</span> with the same application to the eigenfaces dataset.</p>
-<div id="cdd3e896" class="cell" data-execution_count="6">
+<div id="79877b72" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Robust principal component analysis and helper functions</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> shrink(X, tau):</span>
@@ -1142,7 +1142,7 @@ X = L + S.
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L, S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="611b2505" class="cell" data-execution_count="7">
+<div id="8b344fdd" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1312,7 +1312,7 @@ Figure&nbsp;13.4: RPCA decomposition for the Yale B dataset.
 </figure>
 </div>
 <p>In <a href="#fig-sensing_rpca" class="quarto-xref">Figure&nbsp;<span>13.4</span></a> we can see that RPCA effectively filters out occluded regions and shadows form <span class="math inline">\(X\)</span> in <span class="math inline">\(L\)</span>. The missing part is filled in with the most consistent low-rank feature from the provided dataset. In our case we include all faces from the first person plus the third image with a fake moustache.</p>
-<p>We need to stress, that we can not use this setup to reconstruct a different face obscured by a moustache.</p>
+<p>We need to stress, that we cannot use this setup to reconstruct a different face obscured by a moustache.</p>
 </div>
 </div>
 </div>

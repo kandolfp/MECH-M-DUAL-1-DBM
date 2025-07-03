@@ -715,7 +715,7 @@ Figure&nbsp;4.2: Thin SVD
 </figure>
 </div>
 <p>In Python we can compute the (Thin)SVD as follows</p>
-<div id="7a772512" class="cell styled-output" data-execution_count="1">
+<div id="51293ee9" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1291,7 +1291,7 @@ Important
 <p>The following code is an adaptation of the <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 1.7 and 1.9)</span>.</p>
 </div>
 </div>
-<div id="06437722" class="cell" data-execution_count="6">
+<div id="17a98111" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1380,7 +1380,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Due to resource limitations the above computation can not be done for each build. We try to make sure that the code matches the image but if something is different if you try it yourself we apologise for that.</p>
+<p>Due to resource limitations the above computation cannot be done for each build. We try to make sure that the code matches the image but if something is different if you try it yourself we apologise for that.</p>
 </div>
 </div>
 </section>
@@ -1390,7 +1390,7 @@ Note
 <p>There are many more applications of the SVD but we want to highlight some regarding systems of linear equations, <span id="eq-leq"><span class="math display">\[
 A x = b
 \tag{4.3}\]</span></span> where the matrix <span class="math inline">\(A\)</span>, as well as the vector <span class="math inline">\(b\)</span> is known an <span class="math inline">\(x\)</span> is unknown.</p>
-<p>Depending on the structure of <span class="math inline">\(A\)</span> and the specific <span class="math inline">\(b\)</span> we have no, one, or infinitely many solutions. For now the interesting case is where <span class="math inline">\(A\)</span> is rectangular and therefore we have either an</p>
+<p>Depending on the structure of <span class="math inline">\(A\)</span> and the specific <span class="math inline">\(b\)</span> we have no solution, a unique solution, or infinitely many solutions. For now, we focus on the case where <span class="math inline">\(A\)</span> is rectangular and therefore we have either an</p>
 <ul>
 <li>under-determined system <span class="math inline">\(m\ll n\)</span>, so more unknowns than equations,</li>
 <li>over-determined system <span class="math inline">\(m\gg n\)</span>, so more equations than unknowns.</li>

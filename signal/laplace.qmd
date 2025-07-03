@@ -29,7 +29,7 @@ It is quite common to use the capitalized function name for the Laplace transfor
 To give a better understanding of theses formula we follow the _derivation_ from [@Brunton2022, Section 2.5].
 
 Let us consider the function $f(t)=\mathrm{e}^{\lambda t}$.
-As mentioned before we can not directly use the Fourier transform as the function is not bounded.
+As mentioned before we cannot directly use the Fourier transform as the function is not bounded.
 In order to trap the function for $t\to\infty$ we multiply by $\mathrm{e}^{-\gamma t}$ where $\gamma$ is damping more that $f$ grows.
 In order to handle $t\to-\infty$ we multiply by the Heaviside function
 $$

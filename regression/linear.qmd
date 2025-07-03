@@ -385,7 +385,7 @@ The condition of the Vandermonde matrix increases rapidly:
 | --- | --- |  --- | --- | --- | --- | --- | 
 | $\kappa_2$  | 6.07e0 | 1.63e1 | 1.89e2 | 154e5 | 1.24e8 | 1.41e11 |
 
-The result of the $m=300$ is unstable and we can not compute it via $X^\dagger$.
+The result of the $m=300$ is unstable and we cannot compute it via $X^\dagger$.
 :::::
 
 As can be seen in @fig-linear_reg_poly we do not necessarily get a good result if we use a higher degree polynomial.
@@ -409,7 +409,7 @@ $$
 c_2 \sum_k \exp(2 c_1 x_k) - \sum_k y_k \exp(c_1 x_k) =0.
 $$
 
-This non-linear system can not be solved in a straight forward fashion but we can avoid it by linearization with the simple transformation
+This non-linear system cannot be solved in a straight forward fashion but we can avoid it by linearization with the simple transformation
 $$
 \begin{array}{ccl}
 \hat{y} &=& \ln(y), \\

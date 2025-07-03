@@ -1598,7 +1598,7 @@ We can see a clear peak at 50Hz but no information of time is given, where else 
 ::: {.callout-note}
 
 For the analysis of time-frequency we see Heisenberg's uncertainty principle at work.
-We can not attain high resolution simultaneously in both time and frequency domain.
+We cannot attain high resolution simultaneously in both time and frequency domain.
 In the time domain we have perfect resolution but no information about the frequencies, in the Fourier domain the time information is not present.
 
 The spectrogram resolves both but with reduced resolution. 

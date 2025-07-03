@@ -53,7 +53,7 @@ where $k_1$ depends on how incoherent $C$ and $B$ are.
 In @fig-mci_sparsity_fft_compress we illustrated compressed sensing with a $4016 \times 6016$ image.
 With our 5% of Fourier coefficients this puts the sparsity $K = 0.05 \times 4016 \times 6016 \approx 1 208 013$ and with $k_1=3$ we would stay with $p$ 3.6 million measurements and about 15% of the original pixels.
 
-The trick part is how to select them, which is why compressed sensing is not used much in imaging, except for some cases like magnetic resonance imaging (MRI) for patience that can not stay still or sedation is risky.
+The trick part is how to select them, which is why compressed sensing is not used much in imaging, except for some cases like magnetic resonance imaging (MRI) for patience that cannot stay still or sedation is risky.
 :::
 
 The idea of the two conditions is to make $CB$ act more or less like a unitary transformation on $K$-sparse vectors $s$, preserving relative distance between vectors and allowing for the $\ell_1$ convex optimization.
@@ -573,7 +573,7 @@ In @fig-sensing_rpca we can see that RPCA effectively filters out occluded regio
 The missing part is filled in with the most consistent low-rank feature from the provided dataset.
 In our case we include all faces from the first person plus the third image with a fake moustache.
 
-We need to stress, that we can not use this setup to reconstruct a different face obscured by a moustache.
+We need to stress, that we cannot use this setup to reconstruct a different face obscured by a moustache.
 ::::
 :::
 

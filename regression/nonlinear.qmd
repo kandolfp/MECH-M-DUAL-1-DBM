@@ -32,7 +32,7 @@ to know that we are in an extrema.
 Since we can have saddle points this is not the sole criteria but a necessary one.
 Gradient descent, as the name suggest uses the gradient as _direction_ in an iterative algorithm to find a minimum.
 
-The idea is basically, if you are lost on a mountain in the fog and you can not see the path, the fastest and a reliable way that only uses local information is to follow the steepest slope down.
+The idea is basically, if you are lost on a mountain in the fog and you cannot see the path, the fastest and a reliable way that only uses local information is to follow the steepest slope down.
 
 ::: {.callout-warning}
 A function does not necessarily experience gravity in the same way as we do, so please do not try this in real live, i.e. cliffs tend to be hard to walk down.
@@ -161,7 +161,7 @@ Gradient descent applied for the function $f(x) = x_1^2 + 3x_2^2$.
 :::
 
 ::: {.callout-note}
-If you can not compute the gradient analytically there are numerical methods to help do the computation.
+If you cannot compute the gradient analytically there are numerical methods to help do the computation.
 :::
 
 In order to get a better idea on how this is working for _curve fitting_ we apply the gradient descent method to our curve fitting from @sec-regr-linear-ols.

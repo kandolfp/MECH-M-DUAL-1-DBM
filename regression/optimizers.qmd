@@ -259,7 +259,7 @@ plt.show()
 ```
 
 For $m=1$, a straight line, we have an underfitted model.
-We can not adequately capture the underlying model, at least not in the entire region.
+We cannot adequately capture the underlying model, at least not in the entire region.
 
 If we move to $m=16$ and the extreme $m=300$ we see an overfitted system.
 The $m=16$ curve follows clusters of points _too close_, e.g. in the region around $x=-2$, this is more pronounced for $m=300$ where we quite often closely follow our observations but between them we clearly overshoot.

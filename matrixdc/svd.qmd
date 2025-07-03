@@ -520,7 +520,7 @@ plt.show()
 ![Approximate reconstruction of a test face and an object using the eigenfaces basis for different order r.](../_assets/matrixdc/eigenfaces.svg){#fig-eigfaces}
 
 ::: {.callout-note}
-Due to resource limitations the above computation can not be done for each build.
+Due to resource limitations the above computation cannot be done for each build.
 We try to make sure that the code matches the image but if something is different if you try it yourself we apologise for that.
 :::
 

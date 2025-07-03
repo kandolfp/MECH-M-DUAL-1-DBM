@@ -121,7 +121,7 @@ print(f"{A[0, :]=}")
 print(f"{A[:, 2]=}")
 ```
 
-Consequently we can say that a vector is a $n \times 1$ matrix.
+Consequently we can say that a vector is an $n \times 1$ matrix.
 It is sometimes also referred to as _column vector_ and its counterpart a $1 \times n$ matrix as a _row vector_.
 
 ::: {.callout-caution appearance="simple" collapse="true" icon=false}

@@ -6,7 +6,10 @@ We will always try to not only discuss the theory but also use [Python](https://
 The main reference for these notes is the excellent @Brunton2022, see citations throughout the notes.
 If python code is adapted form code blocks provided by @Brunton2022, see [github](https://github.com/dynamicslab/databook_python) this is indicated and for these blocks you can also find the MATLAB equivalent in the book or on [github](https://github.com/dynamicslab/databook_matlab).
 
-These notes are intended for engineering students and therefore the mathematical concepts will rarely include rigorous proofs.
+These notes are intended for engineering students and therefore the mathematical concepts will rarely include rigorous proofs but we give references to books that do.
+Nevertheless, if the mathematical concepts are not familiar or need a bit of a refresher we can recommend @Papula-1, @Papula-2, @Papula-3, as well as @Papula2025-ra for exercises.
+All of these books are in German but available online for MCI students via the library. 
+For our English readers we heard good things about @Kreyszig2011-ih.
 
 We start of by recalling the main concepts of @sec-intro-linearalgebra and some statistics on @sec-intro-sets to make sure everybody as an the same page for notation and problematically in Python. 
 

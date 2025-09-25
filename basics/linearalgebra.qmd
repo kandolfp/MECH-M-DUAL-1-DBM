@@ -2,7 +2,7 @@
 
 The aim of this section is to discuss the basics of matrix, vector and number theory that we need for the later chapters and not introduce the whole of linear algebra.
 Nevertheless, we will rely on some basic definitions that can be found in any linear algebra book.
-For notation we refer to @GoluLoan.
+For notation we refer to @GoluLoan, but you can find the material in @Papula-2 as well.
 
 In Python the module `numpy` is used to represent vectors and matrices, we can include it like this (and give it its short hand `np`):
 ```{python}

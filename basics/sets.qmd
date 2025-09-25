@@ -219,6 +219,7 @@ $$
 
 ::: {.callout appearance="simple"}
 :::: {#def-stddeviation} 
+
 ## Standard deviation
 For a finite set represented by a vector $v\in\mathbb{R}^n$ the **standard deviation** is defined as
 $$
@@ -343,6 +344,7 @@ Image(img)
 ```
 
 Scatterplot to investigate correlations in the data set.
+::::
 :::
 
 In the first plot of @fig-correlation we see that the rent tends to go up with the size of the flat but there are for sure some rather cheap options in terms of space.

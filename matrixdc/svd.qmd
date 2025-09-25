@@ -304,8 +304,8 @@ import numpy as np
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)       # Make sure to stay reproducible
 
-xC = np.array([2, 1])      # Center of data (mean)
-sig = np.array([2, 0.5])   # Principal axes
+center = np.array([2, 1])      # Center of data (mean)
+sigma = np.array([2, 0.5])   # Principal axes
 
 theta = np.pi / 3            # Rotate cloud by pi/3
 
@@ -313,8 +313,8 @@ R = np.array([[np.cos(theta), -np.sin(theta)],     # Rotation matrix
               [np.sin(theta), np.cos(theta)]])
 
 nPoints = 10000            # Create 10,000 points
-X = R @ np.diag(sig) @ np.random.randn(2, nPoints) + \
-        np.diag(xC) @ np.ones((2, nPoints))
+X = R @ np.diag(sigma) @ np.random.randn(2, nPoints) + \
+        np.diag(center) @ np.ones((2, nPoints))
 
 fig = plt.figure()
 ax1 = fig.add_subplot(121)

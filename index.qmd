@@ -1,6 +1,11 @@
 ## Preface {.unnumbered}
 
-These are the lecture notes for the _Grundlagen der Datenbasierten Methoden_ class, part of the _MCI | The Entrepreneurial School_ master for [Mechatronik - Automation, Robotics & AI](https://www.mci.edu/de/studium/master/mechatronik-automation-robotics-ai#im_studium) in the winter term 2024/25.
+These are the lecture notes for the _Grundlagen der Datenbasierten Methoden_ class, part of the _MCI | The Entrepreneurial School_ master for [Mechatronik - Automation, Robotics & AI](https://www.mci.edu/de/studium/master/mechatronik-automation-robotics-ai#im_studium) in the winter term 2025/26.
+This is a revised version of the previous year, checkout previous version via the appropriate tag or get the pdf from the releases.
+
+To cite these notes please see [citation information](CITATION.cff) or 
+[![](https://zenodo.org/badge/861305042.svg)](https://zenodo.org/badge/latestdoi/861305042).
+
 
 ## Acknowledgements {.unnumbered}
 
@@ -8,6 +13,8 @@ We want to thank the open-source community for providing excellent tutorials and
 Individual sources are cited at the appropriate spot throughout the document at hand.
 
 We want to thank Mirjam Ziselsberger and Matthias Panny for testing, checking, suggestions and general proofreading.
+
+Furthermore, the students of the class in the winter term 2024/25 helped to improve these notes due to their feedback in class as well as by providing issues in the github project.
 
 These notes are built with [Quarto](https://quarto.org/).
 

@@ -131,6 +131,8 @@ It often helps to visualize the values to see differences and get an idea of the
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
+%config InlineBackend.figure_formats = ["svg"]
+
 nm_sort = np.sort(data["nm"])
 x = np.linspace(0, 1, len(nm_sort), endpoint=True,)
 

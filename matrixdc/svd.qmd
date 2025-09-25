@@ -159,7 +159,7 @@ This is often called the _truncated SVD_.
 ::::
 :::
 
-![Truncated SVD](../_assets/matrixdc/TruncatedSVD){#fix-tsvd width=2.88in}
+![Truncated SVD](../_assets/matrixdc/TruncatedSVD){#fig-tsvd width=2.88in}
 
 We can use this for image compression.
 

@@ -460,6 +460,15 @@ import io
 import matplotlib.pyplot as plt
 %config InlineBackend.figure_formats = ["svg"]
 
+fun my_plot(testFaceMS, U, m, n, rec):
+    for i, p in enumerate(rec):
+        plt.figure()
+        r = p
+        A_r = avgFace + U[:, :r] @ U[:, :r].T @ testFaceMS
+        plt.imshow(np.reshape(A_r, (m, n)).T, cmap=plt.get_cmap("gray"))
+        plt.gca().set_axis_off()
+        plt.gca().set_title(f"${r=}$")
+
 response = requests.get(
     "https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos"
     "/raw/refs/heads/main/DATA/allFaces.mat")
@@ -480,44 +489,46 @@ testFace = faces[:, np.sum(nfaces[:36])]
 testFaceMS = testFace - avgFace
 rec = [25, 100, 400]
 
-fig = plt.figure()
-axs = [] 
-axs.append(fig.add_subplot(2, 4, 1))
-axs.append(fig.add_subplot(2, 4, 2))
-axs.append(fig.add_subplot(2, 4, 3))
-axs.append(fig.add_subplot(2, 4, 4))
-axs.append(fig.add_subplot(2, 4, 5))
-axs.append(fig.add_subplot(2, 4, 6))
-axs.append(fig.add_subplot(2, 4, 7))
-axs.append(fig.add_subplot(2, 4, 8))
+my_plot(testFaceMS, U, m, n, rec)
 
-for i, p in enumerate(rec):
-    r = p
-    A_r = avgFace + U[:, :r] @ U[:, :r].T @ testFaceMS
-    axs[i].imshow(np.reshape(A_r, (m, n)).T, cmap=plt.get_cmap("gray"))
-    axs[i].set_axis_off()
-    axs[i].set_title(f"${r=}$")
-
-axs[3].imshow(np.reshape(testFace, (m, n)).T, cmap=plt.get_cmap("gray"))
-axs[3].set_axis_off()
-axs[3].set_title(f"Original image")
+plt.figure()
+plt.imshow(np.reshape(testFace, (m, n)).T, cmap=plt.get_cmap("gray"))
+plt.gca().set_axis_off()
+plt.gca().set_title(f"Original image")
 
 shift = 1500
 testFaceMS = np.reshape(im_gray[shift:shift+n, shift:shift+m].T, n*m) - \
              avgFace
 rec = [100, 400, 1600]
-for i, p in enumerate(rec):
-    r = p
-    A_r = avgFace + U[:, :r] @ U[:, :r].T @ testFaceMS
-    axs[4 + i].imshow(np.reshape(A_r, (m, n)).T, cmap=plt.get_cmap("gray"))
-    axs[4 + i].set_axis_off()
-    axs[4 + i].set_title(f"${r=}$")
+
+my_plot(testFaceMS, U, m, n, rec)
+
+plt.figure()
 axs[7].imshow(im_gray[shift:shift+n, shift:shift+m], cmap=plt.get_cmap("gray"))
 axs[7].set_axis_off()
 axs[7].set_title(f"Original image")
 plt.show()
 ```
-![Approximate reconstruction of a test face and an object using the eigenfaces basis for different order r.](../_assets/matrixdc/eigenfaces.svg){#fig-eigfaces}
+::: {#fig-eigfaces layout-ncol=4}
+
+![$r = 25$](../_assets/matrixdc/eigenfaces_face_25.svg){#fig-eigfaces1}
+
+![$r = 100$](../_assets/matrixdc/eigenfaces_face_100.svg){#fig-eigfaces2}
+
+![$r = 400$](../_assets/matrixdc/eigenfaces_face_400.svg){#fig-eigfaces3}
+
+![Original image](../_assets/matrixdc/eigenfaces_face_org.svg){#fig-eigfaces4}
+
+![$r = 100$](../_assets/matrixdc/eigenfaces_mci_100.svg){#fig-eigfaces5}
+
+![$r = 400$](../_assets/matrixdc/eigenfaces_mci_400.svg){#fig-eigfaces6}
+
+![$r = 1600$](../_assets/matrixdc/eigenfaces_mci_1600.svg){#fig-eigfaces7}
+
+![Original image](../_assets/matrixdc/eigenfaces_mci_org.svg){#fig-eigfaces8}
+
+Approximate reconstruction of a test face and an object using the eigenfaces basis for different order $r$.
+:::
 
 ::: {.callout-note}
 Due to resource limitations the above computation cannot be done for each build.

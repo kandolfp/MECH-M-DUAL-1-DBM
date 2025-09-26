@@ -3,9 +3,13 @@
 These are the lecture notes for the _Grundlagen der Datenbasierten Methoden_ class, part of the _MCI | The Entrepreneurial School_ master for [Mechatronik - Automation, Robotics & AI](https://www.mci.edu/de/studium/master/mechatronik-automation-robotics-ai#im_studium) in the winter term 2025/26.
 This is a revised version of the previous year, checkout previous version via the appropriate tag or get the pdf from the releases.
 
+::: {.content-visible when-format="html"}
 To cite these notes please see [citation information](CITATION.cff) or 
 [![](https://zenodo.org/badge/861305042.svg)](https://zenodo.org/badge/latestdoi/861305042).
-
+:::
+::: {.content-visible unless-format="html"}
+To cite these notes see [citation information](https://github.com/kandolfp/MECH-M-DUAL-1-DBM/CITATION.cff) or [DOI 10.5281/zenodo.14671708](https://doi.org/10.5281/zenodo.14671708)
+:::
 
 ## Acknowledgements {.unnumbered}
 

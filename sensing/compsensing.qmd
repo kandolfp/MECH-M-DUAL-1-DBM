@@ -606,7 +606,8 @@ This is achieved with the `SSPOR` algorithm from @8361090.
 #| layout-ncol: 1
 #| code-fold: true
 #| code-summary: "Show the code for the figure"
-from ftplib import FTP
+import requests
+import shutil
 import numpy as np
 import matplotlib.pyplot as plt
 import netCDF4
@@ -615,18 +616,12 @@ import pysensors as ps
 np.random.seed(6020)
 
 # Import and save data locally
-ftp = FTP('ftp.cdc.noaa.gov')
-ftp.login()
-ftp.cwd('/Datasets/noaa.oisst.v2/')
-
-filenames = ['sst.wkmean.1990-present.nc', 'lsmask.nc']
-
-for filename in filenames:
-    localfile = open(filename, 'wb')
-    ftp.retrbinary('RETR ' + filename, localfile.write, 1024)
-    localfile.close()
-
-ftp.quit()
+url_base = "https://downloads.psl.noaa.gov/Datasets/noaa.oisst.v2/"
+for f in ['sst.wkmean.1990-present.nc', 'lsmask.nc']:
+    r = requests.get(url_base + f, verify=True, stream=True)
+    r.raw.decode_content = True
+    with open(f, 'wb') as f:
+        shutil.copyfileobj(r.raw, f)
 
 f = netCDF4.Dataset('sst.wkmean.1990-present.nc')
 lat,lon = f.variables['lat'], f.variables['lon']

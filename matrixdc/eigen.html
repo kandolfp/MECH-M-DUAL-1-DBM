@@ -98,9 +98,9 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-1e3068369e36718fca5120af1b2594eb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-9998c2ee6da4221bd56fa9d29e80e367.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-1e3068369e36718fca5120af1b2594eb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f3e4be047f94999836566be8d7fec70b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-1cff5245d27da707879debdfdc57e7b2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-f3e4be047f94999836566be8d7fec70b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -638,7 +638,7 @@ window.Quarto = {
 \]</span></li>
 </ol>
 <p>So let us check in <code>numpy</code>:</p>
-<div id="d5302bcb" class="cell styled-output" data-execution_count="1">
+<div id="6f4c583f" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -689,7 +689,7 @@ p(\lambda) = \det(A - \lambda I).
 </div>
 </div>
 <p>From the above properties of the determinant we can conclude that, if <span class="math inline">\(X \in \mathbb{C}^{n\times n}\)</span> is nonsingular and <span class="math inline">\(B = X^{-1} A X\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <em>similar</em> and two similar matrices have exactly the same eigenvalues.</p>
-<div id="b5a64ddd" class="cell styled-output" data-execution_count="2">
+<div id="1baa27d7" class="cell styled-output" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> LA.eigvals(A)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lam_sort <span class="op">=</span> np.sort(lam)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -736,7 +736,7 @@ V^{-1} A V = \operatorname{diag}(\lambda_1, \ldots, \lambda_n) = \Lambda = \left
 </div>
 </div>
 <p>Not all matrices <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> are diagonalizable.</p>
-<div id="30ead786" class="cell styled-output" data-execution_count="3">
+<div id="bb49832e" class="cell styled-output" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lam, V <span class="op">=</span> LA.eig(A)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A_eigen <span class="op">=</span> np.diag(lam)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>A_eigen<span class="op">=</span><span class="sc">}</span><span class="ss">"</span>)</span>
@@ -1682,7 +1682,7 @@ Golub, Gene H., and Charles F. Van Loan. 2013. <em>Matrix Computations</em>. 4th
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Basics of Data Science WS 2024 (MECH-M-DUAL-1-GDM)</p>
+<p>Basics of Data Science WS 2025/26 (MECH-M-DUAL-1-GDM)</p>
 </div>   
     <div class="nav-footer-center">
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> Peter Kandolf</p>

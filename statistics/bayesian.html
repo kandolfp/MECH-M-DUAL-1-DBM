@@ -98,9 +98,9 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-1e3068369e36718fca5120af1b2594eb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-9998c2ee6da4221bd56fa9d29e80e367.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-1e3068369e36718fca5120af1b2594eb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f3e4be047f94999836566be8d7fec70b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-1cff5245d27da707879debdfdc57e7b2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-f3e4be047f94999836566be8d7fec70b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -1391,7 +1391,6 @@ Warning
 </section>
 <section id="material-properties" class="level3" data-number="14.3.2">
 <h3 data-number="14.3.2" class="anchored" data-anchor-id="material-properties"><span class="header-section-number">14.3.2</span> Material properties</h3>
-<p>To identify material properties such as strength we can also use Bayes’ theorem.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1402,40 +1401,42 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This example follows the notes <span class="citation" data-cites="mehrle">Mehrle (<a href="../references.html#ref-mehrle" role="doc-biblioref">2024</a>)</span> but as we do not have the data the plots are not generated interactively.</p>
+<p>This example is an adaptation form the notes <span class="citation" data-cites="mehrle">Mehrle (<a href="../references.html#ref-mehrle" role="doc-biblioref">2024</a>)</span>.</p>
 </div>
 </div>
-<p>Again we start with an initial guess, in this case for the yield stress with <span class="math inline">\(90\%\)</span> of the samples endure in our experiment.</p>
+<p>To identify material properties such as strength we can also use Bayes’ theorem.</p>
+<p>Again we start with an initial guess, in this case for the yield stress with <span class="math inline">\(90\%\)</span> of the samples endure in our experiment so far.</p>
 <p>For steel <em>S235JR</em> this is <span class="math inline">\(R_{aH,0} = 235 \mathrm{MPa}\)</span>. We use a Gaussian normal distribution with <span class="math inline">\(\mu_0 = 270\mathrm{MPa}\)</span> and <span class="math inline">\(\sigma_0 = 27.3 \mathrm{MPa}\)</span>.</p>
 <div id="cell-fig-statistics-bayesian-material1" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>normaldist <span class="op">=</span> <span class="kw">lambda</span> mu, sigma, x: <span class="dv">1</span> <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> sigma<span class="op">**</span><span class="dv">2</span>) <span class="op">*</span> <span class="op">\</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    np.exp(<span class="op">-</span> (x <span class="op">-</span> mu)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> sigma<span class="op">**</span><span class="dv">2</span>))</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>Finv <span class="op">=</span> <span class="kw">lambda</span> mu, sigma, p: mu <span class="op">+</span> sigma <span class="op">*</span> np.sqrt(<span class="dv">2</span>) <span class="op">*</span> <span class="op">\</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                            scipy.special.erfinv(<span class="dv">2</span> <span class="op">*</span> p <span class="op">-</span> <span class="dv">1</span>) </span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="dv">270</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>sigma_0 <span class="op">=</span> <span class="fl">27.31</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>RaH_0 <span class="op">=</span> Finv(mu_0, sigma_0, <span class="fl">0.1</span>)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="kw">lambda</span> x: normaldist(mu_0, sigma_0, x)</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">400</span>, <span class="dv">1024</span>)</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p(x))</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.fill_between(x, p(x), where<span class="op">=</span>(x <span class="op">&gt;</span> RaH_0))</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>my_max <span class="op">=</span> np.<span class="bu">round</span>(np.<span class="bu">max</span>(p(x)), <span class="dv">3</span>)</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>plt.plot([RaH_0, RaH_0], [<span class="dv">0</span>, my_max])</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="st">"major"</span>)</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">400</span><span class="op">/</span>(<span class="dv">3</span> <span class="op">*</span> my_max))</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">p</span><span class="kw">(</span><span class="vs">R_{aH}</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>)</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>normaldist <span class="op">=</span> <span class="kw">lambda</span> mu, sigma, x: <span class="dv">1</span> <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> sigma<span class="op">**</span><span class="dv">2</span>) <span class="op">*</span> <span class="op">\</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    np.exp(<span class="op">-</span> (x <span class="op">-</span> mu)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> sigma<span class="op">**</span><span class="dv">2</span>))</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>Finv <span class="op">=</span> <span class="kw">lambda</span> mu, sigma, p: mu <span class="op">+</span> sigma <span class="op">*</span> np.sqrt(<span class="dv">2</span>) <span class="op">*</span> <span class="op">\</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                            scipy.special.erfinv(<span class="dv">2</span> <span class="op">*</span> p <span class="op">-</span> <span class="dv">1</span>) </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="dv">270</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>sigma_0 <span class="op">=</span> <span class="fl">27.31</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>RaH_0 <span class="op">=</span> Finv(mu_0, sigma_0, <span class="fl">0.1</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="kw">lambda</span> x: normaldist(mu_0, sigma_0, x)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">400</span>, <span class="dv">1024</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p(x))</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>plt.fill_between(x, p(x), where<span class="op">=</span>(x <span class="op">&gt;</span> RaH_0))</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>my_max <span class="op">=</span> np.<span class="bu">round</span>(np.<span class="bu">max</span>(p(x)), <span class="dv">3</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>plt.plot([RaH_0, RaH_0], [<span class="dv">0</span>, my_max])</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="st">"major"</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">400</span><span class="op">/</span>(<span class="dv">3</span> <span class="op">*</span> my_max))</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">p</span><span class="kw">(</span><span class="vs">R_{aH}</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-statistics-bayesian-material1" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1455,7 +1456,7 @@ p(\mu) = \mathcal{N}(\mu_0, \sigma_{\mu_0}),\quad\text{with}\quad \sigma_{\mu_0}
 \]</span> and <span class="math display">\[
 p(\sigma) = \mathcal{N}(\sigma_0, \sigma_{\sigma_0}),\quad\text{with}\quad \sigma_{\sigma_0} = \frac{\sigma_0}{10}.
 \]</span></p>
-<p>The likelihood of drawing a sample with yield strength <span class="math inline">\(R_{aH}^{(i)}\)</span> we calculate the dependent probabilities separate by fixing the <em>current</em> values of <span class="math inline">\(\mu = \check{\mu}\)</span> and <span class="math inline">\(\sigma = \check{\sigma}\)</span>, respectively. <span class="math display">\[
+<p>The likelihood of drawing a sample with yield strength <span class="math inline">\(R_{aH}^{(i)}\)</span> we calculate by the dependent probabilities separately. To do so we fixing the <em>current</em> values of <span class="math inline">\(\mu = \check{\mu}\)</span> and <span class="math inline">\(\sigma = \check{\sigma}\)</span>, respectively. <span class="math display">\[
 p\left(R_{aH}^{(i)}\, \middle|\, \mu \right) = \mathcal{N}[\mu, \check{\sigma}](R_{aH}^{(i)})
 \]</span> and <span class="math display">\[
 p\left(R_{aH}^{(i)}\, \middle|\, \sigma \right) = \mathcal{N}[\check{\mu}, \sigma](R_{aH}^{(i)})
@@ -1464,7 +1465,12 @@ p\left( \mu \, \middle|\, R_{aH}^{(i)}\right)  = \frac{p\left(R_{aH}^{(i)}\, \mi
 \]</span> and <span class="math display">\[
 p\left( \sigma \, \middle|\, R_{aH}^{(i)}\right)  = \frac{p\left(R_{aH}^{(i)}\, \middle|\, \sigma \right) p(\sigma)}{\int p\left(R_{aH}^{(i)}\, \middle|\, \sigma \right) p(\sigma)\,\mathrm{d}\sigma},
 \]</span></p>
-<p>Now by computing the inverse from our above probabilities we can update our <span class="math inline">\(\mu_0\)</span> and <span class="math inline">\(\sigma_0\)</span> accordingly. This we can continue for several samples.</p>
+<p>Now our updated values for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are the expected values <span class="math display">\[
+\mathrm{E}[\mu] = \int \mu \cdot p\left( \mu \, \middle|\, R_{aH}^{(i)}\right)
+\]</span> and <span class="math display">\[
+\mathrm{E}[\sigma] = \int \sigma \cdot p\left( \sigma \, \middle|\, R_{aH}^{(i)}\right)
+\]</span></p>
+<p>We can continue this for several samples. As we do not have real measurements for this example at hand we generate some sampled from a normal distribution that seems fitting for a <em>S235JR</em> steal.</p>
 <div id="cell-fig-statistics-bayesian-material2" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div id="fig-statistics-bayesian-material2" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1479,7 +1485,7 @@ Figure&nbsp;14.11: Update after 10 and 100 iterations
 </div>
 </div>
 </div>
-<p>The mean converges relatively fast and stays but the deviation still changes after 100 sample drawn. This is due to the fact that the two variables are not independent of each other and the assumption that of a normal distribution is not a good estimate for <span class="math inline">\(\sigma\)</span>.</p>
+<p>The deviation (<span class="math inline">\(\sigma\)</span>) converges steadily, whereas the mean <span class="math inline">\(\mu\)</span> is more erratic and only slowly converging. This is due to the fact that the two variables are not independent of each other and the assumption that of a normal distribution is not a good estimate for <span class="math inline">\(\sigma\)</span>.</p>
 </section>
 </section>
 <section id="conjugate-priors" class="level2" data-number="14.4">
@@ -1932,7 +1938,7 @@ Mehrle, Andreas. 2024. <span>“<span>Data Science</span>.”</span> <em>Managem
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Basics of Data Science WS 2024 (MECH-M-DUAL-1-GDM)</p>
+<p>Basics of Data Science WS 2025/26 (MECH-M-DUAL-1-GDM)</p>
 </div>   
     <div class="nav-footer-center">
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> Peter Kandolf</p>

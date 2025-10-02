@@ -1,0 +1,25 @@
+title: MECH-M-DUAL-1-DBM - Grundlagen datenbasierter Methoden
+abstract: >-
+  Course material for a ~3 * 15 hours (5 ECTS) course on
+  basic concepts for data science. All the topics are
+  presented with the Python implementation included. We
+  cover matrix decompositions, regression, signal
+  processing, sparsity and compressed sensing and a bit of
+  statistics.
+authors:
+- family-names: Kandolf
+  given-names: Peter
+  orcid: 'https://orcid.org/0000-0003-3601-0852'
+cff-version: 1.2.0
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.14671708
+keywords:
+- Python
+- matrix computations
+- matrix decompositions
+- regression
+- signal processing
+license: CC-BY-NC-SA-4.0
+version: v1.0.2
+date-released: '2025-06-27'

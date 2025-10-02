@@ -98,9 +98,9 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-1e3068369e36718fca5120af1b2594eb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-9998c2ee6da4221bd56fa9d29e80e367.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-1e3068369e36718fca5120af1b2594eb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f3e4be047f94999836566be8d7fec70b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-1cff5245d27da707879debdfdc57e7b2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-f3e4be047f94999836566be8d7fec70b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -682,7 +682,7 @@ f(t) = \cos(97 t\, 2\pi) + \cos(777 t\, 2\pi)
 <p>The sparsity of the sample allows us to reconstruct the signal by sampling randomly with an average sampling rate of <span class="math inline">\(128 \mathrm{Hz}\)</span>, well below the Shannon-Nyquist threshold.</p>
 <p>The code relies on the CoSaMP implementation <span class="citation" data-cites="NEEDELL2009301">Needell and Tropp (<a href="../references.html#ref-NEEDELL2009301" role="doc-biblioref">2009</a>)</span> provided on <a href="https://github.com/avirmaux/CoSaMP/tree/master">gitHub</a> and included below so we can work with it.</p>
 <p>The code is adapted from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 3.3)</span></p>
-<div id="72c63bfb" class="cell" data-execution_count="1">
+<div id="f841fa58" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>CoSaMP algorithm form gitHub, now print.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1053,7 +1053,7 @@ Figure&nbsp;13.3: Cross-validation mean square error of Lasso fit, the green cir
 </div>
 </div>
 <p>The resulting coefficients for the best fit with lasso are</p>
-<div id="77e32287" class="cell styled-output" data-execution_count="5">
+<div id="4ab06cdd" class="cell styled-output" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>array([ 0.        ,  0.        ,  1.0978465 ,  0.        , -0.        ,
        -0.        , -1.06495486,  0.        ,  0.        ,  0.        ])</code></pre>
@@ -1110,7 +1110,7 @@ X = L + S.
 <div class="callout-body-container">
 <div id="exm-sensing-rpca" class="theorem example">
 <p><span class="theorem-title"><strong>Example 13.3 (Robust principal component analysis with Yale B dataset)</strong></span> The following implementation of RPCA can be found in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 121</a>)</span> with the same application to the eigenfaces dataset.</p>
-<div id="79877b72" class="cell" data-execution_count="6">
+<div id="d5906942" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Robust principal component analysis and helper functions</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> shrink(X, tau):</span>
@@ -1142,7 +1142,7 @@ X = L + S.
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L, S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="8b344fdd" class="cell" data-execution_count="7">
+<div id="494cd073" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1334,66 +1334,61 @@ Figure&nbsp;13.4: RPCA decomposition for the Yale B dataset.
 <p><span class="theorem-title"><strong>Example 13.4 (Sea Surface Temperature (SST) sensors)</strong></span> For a given dataset of sea surface temperature as training data we would like to place (sparse) sensors optimal that allow us to reconstruct the temperature at any other location. This is achieved with the <code>SSPOR</code> algorithm from <span class="citation" data-cites="8361090">Manohar et al. (<a href="../references.html#ref-8361090" role="doc-biblioref">2018</a>)</span>.</p>
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ftplib <span class="im">import</span> FTP</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> netCDF4</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pysensors <span class="im">as</span> ps</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">6020</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Import and save data locally</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>ftp <span class="op">=</span> FTP(<span class="st">'ftp.cdc.noaa.gov'</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>ftp.login()</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>ftp.cwd(<span class="st">'/Datasets/noaa.oisst.v2/'</span>)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>filenames <span class="op">=</span> [<span class="st">'sst.wkmean.1990-present.nc'</span>, <span class="st">'lsmask.nc'</span>]</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> filenames:</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    localfile <span class="op">=</span> <span class="bu">open</span>(filename, <span class="st">'wb'</span>)</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    ftp.retrbinary(<span class="st">'RETR '</span> <span class="op">+</span> filename, localfile.write, <span class="dv">1024</span>)</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    localfile.close()</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>ftp.quit()</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> shutil</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> netCDF4</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pysensors <span class="im">as</span> ps</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">6020</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Import and save data locally</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>url_base <span class="op">=</span> <span class="st">"https://downloads.psl.noaa.gov/Datasets/noaa.oisst.v2/"</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> [<span class="st">'sst.wkmean.1990-present.nc'</span>, <span class="st">'lsmask.nc'</span>]:</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> requests.get(url_base <span class="op">+</span> f, verify<span class="op">=</span><span class="va">True</span>, stream<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    r.raw.decode_content <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(f, <span class="st">'wb'</span>) <span class="im">as</span> f:</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        shutil.copyfileobj(r.raw, f)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> netCDF4.Dataset(<span class="st">'sst.wkmean.1990-present.nc'</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>lat,lon <span class="op">=</span> f.variables[<span class="st">'lat'</span>], f.variables[<span class="st">'lon'</span>]</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>SST <span class="op">=</span> f.variables[<span class="st">'sst'</span>]</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>sst <span class="op">=</span> SST[:]</span>
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> netCDF4.Dataset(<span class="st">'sst.wkmean.1990-present.nc'</span>)</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>lat,lon <span class="op">=</span> f.variables[<span class="st">'lat'</span>], f.variables[<span class="st">'lon'</span>]</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>SST <span class="op">=</span> f.variables[<span class="st">'sst'</span>]</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>sst <span class="op">=</span> SST[:]</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> netCDF4.Dataset(<span class="st">'lsmask.nc'</span>)</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> f.variables[<span class="st">'mask'</span>]</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>masks <span class="op">=</span> np.bool_(np.squeeze(mask))</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>snapshot <span class="op">=</span> <span class="bu">float</span>(<span class="st">"nan"</span>)<span class="op">*</span>np.ones((<span class="dv">180</span>,<span class="dv">360</span>))</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>snapshot[masks] <span class="op">=</span> sst[<span class="dv">0</span>,masks]</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>plt.imshow(snapshot, cmap<span class="op">=</span>plt.cm.coolwarm)</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>plt.yticks([])</span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sst[:,masks]</span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.reshape(X.compressed(), X.shape)</span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute optimal sensor placement</span></span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ps.SSPOR(</span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    basis<span class="op">=</span>ps.basis.SVD(n_basis_modes<span class="op">=</span><span class="dv">25</span>),</span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    n_sensors<span class="op">=</span><span class="dv">25</span></span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>model.fit(X)</span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>sensors <span class="op">=</span> model.get_selected_sensors()</span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot sensor locations</span></span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> np.transpose(<span class="dv">0</span> <span class="op">*</span> X[<span class="dv">1</span>,:])</span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>temp[sensors] <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> <span class="dv">0</span> <span class="op">*</span> snapshot</span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>img[masks] <span class="op">=</span> temp</span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>plt.imshow(snapshot, cmap<span class="op">=</span>plt.cm.coolwarm)</span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>indx <span class="op">=</span> np.where(img<span class="op">==</span><span class="dv">1</span>)</span>
-<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>plt.scatter(indx[<span class="dv">1</span>], indx[<span class="dv">0</span>], <span class="dv">8</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
-<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>plt.yticks([])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> netCDF4.Dataset(<span class="st">'lsmask.nc'</span>)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> f.variables[<span class="st">'mask'</span>]</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>masks <span class="op">=</span> np.bool_(np.squeeze(mask))</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>snapshot <span class="op">=</span> <span class="bu">float</span>(<span class="st">"nan"</span>)<span class="op">*</span>np.ones((<span class="dv">180</span>,<span class="dv">360</span>))</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>snapshot[masks] <span class="op">=</span> sst[<span class="dv">0</span>,masks]</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>plt.imshow(snapshot, cmap<span class="op">=</span>plt.cm.coolwarm)</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>plt.yticks([])</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sst[:,masks]</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.reshape(X.compressed(), X.shape)</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute optimal sensor placement</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ps.SSPOR(</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    basis<span class="op">=</span>ps.basis.SVD(n_basis_modes<span class="op">=</span><span class="dv">25</span>),</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    n_sensors<span class="op">=</span><span class="dv">25</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>model.fit(X)</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>sensors <span class="op">=</span> model.get_selected_sensors()</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot sensor locations</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> np.transpose(<span class="dv">0</span> <span class="op">*</span> X[<span class="dv">1</span>,:])</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>temp[sensors] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> <span class="dv">0</span> <span class="op">*</span> snapshot</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>img[masks] <span class="op">=</span> temp</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>plt.imshow(snapshot, cmap<span class="op">=</span>plt.cm.coolwarm)</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>indx <span class="op">=</span> np.where(img<span class="op">==</span><span class="dv">1</span>)</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>plt.scatter(indx[<span class="dv">1</span>], indx[<span class="dv">0</span>], <span class="dv">8</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>plt.yticks([])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="fig-sensing_sst" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1892,7 +1887,7 @@ Needell, D., and J. A. Tropp. 2009. <span>“CoSaMP: Iterative Signal Recovery f
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Basics of Data Science WS 2024 (MECH-M-DUAL-1-GDM)</p>
+<p>Basics of Data Science WS 2025/26 (MECH-M-DUAL-1-GDM)</p>
 </div>   
     <div class="nav-footer-center">
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> Peter Kandolf</p>

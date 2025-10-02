@@ -63,9 +63,9 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1e3068369e36718fca5120af1b2594eb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-9998c2ee6da4221bd56fa9d29e80e367.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-1e3068369e36718fca5120af1b2594eb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f3e4be047f94999836566be8d7fec70b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-1cff5245d27da707879debdfdc57e7b2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f3e4be047f94999836566be8d7fec70b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -524,7 +524,7 @@ div.csl-indent {
 
 <p>In this class we are going to look at the basic concepts behind modern day Data Science techniques. We will always try to not only discuss the theory but also use <a href="https://www.python.org/">Python</a> to illustrate the content programmatically.</p>
 <p>The main reference for these notes is the excellent <span class="citation" data-cites="Brunton2022">Brunton and Kutz (<a href="references.html#ref-Brunton2022" role="doc-biblioref">2022</a>)</span>, see citations throughout the notes. If python code is adapted form code blocks provided by <span class="citation" data-cites="Brunton2022">Brunton and Kutz (<a href="references.html#ref-Brunton2022" role="doc-biblioref">2022</a>)</span>, see <a href="https://github.com/dynamicslab/databook_python">github</a> this is indicated and for these blocks you can also find the MATLAB equivalent in the book or on <a href="https://github.com/dynamicslab/databook_matlab">github</a>.</p>
-<p>These notes are intended for engineering students and therefore the mathematical concepts will rarely include rigorous proofs.</p>
+<p>These notes are intended for engineering students and therefore the mathematical concepts will rarely include rigorous proofs but we give references to books that do. Nevertheless, if the mathematical concepts are not familiar or need a bit of a refresher we can recommend <span class="citation" data-cites="Papula-1">Papula (<a href="references.html#ref-Papula-1" role="doc-biblioref">2024a</a>)</span>, <span class="citation" data-cites="Papula-2">Papula (<a href="references.html#ref-Papula-2" role="doc-biblioref">2025a</a>)</span>, <span class="citation" data-cites="Papula-3">Papula (<a href="references.html#ref-Papula-3" role="doc-biblioref">2024b</a>)</span>, as well as <span class="citation" data-cites="Papula2025-ra">Papula (<a href="references.html#ref-Papula2025-ra" role="doc-biblioref">2025b</a>)</span> for exercises. All of these books are in German but available online for MCI students via the library. For our English readers we heard good things about <span class="citation" data-cites="Kreyszig2011-ih">Kreyszig (<a href="references.html#ref-Kreyszig2011-ih" role="doc-biblioref">2011</a>)</span>.</p>
 <p>We start of by recalling the main concepts of <a href="basics/linearalgebra.html" class="quarto-xref"><span>1&nbsp; Linear Algebra</span></a> and some statistics on <a href="basics/sets.html" class="quarto-xref"><span>2&nbsp; Data sets</span></a> to make sure everybody as an the same page for notation and problematically in Python.</p>
 <p>We continue with matrix decomposition, namely <a href="matrixdc/eigen.html" class="quarto-xref"><span>3&nbsp; Eigendecomposition</span></a> and <a href="matrixdc/svd.html" class="quarto-xref"><span>4&nbsp; Singular Value Decomposition</span></a>. These basic decomposition are used to illustrate certain concepts we need in later chapters but also to show how the change of basis is influencing problems, their solution and computational properties. Furthermore, we dive into the first concepts used in machine learning where matrix computations build the foundation. As illustration we use applications for engineering and image processing.</p>
 <p>The SVD allows us to neatly transition to <a href="regression/linear.html" class="quarto-xref"><span>5&nbsp; Linear Regression</span></a>, generalize to <a href="regression/nonlinear.html" class="quarto-xref"><span>6&nbsp; Non-linear Regression</span></a> and discuss optimization and learning properties with the help of <a href="regression/optimizers.html#sec-regression-optimizers-lasso" class="quarto-xref"><span>LASSO</span></a> and <a href="regression/optimizers.html#sec-regression-optimizers-msou" class="quarto-xref"><span>Model Selection/Identification and over-/underfitting</span></a> in <a href="regression/optimizers.html" class="quarto-xref"><span>7&nbsp; Optimizers</span></a>. We mainly use toy examples but where appropriate we look at the world population or unemployment data to illustrate a concept.</p>
@@ -536,6 +536,21 @@ div.csl-indent {
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-Brunton2022" class="csl-entry" role="listitem">
 Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engineering - Machine Learning, Dynamical Systems, and Control</em>. 2nd ed. Cambridge: Cambridge University Press.
+</div>
+<div id="ref-Kreyszig2011-ih" class="csl-entry" role="listitem">
+Kreyszig, Erwin. 2011. <em>Advanced Engineering Mathematics</em>. 10th ed. Chichester, England: John Wiley &amp; Sons.
+</div>
+<div id="ref-Papula-1" class="csl-entry" role="listitem">
+Papula, Lothar. 2024a. <em>Mathematik f<span>ü</span>r Ingenieure Und Naturwissenschaftler Band 1</em>. 16th ed. Wiesbaden, Germany: Springer Fachmedien.
+</div>
+<div id="ref-Papula-3" class="csl-entry" role="listitem">
+———. 2024b. <em>Mathematik f<span>ü</span>r Ingenieure Und Naturwissenschaftler Band 3: Vektoranalysis, Wahrscheinlichkeitsrechnung, Mathematische Statistik, Fehler- Und Ausgleichsrechnung</em>. Springer Verlag.
+</div>
+<div id="ref-Papula-2" class="csl-entry" role="listitem">
+———. 2025a. <em>Mathematik f<span>ü</span>r Ingenieure Und Naturwissenschaftler Band 2</em>. 15th ed. Wiesbaden, Germany: Springer Fachmedien.
+</div>
+<div id="ref-Papula2025-ra" class="csl-entry" role="listitem">
+———. 2025b. <em>Mathematik f<span>ü</span>r Ingenieure Und Naturwissenschaftler - Klausur- Und <span>Ü</span>bungsaufgaben: <span>Ü</span>ber 700 Aufgaben Mit Ausf<span>ü</span>hrlichen l<span>ö</span>sungen Zum Selbststudium Und Zur Pr<span>ü</span>fungsvorbereitung</em>. Springer Verlag.
 </div>
 </div>
 
@@ -968,7 +983,7 @@ Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engine
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Basics of Data Science WS 2024 (MECH-M-DUAL-1-GDM)</p>
+<p>Basics of Data Science WS 2025/26 (MECH-M-DUAL-1-GDM)</p>
 </div>   
     <div class="nav-footer-center">
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> Peter Kandolf</p>

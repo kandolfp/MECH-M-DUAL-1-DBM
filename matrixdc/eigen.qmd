@@ -53,20 +53,20 @@ A = np.array([[2, 0, 0],
               [0, 3, 4],
               [0, 4, 9]])
 det_A = LA.det(A)
-print(f"{det_A=}")
+print(f"{det_A = }")
 
 A_T = np.transpose(A)
 det_A_T = LA.det(A_T)
-print(f"{det_A_T=}")
+print(f"{det_A_T = }")
 
 X = LA.inv(A)
 det_X = LA.det(X)
-print(f"{det_X=}")
+print(f"{det_X = }")
 
-print(f"{det_X*det_A=}")
+print(f"{det_X*det_A = }")
 
 det_Am = LA.det(-A)
-print(f"{det_Am=}")
+print(f"{det_Am = }")
 ```
 
 ::: {.callout appearance="simple"}
@@ -100,7 +100,7 @@ From the above properties of the determinant we can conclude that, if $X \in \ma
 lam = LA.eigvals(A)
 lam_sort = np.sort(lam)
 
-print(f"{lam_sort=}")
+print(f"{lam_sort = }")
 ```
 
 ::: {.callout appearance="simple"}
@@ -145,16 +145,16 @@ Not all matrices $A \in \mathbb{R}^{n\times n}$ are diagonalizable.
 #| error: true
 lam, V = LA.eig(A)
 A_eigen = np.diag(lam)
-print(f"{A_eigen=}")
-print(f"{V=}")
+print(f"{A_eigen = }")
+print(f"{V = }")
 
 v_1 = (A @ V[:, 0]) / lam[0]
-print(f"{v_1=}")
+print(f"{v_1 = }")
 
 A_eigen2 = LA.inv(V) @ A @ V
-print(f"{A_eigen2=}")
+print(f"{A_eigen2 = }")
 
-print(f"{np.allclose(A_eigen, A_eigen2)=}")
+print(f"{np.allclose(A_eigen, A_eigen2) = }")
 ```
 
 We can use what we have learned about the basis of a vector space and the transformation between two bases, see @sec-intro-linearalgebra-basis to get a different interpretation of the eigendecomposition.

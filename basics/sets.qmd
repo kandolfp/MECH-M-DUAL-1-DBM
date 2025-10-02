@@ -37,11 +37,11 @@ response = requests.get("https://data.ub.uni-muenchen.de/2/1/miete03.asc")
 # Transform the content of the file into a numpy.ndarray
 data = np.genfromtxt(io.BytesIO(response.content), names=True)
 # Access the data types and names
-print(f"{data.dtype=}")
+print(f"{data.dtype = }")
 # Access the second element (row)
-print(f"{data[1]=}")
+print(f"{data[1] = }")
 # Access a name
-print(f"{data['rooms']=}")
+print(f'{data["rooms"] = }')
 ```
 
 Now that we have some data we can look at it more closely, for this we interpret a row as a vector.
@@ -80,29 +80,29 @@ $$
 $$
 Some quantiles have special names, like the median for $p=0.5$, the lower and upper quartile for $p=0.25$ and $p=0.75$ (or first, second (median) and third quartile), respectively.
 ```{python}
-#| classes: styled-output
-nm_max = np.max(data['nm'])
-print(f"{nm_max=}")
+# | classes: styled-output
+nm_max = np.max(data["nm"])
+print(f"{nm_max = }")
 
-nm_min = np.min(data['nm'])
-print(f"{nm_min=}")
+nm_min = np.min(data["nm"])
+print(f"{nm_min = }")
 
-nm_mean = np.mean(data['nm'])
+nm_mean = np.mean(data["nm"])
 # round to 2 digits
 nm_mean_r = np.around(nm_mean, 2)
-print(f"{nm_mean_r=}")
+print(f"{nm_mean_r = }")
 
-nm_median = np.median(data['nm'])
-print(f"{nm_median=}")
+nm_median = np.median(data["nm"])
+print(f"{nm_median = }")
 
-nm_quartiles = np.quantile(data['nm'], [1/4, 1/2, 3/4])
-print(f"{nm_quartiles=}")
+nm_quartiles = np.quantile(data["nm"], [1 / 4, 1 / 2, 3 / 4])
+print(f"{nm_quartiles = }")
 ```
 ```{python}
-#| echo: false
-max_index = np.argmax(data['nm'])
-rooms = int(data['rooms'][max_index])
-year = int(data['bj'][max_index])
+# | echo: false
+max_index = np.argmax(data["nm"])
+rooms = int(data["rooms"][max_index])
+year = int(data["bj"][max_index])
 ```
 From this Python snippet we know that for tenants the rent varied between `{python} float(nm_min)` and `{python} float(nm_max)`, with an average of `{python} float(nm_mean_r)` and a median of `{python} float(nm_median)`.
 Of course there are tricky questions that require us to dig a bit deeper into these functions, e.g. how many rooms does the most expensive flat have?
@@ -110,11 +110,11 @@ The surprising answer is `{python} rooms` and it was built in `{python} year`, b
 
 We can use `numpy.argwhere` or a function which returns the index directly like `numpy.argmax`.
 ```{python}
-#| classes: styled-output
-max_index = np.argmax(data['nm'])
-rooms = int(data['rooms'][max_index])
-year = int(data['bj'][max_index])
-print(f"{rooms=}, {year=}")
+# | classes: styled-output
+max_index = np.argmax(data["nm"])
+rooms = int(data["rooms"][max_index])
+year = int(data["bj"][max_index])
+print(f"{rooms = }, {year = }")
 ```
 
 ### Visualization
@@ -245,13 +245,13 @@ With `numpy` they are computed as follows
 #| classes: styled-output
 
 nm_var = np.var(data["nm"])
-print(f"{nm_var=}")
+print(f"{nm_var = }")
 
 nm_std = np.std(data["nm"])
-print(f"{nm_std=}")
+print(f"{nm_std = }")
 
 nm_IQR = nm_quartiles[2] - nm_quartiles[0]
-print(f"{nm_IQR=}")
+print(f"{nm_IQR = }")
 ```
 
 ## Histogram
@@ -388,10 +388,10 @@ Consequently, `numpy.corrcoef` is a matrix as well.
 ```{python}
 #| classes: styled-output
 cov_nm_wfl = np.cov(data["nm"], data["wfl"])
-print(f"{cov_nm_wfl[0, 1]=}")
+print(f"{cov_nm_wfl[0, 1] = }")
 
 corr_nm_wfl = np.corrcoef(data["nm"], data["wfl"])
-print(f"{corr_nm_wfl[0, 1]=}")
+print(f"{corr_nm_wfl[0, 1] = }")
 ```
 
 The above results, particularly $\rho_{\text{nm},\text{wfl}}=`{python} round(float(corr_nm_wfl[0, 1]),3)`$ suggest that the higher the rent, the more space you get.

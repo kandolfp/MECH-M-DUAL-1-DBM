@@ -60,21 +60,21 @@ For the scalar multiplication we need to have
 
 
 ```{python}
-#| classes: styled-output
+# | classes: styled-output
 v = np.array([1, 2, 3, 4])
 # show the shape
-print(f"{v.shape=}")
+print(f"{v.shape = }")
 # access a single element
-print(f"{v[0]=}")
+print(f"{v[0] = }")
 # use slicing to access multiple elements
-print(f"{v[0:3]=}")
-print(f"{v[2:]=}")
-print(f"{v[:2]=}")
-print(f"{v[0::2]=}")
+print(f"{v[0:3] = }")
+print(f"{v[2:] = }")
+print(f"{v[:2] = }")
+print(f"{v[0::2] = }")
 
 alpha = 0.5
 w = alpha * v
-print(f"{w=}")
+print(f"{w = }")
 ```
 
 ::: {.callout-important}
@@ -113,12 +113,12 @@ A = np.array([[1, 2, 3, 4],
               [5, 6, 7, 8],
               [9, 10, 11, 12]])
 # show the shape
-print(f"{A.shape=}")
+print(f"{A.shape = }")
 # access a single element
-print(f"{A[0, 0]=}")
+print(f"{A[0, 0] = }")
 # use slicing to access multiple elements
-print(f"{A[0, :]=}")
-print(f"{A[:, 2]=}")
+print(f"{A[0, :] = }")
+print(f"{A[:, 2] = }")
 ```
 
 Consequently we can say that a vector is an $n \times 1$ matrix.
@@ -158,17 +158,17 @@ The result is a vector but this time in $\mathbb{R}^m$.
 In Python the `*` operator is usually indicating multiplication.
 Unfortunately, in `numpy` it is interpreted as _element wise multiplication_, so we use `@` for multiplications between vector spaces.
 ```{python}
-#| classes: styled-output
+# | classes: styled-output
 w = A @ v
 # show the shape
-print(f"{w.shape=}")
+print(f"{w.shape = }")
 # show the result
-print(f"{w=}")
+print(f"{w = }")
 # Doing the same by hand this is tricky
 w_tilde = np.zeros(A.shape[0])
 for i, bb in enumerate(v):
     w_tilde += A[:, i] * bb
-print(f"{w_tilde=}")
+print(f"{w_tilde = }")
 ```
 
 As we can see from the above equation, we can view the matrix $A$ as a _linear mapping_ or _linear function_ between two vector spaces, namely from $\mathbb{R}^{n}$ to $\mathbb{R}^{m}$.
@@ -195,12 +195,12 @@ $$
 Consequently, the transpose of a (row) vector is a column vector.
 
 ```{python}
-#| classes: styled-output
-print(f"{A=}")
-print(f"{A.shape=}")
+# | classes: styled-output
+print(f"{A = }")
+print(f"{A.shape = }")
 B = A.transpose()
-print(f"{B=}")
-print(f"{B.shape=}")
+print(f"{B = }")
+print(f"{B.shape = }")
 ```
 
 With this operation we can define two more mappings.
@@ -214,13 +214,13 @@ $$\langle v, w\rangle = v \cdot w = v^{\mathsf{T}} w = \sum_i v_i w_i.$$
 :::
 
 ```{python}
-#| classes: styled-output
+# | classes: styled-output
 v = np.array([1, 2, 3, 4])
 w = np.array([1, 1, 1, 1])
 # alternatively we can define w with
 w = np.ones(v.shape)
 alpha = np.vdot(v, w)
-print(f"{alpha=}")
+print(f"{alpha = }")
 ```
 
 :::{.callout-note}
@@ -243,9 +243,9 @@ $$
 :::
 
 ```{python}
-#| classes: styled-output
+# | classes: styled-output
 C = np.outer(v, w)
-print(f"{C=}")
+print(f"{C = }")
 ```
 
 We can also multiply matrices $A$ and $B$ by applying the matrix vector multiplication to each column vector of $B$, or a bit more elaborated:
@@ -266,11 +266,11 @@ Show that the matrix multiplication is:
 :::
 
 ```{python}
-#| classes: styled-output
+# | classes: styled-output
 C = A @ A.transpose()
-print(f"{C=}")
+print(f"{C = }")
 D = A.transpose() @ A
-print(f"{D=}")
+print(f"{D = }")
 ```
 
 From the above Python snippet we can easily see that matrix-matrix multiplication is not commutative.
@@ -318,17 +318,18 @@ $$ \| A \|_p = \left(\sum_i \sum_j |a_{ij}|^p\right)^{\frac1p},$$
 $$ \| A \|_1 = \max_i \sum_j |a_{ij}|.$$
 
 ```{python}
-#| classes: styled-output
+# | classes: styled-output
 # The norms can be found in the linalg package of numpy
 from numpy import linalg as LA
+
 norm_v = LA.norm(v)
-print(f"{norm_v=}")
+print(f"{norm_v = }")
 norm_v2 = LA.norm(v, 2)
-print(f"{norm_v2=}")
+print(f"{norm_v2 = }")
 norm_A = LA.norm(A, 1)
-print(f"{norm_A=}")
+print(f"{norm_A = }")
 norm_Afr = LA.norm(A, "fro")
-print(f"{norm_Afr=}")
+print(f"{norm_Afr = }")
 ```
 
 :::{.callout-note}
@@ -375,45 +376,45 @@ Note, the index $n$ is often omitted as it should be clear from the dimensions o
 
 The easiest way to create one of standard basis vectors, lets say $e_3 \in \mathbb{R}^3$, in Python is by calling
 ```{python}
-#| classes: styled-output
+# | classes: styled-output
 # We need to keep the index shift in mind
 n = 3
 e_3 = np.zeros(n)
-e_3[3-1] = 1
-print(f"{e_3=}")
+e_3[3 - 1] = 1
+print(f"{e_3 = }")
 ```
 and the identity matrix by
 ```{python}
-#| classes: styled-output
+# | classes: styled-output
 n = 4
 I_4 = np.eye(n)
-print(f"{I_4=}")
+print(f"{I_4 = }")
 ```
 
 ::: {.callout-tip appearance="simple" collapse="true" icon=false}
 :::: {#exm-basics-std-basis}
 ## Standard basis
 ```{python}
-#| classes: styled-output
-#| error: true
+# | classes: styled-output
+# | error: true
 n = 3
 e_1 = np.zeros(n)
 e_1[0] = 1
 e_2 = np.zeros(n)
 e_2[1] = 1
-e_3 = np.zeros(n) 
+e_3 = np.zeros(n)
 e_3[2] = 1
 
 x = np.random.rand(n)
-print(f"{x=}")
+print(f"{x = }")
 # compute the coefficients
-a = np.dot(x, e_1) / np.dot(e_1, e_1)   # <1>
+a = np.dot(x, e_1) / np.dot(e_1, e_1)  # <1>
 b = np.dot(x, e_2) / np.dot(e_2, e_2)
 c = np.dot(x, e_3) / np.dot(e_3, e_3)
 y = a * e_1 + b * e_2 + c * e_3
-print(f"{y=}")
-print(f"{np.allclose(x, y)=}")
-print(f"{LA.norm(x-y)=}")
+print(f"{y = }")
+print(f"{np.allclose(x, y) = }")
+print(f"{LA.norm(x-y) = }")
 ```
 1. This is the orthogonal projection of $x$ on $e_1$.
 
@@ -440,14 +441,14 @@ $$ (AB)^{-1} = B^{-1}A^{-1},$$
 $$ (A^{-1})^{\mathsf{T}} = (A^{\mathsf{T}})^{-1} \equiv A^{-\mathsf{T}}.$$
 
 ```{python}
-#| classes: styled-output
-#| error: true
+# | classes: styled-output
+# | error: true
 A = np.random.rand(3, 3)
-print(f"{A=}")
+print(f"{A = }")
 X = LA.inv(A)
-print(f"{X=}")
-print(f"{A @ X=}")
-print(f"{np.allclose(A @ X, np.eye(A.shape[0]))=}")
+print(f"{X = }")
+print(f"{A @ X = }")
+print(f"{np.allclose(A @ X, np.eye(A.shape[0])) = }")
 # Note that the equality is hard to achieve for floats
 np.testing.assert_equal(A @ X, np.eye(A.shape[0]), verbose=False)
 ```

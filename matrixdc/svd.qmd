@@ -108,35 +108,35 @@ A = np.array([[3, 2, 2],
               ])
 
 U, s, Vh = LA.svd(A, full_matrices=True)
-print(f"{U.shape=}, {s.shape=}, {Vh.shape=}")
-print(f"{U=}")
-print(f"{U @ U.transpose()=}\n")
+print(f"{U.shape = }, {s.shape = }, {Vh.shape = }")
+print(f"{U = }")
+print(f"{U @ U.transpose() = }\n")
 
-print(f"{np.diag(s)=}\n")
+print(f"{np.diag(s) = }\n")
 
-print(f"{Vh=}")
-print(f"{Vh.transpose() @ Vh=}\n")
+print(f"{Vh = }")
+print(f"{Vh.transpose() @ Vh = }\n")
 
 A1 = U[:, :len(s)] @ np.diag(s) @ Vh[:len(s),:]
-print(f"{np.allclose(A, A1)=}")
-print(f"{A-A1=}\n")
+print(f"{np.allclose(A, A1) = }")
+print(f"{A-A1 = }\n")
 
 S = np.zeros(A.shape)
 S[:len(s), :len(s)] = np.diag(s)
 A2 = U @ S @ Vh
 np.allclose(A, A2)
-print(f"{A-A2=}\n")
+print(f"{A-A2 = }\n")
 
 print("\nThin SVD:")
 U, s, Vh = LA.svd(A, full_matrices=False)
-print(f"{U.shape=}, {s.shape=}, {Vh.shape=}")
-print(f"{np.allclose(A, U @ np.diag(s) @ Vh)=}")
+print(f"{U.shape = }, {s.shape = }, {Vh.shape = }")
+print(f"{np.allclose(A, U @ np.diag(s) @ Vh) = }")
 
 print("\nTransposed matrix:")
 B = A.transpose()
 U, s, Vh = LA.svd(B, full_matrices=False)
-print(f"{U.shape=}, {s.shape=}, {Vh.shape=}")
-print(f"{np.allclose(B, U @ np.diag(s) @ Vh)=}")
+print(f"{U.shape = }, {s.shape = }, {Vh.shape = }")
+print(f"{np.allclose(B, U @ np.diag(s) @ Vh) = }")
 ```
 
 ## Low rank approximation
@@ -467,7 +467,7 @@ fun my_plot(testFaceMS, avgFace, U, m, n, rec):
         A_r = avgFace + U[:, :r] @ U[:, :r].T @ testFaceMS
         plt.imshow(np.reshape(A_r, (m, n)).T, cmap=plt.get_cmap("gray"))
         plt.gca().set_axis_off()
-        plt.gca().set_title(f"${r=}$")
+        plt.gca().set_title(f"${r = }$")
 
 response = requests.get(
     "https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos"

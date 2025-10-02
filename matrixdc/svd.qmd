@@ -445,7 +445,7 @@ In the case of faces, we can use this for face recognition, i.e. if the coeffici
 :::
 
 ::: {.callout-important}
-The following code is an adaptation  of the [@Brunton2022, Code 1.7 and 1.9].
+The following code is an adaptation of the [@Brunton2022, Code 1.7 and 1.9].
 :::
 
 ```{python}
@@ -460,7 +460,7 @@ import io
 import matplotlib.pyplot as plt
 %config InlineBackend.figure_formats = ["svg"]
 
-fun my_plot(testFaceMS, U, m, n, rec):
+fun my_plot(testFaceMS, avgFace, U, m, n, rec):
     for i, p in enumerate(rec):
         plt.figure()
         r = p
@@ -489,7 +489,7 @@ testFace = faces[:, np.sum(nfaces[:36])]
 testFaceMS = testFace - avgFace
 rec = [25, 100, 400]
 
-my_plot(testFaceMS, U, m, n, rec)
+my_plot(testFaceMS, avgFace, U, m, n, rec)
 
 plt.figure()
 plt.imshow(np.reshape(testFace, (m, n)).T, cmap=plt.get_cmap("gray"))
@@ -501,7 +501,7 @@ testFaceMS = np.reshape(im_gray[shift:shift+n, shift:shift+m].T, n*m) - \
              avgFace
 rec = [100, 400, 1600]
 
-my_plot(testFaceMS, U, m, n, rec)
+my_plot(testFaceMS, avgFace, U, m, n, rec)
 
 plt.figure()
 axs[7].imshow(im_gray[shift:shift+n, shift:shift+m], cmap=plt.get_cmap("gray"))

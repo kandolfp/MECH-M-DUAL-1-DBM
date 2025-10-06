@@ -1,0 +1,1946 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>13&nbsp; Compressed Sensing – Basics of Data Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../statistics/index.html" rel="next">
+<link href="../sensing/sparsity.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f3e4be047f94999836566be8d7fec70b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-1cff5245d27da707879debdfdc57e7b2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-f3e4be047f94999836566be8d7fec70b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sensing/index.html">Sparsity and compression</a></li><li class="breadcrumb-item"><a href="../sensing/compsensing.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Basics of Data Science</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../basics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../basics/linearalgebra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../basics/sets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data sets</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../matrixdc/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Matrix decompositions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../matrixdc/eigen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Eigendecomposition</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../matrixdc/svd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Singular Value Decomposition</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../regression/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regression analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../regression/linear.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../regression/nonlinear.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Non-linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../regression/optimizers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Optimizers</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../signal/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Signal Processing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../signal/fourier.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fourier Transform</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../signal/laplace.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Laplace Transform</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../signal/wavelet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wavelet Transform</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../signal/twodim.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Two-Dimensional Transform</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../sensing/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sparsity and compression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sensing/sparsity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sensing/compsensing.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../statistics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistics/bayesian.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bayesian Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistics/kalman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Kalman Filter</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-theoretic-basics-of-compressed-sensing" id="toc-the-theoretic-basics-of-compressed-sensing" class="nav-link active" data-scroll-target="#the-theoretic-basics-of-compressed-sensing"><span class="header-section-number">13.1</span> The theoretic basics of compressed sensing</a></li>
+  <li><a href="#sparse-regression" id="toc-sparse-regression" class="nav-link" data-scroll-target="#sparse-regression"><span class="header-section-number">13.2</span> Sparse Regression</a></li>
+  <li><a href="#robust-principal-component-analysis-rpca" id="toc-robust-principal-component-analysis-rpca" class="nav-link" data-scroll-target="#robust-principal-component-analysis-rpca"><span class="header-section-number">13.3</span> Robust Principal Component Analysis (RPCA)</a></li>
+  <li><a href="#sparse-sensor-placement" id="toc-sparse-sensor-placement" class="nav-link" data-scroll-target="#sparse-sensor-placement"><span class="header-section-number">13.4</span> Sparse Sensor Placement</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/sensing/compsensing.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sensing/index.html">Sparsity and compression</a></li><li class="breadcrumb-item"><a href="../sensing/compsensing.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-sensing-compressed-sensing" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Compressed Sensing</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>We use compression in everyday life extensively. Nevertheless, it almost always requires us to have the high resolution data/measurement and than compress it down. Here we discuss the reverse, where we collect relatively few <em>compressed</em> or <em>random</em> measurements and then infer a sparse representation.</p>
+<p>Until recent developments the computation was non-polynomial (NP) hard problem but now there are algorithms to reconstruct the full signal with high probability using convex algorithms.</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-sensing-compressed-sensing" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 13.1 (Compressed Sensing)</strong></span> For a signal <span class="math inline">\(x\)</span> that is <span class="math inline">\(K\)</span>-sparse in <span class="math inline">\(\mathcal{B}\)</span> with matrix <span class="math inline">\(B\)</span> we need <span class="math inline">\(n\)</span> measurements and can compress them to <span class="math inline">\(K\)</span>.</p>
+<p>In compressed sensing we collect <span class="math inline">\(p\)</span> randomly chosen or <em>compressed</em> measurements and solve for the <span class="math inline">\(K\)</span> elements of <span class="math inline">\(s\)</span> that are not zero, with <span class="math inline">\(K &lt; p \ll n\)</span>.</p>
+<p>We can represent <span class="math inline">\(p\)</span> linear measurements of <span class="math inline">\(x\)</span> as the matrix <span class="math inline">\(C\in\mathbb{R}^{p\times n}\)</span> and thus <span class="math display">\[
+y = C x.
+\]</span></p>
+<p>Relating this back to <span class="math inline">\(s\)</span> and <span class="math inline">\(\mathcal{B}\)</span> we get <span class="math display">\[
+y = C x = C B s = D s,
+\]</span> as an under-determined system. To get the optimal solution, i.e.&nbsp;the smallest <span class="math inline">\(K\)</span>, we optimize <span class="math display">\[
+\check{s} = \operatorname{argmin}_s \| s \|_0, \quad \text{subject to} \quad y = C B s.
+\]</span> Here <span class="math inline">\(\|\cdot\|_0\)</span> is <span class="math inline">\(\ell_0\)</span> pseudo norm that measures the number of non-zero elements.</p>
+</div>
+</div>
+</div>
+</div>
+<p>As we will see, the selection of the matrix <span class="math inline">\(C\)</span> is important to allow for the optimization to be such that we do not need brute-force to look for <span class="math inline">\(\check{s}\)</span>. This brute-force search is combinatorial in <span class="math inline">\(n\)</span> and <span class="math inline">\(K\)</span>, for a fixed (known) <span class="math inline">\(K\)</span> but significantly larger for unknown <span class="math inline">\(K\)</span>.</p>
+<p>Under certain condition on <span class="math inline">\(C\)</span> we can relax the conditions to a convex <span class="math inline">\(\ell_1\)</span>-minimization <span id="eq-sparse-l1"><span class="math display">\[
+\check{s} = \operatorname{argmin}_s \| s \|_1, \quad \text{subject to} \quad y = C B s.
+\tag{13.1}\]</span></span></p>
+<p>In order to have <a href="#eq-sparse-l1" class="quarto-xref">Equation&nbsp;<span>13.1</span></a> converge with high properbility we need to following assumptions to be met (precise description will follow):</p>
+<ol type="1">
+<li>The measurement matrix <span class="math inline">\(C\)</span> must be <em>incoherent</em> with respect to the sparsifying basis <span class="math inline">\(\mathcal{B}\)</span>, i.e.&nbsp;the rows of <span class="math inline">\(C\)</span> do not correlate with the columns of <span class="math inline">\(B\)</span>.</li>
+<li>The number of measurements <span class="math inline">\(p\)</span> must be sufficiently large, on the order of <span class="math display">\[
+p \approx \mathcal{O}\left(K\log\left(\frac{n}{K}\right)\right) \approx k_1\, K \log\left(\frac{n}{K}\right),
+\]</span> where <span class="math inline">\(k_1\)</span> depends on how incoherent <span class="math inline">\(C\)</span> and <span class="math inline">\(B\)</span> are.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In <a href="sparsity.html#fig-mci_sparsity_fft_compress" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> we illustrated compressed sensing with a <span class="math inline">\(4016 \times 6016\)</span> image. With our 5% of Fourier coefficients this puts the sparsity <span class="math inline">\(K = 0.05 \times 4016 \times 6016 \approx 1 208 013\)</span> and with <span class="math inline">\(k_1=3\)</span> we would stay with <span class="math inline">\(p\)</span> 3.6 million measurements and about 15% of the original pixels.</p>
+<p>The trick part is how to select them, which is why compressed sensing is not used much in imaging, except for some cases like magnetic resonance imaging (MRI) for patience that cannot stay still or sedation is risky.</p>
+</div>
+</div>
+<p>The idea of the two conditions is to make <span class="math inline">\(CB\)</span> act more or less like a unitary transformation on <span class="math inline">\(K\)</span>-sparse vectors <span class="math inline">\(s\)</span>, preserving relative distance between vectors and allowing for the <span class="math inline">\(\ell_1\)</span> convex optimization. We will see this in therms of the <em>restricted isometry property</em> (RIP).</p>
+<p>We know of the Shannon-Nyquist sampling theorem:</p>
+<blockquote class="blockquote">
+<p><em>If a function <span class="math inline">\(f(t)\)</span> contains no frequencies higher than <span class="math inline">\(b\)</span> hertz, then it can be completely determined from its ordinates at a sequence of points spaced less than <span class="math inline">\(\frac{1}{2b}\)</span> seconds apart.</em> - see <a href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem">Wikipedia</a></p>
+</blockquote>
+<p>telling us that we need a sampling rate of at least double the highest frequency to recover the signal properly. However, this is only true for signals with broadband frequency content and this is hardly ever the case for uncompressed signals. As we expect an uncompressed signal can be expressed as a sparse signal in the correct basis we can relax the Shannon-Nyquist theorem. Nevertheless, we need precise timing for our measurements and the recovery is not guaranteed, it is possible with high probability.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are alternative formulations based on so called <em>greedy algorithms</em> that determine the sparsity through an iterative matching pursuit problem, e.g.&nbsp;the <em>compressed sensing matching pursuit</em> algorithm or CoSaMP for short.</p>
+<p>A related convex formulation we have already seen and can be applied here is <span class="math display">\[
+\check{s} = \operatorname{argmin}_s \| CBs - y\|_2 + \lambda_1 \|s\|_1
+\]</span> compare <a href="../regression/optimizers.html" class="quarto-xref"><span>Chapter 7</span></a> where <span class="math inline">\(\lambda\)</span> is a weight for the importance of sparsity, see <a href="../regression/optimizers.html#fig-opt_lambda1" class="quarto-xref">Figure&nbsp;<span>7.1</span></a>.</p>
+</div>
+</div>
+<p><a href="../regression/optimizers.html" class="quarto-xref"><span>Chapter 7</span></a> actually serve as our first example and shows neatly how the <span class="math inline">\(\ell_1\)</span> norm promotes sparsity whereas the <span class="math inline">\(\ell_2\)</span> solution stays dense. We can also use this example to give an insight to what <em>with high probability</em> means. We created a random matrix in this example with 5 times more rows than columns, unless we are very unlucky and we have a lot of linear dependency between the rows we will have infinitely many solution with <em>high probability</em>.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-sensing-recovery-audio" class="theorem example">
+<p><span class="theorem-title"><strong>Example 13.1 (Recovering an Audio Signal from Sparse Measurements)</strong></span> Let us consider a audio signal consisting of a two-tone audio signal <span class="math display">\[
+f(t) = \cos(97 t\, 2\pi) + \cos(777 t\, 2\pi)
+\]</span> which is sparse in the frequency domain (transformation via FFT). The highest frequency is <span class="math inline">\(777 \mathrm{Hz}\)</span> and therefore the Shannon-Nyquist theorem tells us we should sample with at least <span class="math inline">\(1554 \mathrm{Hz}\)</span>.</p>
+<p>The sparsity of the sample allows us to reconstruct the signal by sampling randomly with an average sampling rate of <span class="math inline">\(128 \mathrm{Hz}\)</span>, well below the Shannon-Nyquist threshold.</p>
+<p>The code relies on the CoSaMP implementation <span class="citation" data-cites="NEEDELL2009301">Needell and Tropp (<a href="../references.html#ref-NEEDELL2009301" role="doc-biblioref">2009</a>)</span> provided on <a href="https://github.com/avirmaux/CoSaMP/tree/master">gitHub</a> and included below so we can work with it.</p>
+<p>The code is adapted from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 3.3)</span></p>
+<div id="0a7ccf5a" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>CoSaMP algorithm form gitHub, now print.</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cosamp(phi, u, s, epsilon<span class="op">=</span><span class="fl">1e-10</span>, max_iter<span class="op">=</span><span class="dv">1000</span>):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Return an `s`-sparse approximation of the target signal</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    Input:</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">        - phi, sampling matrix</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - u, noisy sample vector</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - s, sparsity</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> np.zeros(phi.shape[<span class="dv">1</span>])</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> u</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    it <span class="op">=</span> <span class="dv">0</span>  <span class="co"># count</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    halt <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="kw">not</span> halt:</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        it <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> np.dot(np.transpose(phi), v)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># large components</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        omega <span class="op">=</span> np.argsort(y)[<span class="op">-</span>(<span class="dv">2</span> <span class="op">*</span> s) :]</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        omega <span class="op">=</span> np.union1d(omega, a.nonzero()[<span class="dv">0</span>])</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        phiT <span class="op">=</span> phi[:, omega]</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> np.zeros(phi.shape[<span class="dv">1</span>])</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Solve Least Square</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        b[omega], _, _, _ <span class="op">=</span> np.linalg.lstsq(phiT, u)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get new estimate</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        b[np.argsort(b)[:<span class="op">-</span>s]] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        a <span class="op">=</span> b</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Halt criterion</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        v_old <span class="op">=</span> v</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> u <span class="op">-</span> np.dot(phi, a)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        halt <span class="op">=</span> (</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>            (np.linalg.norm(v <span class="op">-</span> v_old) <span class="op">&lt;</span> epsilon)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>            <span class="kw">or</span> np.linalg.norm(v) <span class="op">&lt;</span> epsilon</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>            <span class="kw">or</span> it <span class="op">&gt;</span> max_iter</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.fftpack <span class="im">import</span> dct, idct</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">6020</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">4096</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, N)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> t: np.cos(<span class="dv">97</span> <span class="op">*</span> t <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi) <span class="op">+</span> np.cos(<span class="dv">777</span> <span class="op">*</span> t <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> fun(t)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>f_hat <span class="op">=</span> np.fft.fft(f)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>PSD <span class="op">=</span> np.<span class="bu">abs</span>(f_hat) <span class="op">**</span> <span class="dv">2</span> <span class="op">/</span> N</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">## Randomly sample signal</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># num. random samples</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> N <span class="op">//</span> <span class="dv">32</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>perm <span class="op">=</span> np.floor(np.random.rand(p) <span class="op">*</span> N).astype(<span class="bu">int</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> f[perm]</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">## Solve compressed sensing problem</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Build Psi</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>Psi <span class="op">=</span> dct(np.identity(N))</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Measure rows of Psi</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>Theta <span class="op">=</span> Psi[perm, :]</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># CS via matching pursuit</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> cosamp(Theta, y, s<span class="op">=</span><span class="dv">10</span>, epsilon<span class="op">=</span><span class="fl">1.0e-10</span>, max_iter<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>frec <span class="op">=</span> idct(s)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># computes the (fast) discrete fourier transform</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>frec_hat <span class="op">=</span> np.fft.fft(frec, N)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Power spectrum (how much power in each freq)</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>PSDrec <span class="op">=</span> np.<span class="bu">abs</span>(frec_hat) <span class="op">**</span> <span class="dv">2</span> <span class="op">/</span> N</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>time_window <span class="op">=</span> np.array([<span class="dv">512</span>, <span class="dv">768</span>]) <span class="op">/</span> N</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>freq <span class="op">=</span> np.arange(N)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="bu">int</span>(np.floor(N <span class="op">/</span> <span class="dv">2</span>))</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f, <span class="st">"k"</span>)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>plt.plot(perm <span class="op">/</span> N, y, <span class="st">"rx"</span>, ms<span class="op">=</span><span class="dv">12</span>, mew<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time [s]"</span>)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>plt.xlim(time_window[<span class="dv">0</span>], time_window[<span class="dv">1</span>])</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">5e-3</span>)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>plt.plot(t, frec, <span class="st">"r"</span>)</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>plt.xlim(time_window[<span class="dv">0</span>], time_window[<span class="dv">1</span>])</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time [s]"</span>)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">5e-3</span>)</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>plt.plot(freq[:L], PSD[:L], <span class="st">"k"</span>, label<span class="op">=</span><span class="st">"Original"</span>)</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>plt.plot(freq[:L], PSDrec[:L], <span class="st">"r"</span>, label<span class="op">=</span><span class="st">"Reconstructed"</span>)</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, N <span class="op">/</span> <span class="dv">4</span>)</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, N <span class="op">/</span> <span class="dv">4</span>)</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">1</span> <span class="op">/</span> <span class="dv">3</span>)</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-sensing_compsensing_signal" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sensing_compsensing_signal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_compsensing_signal" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-sensing_compsensing_signal-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_compsensing_signal-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-1.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal" title="Figure&nbsp;13.1&nbsp;(a): Time window of the signal, the x marks sampling points in the domain."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_compsensing_signal-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Time window of the signal, the x marks sampling points in the domain.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_compsensing_signal" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-sensing_compsensing_signal-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_compsensing_signal-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-2.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal" title="Figure&nbsp;13.1&nbsp;(b): Time window of the reconstructed signal from the above measurements."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_compsensing_signal-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Time window of the reconstructed signal from the above measurements.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_compsensing_signal" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-sensing_compsensing_signal-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_compsensing_signal-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-3.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal" title="Figure&nbsp;13.1&nbsp;(c): Power spectral density of the original and reconstructed signal."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_compsensing_signal-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Power spectral density of the original and reconstructed signal.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sensing_compsensing_signal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13.1: Compressed sensing reconstruction of a two frequency audio signal, entire time from [0, 1].
+</figcaption>
+</figure>
+</div>
+<p>The CoSaMP algorithm works in the discrete cosine transform basis, which can be derived from the FFT. For this algorithm we sample <span class="math inline">\(p=128\)</span> points in time from the <span class="math inline">\(N = 4096\)</span> high resolution sampling. We therefore know exactly the timing of these samples. If we would sample uniformly in time we fail, see <a href="#fig-sensing_compsensing_signal2" class="quarto-xref">Figure&nbsp;<span>13.2</span></a>. This happens because we see an aliasing effect for the high-frequency domain resulting in erroneous frequency peaks. If we compare the samples in <a href="#fig-sensing_compsensing_signal-1" class="quarto-xref">Figure&nbsp;<span>13.1 (a)</span></a> and <a href="#fig-sensing_compsensing_signal2-1" class="quarto-xref">Figure&nbsp;<span>13.2 (a)</span></a> it is hard to see the difference.</p>
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ttt <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">1</span>, p)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> fun(ttt)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">## Solve compressed sensing problem</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Psi <span class="op">=</span> dct(np.identity(N))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>Theta <span class="op">=</span> Psi[perm, :]</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># CS via matching pursuit</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> cosamp(Theta, y, s<span class="op">=</span><span class="dv">10</span>, epsilon<span class="op">=</span><span class="fl">1.0e-10</span>, max_iter<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>frec <span class="op">=</span> idct(s)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>frec_hat <span class="op">=</span> np.fft.fft(frec, N)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>PSDrec <span class="op">=</span> np.<span class="bu">abs</span>(frec_hat) <span class="op">**</span> <span class="dv">2</span> <span class="op">/</span> N</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f, <span class="st">"k"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.plot(perm <span class="op">/</span> N, y, <span class="st">"rx"</span>, ms<span class="op">=</span><span class="dv">12</span>, mew<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time [s]"</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.xlim(time_window[<span class="dv">0</span>], time_window[<span class="dv">1</span>])</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">5e-3</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>plt.plot(t, frec, <span class="st">"r"</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>plt.xlim(time_window[<span class="dv">0</span>], time_window[<span class="dv">1</span>])</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time [s]"</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="fl">5e-3</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>plt.plot(freq[:L], PSD[:L], <span class="st">"k"</span>, label<span class="op">=</span><span class="st">"Original"</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>plt.plot(freq[:L], PSDrec[:L], <span class="st">"r"</span>, label<span class="op">=</span><span class="st">"Reconstructed"</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, N <span class="op">/</span> <span class="dv">4</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, N <span class="op">/</span> <span class="dv">4</span>)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">1</span> <span class="op">/</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-sensing_compsensing_signal2" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sensing_compsensing_signal2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_compsensing_signal2" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-sensing_compsensing_signal2-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_compsensing_signal2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-1.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal2" title="Figure&nbsp;13.2&nbsp;(a): Time window of the signal, the x marks sampling points in the domain."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal2"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_compsensing_signal2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Time window of the signal, the x marks sampling points in the domain.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_compsensing_signal2" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-sensing_compsensing_signal2-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_compsensing_signal2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-2.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal2" title="Figure&nbsp;13.2&nbsp;(b): Time window of the reconstructed signal from the above measurements."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal2"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_compsensing_signal2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Time window of the reconstructed signal from the above measurements.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_compsensing_signal2" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-sensing_compsensing_signal2-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_compsensing_signal2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-3.svg" class="lightbox" data-gallery="fig-sensing_compsensing_signal2" title="Figure&nbsp;13.2&nbsp;(c): Power spectral density of the original and reconstructed signal."><img src="compsensing_files/figure-html/fig-sensing_compsensing_signal2-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_compsensing_signal2"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_compsensing_signal2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Power spectral density of the original and reconstructed signal.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sensing_compsensing_signal2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13.2: Compressed sensing reconstruction of a two frequency audio signal, entire time from [0, 1] - sampling uniform in time.
+</figcaption>
+</figure>
+</div>
+<p>In the algorithm CoSaMP the desired level of sparsity can be selected. For the above plots we used <span class="math inline">\(s=10\)</span> to simulate an unknown factor. Convergence to the sparsest solution relies on <span class="math inline">\(p\)</span>, which in return is related to the sparsity <span class="math inline">\(K\)</span>.</p>
+<p><span class="citation" data-cites="Brunton2022">(Compare <a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 107</a>)</span></p>
+</div>
+</div>
+</div>
+</div>
+<section id="the-theoretic-basics-of-compressed-sensing" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="the-theoretic-basics-of-compressed-sensing"><span class="header-section-number">13.1</span> The theoretic basics of compressed sensing</h2>
+<p>Now that we have seen compressed sensing in action we need to bring in the theoretical basics that form this theory.</p>
+<p>The key feature is to look into the geometry of sparse vectors and how these vectors are transformed via random measurements. More precisely, for large enough <span class="math inline">\(p\)</span> (amount of measurements) our matrix <span class="math inline">\(D = CB\)</span> of <a href="#def-sensing-compressed-sensing" class="quarto-xref">Definition&nbsp;<span>13.1</span></a> preserves the distance and inner product structure of sparse vectors. In turn this means, we need to find a matrix <span class="math inline">\(C\)</span> such that <span class="math inline">\(D\)</span> is a near-isometry map on sparse vectors.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An isometry map is a map that is distance preserving, i.e.&nbsp;the distance between to points is not changed under this map.</p>
+<p><span class="math display">\[
+\| a - b \| = \| f(a) - f(b) \|
+\]</span></p>
+<p>A unitary map is a map that preserves distance and angle between vectors, i.e. <span class="math display">\[
+\langle a, b \rangle = \langle f(a), f(b) \rangle
+\]</span> For a linear map <span class="math inline">\(f(x) = Ux\)</span> this results in <span class="math inline">\(U^\mathrm{H}U = UU^\mathrm{H} = I\)</span>.</p>
+</div>
+</div>
+<p>If <span class="math inline">\(D\)</span> behaves as a near isometry, it is possible to solve <span class="math display">\[
+y = D s
+\]</span> for the <em>sparsest</em> vector <span class="math inline">\(s\)</span> using convex <span class="math inline">\(\ell_1\)</span> minimization.</p>
+<p>Furthermore, a general rule is, the more incoherent the measurements are the smaller we can choose <span class="math inline">\(p\)</span>.</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-sensing-rip" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 13.2 (Restricted Isometry Property (RIP))</strong></span> For <span class="math inline">\(p\)</span> incoherent measurements the matrix <span class="math inline">\(D=CB\)</span> satisfies a <strong>restricted isometry property</strong> (RIP) for sparse vectors <span class="math inline">\(s\)</span></p>
+<p><span class="math display">\[
+(1-\delta_K)\|s\|_2^2 \leq \|C B s\|_2^2 \leq (1+\delta_K)\|s\|_2^2,
+\]</span> with the restricted isometry constant <span class="math inline">\(\delta_K\)</span>. For a small enough <span class="math inline">\(\delta_K\)</span> <span class="math inline">\(CB\)</span> acts as a near-isometry on <span class="math inline">\(K\)</span>-sparse vectors.</p>
+<p>In particular, for <span class="math inline">\(\delta_K &lt; 1\)</span> and therefore <span class="math inline">\((1-\delta_K) &gt; 0\)</span> and <span class="math inline">\((1+\delta_K) &gt; 0\)</span> this means the norm induced by <span class="math inline">\(CB\)</span> is equivalent to the two norm on the <span class="math inline">\(K\)</span>-sparse vectors.</p>
+</div>
+</div>
+</div>
+</div>
+<p>It is difficult to compute the <span class="math inline">\(\delta_K\)</span> in the RIP and as <span class="math inline">\(C\)</span> may be selected at random there is more information included in the statistical properties of <span class="math inline">\(\delta_K\)</span> for a family of matrices <span class="math inline">\(C\)</span>. In general, increasing <span class="math inline">\(p\)</span> will decrease <span class="math inline">\(\delta_K\)</span>, same as having incoherence vectors and both improve the properties of <span class="math inline">\(CB\)</span> by bringing it closer to an isometry.</p>
+<p>Luckily, there exist generic sampling matrices <span class="math inline">\(C\)</span> that are sufficiently incoherent with respect to nearly all transform bases. In particular, Gaussian and Bernoulli random measurement matrices satisfy <a href="#def-sensing-rip" class="quarto-xref">Definition&nbsp;<span>13.2</span></a> for a generic <span class="math inline">\(B\)</span> (with high probability).</p>
+</section>
+<section id="sparse-regression" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="sparse-regression"><span class="header-section-number">13.2</span> Sparse Regression</h2>
+<p>Let us return to regression for a moment an in particular to the LASSO method introduced in <a href="../regression/optimizers.html#sec-regression-optimizers-lasso" class="quarto-xref"><span>Section 7.1.1</span></a>. We have seen that <span class="math inline">\(\ell_1\)</span>, i.e.&nbsp;the <span class="math inline">\(\|\cdot\|_1\)</span>, promotes sparsity and we can use this to create a more robust method that rejects outliers.</p>
+<p>We split up our points into a training and test set (the classic 80:20 split). We vary the parameter <span class="math inline">\(\lambda_1\)</span> through a range of values to create a <em>fit</em> with the training set and test against the test set.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-sensing-lasso" class="theorem example">
+<p><span class="theorem-title"><strong>Example 13.2 (LASSO fit for a regression problem)</strong></span> For our <span class="math display">\[
+A x = b
+\]</span> problem, we prescribe the dimensions as <span class="math inline">\(200\)</span> observations with <span class="math inline">\(10\)</span> candidate predictions. This results in a matrix <span class="math inline">\(A\in\mathbb{R}^{200 \times 10}\)</span> and we select the vector <span class="math inline">\(b\in\mathbb{R}^{200}\)</span> as the linear combination of exactly two of theses <span class="math inline">\(10\)</span> candidates. As a result, the vector <span class="math inline">\(x\)</span> is <span class="math inline">\(2\)</span>-sparse by construction, and the aim is to recover this. In order to give the algorithm something to work on we add noise to <span class="math inline">\(b\)</span> resulting in no zero element in <span class="math inline">\(b\)</span>.</p>
+<p>To perform a <span class="math inline">\(10\)</span>-fold cross validation <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> for the LASSO method we use the features of <code>sklearn</code> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<div id="cell-fig-sensing_lasso" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> linear_model</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> model_selection</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">6020</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.random.randn(m, n)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>])</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> A <span class="op">@</span> x <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> np.random.randn(m)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># k-cross validation for the Lasso method</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>lassoCV <span class="op">=</span> linear_model.LassoCV(cv<span class="op">=</span>cv, random_state<span class="op">=</span><span class="dv">6020</span>, tol<span class="op">=</span><span class="fl">1e-8</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>lassoCV.fit(A, b)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Recompute the lasso method for the optimal lambda selected</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>lasso_best <span class="op">=</span> linear_model.Lasso(alpha<span class="op">=</span>lassoCV.alpha_, random_state<span class="op">=</span><span class="dv">6020</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>lasso_best.fit(A, b)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>Lmean <span class="op">=</span> lassoCV.mse_path_.mean(axis<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>error <span class="op">=</span> [</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">min</span>(lassoCV.mse_path_, axis<span class="op">=-</span><span class="dv">1</span>),</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">max</span>(lassoCV.mse_path_, axis<span class="op">=-</span><span class="dv">1</span>),</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>] <span class="op">/</span> np.sqrt(cv)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>plt.errorbar(lassoCV.alphas_, Lmean, yerr<span class="op">=</span>error, ecolor<span class="op">=</span><span class="st">"lightgray"</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>plt.plot(lassoCV.alpha_, Lmean[lassoCV.alphas_ <span class="op">==</span> lassoCV.alpha_], <span class="st">"go"</span>, mfc<span class="op">=</span><span class="st">"none"</span>)</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">"log"</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Means Square Error"</span>)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">lambda_1</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>plt.gca().invert_xaxis()</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-sensing_lasso" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sensing_lasso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="compsensing_files/figure-html/fig-sensing_lasso-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;13.3: Cross-validation mean square error of Lasso fit, the green circle marks the optimal choice, the blue line the mean error of the k-folds and the error bar the maximal and minimal error form the k-folds."><img src="compsensing_files/figure-html/fig-sensing_lasso-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sensing_lasso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13.3: Cross-validation mean square error of Lasso fit, the green circle marks the optimal choice, the blue line the mean error of the k-folds and the error bar the maximal and minimal error form the k-folds.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The resulting coefficients for the best fit with lasso are</p>
+<div id="6625685e" class="cell styled-output" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>array([ 0.        ,  0.        ,  1.0978465 ,  0.        , -0.        ,
+       -0.        , -1.06495486,  0.        ,  0.        ,  0.        ])</code></pre>
+</div>
+</div>
+<p>and a appropriate fit for our toy example.</p>
+<p><span class="citation" data-cites="Brunton2022">(Compare <a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 115</a>)</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is also possible to build a dictionary and and look for a sparse representation in this dictionary.</p>
+<p>An example how this can be done with the Eigenfaces example can be found in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 117</a>)</span></p>
+</div>
+</div>
+</section>
+<section id="robust-principal-component-analysis-rpca" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="robust-principal-component-analysis-rpca"><span class="header-section-number">13.3</span> Robust Principal Component Analysis (RPCA)</h2>
+<p>We discussed the principal component analysis in <a href="../matrixdc/svd.html#sec-matrixdc-pca" class="quarto-xref"><span>Section 4.2</span></a> as an application for the SVD. Similar as regression, also the PCA is sensitive to outliers and <em>corrupt data</em>. In <span class="citation" data-cites="10.1145/1970392.1970395">Candès et al. (<a href="../references.html#ref-10.1145/1970392.1970395" role="doc-biblioref">2011</a>)</span> an algorithm to make it more robust was developed.</p>
+<p>The main idea of the paper is to decompose a matrix <span class="math inline">\(X\)</span> into a structured low-rank matrix <span class="math inline">\(L\)</span> and a sparse matrix <span class="math inline">\(S\)</span> containing the outliers and corrupt data <span class="math display">\[
+X = L + S.
+\]</span> If we can recover the principal components of <span class="math inline">\(L\)</span> from <span class="math inline">\(X\)</span> we have a robust method as the perturbation of <span class="math inline">\(S\)</span> has little influence.</p>
+<p>It might not be immediately obvious but applications of this split are video surveillance where the background is represented by <span class="math inline">\(L\)</span> and the foreground objects in <span class="math inline">\(L\)</span>, face recognition with the eigenfaces in <span class="math inline">\(L\)</span> and shadows, occlusions (like glasses or masks) are in <span class="math inline">\(S\)</span>.</p>
+<p>The task boils down to an optimization problem of the form <span id="eq-rpca-org"><span class="math display">\[
+\min_{L, S} \operatorname{rank}(L) + \| S \|_0 \quad\text{subject to}\quad L+S = X,
+\tag{13.2}\]</span></span> where unfortunately both parts are not convex but we can search for it with <em>high probability</em> using <span id="eq-rpca-pcp"><span class="math display">\[
+\min_{L, S} \|L\|_{\star} + \lambda \| S \|_1 \quad\text{subject to}\quad L+S = X.
+\tag{13.3}\]</span></span> In <a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> <span class="math inline">\(\|\cdot\|_{\star}\)</span> is called the <em>nuclear norm</em> consisting of the sum of all singular values and we use it as our proxy for the <span class="math inline">\(\operatorname{rank}\)</span>.</p>
+<p><a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> is called <em>principal component pursuit</em> (PCP) and in <span class="citation" data-cites="10.1145/1970392.1970395">Candès et al. (<a href="../references.html#ref-10.1145/1970392.1970395" role="doc-biblioref">2011</a>)</span> the authors show that <a href="#eq-rpca-pcp" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> converges to <a href="#eq-rpca-org" class="quarto-xref">Equation&nbsp;<span>13.2</span></a> for</p>
+<ol type="1">
+<li><span class="math inline">\(\lambda = 1/\sqrt{\max(n,m)}\)</span> for <span class="math inline">\(X^{m \times n}\)</span>,</li>
+<li><span class="math inline">\(L\)</span> is not sparse,</li>
+<li><span class="math inline">\(S\)</span> is not low-rank, where we assume that the entries do not span a low-dimensional column space.</li>
+</ol>
+<p>We can solve the PCP with an augmented Lagrange multiplier algorithm such as <span class="math display">\[
+\mathcal{L}(L, S, Y) = \|L\|_{\star} + \lambda \| S \|_1 + \langle Y, X - L - S \rangle + \frac{\mu}{2} \|X-L-S\|_F^2.
+\]</span></p>
+<p>This is an iterative method where we solve for <span class="math inline">\(L_k\)</span> and <span class="math inline">\(S_k\)</span>, update <span class="math inline">\(Y_{k+1} = Y_k + \mu (X-L_k - S_k)\)</span> and check for convergence. For this specific problem the alternations method (ADM) provides a simple procedure to solve for <span class="math inline">\(L\)</span> and <span class="math inline">\(S\)</span>.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-sensing-rpca" class="theorem example">
+<p><span class="theorem-title"><strong>Example 13.3 (Robust principal component analysis with Yale B dataset)</strong></span> The following implementation of RPCA can be found in <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 121</a>)</span> with the same application to the eigenfaces dataset.</p>
+<div id="db74c12a" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Robust principal component analysis and helper functions</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> shrink(X, tau):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    Y <span class="op">=</span> np.<span class="bu">abs</span>(X) <span class="op">-</span> tau</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sign(X) <span class="op">*</span> np.maximum(Y, np.zeros_like(Y))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> SVT(X, tau):</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    U, S, VT <span class="op">=</span> np.linalg.svd(X, full_matrices<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> U <span class="op">@</span> np.diag(shrink(S, tau)) <span class="op">@</span> VT</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> RPCA(X):</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    n1, n2 <span class="op">=</span> X.shape</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    mu <span class="op">=</span> n1 <span class="op">*</span> n2 <span class="op">/</span> (<span class="dv">4</span> <span class="op">*</span> np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(X.reshape(<span class="op">-</span><span class="dv">1</span>))))</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    lambd <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> np.sqrt(np.maximum(n1, n2))</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    thresh <span class="op">=</span> <span class="dv">10</span> <span class="op">**</span> (<span class="op">-</span><span class="dv">7</span>) <span class="op">*</span> np.linalg.norm(X)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    S <span class="op">=</span> np.zeros_like(X)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    Y <span class="op">=</span> np.zeros_like(X)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    L <span class="op">=</span> np.zeros_like(X)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (np.linalg.norm(X <span class="op">-</span> L <span class="op">-</span> S) <span class="op">&gt;</span> thresh) <span class="kw">and</span> (count <span class="op">&lt;</span> <span class="dv">1000</span>):</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        L <span class="op">=</span> SVT(X <span class="op">-</span> S <span class="op">+</span> (<span class="dv">1</span> <span class="op">/</span> mu) <span class="op">*</span> Y, <span class="dv">1</span> <span class="op">/</span> mu)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        S <span class="op">=</span> shrink(X <span class="op">-</span> L <span class="op">+</span> (<span class="dv">1</span> <span class="op">/</span> mu) <span class="op">*</span> Y, lambd <span class="op">/</span> mu)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        Y <span class="op">=</span> Y <span class="op">+</span> mu <span class="op">*</span> (X <span class="op">-</span> L <span class="op">-</span> S)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L, S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="3ca44f9c" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> LA</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio.v3 <span class="im">as</span> iio</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">'svg'</span>]</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rgb2gray(rgb):</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.dot(rgb[..., :<span class="dv">3</span>], [<span class="fl">0.2989</span>, <span class="fl">0.5870</span>, <span class="fl">0.1140</span>])</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos"</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"/raw/refs/heads/main/DATA/allFaces.mat"</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> scipy.io.loadmat(io.BytesIO(response.content))</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>faces <span class="op">=</span> data[<span class="st">"faces"</span>]</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="bu">int</span>(data[<span class="st">"m"</span>][<span class="dv">0</span>, <span class="dv">0</span>])</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">int</span>(data[<span class="st">"n"</span>][<span class="dv">0</span>, <span class="dv">0</span>])</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>nfaces <span class="op">=</span> np.ndarray.flatten(data[<span class="st">"nfaces"</span>])</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> faces[:, : nfaces[<span class="dv">0</span>]]</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>im <span class="op">=</span> np.asarray(</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    iio.imread(</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">"https://raw.githubusercontent.com/dynamicslab/databook_python"</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">"/refs/heads/master/DATA/mustache.jpg"</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.<span class="bu">round</span>(rgb2gray(im) <span class="op">/</span> <span class="dv">255</span>).astype(<span class="st">"uint8"</span>)</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.append(XX, (XX[:, <span class="dv">2</span>] <span class="op">*</span> A.T.flatten()).reshape((<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>L, S <span class="op">=</span> RPCA(X)</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index <span class="kw">in</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    plt.imshow(np.reshape(X[:, index], (m, n)).T, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    plt.gca().axis(<span class="st">"off"</span>)</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>    plt.imshow(np.reshape(L[:, index], (m, n)).T, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    plt.gca().axis(<span class="st">"off"</span>)</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    plt.imshow(np.reshape(S[:, index], (m, n)).T, cmap<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    plt.gca().axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="fig-sensing_rpca" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sensing_rpca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_rpca" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-sensing_rpca-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_rpca-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../_assets/sensing/X_2.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(a): X for image 3"><img src="../_assets/sensing/X_2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) <span class="math inline">\(X\)</span> for image 3
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_rpca" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-sensing_rpca-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_rpca-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../_assets/sensing/L_2.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(b): L for image 3"><img src="../_assets/sensing/L_2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) <span class="math inline">\(L\)</span> for image 3
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_rpca" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-sensing_rpca-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_rpca-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../_assets/sensing/S_2.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(c): S for image 3"><img src="../_assets/sensing/S_2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) <span class="math inline">\(S\)</span> for image 3
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_rpca" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-sensing_rpca-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_rpca-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../_assets/sensing/X_3.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(d): X for image 4"><img src="../_assets/sensing/X_3.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) <span class="math inline">\(X\)</span> for image 4
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_rpca" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-sensing_rpca-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_rpca-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../_assets/sensing/L_3.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(e): L for image 4"><img src="../_assets/sensing/L_3.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(e) <span class="math inline">\(L\)</span> for image 4
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_rpca" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-sensing_rpca-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_rpca-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../_assets/sensing/S_3.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(f): S for image 4"><img src="../_assets/sensing/S_3.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(f) <span class="math inline">\(S\)</span> for image 4
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_rpca" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-sensing_rpca-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_rpca-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../_assets/sensing/X_-1.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(g): X for image 3 with comic disguise"><img src="../_assets/sensing/X_-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(g) <span class="math inline">\(X\)</span> for image 3 with comic disguise
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_rpca" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-sensing_rpca-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_rpca-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../_assets/sensing/L_-1.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(h): L for image 3 with comic disguise"><img src="../_assets/sensing/L_-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(h) <span class="math inline">\(L\)</span> for image 3 with comic disguise
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_rpca" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-sensing_rpca-9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_rpca-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../_assets/sensing/S_-1.svg" class="lightbox" data-gallery="fig-sensing_rpca" title="Figure&nbsp;13.4&nbsp;(i): S for image 3 with comic disguise"><img src="../_assets/sensing/S_-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_rpca"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_rpca-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(i) <span class="math inline">\(S\)</span> for image 3 with comic disguise
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sensing_rpca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13.4: RPCA decomposition for the Yale B dataset.
+</figcaption>
+</figure>
+</div>
+<p>In <a href="#fig-sensing_rpca" class="quarto-xref">Figure&nbsp;<span>13.4</span></a> we can see that RPCA effectively filters out occluded regions and shadows form <span class="math inline">\(X\)</span> in <span class="math inline">\(L\)</span>. The missing part is filled in with the most consistent low-rank feature from the provided dataset. In our case we include all faces from the first person plus the third image with a fake moustache.</p>
+<p>We need to stress, that we cannot use this setup to reconstruct a different face obscured by a moustache.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sparse-sensor-placement" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="sparse-sensor-placement"><span class="header-section-number">13.4</span> Sparse Sensor Placement</h2>
+<p>So far we have looked how to reconstruct a signal with random measurements in a generic basis. But how about placing sensors at the correct points to reconstruct the signal with high probability. This can dramatically reduce the amount of data to measure.</p>
+<p>We can set <em>tailored sensors</em> for a particular library (our basis) instead of <em>random sensors</em> in a generic library.</p>
+<p>Amongst other things, this can be used to reconstruct faces, or classify signals, see <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, chap. 3.8</a>)</span> and references within.</p>
+<p>To see this in action we use the Python package <code>PySensors</code> and the example <em>Sea Surface Temperature (SST) sensors</em> from their documentation, see the <a href="https://python-sensors.readthedocs.io/en/latest/examples/sea_surface_temperature.html#gallery-examples-sea-surface-temperature-ipynb">docs</a> accessed on the 28th of November 2024.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-sensing-sparse-sensor-placement" class="theorem example">
+<p><span class="theorem-title"><strong>Example 13.4 (Sea Surface Temperature (SST) sensors)</strong></span> For a given dataset of sea surface temperature as training data we would like to place (sparse) sensors optimal that allow us to reconstruct the temperature at any other location. This is achieved with the <code>SSPOR</code> algorithm from <span class="citation" data-cites="8361090">Manohar et al. (<a href="../references.html#ref-8361090" role="doc-biblioref">2018</a>)</span>.</p>
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> shutil</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> netCDF4</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pysensors <span class="im">as</span> ps</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_formats <span class="op">=</span> [<span class="st">"svg"</span>]</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">6020</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Import and save data locally</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>url_base <span class="op">=</span> <span class="st">"https://downloads.psl.noaa.gov/Datasets/noaa.oisst.v2/"</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> [<span class="st">"sst.wkmean.1990-present.nc"</span>, <span class="st">"lsmask.nc"</span>]:</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> requests.get(url_base <span class="op">+</span> f, verify<span class="op">=</span><span class="va">True</span>, stream<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    r.raw.decode_content <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(f, <span class="st">"wb"</span>) <span class="im">as</span> f:</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        shutil.copyfileobj(r.raw, f)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> netCDF4.Dataset(<span class="st">"sst.wkmean.1990-present.nc"</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>lat, lon <span class="op">=</span> f.variables[<span class="st">"lat"</span>], f.variables[<span class="st">"lon"</span>]</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>SST <span class="op">=</span> f.variables[<span class="st">"sst"</span>]</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>sst <span class="op">=</span> SST[:]</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> netCDF4.Dataset(<span class="st">"lsmask.nc"</span>)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> f.variables[<span class="st">"mask"</span>]</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>masks <span class="op">=</span> np.bool_(np.squeeze(mask))</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>snapshot <span class="op">=</span> <span class="bu">float</span>(<span class="st">"nan"</span>) <span class="op">*</span> np.ones((<span class="dv">180</span>, <span class="dv">360</span>))</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>snapshot[masks] <span class="op">=</span> sst[<span class="dv">0</span>, masks]</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>plt.imshow(snapshot, cmap<span class="op">=</span>plt.cm.coolwarm)</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>plt.yticks([])</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sst[:, masks]</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.reshape(X.compressed(), X.shape)</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute optimal sensor placement</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ps.SSPOR(basis<span class="op">=</span>ps.basis.SVD(n_basis_modes<span class="op">=</span><span class="dv">25</span>), n_sensors<span class="op">=</span><span class="dv">25</span>)</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>model.fit(X)</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>sensors <span class="op">=</span> model.get_selected_sensors()</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot sensor locations</span></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> np.transpose(<span class="dv">0</span> <span class="op">*</span> X[<span class="dv">1</span>, :])</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>temp[sensors] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> <span class="dv">0</span> <span class="op">*</span> snapshot</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>img[masks] <span class="op">=</span> temp</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>plt.imshow(snapshot, cmap<span class="op">=</span>plt.cm.coolwarm)</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>indx <span class="op">=</span> np.where(img <span class="op">==</span> <span class="dv">1</span>)</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>plt.scatter(indx[<span class="dv">1</span>], indx[<span class="dv">0</span>], <span class="dv">8</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>plt.yticks([])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-sensing_sst" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sensing_sst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_sst" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-sensing_sst-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_sst-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="compsensing_files/figure-html/fig-sensing_sst-output-1.svg" class="lightbox" data-gallery="fig-sensing_sst" title="Figure&nbsp;13.5&nbsp;(a): Sea surface temperature."><img src="compsensing_files/figure-html/fig-sensing_sst-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_sst"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_sst-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Sea surface temperature.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-sensing_sst" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-sensing_sst-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-sensing_sst-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="compsensing_files/figure-html/fig-sensing_sst-output-2.svg" class="lightbox" data-gallery="fig-sensing_sst" title="Figure&nbsp;13.5&nbsp;(b): Optimal learned sensor placements to recover sea surface temperature"><img src="compsensing_files/figure-html/fig-sensing_sst-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-sensing_sst"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sensing_sst-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Optimal learned sensor placements to recover sea surface temperature
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sensing_sst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13.5: Finding optimal sensor placements to recover the sea surface temperature.
+</figcaption>
+</figure>
+</div>
+<p>(Compare <a href="https://python-sensors.readthedocs.io/en/latest/examples/sea_surface_temperature.html#gallery-examples-sea-surface-temperature-ipynb">docs of <code>PySensors</code></a> accessed on the 28th of November 2024)</p>
+</div>
+</div>
+</div>
+</div>
+<p>This concludes our excursion into compressed sensing.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Brunton2022" class="csl-entry" role="listitem">
+Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engineering - Machine Learning, Dynamical Systems, and Control</em>. 2nd ed. Cambridge: Cambridge University Press.
+</div>
+<div id="ref-10.1145/1970392.1970395" class="csl-entry" role="listitem">
+Candès, Emmanuel J., Xiaodong Li, Yi Ma, and John Wright. 2011. <span>“Robust Principal Component Analysis?”</span> <em>J. ACM</em> 58 (3). <a href="https://doi.org/10.1145/1970392.1970395">https://doi.org/10.1145/1970392.1970395</a>.
+</div>
+<div id="ref-8361090" class="csl-entry" role="listitem">
+Manohar, Krithika, Bingni W. Brunton, J. Nathan Kutz, and Steven L. Brunton. 2018. <span>“Data-Driven Sparse Sensor Placement for Reconstruction: Demonstrating the Benefits of Exploiting Known Patterns.”</span> <em>IEEE Control Systems Magazine</em> 38 (3): 63–86. <a href="https://doi.org/10.1109/MCS.2018.2810460">https://doi.org/10.1109/MCS.2018.2810460</a>.
+</div>
+<div id="ref-NEEDELL2009301" class="csl-entry" role="listitem">
+Needell, D., and J. A. Tropp. 2009. <span>“CoSaMP: Iterative Signal Recovery from Incomplete and Inaccurate Samples.”</span> <em>Applied and Computational Harmonic Analysis</em> 26 (3): 301–21. https://doi.org/<a href="https://doi.org/10.1016/j.acha.2008.07.002">https://doi.org/10.1016/j.acha.2008.07.002</a>.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>We split our data into <span class="math inline">\(10\)</span> sets, use 9 for the training and 1 for test and average over the results.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Install the package via <code>pdm add scikit-learn</code>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/kandolfp\.github\.io\/MECH-M-DUAL-1-DBM\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../sensing/sparsity.html" class="pagination-link" aria-label="Sparsity and Compression">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Sparsity and Compression</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../statistics/index.html" class="pagination-link" aria-label="Statistics">
+        <span class="nav-page-text">Statistics</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Basics of Data Science WS 2025/26 (MECH-M-DUAL-1-GDM)</p>
+</div>   
+    <div class="nav-footer-center">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> Peter Kandolf</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/sensing/compsensing.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

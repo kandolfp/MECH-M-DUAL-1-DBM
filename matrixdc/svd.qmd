@@ -415,39 +415,20 @@ If the sensor ranges of our matrix are very different in magnitude the correlati
 :::
 
 ```{python}
-# | echo: false
-# | output: asis
+#| echo: false
+#| output: asis
 
 print(r"In our example we get our scaled ")
-print(r"$\sigma_1=" + str(float(round(S[0], 3))) + r"\approx 2$")
-print(r"and $\sigma_2=" + str(float(round(S[1], 3))) + r"\approx \frac12$.")
+print(r"$\sigma_1=" + str(float(round(S[0],3))) + r"\approx 2$")
+print(r"and $\sigma_2=" + str(float(round(S[1],3))) + r"\approx \frac12$.")
 print(r"These results recover our given parameters very well.")
-print(
-    r"Additionally we can see that our rotation matrix is closely matched by $U$ (up to signs) from our SVD:"
-)
-print(
-    r"""$$
+print(r"Additionally we can see that our rotation matrix is closely matched by $U$ (up to signs) from our SVD:")
+print(r"""$$
 R_{\frac\pi3} = \left[
-\begin{array}{cc} """
-    + str(float(round(R[0, 0], 3)))
-    + "&"
-    + str(float(round(R[1, 0], 3)))
-    + r"\\"
-    + str(float(round(R[0, 1], 3)))
-    + "&"
-    + str(float(round(R[1, 1], 3)))
-    + r"""\end{array}
+\begin{array}{cc} """ + str(float(round(R[0, 0], 3))) + "&" + str(float(round(R[1, 0], 3))) + r"\\" + str(float(round(R[0, 1], 3))) + "&" + str(float(round(R[1, 1], 3))) + r"""\end{array}
 \right], \quad U = \left[
-\begin{array}{cc}"""
-    + str(float(round(U[0, 0], 3)))
-    + "&"
-    + str(float(round(U[1, 0], 3)))
-    + r"\\"
-    + str(float(round(U[0, 1], 3)))
-    + "&"
-    + str(float(round(U[1, 1], 3)))
-    + r"""\end{array} \right]
-$$"""
+\begin{array}{cc}""" + str(float(round(U[0, 0], 3))) + "&" + str(float(round(U[1, 0], 3))) + r"\\" + str(float(round(U[0, 1], 3))) + "&" + str(float(round(U[1, 1], 3))) + r"""\end{array} \right].
+$$""")
 ```
 
 ### Example Eigenfaces {#sec-matrixcd-svd-eigenfaces}

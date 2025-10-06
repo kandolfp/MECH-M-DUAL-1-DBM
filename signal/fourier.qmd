@@ -118,7 +118,7 @@ $$
 $$ {#eq-euler}
 we can rewrite @eq-fs as
 $$
-f(t) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\omega\mathrm{i} k t}
+f(t) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\omega\mathrm{i} k t},
 $$
 with 
 $$
@@ -337,7 +337,7 @@ The Fourier transform extends this to functions with the domain extended to $\pm
 
 Let us start of with the series representation we already know:
 $$
-f(t) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\mathrm{i} \omega k t}
+f(t) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\mathrm{i} \omega k t},
 $$
 with the coefficients
 $$
@@ -349,7 +349,7 @@ If we now perform the transition for $L \to \infty$ resulting in $\Delta\omega \
 This results in
 $$
 f(t) = \lim_{\Delta \omega \to 0} \sum_{k=-\infty}^\infty \frac{\Delta \omega}{2\pi}
-\int_{-\tfrac{\pi}{\Delta \omega}}^{\tfrac{\pi}{\Delta \omega}} f(\xi) \mathrm{e}^{-\mathrm{i} k \Delta \omega \xi}\, \mathrm{d}\xi\,\, \mathrm{e}^{\Delta\omega\mathrm{i} k t}
+\int_{-\tfrac{\pi}{\Delta \omega}}^{\tfrac{\pi}{\Delta \omega}} f(\xi) \mathrm{e}^{-\mathrm{i} k \Delta \omega \xi}\, \mathrm{d}\xi\,\, \mathrm{e}^{\Delta\omega\mathrm{i} k t},
 $$
 which is a Riemann integral and the kernel becomes the Fourier Transform of our function. 
 
@@ -365,7 +365,7 @@ In this case we call $\hat{f}(\omega) \equiv \mathcal{F}\{f(t)\}$ the **Fourier 
 
 The **inverse Fourier transform** is defined as
 $$
-\mathcal{F}^{-1}\{\hat{f}(\omega)\} = \frac{1}{2 \pi}\int_{-\infty}^{\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i} \omega x}\, \mathrm{d}\omega
+\mathcal{F}^{-1}\{\hat{f}(\omega)\} = \frac{1}{2 \pi}\int_{-\infty}^{\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i} \omega x}\, \mathrm{d}\omega.
 $$
 ::::
 :::
@@ -527,10 +527,9 @@ DFT = np.power(w, J * K)
 ```
 :::
 
-## Fast-Fourier Transform>
->
-In 1965, James W. Cooley (IBM) and John W. Tukey (Princeton) developed the so called _fast Fourier transform_ (FFT) that scales with $\mathcal{O}(N \log(N))$.
- which becomes almost linear for large enough $N$, see @Cooley1965.
+## Fast-Fourier Transform
+
+>In 1965, James W. Cooley (IBM) and John W. Tukey (Princeton) developed the so called _fast Fourier transform_ (FFT) that scales with $\mathcal{O}(N \log(N))$, which becomes almost linear for large enough $N$, see @Cooley1965.
 
 ::: {.callout-note}
 
@@ -1107,12 +1106,13 @@ plt.show()
 ::: {.content-visible when-format="html"}
 :::: {.callout-caution appearance="simple" collapse="true" icon=false}
 ::::: {#exr-fourier-fft-heat-self}
+
 ## Self implementation @exm-fourier-fft-heat
 
 Implement the code yourself by filling out the missing sections:
 
 ```{python}
-# | code-fold: false
+# | code-fold: true
 # | eval: false
 # | code-summary: "Code fragment for implementation."
 import numpy as np

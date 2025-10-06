@@ -66,13 +66,13 @@ In order to make it clearer we follow the example given in [@Brunton2022, Sectio
 
 For the function 
 $$
-f(x) = x_1^2 + 3 x_2^2
+f(x) = x_1^2 + 3 x_2^2,
 $$
 we can compute the gradient as
 $$
-\nabla f (x)= \left[ \begin{array}{c} \partial_{x_1} f(x)\\ \partial_{x_2} f(x) \end{array} \right] = \left[ \begin{array}{c} 2 x_1 \\ 6 x_2 \end{array} \right]
+\nabla f (x)= \left[ \begin{array}{c} \partial_{x_1} f(x)\\ \partial_{x_2} f(x) \end{array} \right] = \left[ \begin{array}{c} 2 x_1 \\ 6 x_2 \end{array} \right],
 $$
-Resulting in 
+resulting in 
 $$
 x^{k+1} = x^{(k)} - \delta \, \nabla f(x^{(k)}) = 
 \left[ \begin{array}{c} (1 - 2 \delta) x^{(k)}_1 \\ (1 - 6 \delta)x^{(k)}_2 \end{array} \right].
@@ -165,10 +165,10 @@ If you cannot compute the gradient analytically there are numerical methods to h
 
 In order to get a better idea on how this is working for _curve fitting_ we apply the gradient descent method to our curve fitting from @sec-regr-linear-ols.
 
-In @eq-ols_gradient we computed the gradient and instead of computing $X^\dagger$ with high cost we get the low cost iterative solver:
+In @eq-ols_gradient we computed the gradient and instead of computing $X^\dagger$ with high cost we get the low cost iterative solver
 
 $$
-c^{(k+1)} = c^{(k)} - \delta (2 X^{\mathsf{T}} X c^{(k)} - 2 X^{\mathsf{T}} y)
+c^{(k+1)} = c^{(k)} - \delta (2 X^{\mathsf{T}} X c^{(k)} - 2 X^{\mathsf{T}} y).
 $$
 
 As $\delta$ is tricky to compute we do not update it but prescribe it.

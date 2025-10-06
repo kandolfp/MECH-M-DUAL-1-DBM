@@ -21,7 +21,7 @@ If we further impose a restriction on $x$ we can select a more specific solution
 
 The generalized form is
 $$
-x = \underset{v}{\operatorname{argmin}} \|Av - b\|_2 + \lambda_1 \|v\|_1 + \lambda_2\|v\|_2
+x = \underset{v}{\operatorname{argmin}} \|Av - b\|_2 + \lambda_1 \|v\|_1 + \lambda_2\|v\|_2,
 $$ {#eq-reg-optimizers}
 where the parameters $\lambda_1$ and $\lambda_2$ are called the _penalization coefficients_, with respect to the norm.
 Selecting these coefficients is the first step towards _model selection_.

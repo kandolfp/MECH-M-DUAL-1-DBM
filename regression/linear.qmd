@@ -260,7 +260,7 @@ X = \left[
 1 & \vdots &\vdots & \ddots &\vdots \\
 1 & x_n    &x_n^2  & \cdots &x_n^m
 \end{array}
-\right]
+\right].
 $$ {#eq-vander}
 
 ::: {.callout-note}

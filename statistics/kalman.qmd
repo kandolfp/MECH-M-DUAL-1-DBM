@@ -108,21 +108,25 @@ Going back to our model description before, we have $\hat{x}_{1|0} = \mu_0$ and 
 :::
 
 ```{python}
-#| label: fig-kalman-train1
-#| fig-cap: "Position of the train"
-#| fig-subcap:
-#|   - "Position at time t=0."
-#|   - "Position at time t=1."
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-kalman-train1
+# | fig-cap: "Position of the train"
+# | fig-subcap:
+# |   - "Position at time t=0."
+# |   - "Position at time t=1."
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+
 %config InlineBackend.figure_formats = ["svg"]
 
-f = lambda mu, sigma, x: 1 / np.sqrt(2 * np.pi * sigma**2) * \
-                         np.exp(- (x - mu)**2 / (2 * sigma**2))
+f = (
+    lambda mu, sigma, x: 1
+    / np.sqrt(2 * np.pi * sigma**2)
+    * np.exp(-((x - mu) ** 2) / (2 * sigma**2))
+)
 
 x = np.linspace(0, 2.5, 1024)
 plt.figure()
@@ -172,22 +176,27 @@ $$ {#eq-kalman-update2}
 
 Let us use this to get an estimate of our train after the measurement by multiplying the two Gaussian distributions, as seen in @fig-kalman-train2.
 ```{python}
-#| label: fig-kalman-train2
-#| fig-cap: "Position of the train at t=1 with measurement and resulting distribution."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-kalman-train2
+# | fig-cap: "Position of the train at t=1 with measurement and resulting distribution."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+
 %config InlineBackend.figure_formats = ["svg"]
 
-f = lambda mu, sigma, x: 1 / np.sqrt(2 * np.pi * sigma**2) * \
-    np.exp(- (x - mu)**2 / (2 * sigma**2))
+f = (
+    lambda mu, sigma, x: 1
+    / np.sqrt(2 * np.pi * sigma**2)
+    * np.exp(-((x - mu) ** 2) / (2 * sigma**2))
+)
 
-update = lambda mu, sigma: ((mu[0] * np.pow(sigma[1], 2) + mu[1] * 
-                             np.pow(sigma[0], 2)) / \
-                            (np.sum(np.pow(sigma, 2))),
-                            np.prod(sigma) / np.sqrt(np.sum(np.pow(sigma, 2))))
+update = lambda mu, sigma: (
+    (mu[0] * np.pow(sigma[1], 2) + mu[1] * np.pow(sigma[0], 2))
+    / (np.sum(np.pow(sigma, 2))),
+    np.prod(sigma) / np.sqrt(np.sum(np.pow(sigma, 2))),
+)
 
 x = np.linspace(0, 2.5, 1024)
 plt.figure()

@@ -102,9 +102,10 @@ The code relies on the CoSaMP implementation @NEEDELL2009301 provided on [gitHub
 The code is adapted from [@Brunton2022, Code 3.3]
 
 ```{python}
-#| code-fold: true
-#| code-summary: "CoSaMP algorithm form gitHub, now print."
+# | code-fold: true
+# | code-summary: "CoSaMP algorithm form gitHub, now print."
 import numpy as np
+
 
 def cosamp(phi, u, s, epsilon=1e-10, max_iter=1000):
     """
@@ -116,48 +117,51 @@ def cosamp(phi, u, s, epsilon=1e-10, max_iter=1000):
     """
     a = np.zeros(phi.shape[1])
     v = u
-    it = 0 # count
+    it = 0  # count
     halt = False
     while not halt:
         it += 1
-        
+
         y = np.dot(np.transpose(phi), v)
         # large components
-        omega = np.argsort(y)[-(2*s):]
+        omega = np.argsort(y)[-(2 * s) :]
         omega = np.union1d(omega, a.nonzero()[0])
         phiT = phi[:, omega]
         b = np.zeros(phi.shape[1])
         # Solve Least Square
         b[omega], _, _, _ = np.linalg.lstsq(phiT, u)
-        
+
         # Get new estimate
         b[np.argsort(b)[:-s]] = 0
         a = b
-        
+
         # Halt criterion
         v_old = v
         v = u - np.dot(phi, a)
 
-        halt = (np.linalg.norm(v - v_old) < epsilon) or \
-            np.linalg.norm(v) < epsilon or \
-            it > max_iter
-        
+        halt = (
+            (np.linalg.norm(v - v_old) < epsilon)
+            or np.linalg.norm(v) < epsilon
+            or it > max_iter
+        )
+
     return a
 ```
 
 ```{python}
-#| label: fig-sensing_compsensing_signal
-#| fig-cap: "Compressed sensing reconstruction of a two frequency audio signal, entire time from [0, 1]."
-#| fig-subcap:
-#|   - "Time window of the signal, the x marks sampling points in the domain."
-#|   - "Time window of the reconstructed signal from the above measurements."
-#|   - "Power spectral density of the original and reconstructed signal."
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-sensing_compsensing_signal
+# | fig-cap: "Compressed sensing reconstruction of a two frequency audio signal, entire time from [0, 1]."
+# | fig-subcap:
+# |   - "Time window of the signal, the x marks sampling points in the domain."
+# |   - "Time window of the reconstructed signal from the above measurements."
+# |   - "Power spectral density of the original and reconstructed signal."
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.fftpack import dct, idct
+
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
 
@@ -166,7 +170,7 @@ t = np.linspace(0, 1, N)
 fun = lambda t: np.cos(97 * t * 2 * np.pi) + np.cos(777 * t * 2 * np.pi)
 f = fun(t)
 f_hat = np.fft.fft(f)
-PSD = np.abs(f_hat)**2 / N
+PSD = np.abs(f_hat) ** 2 / N
 
 ## Randomly sample signal
 # num. random samples
@@ -181,12 +185,12 @@ Psi = dct(np.identity(N))
 Theta = Psi[perm, :]
 
 # CS via matching pursuit
-s = cosamp(Theta, y, s=10, epsilon=1.e-10, max_iter=10)
+s = cosamp(Theta, y, s=10, epsilon=1.0e-10, max_iter=10)
 frec = idct(s)
 # computes the (fast) discrete fourier transform
 frec_hat = np.fft.fft(frec, N)
 # Power spectrum (how much power in each freq)
-PSDrec = np.abs(frec_hat)**2 / N
+PSDrec = np.abs(frec_hat) ** 2 / N
 
 time_window = np.array([512, 768]) / N
 freq = np.arange(N)
@@ -194,7 +198,7 @@ L = int(np.floor(N / 2))
 
 plt.figure()
 plt.plot(t, f, "k")
-plt.plot(perm/N, y, "rx", ms=12, mew=4)
+plt.plot(perm / N, y, "rx", ms=12, mew=4)
 plt.xlabel("Time [s]")
 plt.xlim(time_window[0], time_window[1])
 plt.ylim(-2, 2)
@@ -210,10 +214,10 @@ plt.gca().set_aspect(5e-3)
 plt.figure()
 plt.plot(freq[:L], PSD[:L], "k", label="Original")
 plt.plot(freq[:L], PSDrec[:L], "r", label="Reconstructed")
-plt.xlim(0, N/4)
-plt.ylim(0, N/4)
+plt.xlim(0, N / 4)
+plt.ylim(0, N / 4)
 plt.legend()
-plt.gca().set_aspect(1/3)
+plt.gca().set_aspect(1 / 3)
 
 plt.show()
 ```
@@ -226,15 +230,15 @@ This happens because we see an aliasing effect for the high-frequency domain res
 If we compare the samples in @fig-sensing_compsensing_signal-1 and @fig-sensing_compsensing_signal2-1 it is hard to see the difference.
 
 ```{python}
-#| label: fig-sensing_compsensing_signal2
-#| fig-cap: "Compressed sensing reconstruction of a two frequency audio signal, entire time from [0, 1] - sampling uniform in time."
-#| fig-subcap:
-#|   - "Time window of the signal, the x marks sampling points in the domain."
-#|   - "Time window of the reconstructed signal from the above measurements."
-#|   - "Power spectral density of the original and reconstructed signal."
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-sensing_compsensing_signal2
+# | fig-cap: "Compressed sensing reconstruction of a two frequency audio signal, entire time from [0, 1] - sampling uniform in time."
+# | fig-subcap:
+# |   - "Time window of the signal, the x marks sampling points in the domain."
+# |   - "Time window of the reconstructed signal from the above measurements."
+# |   - "Power spectral density of the original and reconstructed signal."
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 ttt = np.random.uniform(0, 1, p)
 y = fun(ttt)
 
@@ -243,14 +247,14 @@ Psi = dct(np.identity(N))
 Theta = Psi[perm, :]
 
 # CS via matching pursuit
-s = cosamp(Theta, y, s=10, epsilon=1.e-10, max_iter=10) 
+s = cosamp(Theta, y, s=10, epsilon=1.0e-10, max_iter=10)
 frec = idct(s)
 frec_hat = np.fft.fft(frec, N)
-PSDrec = np.abs(frec_hat)**2 / N
+PSDrec = np.abs(frec_hat) ** 2 / N
 
 plt.figure()
 plt.plot(t, f, "k")
-plt.plot(perm/N, y, "rx", ms=12, mew=4)
+plt.plot(perm / N, y, "rx", ms=12, mew=4)
 plt.xlabel("Time [s]")
 plt.xlim(time_window[0], time_window[1])
 plt.ylim(-2, 2)
@@ -266,10 +270,10 @@ plt.gca().set_aspect(5e-3)
 plt.figure()
 plt.plot(freq[:L], PSD[:L], "k", label="Original")
 plt.plot(freq[:L], PSDrec[:L], "r", label="Reconstructed")
-plt.xlim(0, N/4)
-plt.ylim(0, N/4)
+plt.xlim(0, N / 4)
+plt.ylim(0, N / 4)
 plt.legend()
-plt.gca().set_aspect(1/3)
+plt.gca().set_aspect(1 / 3)
 ```
 
 In the algorithm CoSaMP the desired level of sparsity can be selected.
@@ -358,15 +362,16 @@ In order to give the algorithm something to work on we add noise to $b$ resultin
 To perform a $10$-fold cross validation [^1] for the LASSO method we use the features of `sklearn` [^2]. 
 
 ```{python}
-#| label: fig-sensing_lasso
-#| fig-cap: "Cross-validation mean square error of Lasso fit, the green circle marks the optimal choice, the blue line the mean error of the k-folds and the error bar the maximal and minimal error form the k-folds."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-sensing_lasso
+# | fig-cap: "Cross-validation mean square error of Lasso fit, the green circle marks the optimal choice, the blue line the mean error of the k-folds and the error bar the maximal and minimal error form the k-folds."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import linear_model
 from sklearn import model_selection
 import pandas as pd
+
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
 
@@ -388,12 +393,12 @@ lasso_best.fit(A, b)
 # Plotting
 plt.figure()
 Lmean = lassoCV.mse_path_.mean(axis=-1)
-error = [np.min(lassoCV.mse_path_, axis=-1), 
-         np.max(lassoCV.mse_path_, axis=-1)] / np.sqrt(cv)
+error = [
+    np.min(lassoCV.mse_path_, axis=-1),
+    np.max(lassoCV.mse_path_, axis=-1),
+] / np.sqrt(cv)
 plt.errorbar(lassoCV.alphas_, Lmean, yerr=error, ecolor="lightgray")
-plt.plot(lassoCV.alpha_,
-         Lmean[lassoCV.alphas_==lassoCV.alpha_],
-         "go", mfc='none')
+plt.plot(lassoCV.alpha_, Lmean[lassoCV.alphas_ == lassoCV.alpha_], "go", mfc="none")
 plt.xscale("log")
 plt.ylabel("Means Square Error")
 plt.xlabel(r"$\lambda_1$")
@@ -403,8 +408,8 @@ plt.show()
 The resulting coefficients for the best fit with lasso are 
 
 ```{python} 
-#| classes: styled-output
-#| echo: false
+# | classes: styled-output
+# | echo: false
 lasso_best.coef_
 ```
 and a appropriate fit for our toy example.
@@ -468,8 +473,8 @@ For this specific problem the alternations method (ADM) provides a simple proced
 The following implementation of RPCA can be found in [@Brunton2022, pp. 121] with the same application to the eigenfaces dataset.
 
 ```{python}
-#| code-fold: true
-#| code-summary: "Robust principal component analysis and helper functions"
+# | code-fold: true
+# | code-summary: "Robust principal component analysis and helper functions"
 def shrink(X, tau):
     Y = np.abs(X) - tau
     return np.sign(X) * np.maximum(Y, np.zeros_like(Y))
@@ -485,8 +490,8 @@ def RPCA(X):
     n1, n2 = X.shape
     mu = n1 * n2 / (4 * np.sum(np.abs(X.reshape(-1))))
     lambd = 1 / np.sqrt(np.maximum(n1, n2))
-    thresh = 10**(-7) * np.linalg.norm(X)
-    
+    thresh = 10 ** (-7) * np.linalg.norm(X)
+
     S = np.zeros_like(X)
     Y = np.zeros_like(X)
     L = np.zeros_like(X)
@@ -494,16 +499,15 @@ def RPCA(X):
     while (np.linalg.norm(X - L - S) > thresh) and (count < 1000):
         L = SVT(X - S + (1 / mu) * Y, 1 / mu)
         S = shrink(X - L + (1 / mu) * Y, lambd / mu)
-        Y = Y + mu*(X - L - S)
+        Y = Y + mu * (X - L - S)
         count += 1
     return L, S
 ```
 
 ```{python}
-#| eval: false
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
-
+# | eval: false
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import numpy.linalg as LA
 import scipy
@@ -511,26 +515,33 @@ import requests
 import io
 import imageio.v3 as iio
 import matplotlib.pyplot as plt
+
 %config InlineBackend.figure_formats = ['svg']
 
+
 def rgb2gray(rgb):
-    return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
+    return np.dot(rgb[..., :3], [0.2989, 0.5870, 0.1140])
+
 
 response = requests.get(
     "https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos"
-    "/raw/refs/heads/main/DATA/allFaces.mat")
+    "/raw/refs/heads/main/DATA/allFaces.mat"
+)
 
 data = scipy.io.loadmat(io.BytesIO(response.content))
 faces = data["faces"]
-m = int(data["m"][0,0])
-n = int(data["n"][0,0])
-nfaces = np.ndarray.flatten(data['nfaces'])
+m = int(data["m"][0, 0])
+n = int(data["n"][0, 0])
+nfaces = np.ndarray.flatten(data["nfaces"])
 
-XX = faces[:,:nfaces[0]]
-im = np.asarray(iio.imread(
-    "https://raw.githubusercontent.com/dynamicslab/databook_python"
-    "/refs/heads/master/DATA/mustache.jpg"))
-A = np.round(rgb2gray(im)/255).astype("uint8")
+XX = faces[:, : nfaces[0]]
+im = np.asarray(
+    iio.imread(
+        "https://raw.githubusercontent.com/dynamicslab/databook_python"
+        "/refs/heads/master/DATA/mustache.jpg"
+    )
+)
+A = np.round(rgb2gray(im) / 255).astype("uint8")
 X = np.append(XX, (XX[:, 2] * A.T.flatten()).reshape((-1, 1)), axis=1)
 
 L, S = RPCA(X)
@@ -598,67 +609,65 @@ For a given dataset of sea surface temperature as training data we would like to
 This is achieved with the `SSPOR` algorithm from @8361090.
 
 ```{python}
-#| label: fig-sensing_sst
-#| fig-cap: "Finding optimal sensor placements to recover the sea surface temperature."
-#| fig-subcap:
-#|   - "Sea surface temperature."
-#|   - "Optimal learned sensor placements to recover sea surface temperature"
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-sensing_sst
+# | fig-cap: "Finding optimal sensor placements to recover the sea surface temperature."
+# | fig-subcap:
+# |   - "Sea surface temperature."
+# |   - "Optimal learned sensor placements to recover sea surface temperature"
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import requests
 import shutil
 import numpy as np
 import matplotlib.pyplot as plt
 import netCDF4
 import pysensors as ps
+
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
 
 # Import and save data locally
 url_base = "https://downloads.psl.noaa.gov/Datasets/noaa.oisst.v2/"
-for f in ['sst.wkmean.1990-present.nc', 'lsmask.nc']:
+for f in ["sst.wkmean.1990-present.nc", "lsmask.nc"]:
     r = requests.get(url_base + f, verify=True, stream=True)
     r.raw.decode_content = True
-    with open(f, 'wb') as f:
+    with open(f, "wb") as f:
         shutil.copyfileobj(r.raw, f)
 
-f = netCDF4.Dataset('sst.wkmean.1990-present.nc')
-lat,lon = f.variables['lat'], f.variables['lon']
-SST = f.variables['sst']
+f = netCDF4.Dataset("sst.wkmean.1990-present.nc")
+lat, lon = f.variables["lat"], f.variables["lon"]
+SST = f.variables["sst"]
 sst = SST[:]
 
-f = netCDF4.Dataset('lsmask.nc')
-mask = f.variables['mask']
+f = netCDF4.Dataset("lsmask.nc")
+mask = f.variables["mask"]
 
 masks = np.bool_(np.squeeze(mask))
-snapshot = float("nan")*np.ones((180,360))
-snapshot[masks] = sst[0,masks]
+snapshot = float("nan") * np.ones((180, 360))
+snapshot[masks] = sst[0, masks]
 
 plt.figure()
 plt.imshow(snapshot, cmap=plt.cm.coolwarm)
 plt.xticks([])
 plt.yticks([])
-X = sst[:,masks]
+X = sst[:, masks]
 X = np.reshape(X.compressed(), X.shape)
 
 # Compute optimal sensor placement
-model = ps.SSPOR(
-    basis=ps.basis.SVD(n_basis_modes=25),
-    n_sensors=25
-)
+model = ps.SSPOR(basis=ps.basis.SVD(n_basis_modes=25), n_sensors=25)
 model.fit(X)
 sensors = model.get_selected_sensors()
 
 # Plot sensor locations
-temp = np.transpose(0 * X[1,:])
+temp = np.transpose(0 * X[1, :])
 temp[sensors] = 1
 img = 0 * snapshot
 img[masks] = temp
 plt.figure()
 plt.imshow(snapshot, cmap=plt.cm.coolwarm)
-indx = np.where(img==1)
-plt.scatter(indx[1], indx[0], 8, color='black')
+indx = np.where(img == 1)
+plt.scatter(indx[1], indx[0], 8, color="black")
 plt.xticks([])
 plt.yticks([])
 ```

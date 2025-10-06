@@ -90,9 +90,9 @@ $$
 $$
 
 ```{python}
-#| output: false
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | output: false
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import plotly.graph_objects as go
 import numpy as np
 
@@ -102,19 +102,20 @@ X, Y = np.meshgrid(x_, y_)
 
 f = lambda x, y: np.pow(x, 2) + 3 * np.pow(y, 2)
 grad_f = lambda x: x * np.array([2, 6]).reshape(x.shape)
-delta = lambda x: (x[0]**2 + 9 * x[1]**2)/(2 * x[0]**2 + 54 * x[1]**2)
+delta = lambda x: (x[0] ** 2 + 9 * x[1] ** 2) / (2 * x[0] ** 2 + 54 * x[1] ** 2)
 
 Z = f(X, Y)
 
 fig = go.Figure()
-fig.add_trace(go.Surface(z=Z, x=X, y=Y,
-                        colorscale='greys', name="Function"))
-fig.update_traces(contours_z=dict(show=True, usecolormap=True,
-                                  highlightcolor="limegreen",
-                                  project_z=True))
-fig.update_scenes(xaxis_title_text=r"x_1",  
-                  yaxis_title_text=r"x_2",  
-                  zaxis_title_text=r"f(x)")
+fig.add_trace(go.Surface(z=Z, x=X, y=Y, colorscale="greys", name="Function"))
+fig.update_traces(
+    contours_z=dict(
+        show=True, usecolormap=True, highlightcolor="limegreen", project_z=True
+    )
+)
+fig.update_scenes(
+    xaxis_title_text=r"x_1", yaxis_title_text=r"x_2", zaxis_title_text=r"f(x)"
+)
 x = np.array([3, 2]).reshape((1, 2))
 z = np.array(f(x[0, 0], x[0, 1]))
 diff = 1
@@ -125,19 +126,16 @@ while diff > 1e-10:
     diff = np.linalg.norm(z[-1] - z[-2])
     x = np.vstack((x, x_new))
 
-fig.add_scatter3d(x=x[:, 0], y=x[:, 1], z=z,
-                  line_color='red', name="Descent path")
-camera = dict(
-    eye=dict(x=1.7, y=1.3, z=2.2)
-)
+fig.add_scatter3d(x=x[:, 0], y=x[:, 1], z=z, line_color="red", name="Descent path")
+camera = dict(eye=dict(x=1.7, y=1.3, z=2.2))
 fig.update_layout(scene_camera=camera)
 fig.show()
 ```
 ::::: {.content-visible when-format="html"}
 ```{python}
-#| echo: false
-#| label: fig-gd-ex1
-#| fig-cap: "Gradient descent applied for the function $f(x) = x_1^2 + 3x_2^2$."
+# | echo: false
+# | label: fig-gd-ex1
+# | fig-cap: "Gradient descent applied for the function $f(x) = x_1^2 + 3x_2^2$."
 fig.show()
 ```
 
@@ -146,9 +144,10 @@ fig.show()
 ::::: {.content-visible unless-format="html"}
 :::::: {#fig-gd-ex1 fig-env="figure"}
 ```{python}
-#| echo: false
+# | echo: false
 import plotly.io as pio
 from IPython.display import Image
+
 img = pio.to_image(fig, format="png", engine="kaleido")
 Image(img)
 ```
@@ -182,17 +181,19 @@ In machine learning the parameter $\delta$ is often called the _learning rate_.
 So lets try it with our example from @fig-linear_reg.
 
 ```{python}
-#| label: fig-non-linear_reg_gd2
-#| fig-cap: "Line fit with gradient descent for different number of iterations and learning rate 2e-3."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-non-linear_reg_gd2
+# | fig-cap: "Line fit with gradient descent for different number of iterations and learning rate 2e-3."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import numpy as np
+
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
 
 grad = lambda c, X, y: 2 * X.T @ (X @ c - y)
 update = lambda c, delta, X, y: c - delta * grad(c, X, y)
+
 
 def gd(c, delta, X, y, n, stop=1e-10):
     diff = 1
@@ -200,13 +201,14 @@ def gd(c, delta, X, y, n, stop=1e-10):
         cnew = update(c, delta, X, y)
         diff = np.linalg.norm(cnew - c)
         c = cnew
-        if diff < stop: break
+        if diff < stop:
+            break
     return c
+
 
 # The data
 x = np.arange(1, 11)
-y = np.array([0.2, 0.5, 0.3, 0.5, 1.0, 
-              1.5, 1.8, 2.0, 2.3, 2.2]).reshape((-1, 1))
+y = np.array([0.2, 0.5, 0.3, 0.5, 1.0, 1.5, 1.8, 2.0, 2.3, 2.2]).reshape((-1, 1))
 
 X = np.array([x, np.ones(x.shape)]).T
 delta = 0.002
@@ -255,17 +257,19 @@ On the other side, it might not get stuck in local minima as often.
 
 One possibility to try to get the strength of both is to use SDG to get a good guess for your initial value and SD for the fine tuning.
 ```{python}
-#| label: fig-non-linear_reg_gd3
-#| fig-cap: "Line fit with stochastic gradient descent with 1 or 3 samples and 200 iterations as well as the 3 sample version as initial guess for GD with 100 iterations."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-non-linear_reg_gd3
+# | fig-cap: "Line fit with stochastic gradient descent with 1 or 3 samples and 200 iterations as well as the 3 sample version as initial guess for GD with 100 iterations."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import numpy as np
+
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
 
 grad = lambda c, X, y: 2 * X.T @ (X @ c - y)
 update = lambda c, delta, X, y: c - delta * grad(c, X, y)
+
 
 def sgd(c, delta, X, y, n, indices=-1, stop=1e-10):
     if indices == -1:
@@ -277,13 +281,14 @@ def sgd(c, delta, X, y, n, indices=-1, stop=1e-10):
         cnew = update(c, delta, X[I, :], y[I])
         diff = np.linalg.norm(cnew - c)
         c = cnew
-        if diff < stop: break
+        if diff < stop:
+            break
     return c
+
 
 # The data
 x = np.arange(1, 11)
-y = np.array([0.2, 0.5, 0.3, 0.5, 1.0, 
-              1.5, 1.8, 2.0, 2.3, 2.2]).reshape((-1, 1))
+y = np.array([0.2, 0.5, 0.3, 0.5, 1.0, 1.5, 1.8, 2.0, 2.3, 2.2]).reshape((-1, 1))
 
 X = np.array([x, np.ones(x.shape)]).T
 delta = 0.002
@@ -307,7 +312,7 @@ fig = plt.figure()
 plt.plot(x, y, "o", color="r", label="observations")
 plt.plot(xf, y1, label=r"#I=$1$")
 plt.plot(xf, y2, label=r"#I=$3$")
-#plt.plot(xf, y3, label=r"#I=$5$")
+# plt.plot(xf, y3, label=r"#I=$5$")
 plt.plot(xf, yft, label=r"#I=$3$ GD $n=100$")
 plt.plot(xf, y4, label=r"$E_2$")
 
@@ -341,32 +346,40 @@ For the regression @fig-non-categorical_variables-2 we can see that this capture
 The data is taken from [Arbeitsmarktdaten online](https://iambweb.ams.or.at/ambweb/).
 
 ```{python}
-#| label: fig-non-categorical_variables
-#| fig-cap: "Unemployment data from Austria for the years 2010 to 2017."
-#| fig-subcap: 
-#|   - "Regression with categorical variables per month."
-#|   - "Seasonality of the unemployment average over the years." 
-#| layout-ncol: 1
-#| code-fold: true
-#| echo: false
-#| code-summary: "Show the code for the figure"
+# | label: fig-non-categorical_variables
+# | fig-cap: "Unemployment data from Austria for the years 2010 to 2017."
+# | fig-subcap:
+# |   - "Regression with categorical variables per month."
+# |   - "Seasonality of the unemployment average over the years."
+# | layout-ncol: 1
+# | code-fold: true
+# | echo: false
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import locale
 import DateTime
+
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
 
 df = pd.read_excel("../_assets/regression/AUT_UE10-19.ods", engine="odf")
 
-locale.setlocale(locale.LC_ALL, 'de_AT.utf8')
+locale.setlocale(locale.LC_ALL, "de_AT.utf8")
 select = "Gesamt Bestand"
 df["date"] = pd.to_datetime(df["Monat"], format="%B %Y")
 df["month"] = pd.to_datetime(df["Monat"], format="%B %Y").dt.month
 y = df[select].to_numpy().reshape((-1, 1))
-x = (pd.to_datetime(df["Monat"], format="%B %Y").astype(int) / 10**9 - 1262304000.0) / 2678400.0 * 1 / 12
-X = pd.concat([x, x**2, x**3, pd.get_dummies(df["month"], dtype='int')], axis=1).to_numpy()
+x = (
+    (pd.to_datetime(df["Monat"], format="%B %Y").astype(int) / 10**9 - 1262304000.0)
+    / 2678400.0
+    * 1
+    / 12
+)
+X = pd.concat(
+    [x, x**2, x**3, pd.get_dummies(df["month"], dtype="int")], axis=1
+).to_numpy()
 cat = 122
 c = np.linalg.pinv(X[:cat, :]) @ y[:cat]
 
@@ -381,8 +394,10 @@ plt.show()
 mean_month = df[[select, "month"]].groupby("month").mean()
 mean_month = mean_month - mean_month.mean()
 fig = plt.figure()
-plt.bar(x=pd.to_datetime(df["Monat"][:12], format="%B %Y").dt.month_name(),
-        height=mean_month[select].to_numpy())
+plt.bar(
+    x=pd.to_datetime(df["Monat"][:12], format="%B %Y").dt.month_name(),
+    height=mean_month[select].to_numpy(),
+)
 plt.xticks(rotation=45)
 plt.ylabel("Relative unemployment")
 plt.show()

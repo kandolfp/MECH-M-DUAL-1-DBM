@@ -142,17 +142,18 @@ We test the Fourier Series with two different hat functions.
 The first represents a triangle with constant slope up and down, the second a rectangle with infinite slope in the corners.
 
 ```{python}
-#| label: fig-fourier_hat
-#| fig-cap: "Fourier transform of a two hat functions."
-#| fig-subcap:
-#|   - "Sawtooth function and the reconstruction with 7 nodes"
-#|   - "Nodes of the reconstruction"
-#|   - "Step function and the reconstruction with various nodes"
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-fourier_hat
+# | fig-cap: "Fourier transform of a two hat functions."
+# | fig-subcap:
+# |   - "Sawtooth function and the reconstruction with 7 nodes"
+# |   - "Nodes of the reconstruction"
+# |   - "Step function and the reconstruction with various nodes"
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
+
 %config InlineBackend.figure_formats = ["svg"]
 
 # Parameters
@@ -165,7 +166,7 @@ fun = lambda t, L: 0 if abs(t) > L / 4 else (1 - np.sign(t) * t * 4 / L)
 fun2 = lambda t, L: 0 if abs(t) > L / 4 else 1
 
 # t
-t = np.linspace(-L/2, L/2, N, endpoint=False) # <1>
+t = np.linspace(-L / 2, L / 2, N, endpoint=False)  # <1>
 dt = t[1] - t[0]
 w = np.pi * 2 / L
 
@@ -179,9 +180,9 @@ b_coeff = lambda n, f: 2 / L * scalarproduct(f, np.sin(w * n * t), dt)
 
 # f_hat_0
 f_hat = np.zeros((M + 1, N))
-f_hat[0, :] = 1/2 * a_coeff(0, f)
+f_hat[0, :] = 1 / 2 * a_coeff(0, f)
 f2_hat = np.zeros((M2 + 1, N))
-f2_hat[0, :] = 1/2 * a_coeff(0, f2)
+f2_hat[0, :] = 1 / 2 * a_coeff(0, f2)
 
 # Computation of the approximation
 a = np.zeros(M)
@@ -189,14 +190,16 @@ b = np.zeros(M)
 for i in range(M):
     a[i] = a_coeff(i + 1, f)
     b[i] = b_coeff(i + 1, f)
-    f_hat[i + 1, :] = f_hat[i, :] + \
-        a[i] * np.cos(w * (i + 1) * t) + \
-        b[i] * np.sin(w * (i + 1) * t)
+    f_hat[i + 1, :] = (
+        f_hat[i, :] + a[i] * np.cos(w * (i + 1) * t) + b[i] * np.sin(w * (i + 1) * t)
+    )
 
 for i in range(M2):
-    f2_hat[i + 1, :] = f2_hat[i, :] + \
-        a_coeff(i + 1, f2) * np.cos(w * (i + 1) * t) + \
-        b_coeff(i + 1, f2) * np.sin(w * (i + 1) * t)
+    f2_hat[i + 1, :] = (
+        f2_hat[i, :]
+        + a_coeff(i + 1, f2) * np.cos(w * (i + 1) * t)
+        + b_coeff(i + 1, f2) * np.sin(w * (i + 1) * t)
+    )
 
 # Figures
 plt.figure(0)
@@ -209,8 +212,7 @@ plt.gca().set_aspect(1.5)
 plt.figure(1)
 plt.plot(t, f_hat[0, :], label=rf"$a_{0}$")
 for i in range(M):
-    plt.plot(t, a[i] * np.cos(w * (i+1) * t),
-             label=rf"$a_{i+1}\cos({i+1}\omega t)$")
+    plt.plot(t, a[i] * np.cos(w * (i + 1) * t), label=rf"$a_{i+1}\cos({i+1}\omega t)$")
 plt.legend(ncol=np.ceil((M + 1) / 2), bbox_to_anchor=(1, -0.1))
 plt.xticks([])
 plt.gca().set_aspect(1.5)
@@ -238,17 +240,17 @@ plt.show()
 Implement the code yourself by filling out the missing sections:
 
 ```{python}
-#| code-fold: true
-#| eval: false
-#| code-summary: "Code fragment for implementation."
+# | code-fold: true
+# | eval: false
+# | code-summary: "Code fragment for implementation."
 import numpy as np
 import matplotlib.pyplot as plt
 
 # Parameters
-L = 2 * np.pi   # Interval
-M = 5           # Nodes for the first function
-M2 = 50         # Nodes for the second function
-N = 512         # Interpolation points
+L = 2 * np.pi  # Interval
+M = 5  # Nodes for the first function
+M2 = 50  # Nodes for the second function
+N = 512  # Interpolation points
 # Hat functions
 fun = lambda x, L: # tooth
 fun2 = lambda x, L: # step
@@ -278,14 +280,16 @@ b = np.zeros(M)
 for i in range(M):
     a[i] = a_coeff(i + 1, f)
     b[i] = b_coeff(i + 1, f)
-    f_hat[i + 1, :] = f_hat[i, :] + \
-        a[i] * np.cos(w * (i + 1) * t) + \
-        b[i] * np.sin(w * (i + 1) * t)
+    f_hat[i + 1, :] = (
+        f_hat[i, :] + a[i] * np.cos(w * (i + 1) * t) + b[i] * np.sin(w * (i + 1) * t)
+    )
 
 for i in range(M2):
-    f2_hat[i + 1, :] = f2_hat[i, :] + \
-        a_coeff(i + 1, f2) * np.cos(w * (i + 1) * t) + \
-        b_coeff(i + 1, f2) * np.sin(w * (i + 1) * t)
+    f2_hat[i + 1, :] = (
+        f2_hat[i, :]
+        + a_coeff(i + 1, f2) * np.cos(w * (i + 1) * t)
+        + b_coeff(i + 1, f2) * np.sin(w * (i + 1) * t)
+    )
 
 # Figures
 plt.figure(0)
@@ -298,9 +302,8 @@ plt.gca().set_aspect(1.5)
 plt.figure(1)
 plt.plot(t, f_hat[0, :], label=rf"$a_{0}$")
 for i in range(M):
-    plt.plot(t, a[i] * np.cos(w * (i+1) * t),
-             label=rf"$a_{i+1}\cos({i+1}\omega t)$")
-plt.legend(ncol=np.ceil((M + 1)/2), bbox_to_anchor=(1, -0.1))
+    plt.plot(t, a[i] * np.cos(w * (i + 1) * t), label=rf"$a_{i+1}\cos({i+1}\omega t)$")
+plt.legend(ncol=np.ceil((M + 1) / 2), bbox_to_anchor=(1, -0.1))
 plt.xticks([])
 plt.gca().set_aspect(1.5)
 
@@ -315,6 +318,7 @@ plt.gca().set_aspect(1.5)
 
 plt.show()
 ```
+:::::
 :::::
 ::::
 :::
@@ -507,22 +511,22 @@ The downside of the DFT is that it does not scale well for large $N$ as the matr
 Code for the computation of the DFT matrix. 
 
 ```{python}
-#| code-fold: true
-#| code-summary: "Show the code."
+# | code-fold: true
+# | code-summary: "Show the code."
 import numpy as np
 import matplotlib.pyplot as plt
 
 # Parameters
 N = 256
-w = np.exp(-1j * 2 * np.pi / N )
+w = np.exp(-1j * 2 * np.pi / N)
 
 J, K = np.meshgrid(np.arange(N), np.arange(N))
-DFT = np.power(w, J*K)
+DFT = np.power(w, J * K)
 ```
 :::
 
-## Fast Fourier Transform
-
+## Fast-Fourier Transform>
+>
 In 1965, James W. Cooley (IBM) and John W. Tukey (Princeton) developed the so called _fast Fourier transform_ (FFT) that scales with $\mathcal{O}(N \log(N))$.
  which becomes almost linear for large enough $N$, see @Cooley1965.
 
@@ -669,23 +673,24 @@ We use the PSD to take all frequencies with a $PSD < 100$ out of our reconstruct
 This removes noise from the signal.
 
 ```{python}
-#| label: fig-fourier_fft_denoise
-#| fig-cap: "Signal noise filter with FFT."
-#| fig-subcap:
-#|   - "Original clean signal and noisy signal."
-#|   - "Scaled square norm of of the Fourier coefficients (PSD), only parts are shown."
-#|   - "Original signal and de-noised signal."
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-fourier_fft_denoise
+# | fig-cap: "Signal noise filter with FFT."
+# | fig-subcap:
+# |   - "Original clean signal and noisy signal."
+# |   - "Scaled square norm of of the Fourier coefficients (PSD), only parts are shown."
+# |   - "Original signal and de-noised signal."
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
+
 %config InlineBackend.figure_formats = ["svg"]
 
 np.random.seed(6020)
 # Parameters
 N = 1024
-a, b = 0, 1/4
+a, b = 0, 1 / 4
 t = np.linspace(a, b, N, endpoint=False)
 dt = t[1] - t[0]
 f1 = 50
@@ -693,16 +698,16 @@ f2 = 120
 fun = lambda t: np.sin(2 * np.pi * f1 * t) + np.sin(2 * np.pi * f2 * t)
 
 f_clean = fun(t)
-f_noise = fun(t) + 2.5 * np.random.randn(len(t))           # Add some noise
+f_noise = fun(t) + 2.5 * np.random.randn(len(t))  # Add some noise
 
 fhat_noise = np.fft.fft(f_noise)
 fhat_clean = np.fft.fft(f_clean)
 
-PSD_noise = np.abs(fhat_noise)**2 / N
-PSD_clean = np.abs(fhat_clean)**2 / N
+PSD_noise = np.abs(fhat_noise) ** 2 / N
+PSD_clean = np.abs(fhat_clean) ** 2 / N
 
 freq = (1 / (dt * N)) * np.arange(N)
-L = np.arange(1, np.floor(N/4), dtype='int')
+L = np.arange(1, np.floor(N / 4), dtype="int")
 
 # Apply filter in spectral space
 filter = PSD_noise > 100
@@ -746,35 +751,39 @@ As can be seen in the @fig-fourier_fft_denoise-3, the reconstruction is not exac
 This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. 
 In particular: 
 ```{python}
-#| echo: false
+# | echo: false
 import pandas as pd
-df = pd.DataFrame({"Frequency": np.round(freq[filter], 3), "PSD": np.round(PSD_noise[filter], 3)})
+
+df = pd.DataFrame(
+    {"Frequency": np.round(freq[filter], 3), "PSD": np.round(PSD_noise[filter], 3)}
+)
 df
 ```
 
 Note: For @fig-fourier_fft_denoise-3 we discarded the imaginary part of the reconstruction.
+
 ::::
 :::
 
 ::: {.content-visible when-format="html"}
 :::: {.callout-caution appearance="simple" collapse="true" icon=false}
 ::::: {#exr-fourier-fft-den-self}
+
 ## Self implementation @exm-fourier-fft-den
 
 Implement the code yourself by filling out the missing sections:
 
 ```{python}
-#| code-fold: true
-#| eval: false
-#| code-summary: "Code fragment for implementation."
+# | code-fold: true
+# | eval: false
+# | code-summary: "Code fragment for implementation."
 import numpy as np
 import matplotlib.pyplot as plt
-%config InlineBackend.figure_formats = ["svg"]
 
 np.random.seed(6020)
 # Parameters
 N = 1024
-a, b = 0, 1/4
+a, b = 0, 1 / 4
 t = # specify the sample steps for t
 dt = t[1] - t[0]
 f1 = 50
@@ -787,14 +796,14 @@ f_noise = fun(t) + 2.5 * np.random.randn(len(t))
 fhat_noise = # transform the noisy signal with fft
 fhat_clean = # transform the clean signal with fft
 
-PSD_noise = # Compute the PSD for the noisy signal 
-PSD_clean = # Compute the PSD for the clean signal 
+PSD_noise = # Compute the PSD for the noisy signal
+PSD_clean = # Compute the PSD for the clean signal
 
 freq = (1 / (dt * N)) * np.arange(N)
-L = np.arange(1, np.floor(N/4), dtype='int')
+L = np.arange(1, np.floor(N / 4), dtype="int")
 
 # Apply filter in spectral space
-filter = # create the filter for the PSD values grater 100 
+filter = # create the filter for the PSD values grater 100
 PSDclean = # set everything not part of the filter to zero
 fhat_filtered = # apply the filter to the transformed function
 f_filtered = # apply the inverse fft
@@ -829,17 +838,19 @@ plt.ylim(-5, 5)
 plt.legend(loc=1)
 plt.gca().set_aspect(5e-3)
 plt.show()
-
 ```
+
 :::::
 ::::
 :::
 
 ::: {.callout-caution appearance="simple" collapse="true" icon=false}
 :::: {#exr-fourier-fft-den}
+
 ## DFT vs. FFT
 
 Implement @exm-fourier-fft-den with DFT and FFT such that you can evaluate the runtime and create a plot showing the different runtime as well as check if the two produce the same result.
+
 ::::
 :::
 
@@ -867,17 +878,18 @@ $$
 $$
 
 ```{python}
-#| label: fig-fourier_fft_spectralderivative
-#| fig-cap: "Computing the derivative of a function."
-#| fig-subcap:
-#|   - "Computation of the derivative with different methods (Exact and spectral are almost the same)."
-#|   - "Accuracy of the methods for computing the derivative."
-#|   - "Gibbs phenomenon for the spectral derivative for discontinuous functions."
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-fourier_fft_spectralderivative
+# | fig-cap: "Computing the derivative of a function."
+# | fig-subcap:
+# |   - "Computation of the derivative with different methods (Exact and spectral are almost the same)."
+# |   - "Accuracy of the methods for computing the derivative."
+# |   - "Gibbs phenomenon for the spectral derivative for discontinuous functions."
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
+
 %config InlineBackend.figure_formats = ["svg"]
 
 # Parameters
@@ -886,8 +898,8 @@ a, b = -15, 15
 L = b - a
 
 fun = lambda t: np.cos(t) * np.exp(-np.power(t, 2) / 25)
-dfun = lambda t: -(np.sin(t) * np.exp(-np.power(t, 2) / 25) + \
-                 (2 / 25) * t * fun(t))
+dfun = lambda t: -(np.sin(t) * np.exp(-np.power(t, 2) / 25) + (2 / 25) * t * fun(t))
+
 
 def fD(N, fun, dfun, a, b):
     t = np.linspace(a, b, N, endpoint=False)
@@ -896,6 +908,7 @@ def fD(N, fun, dfun, a, b):
     df_DD = np.diff(f) / dt
     df_DD = np.append(df_DD, (f[-1] - f[0]) / dt)
     return df_DD, np.linalg.norm(df_DD - dfun(t)) / np.linalg.norm(df_DD)
+
 
 def spD(N, fun, dfun, a, b):
     t = np.linspace(a, b, N, endpoint=False)
@@ -960,8 +973,10 @@ plt.xlim(-2, 2)
 plt.legend(loc=1)
 plt.gca().set_aspect(0.5)
 ```
+
 As can be seen in @fig-fourier_fft_spectralderivative-2 we can reduce the error of both methods by increasing $N$.
 Nevertheless, the spectral method is more accurate and converges faster.
+
 ::::
 :::
 
@@ -971,11 +986,13 @@ The same is true with the Fourier transformation.
 As mentioned before, Fourier introduced it to solve the heat equation and we will do the same.
 
 ::: {.callout-important}
+
 Above we have always transformed the _time_ component of a function into the frequency domain via FFT.
 In the next example we have the time evolution of a signal and therefore the function depends on time and space.
 We apply the FFT to the space component to compute the derivative in _frequency_ domain w.r.t. the transformed variable.
 
 This automatically results in periodic boundary conditions for the following examples, see especially @exm-fourier-fft-advection.
+
 :::
 
 ::: {.callout-tip appearance="simple" collapse="true" icon=false}
@@ -1011,17 +1028,18 @@ For the numerical computation it is more convenient to stay in the frequency dom
 The majority of the following code is from [@Brunton2022, Code 2.5 and Code 2.6].
 
 ```{python}
-#| label: fig-fourier_fft_heat
-#| fig-cap: "Simulation of the heat equation in 1D."
-#| fig-subcap:
-#|   - "Evolution of the heat equation in time."
-#|   - "x-t diagram of the transport equation. "
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-fourier_fft_heat
+# | fig-cap: "Simulation of the heat equation in 1D."
+# | fig-subcap:
+# |   - "Evolution of the heat equation in time."
+# |   - "x-t diagram of the transport equation. "
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
+
 %config InlineBackend.figure_formats = ["svg"]
 
 alpha = 1
@@ -1032,7 +1050,7 @@ x = np.linspace(a, b, N, endpoint=False)
 dx = x[1] - x[0]
 
 # Define discrete wavenumbers
-#kappa = 2 * np.pi * np.fft.fftfreq(N, d=dx)
+# kappa = 2 * np.pi * np.fft.fftfreq(N, d=dx)
 kappa = np.fft.fftfreq(N, (b - a) / (N * 2 * np.pi))
 
 # Initial condition
@@ -1044,7 +1062,7 @@ u0hat = np.fft.fft(u0)
 dt = 0.001
 T = np.arange(0, 10, dt)
 
-fun = lambda t, x: - alpha**2 * (np.power(kappa, 2)) * x
+fun = lambda t, x: -(alpha**2) * (np.power(kappa, 2)) * x
 euler = lambda y, dt, t, fun: y + dt * fun(t, y)
 
 uhat = np.zeros((len(T), len(u0hat)), dtype="complex")
@@ -1057,21 +1075,21 @@ u = np.zeros_like(uhat)
 for k in range(len(T)):
     u[k, :] = np.fft.ifft(uhat[k, :])
 
-u = u.real    
+u = u.real
 
 fig = plt.figure()
-ax = fig.add_subplot(projection='3d')
-#ax.view_init(elev=45, azim=-20, roll=0)
+ax = fig.add_subplot(projection="3d")
+# ax.view_init(elev=45, azim=-20, roll=0)
 ax.set_xlabel(r"$x$")
 ax.set_ylabel(r"$t$")
 ax.set_zlabel(r"$u(t, x)$")
 ax.set_zticks([])
 
-u_plot = u[0:-1:int(1 / dt), :]
+u_plot = u[0 : -1 : int(1 / dt), :]
 for j in range(u_plot.shape[0]):
     ys = j * np.ones(u_plot.shape[1])
     ax.plot(x, ys, u_plot[j, :])
-    
+
 # Image plot
 plt.figure()
 plt.imshow(np.flipud(u[0:-1:100]), aspect=8)
@@ -1092,12 +1110,11 @@ plt.show()
 Implement the code yourself by filling out the missing sections:
 
 ```{python}
-#| code-fold: false
-#| eval: false
-#| code-summary: "Code fragment for implementation."
+# | code-fold: false
+# | eval: false
+# | code-summary: "Code fragment for implementation."
 import numpy as np
 import matplotlib.pyplot as plt
-%config InlineBackend.figure_formats = ["svg"]
 
 alpha = 1
 a, b = -50, 50
@@ -1129,23 +1146,23 @@ for i, t in enumerate(T[1:]):
 u = np.zeros_like(uhat)
 
 for k in range(len(T)):
-    u[k, :] = np.fft.ifft(uhat[k,:])
+    u[k, :] = np.fft.ifft(uhat[k, :])
 
-u = u.real    
+u = u.real
 
 # Waterfall plot
 fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+ax = fig.add_subplot(111, projection="3d")
 ax.set_xlabel(r"$x$")
 ax.set_ylabel(r"$t$")
 ax.set_zlabel(r"$u(t, x)$")
 ax.set_zticks([])
 
-u_plot = u[0:-1:int(1 / dt), :]
+u_plot = u[0 : -1 : int(1 / dt), :]
 for j in range(u_plot.shape[0]):
     ys = j * np.ones(u_plot.shape[1])
     ax.plot(x, ys, u_plot[j, :])
-    
+
 # Image plot
 plt.figure()
 plt.imshow(np.flipud(u[0:-1:100]), aspect=8)
@@ -1179,17 +1196,18 @@ The solution is simply computed by exchanging the right hand side from the above
 The majority of the following code is from [@Brunton2022, Code 2.5 and Code 2.6].
 
 ```{python}
-#| label: fig-fourier_fft_advection
-#| fig-cap: "Computing the derivative of a function"
-#| fig-subcap:
-#|   - "Evolution of the transport equation in time."
-#|   - "x-t diagram of the transport equation."
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-fourier_fft_advection
+# | fig-cap: "Computing the derivative of a function"
+# | fig-subcap:
+# |   - "Evolution of the transport equation in time."
+# |   - "x-t diagram of the transport equation."
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
+
 %config InlineBackend.figure_formats = ["svg"]
 
 c = 2
@@ -1200,27 +1218,29 @@ x = np.linspace(a, b, N, endpoint=False)
 dx = x[1] - x[0]
 
 # Define discrete wavenumbers
-#kappa = 2 * np.pi * np.fft.fftfreq(N, d=dx)
+# kappa = 2 * np.pi * np.fft.fftfreq(N, d=dx)
 kappa = np.fft.fftfreq(N, (b - a) / (N * 2 * np.pi))
 
 # Initial condition
-u0 = 1/np.cosh(x)
+u0 = 1 / np.cosh(x)
 u0hat = np.fft.fft(u0)
 
 # SciPy's odeint function doesn't play well with complex numbers,
-# so we recast the state u0hat from an N-element complex vector 
+# so we recast the state u0hat from an N-element complex vector
 # to a 2N-element real vector
 u0hat_ri = np.concatenate((u0hat.real, u0hat.imag))
 
 # Simulate in Fourier frequency domain
 dt = 0.025
-T = np.arange(0, 600*dt, dt)
+T = np.arange(0, 600 * dt, dt)
 
-def rhsWave(uhat_ri,t,kappa,c):
+
+def rhsWave(uhat_ri, t, kappa, c):
     uhat = uhat_ri[:N] + (1j) * uhat_ri[N:]
-    d_uhat = -c * (1j ) * kappa * uhat
-    d_uhat_ri = np.concatenate((d_uhat.real, d_uhat.imag)).astype('float64')
+    d_uhat = -c * (1j) * kappa * uhat
+    d_uhat_ri = np.concatenate((d_uhat.real, d_uhat.imag)).astype("float64")
     return d_uhat_ri
+
 
 uhat_ri = odeint(rhsWave, u0hat_ri, T, args=(kappa, c))
 
@@ -1231,11 +1251,11 @@ u = np.zeros_like(uhat)
 for k in range(len(T)):
     u[k, :] = np.fft.ifft(uhat[k, :])
 
-u = u.real    
+u = u.real
 
 # Waterfall plot
 fig = plt.figure()
-ax = fig.add_subplot(projection='3d')
+ax = fig.add_subplot(projection="3d")
 ax.set_xlabel(r"$x$")
 ax.set_ylabel(r"$t$")
 ax.set_zlabel(r"$u(t, x)$")
@@ -1244,7 +1264,7 @@ u_plot = u[0:-1:60, :]
 for j in range(u_plot.shape[0]):
     ys = j * np.ones(u_plot.shape[1])
     ax.plot(x, ys, u_plot[j, :])
-    
+
 # Image plot
 plt.figure()
 plt.imshow(np.flipud(u), aspect=1.5)
@@ -1278,17 +1298,18 @@ This example is also very useful to test the capabilities of your solver as by d
 The majority of the following code is from [@Brunton2022, Code 2.5 and Code 2.6].
 
 ```{python}
-#| label: fig-fourier_fft_burger
-#| fig-cap: "Time integration of the Burger's equation"
-#| fig-subcap:
-#|   - "Evolution of Burger's equation in time."
-#|   - "x-t diagram of Burger's equation."
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-fourier_fft_burger
+# | fig-cap: "Time integration of the Burger's equation"
+# | fig-subcap:
+# |   - "Evolution of Burger's equation in time."
+# |   - "x-t diagram of Burger's equation."
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
+
 %config InlineBackend.figure_formats = ["svg"]
 
 nu = 0.001
@@ -1299,15 +1320,16 @@ x = np.linspace(a, b, N, endpoint=False)
 dx = x[1] - x[0]
 
 # Define discrete wavenumbers
-#kappa = 2 * np.pi * np.fft.fftfreq(N, d=dx)
+# kappa = 2 * np.pi * np.fft.fftfreq(N, d=dx)
 kappa = np.fft.fftfreq(N, (b - a) / (N * 2 * np.pi))
 
 # Initial condition
-u0 = 1/np.cosh(x)
+u0 = 1 / np.cosh(x)
 
 # Simulate in Fourier frequency domain
 dt = 0.025
-T = np.arange(0,100*dt,dt)
+T = np.arange(0, 100 * dt, dt)
+
 
 def rhsBurgers(u, t, kappa, nu):
     uhat = np.fft.fft(u)
@@ -1318,11 +1340,12 @@ def rhsBurgers(u, t, kappa, nu):
     du_dt = -u * d_u + nu * dd_u
     return du_dt.real
 
+
 u = odeint(rhsBurgers, u0, T, args=(kappa, nu))
 
 # Waterfall plot
 fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+ax = fig.add_subplot(111, projection="3d")
 ax.set_xlabel(r"$x$")
 ax.set_ylabel(r"$t$")
 ax.set_zlabel(r"$u(t, x)$")
@@ -1332,7 +1355,7 @@ u_plot = u[0:-1:10, :]
 for j in range(u_plot.shape[0]):
     ys = j * np.ones(u_plot.shape[1])
     ax.plot(x, ys, u_plot[j, :])
-    
+
 # Image plot
 plt.figure()
 plt.imshow(np.flipud(u), aspect=8)
@@ -1357,11 +1380,12 @@ We can use FFT to compute some base properties of a ground emitter circuit @fig-
 ![Electric circuit](../_assets/signal/electric_circuit){#fig-fft-gec-1 width=2.28in}
 
 ```{python}
-#| code-fold: true
-#| echo: true
-#| code-summary: "Show the raw data for the example"
+# | code-fold: true
+# | echo: true
+# | code-summary: "Show the raw data for the example"
 import numpy as np
 import matplotlib.pyplot as plt
+
 %config InlineBackend.figure_formats = ["svg"]
 
 frequ = 2 * np.pi * 50
@@ -1379,7 +1403,7 @@ k = np.arange(0, 16) * 1 / 16
 if False:
     plt.figure()
     plt.plot(f(t), t)
-    plt.plot([np.min(t),np.max(t)], [0,0], "gray")
+    plt.plot([np.min(t), np.max(t)], [0, 0], "gray")
     plt.axis("off")
     plt.savefig("sin.svg", transparent=True)
     plt.figure()
@@ -1387,26 +1411,26 @@ if False:
     z = np.array([0, np.min(f(t)), np.max(f(t))])
     plt.plot(z, diod(z), "bx")
     plt.axis("off")
-    plt.xlim([-2,5])
+    plt.xlim([-2, 5])
     plt.gcf().patch.set_visible(False)
     plt.savefig("diode.svg", transparent=True)
 
     plt.figure()
     plt.plot(t, ic(t))
-    plt.plot(2*np.pi*k/frequ, ic(2*np.pi*k/frequ), "ro")
+    plt.plot(2 * np.pi * k / frequ, ic(2 * np.pi * k / frequ), "ro")
     plt.axis("off")
-    plt.savefig("ic.svg", transparent=True, bbox_inches ="tight")
+    plt.savefig("ic.svg", transparent=True, bbox_inches="tight")
 
 y = ic(k)
-yhat = (np.fft.fft(y))
-#Necessary correction factor for the FFT
+yhat = np.fft.fft(y)
+# Necessary correction factor for the FFT
 factor = 1 / 16
 yy = factor * yhat
 
-ic_mean = np.mean(ic(np.linspace(0, 1/50, 2**20)))
+ic_mean = np.mean(ic(np.linspace(0, 1 / 50, 2**20)))
 c0 = yy[0].real
 effective_value = np.linalg.norm(yy[1:])
-harmonic_distortion = np.linalg.norm(yy[3:-2])/np.linalg.norm(yy[1:])
+harmonic_distortion = np.linalg.norm(yy[3:-2]) / np.linalg.norm(yy[1:])
 ```
 
 The transition of the transistor can be approximated by a diode and is illustrated in the $u_{BE}$ vs. $i_C$ diagram on the top left (orange signal in @fig-fft-gec-2). 
@@ -1425,26 +1449,32 @@ If we compute the fast fourier transform, as illustrated with the red discretisa
 
 1. the direct current component:
 ```{python}
-#| echo: false
-#| output: asis
+# | echo: false
+# | output: asis
 print(r"$$")
 print(f"c_0 = {np.round(c0,3)}")
 print(r"$$")
 ```
 1. the effective value from Parseval's Theorem:
 ```{python}
-#| echo: false
-#| output: asis
+# | echo: false
+# | output: asis
 print(r"$$")
-print(r"\overline{i_c} = \sqrt{\sum_{i=0}^{15} |c_i|^2}"f"= {np.round(effective_value,3)}")
+print(
+    r"\overline{i_c} = \sqrt{\sum_{i=0}^{15} |c_i|^2}"
+    f"= {np.round(effective_value,3)}"
+)
 print(r"$$")
 ```
 1. the total harmonic distortion (how the signal is deformed):
 ```{python}
-#| echo: false
-#| output: asis
+# | echo: false
+# | output: asis
 print(r"$$")
-print(r"THD = \frac{\sqrt{\sum_{i=2}^{14} |c_i|^2}}{\sqrt{\sum_{i=1}^{15} |c_i|^2}}="f"{np.round(harmonic_distortion,3)}")
+print(
+    r"THD = \frac{\sqrt{\sum_{i=2}^{14} |c_i|^2}}{\sqrt{\sum_{i=1}^{15} |c_i|^2}}="
+    f"{np.round(harmonic_distortion,3)}"
+)
 print(r"$$")
 ```
 
@@ -1472,18 +1502,19 @@ g(t - \tau) =  \mathrm{e}^{-\tfrac{(t-\tau)^2}{a^2}}.
 $$
 
 ```{python}
-#| label: fig-fourier_gabor
-#| fig-cap: "Signal with Gaussian kernel"
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-fourier_gabor
+# | fig-cap: "Signal with Gaussian kernel"
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
+
 %config InlineBackend.figure_formats = ["svg"]
 
 np.random.seed(6020)
 # Parameters
 N = 1024
-a, b = 0, 1/4
+a, b = 0, 1 / 4
 t = np.linspace(a, b, N, endpoint=False)
 dt = t[1] - t[0]
 f1 = 50
@@ -1492,15 +1523,15 @@ fun = lambda t: np.sin(2 * np.pi * f1 * t) + np.sin(2 * np.pi * f2 * t)
 
 gauss = lambda x, a: np.exp(-np.pow(x, 2) / a**2)
 
-f_clean = fun(t) + np.random.randn(len(t))  
+f_clean = fun(t) + np.random.randn(len(t))
 gauss = gauss(t - 0.125, 0.025) * 4.8
 
 # Figures
 plt.figure(0)
 plt.plot(t, f_clean, label="Signal")
 plt.plot(t, gauss, label=r"$g(t-\tau)$")
-#plt.xlabel("Time [s]")
-#plt.ylabel(r"$f$")
+# plt.xlabel("Time [s]")
+# plt.ylabel(r"$f$")
 plt.xticks([0.1, 0.125, 0.15], [r"$\tau - a$", r"$\tau$", r"$\tau + a$"])
 plt.xlim(t[0], t[-1])
 plt.ylim(-5, 5)
@@ -1552,17 +1583,18 @@ where the frequency shifts from $h_0$ to $h_1$ between $t=0$ and $t=t_1$.
 The majority of the following code is from [@Brunton2022, Code 2.9].
 
 ```{python}
-#| label: fig-fourier_dgt_chirp
-#| fig-cap: "Quadratic chirp signal "
-#| fig-subcap:
-#|   - "Power spectral density of the signal."
-#|   - "Spectrogram."
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-fourier_dgt_chirp
+# | fig-cap: "Quadratic chirp signal "
+# | fig-subcap:
+# |   - "Power spectral density of the signal."
+# |   - "Spectrogram."
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
+
 %config InlineBackend.figure_formats = ["svg"]
 
 N = 2048
@@ -1572,18 +1604,18 @@ dt = t[1] - t[0]
 h0 = 50
 h1 = 250
 t1 = 2
-x = np.cos(2 * np.pi * t * (h0 + (h1 - h0) * np.power(t,2) / (3 * t1**2)))
+x = np.cos(2 * np.pi * t * (h0 + (h1 - h0) * np.power(t, 2) / (3 * t1**2)))
 
 plt.figure(0)
 N = len(x)
 freq = (1 / (dt * N)) * np.arange(N)
-PSD_noise = np.abs(np.fft.fft(x))**2 / N
-plt.plot(freq[:N//2], PSD_noise[:N//2])
+PSD_noise = np.abs(np.fft.fft(x)) ** 2 / N
+plt.plot(freq[: N // 2], PSD_noise[: N // 2])
 plt.xlabel("Frequency [Hz]")
 plt.gca().set_aspect(10)
 
 plt.figure(1)
-plt.specgram(x, NFFT=128, Fs=1/dt, noverlap=120, cmap='jet')
+plt.specgram(x, NFFT=128, Fs=1 / dt, noverlap=120, cmap="jet")
 plt.colorbar()
 plt.xlabel("Time [s]")
 plt.ylabel("Frequency [Hz]")

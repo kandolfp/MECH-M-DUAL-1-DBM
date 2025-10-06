@@ -269,26 +269,28 @@ $$
 
 
 ```{python}
-#| label: fig-laplace-cam-drive2
-#| fig-cap: "Exciting function and response, we indicate the growth rate as a dotted line."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-laplace-cam-drive2
+# | fig-cap: "Exciting function and response, we indicate the growth rate as a dotted line."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
+
 %config InlineBackend.figure_formats = ["svg"]
 
-heavy_side = lambda t: np.ones_like(t) * (t>=0)
-g = lambda n, t: (np.heaviside(t - 2 * n * np.pi, 1) - \
-                  np.heaviside(t - (2 * n + 1) * np.pi, 1))
-h = lambda n, t: (np.heaviside(t - (2 * n + 1) * np.pi, 1) - \
-                  np.heaviside(t - (2 * n + 2) * np.pi, 1))
+heavy_side = lambda t: np.ones_like(t) * (t >= 0)
+g = lambda n, t: (
+    np.heaviside(t - 2 * n * np.pi, 1) - np.heaviside(t - (2 * n + 1) * np.pi, 1)
+)
+h = lambda n, t: (
+    np.heaviside(t - (2 * n + 1) * np.pi, 1) - np.heaviside(t - (2 * n + 2) * np.pi, 1)
+)
 
 xa = lambda t: 1 / 2 * (np.sin(t) + np.abs(np.sin(t)))
 
-fun1 = lambda n, t: (1 / 3 * np.sin(t) - (2 * n + 1) / 6 * \
-                     np.sin(2 * t)) * g(n, t)
-fun2 = lambda n, t:-1 * (n + 1) / 3 * np.sin(2 * t) * h(n, t)
-funn = lambda n, t: fun1(n, t) + fun2(n, t) 
+fun1 = lambda n, t: (1 / 3 * np.sin(t) - (2 * n + 1) / 6 * np.sin(2 * t)) * g(n, t)
+fun2 = lambda n, t: -1 * (n + 1) / 3 * np.sin(2 * t) * h(n, t)
+funn = lambda n, t: fun1(n, t) + fun2(n, t)
 fun = lambda t: funn(0, t) + funn(1, t) + funn(2, t) + funn(3, t)
 
 t = np.linspace(0, 8 * np.pi, 1024)
@@ -303,7 +305,7 @@ plt.plot(t, line(t), "k:")
 plt.xlabel(r"t")
 plt.ylabel(r"x")
 plt.legend()
-plt.gca().set_aspect(8*np.pi / (3 * 3.0))
+plt.gca().set_aspect(8 * np.pi / (3 * 3.0))
 plt.ylim([-1.5, 1.5])
 ```
 ::::
@@ -425,15 +427,16 @@ h(t) = \frac{1}{RC}\mathrm{e}^{-\frac{t}{RC}}.
 $$
 
 ```{python}
-#| label: fig-laplace-rclowpass
-#| fig-cap: "Impulse response for the first order RC low pass filter"
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-laplace-rclowpass
+# | fig-cap: "Impulse response for the first order RC low pass filter"
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
+
 %config InlineBackend.figure_formats = ["svg"]
 
-RC = 1 
+RC = 1
 fun = lambda t: 1 / RC * np.exp(-t / RC) * np.heaviside(t, 1)
 t = np.linspace(-0.5, 8.5, 1024)
 
@@ -454,22 +457,23 @@ h(t) = \frac{1}{(RC)^2}t\mathrm{e}^{-\frac{t}{RC}}.
 $$
 
 ```{python}
-#| label: fig-laplace-rclowpass2
-#| fig-cap: "Impulse response for the first order RC low pass filter"
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-laplace-rclowpass2
+# | fig-cap: "Impulse response for the first order RC low pass filter"
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
+
 %config InlineBackend.figure_formats = ["svg"]
 
-RC = 1 
+RC = 1
 fun = lambda t: 1 / RC**2 * t * np.exp(-t / RC) * np.heaviside(t, 1)
 t = np.linspace(-0.5, 8.5, 1024)
 
 plt.plot(t, fun(t))
-plt.text(-0.5, 0.94/(np.exp(1)), r"$\frac{1}{RC \mathrm{e}}$")
+plt.text(-0.5, 0.94 / (np.exp(1)), r"$\frac{1}{RC \mathrm{e}}$")
 plt.text(0.8, -0.05, r"$RC$")
-plt.plot([-0.1, 1, 1], [1/np.exp(1), 1/np.exp(1), 0], "k:")
+plt.plot([-0.1, 1, 1], [1 / np.exp(1), 1 / np.exp(1), 0], "k:")
 plt.xlabel(r"t")
 plt.ylabel(r"y")
 plt.gca().set_aspect(9 / (3 * 0.37))

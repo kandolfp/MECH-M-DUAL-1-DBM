@@ -34,13 +34,14 @@ The _least absolute shrinkage and selection operator_ LASSO solves @eq-reg-optim
 The theory tells us that for increasing $\lambda_1$ we should get more and more zeros in our solution $x$.
 
 ```{python}
-#| label: fig-opt_lambda1
-#| fig-cap: "LASSO regression coefficients of an over-determined system with 500 constraints and 100 unknowns. Top three show the values for the solution and the bottom three a histogram of this solution. The label with lambda maps the two."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-opt_lambda1
+# | fig-cap: "LASSO regression coefficients of an over-determined system with 500 constraints and 100 unknowns. Top three show the values for the solution and the bottom three a histogram of this solution. The label with lambda maps the two."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import minimize
+
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
 
@@ -50,8 +51,9 @@ A = np.random.rand(m, n)
 b = np.random.rand(m)
 x0 = np.linalg.pinv(A) @ b
 
-optimize = lambda x, A, b, lam, norm: np.linalg.norm(A @ x - b, ord=norm[0]) +\
-    lam * np.linalg.norm(x, ord=norm[1])
+optimize = lambda x, A, b, lam, norm: np.linalg.norm(
+    A @ x - b, ord=norm[0]
+) + lam * np.linalg.norm(x, ord=norm[1])
 
 fig = plt.figure()
 axs = []
@@ -78,7 +80,7 @@ axs[3].set_yticks([])
 axs[5].set_yticks([])
 
 
-plt.subplots_adjust(top = 0.99, bottom=0.1, hspace=0.35, wspace=0.2)
+plt.subplots_adjust(top=0.99, bottom=0.1, hspace=0.35, wspace=0.2)
 plt.show()
 ```
 
@@ -90,13 +92,14 @@ The Ridge Regression solves @eq-reg-optimizers with $\lambda_1 = 0$ and $\lambda
 The theory tells us that for increasing $\lambda_2$ we should get more and more zeros in our solution $x$.
 
 ```{python}
-#| label: fig-opt_lambda2
-#| fig-cap: "Ridge regression coefficients of an over-determined system with 500 constraints and 100 unknowns. Top three show the values for the solution and the bottom three a histogram of this solution. The label with lambda maps the two."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-opt_lambda2
+# | fig-cap: "Ridge regression coefficients of an over-determined system with 500 constraints and 100 unknowns. Top three show the values for the solution and the bottom three a histogram of this solution. The label with lambda maps the two."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import minimize
+
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
 
@@ -106,8 +109,9 @@ A = np.random.rand(m, n)
 b = np.random.rand(m)
 x0 = np.linalg.pinv(A) @ b
 
-optimize = lambda x, A, b, lam, norm: np.linalg.norm(A @ x - b, ord=norm[0]) +\
-    lam * np.linalg.norm(x, ord=norm[1])
+optimize = lambda x, A, b, lam, norm: np.linalg.norm(
+    A @ x - b, ord=norm[0]
+) + lam * np.linalg.norm(x, ord=norm[1])
 
 fig = plt.figure()
 axs = []
@@ -134,7 +138,7 @@ axs[3].set_yticks([])
 axs[5].set_yticks([])
 
 
-plt.subplots_adjust(top = 0.99, bottom=0.1, hspace=0.35, wspace=0.2)
+plt.subplots_adjust(top=0.99, bottom=0.1, hspace=0.35, wspace=0.2)
 plt.show()
 ```
 ::: {.content-visible when-format="html"}
@@ -146,17 +150,18 @@ plt.show()
 Fill out the missing parts:
 
 ```{python}
-#| code-fold: true
-#| code-summary: "Code fragment for implementation."
-#| eval: false
+# | code-fold: true
+# | code-summary: "Code fragment for implementation."
+# | eval: false
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import minimize
+
 np.random.seed(6020)
 
 m = 500
 n = 100
-A = # Random matrix with m rows and 100 columns 
+A = # Random matrix with m rows and 100 columns
 b = np.random.rand(m)
 x0 = # Optimal 2 norm solution without penalization as initial start
 
@@ -186,9 +191,10 @@ axs[2].set_xticks([])
 axs[3].set_yticks([])
 axs[5].set_yticks([])
 
-plt.subplots_adjust(top = 0.99, bottom=0.1, hspace=0.35, wspace=0.2)
+plt.subplots_adjust(top=0.99, bottom=0.1, hspace=0.35, wspace=0.2)
 plt.show()
 ```
+
 :::::
 ::::
 :::
@@ -211,20 +217,21 @@ This plays an intimate role in over- and underfitting of models.
 To illustrate this we recall @exm-regression-linear-poly with @fig-linear_reg_poly as seen below once more.
 
 ```{python}
-#| label: fig-linear_reg_poly2
-#| fig-cap: "Fitting for different degrees of polynomial $m$"
-#| echo: false
-#| code-summary: "Show the code for the figure"
+# | label: fig-linear_reg_poly2
+# | fig-cap: "Fitting for different degrees of polynomial $m$"
+# | echo: false
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import numpy as np
 import warnings
-warnings.simplefilter('ignore', np.exceptions.RankWarning)
+
+warnings.simplefilter("ignore", np.exceptions.RankWarning)
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
 
 m = 100
 x = 6 * np.random.rand(m) - 3
-y = 1/2 * x ** 2 + x + 2 + np.random.randn(m)
+y = 1 / 2 * x**2 + x + 2 + np.random.randn(m)
 
 X1 = np.vander(x, 2)
 X2 = np.vander(x, 3)
@@ -253,7 +260,7 @@ plt.xlim(-3, 3)
 plt.xlabel(r"$x$")
 plt.ylabel(r"$y$")
 plt.legend(loc="upper left")
-#plt.gca().set_aspect(0.25)
+# plt.gca().set_aspect(0.25)
 plt.grid(visible=True)
 plt.show()
 ```

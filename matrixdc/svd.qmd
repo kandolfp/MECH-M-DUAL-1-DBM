@@ -98,14 +98,12 @@ $$
 In Python we can compute the (Thin)SVD as follows
 
 ```{python}
-#| classes: styled-output
-#| error: true
+# | classes: styled-output
+# | error: true
 import numpy as np
 import numpy.linalg as LA
 
-A = np.array([[3, 2, 2], 
-              [2, 3, -2]
-              ])
+A = np.array([[3, 2, 2], [2, 3, -2]])
 
 U, s, Vh = LA.svd(A, full_matrices=True)
 print(f"{U.shape = }, {s.shape = }, {Vh.shape = }")
@@ -117,12 +115,12 @@ print(f"{np.diag(s) = }\n")
 print(f"{Vh = }")
 print(f"{Vh.transpose() @ Vh = }\n")
 
-A1 = U[:, :len(s)] @ np.diag(s) @ Vh[:len(s),:]
+A1 = U[:, : len(s)] @ np.diag(s) @ Vh[: len(s), :]
 print(f"{np.allclose(A, A1) = }")
 print(f"{A-A1 = }\n")
 
 S = np.zeros(A.shape)
-S[:len(s), :len(s)] = np.diag(s)
+S[: len(s), : len(s)] = np.diag(s)
 A2 = U @ S @ Vh
 np.allclose(A, A2)
 print(f"{A-A2 = }\n")
@@ -164,38 +162,42 @@ This is often called the _truncated SVD_.
 We can use this for image compression.
 
 ```{python}
-#| label: fig-mci_headquater_svd
-#| fig-cap: "Image of MCI I and the reconstruction with reduced rank matrices."
-#| fig-subcap:
-#|      - "Singular values from largest to smallest"
-#|      - "0.1% of eigenvalue"
-#|      - "10% of eigenvalue"
-#|      - "25% of eigenvalue"
-#|      - "50% of eigenvalue"
-#|      - "75% of eigenvalue"
-#|      - "original image"
-#| layout: [[1], [1, 1, 1], [1, 1, 1]]
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-mci_headquater_svd
+# | fig-cap: "Image of MCI I and the reconstruction with reduced rank matrices."
+# | fig-subcap:
+# |      - "Singular values from largest to smallest"
+# |      - "0.1% of eigenvalue"
+# |      - "10% of eigenvalue"
+# |      - "25% of eigenvalue"
+# |      - "50% of eigenvalue"
+# |      - "75% of eigenvalue"
+# |      - "original image"
+# | layout: [[1], [1, 1, 1], [1, 1, 1]]
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import imageio.v3 as iio
 import numpy as np
 import numpy.linalg as LA
 %config InlineBackend.figure_formats = ['svg']
 
-im = np.asarray(iio.imread(
-    "https://www.mci.edu/en/download/27-logos-bilder?"
-    "download=618:mci-eu-web"))
+im = np.asarray(
+    iio.imread(
+        "https://www.mci.edu/en/download/27-logos-bilder?" "download=618:mci-eu-web"
+    )
+)
+
 
 def rgb2gray(rgb):
     return np.dot(rgb[..., :3], [0.2989, 0.5870, 0.1140])
+
 
 im_gray = rgb2gray(im)
 im_scale = im_gray[1500:3001, 1500:3001] / 255
 
 U, s, Vh = LA.svd(im_scale, full_matrices=False)
 
-rec = [1/1000, 10/100, 25/100, 50/100, 75/100]
+rec = [1 / 1000, 10 / 100, 25 / 100, 50 / 100, 75 / 100]
 
 plt.figure()
 plt.plot(s)
@@ -234,18 +236,18 @@ M_k = U(:, k) V^{\mathsf{T}}(k, :).
 $$
 
 ```{python}
-#| label: fig-mci_headquater_svd_modes
-#| fig-cap: "Modes of the SVD decomposition of the MCI I image."
-#| fig-subcap:
-#|      - "First mode"
-#|      - "Second mode"
-#|      - "Third mode"
-#|      - "Fourth mode"
-#|      - "Fifth mode"
-#|      - "Sixth mode"
-#| layout: [[1, 1, 1], [1, 1, 1]]
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-mci_headquater_svd_modes
+# | fig-cap: "Modes of the SVD decomposition of the MCI I image."
+# | fig-subcap:
+# |      - "First mode"
+# |      - "Second mode"
+# |      - "Third mode"
+# |      - "Fourth mode"
+# |      - "Fifth mode"
+# |      - "Sixth mode"
+# | layout: [[1, 1, 1], [1, 1, 1]]
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import numpy as np
 import numpy.linalg as LA
@@ -295,26 +297,28 @@ The following code is a slight adaptation (for nicer presentation in these notes
 :::
 
 ```{python}
-#| label: fig-pca_gauss
-#| fig-cap: "Principal components of the mean-subtracted Gaussian data on the left as, as well as the first three standard deviation ellisoids and the two scaled left singular vectors."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-pca_gauss
+# | fig-cap: "Principal components of the mean-subtracted Gaussian data on the left as, as well as the first three standard deviation ellisoids and the two scaled left singular vectors."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import numpy as np
 %config InlineBackend.figure_formats = ["svg"]
-np.random.seed(6020)       # Make sure to stay reproducible
+np.random.seed(6020)  # Make sure to stay reproducible
 
-center = np.array([2, 1])      # Center of data (mean)
-sigma = np.array([2, 0.5])   # Principal axes
+center = np.array([2, 1])  # Center of data (mean)
+sigma = np.array([2, 0.5])  # Principal axes
 
-theta = np.pi / 3            # Rotate cloud by pi/3
+theta = np.pi / 3  # Rotate cloud by pi/3
 
-R = np.array([[np.cos(theta), -np.sin(theta)],     # Rotation matrix
-              [np.sin(theta), np.cos(theta)]])
+R = np.array(
+    [[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]]  # Rotation matrix
+)
 
-nPoints = 10000            # Create 10,000 points
-X = R @ np.diag(sigma) @ np.random.randn(2, nPoints) + \
-        np.diag(center) @ np.ones((2, nPoints))
+nPoints = 10000  # Create 10,000 points
+X = R @ np.diag(sigma) @ np.random.randn(2, nPoints) + np.diag(center) @ np.ones(
+    (2, nPoints)
+)
 
 fig = plt.figure()
 ax1 = fig.add_subplot(121)
@@ -326,15 +330,15 @@ plt.ylim((-6, 8))
 
 ## f_ch01_ex03_1b
 
-Xavg = np.mean(X, axis=1)                  # Compute mean
-B = X - np.tile(Xavg, (nPoints, 1)).T       # Mean-subtracted data
+Xavg = np.mean(X, axis=1)  # Compute mean
+B = X - np.tile(Xavg, (nPoints, 1)).T  # Mean-subtracted data
 
 # Find principal components (SVD)
 U, S, VT = np.linalg.svd(B, full_matrices=False)
 S = S / np.sqrt(nPoints - 1)
 
 ax2 = fig.add_subplot(122)
-ax2.plot(X[0, :], X[1, :], ".", color="k")   # Plot data to overlay PCA
+ax2.plot(X[0, :], X[1, :], ".", color="k")  # Plot data to overlay PCA
 ax2.grid()
 ax2.set_aspect("equal")
 plt.xlim((-6, 8))
@@ -345,20 +349,29 @@ theta = 2 * np.pi * np.arange(0, 1, 0.01)
 # 1-std confidence interval
 Xstd = U @ np.diag(S) @ np.array([np.cos(theta), np.sin(theta)])
 
-ax2.plot(Xavg[0] + Xstd[0, :], Xavg[1] + Xstd[1, :],
-        "-", color="r", linewidth=3)
-ax2.plot(Xavg[0] + 2 * Xstd[0, :], Xavg[1] + 2 * Xstd[1, :],
-        "-", color="r", linewidth=3)
-ax2.plot(Xavg[0] + 3 * Xstd[0, :], Xavg[1] + 3 * Xstd[1, :],
-        "-", color="r", linewidth=3)
+ax2.plot(Xavg[0] + Xstd[0, :], Xavg[1] + Xstd[1, :], "-", color="r", linewidth=3)
+ax2.plot(
+    Xavg[0] + 2 * Xstd[0, :], Xavg[1] + 2 * Xstd[1, :], "-", color="r", linewidth=3
+)
+ax2.plot(
+    Xavg[0] + 3 * Xstd[0, :], Xavg[1] + 3 * Xstd[1, :], "-", color="r", linewidth=3
+)
 
 # Plot principal components U[:,0]S[0] and U[:,1]S[1]
-ax2.plot(np.array([Xavg[0], Xavg[0] + U[0,0] * S[0]]),
-         np.array([Xavg[1], Xavg[1] + U[1,0] * S[0]]),
-         "-", color="cyan", linewidth=5)
-ax2.plot(np.array([Xavg[0], Xavg[0] + U[0,1] * S[1]]),
-         np.array([Xavg[1], Xavg[1] + U[1,1] * S[1]]),
-         "-", color="cyan", linewidth=5)
+ax2.plot(
+    np.array([Xavg[0], Xavg[0] + U[0, 0] * S[0]]),
+    np.array([Xavg[1], Xavg[1] + U[1, 0] * S[0]]),
+    "-",
+    color="cyan",
+    linewidth=5,
+)
+ax2.plot(
+    np.array([Xavg[0], Xavg[0] + U[0, 1] * S[1]]),
+    np.array([Xavg[1], Xavg[1] + U[1, 1] * S[1]]),
+    "-",
+    color="cyan",
+    linewidth=5,
+)
 
 plt.show()
 ```
@@ -402,20 +415,39 @@ If the sensor ranges of our matrix are very different in magnitude the correlati
 :::
 
 ```{python}
-#| echo: false
-#| output: asis
+# | echo: false
+# | output: asis
 
 print(r"In our example we get our scaled ")
-print(r"$\sigma_1=" + str(float(round(S[0],3))) + r"\approx 2$")
-print(r"and $\sigma_2=" + str(float(round(S[1],3))) + r"\approx \frac12$.")
+print(r"$\sigma_1=" + str(float(round(S[0], 3))) + r"\approx 2$")
+print(r"and $\sigma_2=" + str(float(round(S[1], 3))) + r"\approx \frac12$.")
 print(r"These results recover our given parameters very well.")
-print(r"Additionally we can see that our rotation matrix is closely matched by $U$ (up to signs) from our SVD:")
-print(r"""$$
+print(
+    r"Additionally we can see that our rotation matrix is closely matched by $U$ (up to signs) from our SVD:"
+)
+print(
+    r"""$$
 R_{\frac\pi3} = \left[
-\begin{array}{cc} """ + str(float(round(R[0, 0], 3))) + "&" + str(float(round(R[1, 0], 3))) + r"\\" + str(float(round(R[0, 1], 3))) + "&" + str(float(round(R[1, 1], 3))) + r"""\end{array}
+\begin{array}{cc} """
+    + str(float(round(R[0, 0], 3)))
+    + "&"
+    + str(float(round(R[1, 0], 3)))
+    + r"\\"
+    + str(float(round(R[0, 1], 3)))
+    + "&"
+    + str(float(round(R[1, 1], 3)))
+    + r"""\end{array}
 \right], \quad U = \left[
-\begin{array}{cc}""" + str(float(round(U[0, 0], 3))) + "&" + str(float(round(U[1, 0], 3))) + r"\\" + str(float(round(U[0, 1], 3))) + "&" + str(float(round(U[1, 1], 3))) + r"""\end{array} \right]
-$$""")
+\begin{array}{cc}"""
+    + str(float(round(U[0, 0], 3)))
+    + "&"
+    + str(float(round(U[1, 0], 3)))
+    + r"\\"
+    + str(float(round(U[0, 1], 3)))
+    + "&"
+    + str(float(round(U[1, 1], 3)))
+    + r"""\end{array} \right]
+$$"""
 ```
 
 ### Example Eigenfaces {#sec-matrixcd-svd-eigenfaces}
@@ -449,9 +481,9 @@ The following code is an adaptation of the [@Brunton2022, Code 1.7 and 1.9].
 :::
 
 ```{python}
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
-#| eval: false
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
+# | eval: false
 import numpy as np
 import numpy.linalg as LA
 import scipy
@@ -460,7 +492,8 @@ import io
 import matplotlib.pyplot as plt
 %config InlineBackend.figure_formats = ["svg"]
 
-fun my_plot(testFaceMS, avgFace, U, m, n, rec):
+
+def my_plot(testFaceMS, avgFace, U, m, n, rec):
     for i, p in enumerate(rec):
         plt.figure()
         r = p
@@ -469,21 +502,23 @@ fun my_plot(testFaceMS, avgFace, U, m, n, rec):
         plt.gca().set_axis_off()
         plt.gca().set_title(f"${r = }$")
 
+
 response = requests.get(
     "https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos"
-    "/raw/refs/heads/main/DATA/allFaces.mat")
+    "/raw/refs/heads/main/DATA/allFaces.mat"
+)
 
 data = scipy.io.loadmat(io.BytesIO(response.content))
 faces = data["faces"]
-m = int(data["m"][0,0])
-n = int(data["n"][0,0])
-nfaces = np.ndarray.flatten(data['nfaces'])
+m = int(data["m"][0, 0])
+n = int(data["n"][0, 0])
+nfaces = np.ndarray.flatten(data["nfaces"])
 
 trainingFaces = faces[:, : np.sum(nfaces[:36])]
 avgFace = np.mean(trainingFaces, axis=1)
 
 B = trainingFaces - np.tile(avgFace, (trainingFaces.shape[1], 1)).T
-U, _, _ = LA.svd(B, 'econ')
+U, _, _ = LA.svd(B, "econ")
 
 testFace = faces[:, np.sum(nfaces[:36])]
 testFaceMS = testFace - avgFace
@@ -497,14 +532,15 @@ plt.gca().set_axis_off()
 plt.gca().set_title(f"Original image")
 
 shift = 1500
-testFaceMS = np.reshape(im_gray[shift:shift+n, shift:shift+m].T, n*m) - \
-             avgFace
+testFaceMS = (
+    np.reshape(im_gray[shift : shift + n, shift : shift + m].T, n * m) - avgFace
+)
 rec = [100, 400, 1600]
 
 my_plot(testFaceMS, avgFace, U, m, n, rec)
 
 plt.figure()
-axs[7].imshow(im_gray[shift:shift+n, shift:shift+m], cmap=plt.get_cmap("gray"))
+axs[7].imshow(im_gray[shift : shift + n, shift : shift + m], cmap=plt.get_cmap("gray"))
 axs[7].set_axis_off()
 axs[7].set_title(f"Original image")
 plt.show()
@@ -654,27 +690,27 @@ x = \frac{a^{\mathsf{T}} b}{a^{\mathsf{T}} a}.
 $$
 
 ```{python}
-#| label: fig-linear_regression_svd
-#| fig-cap: "Linear regression with SVD."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-linear_regression_svd
+# | fig-cap: "Linear regression with SVD."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import numpy as np
 import numpy.linalg as LA
 %config InlineBackend.figure_formats = ['svg']
-np.random.seed(6020)       # Make sure to stay reproducible
+np.random.seed(6020)  # Make sure to stay reproducible
 
 k = 3
 A = np.arange(-2, 2, 0.25).reshape(-1, 1)
-b = k*A + np.random.randn(*A.shape) * 0.5
+b = k * A + np.random.randn(*A.shape) * 0.5
 
 U, s, VT = LA.svd(A, full_matrices=False)
 
-x = VT.T @ np.diag(1/s) @ U.T @ b
+x = VT.T @ np.diag(1 / s) @ U.T @ b
 
-plt.plot(A, k*A, color="k", label="Target")
-plt.plot(A, b, 'x', color="r", label="Noisy data")
-plt.plot(A, A*x, '--', color="b", label="Regression line")
+plt.plot(A, k * A, color="k", label="Target")
+plt.plot(A, b, "x", color="r", label="Noisy data")
+plt.plot(A, A * x, "--", color="b", label="Regression line")
 plt.legend()
 plt.xlabel("$a$")
 plt.ylabel("$b$")
@@ -691,10 +727,10 @@ The data set contains the heat generation during the hardening of 12 cement mixt
 The aim is to determine the weights $x$ that relate the proportion of the ingredients to the heat generation in the mixture.
 
 ```{python}
-#| label: fig-cement_svd
-#| fig-cap: "Estimate for hardening in cement mixtures."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-cement_svd
+# | fig-cap: "Estimate for hardening in cement mixtures."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import numpy as np
 import numpy.linalg as LA
@@ -705,21 +741,23 @@ import io
 # Transform the content of the file into a numpy.ndarray
 response = requests.get(
     "https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos"
-    "/raw/refs/heads/main/DATA/hald_ingredients.csv")
+    "/raw/refs/heads/main/DATA/hald_ingredients.csv"
+)
 # Transform the content of the file into a numpy.ndarray
 A = np.genfromtxt(io.BytesIO(response.content), delimiter=",")
 
 response = requests.get(
     "https://github.com/frankhuettner/Data_Driven_Science_Julia_Demos"
-    "/raw/refs/heads/main/DATA/hald_heat.csv")
+    "/raw/refs/heads/main/DATA/hald_heat.csv"
+)
 b = np.genfromtxt(io.BytesIO(response.content), delimiter=",")
 
 U, s, VT = LA.svd(A, full_matrices=False)
 
-x = VT.T @ np.diag(1/s) @ U.T @ b
+x = VT.T @ np.diag(1 / s) @ U.T @ b
 
 plt.plot(b, color="k", label="Target - Heat data")
-plt.plot(A@x, '--', color="b", label="Regression")
+plt.plot(A @ x, "--", color="b", label="Regression")
 plt.legend()
 plt.xlabel("mixture")
 plt.ylabel("Heat[cal/g]")

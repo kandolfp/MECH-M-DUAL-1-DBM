@@ -44,14 +44,12 @@ $$
 
 So let us check in `numpy`:
 ```{python}
-#| classes: styled-output
-#| error: true
+# | classes: styled-output
+# | error: true
 import numpy as np
 from numpy import linalg as LA
 
-A = np.array([[2, 0, 0],
-              [0, 3, 4],
-              [0, 4, 9]])
+A = np.array([[2, 0, 0], [0, 3, 4], [0, 4, 9]])
 det_A = LA.det(A)
 print(f"{det_A = }")
 
@@ -95,8 +93,8 @@ and we denote the largest by $\lambda_{max}(A) = \lambda_1(A)$ and the smallest 
 From the above properties of the determinant we can conclude that, if $X \in \mathbb{C}^{n\times n}$ is nonsingular and $B = X^{-1} A X$, then $A$ and $B$ are called _similar_ and two similar matrices have exactly the same eigenvalues.
 
 ```{python}
-#| classes: styled-output
-#| error: true
+# | classes: styled-output
+# | error: true
 lam = LA.eigvals(A)
 lam_sort = np.sort(lam)
 
@@ -141,8 +139,8 @@ This is called the _eigendecomposition_ of the matrix $A$.
 Not all matrices $A \in \mathbb{R}^{n\times n}$ are diagonalizable.
 
 ```{python}
-#| classes: styled-output
-#| error: true
+# | classes: styled-output
+# | error: true
 lam, V = LA.eig(A)
 A_eigen = np.diag(lam)
 print(f"{A_eigen = }")
@@ -484,41 +482,45 @@ To make this a bit easier to understand the following illustration is helpful:
 This approximation can be used to reduce the storage demand of an image.
 
 ```{python}
-#| label: fig-mci_headquater
-#| fig-cap: "Image of MCI I and the reconstruction with approximated matrix."
-#| fig-subcap:
-#|      - "Absolute value of Eigenvalues from largest to smallest"
-#|      - "0.1% of eigenvalue"
-#|      - "10% of eigenvalue"
-#|      - "25% of eigenvalue"
-#|      - "50% of eigenvalue"
-#|      - "75% of eigenvalue"
-#|      - "original image"
-#| layout: [[1], [1, 1, 1], [1, 1, 1]]
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-mci_headquater
+# | fig-cap: "Image of MCI I and the reconstruction with approximated matrix."
+# | fig-subcap:
+# |      - "Absolute value of Eigenvalues from largest to smallest"
+# |      - "0.1% of eigenvalue"
+# |      - "10% of eigenvalue"
+# |      - "25% of eigenvalue"
+# |      - "50% of eigenvalue"
+# |      - "75% of eigenvalue"
+# |      - "original image"
+# | layout: [[1], [1, 1, 1], [1, 1, 1]]
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import imageio.v3 as iio
 import numpy as np
 import numpy.linalg as LA
 %config InlineBackend.figure_formats = ["svg"]
 
-im = np.asarray(iio.imread(
-    "https://www.mci.edu/en/download/27-logos-bilder?"
-    "download=618:mci-eu-web"))
+im = np.asarray(
+    iio.imread(
+        "https://www.mci.edu/en/download/27-logos-bilder?" "download=618:mci-eu-web"
+    )
+)
+
 
 def rgb2gray(rgb):
-    return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
+    return np.dot(rgb[..., :3], [0.2989, 0.5870, 0.1140])
+
 
 im_gray = rgb2gray(im)
-im_cut = im_gray[1500:3001,1500:3001] / 255
+im_cut = im_gray[1500:3001, 1500:3001] / 255
 
 lam_, V_ = LA.eig(im_cut)
 order = np.argsort(np.abs(lam_))
 lam = lam_[order[::-1]]
 V = V_[:, order[::-1]]
 
-rec = [1/1000, 10/100, 25/100, 50/100, 75/100]
+rec = [1 / 1000, 10 / 100, 25 / 100, 50 / 100, 75 / 100]
 Vinv = LA.inv(V)
 
 plt.figure()

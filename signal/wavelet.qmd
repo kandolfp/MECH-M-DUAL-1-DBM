@@ -31,25 +31,29 @@ $$
 
 
 ```{python}
-#| label: fig-wavelet-haar
-#| fig-cap: "Haar wavelets for the first two levels of multi resolution."
-#| fig-subcap:
-#|   - "Scaling 1 and translation 0."
-#|   - "Scaling 1/2 and translation 0."
-#|   - "Scaling 1/2 and translation 1/2."
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-wavelet-haar
+# | fig-cap: "Haar wavelets for the first two levels of multi resolution."
+# | fig-subcap:
+# |   - "Scaling 1 and translation 0."
+# |   - "Scaling 1/2 and translation 0."
+# |   - "Scaling 1/2 and translation 1/2."
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
+
 %config InlineBackend.figure_formats = ["svg"]
 
 N = 1000
 a, b = -0.25, 1.25
 t = np.linspace(a, b, N, endpoint=False)
-mother = lambda t: np.heaviside(t, 1) - np.heaviside(t - 1/2, 1) - \
-                   (np.heaviside(t - 1/2, 1) - np.heaviside(t - 1, 1))
+mother = (
+    lambda t: np.heaviside(t, 1)
+    - np.heaviside(t - 1 / 2, 1)
+    - (np.heaviside(t - 1 / 2, 1) - np.heaviside(t - 1, 1))
+)
 psi = lambda t, a, b: 1 / np.sqrt(a) * mother((t - b) / a)
 
 plt.figure(0)
@@ -59,13 +63,13 @@ plt.ylabel(r"$\psi_{1,0}$")
 plt.gca().set_aspect(0.125)
 
 plt.figure(1)
-plt.plot(t, psi(t, 1/2, 0))
+plt.plot(t, psi(t, 1 / 2, 0))
 plt.xlabel("x")
 plt.ylabel(r"$\psi_{\frac{1}{2}, 0}$")
 plt.gca().set_aspect(0.125)
 
 plt.figure(2)
-plt.plot(t, psi(t, 1/2, 1/2))
+plt.plot(t, psi(t, 1 / 2, 1 / 2))
 plt.xlabel("t")
 plt.ylabel(r"$\psi_{\frac{1}{2}, \frac{1}{2}}$")
 plt.gca().set_aspect(0.125)
@@ -89,24 +93,25 @@ $$
 
 
 ```{python}
-#| label: fig-wavelet-mexicanhat
-#| fig-cap: "Mexican hat wavelets for the first two levels of multi resolution."
-#| fig-subcap:
-#|   - "Scaling 1 and translation 0."
-#|   - "Scaling 1/2 and translation 0."
-#|   - "Scaling 1/2 and translation 1/2."
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-wavelet-mexicanhat
+# | fig-cap: "Mexican hat wavelets for the first two levels of multi resolution."
+# | fig-subcap:
+# |   - "Scaling 1 and translation 0."
+# |   - "Scaling 1/2 and translation 0."
+# |   - "Scaling 1/2 and translation 1/2."
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
+
 %config InlineBackend.figure_formats = ["svg"]
 
 N = 1000
 a, b = -5, 5
 t = np.linspace(a, b, N, endpoint=False)
-mother = lambda t, d: (1 - np.pow(t, 2)) * np.exp(-1/2 * np.pow(t, 2))
+mother = lambda t, d: (1 - np.pow(t, 2)) * np.exp(-1 / 2 * np.pow(t, 2))
 psi = lambda t, a, b: 1 / np.sqrt(a) * mother((t - b) / a, 2)
 
 plt.figure(0)
@@ -116,13 +121,13 @@ plt.ylabel(r"$\psi_{1,0}$")
 plt.gca().set_aspect(1.5)
 
 plt.figure(1)
-plt.plot(t, psi(t, 1/2, 0))
+plt.plot(t, psi(t, 1 / 2, 0))
 plt.xlabel("x")
 plt.ylabel(r"$\psi_{\frac{1}{2}, 0}$")
 plt.gca().set_aspect(1.5)
 
 plt.figure(2)
-plt.plot(t, psi(t, 1/2, 1/2))
+plt.plot(t, psi(t, 1 / 2, 1 / 2))
 plt.xlabel("t")
 plt.ylabel(r"$\psi_{\frac{1}{2}, \frac{1}{2}}$")
 plt.gca().set_aspect(1.5)
@@ -317,23 +322,24 @@ $$
 $$
 
 ```{python}
-#| label: fig-wavelet-haar-1d
-#| fig-cap: "Haar wavelets for the first three levels of multi resolution analysis."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-wavelet-haar-1d
+# | fig-cap: "Haar wavelets for the first three levels of multi resolution analysis."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
 import pywt
-%config InlineBackend.figure_formats = ["svg"]
 
+%config InlineBackend.figure_formats = ["svg"]
 
 N = 1000
 a, b = 0, 8
 t = np.linspace(a, b, N, endpoint=False)
 v = np.array([3, 1, 0, 4, 0, 6, 9, 9])
 chi = lambda t, a, b: np.heaviside(t - a, 1) - np.heaviside(t - b, 1)
-mother = lambda t: chi(t, 0, 1/2) - chi(1/2, 1)
+mother = lambda t: chi(t, 0, 1 / 2) - chi(1 / 2, 1)
 psi = lambda t, a, b: 1 / np.sqrt(a) * mother((t - b) / a, 2)
+
 
 def f(t, v, spread=1):
     y = np.zeros(t.shape)
@@ -341,14 +347,15 @@ def f(t, v, spread=1):
         y += x * chi(t, i * spread, (i + 1) * spread)
     return y
 
+
 X = np.zeros((4, len(v)))
 for i in range(0, 4):
     x = pywt.wavedec(v, wavelet="Haar", level=i)
-    X[i, :] = np.concatenate(x) 
+    X[i, :] = np.concatenate(x)
 
 plt.figure(0)
 plt.plot(t, f(t, v), label="Signal")
-#plt.plot(t, f(t, X[0, :], 1))
+# plt.plot(t, f(t, X[0, :], 1))
 plt.plot(t, f(t, X[1, 0:5], 2), label="Level 1")
 plt.plot(t, f(t, X[2, 0:3], 4), label="Level 2")
 plt.plot(t, f(t, X[3, 0:1], 8), label="Level 3")

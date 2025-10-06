@@ -28,10 +28,11 @@ For now, we'll just show the code without much explanation because we want to ju
 We use a [structured array](https://numpy.org/doc/stable/user/basics.rec.html#module-numpy.doc.structured_arrays) of `numpy` for it.
 
 ```{python}
-#| classes: styled-output
+# | classes: styled-output
 import numpy as np
 import requests
 import io
+
 response = requests.get("https://data.ub.uni-muenchen.de/2/1/miete03.asc")
 
 # Transform the content of the file into a numpy.ndarray
@@ -126,29 +127,36 @@ Two widely used packages are [`matplotlib`](https://matplotlib.org) and [`plotly
 
 It often helps to visualize the values to see differences and get an idea of their use.
 ```{python}
-#| label: fig-quartiles
-#| fig-cap: "Visualization of the different measurements."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-quartiles
+# | fig-cap: "Visualization of the different measurements."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 %config InlineBackend.figure_formats = ["svg"]
 
 nm_sort = np.sort(data["nm"])
-x = np.linspace(0, 1, len(nm_sort), endpoint=True,)
+x = np.linspace(
+    0,
+    1,
+    len(nm_sort),
+    endpoint=True,
+)
 
 plt.plot(x, nm_sort, label="net rent")
-plt.axis((0, 1, np.round(nm_min/100)*100, np.round(nm_max/100)*100))
-plt.xlabel('Scaled index')
-plt.ylabel('Net rent - nm')
+plt.axis((0, 1, np.round(nm_min / 100) * 100, np.round(nm_max / 100) * 100))
+plt.xlabel("Scaled index")
+plt.ylabel("Net rent - nm")
 
-plt.plot([0, 0.25, 0.25], [nm_quartiles[0], nm_quartiles[0], nm_min], 
-         label='1st quartile')
-plt.plot([0, 0.5, 0.5], [nm_quartiles[1], nm_quartiles[1], nm_min],
-         label='2st quartile')
-plt.plot([0, 0.75, 0.75], [nm_quartiles[2], nm_quartiles[2], nm_min],
-         label='3st quartile')
-plt.plot([0, 1], [nm_mean, nm_mean],
-         label='mean')
+plt.plot(
+    [0, 0.25, 0.25], [nm_quartiles[0], nm_quartiles[0], nm_min], label="1st quartile"
+)
+plt.plot(
+    [0, 0.5, 0.5], [nm_quartiles[1], nm_quartiles[1], nm_min], label="2st quartile"
+)
+plt.plot(
+    [0, 0.75, 0.75], [nm_quartiles[2], nm_quartiles[2], nm_min], label="3st quartile"
+)
+plt.plot([0, 1], [nm_mean, nm_mean], label="mean")
 plt.legend()
 plt.show()
 ```
@@ -156,9 +164,9 @@ plt.show()
 What is shown in @fig-quartiles is often combined into a single [boxplot](https://en.wikipedia.org/wiki/Box_plot) (see @fig-boxplot) that provides way more information at once.
 
 ```{python}
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
-#| output: false
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
+# | output: false
 import plotly.graph_objects as go
 
 fig = go.Figure()
@@ -169,9 +177,9 @@ fig.show()
 
 ::: {.content-visible when-format="html"}
 ```{python}
-#| label: fig-boxplot
-#| fig-cap: "Boxplot done in plotly with whiskers following 3/2 IQR."
-#| echo: false
+# | label: fig-boxplot
+# | fig-cap: "Boxplot done in plotly with whiskers following 3/2 IQR."
+# | echo: false
 fig.show()
 ```
 :::
@@ -179,9 +187,10 @@ fig.show()
 ::: {.content-visible unless-format="html"}
 :::: {#fig-boxplot fig-env="figure"}
 ```{python}
-#| echo: false
+# | echo: false
 import plotly.io as pio
 from IPython.display import Image
+
 img = pio.to_image(fig, format="png", engine="kaleido")
 Image(img)
 ```
@@ -242,7 +251,7 @@ $$
 With `numpy` they are computed as follows
 
 ```{python}
-#| classes: styled-output
+# | classes: styled-output
 
 nm_var = np.var(data["nm"])
 print(f"{nm_var = }")
@@ -260,15 +269,15 @@ When exploring data it is also quite useful to draw histograms.
 For the _net rent_ this makes not much sense but for _rooms_ this is useful.
 
 ```{python}
-#| label: fig-hist
-#| fig-cap: "Histogram of the number of rooms in our dataset."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
-index = np.array(range(0, len(data['rooms'])))
+# | label: fig-hist
+# | fig-cap: "Histogram of the number of rooms in our dataset."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
+index = np.array(range(0, len(data["rooms"])))
 
-plt.hist(data['rooms'])
-plt.xlabel('rooms')
-plt.ylabel('# of rooms')
+plt.hist(data["rooms"])
+plt.xlabel("rooms")
+plt.ylabel("# of rooms")
 plt.show()
 ```
 What we see in @fig-hist is simply the amount of occurrences of $1$ to $6$ in our dataset.
@@ -276,15 +285,15 @@ Already we can see something rather interesting, there are flats with $5.5$ room
 
 Another helpful histogram is @fig-hist2 showing the amount of buildings built per year.
 ```{python}
-#| label: fig-hist2
-#| fig-cap: "Histogram of buildings built per year."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
-index = np.array(range(0, len(data['rooms'])))
+# | label: fig-hist2
+# | fig-cap: "Histogram of buildings built per year."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
+index = np.array(range(0, len(data["rooms"])))
 
-plt.hist(data['bj'])
-plt.xlabel('year of building')
-plt.ylabel('# of buildings')
+plt.hist(data["bj"])
+plt.xlabel("year of building")
+plt.ylabel("# of buildings")
 plt.show()
 ```
 
@@ -299,25 +308,22 @@ For our dataset we can, for example, check:
 1. the _year of construction_ - `bj` vs. the _city district_ - `bez`
 
 ```{python}
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
-#| output: false
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
+# | output: false
 from plotly.subplots import make_subplots
 
 fig = make_subplots(rows=3, cols=1)
 
-fig.add_trace(go.Scatter(x=data["wfl"], y=data["nm"], mode="markers"),
-                row=1, col=1)
+fig.add_trace(go.Scatter(x=data["wfl"], y=data["nm"], mode="markers"), row=1, col=1)
 fig.update_xaxes(title_text="living area in m^2", row=1, col=1)
 fig.update_yaxes(title_text="net rent", row=1, col=1)
 
-fig.add_trace(go.Scatter(x=data["bj"], y=data["zh0"], mode="markers"),
-                row=2, col=1)
+fig.add_trace(go.Scatter(x=data["bj"], y=data["zh0"], mode="markers"), row=2, col=1)
 fig.update_xaxes(title_text="year of construction", row=2, col=1)
 fig.update_yaxes(title_text="central heating", row=2, col=1)
 
-fig.add_trace(go.Scatter(x=data["bj"], y=data["bez"], mode="markers"),
-                row=3, col=1)
+fig.add_trace(go.Scatter(x=data["bj"], y=data["bez"], mode="markers"), row=3, col=1)
 fig.update_xaxes(title_text="year of construction", row=3, col=1)
 fig.update_yaxes(title_text="city district", row=3, col=1)
 
@@ -326,9 +332,9 @@ fig.show()
 
 ::: {.content-visible when-format="html"}
 ```{python}
-#| label: fig-correlation
-#| fig-cap: "Scatterplot to investigate correlations in the data set."
-#| echo: false
+# | label: fig-correlation
+# | fig-cap: "Scatterplot to investigate correlations in the data set."
+# | echo: false
 fig.show()
 ```
 :::
@@ -336,9 +342,10 @@ fig.show()
 ::: {.content-visible unless-format="html"}
 :::: {#fig-correlation fig-env="figure"}
 ```{python}
-#| echo: false
+# | echo: false
 import plotly.io as pio
 from IPython.display import Image
+
 img = pio.to_image(fig, format="png", engine="kaleido")
 Image(img)
 ```
@@ -386,7 +393,7 @@ where $\sigma_v$ and $\sigma_w$ are the standard deviation of these vectors, see
 In `numpy` the function `numpy.cov` computes a matrix where the diagonal is the variance of the values and the off-diagonals are the covariances of the $i$ and $j$ samples.
 Consequently, `numpy.corrcoef` is a matrix as well.
 ```{python}
-#| classes: styled-output
+# | classes: styled-output
 cov_nm_wfl = np.cov(data["nm"], data["wfl"])
 print(f"{cov_nm_wfl[0, 1] = }")
 

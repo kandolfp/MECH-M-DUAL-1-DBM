@@ -207,15 +207,16 @@ $$
 
 Of course this does not mean we will get exactly $\frac12$ for $n$ tosses but with the rule of large numbers we see that it will end up there for a lot of flips
 ```{python}
-#| label: fig-statistics-cointossln
-#| fig-cap: "Rule of large numbers for coin toss, coin toss simulated by a random numbers smaller or grater than 0.5."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-statistics-cointossln
+# | fig-cap: "Rule of large numbers for coin toss, coin toss simulated by a random numbers smaller or grater than 0.5."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
+import scipy.special
 import matplotlib.pyplot as plt
+
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
-import scipy.special
 
 x = range(1, 1_001, 2)
 y = []
@@ -223,7 +224,7 @@ for n in x:
     y.append(np.sum(np.random.rand(n) < 0.5) / n)
 
 plt.plot(x, y)
-plt.plot([0, max(x)], [1/2,  1/2])
+plt.plot([0, max(x)], [1 / 2, 1 / 2])
 plt.gca().set_aspect(1000 / (3))
 plt.show()
 ```
@@ -280,22 +281,26 @@ F(x) = \sum_{i=0}^{\lfloor x \rfloor}\left(\begin{array}{c} n\\ i\end{array}\rig
 $$
 
 ```{python}
-#| label: fig-statistics-binomial
-#| fig-cap: "Binomial distribution - basic functions."
-#| fig-subcap:
-#|   - "Probability density function."
-#|   - "Cumulative distribution function."
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-statistics-binomial
+# | fig-cap: "Binomial distribution - basic functions."
+# | fig-subcap:
+# |   - "Probability density function."
+# |   - "Cumulative distribution function."
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+
 %config InlineBackend.figure_formats = ["svg"]
 
 
-f = lambda n, p, x: np.vectorize(lambda x: math.comb(n, x))(x) * \
-                    np.pow(p, x) * np.pow(1 - p, n - x)
+f = (
+    lambda n, p, x: np.vectorize(lambda x: math.comb(n, x))(x)
+    * np.pow(p, x)
+    * np.pow(1 - p, n - x)
+)
 
 helper = lambda n, p, x: np.sum(f(n, p, np.arange(0, x + 1)))
 cfd = lambda n, p, x: np.vectorize(lambda x: helper(n, p, x))(x)
@@ -305,13 +310,13 @@ plt.figure()
 plt.plot(x, f(20, 0.5, x), "o", label=r"$n=20, p=\frac{1}{2}$")
 plt.plot(x, f(20, 0.7, x), "x", label=r"$n=20, p=\frac{7}{10}$")
 plt.plot(x, f(40, 0.5, x), "d", label=r"$n=40, p=\frac{1}{2}$")
-plt.gca().set_aspect(40/(3 * 0.2))
+plt.gca().set_aspect(40 / (3 * 0.2))
 plt.legend()
 plt.figure()
 plt.plot(x, cfd(20, 0.5, x), "o", label=r"$n=20, p=\frac{1}{2}$")
 plt.plot(x, cfd(20, 0.7, x), "x", label=r"$n=20, p=\frac{7}{10}$")
 plt.plot(x, cfd(40, 0.5, x), "d", label=r"$n=40, p=\frac{1}{2}$")
-plt.gca().set_aspect(40/(3 * 1))
+plt.gca().set_aspect(40 / (3 * 1))
 plt.legend()
 plt.show()
 ```
@@ -367,29 +372,31 @@ F(x) =
 $$
 
 ```{python}
-#| label: fig-statistics-cud
-#| fig-cap: "Continuous uniform distribution - basic functions."
-#| fig-subcap:
-#|   - "Probability density function."
-#|   - "Cumulative distribution function."
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-statistics-cud
+# | fig-cap: "Continuous uniform distribution - basic functions."
+# | fig-subcap:
+# |   - "Probability density function."
+# |   - "Cumulative distribution function."
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
+
 %config InlineBackend.figure_formats = ["svg"]
 a = 0
 b = 1
 f = lambda x: np.astype((x >= a) & (x < b), float) / (b - a)
-cfd = lambda x: (x - a) / (b - a) * np.astype((x >= a) & (x < b) , float) +\
-                np.astype((x >= b) , float)
+cfd = lambda x: (x - a) / (b - a) * np.astype((x >= a) & (x < b), float) + np.astype(
+    (x >= b), float
+)
 x = np.linspace(-1, 2, 1024)
 plt.figure()
 plt.plot(x, f(x))
-plt.gca().set_aspect(3/(3 * 1))
+plt.gca().set_aspect(3 / (3 * 1))
 plt.figure()
 plt.plot(x, cfd(x))
-plt.gca().set_aspect(3/(3 * 1))
+plt.gca().set_aspect(3 / (3 * 1))
 plt.show()
 
 ```
@@ -425,42 +432,40 @@ $$
 $$
 
 ```{python}
-#| label: fig-statistics-nd
-#| fig-cap: "Normal distribution - basic functions."
-#| fig-subcap:
-#|   - "Probability density function."
-#|   - "Cumulative distribution function."
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-statistics-nd
+# | fig-cap: "Normal distribution - basic functions."
+# | fig-subcap:
+# |   - "Probability density function."
+# |   - "Cumulative distribution function."
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+
 %config InlineBackend.figure_formats = ["svg"]
 
-f = lambda mu, sigma, x: 1 / np.sqrt(2 * np.pi * sigma**2) * \
-    np.exp(- (x - mu)**2 / (2 * sigma**2))
+f = (
+    lambda mu, sigma, x: 1
+    / np.sqrt(2 * np.pi * sigma**2)
+    * np.exp(-((x - mu) ** 2) / (2 * sigma**2))
+)
 
-phi = np.vectorize(lambda x: 1/2 * (1 + math.erf(x / np.sqrt(2))))
+phi = np.vectorize(lambda x: 1 / 2 * (1 + math.erf(x / np.sqrt(2))))
 cfd = lambda mu, sigma, x: phi((x - mu) / sigma)
 x = np.linspace(-3, 3, 1024)
 plt.figure()
-plt.plot(x, f(0, 1, x),
-         label=r"$\mu=0$, $\sigma^2=1$")
-plt.plot(x, f(0, np.sqrt(0.1), x),
-         label=r"$\mu=0$, $\sigma^2=0.1$")
-plt.plot(x, f(1/2, np.sqrt(0.5), x),
-         label=r"$\mu=\frac{1}{2}$, $\sigma^2=0.5$")
-plt.gca().set_aspect(6/(3 * 1.25))
+plt.plot(x, f(0, 1, x), label=r"$\mu=0$, $\sigma^2=1$")
+plt.plot(x, f(0, np.sqrt(0.1), x), label=r"$\mu=0$, $\sigma^2=0.1$")
+plt.plot(x, f(1 / 2, np.sqrt(0.5), x), label=r"$\mu=\frac{1}{2}$, $\sigma^2=0.5$")
+plt.gca().set_aspect(6 / (3 * 1.25))
 plt.legend()
 plt.figure()
-plt.plot(x, cfd(0, 1, x),
-         label=r"$\mu=0$, $\sigma^2=1$")
-plt.plot(x, cfd(0, np.sqrt(0.1), x),
-         label=r"$\mu=0$, $\sigma^2=0.1$")
-plt.plot(x, cfd(1/2, np.sqrt(0.5), x),
-         label=r"$\mu=\frac{1}{2}$, $\sigma^2=0.5$")
-plt.gca().set_aspect(6/(3 * 1))
+plt.plot(x, cfd(0, 1, x), label=r"$\mu=0$, $\sigma^2=1$")
+plt.plot(x, cfd(0, np.sqrt(0.1), x), label=r"$\mu=0$, $\sigma^2=0.1$")
+plt.plot(x, cfd(1 / 2, np.sqrt(0.5), x), label=r"$\mu=\frac{1}{2}$, $\sigma^2=0.5$")
+plt.gca().set_aspect(6 / (3 * 1))
 plt.legend()
 plt.show()
 ```
@@ -486,22 +491,27 @@ $$
 where the numerator is called the upper incomplete gamma function.
 
 ```{python}
-#| label: fig-statistics-gammainv
-#| fig-cap: "Inverse Gamma distribution - basic functions."
-#| fig-subcap:
-#|   - "Probability density function."
-#|   - "Cumulative distribution function."
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-statistics-gammainv
+# | fig-cap: "Inverse Gamma distribution - basic functions."
+# | fig-subcap:
+# |   - "Probability density function."
+# |   - "Cumulative distribution function."
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
 import math
 import scipy
+
 %config InlineBackend.figure_formats = ["svg"]
 
-f = lambda alpha, beta, x: np.pow(beta, alpha) / math.gamma(alpha) * \
-                           np.pow(1/x, 1 + alpha) * np.exp(-beta/x)
+f = (
+    lambda alpha, beta, x: np.pow(beta, alpha)
+    / math.gamma(alpha)
+    * np.pow(1 / x, 1 + alpha)
+    * np.exp(-beta / x)
+)
 
 cfd = lambda alpha, beta, x: scipy.special.gdtr(alpha, beta, x)
 x = np.linspace(1e-3, 3, 1024)
@@ -509,13 +519,13 @@ plt.figure()
 plt.plot(x, f(1, 1, x), label=r"$\alpha=1$, $\beta=1$")
 plt.plot(x, f(3, 1, x), label=r"$\alpha=3$, $\beta=1$")
 plt.plot(x, f(3, 0.5, x), label=r"$\alpha=3$, $\beta=0.5$")
-plt.gca().set_aspect(4/(3 * 5))
+plt.gca().set_aspect(4 / (3 * 5))
 plt.legend()
 plt.figure()
 plt.plot(x, cfd(1, 1, x), label=r"$\mu=0$, $\sigma^2=1$")
 plt.plot(x, cfd(3, 1, x), label=r"$\mu=0$, $\sigma^2=0.1$")
 plt.plot(x, cfd(3, 0.5, x), label=r"$\mu=\frac{1}{2}$, $\sigma^2=0.5$")
-plt.gca().set_aspect(6/(3 * 1))
+plt.gca().set_aspect(6 / (3 * 1))
 plt.legend()
 plt.show()
 ```
@@ -559,16 +569,20 @@ $$
 and in our case we get $p(x) = \mathcal{N}[0.2, 0.05^2](x)$.
 
 ```{python}
-#| label: fig-statistics-bayesian-vote1
-#| fig-cap: "Probability density for our initial guess of the vote for party x."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-statistics-bayesian-vote1
+# | fig-cap: "Probability density for our initial guess of the vote for party x."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import matplotlib.pyplot as plt
+
 %config InlineBackend.figure_formats = ["svg"]
 
-normaldist = lambda mu, sigma, x: 1 / np.sqrt(2 * np.pi * sigma**2) * \
-    np.exp(- (x - mu)**2 / (2 * sigma**2))
+normaldist = (
+    lambda mu, sigma, x: 1
+    / np.sqrt(2 * np.pi * sigma**2)
+    * np.exp(-((x - mu) ** 2) / (2 * sigma**2))
+)
 
 p = lambda x: normaldist(0.2, 0.05, x)
 
@@ -576,7 +590,7 @@ x = np.linspace(0, 1, 1024)
 plt.figure()
 plt.plot(x, p(x))
 plt.grid("major")
-plt.gca().set_aspect(1/(3 * 8))
+plt.gca().set_aspect(1 / (3 * 8))
 plt.xlabel(r"$x$")
 plt.ylabel(r"$p(x)$")
 plt.show()
@@ -595,14 +609,13 @@ p\left(\frac{k}{n} \middle| x\right) = \left(\begin{array}{c} n\\ k\end{array}\r
 $$
 
 ```{python}
-#| label: fig-statistics-bayesian-vote2
-#| fig-cap: "Probability density of k=5 positives out of n=15 samples."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-statistics-bayesian-vote2
+# | fig-cap: "Probability density of k=5 positives out of n=15 samples."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import scipy
 
-bino = lambda k, n, x: scipy.special.comb(n, k) * np.pow(x, k) * \
-                       np.pow(1-x, n - k)
+bino = lambda k, n, x: scipy.special.comb(n, k) * np.pow(x, k) * np.pow(1 - x, n - k)
 p2 = lambda x: bino(2, 10, x)
 
 x = np.linspace(0, 1, 1024)
@@ -623,14 +636,15 @@ $$
 So for a given sample size $n$ and positive samples $k$ we get a new distribution.
 
 ```{python}
-#| label: fig-statistics-bayesian-vote3
-#| fig-cap: "Parameter likelihood after a survey with k=5 positives out of n=15 samples (solid - blue) and k=15 out of n=150 samples (dotted)."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-statistics-bayesian-vote3
+# | fig-cap: "Parameter likelihood after a survey with k=5 positives out of n=15 samples (solid - blue) and k=15 out of n=150 samples (dotted)."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 from scipy.integrate import quad
+
 p3 = lambda k, n: quad(lambda x: bino(k, n, x) * p(x), 0, 1)[0]
 
-p4 = lambda k, n ,x: p(x) * bino(k, n, x) / p3(k, n)
+p4 = lambda k, n, x: p(x) * bino(k, n, x) / p3(k, n)
 
 x = np.linspace(0, 1, 1024)
 plt.figure()
@@ -664,19 +678,22 @@ For steel _S235JR_ this is $R_{aH,0} = 235 \mathrm{MPa}$.
 We use a Gaussian normal distribution with $\mu_0 = 270\mathrm{MPa}$ and $\sigma_0 = 27.3 \mathrm{MPa}$.
 
 ```{python}
-#| label: fig-statistics-bayesian-material1
-#| fig-cap: "Initial assumption for the yield stress of the material, the coloured part represents the 90% of samples that have a yield stress larger than 235."
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-statistics-bayesian-material1
+# | fig-cap: "Initial assumption for the yield stress of the material, the coloured part represents the 90% of samples that have a yield stress larger than 235."
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import numpy as np
 import scipy
 import matplotlib.pyplot as plt
+
 %config InlineBackend.figure_formats = ["svg"]
 
-normaldist = lambda mu, sigma, x: 1 / np.sqrt(2 * np.pi * sigma**2) * \
-    np.exp(- (x - mu)**2 / (2 * sigma**2))
-Finv = lambda mu, sigma, p: mu + sigma * np.sqrt(2) * \
-                            scipy.special.erfinv(2 * p - 1) 
+normaldist = (
+    lambda mu, sigma, x: 1
+    / np.sqrt(2 * np.pi * sigma**2)
+    * np.exp(-((x - mu) ** 2) / (2 * sigma**2))
+)
+Finv = lambda mu, sigma, p: mu + sigma * np.sqrt(2) * scipy.special.erfinv(2 * p - 1)
 
 mu_0 = 270
 sigma_0 = 27.31
@@ -691,7 +708,7 @@ plt.fill_between(x, p(x), where=(x > RaH_0))
 my_max = np.round(np.max(p(x)), 3)
 plt.plot([RaH_0, RaH_0], [0, my_max])
 plt.grid("major")
-plt.gca().set_aspect(400/(3 * my_max))
+plt.gca().set_aspect(400 / (3 * my_max))
 plt.xlabel(r"$x$")
 plt.ylabel(r"$p(R_{aH})$")
 plt.show()
@@ -737,13 +754,12 @@ We can continue this for several samples.
 As we do not have real measurements for this example at hand we generate some sampled from a normal distribution that seems fitting for a _S235JR_ steal.
 
 ```{python}
-#| label: fig-statistics-bayesian-material2
-#| fig-cap: "Update after 10 and 100 iterations"
-#| code-fold: true
-#| eval: true
-#| echo: false
-#| code-summary: "Show the code for the figure"
-
+# | label: fig-statistics-bayesian-material2
+# | fig-cap: "Update after 10 and 100 iterations"
+# | code-fold: true
+# | eval: true
+# | echo: false
+# | code-summary: "Show the code for the figure"
 np.random.seed(6020)
 RaH_samples = np.random.normal(245, 15, 100)
 
@@ -754,7 +770,9 @@ p_rah_mu = lambda mu, sigma, x: normaldist(mu, sigma, x)
 p_rah_sigma = lambda mu, sigma, x: normaldist(mu, sigma, x)
 
 mu_integrant = lambda mu, sigma, RaH, mu_0: p_rah_mu(mu, sigma, RaH) * p_mu(mu, mu_0)
-sigma_integrant = lambda mu, sigma, RaH, sigma_0: p_rah_sigma(mu, sigma, RaH) * p_sigma(sigma, sigma_0)
+sigma_integrant = lambda mu, sigma, RaH, sigma_0: p_rah_sigma(mu, sigma, RaH) * p_sigma(
+    sigma, sigma_0
+)
 
 mu = mu_0
 sigma = sigma_0
@@ -765,17 +783,29 @@ for i, RaH in enumerate(RaH_samples):
     m_int = [mu - 0.3 * mu, mu + 0.3 * mu]
     s_int = [sigma - 0.3 * sigma, sigma + 0.3 * sigma]
 
-    p_mus_rah_norm = quad(lambda x: mu_integrant(x, sigma, RaH, mu), m_int[0], m_int[-1])[0]
-    sigmas_norm = quad(lambda x: sigma_integrant(mu, x, RaH, sigma), s_int[0], s_int[-1])[0]
+    p_mus_rah_norm = quad(
+        lambda x: mu_integrant(x, sigma, RaH, mu), m_int[0], m_int[-1]
+    )[0]
+    sigmas_norm = quad(
+        lambda x: sigma_integrant(mu, x, RaH, sigma), s_int[0], s_int[-1]
+    )[0]
 
     mu_old = mu
-    mu = quad(lambda x: x * mu_integrant(x, sigma, RaH, mu) / p_mus_rah_norm, m_int[0], m_int[-1])[0]
-    sigma = quad(lambda x: x * sigma_integrant(mu_old, x, RaH, sigma) / sigmas_norm, s_int[0], s_int[-1])[0]
-    
+    mu = quad(
+        lambda x: x * mu_integrant(x, sigma, RaH, mu) / p_mus_rah_norm,
+        m_int[0],
+        m_int[-1],
+    )[0]
+    sigma = quad(
+        lambda x: x * sigma_integrant(mu_old, x, RaH, sigma) / sigmas_norm,
+        s_int[0],
+        s_int[-1],
+    )[0]
+
     if (i == 9) or (i == 99):
         plt.plot(x, normaldist(mu, sigma, x), label=f"update after {i+1} iterations")
 
-plt.gca().set_aspect(400/(3 * 0.022))
+plt.gca().set_aspect(400 / (3 * 0.022))
 plt.grid("major")
 plt.legend()
 plt.show()

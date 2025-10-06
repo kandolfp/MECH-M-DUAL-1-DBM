@@ -15,7 +15,8 @@ $$
 We have $m$ independent variables and consequently for each of this $n$ observations this results in a matrix
 $$X = \left[
     \begin{array}{c} X_{1-} \\ X_{2-} \\ X_{3-} \\ \vdots \\ X_{n-} \end{array}
-    \right] = \left[X_{-1}, \dots, X_{-m}\right],$$
+    \right] = \left[X_{-1}, \dots, X_{-m}\right],
+$$
 where the second representation more closely fits to our idea of the $m$ independent variables. 
 
 Let us model the relation in a linear fashion with the parameters $c$
@@ -74,29 +75,35 @@ If we go back and we want to solve @eq-fiterror for $c$ we have different realis
 To illustrate this we use the example from [@Brunton2022, pp. 136-167].
 
 ```{python}
-#| label: fig-linear_reg
-#| fig-cap: "Line fit with different norms. Top without outliers, bottom with one outlier."
-#| fig-subcap:
-#|   - "Observations with no outliers."
-#|   - "Observations with outliers." 
-#| layout-ncol: 1
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-linear_reg
+# | fig-cap: "Line fit with different norms. Top without outliers, bottom with one outlier."
+# | fig-subcap:
+# |   - "Observations with no outliers."
+# |   - "Observations with outliers."
+# | layout-ncol: 1
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.optimize
 %config InlineBackend.figure_formats = ["svg"]
 
+
 # Function definitions
 def fit1(x0, t):
     x, y = t
-    return 1/len(y)*np.max(np.abs(x0[0] * x + x0[1] - y))
+    return 1 / len(y) * np.max(np.abs(x0[0] * x + x0[1] - y))
+
+
 def fit2(x0, t):
     x, y = t
-    return 1/len(y)*np.sum(np.abs(x0[0] * x + x0[1] - y))
+    return 1 / len(y) * np.sum(np.abs(x0[0] * x + x0[1] - y))
+
+
 def fit3(x0, t):
     x, y = t
-    return 1/len(y)*np.sum(np.power(np.abs(x0[0] * x + x0[1] - y), 2))
+    return 1 / len(y) * np.sum(np.power(np.abs(x0[0] * x + x0[1] - y), 2))
+
 
 # The data
 x = np.arange(1, 11)
@@ -330,20 +337,21 @@ where $\epsilon_k$ is a random number that simulates the error.
 We perform the interpolation with $X^\dagger$.
 
 ```{python}
-#| label: fig-linear_reg_poly
-#| fig-cap: "Fitting for different degrees of polynomial $m$"
-#| code-fold: true
-#| code-summary: "Show the code for the figure"
+# | label: fig-linear_reg_poly
+# | fig-cap: "Fitting for different degrees of polynomial $m$"
+# | code-fold: true
+# | code-summary: "Show the code for the figure"
 import matplotlib.pyplot as plt
 import numpy as np
 import warnings
-warnings.simplefilter('ignore', np.exceptions.RankWarning)
+
+warnings.simplefilter("ignore", np.exceptions.RankWarning)
 %config InlineBackend.figure_formats = ["svg"]
 np.random.seed(6020)
 
 m = 100
 x = 6 * np.random.rand(m) - 3
-y = 1/2 * x ** 2 + x + 2 + np.random.randn(m)
+y = 1 / 2 * x**2 + x + 2 + np.random.randn(m)
 
 X1 = np.vander(x, 2)
 X2 = np.vander(x, 3)
@@ -372,7 +380,7 @@ plt.xlim(-3, 3)
 plt.xlabel(r"$x$")
 plt.ylabel(r"$y$")
 plt.legend(loc="upper left")
-#plt.gca().set_aspect(0.25)
+# plt.gca().set_aspect(0.25)
 plt.grid(visible=True)
 plt.show()
 ```
@@ -432,9 +440,9 @@ In order to apply it to the original function the parameters transform needs to 
 We take a look at the population growth were the data is kindly provided by @owid-population-growth. Have a look at there excellent work on [ourworldindata.org](https://ourworldindata.org/).
 
 ```{python}
-#| code-fold: true
-#| code-summary: "Show the code for the figures"
-#| output: false
+# | code-fold: true
+# | code-summary: "Show the code for the figures"
+# | output: false
 
 from owid.catalog import charts
 import numpy as np
@@ -442,19 +450,19 @@ import scipy.optimize
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-df = charts.get_data(
-    "https://ourworldindata.org/grapher/population?country=~OWID_WRL")
+df = charts.get_data("https://ourworldindata.org/grapher/population?country=~OWID_WRL")
 data = df[df["entities"] == "World"]
 x = data["years"].to_numpy()
 y = data["population"].to_numpy()
 ylog = np.log(y)
 
+
 def fit3(x0, t):
     x, y = t
     return np.sum(np.power(np.abs(x0[0] * x + x0[1] - y), 2))
 
-start = [-np.inf, 0, 1700, 1900, 1980]
 
+start = [-np.inf, 0, 1700, 1900, 1980]
 yest = []
 
 for s in start:
@@ -466,10 +474,12 @@ for s in start:
 
 fig = go.Figure()
 fig2 = go.Figure()
-fig.add_trace(go.Scatter(mode="markers", x=data["years"],
-                y=data["population"], name="data"))
-fig2.add_trace(go.Scatter(mode="markers", x=data["years"],
-                y=data["population"], name="data"))
+fig.add_trace(
+    go.Scatter(mode="markers", x=data["years"], y=data["population"], name="data")
+)
+fig2.add_trace(
+    go.Scatter(mode="markers", x=data["years"], y=data["population"], name="data")
+)
 
 for i, ye in enumerate(yest):
     fig.add_trace(go.Scatter(x=x, y=ye, name=f"fit from {start[i]}"))
@@ -478,44 +488,35 @@ for i, ye in enumerate(yest):
 
 fig.update_xaxes(title_text="year", range=[1700, 2023])
 fig.update_yaxes(title_text="population")
-fig.update_layout(legend=dict(
-    yanchor="top",
-    y=0.99,
-    xanchor="left",
-    x=0.01
-))
+fig.update_layout(legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01))
 fig.show()
 
 fig2.update_xaxes(title_text="year", range=[1700, 2023])
-fig2.update_yaxes(title_text="population", type="log", range=[8.5,10])
-fig2.update_layout(legend=dict(
-    yanchor="top",
-    y=0.99,
-    xanchor="left",
-    x=0.01
-))
+fig2.update_yaxes(title_text="population", type="log", range=[8.5, 10])
+fig2.update_layout(legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01))
 fig2.show()
 ```
 ::::: {.content-visible when-format="html"}
 ```{python}
-#| label: fig-reg_wp-1
-#| fig-cap: "World population with regression lines normal scale."
-#| echo: false
+# | label: fig-reg_wp-1
+# | fig-cap: "World population with regression lines normal scale."
+# | echo: false
 fig.show()
 ```
 ```{python}
-#| label: fig-reg_wp-2
-#| fig-cap: "World population with regression lines logarithmic scale."
-#| echo: false
+# | label: fig-reg_wp-2
+# | fig-cap: "World population with regression lines logarithmic scale."
+# | echo: false
 fig2.show()
 ```
 :::::
 ::::: {.content-visible unless-format="html"}
 :::::: {#fig-reg_wp-1 fig-env="figure"}
 ```{python}
-#| echo: false
+# | echo: false
 import plotly.io as pio
 from IPython.display import Image
+
 img = pio.to_image(fig, format="png", engine="kaleido")
 Image(img)
 ```
@@ -525,9 +526,10 @@ World population with regression lines normal scale.
 ::::::
 :::::: {#fig-reg_wp-2 fig-env="figure"}
 ```{python}
-#| echo: false
+# | echo: false
 import plotly.io as pio
 from IPython.display import Image
+
 img = pio.to_image(fig2, format="png", engine="kaleido")
 Image(img)
 ```

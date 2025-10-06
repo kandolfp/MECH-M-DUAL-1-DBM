@@ -229,12 +229,14 @@ plt.gca().set_aspect(1.5)
 plt.show()
 ```
 1. Not including the endpoint is important, as this is part of the periodicity of the function.
+
 ::::
 :::
 
 ::: {.content-visible when-format="html"}
 :::: {.callout-caution appearance="simple" collapse="true" icon=false}
 ::::: {#exr-fourier-hat-self}
+
 ## Self implementation @exm-fourier-hat
 
 Implement the code yourself by filling out the missing sections:
@@ -318,7 +320,7 @@ plt.gca().set_aspect(1.5)
 
 plt.show()
 ```
-:::::
+
 :::::
 ::::
 :::

@@ -10,5 +10,6 @@
     "cSpell.minWordLength": 3,
     "cSpell.ignoreRegExpList": [
         "/\\\\[a-z]+/gi\t"
-    ]
+    ],
+    "quarto.visualEditor.spellingDictionary": "en_GB"
 }

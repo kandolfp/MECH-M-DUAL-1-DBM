@@ -574,7 +574,7 @@ window.Quarto = {
   <li><a href="#fourier-series" id="toc-fourier-series" class="nav-link active" data-scroll-target="#fourier-series"><span class="header-section-number">8.1</span> Fourier Series</a></li>
   <li><a href="#fourier-transform" id="toc-fourier-transform" class="nav-link" data-scroll-target="#fourier-transform"><span class="header-section-number">8.2</span> Fourier Transform</a></li>
   <li><a href="#discrete-fourier-transform" id="toc-discrete-fourier-transform" class="nav-link" data-scroll-target="#discrete-fourier-transform"><span class="header-section-number">8.3</span> Discrete Fourier Transform</a></li>
-  <li><a href="#fast-fourier-transform" id="toc-fast-fourier-transform" class="nav-link" data-scroll-target="#fast-fourier-transform"><span class="header-section-number">8.4</span> Fast-Fourier Transform&gt;</a>
+  <li><a href="#fast-fourier-transform" id="toc-fast-fourier-transform" class="nav-link" data-scroll-target="#fast-fourier-transform"><span class="header-section-number">8.4</span> Fast-Fourier Transform</a>
   <ul class="collapse">
   <li><a href="#examples-for-the-fft-in-action" id="toc-examples-for-the-fft-in-action" class="nav-link" data-scroll-target="#examples-for-the-fft-in-action"><span class="header-section-number">8.4.1</span> Examples for the FFT in action</a></li>
   </ul></li>
@@ -706,7 +706,7 @@ b_k &amp;= \frac{1}{\|\sin\left(\omega k t\right)\|_2^2} \langle f(t), \sin\left
 <p>With the help of Euler’s formula: <span id="eq-euler"><span class="math display">\[
 \mathrm{e}^{\mathrm{i} k t} = \cos(k t) + \mathrm{i} \sin(k t)
 \tag{8.2}\]</span></span> we can rewrite <a href="#eq-fs" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> as <span class="math display">\[
-f(t) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\omega\mathrm{i} k t}
+f(t) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\omega\mathrm{i} k t},
 \]</span> with <span class="math display">\[
 c_k = \frac{1}{L} \int_0^L f(t) \mathrm{e}^{-\omega\mathrm{i} k t}\, \mathrm{d}t.
 \]</span> and for <span class="math inline">\(n=1, 2, 3, \ldots\)</span> <span class="math display">\[
@@ -883,7 +883,7 @@ Figure&nbsp;8.1: Fourier transform of a two hat functions.
 <div class="callout-body-container">
 <div id="exr-fourier-hat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.1 (Self implementation <a href="#exm-fourier-hat" class="quarto-xref">Example&nbsp;<span>8.1</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="16b35387" class="cell" data-execution_count="2">
+<div id="c750ec0c" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -984,13 +984,13 @@ Note
 <h2 data-number="8.2" class="anchored" data-anchor-id="fourier-transform"><span class="header-section-number">8.2</span> Fourier Transform</h2>
 <p>The Fourier Series is defined for <span class="math inline">\(L\)</span>-periodic functions. The Fourier transform extends this to functions with the domain extended to <span class="math inline">\(\pm\infty\)</span>.</p>
 <p>Let us start of with the series representation we already know: <span class="math display">\[
-f(t) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\mathrm{i} \omega k t}
+f(t) = \sum_{k=-\infty}^\infty c_k \mathrm{e}^{\mathrm{i} \omega k t},
 \]</span> with the coefficients <span class="math display">\[
 c_k = \frac{1}{2L} \int_{-L}^{L} f(t) \mathrm{e}^{-\mathrm{i} \omega_k t}\, \mathrm{d}t,
 \]</span> with <span class="math inline">\(\omega_k=\frac{k\pi}{L} = k\Delta \omega\)</span>.</p>
 <p>If we now perform the transition for <span class="math inline">\(L \to \infty\)</span> resulting in <span class="math inline">\(\Delta\omega \to 0\)</span> and basically moving from discrete frequencies to a continuous set of frequencies. This results in <span class="math display">\[
 f(t) = \lim_{\Delta \omega \to 0} \sum_{k=-\infty}^\infty \frac{\Delta \omega}{2\pi}
-\int_{-\tfrac{\pi}{\Delta \omega}}^{\tfrac{\pi}{\Delta \omega}} f(\xi) \mathrm{e}^{-\mathrm{i} k \Delta \omega \xi}\, \mathrm{d}\xi\,\, \mathrm{e}^{\Delta\omega\mathrm{i} k t}
+\int_{-\tfrac{\pi}{\Delta \omega}}^{\tfrac{\pi}{\Delta \omega}} f(\xi) \mathrm{e}^{-\mathrm{i} k \Delta \omega \xi}\, \mathrm{d}\xi\,\, \mathrm{e}^{\Delta\omega\mathrm{i} k t},
 \]</span> which is a Riemann integral and the kernel becomes the Fourier Transform of our function.</p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
@@ -1003,7 +1003,7 @@ f(t) = \lim_{\Delta \omega \to 0} \sum_{k=-\infty}^\infty \frac{\Delta \omega}{2
 \hat{f}(\omega) = \mathcal{F}\{f(t)\} = \int_{-\infty}^{\infty} f(t)\mathrm{e}^{-\mathrm{i} \omega t}\, \mathrm{d}t
 \]</span> exists for all <span class="math inline">\(\omega\in\mathbb{R}\)</span>. In this case we call <span class="math inline">\(\hat{f}(\omega) \equiv \mathcal{F}\{f(t)\}\)</span> the <strong>Fourier transform</strong> of <span class="math inline">\(f(t)\)</span>.</p>
 <p>The <strong>inverse Fourier transform</strong> is defined as <span class="math display">\[
-\mathcal{F}^{-1}\{\hat{f}(\omega)\} = \frac{1}{2 \pi}\int_{-\infty}^{\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i} \omega x}\, \mathrm{d}\omega
+\mathcal{F}^{-1}\{\hat{f}(\omega)\} = \frac{1}{2 \pi}\int_{-\infty}^{\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i} \omega x}\, \mathrm{d}\omega.
 \]</span></p>
 </div>
 </div>
@@ -1137,7 +1137,7 @@ Tip
 </div>
 <div class="callout-body-container callout-body">
 <p>Code for the computation of the DFT matrix.</p>
-<div id="7d5a7338" class="cell" data-execution_count="3">
+<div id="f9e389c6" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code.</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1155,9 +1155,9 @@ Tip
 </div>
 </section>
 <section id="fast-fourier-transform" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="fast-fourier-transform"><span class="header-section-number">8.4</span> Fast-Fourier Transform&gt;</h2>
+<h2 data-number="8.4" class="anchored" data-anchor-id="fast-fourier-transform"><span class="header-section-number">8.4</span> Fast-Fourier Transform</h2>
 <blockquote class="blockquote">
-<p>In 1965, James W. Cooley (IBM) and John W. Tukey (Princeton) developed the so called <em>fast Fourier transform</em> (FFT) that scales with <span class="math inline">\(\mathcal{O}(N \log(N))\)</span>. which becomes almost linear for large enough <span class="math inline">\(N\)</span>, see <span class="citation" data-cites="Cooley1965">Cooley and Tukey (<a href="../references.html#ref-Cooley1965" role="doc-biblioref">1965</a>)</span>.</p>
+<p>In 1965, James W. Cooley (IBM) and John W. Tukey (Princeton) developed the so called <em>fast Fourier transform</em> (FFT) that scales with <span class="math inline">\(\mathcal{O}(N \log(N))\)</span>, which becomes almost linear for large enough <span class="math inline">\(N\)</span>, see <span class="citation" data-cites="Cooley1965">Cooley and Tukey (<a href="../references.html#ref-Cooley1965" role="doc-biblioref">1965</a>)</span>.</p>
 </blockquote>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1419,7 +1419,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 </figure>
 </div>
 <p>As can be seen in the <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span>8.2 (c)</span></a>, the reconstruction is not exact. This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. In particular:</p>
-<div id="f1a41eb2" class="cell" data-execution_count="5">
+<div id="d41d5c70" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -1472,7 +1472,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-den-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.2 (Self implementation <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span>8.2</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="eb293f02" class="cell" data-execution_count="6">
+<div id="60dbf789" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1868,7 +1868,9 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-heat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.4 (Self implementation <a href="#exm-fourier-fft-heat" class="quarto-xref">Example&nbsp;<span>8.4</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="56a48df4" class="cell" data-execution_count="9">
+<div id="80e65cdf" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1927,6 +1929,7 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 <span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_xaxis().set_ticks([])</span>
 <span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>plt.gca().axes.get_yaxis().set_ticks([])</span>
 <span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </div>
 </div>
@@ -2193,7 +2196,7 @@ Figure&nbsp;8.7: Electric circuit
 </figcaption>
 </figure>
 </div>
-<div id="dc0c6ccf" class="cell" data-execution_count="12">
+<div id="2622279d" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the raw data for the example</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>

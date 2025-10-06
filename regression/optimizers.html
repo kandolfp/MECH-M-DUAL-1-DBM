@@ -621,7 +621,7 @@ Important
 <h2 data-number="7.1" class="anchored" data-anchor-id="over-determined-systems"><span class="header-section-number">7.1</span> Over-Determined Systems</h2>
 <p>We speak of an over-determined system if we have more rows than columns, i.e.&nbsp;<span class="math inline">\(A\)</span> is tall and skinny and in general there is no solution to <a href="#eq-axb" class="quarto-xref">Equation&nbsp;<span>7.1</span></a> but rather we minimize the error according to a norm, see <a href="linear.html#sec-regr-linear-ols" class="quarto-xref"><span>Section 5.1</span></a>. If we further impose a restriction on <span class="math inline">\(x\)</span> we can select a more specific solution.</p>
 <p>The generalized form is <span id="eq-reg-optimizers"><span class="math display">\[
-x = \underset{v}{\operatorname{argmin}} \|Av - b\|_2 + \lambda_1 \|v\|_1 + \lambda_2\|v\|_2
+x = \underset{v}{\operatorname{argmin}} \|Av - b\|_2 + \lambda_1 \|v\|_1 + \lambda_2\|v\|_2,
 \tag{7.2}\]</span></span> where the parameters <span class="math inline">\(\lambda_1\)</span> and <span class="math inline">\(\lambda_2\)</span> are called the <em>penalization coefficients</em>, with respect to the norm. Selecting these coefficients is the first step towards <em>model selection</em>.</p>
 <p>Let us have a look at this in action for solving a <em>random</em> system with different parameters <span class="math inline">\(\lambda_1\)</span> and setting <span class="math inline">\(\lambda_2\)</span>.</p>
 <section id="sec-regression-optimizers-lasso" class="level3" data-number="7.1.1">
@@ -762,7 +762,7 @@ Figure&nbsp;7.2: Ridge regression coefficients of an over-determined system with
 <div class="callout-body-container">
 <div id="exr-lasso_reg" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 7.1 (Implement the above optimization yourself.)</strong></span> Fill out the missing parts:</p>
-<div id="a39f7804" class="cell" data-execution_count="3">
+<div id="0386878c" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>

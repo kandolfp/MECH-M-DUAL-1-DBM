@@ -144,9 +144,9 @@ $$
 Av = 
 \left[
     \begin{array}{cccc} a_{11} & a_{12} & \dots & a_{1n} \\
-                        a_{21} & a_{22} & \dots & A_{2n} \\  
+                        a_{21} & a_{22} & \dots & a_{2n} \\  
                         \vdots & \vdots & \ddots & \vdots\\
-                        a_{m1} & a_{m2} & \dots & A_{mn} \\  \end{array}
+                        a_{m1} & a_{m2} & \dots & a_{mn} \\  \end{array}
 \right] 
 \left[
     \begin{array}{c} v_1 \\ v_2 \\ \vdots \\ v_n \end{array}
@@ -414,7 +414,7 @@ c = np.dot(x, e_3) / np.dot(e_3, e_3)
 y = a * e_1 + b * e_2 + c * e_3
 print(f"{y = }")
 print(f"{np.allclose(x, y) = }")
-print(f"{LA.norm(x-y) = }")
+print(f"{LA.norm(x - y) = }")
 ```
 1. This is the orthogonal projection of $x$ on $e_1$.
 

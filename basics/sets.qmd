@@ -273,8 +273,6 @@ For the _net rent_ this makes not much sense but for _rooms_ this is useful.
 # | fig-cap: "Histogram of the number of rooms in our dataset."
 # | code-fold: true
 # | code-summary: "Show the code for the figure"
-index = np.array(range(0, len(data["rooms"])))
-
 plt.hist(data["rooms"])
 plt.xlabel("rooms")
 plt.ylabel("# of rooms")
@@ -289,8 +287,6 @@ Another helpful histogram is @fig-hist2 showing the amount of buildings built pe
 # | fig-cap: "Histogram of buildings built per year."
 # | code-fold: true
 # | code-summary: "Show the code for the figure"
-index = np.array(range(0, len(data["rooms"])))
-
 plt.hist(data["bj"])
 plt.xlabel("year of building")
 plt.ylabel("# of buildings")

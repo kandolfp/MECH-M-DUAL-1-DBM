@@ -163,14 +163,14 @@ We can use this for image compression.
 
 ```{python}
 # | label: fig-mci_headquater_svd
-# | fig-cap: "Image of MCI I and the reconstruction with reduced rank matrices."
+# | fig-cap: "Image of MCI I and the reconstruction with reduced rank SVD."
 # | fig-subcap:
 # |      - "Singular values from largest to smallest"
-# |      - "0.1% of singularvalue"
-# |      - "10% of singularvalue"
-# |      - "25% of singularvalue"
-# |      - "50% of singularvalue"
-# |      - "75% of singularvalue"
+# |      - "0.1% of singularvalues"
+# |      - "10% of singularvalues"
+# |      - "25% of singularvalues"
+# |      - "50% of singularvalues"
+# |      - "75% of singularvalues"
 # |      - "original image"
 # | layout: [[1], [1, 1, 1], [1, 1, 1]]
 # | code-fold: true

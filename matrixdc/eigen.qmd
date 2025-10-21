@@ -485,12 +485,12 @@ This approximation can be used to reduce the storage demand of an image.
 # | label: fig-mci_headquater
 # | fig-cap: "Image of MCI I and the reconstruction with approximated matrix."
 # | fig-subcap:
-# |      - "Absolute value of Eigenvalues from largest to smallest"
-# |      - "0.1% of eigenvalue"
-# |      - "10% of eigenvalue"
-# |      - "25% of eigenvalue"
-# |      - "50% of eigenvalue"
-# |      - "75% of eigenvalue"
+# |      - "Absolute value of eigenvalues from largest to smallest"
+# |      - "0.1% of eigenvalues"
+# |      - "10% of eigenvalues"
+# |      - "25% of eigenvalues"
+# |      - "50% of eigenvalues"
+# |      - "75% of eigenvalues"
 # |      - "original image"
 # | layout: [[1], [1, 1, 1], [1, 1, 1]]
 # | code-fold: true

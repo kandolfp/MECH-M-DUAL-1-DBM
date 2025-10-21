@@ -123,7 +123,7 @@ S = np.zeros(A.shape)
 S[: len(s), : len(s)] = np.diag(s)
 A2 = U @ S @ Vh
 np.allclose(A, A2)
-print(f"{A-A2 = }\n")
+print(f"{A - A2 = }\n")
 
 print("\nThin SVD:")
 U, s, Vh = LA.svd(A, full_matrices=False)
@@ -166,11 +166,11 @@ We can use this for image compression.
 # | fig-cap: "Image of MCI I and the reconstruction with reduced rank matrices."
 # | fig-subcap:
 # |      - "Singular values from largest to smallest"
-# |      - "0.1% of eigenvalue"
-# |      - "10% of eigenvalue"
-# |      - "25% of eigenvalue"
-# |      - "50% of eigenvalue"
-# |      - "75% of eigenvalue"
+# |      - "0.1% of singularvalue"
+# |      - "10% of singularvalue"
+# |      - "25% of singularvalue"
+# |      - "50% of singularvalue"
+# |      - "75% of singularvalue"
 # |      - "original image"
 # | layout: [[1], [1, 1, 1], [1, 1, 1]]
 # | code-fold: true
@@ -202,7 +202,7 @@ rec = [1 / 1000, 10 / 100, 25 / 100, 50 / 100, 75 / 100]
 plt.figure()
 plt.plot(s)
 plt.yscale("log")
-plt.ylabel(r"$|\sigma_i|$")
+plt.ylabel(r"$\sigma_i$")
 plt.xlabel("index")
 plt.gca().set_aspect(5e1)
 

@@ -274,7 +274,7 @@ We will see in later sections about _wavelets_ and _Fourier_ decomposition how a
 
 On of the most important applications of SVD is in the stable computation of the so called _principal component analysis_ (PCA). It is a common technique in data exploration, analysis, visualization, and preprocessing. 
 
-The main idea of PCM is to transform the data in such a way that the main directions (principal components) capture the largest variation. In short we perform a change of the basis, see @def-changebasis.
+The main idea of PCA is to transform the data in such a way that the main directions (principal components) capture the largest variation. In short we perform a change of the basis, see @def-changebasis.
 
 Let us investigate this in terms of a (artificial) data set. 
 

@@ -74,7 +74,7 @@ $$
 $$
 resulting in 
 $$
-x^{k+1} = x^{(k)} - \delta \, \nabla f(x^{(k)}) = 
+x^{(k+1)} = x^{(k)} - \delta \, \nabla f(x^{(k)}) = 
 \left[ \begin{array}{c} (1 - 2 \delta) x^{(k)}_1 \\ (1 - 6 \delta)x^{(k)}_2 \end{array} \right].
 $$
 Consequently

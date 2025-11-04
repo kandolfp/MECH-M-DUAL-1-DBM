@@ -247,7 +247,7 @@ This ansatz can be extended to polynomials of degree $k$, where the result is al
 
 ## Polynomial Regression
 
-Polynomial regression, despite its name, is linear regression with a special function $f$ where the relation is polynomial in $x= \left[a_1, \dots, x_m\right]^{\mathsf{T}}$
+Polynomial regression, despite its name, is linear regression with a special function $f$ where the relation is polynomial in $x= \left[x_1, \dots, x_m\right]^{\mathsf{T}}$
 $$
 y_k = x_k^0 + x_k^1 c_1 + x_k^2 c_2 + \cdots + x_k^m c_m, \quad 1\leq k \leq n,
 $$

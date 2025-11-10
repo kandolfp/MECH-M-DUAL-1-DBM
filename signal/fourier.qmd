@@ -383,7 +383,7 @@ or $f, \hat{f} \in L^1[(-\infty, \infty)]$.
 
 As could be expected, the Fourier transform has properties that lead to computational advantages.
 
-For tow functions $f, g \in L^1[(-\infty, \infty)]$ and $\alpha, \beta\in\mathbb{C}$ the following properties hold:
+For two functions $f, g \in L^1[(-\infty, \infty)]$ and $\alpha, \beta\in\mathbb{C}$ the following properties hold:
 
 1.  **Linearity**
     $$
@@ -536,7 +536,7 @@ DFT = np.power(w, J * K)
 To give an idea of what this change means and why this algorithm was a game changer.
 Audio is most of the time sampled with 44.1kHz, i.e. 44 100 samples per second.
 For a 10s audio clip the vector $f$ will have the length $N = 4.41 \times 10^5$.
-The DFT computation (without generating the matrix) results ins approximately $2\times 10^{11}$ multiplications.
+The DFT computation (without generating the matrix) results in approximately $2\times 10^{11}$ multiplications.
 The FFT on the other hand requires $6\times 10^6$ leading to a speed-up of about $30 000$.
 
 How this influenced our world we know from the use in our daily communication networks.

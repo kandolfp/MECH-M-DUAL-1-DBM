@@ -692,7 +692,7 @@ Figure&nbsp;7.1: LASSO regression coefficients of an over-determined system with
 </section>
 <section id="ridge" class="level3" data-number="7.1.2">
 <h3 data-number="7.1.2" class="anchored" data-anchor-id="ridge"><span class="header-section-number">7.1.2</span> RIDGE</h3>
-<p>The Ridge Regression solves <a href="#eq-reg-optimizers" class="quarto-xref">Equation&nbsp;<span>7.2</span></a> with <span class="math inline">\(\lambda_1 = 0\)</span> and <span class="math inline">\(\lambda_2 &gt; 0\)</span>, i.e.&nbsp;only optimizing with the <span class="math inline">\(\ell_2\)</span> norm. The theory tells us that for increasing <span class="math inline">\(\lambda_2\)</span> we should get more and more zeros in our solution <span class="math inline">\(x\)</span>.</p>
+<p>The Ridge Regression solves <a href="#eq-reg-optimizers" class="quarto-xref">Equation&nbsp;<span>7.2</span></a> with <span class="math inline">\(\lambda_1 = 0\)</span> and <span class="math inline">\(\lambda_2 &gt; 0\)</span>, i.e.&nbsp;only optimizing with the <span class="math inline">\(\ell_2\)</span> norm. The theory tells us that for increasing <span class="math inline">\(\lambda_2\)</span> we should get a homogenized solution <span class="math inline">\(x\)</span>.</p>
 <div id="cell-fig-opt_lambda2" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
@@ -762,7 +762,7 @@ Figure&nbsp;7.2: Ridge regression coefficients of an over-determined system with
 <div class="callout-body-container">
 <div id="exr-lasso_reg" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 7.1 (Implement the above optimization yourself.)</strong></span> Fill out the missing parts:</p>
-<div id="17f7ccb4" class="cell" data-execution_count="3">
+<div id="32f7b78d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>

@@ -663,7 +663,7 @@ f(g + L) = f(t),\quad\forall t \in \mathbb{R}.
 <ol type="1">
 <li>If <span class="math inline">\(L\)</span> is a period than <span class="math inline">\(nL\)</span> for <span class="math inline">\(n = 1, 2, 3, \ldots\)</span> is a period as well.</li>
 <li>If <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are <span class="math inline">\(L\)</span>-periodic, than <span class="math inline">\(\alpha f + \beta g\)</span> are <span class="math inline">\(L\)</span>-periodic, for <span class="math inline">\(\alpha, \beta \in \mathbb{C}\)</span>.</li>
-<li>I <span class="math inline">\(f\)</span> is <span class="math inline">\(L\)</span>-periodic it follows that <span class="math inline">\(\forall a\in\mathbb{R}\)</span> <span class="math display">\[
+<li>If <span class="math inline">\(f\)</span> is <span class="math inline">\(L\)</span>-periodic it follows that <span class="math inline">\(\forall a\in\mathbb{R}\)</span> <span class="math display">\[
 \int_a^{a+T}f(t)\,\mathrm{d}t = \int_0^{T}f(t)\,\mathrm{d}t.
 \]</span></li>
 <li>If <span class="math inline">\(f\)</span> is <span class="math inline">\(L\)</span>-periodic than <span class="math inline">\(F(t)=f(\frac{t}{\omega})\)</span> with <span class="math inline">\(\omega = \frac{2\pi}{L}\)</span> is <span class="math inline">\(2\pi\)</span>-periodic.</li>
@@ -883,7 +883,7 @@ Figure&nbsp;8.1: Fourier transform of a two hat functions.
 <div class="callout-body-container">
 <div id="exr-fourier-hat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.1 (Self implementation <a href="#exm-fourier-hat" class="quarto-xref">Example&nbsp;<span>8.1</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="55a93d8c" class="cell" data-execution_count="2">
+<div id="ff083642" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1137,7 +1137,7 @@ Tip
 </div>
 <div class="callout-body-container callout-body">
 <p>Code for the computation of the DFT matrix.</p>
-<div id="f7a9d6ec" class="cell" data-execution_count="3">
+<div id="ddcd936b" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code.</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1419,7 +1419,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 </figure>
 </div>
 <p>As can be seen in the <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span>8.2 (c)</span></a>, the reconstruction is not exact. This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. In particular:</p>
-<div id="4fd04d75" class="cell" data-execution_count="5">
+<div id="52174cd3" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -1472,7 +1472,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-den-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.2 (Self implementation <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span>8.2</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="ed3c890c" class="cell" data-execution_count="6">
+<div id="49b78868" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1868,7 +1868,7 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-heat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.4 (Self implementation <a href="#exm-fourier-fft-heat" class="quarto-xref">Example&nbsp;<span>8.4</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="f84e9ed8" class="cell" data-execution_count="9">
+<div id="1817f014" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2196,7 +2196,7 @@ Figure&nbsp;8.7: Electric circuit
 </figcaption>
 </figure>
 </div>
-<div id="8cb27b1e" class="cell" data-execution_count="12">
+<div id="b2e39752" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the raw data for the example</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>

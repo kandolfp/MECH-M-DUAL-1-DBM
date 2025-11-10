@@ -657,7 +657,7 @@ f_i = f(x_i) = f(a + (i - 1) \Delta x),\quad i = 1, \ldots n,
 <div class="callout-body-container">
 <div id="def-fourier-periodic" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 8.3 (Periodic function)</strong></span> We call a function <span class="math inline">\(f\,:\, \mathbb{R} \to \mathbb{R}\)</span> periodic with a period of <span class="math inline">\(L&gt;0\)</span>, <span class="math inline">\(L\)</span>-periodic for short, if <span class="math display">\[
-f(g + L) = f(t),\quad\forall t \in \mathbb{R}.
+f(t + L) = f(t),\quad\forall t \in \mathbb{R}.
 \]</span></p>
 <p>The following holds true for <span class="math inline">\(L\)</span>-periodic functions:</p>
 <ol type="1">
@@ -883,7 +883,7 @@ Figure&nbsp;8.1: Fourier transform of a two hat functions.
 <div class="callout-body-container">
 <div id="exr-fourier-hat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.1 (Self implementation <a href="#exm-fourier-hat" class="quarto-xref">Example&nbsp;<span>8.1</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="ff083642" class="cell" data-execution_count="2">
+<div id="ed2acdf5" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1026,7 +1026,7 @@ Note
 </div>
 </div>
 <p>As could be expected, the Fourier transform has properties that lead to computational advantages.</p>
-<p>For tow functions <span class="math inline">\(f, g \in L^1[(-\infty, \infty)]\)</span> and <span class="math inline">\(\alpha, \beta\in\mathbb{C}\)</span> the following properties hold:</p>
+<p>For two functions <span class="math inline">\(f, g \in L^1[(-\infty, \infty)]\)</span> and <span class="math inline">\(\alpha, \beta\in\mathbb{C}\)</span> the following properties hold:</p>
 <ol type="1">
 <li><p><strong>Linearity</strong> <span class="math display">\[
 \mathcal{F}\{\alpha f(t) + \beta g(t)\} =
@@ -1137,7 +1137,7 @@ Tip
 </div>
 <div class="callout-body-container callout-body">
 <p>Code for the computation of the DFT matrix.</p>
-<div id="ddcd936b" class="cell" data-execution_count="3">
+<div id="c713507f" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code.</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1169,7 +1169,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>To give an idea of what this change means and why this algorithm was a game changer. Audio is most of the time sampled with 44.1kHz, i.e.&nbsp;44 100 samples per second. For a 10s audio clip the vector <span class="math inline">\(f\)</span> will have the length <span class="math inline">\(N = 4.41 \times 10^5\)</span>. The DFT computation (without generating the matrix) results ins approximately <span class="math inline">\(2\times 10^{11}\)</span> multiplications. The FFT on the other hand requires <span class="math inline">\(6\times 10^6\)</span> leading to a speed-up of about <span class="math inline">\(30 000\)</span>.</p>
+<p>To give an idea of what this change means and why this algorithm was a game changer. Audio is most of the time sampled with 44.1kHz, i.e.&nbsp;44 100 samples per second. For a 10s audio clip the vector <span class="math inline">\(f\)</span> will have the length <span class="math inline">\(N = 4.41 \times 10^5\)</span>. The DFT computation (without generating the matrix) results in approximately <span class="math inline">\(2\times 10^{11}\)</span> multiplications. The FFT on the other hand requires <span class="math inline">\(6\times 10^6\)</span> leading to a speed-up of about <span class="math inline">\(30 000\)</span>.</p>
 <p>How this influenced our world we know from the use in our daily communication networks.</p>
 <p><span class="citation" data-cites="Brunton2022">(Compare <a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, 65–66</a>)</span></p>
 </div>
@@ -1419,7 +1419,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 </figure>
 </div>
 <p>As can be seen in the <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span>8.2 (c)</span></a>, the reconstruction is not exact. This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. In particular:</p>
-<div id="52174cd3" class="cell" data-execution_count="5">
+<div id="04354d05" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -1472,7 +1472,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-den-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.2 (Self implementation <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span>8.2</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="49b78868" class="cell" data-execution_count="6">
+<div id="cec8035b" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1868,7 +1868,7 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-heat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.4 (Self implementation <a href="#exm-fourier-fft-heat" class="quarto-xref">Example&nbsp;<span>8.4</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="1817f014" class="cell" data-execution_count="9">
+<div id="13e7ba1c" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2196,7 +2196,7 @@ Figure&nbsp;8.7: Electric circuit
 </figcaption>
 </figure>
 </div>
-<div id="b2e39752" class="cell" data-execution_count="12">
+<div id="9287a014" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the raw data for the example</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>

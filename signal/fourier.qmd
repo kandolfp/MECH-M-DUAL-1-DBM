@@ -62,7 +62,7 @@ Similar as we saw projection in vector spaces related to the inner product this 
 
 We call a function $f\,:\, \mathbb{R} \to \mathbb{R}$ periodic with a period of $L>0$, $L$-periodic for short, if 
 $$
-f(g + L) = f(t),\quad\forall t \in \mathbb{R}.
+f(t + L) = f(t),\quad\forall t \in \mathbb{R}.
 $$
 
 The following holds true for $L$-periodic functions:

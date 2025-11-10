@@ -69,7 +69,7 @@ The following holds true for $L$-periodic functions:
 
 1. If $L$ is a period than $nL$ for $n = 1, 2, 3, \ldots$ is a period as well.
 1. If $f$ and $g$ are $L$-periodic, than $\alpha f + \beta g$ are $L$-periodic, for $\alpha, \beta \in \mathbb{C}$.
-1. I $f$ is $L$-periodic it follows that $\forall a\in\mathbb{R}$
+1. If $f$ is $L$-periodic it follows that $\forall a\in\mathbb{R}$
 $$
 \int_a^{a+T}f(t)\,\mathrm{d}t = \int_0^{T}f(t)\,\mathrm{d}t.
 $$

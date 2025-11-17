@@ -1463,7 +1463,7 @@ The following example is taken from [@Meyberg1992-ws].
 
 ## Ground Emitter Circuit
 
-We can use FFT to compute some base properties of a ground emitter circuit @fig-fft-gec-1 and how the signal is propagated through this circuit @fig-fft-gec-2.
+We can use FFT to compute some base properties of a ground emitter circuit @fig-fft-gec-1 and show how the signal is propagated through this circuit @fig-fft-gec-2.
 
 ![Electric circuit](../_assets/signal/electric_circuit){#fig-fft-gec-1 width=2.28in}
 
@@ -1536,35 +1536,35 @@ We can see, that the signal is boosted depending on the characteristic curve of 
 If we compute the fast fourier transform, as illustrated with the red discretisation points of the curve on the right hand side, we can interpret the FFT coefficients $c_i$ as follows:
 
 1. the direct current component:
-```{python}
-# | echo: false
-# | output: asis
-print(r"$$")
-print(f"c_0 = {np.round(c0,3)}")
-print(r"$$")
-```
+   ```{python}
+   # | echo: false
+   # | output: asis
+   print(r"$$")
+   print(f"c_0 = {np.round(c0,3)}")
+   print(r"$$")
+   ```
 1. the effective value from Parseval's Theorem:
-```{python}
-# | echo: false
-# | output: asis
-print(r"$$")
-print(
-    r"\overline{i_c} = \sqrt{\sum_{i=0}^{15} |c_i|^2}"
-    f"= {np.round(effective_value,3)}"
-)
-print(r"$$")
-```
+   ```{python}
+   # | echo: false
+   # | output: asis
+   print(r"$$")
+   print(
+       r"\overline{i_c} = \sqrt{\sum_{i=0}^{15} |c_i|^2}"
+       f"= {np.round(effective_value,3)}"
+   )
+   print(r"$$")
+   ```
 1. the total harmonic distortion (how the signal is deformed):
-```{python}
-# | echo: false
-# | output: asis
-print(r"$$")
-print(
-    r"THD = \frac{\sqrt{\sum_{i=2}^{14} |c_i|^2}}{\sqrt{\sum_{i=1}^{15} |c_i|^2}}="
-    f"{np.round(harmonic_distortion,3)}"
-)
-print(r"$$")
-```
+   ```{python}
+   # | echo: false
+   # | output: asis
+   print(r"$$")
+   print(
+       r"THD = \frac{\sqrt{\sum_{i=2}^{14} |c_i|^2}}{\sqrt{\sum_{i=1}^{15} |c_i|^2}}="
+       f"{np.round(harmonic_distortion,3)}"
+   )
+   print(r"$$")
+   ```
 
 ::::
 :::

@@ -1,7 +1,7 @@
 # Sparsity and Compression {#sec-sensing-sparsity}
 
 As we have seen before and maybe know from our own experience, most image and audio signals are highly compressible.
-Here compressible means we can find a basis that allows for a sparse reprehension of our signal. 
+Here compressible means we can find a basis that allows for a sparse representation of our signal. 
 Let us put this into a small definition. 
 
 ::: {.callout appearance="simple"}

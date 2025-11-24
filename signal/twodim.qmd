@@ -277,4 +277,4 @@ for c in (0.05, 0.01, 0.002):
 
 ```
 
-For ne-noising filters are applied or we and this is going to be the subject for a lecture more focused on image processing.
+For de-noising filters are applied or we and this is going to be the subject for a lecture more focused on image processing.

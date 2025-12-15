@@ -23,7 +23,7 @@ Furthermore we call $P(\neg A)$ the probability of _not_ $A$, i.e. $P(\neg A) = 
 :::: {#def-statistics-independent} 
 ## Independent events - unconditional probability
 
-We call two events $A$ and $B$ independent if the fact that we know $A$ happened does not give us any insight the probability that $B$ happens or vice versa. 
+We call two events $A$ and $B$ independent if the fact that we know $A$ happened does not give us any insight of the probability $B$ or indeed if it happens or vice versa. 
 
 In this case the probability of both events happening is
 $$

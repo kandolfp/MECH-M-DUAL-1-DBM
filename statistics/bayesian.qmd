@@ -236,8 +236,8 @@ plt.show()
 If the cumulative distribution function is continuous everywhere we get a continuous random variable. 
 For such variables it makes more sense to not look for an exact equality with a number but rather, what is the probability that $X$ lies between $[a, b]$.
 
-Example could be the height of a person (if we can measure continuously).
-In this example it the probability that a person is exactly $185m$ is zero but the question if somebodies hight is in $[180, 190)$ makes sense.
+An example could be the height of a person (if we can measure continuously).
+In this example, the probability that a person is exactly $185m$ is zero, but the question if somebodies hight is in $[180, 190)$ makes sense.
 
 ::: {.callout-note}
 We introduced the Laplace transform in @sec-signal-laplace. 

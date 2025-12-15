@@ -255,7 +255,7 @@ $$
 
 ## Probability distributions
 
-It is instructive to look at some of the most common probability distributions so that we know what we can describe by these them. 
+It is instructive to look at some of the most common probability distributions so that we know what we can describe by them. 
 
 ::: {.callout-tip appearance="simple" collapse="true" icon=false}
 :::: {#exm-statistics-binomial_dist}

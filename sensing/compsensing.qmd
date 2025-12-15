@@ -439,7 +439,7 @@ X = L + S.
 $$
 If we can recover the principal components of $L$ from $X$ we have a robust method as the perturbation of $S$ has little influence.
 
-It might not be immediately obvious but applications of this split are video surveillance where the background is represented by $L$ and the foreground objects in $L$, face recognition with the eigenfaces in $L$ and shadows, occlusions (like glasses or masks) are in $S$.
+It might not be immediately obvious but applications of this split are video surveillance where the background is represented by $L$ and the foreground objects in $S$, face recognition with the eigenfaces in $L$ and shadows, occlusions (like glasses or masks) are in $S$.
 
 The task boils down to an optimization problem of the form
 $$

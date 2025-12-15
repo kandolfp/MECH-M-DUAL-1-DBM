@@ -627,7 +627,7 @@ Figure&nbsp;14.1: Venn diagram illustrating the principal of joint probabilities
 </div>
 <div class="callout-body-container">
 <div id="def-statistics-independent" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 14.1 (Independent events - unconditional probability)</strong></span> We call two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> independent if the fact that we know <span class="math inline">\(A\)</span> happened does not give us any insight the probability that <span class="math inline">\(B\)</span> happens or vice versa.</p>
+<p><span class="theorem-title"><strong>Definition 14.1 (Independent events - unconditional probability)</strong></span> We call two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> independent if the fact that we know <span class="math inline">\(A\)</span> happened does not give us any insight of the probability <span class="math inline">\(B\)</span> or indeed if it happens or vice versa.</p>
 <p>In this case the probability of both events happening is <span class="math display">\[
 P(A, B) = P(A) P(B).
 \]</span></p>
@@ -1489,6 +1489,58 @@ p\left( \sigma \, \middle|\, R_{aH}^{(i)}\right)  = \frac{p\left(R_{aH}^{(i)}\, 
 \]</span></p>
 <p>We can continue this for several samples. As we do not have real measurements for this example at hand we generate some sampled from a normal distribution that seems fitting for a <em>S235JR</em> steal.</p>
 <div id="cell-fig-statistics-bayesian-material2" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Show the code for the figure</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">6020</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>RaH_samples <span class="op">=</span> np.random.normal(<span class="dv">245</span>, <span class="dv">15</span>, <span class="dv">100</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>p_mu <span class="op">=</span> <span class="kw">lambda</span> x, mu_0: normaldist(mu_0, mu_0 <span class="op">/</span> <span class="dv">10</span>, x)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>p_sigma <span class="op">=</span> <span class="kw">lambda</span> x, sigma_0: normaldist(sigma_0, sigma_0 <span class="op">/</span> <span class="dv">10</span>, x)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>p_rah_mu <span class="op">=</span> <span class="kw">lambda</span> mu, sigma, x: normaldist(mu, sigma, x)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>p_rah_sigma <span class="op">=</span> <span class="kw">lambda</span> mu, sigma, x: normaldist(mu, sigma, x)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>mu_integrant <span class="op">=</span> <span class="kw">lambda</span> mu, sigma, RaH, mu_0: p_rah_mu(mu, sigma, RaH) <span class="op">*</span> p_mu(mu, mu_0)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>sigma_integrant <span class="op">=</span> <span class="kw">lambda</span> mu, sigma, RaH, sigma_0: p_rah_sigma(mu, sigma, RaH) <span class="op">*</span> p_sigma(</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    sigma, sigma_0</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> mu_0</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> sigma_0</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>plt.plot(x, normaldist(mu, sigma, x), label<span class="op">=</span><span class="st">"initial guess"</span>)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, RaH <span class="kw">in</span> <span class="bu">enumerate</span>(RaH_samples):</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    m_int <span class="op">=</span> [mu <span class="op">-</span> <span class="fl">0.3</span> <span class="op">*</span> mu, mu <span class="op">+</span> <span class="fl">0.3</span> <span class="op">*</span> mu]</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    s_int <span class="op">=</span> [sigma <span class="op">-</span> <span class="fl">0.3</span> <span class="op">*</span> sigma, sigma <span class="op">+</span> <span class="fl">0.3</span> <span class="op">*</span> sigma]</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    p_mus_rah_norm <span class="op">=</span> quad(</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        <span class="kw">lambda</span> x: mu_integrant(x, sigma, RaH, mu), m_int[<span class="dv">0</span>], m_int[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    )[<span class="dv">0</span>]</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    sigmas_norm <span class="op">=</span> quad(</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        <span class="kw">lambda</span> x: sigma_integrant(mu, x, RaH, sigma), s_int[<span class="dv">0</span>], s_int[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    )[<span class="dv">0</span>]</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    mu_old <span class="op">=</span> mu</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    mu <span class="op">=</span> quad(</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>        <span class="kw">lambda</span> x: x <span class="op">*</span> mu_integrant(x, sigma, RaH, mu) <span class="op">/</span> p_mus_rah_norm,</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>        m_int[<span class="dv">0</span>],</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>        m_int[<span class="op">-</span><span class="dv">1</span>],</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>    )[<span class="dv">0</span>]</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>    sigma <span class="op">=</span> quad(</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>        <span class="kw">lambda</span> x: x <span class="op">*</span> sigma_integrant(mu_old, x, RaH, sigma) <span class="op">/</span> sigmas_norm,</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>        s_int[<span class="dv">0</span>],</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>        s_int[<span class="op">-</span><span class="dv">1</span>],</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    )[<span class="dv">0</span>]</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (i <span class="op">==</span> <span class="dv">9</span>) <span class="kw">or</span> (i <span class="op">==</span> <span class="dv">99</span>):</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>        plt.plot(x, normaldist(mu, sigma, x), label<span class="op">=</span><span class="ss">f"update after </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss"> iterations"</span>)</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">400</span> <span class="op">/</span> (<span class="dv">3</span> <span class="op">*</span> <span class="fl">0.022</span>))</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="st">"major"</span>)</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div id="fig-statistics-bayesian-material2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">

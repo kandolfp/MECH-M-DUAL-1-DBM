@@ -758,7 +758,7 @@ As we do not have real measurements for this example at hand we generate some sa
 # | fig-cap: "Update after 10 and 100 iterations"
 # | code-fold: true
 # | eval: true
-# | echo: false
+# | echo: true
 # | code-summary: "Show the code for the figure"
 np.random.seed(6020)
 RaH_samples = np.random.normal(245, 15, 100)

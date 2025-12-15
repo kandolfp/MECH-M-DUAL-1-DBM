@@ -715,7 +715,7 @@ Figure&nbsp;4.2: Thin SVD
 </figure>
 </div>
 <p>In Python we can compute the (Thin)SVD as follows</p>
-<div id="a6272fdd" class="cell styled-output" data-execution_count="1">
+<div id="f0c86f06" class="cell styled-output" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> LA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -755,8 +755,8 @@ Figure&nbsp;4.2: Thin SVD
 <pre><code>U.shape = (2, 2), s.shape = (2,), Vh.shape = (3, 3)
 U = array([[-0.70710678, -0.70710678],
        [-0.70710678,  0.70710678]])
-U @ U.transpose() = array([[1.00000000e+00, 1.53686518e-16],
-       [1.53686518e-16, 1.00000000e+00]])
+U @ U.transpose() = array([[1.00000000e+00, 4.26642159e-17],
+       [4.26642159e-17, 1.00000000e+00]])
 
 np.diag(s) = array([[5., 0.],
        [0., 3.]])
@@ -764,16 +764,16 @@ np.diag(s) = array([[5., 0.],
 Vh = array([[-7.07106781e-01, -7.07106781e-01, -6.47932334e-17],
        [-2.35702260e-01,  2.35702260e-01, -9.42809042e-01],
        [-6.66666667e-01,  6.66666667e-01,  3.33333333e-01]])
-Vh.transpose() @ Vh = array([[ 1.00000000e+00,  1.35693925e-16,  1.32609972e-16],
-       [ 1.35693925e-16,  1.00000000e+00, -4.93432455e-17],
-       [ 1.32609972e-16, -4.93432455e-17,  1.00000000e+00]])
+Vh.transpose() @ Vh = array([[1.00000000e+00, 6.16790569e-17, 4.93432455e-17],
+       [6.16790569e-17, 1.00000000e+00, 2.46716228e-17],
+       [4.93432455e-17, 2.46716228e-17, 1.00000000e+00]])
 
 np.allclose(A, A1) = True
-A-A1 = array([[-8.88178420e-16, -4.44089210e-16, -8.88178420e-16],
-       [-4.44089210e-16,  0.00000000e+00, -6.66133815e-16]])
+A-A1 = array([[-8.88178420e-16, -4.44089210e-16,  2.22044605e-16],
+       [ 0.00000000e+00,  4.44089210e-16, -6.66133815e-16]])
 
-A - A2 = array([[-8.88178420e-16, -4.44089210e-16, -8.88178420e-16],
-       [-4.44089210e-16,  0.00000000e+00, -6.66133815e-16]])
+A - A2 = array([[-8.88178420e-16, -4.44089210e-16,  2.22044605e-16],
+       [ 0.00000000e+00,  4.44089210e-16, -6.66133815e-16]])
 
 
 Thin SVD:
@@ -1308,7 +1308,7 @@ Important
 <p>The following code is an adaptation of the <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022</a>, Code 1.7 and 1.9)</span>.</p>
 </div>
 </div>
-<div id="8d5b98bd" class="cell" data-execution_count="6">
+<div id="92440713" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code for the figure</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>

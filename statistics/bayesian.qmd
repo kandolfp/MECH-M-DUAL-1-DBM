@@ -545,9 +545,9 @@ Before we get to an example let us consider the terms of the theorem once more.
 
 1. The likelihood is similar to a probability distribution but the integral is not 1. As the name suggest it is the likelihood of a certain experiment result as a function of the parameters of the _model_. If we select the likelihood as a conjugate to the prior we know the shape of the posterior and this can speed up the calculation.
 
-1. The denominator are there to normalize the posterior so that the posterior becomes a probability distribution with integral 1.
+1. The denominator is there to normalize the posterior so that the posterior becomes a probability distribution with integral 1.
 
-1. The posterior are our main result of the so called Bayers inference. If we have multiple samples we can use it as the prior for the next.
+1. The posterior is our main result of the so called Bayers inference. If we have multiple samples we can use it as the prior for the next.
 
 Let us look at some more elaborate examples to show how Bayes theorem can be used. 
 
@@ -601,10 +601,10 @@ Now we improve our estimate with the help of Bayes' theorem by asking _random_ p
 
 ::: {.callout-note}
 Of course this needs to be done in the proper way to make sure it is not biased.
-We assume to not be biased.
+For this example we assume no bias.
 :::
 
-The probability that exactly $k$ people of a random sample of size $n$ vote for party $x$ is a best described with a binomial distribution
+The probability that exactly $k$ people of a random sample of size $n$ vote for party $x$ is best described with a binomial distribution
 $$
 p\left(\frac{k}{n} \middle| x\right) = \left(\begin{array}{c} n\\ k\end{array}\right) x^k (1-x)^{n-k}.
 $$
@@ -725,7 +725,7 @@ p(\sigma) = \mathcal{N}(\sigma_0, \sigma_{\sigma_0}),\quad\text{with}\quad \sigm
 $$
 
 The likelihood of drawing a sample with yield strength $R_{aH}^{(i)}$ we calculate by the dependent probabilities separately.
-To do so we fixing the _current_ values of $\mu = \check{\mu}$ and $\sigma = \check{\sigma}$, respectively.
+To do so we fix the _current_ values of $\mu = \check{\mu}$ and $\sigma = \check{\sigma}$, respectively.
 $$
 p\left(R_{aH}^{(i)}\, \middle|\, \mu \right) = \mathcal{N}[\mu, \check{\sigma}](R_{aH}^{(i)})
 $$
@@ -813,7 +813,7 @@ plt.show()
 ```
 
 The deviation ($\sigma$) converges steadily, whereas the mean $\mu$ is more erratic and only slowly converging.
-This is due to the fact that the two variables are not independent of each other and the assumption that of a normal distribution is not a good estimate for $\sigma$.
+This is due to the fact that the two variables are not independent of each other and the assumption of a normal distribution is not a good estimate for $\sigma$.
 
 ## Conjugate priors
 

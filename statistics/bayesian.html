@@ -568,18 +568,15 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#random-variable" id="toc-random-variable" class="nav-link active" data-scroll-target="#random-variable"><span class="header-section-number">14.1</span> Random variable</a>
+  <li><a href="#discrete-random-variables" id="toc-discrete-random-variables" class="nav-link active" data-scroll-target="#discrete-random-variables"><span class="header-section-number">14.0.1</span> Discrete random variables</a></li>
+  <li><a href="#continuous-random-variable" id="toc-continuous-random-variable" class="nav-link" data-scroll-target="#continuous-random-variable"><span class="header-section-number">14.0.2</span> Continuous random variable</a></li>
+  <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions"><span class="header-section-number">14.1</span> Probability distributions</a></li>
+  <li><a href="#bayes-theorem-in-action" id="toc-bayes-theorem-in-action" class="nav-link" data-scroll-target="#bayes-theorem-in-action"><span class="header-section-number">14.2</span> Bayes’ theorem in action</a>
   <ul class="collapse">
-  <li><a href="#discrete-random-variables" id="toc-discrete-random-variables" class="nav-link" data-scroll-target="#discrete-random-variables"><span class="header-section-number">14.1.1</span> Discrete random variables</a></li>
-  <li><a href="#continuous-random-variable" id="toc-continuous-random-variable" class="nav-link" data-scroll-target="#continuous-random-variable"><span class="header-section-number">14.1.2</span> Continuous random variable</a></li>
+  <li><a href="#election-prediction-as-instructive-example" id="toc-election-prediction-as-instructive-example" class="nav-link" data-scroll-target="#election-prediction-as-instructive-example"><span class="header-section-number">14.2.1</span> Election prediction as instructive example</a></li>
+  <li><a href="#material-properties" id="toc-material-properties" class="nav-link" data-scroll-target="#material-properties"><span class="header-section-number">14.2.2</span> Material properties</a></li>
   </ul></li>
-  <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions"><span class="header-section-number">14.2</span> Probability distributions</a></li>
-  <li><a href="#bayes-theorem-in-action" id="toc-bayes-theorem-in-action" class="nav-link" data-scroll-target="#bayes-theorem-in-action"><span class="header-section-number">14.3</span> Bayes’ theorem in action</a>
-  <ul class="collapse">
-  <li><a href="#election-prediction-as-instructive-example" id="toc-election-prediction-as-instructive-example" class="nav-link" data-scroll-target="#election-prediction-as-instructive-example"><span class="header-section-number">14.3.1</span> Election prediction as instructive example</a></li>
-  <li><a href="#material-properties" id="toc-material-properties" class="nav-link" data-scroll-target="#material-properties"><span class="header-section-number">14.3.2</span> Material properties</a></li>
-  </ul></li>
-  <li><a href="#conjugate-priors" id="toc-conjugate-priors" class="nav-link" data-scroll-target="#conjugate-priors"><span class="header-section-number">14.4</span> Conjugate priors</a></li>
+  <li><a href="#conjugate-priors" id="toc-conjugate-priors" class="nav-link" data-scroll-target="#conjugate-priors"><span class="header-section-number">14.3</span> Conjugate priors</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/edit/main/statistics/bayesian.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/kandolfp/MECH-M-DUAL-1-DBM/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -752,7 +749,7 @@ P(cancer | +) = \frac{P(+ | cancer) P(cancer)}{P(+)} = \frac{0.8 \cdot 0.01}{0.1
 <ol type="1">
 <li>A person is known to lie one third the time. This person throws a die and reports it is a 4 (four).<br>
 <br>
-What is the probability that it is actually a four?<br>
+What is the probability that it is actually a four?[^explanation]<br>
 </li>
 <li>There are 3 urns containing 3 white and 2 black, 2 white and 3 black, as well as 4 white and 1 black ball respectively. Each urn can be chosen with equal probability.<br>
 <br>
@@ -762,8 +759,7 @@ What is the likelihood that a white ball is drawn?</li>
 </div>
 </div>
 </div>
-<section id="random-variable" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="random-variable"><span class="header-section-number">14.1</span> Random variable</h2>
+<p>[^explanation] The question is vague and it is not clear what exactly the answer of the man is. Stackexchange has an excellent discussion of the question - <a href="https://math.stackexchange.com/questions/1084785/a-man-who-lies-a-fourth-of-the-time-throws-a-die-and-says-it-is-a-six-what-is-t">Link</a> (accessed 16.12.2025). ## Random variable</p>
 <p>A random variable <span class="math inline">\(X\)</span> (often also called random quantity or stochastic variable) is a variable that is dependent on <em>random events</em> and is a function defined on a probability space <span class="math inline">\((\Omega, \mathcal{F}, P)\)</span>. <span class="math inline">\(\Omega\)</span> is called the sample space of all possible outcomes, <span class="math inline">\(\mathcal{F}\)</span> the event space (a set of outcomes in the sample space), and <span class="math inline">\(P\)</span> is the probability function which assigns each event in the event space a probability as a number between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>.</p>
 <p>A very simple random variable is the one describing a coin toss. It is one for heads and zero for tails. To increase the complexity we can search for a random variable that tells us how often tails was the result for <span class="math inline">\(n\)</span> coin tosses.</p>
 <p>To better understand what <span class="math inline">\((\Omega, \mathcal{F}, P)\)</span> and <span class="math inline">\(X\)</span> are, we should ask the following question: <em>How likely is the value of <span class="math inline">\(X=2\)</span>?</em></p>
@@ -771,8 +767,8 @@ What is the likelihood that a white ball is drawn?</li>
 <p>If we record all this probabilities of outcomes of <span class="math inline">\(X\)</span> results in the <strong>probability distribution</strong> of <span class="math inline">\(X\)</span>. If this probability distribution is real valued we get the <strong>cumulative distribution function</strong> (CDF) <span class="math display">\[
 F_X(x) = P(X\leq x).
 \]</span></p>
-<section id="discrete-random-variables" class="level3" data-number="14.1.1">
-<h3 data-number="14.1.1" class="anchored" data-anchor-id="discrete-random-variables"><span class="header-section-number">14.1.1</span> Discrete random variables</h3>
+<section id="discrete-random-variables" class="level3" data-number="14.0.1">
+<h3 data-number="14.0.1" class="anchored" data-anchor-id="discrete-random-variables"><span class="header-section-number">14.0.1</span> Discrete random variables</h3>
 <p>We have already seen a discrete random variable as <em>the number of heads for <span class="math inline">\(n\)</span> coin tosses</em>, other possibilities are <em>the number of children for a person</em>.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
@@ -833,10 +829,10 @@ Figure&nbsp;14.2: Rule of large numbers for coin toss, coin toss simulated by a 
 </div>
 </div>
 </section>
-<section id="continuous-random-variable" class="level3" data-number="14.1.2">
-<h3 data-number="14.1.2" class="anchored" data-anchor-id="continuous-random-variable"><span class="header-section-number">14.1.2</span> Continuous random variable</h3>
+<section id="continuous-random-variable" class="level3" data-number="14.0.2">
+<h3 data-number="14.0.2" class="anchored" data-anchor-id="continuous-random-variable"><span class="header-section-number">14.0.2</span> Continuous random variable</h3>
 <p>If the cumulative distribution function is continuous everywhere we get a continuous random variable. For such variables it makes more sense to not look for an exact equality with a number but rather, what is the probability that <span class="math inline">\(X\)</span> lies between <span class="math inline">\([a, b]\)</span>.</p>
-<p>Example could be the height of a person (if we can measure continuously). In this example it the probability that a person is exactly <span class="math inline">\(185m\)</span> is zero but the question if somebodies hight is in <span class="math inline">\([180, 190)\)</span> makes sense.</p>
+<p>An example could be the height of a person (if we can measure continuously). In this example, the probability that a person is exactly <span class="math inline">\(185m\)</span> is zero, but the question if somebodies hight is in <span class="math inline">\([180, 190)\)</span> makes sense.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -857,10 +853,9 @@ F_X(x) = \mathcal{L}^{-1}\left\{ \frac{1}{s} \mathrm{E}\left[\mathrm{e}^{- s X}\
 </div>
 </div>
 </section>
-</section>
-<section id="probability-distributions" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="probability-distributions"><span class="header-section-number">14.2</span> Probability distributions</h2>
-<p>It is instructive to look at some of the most common probability distributions so that we know what we can describe by these them.</p>
+<section id="probability-distributions" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="probability-distributions"><span class="header-section-number">14.1</span> Probability distributions</h2>
+<p>It is instructive to look at some of the most common probability distributions so that we know what we can describe by them.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1234,8 +1229,8 @@ Figure&nbsp;14.6: Inverse Gamma distribution - basic functions.
 </div>
 </div>
 </section>
-<section id="bayes-theorem-in-action" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="bayes-theorem-in-action"><span class="header-section-number">14.3</span> Bayes’ theorem in action</h2>
+<section id="bayes-theorem-in-action" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="bayes-theorem-in-action"><span class="header-section-number">14.2</span> Bayes’ theorem in action</h2>
 <p>What Bayes was after was the basic question of data science: find the parameters of a model given the outcome data together with the model. The theorem can be used as an update for the probability we have with additional information and therefore fitting our parameters.</p>
 <p>Before we get to an example let us consider the terms of the theorem once more.</p>
 <ol type="1">
@@ -1245,8 +1240,8 @@ Figure&nbsp;14.6: Inverse Gamma distribution - basic functions.
 <li><p>The posterior are our main result of the so called Bayers inference. If we have multiple samples we can use it as the prior for the next.</p></li>
 </ol>
 <p>Let us look at some more elaborate examples to show how Bayes theorem can be used.</p>
-<section id="election-prediction-as-instructive-example" class="level3" data-number="14.3.1">
-<h3 data-number="14.3.1" class="anchored" data-anchor-id="election-prediction-as-instructive-example"><span class="header-section-number">14.3.1</span> Election prediction as instructive example</h3>
+<section id="election-prediction-as-instructive-example" class="level3" data-number="14.2.1">
+<h3 data-number="14.2.1" class="anchored" data-anchor-id="election-prediction-as-instructive-example"><span class="header-section-number">14.2.1</span> Election prediction as instructive example</h3>
 <p>Here we give a rudimentary introduction to election forecasts (this example follows the notes <span class="citation" data-cites="mehrle">Mehrle (<a href="../references.html#ref-mehrle" role="doc-biblioref">2024</a>)</span>).</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1403,8 +1398,8 @@ Warning
 </div>
 </div>
 </section>
-<section id="material-properties" class="level3" data-number="14.3.2">
-<h3 data-number="14.3.2" class="anchored" data-anchor-id="material-properties"><span class="header-section-number">14.3.2</span> Material properties</h3>
+<section id="material-properties" class="level3" data-number="14.2.2">
+<h3 data-number="14.2.2" class="anchored" data-anchor-id="material-properties"><span class="header-section-number">14.2.2</span> Material properties</h3>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1557,8 +1552,8 @@ Figure&nbsp;14.11: Update after 10 and 100 iterations
 <p>The deviation (<span class="math inline">\(\sigma\)</span>) converges steadily, whereas the mean <span class="math inline">\(\mu\)</span> is more erratic and only slowly converging. This is due to the fact that the two variables are not independent of each other and the assumption that of a normal distribution is not a good estimate for <span class="math inline">\(\sigma\)</span>.</p>
 </section>
 </section>
-<section id="conjugate-priors" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="conjugate-priors"><span class="header-section-number">14.4</span> Conjugate priors</h2>
+<section id="conjugate-priors" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="conjugate-priors"><span class="header-section-number">14.3</span> Conjugate priors</h2>
 <p>The above updates are relatively expensive in terms of computing and are not handy. The idea is to find the updates analytically.</p>
 <p>In general this is not <em>likely to happen</em> but for certain combinations of density functions the convert neatly into each other under Bayers’ theorem.</p>
 <p>For the normal distribution this is the case and the update becomes <span class="math display">\[

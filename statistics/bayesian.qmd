@@ -160,7 +160,7 @@ What is the likelihood that a white ball is drawn?
 ::::
 :::
 
-[^explanation] The question is vague and it is not clear what exactly the answer of the man is. Stackexchange has an excellent discussion of the question - [Link](https://math.stackexchange.com/questions/1084785/a-man-who-lies-a-fourth-of-the-time-throws-a-die-and-says-it-is-a-six-what-is-t) (accessed 16.12.2025).
+[^explanation]: The question is vague and it is not clear what exactly the answer of the man is. Stackexchange has an excellent discussion of the question - [Link](https://math.stackexchange.com/questions/1084785/a-man-who-lies-a-fourth-of-the-time-throws-a-die-and-says-it-is-a-six-what-is-t) (accessed 16.12.2025).
 ## Random variable
 
 A random variable $X$ (often also called random quantity or stochastic variable) is a variable that is dependent on _random events_ and is a function defined on a probability space $(\Omega, \mathcal{F}, P)$.

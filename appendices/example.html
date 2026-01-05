@@ -737,7 +737,7 @@ Figure&nbsp;A.4: Weekly average with enveloping tunnel.
 <ul>
 <li><p>the first <span class="math inline">\(n\)</span> columns should be the indices of the entries scaled by <code>53</code> and to the power of the column number (i.e.&nbsp;for <span class="math inline">\(n=4\)</span> we get <span class="math inline">\(t^1, t^2, t^3, t^4\)</span>).</p></li>
 <li><p>the other columns correspond to the weeks, so in row <span class="math inline">\(n\)</span> all entries corresponding to week (<span class="math inline">\(1\)</span> or in our case now <span class="math inline">\(0\)</span>) should have an entry <span class="math inline">\(1\)</span> and <span class="math inline">\(0\)</span> otherwise.</p>
-<div id="896d453d" class="cell styled-output" data-execution_count="6">
+<div id="4b783cda" class="cell styled-output" data-execution_count="6">
 <div class="cell-output cell-output-stdout">
 <pre><code>With n = 4 we get 
 X[:3, :6] = array([[0.000, 0.000, 0.000, 0.000, 0.000, 0.000],
@@ -753,7 +753,7 @@ X[:3, :6] = array([[0.000, 0.000, 0.000, 0.000, 0.000, 0.000],
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cc <span class="op">=</span> sgd(np.random.random((xx.shape[<span class="dv">1</span>], <span class="dv">1</span>)), </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>         <span class="fl">1e-7</span>, xx, yy, <span class="dv">5_000_000</span>, <span class="dv">400</span>, <span class="fl">1e-9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Use a k-folds cross validation to find the optimal choice for <span class="math inline">\(n\)</span>, you can use the following code block. What about over-fitting?</p>
-<div id="6cd80bfa" class="cell" data-execution_count="7">
+<div id="d529c99f" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kfold_cv(X, y, k<span class="op">=</span><span class="dv">5</span>, seed<span class="op">=</span><span class="dv">6020</span>):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    rng <span class="op">=</span> np.random.default_rng(seed)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    idx <span class="op">=</span> np.arange(<span class="bu">len</span>(y))</span>
@@ -769,19 +769,21 @@ X[:3, :6] = array([[0.000, 0.000, 0.000, 0.000, 0.000, 0.000],
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.mean(mses)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ul>
-<div id="cell-fig-appendices-oe-cat_regression" class="cell styled-output" data-execution_count="8">
+<div id="95e4d569" class="cell styled-output" data-execution_count="8">
 <div class="cell-output cell-output-stdout">
-<pre><code>For n = 0 we the greatest difference is 5.013416356889029
-For n = 1 we the greatest difference is 4.841104641397548
-For n = 2 we the greatest difference is 4.8510342183687225
-For n = 3 we the greatest difference is 4.610963617978807
-For n = 4 we the greatest difference is 3.5346535303733733</code></pre>
+<pre><code>For n = 0 we the greatest difference is 5.151896212592957
+For n = 1 we the greatest difference is 4.975019660082316
+For n = 2 we the greatest difference is 4.9844604683515
+For n = 3 we the greatest difference is 4.7601519323922705
+For n = 4 we the greatest difference is 3.7071941060020874</code></pre>
 </div>
+</div>
+<div id="cell-fig-appendices-oe-cat_regression" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div id="fig-appendices-oe-cat_regression" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-appendices-oe-cat_regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="example_files/figure-html/fig-appendices-oe-cat_regression-output-2.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;A.5: Categorical regression with the first 10 years."><img src="example_files/figure-html/fig-appendices-oe-cat_regression-output-2.svg" class="img-fluid figure-img"></a>
+<a href="example_files/figure-html/fig-appendices-oe-cat_regression-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;A.5: Categorical regression with the first 10 years."><img src="example_files/figure-html/fig-appendices-oe-cat_regression-output-1.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-appendices-oe-cat_regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;A.5: Categorical regression with the first 10 years.
@@ -817,18 +819,15 @@ Figure&nbsp;A.5: Categorical regression with the first 10 years.
 <li>Define the projection <span class="math display">\[x_r = U_r U^\mathsf{T}_r x.\]</span></li>
 <li>For our entry of the cost of south america show the relative projection error with different norms.</li>
 </ul>
-<div class="cell styled-output" data-execution_count="9">
-<div class="cell-output cell-output-stdout">
-<pre><code>Cumulative explained variance: 0.998522937297821</code></pre>
-</div>
-<div id="fig-appendices-oe-pca" class="cell styled-output quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="9">
+<div class="cell" data-execution_count="10">
+<div id="fig-appendices-oe-pca" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="10">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-appendices-oe-pca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display">
 <div id="fig-appendices-oe-pca-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-appendices-oe-pca-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="example_files/figure-html/fig-appendices-oe-pca-output-2.svg" class="lightbox" data-gallery="fig-appendices-oe-pca" title="Figure&nbsp;A.6&nbsp;(a): Singular values in descending order"><img src="example_files/figure-html/fig-appendices-oe-pca-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-appendices-oe-pca"></a>
+<a href="example_files/figure-html/fig-appendices-oe-pca-output-1.svg" class="lightbox" data-gallery="fig-appendices-oe-pca" title="Figure&nbsp;A.6&nbsp;(a): Singular values in descending order"><img src="example_files/figure-html/fig-appendices-oe-pca-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-appendices-oe-pca"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-appendices-oe-pca-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Singular values in descending order
@@ -840,7 +839,7 @@ Figure&nbsp;A.5: Categorical regression with the first 10 years.
 <div id="fig-appendices-oe-pca-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-appendices-oe-pca-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="example_files/figure-html/fig-appendices-oe-pca-output-3.svg" class="lightbox" data-gallery="fig-appendices-oe-pca" title="Figure&nbsp;A.6&nbsp;(b): Relative error of the projected and reconstructed U componente of the PCA."><img src="example_files/figure-html/fig-appendices-oe-pca-output-3.svg" class="img-fluid figure-img" data-ref-parent="fig-appendices-oe-pca"></a>
+<a href="example_files/figure-html/fig-appendices-oe-pca-output-2.svg" class="lightbox" data-gallery="fig-appendices-oe-pca" title="Figure&nbsp;A.6&nbsp;(b): Relative error of the projected and reconstructed U componente of the PCA."><img src="example_files/figure-html/fig-appendices-oe-pca-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-appendices-oe-pca"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-appendices-oe-pca-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Relative error of the projected and reconstructed U componente of the PCA.
@@ -853,6 +852,11 @@ Figure&nbsp;A.5: Categorical regression with the first 10 years.
 Figure&nbsp;A.6: Results from the PCA.
 </figcaption>
 </figure>
+</div>
+</div>
+<div id="5dc43c4c" class="cell styled-output" data-execution_count="11">
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative explained variance for the first 25 values: 0.998522937297821</code></pre>
 </div>
 </div>
 </div>
@@ -890,7 +894,7 @@ Figure&nbsp;A.6: Results from the PCA.
 <li>Plot <code>week</code> vs.&nbsp;<code>expected value</code> with a <code>plt.fill_between</code> with the lower and upper bound from above.</li>
 </ul></li>
 </ul>
-<div id="cell-fig-appendices-oe-bayase" class="cell styled-output" data-execution_count="10">
+<div id="cell-fig-appendices-oe-bayase" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div id="fig-appendices-oe-bayase" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">

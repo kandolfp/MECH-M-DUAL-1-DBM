@@ -23,6 +23,8 @@ dependencies = [
     "python-sensors>=0.3.5",
     "yq>=3.4.3",
     "kaleido==0.2.1",
+    "black>=25.9.0",
+    "scikit-image>=0.26.0",
 ]
 requires-python = "==3.12.*"
 readme = "README.md"

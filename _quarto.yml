@@ -51,6 +51,8 @@ book:
         - statistics/kalman.qmd
     - summary.qmd
     - references.qmd
+  appendices:
+    - appendices/example.qmd
 
 bibliography: references.bib
 

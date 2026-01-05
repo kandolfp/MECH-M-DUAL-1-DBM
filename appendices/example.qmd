@@ -1,0 +1,516 @@
+# Overarching example
+
+In this interactive example we will combine several topics of this class in the context of one example.
+For this we recall the sea surface temperature from @fig-sensing_sst and we go through the task step by step.
+Please code along to recreate the figures and the insights.
+There is almost no code provided only some small snippets but some content might be found elsewhere in the notes.
+
+## Download the dataset
+
+The first step should always be to download the dataset we need. 
+To do so by getting the files from [National Oceanic and Atmospheric Administration - NOOA](https://psl.noaa.gov/) specifically [Files](https://downloads.psl.noaa.gov/Datasets/noaa.oisst.v2/) and here we can work with the two file `sst.wkmean.1990-present.nc` and `lsmask.nc`.
+
+
+::: {.callout-caution appearance="simple" collapse="false" icon=false}
+:::: {#exr-example-self-download}
+
+## Self implementation: _Download Dataset_
+
+Download and store the two files.
+
+```{python}
+# | code-fold: true
+# | echo: false
+# | eval: true
+import requests
+import shutil
+
+url_base = "https://downloads.psl.noaa.gov/Datasets/noaa.oisst.v2/"
+for f in ["sst.wkmean.1990-present.nc", "lsmask.nc"]:
+    r = requests.get(url_base + f, verify=True, stream=True)
+    r.raw.decode_content = True
+    with open(f, "wb") as f:
+        shutil.copyfileobj(r.raw, f)
+```
+
+::::
+:::
+
+## Visualizations
+
+Next it is always a good idea to do some visualization for a new dataset. 
+The same is true here.
+In `sst.wkmean.1990-present.nc` we find the timeseries, `lsmask.nc` gives a mask to get this properly to show only the sea and no land masses. 
+
+::: {.callout-caution appearance="simple" collapse="false" icon=false}
+:::: {#exr-example-self-extract-visualize}
+
+## Self implementation: _Extract and visualize_
+
+Extract the feature latitude, longitude, date and sst (sea surface temperature), as well as the `mask` and do the following tasks:
+
+- Convert the _time_ entry to a python `DateTime`, we can use  `netCDF4.num2date` for it and the units can be found in the dataset.
+- Plot the temperature of the entry corresponding to the week containing the 21st of October 1990, with the help of the mask.
+- Write a helper function to map longitude and latitude to the pixel in the picture, use it to mark the location `lat=0.5` and `lon=270.5`, it should be on pixel `(90, 270)`, which is in the pacific of the cost of south america.
+
+```{python}
+# | label: fig-appendices-oe-temp
+# | fig-cap: "Sea Surface temperature for the entry on the 21st of October 1990 in the timeseries and the marked position."
+# | code-fold: true
+# | echo: false
+# | code-summary: "Show the code for the figure"
+import netCDF4
+import numpy as np
+import matplotlib.pyplot as plt
+
+%config InlineBackend.figure_formats = ["svg"]
+
+f = netCDF4.Dataset("sst.wkmean.1990-present.nc")
+lat, lon = f.variables["lat"], f.variables["lon"]
+SST = f.variables["sst"]
+sst = SST[:]
+date = netCDF4.num2date(
+    f.variables["time"],
+    f.variables["time"].units,
+    only_use_cftime_datetimes=False,
+    only_use_python_datetimes=True,
+)
+
+f = netCDF4.Dataset("lsmask.nc")
+mask = f.variables["mask"]
+
+masks = np.bool_(np.squeeze(mask))
+snapshot = float("nan") * np.ones((180, 360))
+snapshot[masks] = sst[42, masks]
+
+plt.figure()
+plt.imshow(snapshot, cmap=plt.cm.coolwarm)
+plt.xticks([])
+plt.yticks([])
+plt.scatter(270, 90, 8, color="black", marker="x")
+```
+
+::::
+:::
+
+## Get some statistics and smooth the data
+
+Next we want to get some basic statistics for the dataset like average global sea temperatures or average temperature for a specific fixed latitude and all longitudes.
+
+::: {.callout-caution appearance="simple" collapse="false" icon=false}
+:::: {#exr-example-self-statistics}
+
+## Self implementation: _Statistics_
+
+Perform the following tasks and plot the results:
+
+- extract the entire time series for the point (`lat=0.5`, `lon=270.5`), make plots for the following:
+   - the time series without any modifications,
+   - apply `fft` to the time series and try to smooth it by truncating small parts in the _PSD_
+   - apply a _wavelet transform_ to the series and try to smooth it -- we can use the method `denoise_wavelet` from the `scikit-image` library.
+   - get the average sea surface temperature per year.
+   - plot the weekly average with the minimum and maximum as an _enveloping tunnel_
+- get the average sea surface temperature on the equator (or a line close to it in the set), per year.
+
+```{python}
+# | label: fig-appendices-oe-statistics
+# | fig-cap: "Raw and smoothed timeseries for one specific location."
+# | code-fold: true
+# | echo: false
+# | code-summary: "Show the code for the figure"
+from skimage.restoration import denoise_wavelet
+
+%config InlineBackend.figure_formats = ["svg"]
+
+ts = SST[:, 90, 270]
+ts_hat = np.fft.fft(ts)
+PSD = np.abs(ts_hat) ** 2 / len(ts)
+filter = PSD >= 10  # simple threshold
+ts_fft_filter = ts_hat * filter
+ts_denoised = np.fft.ifft(ts_fft_filter).real
+
+ts_denoised_w = denoised_signal = denoise_wavelet(
+    ts,
+    method="BayesShrink",  # Or 'visushrink'
+    wavelet="db4",  # Daubechies 4
+    wavelet_levels=4,  # Decomposition level
+    rescale_sigma=True,  # Estimate sigma if not provided
+)
+
+plt.plot(ts, label="raw")
+plt.plot(ts_denoised, "--", label="fft denoised")
+
+plt.plot(ts_denoised_w, ":", label="wavelet denoised")
+plt.legend()
+plt.gca().set_aspect(len(ts_denoised) / ((31 - 19) * 3))
+```
+
+```{python}
+# | label: fig-appendices-oe-statistics2
+# | fig-cap: "Yearly average SST at our selected point."
+# | code-fold: true
+# | echo: false
+# | code-summary: "Show the code for the figure"
+import pandas as pd
+
+%config InlineBackend.figure_formats = ["svg"]
+df = pd.DataFrame({"sst": ts, "date": date[:]})
+yearly_mean = (
+    df.set_index("date")
+    .resample("YE")["sst"]  # 'Y' = year-end frequency (A-DEC)
+    .mean()
+)
+yearly_mean.plot.bar(ylim=[22, 27])
+plt.gca().set_xticklabels([x.strftime("%Y") for x in yearly_mean.index])
+plt.gca().set_aspect(yearly_mean.size / ((27 - 22) * 3))
+```
+
+```{python}
+# | label: fig-appendices-oe-statistics3
+# | fig-cap: "Weekly average with enveloping tunnel."
+# | code-fold: true
+# | echo: false
+# | code-summary: "Show the code for the figure"
+import pandas as pd
+
+%config InlineBackend.figure_formats = ["svg"]
+df = pd.DataFrame({"sst": ts, "date": date[:]})
+week = df["date"].dt.isocalendar().week
+
+clim = (
+    df.assign(week=week.astype(int))
+    .groupby("week")["sst"]
+    .agg(min="min", max="max", avg="mean")
+)
+
+plt.fill_between(
+    clim.index,
+    clim["min"],
+    clim["max"],
+    color="lightsteelblue",
+    alpha=0.5,
+    label="Min–Max range",
+)
+plt.plot(
+    clim.index, clim["avg"], color="steelblue", linewidth=2, label="Weekly average"
+)
+plt.xlabel("ISO week of year")
+plt.ylabel("SST")
+plt.legend()
+plt.gca().set_aspect(53 / ((31 - 19) * 3))
+```
+::::
+:::
+
+Now that we know the average sea surface temperature per year at (`lat=0.5`, `lon=270.5`), what is your best guess, when an [El Niño](https://en.wikipedia.org/wiki/El_Ni%C3%B1o%E2%80%93Southern_Oscillation) phenomenon happened?
+
+**Hint:** In the plot, find unusual high temperatures over the year.
+
+## Regression analysis for the times series
+
+We can also apply some categorical regression to it. 
+
+::: {.callout-caution appearance="simple" collapse="false" icon=false}
+:::: {#exr-example-self-cat_regression}
+
+## Self implementation: _Categorical regression_
+
+Perform the following tasks and plot the results:
+
+- Extract the weeks from the new _date_ (and subtract `-1` to make it easier to work with indices) and store them as a vector.
+- Create a matrix $X$ of size `(len(ts), np.max(weeks) + n)` for our regression.
+- Fill the entries by performing the following steps:
+   - the first $n$ columns should be the indices of the entries scaled by `53` and to the power of the column number (i.e. for $n=4$ we get $t^1, t^2, t^3, t^4$).
+   - the other columns correspond to the weeks, so in row $n$ all entries corresponding to week ($1$ or in our case now $0$) should have an entry $1$ and $0$ otherwise.
+     ```{python}
+     # | classes: styled-output
+     # | echo: false
+     temp_series = SST[:, 90, 270].reshape((-1, 1))
+     T = len(temp_series)
+     weeks = np.array([d.isocalendar()[1] for d in date]) - 1
+     n = 4
+     X = np.zeros((T, np.max(weeks) + n))
+     for m in range(np.max(weeks)):
+         X[weeks == m, m + n] = 1
+     scale = 53 * 10
+     for i in range(n):
+         X[:, i] = (np.arange(T) / scale) ** (i + 1)
+     
+     np.set_printoptions(formatter={"float": lambda x: "{0:0.3f}".format(x)})
+     print(f"With {n = } we get \n{X[:3, :6] = }")
+     ```
+- reshape our timeseries as well as the smoothed versions into a column vectors.
+- use the `np.linalg.lstsq` algorithm for the categorical regression and try for different values of $n$.
+- The longer the timeseries the more it averages the results, try to fit it only with the first ~10 years.
+- Use the _stochastic gradient decent_ method to solve the same problem, for the algorithm from these notes the following parameters work:
+  ```python
+  cc = sgd(np.random.random((xx.shape[1], 1)), 
+           1e-7, xx, yy, 5_000_000, 400, 1e-9)
+  ```
+- Use a k-folds cross validation to find the optimal choice for $n$, you can use the following code block. What about over-fitting?
+  ```{python}
+  # | eval: false
+  def kfold_cv(X, y, k=5, seed=6020):
+      rng = np.random.default_rng(seed)
+      idx = np.arange(len(y))
+      rng.shuffle(idx)
+      folds = np.array_split(idx, k)
+      mses = []
+      for i in range(k):
+          val = folds[i]
+          train = np.setdiff1d(idx, val)
+          c = np.linalg.lstsq(X[train], y[train], rcond=None)[0]
+          yhat = X[val] @ c
+          mses.append(np.linalg.norm(y[val] - yhat, np.inf))
+      return np.mean(mses)
+  ```
+
+```{python}
+# | label: fig-appendices-oe-cat_regression
+# | fig-cap: "Categorical regression with the first 10 years."
+# | code-fold: true
+# | echo: false
+# | code-summary: "Show the code for the figure"
+# | classes: styled-output
+%config InlineBackend.figure_formats = ["svg"]
+
+temp_series = SST[:, 90, 270].reshape((-1, 1))
+T = len(temp_series)
+weeks = np.array([d.isocalendar()[1] for d in date]) - 1
+n = 4
+X = np.zeros((T, np.max(weeks) + n))
+for m in range(np.max(weeks)):
+    X[weeks == m, m + n] = 1
+scale = 53 * 10
+for i in range(n):
+    X[:, i] = (np.arange(T) / scale) ** (i + 1)
+
+cat = 10 * 52
+mean = np.mean(temp_series[:cat])
+y = temp_series.data[:cat] - 1 * mean
+c = np.linalg.lstsq(X[:cat, :], y, rcond=None)[0]
+
+plt.plot(y + mean, "o", color="r", label="observations")
+plt.plot(X[:cat, :] @ c + mean, label=f"original data with {n = }")
+
+ts_d = ts_denoised_w.reshape((-1, 1))
+mean = np.mean(ts_d[:cat])
+y = ts_d[:cat] - 1 * mean
+c = np.linalg.lstsq(X[:cat, :], y, rcond=None)[0]
+plt.plot(X[:cat, :] @ c + mean, label=f"wavelet data with {n = }")
+plt.grid()
+plt.legend()
+plt.gca().set_aspect(cat / ((31 - 19) * 3))
+
+
+def kfold_cv(X, y, k=5, seed=6020):
+    rng = np.random.default_rng(seed)
+    idx = np.arange(len(y))
+    rng.shuffle(idx)
+    folds = np.array_split(idx, k)
+    mses = []
+    for i in range(k):
+        val = folds[i]
+        train = np.setdiff1d(idx, val)
+        c = np.linalg.lstsq(X[train], y[train], rcond=None)[0]
+        yhat = X[val] @ c
+        mses.append(np.linalg.norm(y[val] - yhat, np.inf))
+    return np.mean(mses)
+
+
+mask_cv = np.arange(X.shape[1])
+for i in range(n + 1):
+    X_tmp = X[:cat, (mask_cv < i) + (mask_cv > n - 1)]
+    error = kfold_cv(X_tmp, y, k=5)
+    print(f"For n = {i} we the greatest difference is {error}")
+```
+
+::::
+:::
+
+## Choice for the SVD size
+
+For the _SSPQR_ algorithm used to compute the sensors placed in @fig-sensing_sst the basis consists of a SVD.
+We used $25$ base nodes without giving an explanation. 
+
+Do the decomposition by hand and check for the relative mean spare error we make with different basis sizes.
+
+::: {.callout-caution appearance="simple" collapse="false" icon=false}
+:::: {#exr-example-self-pca}
+
+## Self implementation: _PCA_
+
+Perform the following tasks and plot the results:
+
+- Compute the PCA for $X$ where the values of $X$ are from `X = sst[:, masks]`.
+- Plot the singular values in descending order of the shifted matrix $B$. 
+- Compute the explained variance: $$\frac{\sigma_i^2}{n - 1}.$$
+- Compute the explained variance ratio as $$\frac{\sigma_i^2}{\|\Sigma\|_2^2}.$$
+- What is the combined explained variance for the first $25$ singular values?
+- Why does the final result does not add up to 1?
+- Define the projection $$x_r = U_r U^\mathsf{T}_r x.$$
+- For our entry of the cost of south america show the relative projection error with different norms.
+
+```{python}
+# | label: fig-appendices-oe-pca
+# | fig-cap: "Results from the PCA."
+# | fig-subcap:
+# |      - "Singular values in descending order"
+# |      - "Relative error of the projected and reconstructed U componente of the PCA."
+# | code-fold: true
+# | echo: false
+# | code-summary: "Show the code for the figure"
+# | classes: styled-output
+%config InlineBackend.figure_formats = ["svg"]
+
+X = sst[:, masks]
+X = np.reshape(X.compressed(), X.shape)
+mean = np.mean(X, axis=1, keepdims=True)
+B = X - mean
+
+U, s, Vh = np.linalg.svd(B, full_matrices=False)
+
+plt.figure()
+plt.plot(s)
+plt.yscale("log")
+plt.ylabel(r"$\sigma_i$")
+plt.xlabel("index")
+plt.gca().set_aspect(1e2)
+
+explained_variance = (s**2) / (len(s) - 1)
+explained_variance_ratio = (s**2) / np.sum(s**2)
+print(f"Cumulative explained variance: {np.cumsum(explained_variance_ratio)[24]}")
+
+reconstruct = lambda r, x: mean[:, 0] + U[:, :r] @ U[:, :r].T @ (x - mean[:, 0])
+
+rs = [1, 25, 50, 100]
+x = X[:, 180 * 90 + 275]
+mynorm = lambda r, x, n: np.linalg.norm(x - reconstruct(r, x), n) / np.linalg.norm(x, n)
+plt.figure()
+for i, r in enumerate(rs):
+    plt.bar(i - 0.2, mynorm(r, x, 2), width=0.2, color="b", label=f"2 norm")
+    plt.bar(i, mynorm(r, x, np.inf), width=0.2, color="r", label=r"\infty norm")
+    plt.bar(i + 0.2, mynorm(r, x, 1), width=0.2, color="y", label=f"1 norm")
+
+plt.legend(["2 norm", r"$\infty$ norm", "1 norm"]);
+plt.xticks(range(len(rs)), [f"{r = }" for r in rs]);
+plt.gca().set_aspect(4 / 0.3)
+```
+
+::::
+:::
+
+## Bayesian update to find out how likely we can go swimming
+
+Next we try to find out how likely it is that for a given position we can go swimming in a specific week of the year, this should come in handy for the next vacation. 
+
+::: {.callout-caution appearance="simple" collapse="false" icon=false}
+:::: {#exr-example-self-bayesian}
+
+## Self implementation: _Bayesian update_
+
+We use a Beta distribution as our prior and a Binomial likelihood, this results again in a Beta posterior and therefore an easy computation.
+
+To get $n$ and $k$ for the likelihood we need to check in how many weeks a certain temperature threshold was exceeded ($k$) within the $n$ weeks we have as sample size. 
+
+As a result our Beta distribution with parameters $\alpha_0$ and $\beta_0$ is updated as
+$$
+\begin{aligned}
+\alpha_1 &= \alpha_0 + k\\
+\beta_1 &= \beta_0 + n - k.
+\end{aligned}
+$$
+Let us do this step by step to get an idea how this works.
+
+- Define a `pandas` `DataFrame` with a our example time series and the date.
+- Define a threshold for an acceptable swimming temperature (as we are in a worm climate we use $25$ in this example to see something).
+- We start with $\alpha_0 = 2, \beta_0 = 2$ as an uninformed prior.
+- Add `week` and `year` to the `DataFrame` as well as an `exceed` column that is $1$ if the temperature is higher than our threshold and $0$ otherwise.
+- To see the update progress we update per decades i.e. $\leq 1999, 2009, 2019. 2029$ (if data exists):
+   - For each upper limit compute $k$ and $n$ and the new $\alpha$, $\beta$ as well as the expected value as $\frac{\alpha}{\alpha + \beta}$ (per week).
+   - To get a lower and upper bound of the estimate we can use the inverse CDF or PPF function for $2.5\%$ and $97.5\%$ form `scipy.stats.beta`.
+   - Plot `week` vs.  `expected value` with a `plt.fill_between` with the lower and upper bound from above. 
+
+
+```{python}
+# | label: fig-appendices-oe-bayase
+# | fig-cap: "Weekly swimability: Bayesian posterior mean and 95% CI."
+# | code-fold: true
+# | echo: false
+# | code-summary: "Show the code for the figure"
+# | classes: styled-output
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.stats import beta as beta_dist
+
+%config InlineBackend.figure_formats = ["svg"]
+
+
+df = pd.DataFrame({"sst": ts, "date": date[:]})
+df = df.sort_values("date")
+
+# Configuration
+T_swim = 25.0  # swimming threshold in °C
+alpha0, beta0 = 2.0, 2.0
+week = df["date"].dt.isocalendar().week.astype(int)
+year = df["date"].dt.year
+df = df.assign(week=week, year=year)
+df["exceed"] = (df["sst"] >= T_swim).astype(int)
+decade_edges = [1999, 2009, 2019, 2024]
+
+results = []
+for edge in decade_edges:
+    # Subset data up to the edge year (cumulative)
+    df_cum = df[df["year"] <= edge]
+    agg = (
+        df_cum.groupby("week")["exceed"]
+        .agg(k="sum", n="count")
+        .reset_index()
+        .sort_values("week")
+    )
+
+    agg["alpha_post"] = alpha0 + agg["k"]
+    agg["beta_post"] = beta0 + (agg["n"] - agg["k"])
+    agg["p_mean"] = agg["alpha_post"] / (agg["alpha_post"] + agg["beta_post"])
+    ci = beta_dist.ppf(
+        np.array([0.025, 0.975])[:, None], agg["alpha_post"], agg["beta_post"]
+    ).T
+    agg["p_low"] = ci[:, 0]
+    agg["p_high"] = ci[:, 1]
+
+    agg["edge_year"] = edge
+    results.append(agg)
+
+# Stack for plotting
+res_all = pd.concat(results, ignore_index=True)
+
+# Distinct colors per cumulative decade
+cmap = plt.get_cmap("viridis")
+n_curves = len(decade_edges)
+
+for i, edge in enumerate(decade_edges):
+    cur = res_all[res_all["edge_year"] == edge]
+    color = cmap(i / max(1, n_curves - 1))
+    label = f"≤ {edge}"
+    # Mean line
+    plt.plot(cur["week"], cur["p_mean"], color=color, lw=2, label=label)
+    # Optional: light band for uncertainty
+    plt.fill_between(cur["week"], cur["p_low"], cur["p_high"], color=color, alpha=0.15)
+
+plt.xlabel("ISO week of year")
+plt.ylabel(f"P(SST ≥ {T_swim:.1f}°C)")
+plt.legend(title="Data up to year", ncol=2)
+plt.gca().set_aspect(53/3)
+```
+
+::::
+:::
+
+```{python}
+# | echo: false
+# | eval: true
+%%bash
+# Code to remove above files
+rm lsmask.nc sst.wkmean.1990-present.nc
+```

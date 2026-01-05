@@ -266,9 +266,6 @@ Perform the following tasks and plot the results:
   ```
 
 ```{python}
-# | label: fig-appendices-oe-cat_regression
-# | fig-cap: "Categorical regression with the first 10 years."
-# | code-fold: true
 # | echo: false
 # | code-summary: "Show the code for the figure"
 # | classes: styled-output
@@ -288,20 +285,6 @@ for i in range(n):
 cat = 10 * 52
 mean = np.mean(temp_series[:cat])
 y = temp_series.data[:cat] - 1 * mean
-c = np.linalg.lstsq(X[:cat, :], y, rcond=None)[0]
-
-plt.plot(y + mean, "o", color="r", label="observations")
-plt.plot(X[:cat, :] @ c + mean, label=f"original data with {n = }")
-
-ts_d = ts_denoised_w.reshape((-1, 1))
-mean = np.mean(ts_d[:cat])
-y = ts_d[:cat] - 1 * mean
-c = np.linalg.lstsq(X[:cat, :], y, rcond=None)[0]
-plt.plot(X[:cat, :] @ c + mean, label=f"wavelet data with {n = }")
-plt.grid()
-plt.legend()
-plt.gca().set_aspect(cat / ((31 - 19) * 3))
-
 
 def kfold_cv(X, y, k=5, seed=6020):
     rng = np.random.default_rng(seed)
@@ -323,6 +306,29 @@ for i in range(n + 1):
     X_tmp = X[:cat, (mask_cv < i) + (mask_cv > n - 1)]
     error = kfold_cv(X_tmp, y, k=5)
     print(f"For n = {i} we the greatest difference is {error}")
+```
+
+```{python}
+# | label: fig-appendices-oe-cat_regression
+# | fig-cap: "Categorical regression with the first 10 years."
+# | code-fold: true
+# | echo: false
+# | code-summary: "Show the code for the figure"
+%config InlineBackend.figure_formats = ["svg"]
+
+c = np.linalg.lstsq(X[:cat, :], y, rcond=None)[0]
+
+plt.plot(y + mean, "o", color="r", label="observations")
+plt.plot(X[:cat, :] @ c + mean, label=f"original data with {n = }")
+
+ts_d = ts_denoised_w.reshape((-1, 1))
+mean = np.mean(ts_d[:cat])
+y = ts_d[:cat] - 1 * mean
+c = np.linalg.lstsq(X[:cat, :], y, rcond=None)[0]
+plt.plot(X[:cat, :] @ c + mean, label=f"wavelet data with {n = }")
+plt.grid()
+plt.legend()
+plt.gca().set_aspect(cat / ((31 - 19) * 3))
 ```
 
 ::::
@@ -360,7 +366,6 @@ Perform the following tasks and plot the results:
 # | code-fold: true
 # | echo: false
 # | code-summary: "Show the code for the figure"
-# | classes: styled-output
 %config InlineBackend.figure_formats = ["svg"]
 
 X = sst[:, masks]
@@ -377,10 +382,6 @@ plt.ylabel(r"$\sigma_i$")
 plt.xlabel("index")
 plt.gca().set_aspect(1e2)
 
-explained_variance = (s**2) / (len(s) - 1)
-explained_variance_ratio = (s**2) / np.sum(s**2)
-print(f"Cumulative explained variance: {np.cumsum(explained_variance_ratio)[24]}")
-
 reconstruct = lambda r, x: mean[:, 0] + U[:, :r] @ U[:, :r].T @ (x - mean[:, 0])
 
 rs = [1, 25, 50, 100]
@@ -395,6 +396,15 @@ for i, r in enumerate(rs):
 plt.legend(["2 norm", r"$\infty$ norm", "1 norm"]);
 plt.xticks(range(len(rs)), [f"{r = }" for r in rs]);
 plt.gca().set_aspect(4 / 0.3)
+```
+
+```{python}
+# | code-fold: true
+# | echo: false
+# | classes: styled-output
+explained_variance = (s**2) / (len(s) - 1)
+explained_variance_ratio = (s**2) / np.sum(s**2)
+print(f"Cumulative explained variance for the first 25 values: {np.cumsum(explained_variance_ratio)[24]}")
 ```
 
 ::::
@@ -438,7 +448,6 @@ Let us do this step by step to get an idea how this works.
 # | code-fold: true
 # | echo: false
 # | code-summary: "Show the code for the figure"
-# | classes: styled-output
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -482,10 +491,9 @@ for edge in decade_edges:
     agg["edge_year"] = edge
     results.append(agg)
 
-# Stack for plotting
+
 res_all = pd.concat(results, ignore_index=True)
 
-# Distinct colors per cumulative decade
 cmap = plt.get_cmap("viridis")
 n_curves = len(decade_edges)
 

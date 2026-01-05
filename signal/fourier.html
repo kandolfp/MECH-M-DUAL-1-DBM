@@ -561,6 +561,23 @@ window.Quarto = {
  <span class="menu-text">References</span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Overarching example</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -883,7 +900,7 @@ Figure&nbsp;8.1: Fourier transform of a two hat functions.
 <div class="callout-body-container">
 <div id="exr-fourier-hat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.1 (Self implementation <a href="#exm-fourier-hat" class="quarto-xref">Example&nbsp;<span>8.1</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="d285e4f5" class="cell" data-execution_count="2">
+<div id="57420b02" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1137,7 +1154,7 @@ Tip
 </div>
 <div class="callout-body-container callout-body">
 <p>Code for the computation of the DFT matrix.</p>
-<div id="af680bf1" class="cell" data-execution_count="3">
+<div id="aa57046d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code.</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1419,7 +1436,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 </figure>
 </div>
 <p>As can be seen in the <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span>8.2 (c)</span></a>, the reconstruction is not exact. This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. In particular:</p>
-<div id="97e43a4d" class="cell" data-execution_count="5">
+<div id="8ee5f6ec" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -1472,7 +1489,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-den-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.2 (Self implementation <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span>8.2</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="5c74b0aa" class="cell" data-execution_count="6">
+<div id="bc4eb1c4" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1868,7 +1885,7 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-heat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.4 (Self implementation <a href="#exm-fourier-fft-heat" class="quarto-xref">Example&nbsp;<span>8.4</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="533b30dd" class="cell" data-execution_count="9">
+<div id="002aabd9" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2069,7 +2086,7 @@ Figure&nbsp;8.5: Computing the derivative of a function
 <div class="callout-body-container">
 <div id="exr-fourier-fft-advection-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.5 (Self implementation <a href="#exm-fourier-fft-advection" class="quarto-xref">Example&nbsp;<span>8.5</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="6a082108" class="cell" data-execution_count="11">
+<div id="6fd678cb" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2281,7 +2298,7 @@ Figure&nbsp;8.7: Electric circuit
 </figcaption>
 </figure>
 </div>
-<div id="d56bae0d" class="cell" data-execution_count="13">
+<div id="4eed1531" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the raw data for the example</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>

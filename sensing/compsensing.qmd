@@ -673,7 +673,7 @@ plt.yticks([])
 ```
 
 ```{python}
-#| echo: false
+# | echo: false
 %%bash
 # Code to remove above files
 rm lsmask.nc sst.wkmean.1990-present.nc

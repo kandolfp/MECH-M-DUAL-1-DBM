@@ -1,7 +1,7 @@
 # Overarching example
 
 In this interactive example we will combine several topics of this class in the context of one example.
-For this we recall the sea surface temperature from @fig-sensing_sst and we go through the task step by step.
+For this we recall the Sea Surface temperature from @fig-sensing_sst and we go through the task step by step.
 Please code along to recreate the figures and the insights.
 There is almost no code provided, only some small snippets, but some content might be found elsewhere in the notes.
 
@@ -47,7 +47,7 @@ In `sst.wkmean.1990-present.nc` we find the timeseries, `lsmask.nc` gives a mask
 
 ## Self implementation: _Extract and visualize_
 
-Extract the feature latitude, longitude, date and sst (sea surface temperature), as well as the `mask` and do the following tasks:
+Extract the features latitude, longitude, date and sst (sea surface temperature), as well as the `mask`, and do the following tasks:
 
 - Convert the _time_ entry to a python `DateTime`, we can use  `netCDF4.num2date` for it and the units can be found in the dataset.
 - Plot the temperature of the entry corresponding to the week containing the 21st of October 1990, with the help of the mask.
@@ -109,7 +109,7 @@ Perform the following tasks and plot the results:
    - apply `fft` to the time series and try to smooth it by truncating small parts in the _PSD_
    - apply a _wavelet transform_ to the series and try to smooth it -- we can use the method `denoise_wavelet` from the `scikit-image` library.
    - get the average sea surface temperature per year.
-   - plot the weekly average with the minimum and maximum as an _enveloping tunnel_
+   - plot the weekly average with the minimum and maximum as an _envelope_
 - get the average sea surface temperature on the equator (or a line close to it in the set), per year.
 
 ```{python}
@@ -167,7 +167,7 @@ plt.gca().set_aspect(yearly_mean.size / ((27 - 22) * 3))
 
 ```{python}
 # | label: fig-appendices-oe-statistics3
-# | fig-cap: "Weekly average with enveloping tunnel."
+# | fig-cap: "Weekly average with envelope."
 # | code-fold: true
 # | echo: false
 # | code-summary: "Show the code for the figure"
@@ -354,7 +354,7 @@ Perform the following tasks and plot the results:
 - Compute the explained variance: $$\frac{\sigma_i^2}{n - 1}.$$
 - Compute the explained variance ratio as $$\frac{\sigma_i^2}{\|\Sigma\|_2^2}.$$
 - What is the combined explained variance for the first $25$ singular values?
-- Why does the final result does not add up to 1?
+- Why does the final result not add up to 1?
 - Define the projection $$x_r = U_r U^\mathsf{T}_r x.$$
 - For our entry of the cost of south america show the relative projection error with different norms.
 
@@ -363,7 +363,7 @@ Perform the following tasks and plot the results:
 # | fig-cap: "Results from the PCA."
 # | fig-subcap:
 # |      - "Singular values in descending order"
-# |      - "Relative error of the projected and reconstructed U componente of the PCA."
+# |      - "Relative error of the projected and reconstructed U component of the PCA."
 # | code-fold: true
 # | echo: false
 # | code-summary: "Show the code for the figure"
@@ -390,11 +390,11 @@ x = X[:, 180 * 90 + 275]
 mynorm = lambda r, x, n: np.linalg.norm(x - reconstruct(r, x), n) / np.linalg.norm(x, n)
 plt.figure()
 for i, r in enumerate(rs):
-    plt.bar(i - 0.2, mynorm(r, x, 2), width=0.2, color="b", label=f"2 norm")
-    plt.bar(i, mynorm(r, x, np.inf), width=0.2, color="r", label=r"\infty norm")
-    plt.bar(i + 0.2, mynorm(r, x, 1), width=0.2, color="y", label=f"1 norm")
+    plt.bar(i - 0.2, mynorm(r, x, 2), width=0.2, color="b", label=f"2-norm")
+    plt.bar(i, mynorm(r, x, np.inf), width=0.2, color="r", label=r"\infty-norm")
+    plt.bar(i + 0.2, mynorm(r, x, 1), width=0.2, color="y", label=f"1-norm")
 
-plt.legend(["2 norm", r"$\infty$ norm", "1 norm"]);
+plt.legend(["2-norm", r"$\infty$-norm", "1-norm"]);
 plt.xticks(range(len(rs)), [f"{r = }" for r in rs]);
 plt.gca().set_aspect(4 / 0.3)
 ```
@@ -424,22 +424,22 @@ We use a Beta distribution as our prior and a Binomial likelihood, this results 
 
 To get $n$ and $k$ for the likelihood we need to check in how many weeks a certain temperature threshold was exceeded ($k$) within the $n$ weeks we have as sample size. 
 
-As a result our Beta distribution with parameters $\alpha_0$ and $\beta_0$ is updated as
+As a result, our Beta distribution with parameters $\alpha_0$ and $\beta_0$ is updated as
 $$
 \begin{aligned}
 \alpha_1 &= \alpha_0 + k\\
 \beta_1 &= \beta_0 + n - k.
 \end{aligned}
 $$
-Let us do this step by step to get an idea how this works.
+Let us do this step by step to get an idea of how this works.
 
 - Define a `pandas` `DataFrame` with our example time series and the date.
 - Define a threshold for an acceptable swimming temperature (as we are in a warm climate, we use $25$ in this example to see something).
 - We start with $\alpha_0 = 2, \beta_0 = 2$ as an uninformed prior.
 - Add `week` and `year` to the `DataFrame` as well as an `exceed` column that is $1$ if the temperature is higher than our threshold and $0$ otherwise.
-- To see the update progress we update per decades, i.e. $\leq 1999, 2009, 2019. 2029$ (if data exists):
+- To see the update progress we update per decades, i.e. $\leq 1999, 2009, 2019, 2029$ (if data exists):
    - For each upper limit compute $k$ and $n$ and the new $\alpha$, $\beta$ as well as the expected value as $\frac{\alpha}{\alpha + \beta}$ (per week).
-   - To get a lower and upper bound of the estimate we can use the inverse CDF or PPF function for $2.5\%$ and $97.5\%$ form `scipy.stats.beta`.
+   - To get a lower and upper bound of the estimate we can use the inverse CDF (PPF) function for $2.5\%$ and $97.5\%$ form `scipy.stats.beta`.
    - Plot `week` vs.  `expected value` with a `plt.fill_between` with the lower and upper bound from above. 
 
 

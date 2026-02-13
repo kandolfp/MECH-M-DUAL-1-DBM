@@ -3,12 +3,12 @@
 In this interactive example we will combine several topics of this class in the context of one example.
 For this we recall the sea surface temperature from @fig-sensing_sst and we go through the task step by step.
 Please code along to recreate the figures and the insights.
-There is almost no code provided only some small snippets but some content might be found elsewhere in the notes.
+There is almost no code provided, only some small snippets, but some content might be found elsewhere in the notes.
 
 ## Download the dataset
 
 The first step should always be to download the dataset we need. 
-To do so by getting the files from [National Oceanic and Atmospheric Administration - NOAA](https://psl.noaa.gov/) specifically [Files](https://downloads.psl.noaa.gov/Datasets/noaa.oisst.v2/) and here we can work with the two files `sst.wkmean.1990-present.nc` and `lsmask.nc`.
+To do so, get the files from [National Oceanic and Atmospheric Administration - NOAA](https://psl.noaa.gov/) specifically [Files](https://downloads.psl.noaa.gov/Datasets/noaa.oisst.v2/) and here we can work with the two files `sst.wkmean.1990-present.nc` and `lsmask.nc`.
 
 
 ::: {.callout-caution appearance="simple" collapse="false" icon=false}
@@ -239,15 +239,16 @@ Perform the following tasks and plot the results:
      np.set_printoptions(formatter={"float": lambda x: "{0:0.3f}".format(x)})
      print(f"With {n = } we get \n{X[:3, :6] = }")
      ```
-- reshape our timeseries as well as the smoothed versions into a column vectors.
+- reshape our timeseries as well as the smoothed versions into column vectors.
 - use the `np.linalg.lstsq` algorithm for the categorical regression and try for different values of $n$.
-- The longer the timeseries the more it averages the results, try to fit it only with the first ~10 years.
-- Use the _stochastic gradient descent_ method to solve the same problem, for the algorithm from these notes the following parameters work:
+- The longer the timeseries, the more it averages the results; try to fit it only with the first ~10 years.
+- Use the _stochastic gradient descent_ method to solve the same problem; for the algorithm from these notes the following parameters work:
   ```python
   cc = sgd(np.random.random((xx.shape[1], 1)), 
            1e-7, xx, yy, 5_000_000, 400, 1e-9)
   ```
-- Use a k-folds cross validation to find the optimal choice for $n$, you can use the following code block. What about over-fitting?
+- Use a k-folds cross-validation to find the optimal choice for $n$.
+You can use the following code block. What about over-fitting?
   ```{python}
   # | eval: false
   def kfold_cv(X, y, k=5, seed=6020):
@@ -432,11 +433,11 @@ $$
 $$
 Let us do this step by step to get an idea how this works.
 
-- Define a `pandas` `DataFrame` with a our example time series and the date.
-- Define a threshold for an acceptable swimming temperature (as we are in a warm climate we use $25$ in this example to see something).
+- Define a `pandas` `DataFrame` with our example time series and the date.
+- Define a threshold for an acceptable swimming temperature (as we are in a warm climate, we use $25$ in this example to see something).
 - We start with $\alpha_0 = 2, \beta_0 = 2$ as an uninformed prior.
 - Add `week` and `year` to the `DataFrame` as well as an `exceed` column that is $1$ if the temperature is higher than our threshold and $0$ otherwise.
-- To see the update progress we update per decades i.e. $\leq 1999, 2009, 2019. 2029$ (if data exists):
+- To see the update progress we update per decades, i.e. $\leq 1999, 2009, 2019. 2029$ (if data exists):
    - For each upper limit compute $k$ and $n$ and the new $\alpha$, $\beta$ as well as the expected value as $\frac{\alpha}{\alpha + \beta}$ (per week).
    - To get a lower and upper bound of the estimate we can use the inverse CDF or PPF function for $2.5\%$ and $97.5\%$ form `scipy.stats.beta`.
    - Plot `week` vs.  `expected value` with a `plt.fill_between` with the lower and upper bound from above. 

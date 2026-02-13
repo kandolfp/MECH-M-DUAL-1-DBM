@@ -98,9 +98,9 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-f3e4be047f94999836566be8d7fec70b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-1cff5245d27da707879debdfdc57e7b2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-f3e4be047f94999836566be8d7fec70b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a22dc4d1285b04935f0c9bc4a107b71c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-afb6e7bb50f97048f84a0b57917e7fb2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-a22dc4d1285b04935f0c9bc4a107b71c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -626,14 +626,14 @@ f(t) = \mathcal{L}^{-1}\{F(s)\} = \frac{1}{2 \pi \mathrm{i}} \int_{\gamma - \mat
 </div>
 </div>
 </div>
-<p>To give a better understanding of theses formula we follow the <em>derivation</em> from <span class="citation" data-cites="Brunton2022">(<a href="../references.html#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, sec. 2.5</a>)</span>.</p>
+<p>To give a better understanding of theses formula we follow the <em>derivation</em> from <span class="citation" data-cites="Brunton2022">(<a href="#ref-Brunton2022" role="doc-biblioref">Brunton and Kutz 2022, sec. 2.5</a>)</span>.</p>
 <p>Let us consider the function <span class="math inline">\(f(t)=\mathrm{e}^{\lambda t}\)</span>. As mentioned before we cannot directly use the Fourier transform as the function is not bounded. In order to trap the function for <span class="math inline">\(t\to\infty\)</span> we multiply by <span class="math inline">\(\mathrm{e}^{-\gamma t}\)</span> where <span class="math inline">\(\gamma\)</span> is damping more that <span class="math inline">\(f\)</span> grows. In order to handle <span class="math inline">\(t\to-\infty\)</span> we multiply by the Heaviside function <span class="math display">\[
 H(t) =
 \begin{cases}
 0, &amp;t \leq 0,\\
 1, &amp;t &gt; 0,
 \end{cases}
-\]</span> and transform it into a <em>one-sided</em> function as in definition <a href="#def-signal-laplace-transform" class="quarto-xref">Definition&nbsp;<span>9.1</span></a> required. We end up with the function <span class="math display">\[
+\]</span> and transform it into a <em>one-sided</em> function as in definition <a href="#def-signal-laplace-transform" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-signal-laplace-transform</span></a> required. We end up with the function <span class="math display">\[
 \underline{f}(t) = f(t) \mathrm{e}^{-\gamma t}H(t) =
 \begin{cases}
 0, &amp;t \leq 0,\\
@@ -731,7 +731,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The following examples are mostly from <span class="citation" data-cites="Meyberg1992-ws">Meyberg and Vachenauer (<a href="../references.html#ref-Meyberg1992-ws" role="doc-biblioref">1992</a>)</span>.</p>
+<p>The following examples are mostly from <span class="citation" data-cites="Meyberg1992-ws">Meyberg and Vachenauer (<a href="#ref-Meyberg1992-ws" role="doc-biblioref">1992</a>)</span>.</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-tip no-icon">
@@ -1069,7 +1069,7 @@ Figure&nbsp;9.6: Impulse response for the first order RC low pass filter
 </div>
 </div>
 </div>
-<p>If we extend this to a second order low pass filter <a href="#fig-laplace-rclowpass-2" class="quarto-xref">Figure&nbsp;<span>9.5 (b)</span></a> we get <span class="math display">\[
+<p>If we extend this to a second order low pass filter <a href="#fig-laplace-rclowpass-2" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-laplace-rclowpass-2</span></a> we get <span class="math display">\[
 H(s) = \frac{1}{(sRC + 1)^2}
 \]</span> and the impulse response <span class="math display">\[
 h(t) = \frac{1}{(RC)^2}t\mathrm{e}^{-\frac{t}{RC}}.
@@ -1113,7 +1113,7 @@ Figure&nbsp;9.7: Impulse response for the first order RC low pass filter
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Brunton2022" class="csl-entry" role="listitem">
 Brunton, Steven L., and J. Nathan Kutz. 2022. <em>Data-Driven Science and Engineering - Machine Learning, Dynamical Systems, and Control</em>. 2nd ed. Cambridge: Cambridge University Press.
 </div>

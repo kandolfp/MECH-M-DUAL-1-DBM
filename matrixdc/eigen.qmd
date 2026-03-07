@@ -331,7 +331,7 @@ The resulting equations of motion become
 $$
 \begin{array}{r}
 m_1 \ddot{x_1} + k_1 x_1 + k_2 (x_2 - x_1) = 0,\\
-m_2 \ddot{x_1} + k_2 (x_2 - x_1) = 0,
+m_2 \ddot{x_2} + k_2 (x_2 - x_1) = 0,
 \end{array}
 $$
 resulting in the matrices

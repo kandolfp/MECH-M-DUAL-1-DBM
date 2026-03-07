@@ -415,7 +415,7 @@ For two functions $f, g \in L^1[(-\infty, \infty)]$ and $\alpha, \beta\in\mathbb
 
 5. **Drift in frequency**, for $a\in\mathbb{R}$
     $$
-    \mathrm{e}^{\mathrm{i} a t} \mathcal{F}\{f(t)\} = \hat{f}(\omega - a).
+    \mathrm{e}^{\mathrm{i} a t} f(t) = \hat{f}(\omega - a).
     $$
 
 6. If $f$ is **even** or **odd**, then $\hat{f}$ is even or odd, respectively.
@@ -737,7 +737,7 @@ plt.legend(loc=1)
 plt.gca().set_aspect(1)
 
 plt.figure(3)
-plt.plot(t, np.real(f_filtered), label=r"Noisy")
+plt.plot(t, np.real(f_filtered), label=r"Filtered")
 plt.plot(t, f_clean, label=r"Clean")
 plt.xlabel("Time [s]")
 plt.ylabel(r"$f$")
@@ -1033,7 +1033,7 @@ The majority of the following code is from [@Brunton2022, Code 2.5 and Code 2.6]
 # | fig-cap: "Simulation of the heat equation in 1D."
 # | fig-subcap:
 # |   - "Evolution of the heat equation in time."
-# |   - "x-t diagram of the transport equation. "
+# |   - "x-t diagram of the heat equation equation. "
 # | layout-ncol: 1
 # | code-fold: true
 # | code-summary: "Show the code for the figure"

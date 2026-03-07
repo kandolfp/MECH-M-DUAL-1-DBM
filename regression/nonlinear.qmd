@@ -52,7 +52,7 @@ F(\delta) = f(x^{(k+1)}(\delta))
 $$
 and
 $$
-\partial_\delta F = -\nabla f(x^{(k+1)})\nabla f(x^{(k)}) = 0.
+\partial_\delta F = -\nabla f(x^{(k+1)}) \dot \\nabla f(x^{(k)}) = 0.
 $$ {#eq-gcupdatep}
 
 Now the interpretation of @eq-gcupdatep is that we want that the gradient of the current step is orthogonal to the gradient of the next step.

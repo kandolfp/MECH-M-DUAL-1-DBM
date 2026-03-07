@@ -143,7 +143,7 @@ A lot of the properties we saw for the Fourier transform carry over to the Lapla
 
 8. **Derivative in frequency**
     $$
-    \mathcal{L}\{t^n f(t)\} = (-1)^n \partial_\omega^n F(s)
+    \mathcal{L}\{t^n f(t)\} = (-1)^n \partial_s^n F(s)
     $$
 
 9. **Integral in frequency**
@@ -458,7 +458,7 @@ $$
 
 ```{python}
 # | label: fig-laplace-rclowpass2
-# | fig-cap: "Impulse response for the first order RC low pass filter"
+# | fig-cap: "Impulse response for the second order RC low pass filter"
 # | code-fold: true
 # | code-summary: "Show the code for the figure"
 import numpy as np

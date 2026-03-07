@@ -319,9 +319,9 @@ Let us walk through this with an example from [@Downey2024VibrationMechanicsPrac
 
 ![Two story frame where the floors have different dynamic properties.](../_assets/matrixdc/TwoStoryBuilding){#fig-twostorybuilding width=2.95in}
 
-In @fig-twostorybuilding we can see a two story building consisting of a two column frame with a floor.
+In @fig-twostorybuilding we can see a two story building consisting of a two-column frame with a floor.
 The first floor columns are fixed at the base and have a height $h$, the second floor is fixed to the first and has the same height.
-The columns of each frame are modelled as beams with flexural rigidity $EI$ and $2 EI$, respectively
+The columns of each frame are modelled as beams with flexural rigidity $EI$ and $2 EI$, respectively.
 Where $E$ is called _Young's modulus_ and $I$ the _second moment of area_.
 The mass is centred at the floor level.
 
@@ -439,7 +439,7 @@ The following figure visualizes the two modes.
 Model of a two story building with the shape of the modes according to the modal analysis.
 :::
 
-Two wrap up the example our overall temporal response consists of the time invariant part defined by our eigenvectors $v_1$, and $v_2$, as well as the time dependent part with our eigenfrequencies $\omega_1$ and $\omega_2$ as well as the constants $A_1$, $A_2$, $\phi_1$, $\phi_2$ depending on the initial condition [see @Downey2024VibrationMechanicsPractical, Chapter 5].
+To wrap up the example, our overall temporal response consists of the time invariant part defined by our eigenvectors $v_1$, and $v_2$, as well as the time dependent part with our eigenfrequencies $\omega_1$ and $\omega_2$ as well as the constants $A_1$, $A_2$, $\phi_1$, $\phi_2$ depending on the initial condition [see @Downey2024VibrationMechanicsPractical, Chapter 5].
 $$
 \left[\begin{array}{c}
 x_1(t)\\

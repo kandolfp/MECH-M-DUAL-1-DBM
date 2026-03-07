@@ -201,7 +201,7 @@ plt.show()
 
 ## Model Selection/Identification and over-/underfitting {#sec-regression-optimizers-msou}
 
-Let us use the results we have obtain so far for a discussion on _model selection_. 
+Let us use the results we have obtained so far for a discussion on _model selection_. 
 
 So far, we have mostly explicitly proposed a model that we think will fit our data and we have seen that even in this case we can still choose multiple parameters to fine-tune our selection. 
 
@@ -271,7 +271,7 @@ We cannot adequately capture the underlying model, at least not in the entire re
 If we move to $m=16$ and the extreme $m=300$ we see an overfitted system.
 The $m=16$ curve follows clusters of points _too close_, e.g. in the region around $x=-2$, this is more pronounced for $m=300$ where we quite often closely follow our observations but between them we clearly overshoot.
 
-In this way we can also say that an overfitted system follows the _training_ set too closely and will not generalize good for another _testing_/_evaluation_ set.
+In this way we can also say that an overfitted system follows the _training_ set too closely and will not generalize well for another _testing_/_evaluation_ set.
 
 As a consequence model selection should always be followed by a cross-validation.
 Meaning we need to check if our model is any good. 

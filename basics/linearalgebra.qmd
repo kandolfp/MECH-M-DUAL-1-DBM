@@ -38,7 +38,7 @@ For the vector addition we need to have
 2. commutativity
     $$u + v = v + u,$$
 
-3. there needs to exists an identity element $0\in \mathbb{R}^n$, i.e. the zero vector such that
+3. there needs to exist an identity element $0\in \mathbb{R}^n$, i.e. the zero vector such that
     $$v + 0 =  v,$$
 
 4. there needs to exist an inverse element
@@ -224,7 +224,7 @@ print(f"{alpha = }")
 ```
 
 :::{.callout-note}
-As $\mathbb{R}^n$ is an euclidean vector space the above function is also called the _inner product_.
+As $\mathbb{R}^n$ is an Euclidean vector space the above function is also called the _inner product_.
 :::
 
 ::: {.callout appearance="simple"}
@@ -299,7 +299,7 @@ The most common are:
 
 1. the one norm
 $$ \| v \|_1 = \sum_i |v_i|,$$
-1. the two norm (euclidean norm)
+1. the two-norm (Euclidean norm)
 $$ \| w \| = \| v \|_2 = \sqrt{\sum_i |x_i|^2} = \sqrt{\langle v, v \rangle},$$
 1. more general the $p$-norms (for $1\leq p \le \infty$)
 $$ \| v \|_p = \left(\sum_i |v_i|^p\right)^{\frac{1}{p}},$$
@@ -310,7 +310,7 @@ And for matrices:
 
 1. the one norm (column sum norm)
 $$ \| A \|_1 = \max_j \sum_i |a_{ij}|,$$
-1. the Frobeniusnorm
+1. the Frobenius norm
 $$ \| A \| = \| A \|_F = \sqrt{\sum_i \sum_j |a_{ij}|^2},$$
 1. the $p$ norms are defined
 $$ \| A \|_p = \left(\sum_i \sum_j |a_{ij}|^p\right)^{\frac1p},$$

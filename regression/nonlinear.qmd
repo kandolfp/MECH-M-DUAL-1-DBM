@@ -29,13 +29,13 @@ $$
 \nabla f(x) = 0
 $$
 to know that we are in an extrema.
-Since we can have saddle points this is not the sole criteria but a necessary one.
-Gradient descent, as the name suggest uses the gradient as _direction_ in an iterative algorithm to find a minimum.
+Since we can have saddle points this is not the sole criterion but a necessary one.
+Gradient descent, as the name suggest, uses the gradient as _direction_ in an iterative algorithm to find a minimum.
 
-The idea is basically, if you are lost on a mountain in the fog and you cannot see the path, the fastest and a reliable way that only uses local information is to follow the steepest slope down.
+The idea is basically, if you are lost on a mountain in the fog and you cannot see the path, the fastest and most reliable way that only uses local information is to follow the steepest slope down.
 
 ::: {.callout-warning}
-A function does not necessarily experience gravity in the same way as we do, so please do not try this in real live, i.e. cliffs tend to be hard to walk down.
+A function does not necessarily experience gravity in the same way as we do, so please do not try this in real life, i.e. cliffs tend to be hard to walk down.
 :::
 
 We express this algorithm in terms of the iterations $x^k$ for guesses of the minimum with the updates
@@ -404,7 +404,7 @@ plt.show()
 ```
 
 ::: {.callout-note}
-There is also quite a difference between man and woman that could be categorized separately.
+There is also quite a difference between men and women that could be categorized separately.
 :::
 
 We wrap up this section about regression by talking more abstract about the regression of linear systems and some general thoughts about the selection of the model and consequences.

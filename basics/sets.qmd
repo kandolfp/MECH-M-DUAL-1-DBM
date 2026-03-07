@@ -1,6 +1,6 @@
 # Data sets {#sec-intro-sets}
 
-We continue our little introduction by looking at _data sets_ in the sense of a list of values that we want to describe closer.
+We continue our little introduction by looking at _data sets_ in the sense of a list of values that we want to describe more closely.
 
 We use the `mieten3.asc` from [Open Data LMU](https://data.ub.uni-muenchen.de/2/). 
 The data set contains information about rents in Munich from the year 2003.
@@ -281,7 +281,7 @@ plt.show()
 What we see in @fig-hist is simply the amount of occurrences of $1$ to $6$ in our dataset.
 Already we can see something rather interesting, there are flats with $5.5$ rooms in our dataset.
 
-Another helpful histogram is @fig-hist2 showing the amount of buildings built per year.
+Another helpful histogram is @fig-hist2 showing the number of buildings built per year.
 ```{python}
 # | label: fig-hist2
 # | fig-cap: "Histogram of buildings built per year."

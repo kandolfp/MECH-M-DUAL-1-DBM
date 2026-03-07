@@ -363,7 +363,7 @@ To perform a $10$-fold cross validation [^1] for the LASSO method we use the fea
 
 ```{python}
 # | label: fig-sensing_lasso
-# | fig-cap: "Cross-validation mean square error of Lasso fit, the green circle marks the optimal choice, the blue line the mean error of the k-folds and the error bar the maximal and minimal error form the k-folds."
+# | fig-cap: "Cross-validation mean square error of Lasso fit, the green circle marks the optimal choice, the blue line the mean error of the k-folds and the error bar the maximal and minimal error from the k-folds."
 # | code-fold: true
 # | code-summary: "Show the code for the figure"
 import numpy as np
@@ -400,7 +400,7 @@ error = [
 plt.errorbar(lassoCV.alphas_, Lmean, yerr=error, ecolor="lightgray")
 plt.plot(lassoCV.alpha_, Lmean[lassoCV.alphas_ == lassoCV.alpha_], "go", mfc="none")
 plt.xscale("log")
-plt.ylabel("Means Square Error")
+plt.ylabel("Mean Square Error")
 plt.xlabel(r"$\lambda_1$")
 plt.gca().invert_xaxis()
 plt.show()

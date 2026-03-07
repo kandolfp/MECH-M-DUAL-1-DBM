@@ -737,7 +737,7 @@ Figure&nbsp;A.4: Weekly average with envelope.
 <ul>
 <li><p>the first <span class="math inline">\(n\)</span> columns should be the indices of the entries scaled by <code>53</code> and to the power of the column number (i.e.&nbsp;for <span class="math inline">\(n=4\)</span> we get <span class="math inline">\(t^1, t^2, t^3, t^4\)</span>).</p></li>
 <li><p>the other columns correspond to the weeks, so in row <span class="math inline">\(n\)</span> all entries corresponding to week (<span class="math inline">\(1\)</span> or in our case now <span class="math inline">\(0\)</span>) should have an entry <span class="math inline">\(1\)</span> and <span class="math inline">\(0\)</span> otherwise.</p>
-<div id="c40916b7" class="cell styled-output" data-execution_count="6">
+<div id="3e8a5c4f" class="cell styled-output" data-execution_count="6">
 <div class="cell-output cell-output-stdout">
 <pre><code>With n = 4 we get 
 X[:3, :6] = array([[0.000, 0.000, 0.000, 0.000, 0.000, 0.000],
@@ -753,7 +753,7 @@ X[:3, :6] = array([[0.000, 0.000, 0.000, 0.000, 0.000, 0.000],
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cc <span class="op">=</span> sgd(np.random.random((xx.shape[<span class="dv">1</span>], <span class="dv">1</span>)), </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>         <span class="fl">1e-7</span>, xx, yy, <span class="dv">5_000_000</span>, <span class="dv">400</span>, <span class="fl">1e-9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Use a k-folds cross-validation to find the optimal choice for <span class="math inline">\(n\)</span>. You can use the following code block. What about over-fitting?</p>
-<div id="31745a3d" class="cell" data-execution_count="7">
+<div id="8b300f54" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kfold_cv(X, y, k<span class="op">=</span><span class="dv">5</span>, seed<span class="op">=</span><span class="dv">6020</span>):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    rng <span class="op">=</span> np.random.default_rng(seed)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    idx <span class="op">=</span> np.arange(<span class="bu">len</span>(y))</span>
@@ -769,7 +769,7 @@ X[:3, :6] = array([[0.000, 0.000, 0.000, 0.000, 0.000, 0.000],
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.mean(mses)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ul>
-<div id="4e86ce21" class="cell styled-output" data-execution_count="8">
+<div id="5f351c91" class="cell styled-output" data-execution_count="8">
 <div class="cell-output cell-output-stdout">
 <pre><code>For n = 0 the greatest difference is 5.151896212592957
 For n = 1 the greatest difference is 4.975019660082316
@@ -854,7 +854,7 @@ Figure&nbsp;A.6: Results from the PCA.
 </figure>
 </div>
 </div>
-<div id="beb36be3" class="cell styled-output" data-execution_count="11">
+<div id="bbc92359" class="cell styled-output" data-execution_count="11">
 <div class="cell-output cell-output-stdout">
 <pre><code>Cumulative explained variance for the first 25 values: 0.998522937297821</code></pre>
 </div>

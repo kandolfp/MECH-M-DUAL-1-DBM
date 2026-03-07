@@ -779,7 +779,7 @@ Figure&nbsp;7.2: Ridge regression coefficients of an over-determined system with
 <div class="callout-body-container">
 <div id="exr-lasso_reg" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 7.1 (Implement the above optimization yourself.)</strong></span> Fill out the missing parts:</p>
-<div id="f0fdc6b7" class="cell" data-execution_count="3">
+<div id="b2d43a17" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -832,7 +832,7 @@ Figure&nbsp;7.2: Ridge regression coefficients of an over-determined system with
 </section>
 <section id="sec-regression-optimizers-msou" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="sec-regression-optimizers-msou"><span class="header-section-number">7.2</span> Model Selection/Identification and over-/underfitting</h2>
-<p>Let us use the results we have obtain so far for a discussion on <em>model selection</em>.</p>
+<p>Let us use the results we have obtained so far for a discussion on <em>model selection</em>.</p>
 <p>So far, we have mostly explicitly proposed a model that we think will fit our data and we have seen that even in this case we can still choose multiple parameters to fine-tune our selection.</p>
 <p>Now consider the other possibility, we have data where the model is unknown. For example, in <a href="linear.html#exm-lregfallenobject" class="quarto-xref">Example&nbsp;<span>5.1</span></a> we stopped with degree 2 for our polynomial because we know about Newton’s principles, if we don’t know it, we might extend the model for a higher degree.</p>
 <p>One of the leading assumptions to use in such a case is:</p>
@@ -856,7 +856,7 @@ Figure&nbsp;7.3: Fitting for different degrees of polynomial <span class="math i
 </div>
 <p>For <span class="math inline">\(m=1\)</span>, a straight line, we have an underfitted model. We cannot adequately capture the underlying model, at least not in the entire region.</p>
 <p>If we move to <span class="math inline">\(m=16\)</span> and the extreme <span class="math inline">\(m=300\)</span> we see an overfitted system. The <span class="math inline">\(m=16\)</span> curve follows clusters of points <em>too close</em>, e.g.&nbsp;in the region around <span class="math inline">\(x=-2\)</span>, this is more pronounced for <span class="math inline">\(m=300\)</span> where we quite often closely follow our observations but between them we clearly overshoot.</p>
-<p>In this way we can also say that an overfitted system follows the <em>training</em> set too closely and will not generalize good for another <em>testing</em>/<em>evaluation</em> set.</p>
+<p>In this way we can also say that an overfitted system follows the <em>training</em> set too closely and will not generalize well for another <em>testing</em>/<em>evaluation</em> set.</p>
 <p>As a consequence model selection should always be followed by a cross-validation. Meaning we need to check if our model is any good.</p>
 <p>A classic method is the <em>k-fold cross validation</em>:</p>
 <blockquote class="blockquote">

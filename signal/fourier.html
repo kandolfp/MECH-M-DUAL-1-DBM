@@ -900,7 +900,7 @@ Figure&nbsp;8.1: Fourier transform of a two hat functions.
 <div class="callout-body-container">
 <div id="exr-fourier-hat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.1 (Self implementation <a href="#exm-fourier-hat" class="quarto-xref">Example&nbsp;<span>8.1</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="58180406" class="cell" data-execution_count="2">
+<div id="755946da" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1064,9 +1064,9 @@ Note
 \mathcal{F}\{f(t - a)\} = \mathrm{e}^{-\mathrm{i}\omega a}\hat{f}(\omega).
 \]</span></p></li>
 <li><p><strong>Drift in frequency</strong>, for <span class="math inline">\(a\in\mathbb{R}\)</span> <span class="math display">\[
-\mathrm{e}^{\mathrm{i} a t} \mathcal{F}\{f(t)\} = \hat{f}(\omega - a).
+  \mathcal{F}\{\mathrm{e}^{\mathrm{i} a t} f(t)\} = \hat{f}(\omega - a).
 \]</span></p></li>
-<li><p>If <span class="math inline">\(f\)</span> is <strong>even</strong> or <strong>odd</strong>, than <span class="math inline">\(\hat{f}\)</span> is even or odd, respectively.</p></li>
+<li><p>If <span class="math inline">\(f\)</span> is <strong>even</strong> or <strong>odd</strong>, then <span class="math inline">\(\hat{f}\)</span> is even or odd, respectively.</p></li>
 <li><p><strong>Derivative in time</strong> <span class="math display">\[
 \mathcal{F}\{\partial_t f(t)\} = \mathrm{i} \omega \hat{f}(\omega)
 \]</span> We are going to prove this by going through the lines <span class="math display">\[
@@ -1154,7 +1154,7 @@ Tip
 </div>
 <div class="callout-body-container callout-body">
 <p>Code for the computation of the DFT matrix.</p>
-<div id="e5850077" class="cell" data-execution_count="3">
+<div id="116cf2d4" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code.</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1374,7 +1374,7 @@ PSD(\hat{f})=\frac1N \|\hat{f}\|^2.
 <span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="dv">1</span>)</span>
 <span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">3</span>)</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>plt.plot(t, np.real(f_filtered), label<span class="op">=</span><span class="vs">r"Noisy"</span>)</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>plt.plot(t, np.real(f_filtered), label<span class="op">=</span><span class="vs">r"Filtered"</span>)</span>
 <span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>plt.plot(t, f_clean, label<span class="op">=</span><span class="vs">r"Clean"</span>)</span>
 <span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time [s]"</span>)</span>
 <span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">f</span><span class="dv">$</span><span class="vs">"</span>)</span>
@@ -1436,7 +1436,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 </figure>
 </div>
 <p>As can be seen in the <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span>8.2 (c)</span></a>, the reconstruction is not exact. This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. In particular:</p>
-<div id="86d765c0" class="cell" data-execution_count="5">
+<div id="702abc3e" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -1489,7 +1489,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-den-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.2 (Self implementation <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span>8.2</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="5fb29d6c" class="cell" data-execution_count="6">
+<div id="8b4d3954" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1858,10 +1858,10 @@ u(t, x) &amp;= \mathcal{F}^{-1}\{\hat{u}(t, \omega)\} = \mathcal{F}^{-1}\{\mathr
 <div id="fig-fourier_fft_heat-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-fourier_fft_heat-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="fourier_files/figure-html/fig-fourier_fft_heat-output-2.svg" class="lightbox" data-gallery="fig-fourier_fft_heat" title="Figure&nbsp;8.4&nbsp;(b): x-t diagram of the transport equation."><img src="fourier_files/figure-html/fig-fourier_fft_heat-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-fourier_fft_heat"></a>
+<a href="fourier_files/figure-html/fig-fourier_fft_heat-output-2.svg" class="lightbox" data-gallery="fig-fourier_fft_heat" title="Figure&nbsp;8.4&nbsp;(b): x-t diagram of the heat equation equation."><img src="fourier_files/figure-html/fig-fourier_fft_heat-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-fourier_fft_heat"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fourier_fft_heat-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(b) x-t diagram of the transport equation.
+(b) x-t diagram of the heat equation equation.
 </figcaption>
 </figure>
 </div>
@@ -1885,7 +1885,7 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-heat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.4 (Self implementation <a href="#exm-fourier-fft-heat" class="quarto-xref">Example&nbsp;<span>8.4</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="2b8dcc69" class="cell" data-execution_count="9">
+<div id="5eb2a47d" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2086,7 +2086,7 @@ Figure&nbsp;8.5: Computing the derivative of a function
 <div class="callout-body-container">
 <div id="exr-fourier-fft-advection-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.5 (Self implementation <a href="#exm-fourier-fft-advection" class="quarto-xref">Example&nbsp;<span>8.5</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="2e3928ff" class="cell" data-execution_count="11">
+<div id="3672ee6f" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2298,7 +2298,7 @@ Figure&nbsp;8.7: Electric circuit
 </figcaption>
 </figure>
 </div>
-<div id="6a2978e4" class="cell" data-execution_count="13">
+<div id="76a04bdf" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the raw data for the example</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2317,7 +2317,7 @@ Figure&nbsp;8.7: Electric circuit
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">16</span>) <span class="op">*</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">16</span></span>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># The provided figures where used to create the illustation</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># The provided figures were used to create the illustation</span></span>
 <span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">False</span>:</span>
 <span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
 <span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    plt.plot(f(t), t)</span>
@@ -2365,7 +2365,7 @@ Figure&nbsp;8.8: Signal transition for the electric circuit shown above
 </figcaption>
 </figure>
 </div>
-<p>We can see, that the signal is boosted depending on the characteristic curve of the diode, i.e.&nbsp;the positive part of the sine more than the negative part. If we compute the fast fourier transform, as illustrated with the red discretisation points of the curve on the right hand side, we can interpret the FFT coefficients <span class="math inline">\(c_i\)</span> as follows:</p>
+<p>We can see that the signal is boosted depending on the characteristic curve of the diode. The positive part of the sine is boosted more than the negative part. If we compute the fast fourier transform, as illustrated with the red discretisation points of the curve on the right hand side, we can interpret the FFT coefficients <span class="math inline">\(c_i\)</span> as follows:</p>
 <ol type="1">
 <li><p>the direct current component:</p>
 <p><span class="math display">\[
@@ -2547,7 +2547,7 @@ Figure&nbsp;8.10: Quadratic chirp signal
 </figcaption>
 </figure>
 </div>
-<p>We can see a clear peak at 50Hz but no information of time is given, where else in the spectrogram we see how the frequency progresses in time.</p>
+<p>We can see a clear peak at 50Hz, but no information about time is given, whereas in the spectrogram we see how the frequency progresses in time.</p>
 </div>
 </div>
 </div>

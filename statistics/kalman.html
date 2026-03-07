@@ -666,9 +666,9 @@ P_{k|k-1} = E\left[(x_k - x_{k|k-1})(x_k - x_{k|k-1})^{\mathsf{T}}\right].
 <p>The measurement update equations are given by <span class="math display">\[
 \hat{x}_{k|k} = \hat{x}_{k|k-1} + K_k(z_k - H_k \hat{x}_{k|k-1})
 \]</span> and <span class="math display">\[
-P_{k|k} = P_{k|k-1} + K_k H_k P_{k|k-1}
+P_{k|k} = P_{k|k-1} - K_k H_k P_{k|k-1}
 \]</span> for <span class="math display">\[
-K_k = P_{k|k} H_k^{\mathsf{T}}(H_kP_{k|-1}H_k^{\mathsf{T}} + R_k)^{-1}.
+K_k = P_{k|k-1} H_k^{\mathsf{T}}(H_kP_{k|k-1}H_k^{\mathsf{T}} + R_k)^{-1}.
 \]</span> Here, <span class="math inline">\(R_k\)</span> is the covariance of the measurement noise.</p>
 <p>To make (more) sense of the above formula we should consider the train example in more detail.</p>
 <p>At time <span class="math inline">\(t=0\)</span> (and <span class="math inline">\(k=0\)</span>) our tain is at a specific position but due to measurement uncertainty this position is expressed as a probability distribution. As mentioned before we use a normal Gaussian distribution with mean <span class="math inline">\(\mu_0\)</span> and variance <span class="math inline">\(\delta_0^2\)</span>.</p>
@@ -749,7 +749,7 @@ Figure&nbsp;15.1: Position of the train
 </figcaption>
 </figure>
 </div>
-<p>Now we can predict the position of the train at <span class="math inline">\(t=1\)</span> (<span class="math inline">\(k=1\)</span>) with the data we know at time <span class="math inline">\(t=0\)</span> like its maximum speed, possible acceleration and deceleration, etc.. This is can be done via <a href="#eq-kalman_base" class="quarto-xref">Equation&nbsp;<span>15.1</span></a>. We can see a possible outcome in <a href="#fig-kalman-train1-2" class="quarto-xref">Figure&nbsp;<span>15.1 (b)</span></a> where the train has moved in positive direction but the variance has increased indicating the increased uncertainty in the position du to the fact that we do not have noise from the acceleration or deceleration happening in the span <span class="math inline">\(\Delta t\)</span>.</p>
+<p>Now we can predict the position of the train at <span class="math inline">\(t=1\)</span> (<span class="math inline">\(k=1\)</span>) with the data we know at time <span class="math inline">\(t=0\)</span> like its maximum speed, possible acceleration and deceleration, etc.. This is can be done via <a href="#eq-kalman_base" class="quarto-xref">Equation&nbsp;<span>15.1</span></a>. We can see a possible outcome in <a href="#fig-kalman-train1-2" class="quarto-xref">Figure&nbsp;<span>15.1 (b)</span></a> where the train has moved in positive direction but the variance has increased indicating the increased uncertainty in the position due to the fact that we do not have information from the acceleration or deceleration happening in the span <span class="math inline">\(\Delta t\)</span>.</p>
 <p>Now at time <span class="math inline">\(t=1\)</span> we can measure the position of the train. We do so via a radio signal and of course this process is also having some noise added to it resulting in a Gaussian probability to the position.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">

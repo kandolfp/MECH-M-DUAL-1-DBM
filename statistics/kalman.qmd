@@ -90,11 +90,11 @@ $$
 $$
 and
 $$
-P_{k|k} = P_{k|k-1} + K_k H_k P_{k|k-1}
+P_{k|k} = P_{k|k-1} - K_k H_k P_{k|k-1}
 $$
 for 
 $$
-K_k = P_{k|k} H_k^{\mathsf{T}}(H_kP_{k|-1}H_k^{\mathsf{T}} + R_k)^{-1}.
+K_k = P_{k|k-1} H_k^{\mathsf{T}}(H_kP_{k|k-1}H_k^{\mathsf{T}} + R_k)^{-1}.
 $$
 Here, $R_k$ is the covariance of the measurement noise.
 
@@ -144,7 +144,7 @@ plt.show()
 
 Now we can predict the position of the train at $t=1$ ($k=1$) with the data we know at time $t=0$ like its maximum speed, possible acceleration and deceleration, etc.. 
 This is can be done via @eq-kalman_base.
-We can see a possible outcome in @fig-kalman-train1-2 where the train has moved in positive direction but the variance has increased indicating the increased uncertainty in the position du to the fact that we do not have noise from the acceleration or deceleration happening in the span $\Delta t$.
+We can see a possible outcome in @fig-kalman-train1-2 where the train has moved in positive direction but the variance has increased indicating the increased uncertainty in the position due to the fact that we do not have information from the acceleration or deceleration happening in the span $\Delta t$.
 
 Now at time $t=1$ we can measure the position of the train.
 We do so via a radio signal and of course this process is also having some noise added to it resulting in a Gaussian probability to the position.

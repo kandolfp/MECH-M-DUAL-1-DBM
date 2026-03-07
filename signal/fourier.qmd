@@ -415,7 +415,7 @@ For two functions $f, g \in L^1[(-\infty, \infty)]$ and $\alpha, \beta\in\mathbb
 
 5. **Drift in frequency**, for $a\in\mathbb{R}$
     $$
-    \mathrm{e}^{\mathrm{i} a t} f(t) = \hat{f}(\omega - a).
+     \mathcal{F}\{\mathrm{e}^{\mathrm{i} a t} f(t)\} = \hat{f}(\omega - a).
     $$
 
 6. If $f$ is **even** or **odd**, then $\hat{f}$ is even or odd, respectively.

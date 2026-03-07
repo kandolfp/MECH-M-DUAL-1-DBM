@@ -182,3 +182,11 @@ cython_debug/
 *_files
 
 Course_*
+*.pdf
+*.tex
+*.epub
+*.xdv
+*.xlsx
+test.*
+tmp*
+# .vdoc.*

@@ -98,9 +98,9 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-a22dc4d1285b04935f0c9bc4a107b71c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-afb6e7bb50f97048f84a0b57917e7fb2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-a22dc4d1285b04935f0c9bc4a107b71c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d30a1803f2cb25da43db7d7384b94896.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-07669d1e0bc0e86c74a535b3d9ffd488.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-d30a1803f2cb25da43db7d7384b94896.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -900,7 +900,7 @@ Figure&nbsp;8.1: Fourier transform of a two hat functions.
 <div class="callout-body-container">
 <div id="exr-fourier-hat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.1 (Self implementation <a href="#exm-fourier-hat" class="quarto-xref">Example&nbsp;<span>8.1</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="dd322694" class="cell" data-execution_count="2">
+<div id="09702525" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1038,8 +1038,8 @@ Note
 <div class="callout-body-container callout-body">
 <p>The pair <span class="math inline">\((f, \hat{f})\)</span> is often called the <em>Fourier transform pair</em>.</p>
 <p>The two integrals converge, as long as both functions are Lebesgue integrable, i.e.&nbsp; <span class="math display">\[
-\int_{-\infty}^\infty|f(t)|\, \mathrm{d}t \le \infty \quad\text{and}\quad
-\int_{-\infty}^\infty|\hat{f}(\omega)|\, \mathrm{d}\omega \le \infty,\]</span> or <span class="math inline">\(f, \hat{f} \in L^1[(-\infty, \infty)]\)</span>.</p>
+\int_{-\infty}^\infty|f(t)|\, \mathrm{d}t &lt; \infty \quad\text{and}\quad
+\int_{-\infty}^\infty|\hat{f}(\omega)|\, \mathrm{d}\omega &lt; \infty,\]</span> or <span class="math inline">\(f, \hat{f} \in L^1[(-\infty, \infty)]\)</span>.</p>
 </div>
 </div>
 <p>As could be expected, the Fourier transform has properties that lead to computational advantages.</p>
@@ -1154,7 +1154,7 @@ Tip
 </div>
 <div class="callout-body-container callout-body">
 <p>Code for the computation of the DFT matrix.</p>
-<div id="33dcfc8e" class="cell" data-execution_count="3">
+<div id="fddd83fa" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code.</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1436,7 +1436,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 </figure>
 </div>
 <p>As can be seen in the <a href="#fig-fourier_fft_denoise-3" class="quarto-xref">Figure&nbsp;<span>8.2 (c)</span></a>, the reconstruction is not exact. This is due to the fact that the reconstructed frequencies are not matched exactly plus we have some multiples that show up as well. In particular:</p>
-<div id="2b880e93" class="cell" data-execution_count="5">
+<div id="2d7df9d4" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -1489,7 +1489,7 @@ Figure&nbsp;8.2: Signal noise filter with FFT.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-den-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.2 (Self implementation <a href="#exm-fourier-fft-den" class="quarto-xref">Example&nbsp;<span>8.2</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="ac8bc236" class="cell" data-execution_count="6">
+<div id="60ac5bc5" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1885,7 +1885,7 @@ Figure&nbsp;8.4: Simulation of the heat equation in 1D.
 <div class="callout-body-container">
 <div id="exr-fourier-fft-heat-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.4 (Self implementation <a href="#exm-fourier-fft-heat" class="quarto-xref">Example&nbsp;<span>8.4</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="44228416" class="cell" data-execution_count="9">
+<div id="1eb23360" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2086,7 +2086,7 @@ Figure&nbsp;8.5: Computing the derivative of a function
 <div class="callout-body-container">
 <div id="exr-fourier-fft-advection-self" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8.5 (Self implementation <a href="#exm-fourier-fft-advection" class="quarto-xref">Example&nbsp;<span>8.5</span></a>)</strong></span> Implement the code yourself by filling out the missing sections:</p>
-<div id="1a9dfe3e" class="cell" data-execution_count="11">
+<div id="e45e732f" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code fragment for implementation.</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2298,7 +2298,7 @@ Figure&nbsp;8.7: Electric circuit
 </figcaption>
 </figure>
 </div>
-<div id="cf8898af" class="cell" data-execution_count="13">
+<div id="3f970878" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the raw data for the example</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>

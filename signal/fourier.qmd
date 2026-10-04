@@ -376,8 +376,8 @@ The pair $(f, \hat{f})$ is often called the _Fourier transform pair_.
 
 The two integrals converge, as long as both functions are Lebesgue integrable, i.e. 
 $$
-\int_{-\infty}^\infty|f(t)|\, \mathrm{d}t \le \infty \quad\text{and}\quad
-\int_{-\infty}^\infty|\hat{f}(\omega)|\, \mathrm{d}\omega \le \infty,$$
+\int_{-\infty}^\infty|f(t)|\, \mathrm{d}t < \infty \quad\text{and}\quad
+\int_{-\infty}^\infty|\hat{f}(\omega)|\, \mathrm{d}\omega < \infty,$$
 or $f, \hat{f} \in L^1[(-\infty, \infty)]$.
 :::
 
